@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>SBNWEB Guida online</title>
+
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link type="text/css" href="../stile.css" rel="stylesheet">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Ricerca
+titolo per ID Gestionali </h1>
+<ul>
+<li><a href="#Descrizione">Descrizione</a></li>
+<li><a href="#Ingresso">Punti di ingresso</a></li>
+<li><a href="#Prerequisiti">Prerequisiti</a></li>
+<li><a href="#ModuloDati">Modulo immissione
+dati</a>
+<ul>
+<li><a href="#Canali">Area canali</a></li>
+<li><a href="#Filtri">Area filtri</a></li>
+<li><a href="#Miscellanea">Area
+      <span class="Stile3 style8">output o risposta </span> </a></li>
+<li><a href="#Default">Valori di default</a></li>
+<li><a href="#Azioni">Azioni utente</a></li>
+</ul>
+</li>
+<li><a href="#Controlli">Controlli del
+sistema</a><br>
+</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span><strong>Punti
+di ingresso </strong></h2>
+<ol>
+<li>Menu-&gt;Interrogazione-&gt;ID Gestionali </li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="Stile3 style8">Modulo immissione dati</span></h2>
+<p>Il
+  modulo di immissione dati per la ricerca è di tipo dinamico in quanto
+  deve gestire input di dati per diverse tipologie di ricerca.<br>
+  La machera di ricerca si suddivide in tre folder:</p>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Ricerca titoli per ID gestionali - Folder Ricerca titolo per Inventario</span></p>
+<p align="center"><img src="immagini/RicercaTitoloIDgestionaliInventario.gif" width="953" height="315"></p>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Ricerca titoli per ID gestionali - Folder Ricerca titolo per Ordine</span></p>
+<p align="center"><img src="immagini/RicercaTitoloIDgestionaliOrdine.gif" width="952" height="312"></p>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Ricerca titoli per ID gestionali - Folder Ricerca titolo per Localizzazione/Fondo/Segnatura</span></p>
+<p align="center"><img src="immagini/RicercaTitoloIDgestionaliLocFonSeg.gif" width="951" height="312"></p>
+<ul>
+  <li> 
+    La parte superiore &egrave; composta dalle etichette dei folder che consentono di scegliere il tipo di canali da impostare per la ricerca da effettuare:</li>
+  <li>La parte centrale comprende i canali di ricerca specifici per i vari folder:</li>
+  <li>La parte inferiore
+    contiene valori comuni per la gestione della prospettazione della lista
+    sintetica ed il livello di ricerca (locale o indice)</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+  canali </h3>
+<p class="style5 style8 style4 Stile3" align="left">Nell'area
+  dei canali troviamo:  </p>
+<ul>
+  <li><span class="Stile3 style8">Folder Ricerca titolo per Inventario</span>
+    <ul>
+      <li>Codice Biblioteca 2  caratteri alfanumerici (supportata dalla lista delle biblioteche del Polo) </li>
+      <li>Serie &ndash; spazio o al massimo 3 caratteri alfanumerici</li>
+      <li>Numero inventario &ndash; 9 caratteri numerici</li>
+    </ul>
+  </li>
+  <li><span class="Stile3 style8">Folder Ricerca titolo per Ordine</span>
+    <ul>
+      <li>Codice Biblioteca 2  caratteri alfanumerici (supportata dalla lista delle biblioteche del Polo) </li>
+      <li>Tipo ordine - 1 caratteri alfanumerici (supportato dalla lista delle tipologie di ordine)</li>
+      <li>Anno -  4 caratteri numerici</li>
+      <li>Numero ordine  -  9 caratteri numerici</li>
+    </ul>
+  </li>
+  <li><span class="Stile3 style8">Folder Ricerca titolo per Localizzazione/Fondo/Segnatura</span>
+    <ul>
+      <li> Localizzazione (codice polo + sigla biblioteca) &ndash; 6  caratteri alfanumerici </li>
+      <li>Fondo &ndash; 55 caratteri alfanumerici </li>
+      <li>Segnatura&ndash; 30 caratteri alfanumerici</li>
+    </ul>
+  </li>
+  </ul>
+<h3><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Miscellanea" id="InterrogazioneTitoloCanali"></a></span>Area
+  output o risposta  </span></h3>
+<ul>
+  <li><em><u>Numero elementi per blocco</u></em>:
+    permette l&#8217;indicazione del numero di elementi che l&rsquo;utente    desidera ricevere in ciascun blocco della lista. Se non viene
+    indicato nulla in questo campo il sistema applicher&agrave; il valore di
+    default associato all&#8217;utente attivo. </li>
+  <li><em><u>Parametri di Ordinamento</u>:</em> permette la selezione di uno dei seguenti criteri    di ordinamento della lista:<br>
+- identificativo,<br>
+- titolo + data1<br>
+- data1 + titolo.</li>
+  <li><u>Livello di ricerca:</u> permette di indicare su quale base dati si intende effettuare la ricerca:<br>
+    - Locale: la ricerca viene effettuata sulla base dati di Polo;<br>
+    - Indice: la ricerca viene effettuata sulla base dati di Indice;<br>
+	-  La valorizzazione di entrambe le basi dati determina la ricerca automatica e sequenziale prima in locale e, per esito negativo, in Indice;</li>
+  <li><u><u>Formato lista</u></u>: permette di indicare il    tipo di lista sintetica, pi&ugrave; o meno completa nei legami, che si    richiede<br>
+  </li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li>Vedi immagine. I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; </li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+<ul><li>Bottone <strong>'Cerca'</strong> .
+  Esegue i controlli e attiva la selezione in base dati dei titoli che rispondono ai parametri indicati a condizione che siano
+  stati superati i controlli. Gli elementi trovati verranno esposti, in
+  forma sintetica, sulla finestra &#8220;<em><a href="SinteticaTitoli.htm">Sintetica Titoli </a></em>&#8221;,
+  organizzati secondo l&#8217;ordinamento prescelto.</li>
+</ul>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style8"><strong>Controlli del sistema</strong></span></h2>
+<ul>
+<li>
+   Localizzazione, fondo e segnatura sono alternativi  ai precedenti, tutti e tre insieme o la sola segnatura.</li>
+</ul>
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;</p></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body></html>

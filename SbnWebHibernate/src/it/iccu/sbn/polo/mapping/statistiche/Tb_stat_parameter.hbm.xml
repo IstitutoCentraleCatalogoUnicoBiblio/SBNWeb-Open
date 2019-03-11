@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.statistiche.Tb_stat_parameter" table="tb_stat_parameter" schema="sbnweb">
+		<composite-id>
+			<key-many-to-one name="id_stat" column="id_stat" class="it.iccu.sbn.polo.orm.statistiche.Tbf_config_statistiche">
+			</key-many-to-one>
+			<key-property name="nome" column="nome" type="string" length="50"/>
+		</composite-id>
+		<property name="tipo" column="tipo" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="valore" column="valore" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="etichetta_nome" column="etichetta_nome" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="obbligatorio" column="obbligatorio" type="string" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

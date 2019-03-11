@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+
+<title>SBNWEB Guida online</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+   {
+   window.location.href=loc;
+   }
+</script></head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+    <td bgcolor="#dde8f0" valign="top"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+      <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Acquisizioni - Lista sintetica delle fatture</h1>
+      <ul>
+        <li><a href="#Descrizione">Descrizione</a></li>
+        <li><a href="#Ingresso">Punti di ingresso</a> </li>
+        <li><a href="#Prerequisiti">Prerequisiti</a></li>
+        <li><a href="#Prospettazione">Prospettazione</a>
+          <ul>
+            <li><a href="#Default">Valori di default</a> </li>
+            <li><a href="#Azioni">Azioni utente</a></li>
+          </ul>
+        </li>
+        <li><a href="#Controlli">Controlli del sistema</a><br>
+        </li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+      <p>
+	  La funzionalità  consente all'utente bibliotecario di ricevere la lista dei dati sintetici delle voci 
+	  trovate dalla funzione <a href="RicercaFatture.htm">"Ricerca Fatture"</a> ordinato secondo i criteri di interesse. La lista viene prospettata solo se il numero delle voci trovate è positivo. Nella prospettazione della lista è consentita la selezione multipla degli elementi di interesse
+	  per l'esame del <a href="DettaglioFattura.htm">dettaglio</a> di ciascuna voce. 
+	  </p>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span>Punti di ingresso </h2>
+	 <ol>
+	 <li>Menu-&gt;Acquisizioni-&gt;Fatture-&gt;Bottone <strong>'Cerca'</strong>' </li>
+	 <li>Barra di navigazione</li>
+	 </ol>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+      <ul>
+		<li>Il bibliotecario deve avere superato con successo l'autenticazione e l'abilitazione alla funzione</li>
+		<li>Deve esistere almeno una voce in elenco</li>
+      </ul>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prospettazione" id="Prospettazione"></a></span></span><span class="Stile3 style8"><strong>Prospettazione</strong></span></h2>
+	  <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/SinteticaFatture.gif" alt=""></p>
+      <p class="Stile3 style8" align="center"></p>
+      <p>Per consentire la gestione in blocchi di liste numerose di risultati aggiungendo i blocchi di interesse, a capo e piè di lista saranno prospettate <em>:</em></p>
+      <ul>
+	  	<li>Elementi trovati</li>
+	  	<li>Pagina n di m</li>
+	  	<li>CaricaPagina</li>
+      </ul>
+
+      <p>Sulla lista (in formato griglia) saranno prospettate, per ciascun elemento della lista<em>:</em></p>
+      <ul>
+	  	<li>N. Progressivo</li>
+		<li>Bibl.</li>
+		<li>Anno</li>
+		<li>Progr</li>
+		<li>Num Fatt</li>
+		<li>Data Fatt.</li>
+		<li>Data Reg.</li>
+		<li>Importo fatt.</li>
+		<li>Val.</li>
+		<li>Stato</li>
+		<li>Tipo</li> 
+		<li>Fornitore (Codice, nome)</li>
+		<li>Campo check (per consentire la selezione multipla)</li>
+      </ul>
+
+	  
+      <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+      <li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+      della configurazione dei default gestiti dall'utente stesso . In caso
+      l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+      </li>
+      <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span> </h3>
+      <ul>
+		<li> Link <strong>'<a href="DettaglioFattura.htm">progressivo elemento</a>'</strong>.&nbsp; Relativamente all'elemento di lista selezionato, prospetta tutti i dati di dettaglio.
+		<li> Bottone <strong>'>'</strong>.&nbsp; Il valore numerico espresso nel campo 'Carica pagina' aggiunge al primo blocco della lista, il numero di blocco identificato dal numero immesso.
+		<li> Bottone <strong>'<a href="DettaglioFattura.htm">Esamina</a>'</strong>.&nbsp; Attiva le singole prospettazioni di dettaglio di tutti gli elementi selezionati tramite scorrimento degli stessi.</li>
+		<li> Bottone <strong>'<a href="CreaFattura.htm">Crea</a>'</strong>.&nbsp; Attiva la funzione di inserimento.</li>
+		<li> Bottone <strong>'Seleziona tutto'</strong>.&nbsp; Tutti i campi check delle righe prospettate vengono posti in stato di selezione.</li>
+		<li> Bottone <strong>'Deseleziona tutto'</strong>.&nbsp; Tutti i campi check delle righe prospettate vengono posti in stato di deselezione.</li>
+		<li> Bottone <strong>'Indietro'</strong>.&nbsp; Consente l'abbandono della pagina visualizzata  e il ritorno a quella di livello superiore.</li>
+		<li> Link <strong>'barra di navigazione'</strong>.&nbsp; Consente di riproporre le schermate utilizzate di recente.</li>
+      </ul>
+      
+	  <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+	  <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+      <ul>
+      	<li>
+      	<u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.
+      	</li>
+      	<li>
+      	Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.
+      	</li>
+		<li>
+		Viene verificata la selezione di almeno un elemento, in caso di selezione del bottone 'Esamina'
+		</li>
+	  </ul>      
+      <hr>
+        <p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body></html>

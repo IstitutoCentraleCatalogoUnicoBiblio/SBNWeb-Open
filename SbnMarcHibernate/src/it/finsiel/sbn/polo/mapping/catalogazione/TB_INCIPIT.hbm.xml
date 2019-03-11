@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_incipit" polymorphism="explicit" table="TB_INCIPIT" lazy="false">
+		<composite-id>
+		<!--
+			<key-many-to-one name="TB_TITOLO" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			-->
+			<key-property name="BID" column="BID" type="string"/>
+
+
+
+			<!--
+			<key-property name="BID_LETTERARIO" column="BID_LETTERARIO" type="string"/>
+			-->
+
+
+
+			<key-property name="NUMERO_MOV" column="NUMERO_MOV" type="string"/>
+			<key-property name="NUMERO_P_MOV" column="NUMERO_P_MOV" type="string"/>
+		</composite-id>
+		<!--
+		<many-to-one name="BID_LETTERARIO" cascade="lock" column="BID_LETTERARIO" class="it.finsiel.sbn.polo.orm.Tb_titolo11" not-null="true">
+		</many-to-one>
+		-->
+
+
+		<property name="BID_LETTERARIO" column="BID_LETTERARIO" type="string" length="10" not-null="false"/>
+
+
+		<property name="TP_INDICATORE" column="TP_INDICATORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="NUMERO_COMP" column="NUMERO_COMP" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="REGISTRO_MUS" column="REGISTRO_MUS" type="it.finsiel.sbn.util.DataTypeCHAR" length="9" not-null="false"/>
+		<property name="NOME_PERSONAGGIO" column="NOME_PERSONAGGIO" type="string" length="40" not-null="false"/>
+		<property name="TEMPO_MUS" column="TEMPO_MUS" type="string" length="40" not-null="false"/>
+		<property name="CD_FORMA" column="CD_FORMA" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="CD_TONALITA" column="CD_TONALITA" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CHIAVE_MUS" column="CHIAVE_MUS" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false"/>
+		<property name="ALTERAZIONE" column="ALTERAZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="8" not-null="false"/>
+		<property name="MISURA" column="MISURA" type="it.finsiel.sbn.util.DataTypeCHAR" length="9" not-null="false"/>
+		<property name="DS_CONTESTO" column="DS_CONTESTO" type="string" length="160" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_INCIPIT_selectPerKey"
+				condition="bid = :XXXbid
+			  			  AND numero_mov = :XXXnumero_mov
+			  			  AND numero_p_mov = :XXXnumero_p_mov "/>
+
+		<filter name="TB_INCIPIT_selectPerBid"
+				condition="bid = :XXXbid
+			  			  AND fl_canc != 'S' "/>
+
+		<filter name="TB_INCIPIT_verificaEsistenza"
+				condition="bid = :XXXbid
+				  		  AND numero_mov = :XXXnumero_mov
+				  		  AND numero_p_mov = :XXXnumero_p_mov "/>
+
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="areeStatisticheForm"
+			type="it.iccu.sbn.web.actionforms.statistiche.AreeStatisticheForm" />
+		<form-bean name="sinteticaStatisticheForm"
+			type="it.iccu.sbn.web.actionforms.statistiche.SinteticaStatisticheForm"/>
+		<form-bean name="dettaglioVariabiliStatisticheForm"
+			type="it.iccu.sbn.web.actionforms.statistiche.DettaglioVariabiliStatisticheForm"/>
+	</form-beans>
+
+
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards></global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+	<action-mappings>
+
+		<action path="/statistiche/areeStatistiche"
+			name="areeStatisticheForm"
+			input="/WEB-INF/jsp/pages/statistiche/areeStatistiche.jsp"
+			scope="session" validate="true"
+			parameter="methodStatistiche"
+			type="it.iccu.sbn.web.actions.statistiche.AreeStatisticheAction">
+			<forward name="sinteticaStatistiche" path="/statistiche/sinteticaStatistiche.do" />
+			<forward name="blank" path="/blank.do" />
+		</action>
+
+		<action path="/statistiche/sinteticaStatistiche"
+			name="sinteticaStatisticheForm"
+			input="/WEB-INF/jsp/pages/statistiche/sinteticaStatistiche.jsp"
+			scope="session" validate="false"
+			parameter="methodSinStatistiche"
+			type="it.iccu.sbn.web.actions.statistiche.SinteticaStatisticheAction"  >
+			<forward name="dettaglioVariabili" path="/statistiche/dettaglioVariabiliStatistiche.do"/>
+
+        </action>
+
+		<action path="/statistiche/dettaglioVariabiliStatistiche"
+			name="dettaglioVariabiliStatisticheForm"
+			input="/WEB-INF/jsp/pages/statistiche/dettaglioVariabiliStatistiche.jsp"
+			validate="false"
+			type="it.iccu.sbn.web.actions.statistiche.DettaglioVariabiliStatisticheAction"
+			scope="session"
+			parameter="methodDettVarStatistiche" >
+        </action>
+
+
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="statisticheLabels"
+		parameter="it.iccu.sbn.web.resources.StatisticheLabels"
+		null="false" />
+	<message-resources key="statisticheMessages"
+		parameter="it.iccu.sbn.web.resources.StatisticheMessages"
+		null="false" />
+
+</struts-config>

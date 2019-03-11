@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+
+		<form-bean
+			name="stampaOrdiniForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.ordini.StampaOrdiniForm" />
+
+		<form-bean
+			name="stampaBibliotecariForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.bibliotecari.StampaBibliotecariForm" />
+
+		<form-bean
+			name="stampaBibliotecheForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.biblioteche.StampaBibliotecheForm" />
+
+		<form-bean
+			name="stampaBuoniCaricoForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.buoni.StampaBuoniCaricoForm" />
+
+		<form-bean
+			name="stampaClassificazioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.classificazione.StampaClassificazioneForm" />
+
+		<form-bean
+			name="stampaRegistroConservazioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.conservazione.StampaRegistroConservazioneForm" />
+
+		<form-bean
+			name="stampaStrumentiPatrimonioForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.strumentiPatrimonio.StampaStrumentiPatrimonioForm" />
+
+		<form-bean
+			name="stampaEtichetteForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.etichette.StampaEtichetteForm" />
+
+		<form-bean
+			name="stampaFornitoriForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.fornitori.StampaFornitoriForm" />
+
+		<form-bean
+			name="stampaBollettarioForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.bollettario.StampaBollettarioForm" />
+
+		<form-bean
+			name="ripartizioneSpeseForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.spese.RipartizioneSpeseForm" />
+
+		<form-bean
+			name="statisticheTempiForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.spese.StatisticheTempiForm" />
+
+		<form-bean
+			name="stampaRegistroIngressoForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.ingresso.StampaRegistroIngressoForm" />
+
+		<form-bean
+			name="stampaListeForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaListeForm" />
+
+		<form-bean
+			name="stampaListaFascicoliForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.periodici.StampaListaFascicoliForm" />
+
+		<form-bean
+			name="stampaRepertoriForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.repertori.StampaRepertoriForm" />
+
+		<form-bean
+			name="stampaRichiesteIllForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.richiesteill.StampaRichiesteIllForm" />
+
+		<form-bean
+			name="stampaRichiesteLocForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.richiesteloc.StampaRichiesteLocForm" />
+
+		<form-bean
+			name="stampaSchedeForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.schede.StampaSchedeForm" />
+
+		<form-bean
+			name="stampaCataloghiForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.cataloghi.StampaCataloghiForm" />
+
+
+		<form-bean
+			name="stampaSoggettarioForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.semantica.StampaSoggettarioForm" />
+
+		<form-bean
+			name="stampaSollecitiForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.solleciti.StampaSollecitiForm" />
+
+		<form-bean
+			name="stampaStoricoIllForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.storicoill.StampaStoricoIllForm" />
+
+		<form-bean
+			name="stampaStoricoLocForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.storicoloc.StampaStoricoLocForm" />
+
+		<form-bean
+			name="stampaTabelleForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.tabelle.StampaTabelleForm" />
+
+		<form-bean
+			name="stampaRegistroTopograficoForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.topografico.StampaRegistroTopograficoForm" />
+
+		<form-bean
+			name="stampaBollettinoForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.bollettino.StampaBollettinoForm" />
+
+		<form-bean
+			name="stampaUtentiForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.utenti.StampaUtentiForm" />
+
+		<form-bean
+			name="stampaOutputForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.common.StampaOutputForm" />
+
+		<form-bean
+			name="stampaDescrittoriInutilizzatiForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaDescrittoriInutilizzatiForm" />
+
+		<form-bean
+			name="stampaSoggettiInutilizzatiForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaSoggettiInutilizzatiForm" />
+
+		<form-bean
+			name="stampaThesauroUtilizzaForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaThesauroUtilizzaForm" />
+
+		<form-bean
+			name="stampaDescrittoriSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaDescrittoriSoggettoForm" />
+
+		<form-bean
+			name="stampaNotazioniForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaNotazioniForm" />
+
+		<form-bean
+			name="stampaThesauroForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.liste.StampaThesauroForm" />
+
+		<form-bean
+			name="stampaThesauroPoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.semantica.StampaThesauroPoloForm" />
+
+		<form-bean
+			name="stampaTesserinoForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.utenti.StampaTesserinoForm" />
+
+		<form-bean
+			name="StampaOnLineForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.stampaOnLine.StampaOnLineForm" />
+
+		<form-bean
+			name="selezioneStampaSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.semantica.SelezioneStampaSemanticaForm" />
+
+		<form-bean
+			name="prenotaStampaSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.semantica.PrenotaStampaSemanticaForm" />
+
+		<form-bean
+			name="selezioneStampeBibliograficheForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.schede.SelezioneStampeBibliograficheForm" />
+
+		<form-bean
+			name="stampaServiziForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.servizi.StampaServiziForm" />
+
+		<form-bean
+			name="stampaTitoliEditoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionestampe.editori.StampaTitoliEditoreForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+
+	</global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+		<action
+			path="/gestionestampe/ordini/stampaOrdini"
+			name="stampaOrdiniForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/ordini/stampaOrdini.jsp"
+			parameter="methodStampaOrdini"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.ordini.StampaOrdiniAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaOrdini/outputStampaOrdini.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/bibliotecari/stampaBibliotecari"
+			name="stampaBibliotecariForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/bibliotecari/stampaBibliotecari.jsp"
+			parameter="methodStampaBibliotecari"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.bibliotecari.StampaBibliotecariAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaBibliotecari/outputStampaBibliotecari.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/biblioteche/stampaBiblioteche"
+			name="stampaBibliotecheForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/biblioteche/stampaBiblioteche.jsp"
+			parameter="methodStampaBiblioteche"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.biblioteche.StampaBibliotecheAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/biblioteche/outputStampaBiblioteche.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/buoni/stampaBuoniCarico"
+			name="stampaBuoniCaricoForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/buoni/stampaBuoniCarico.jsp"
+			parameter="methodStampaBuoniCarico"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.buoni.StampaBuoniCaricoAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaBuoniCarico/outputStampaBuoni.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/classificazione/stampaClassificazione"
+			name="stampaClassificazioneForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/classificazione/stampaClassificazione.jsp"
+			parameter="methodStampaClassificazione"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.classificazione.StampaClassificazioneAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaClassificazione/outputStampaClassificazione.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/conservazione/stampaRegistroConservazione"
+			name="stampaRegistroConservazioneForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/conservazione/stampaRegistroConservazione.jsp"
+			parameter="methodStampaRegistroConservazione"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.conservazione.StampaRegistroConservazioneAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaRegistroConservazione/outputStampaConservazione.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/strumentiPatrimonio/stampaStrumentiPatrimonio"
+			name="stampaStrumentiPatrimonioForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/strumentiPatrimonio/stampaStrumentiPatrimonio.jsp"
+			parameter="methodStampaStrumentiPatrimonio"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.strumentiPatrimonio.StampaStrumentiPatrimonioAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaRegistroConservazione/outputStampaStrumentiPatrimonio.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action path="/gestionestampe/etichette/stampaEtichette"
+			name="stampaEtichetteForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/etichette/stampaEtichette.jsp"
+			parameter="methodStampaEtichette" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.etichette.StampaEtichetteAction">
+
+			<forward name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward name="conferma"
+				path="/gestionestampe/stampaEtichette/outputStampaEtichette.do" />
+			<forward name="lenteModelli"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward
+				name="SIFbibliotecario"
+				path="/amministrazionesistema/ricercaBibliotecario.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/fornitori/stampaFornitori"
+			name="stampaFornitoriForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/fornitori/stampaFornitori.jsp"
+			parameter="methodStampaFornitori"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.fornitori.StampaFornitoriAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/fornitori/outputStampaFornitori.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/bollettario/stampaBollettario"
+			name="stampaBollettarioForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/bollettario/stampaBollettario.jsp"
+			parameter="methodStampaBollettario"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.bollettario.StampaBollettarioAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/bollettario/*.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/bollettario/*.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/spese/ripartizioneSpese"
+			name="ripartizioneSpeseForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/spese/ripartizioneSpese.jsp"
+			parameter="methodRipartizioneSpese"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.spese.RipartizioneSpeseAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/spese/*.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/spese/*.do" />
+				<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+				<forward name="bilancioCerca" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+				<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+				<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+
+		</action>
+
+		<action
+			path="/gestionestampe/spese/statisticheTempi"
+			name="statisticheTempiForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/spese/statisticheTempi.jsp"
+			parameter="methodStatisticheTempi"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.spese.StatisticheTempiAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/spese/*.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/spese/*.do" />
+		</action>
+
+
+		<!-- <action path="/gestionestampe/ingresso/stampaRegistroIngresso"
+			name="stampaRegistroIngressoForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/ingresso/stampaRegistroIngresso.jsp"
+			parameter="methodStampaRegistroIngresso"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.ingresso.StampaRegistroIngressoAction">
+			<forward name="indietro" path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward name="conferma" path="/gestionestampe/stampaRegistroIngresso/outputStampaRegistroIngresso.do" />
+			<forward name="lenteBiblio"
+			path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+			</action> -->
+
+		<action
+			path="/gestionestampe/ingresso/stampaRegistroIngresso"
+			name="stampaRegistroIngressoForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/ingresso/stampaRegistroIngresso.jsp"
+			parameter="methodStampaRegistroIngresso"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.ingresso.StampaRegistroIngressoAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaRegistroIngresso/outputStampaRegistroIngresso.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaListe"
+			name="stampaListeForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaListe.jsp"
+			parameter="methodStampaListe"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaListeAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaListe/outputStampaListe.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/periodici/stampaListaFascicoli"
+			name="stampaListaFascicoliForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/periodici/stampaListaFascicoli.jsp"
+			parameter="methodStampaFascicoli"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.periodici.StampaListaFascicoliAction">
+			<forward name="ordiniCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do" redirect="true"/>
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="indietro" path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward name="conferma" path="/gestionestampe/periodici/stampaListaFascicoli.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/repertori/stampaRepertori"
+			name="stampaRepertoriForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/repertori/stampaRepertori.jsp"
+			parameter="methodStampaRepertori"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.repertori.StampaRepertoriAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaRepertori/outputStampaRepertori.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/richiesteill/stampaRichiesteIll"
+			name="stampaRichiesteIllForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/richiesteill/stampaRichiesteIll.jsp"
+			parameter="methodStampaRichiesteIll"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.richiesteill.StampaRichiesteIllAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaRichiesteIll/outputStampaRichiesteIll.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/richiesteloc/stampaRichiesteLoc"
+			name="stampaRichiesteLocForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/richiesteloc/stampaRichiesteLoc.jsp"
+			parameter="methodStampaRichiesteLoc"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.richiesteloc.StampaRichiesteLocAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaRichiesteLoc/outputStampaRichiesteLoc.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/schede/stampaSchede"
+			name="stampaSchedeForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/schede/stampaSchede.jsp"
+			parameter="methodStampaSchede"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.schede.StampaSchedeAction">
+			<forward name="indietro" path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward name="conferma" path="/gestionestampe/schede/outputStampaSchede.do" />
+			<forward name="lenteSez" path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward name="lenteColloc"	path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward name="lenteSpecif"	path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward name="lenteBiblio"	path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/cataloghi/stampaCataloghi"
+			name="stampaCataloghiForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/cataloghi/stampaCataloghi.jsp"
+			parameter="methodStampaCataloghi"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.cataloghi.StampaCataloghiAction">
+			<forward name="indietro" path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward name="conferma" path="/gestionestampe/cataloghi/outputStampaCataloghi.do" />
+			<forward name="lenteSez" path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward name="lenteColloc"	path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward name="lenteSpecif"	path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward name="lenteBiblio"	path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/soggettario/stampaSoggettario"
+			name="stampaSoggettarioForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/semantica/stampaSoggettario.jsp"
+			parameter="methodStampaSoggettario"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.semantica.StampaSoggettarioAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/soggettario/outputStampaSoggettario.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/solleciti/stampaSolleciti"
+			name="stampaSollecitiForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/solleciti/stampaSolleciti.jsp"
+			parameter="methodStampaSolleciti"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.solleciti.StampaSollecitiAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaSolleciti/outputStampaSolleciti.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/storicoill/stampaStoricoIll"
+			name="stampaStoricoIllForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/storicoill/stampaStoricoIll.jsp"
+			parameter="methodStampaStoricoIll"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.storicoill.StampaStoricoIllAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaStoricoIll/outputStampaStoricoIll.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/storicoloc/stampaStoricoLoc"
+			name="stampaStoricoLocForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/storicoloc/stampaStoricoLoc.jsp"
+			parameter="methodStampaStoricoLoc"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.storicoloc.StampaStoricoLocAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaStoricoLoc/outputStampaStoricoLoc.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/tabelle/stampaTabelle"
+			name="stampaTabelleForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/tabelle/stampaTabelle.jsp"
+			parameter="methodStampaTabelle"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.tabelle.StampaTabelleAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaTabelle/outputStampaTabelle.do" />
+		</action>
+
+
+		<action
+			path="/gestionestampe/topografico/stampaRegistroTopografico"
+			name="stampaRegistroTopograficoForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/topografico/stampaRegistroTopografico.jsp"
+			scope="session"
+			parameter="methodStampaRegistroTopografico"
+			validate="false"
+			type="it.iccu.sbn.web.actions.gestionestampe.topografico.StampaRegistroTopograficoAction">
+			<forward
+				name="conferma"
+				path="/gestionestampe/topografico/stampaRegistroTopografico.do" />
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+
+		<action
+			path="/gestionestampe/bollettino/stampaBollettino"
+			name="stampaBollettinoForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/bollettino/stampaBollettino.jsp"
+			scope="session"
+			parameter="methodStampaBollettino"
+			validate="false"
+			type="it.iccu.sbn.web.actions.gestionestampe.bollettino.StampaBollettinoAction">
+			<forward
+				name="conferma"
+				path="/gestionestampe/bollettino/stampaBollettino.do" />
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+
+		<action
+			path="/gestionestampe/utenti/stampaUtenti"
+			name="stampaUtentiForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/utenti/stampaUtenti.jsp"
+			parameter="methodStampaUtenti"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.utenti.StampaUtentiAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/common/stampaOutput.do" />
+			<!-- forward name="stampa" path="/gestionestampe/common/StampaUtenti.do"/> -->
+		</action>
+		<action
+			path="/gestionestampe/common/stampaOutput"
+			name="stampaOutputForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/common/stampaOutput.jsp"
+			parameter="methodStampaOutput"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.common.StampaOutputAction">
+			<forward
+				name="indietro"
+				path="/gestionestampe/utenti/StampaUtenti.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaDescrittoriInutilizzati"
+			name="stampaDescrittoriInutilizzatiForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaDescrittoriInutilizzati.jsp"
+			parameter="methodStampaDescrittoriInutilizzati"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaDescrittoriInutilizzatiAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaDescrittoriInutilizzati/StampaDescrittoriInutilizzati.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaSoggettiInutilizzati"
+			name="stampaSoggettiInutilizzatiForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaSoggettiInutilizzati.jsp"
+			parameter="methodStampaSoggettiInutilizzati"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaSoggettiInutilizzatiAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaSoggettiInutilizzati/StampaSoggettiInutilizzati.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaThesauroUtilizza"
+			name="stampaThesauroUtilizzaForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaThesauroUtilizza.jsp"
+			parameter="methodStampaThesauroUtilizza"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaThesauroUtilizzaAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaThesauroUtilizza/StampaThesauroUtilizza.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaDescrittoriSoggetto"
+			name="stampaDescrittoriSoggettoForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaDescrittoriSoggetto.jsp"
+			parameter="methodStampaDescrittoriSoggetto"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaDescrittoriSoggettoAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaDescrittoriSoggetto/StampaDescrittoriSoggetto.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaNotazioni"
+			name="stampaNotazioniForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaNotazioni.jsp"
+			parameter="methodStampaNotazioni"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaNotazioniAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaNotazioni/StampaNotazioni.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/liste/stampaThesauro"
+			name="stampaThesauroForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/liste/stampaThesauro.jsp"
+			parameter="methodStampaThesauro"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.liste.StampaThesauroAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/stampaThesauro/StampaThesauro.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/semantica/stampaThesauroPolo"
+			name="stampaThesauroPoloForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/semantica/stampaThesauroPolo.jsp"
+			parameter="methodStampaThesauroPolo"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.semantica.StampaThesauroPoloAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/semantica/StampaThesauroPolo.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/utenti/Tesserino"
+			name="stampaTesserinoForm"
+			validate="false"
+			parameter="methodStampaTesserino"
+			type="it.iccu.sbn.web.actions.gestionestampe.utenti.StampaTesserinoAction"
+			input="/WEB-INF/jsp/pages/gestionestampe/utenti/stampaTesserino.jsp"
+			scope="session">
+			<forward
+				name="indietro"
+				path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<!-- <forward name="conferma" path="/gestionestampe/utenti/Tesserino.do" /> -->
+		</action>
+
+
+		<!-- ESEMPIO GENERICO -->
+		<action
+			path="/gestionestampe/stampaOnLine/StampaOnLine"
+			name="StampaOnLineForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/stampaOnLine/stampaOnLine.jsp"
+			parameter="methodStampaOnLine"
+			validate="false"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.stampaOnLine.StampaOnLineAction">
+			<forward
+				name="indietroUtenti"
+				path="/servizi/utenti/ListaUtenti.do" />
+			<forward
+				name="indietroFornitori"
+				path="/acquisizioni/fornitori/sinteticaFornitori.do" />
+			<!-- <forward name="conferma" path="/gestionestampe/utenti/Tesserino.do" /> -->
+			<forward name="lenteModelli"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+		</action>
+
+		<action
+			path="/gestionestampe/semantica/selezioneStampaSemantica"
+			name="selezioneStampaSemanticaForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/semantica/selezioneStampaSemantica.jsp"
+			parameter="methodStampa"
+			validate="false"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.semantica.SelezioneStampaSemanticaAction">
+		</action>
+
+		<action
+			path="/gestionestampe/schede/selezioneStampeBibliografiche"
+			name="selezioneStampeBibliograficheForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/schede/selezioneStampeBibliografiche.jsp"
+			parameter="methodStampa"
+			validate="false"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.schede.SelezioneStampeBibliograficheAction">
+		</action>
+
+		<action
+			path="/gestionestampe/semantica/prenotaStampaSemantica"
+			name="prenotaStampaSemanticaForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/semantica/prenotaStampaSemantica.jsp"
+			parameter="methodStampaSem"
+			validate="false"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.semantica.PrenotaStampaSemanticaAction">
+		</action>
+
+	<action
+		path="/gestionestampe/servizi/stampaServizi"
+		name="stampaServiziForm"
+		input="/WEB-INF/jsp/pages/gestionestampe/servizi/stampaServizi.jsp"
+		scope="session"
+		parameter="methodStampaServizi"
+		validate="false"
+		type="it.iccu.sbn.web.actions.gestionestampe.servizi.StampaServiziAction">
+		<forward
+			name="conferma"
+			path="/gestionestampe/servizi/stampaServizi.do" />
+		<forward
+			name="indietro"
+			path="/WEB-INF/jsp/pages/blank.jsp" />
+		<forward
+			name="lenteBiblio"
+			path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		<forward
+			name="sifbid"
+			path="/gestionebibliografica/titolo/interrogazioneTitolo.do?SERVIZI=true" />
+		<forward
+			name="sifinventario"
+			path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do?INVRICERCA=EROGAZIONE_RICERCA" />
+		<forward
+			name="nuovoDocumento"
+			path="/servizi/documenti/GestioneDocumento.do" />
+	</action>
+
+		<action
+			path="/gestionestampe/editori/stampaTitoliEditore"
+			name="stampaTitoliEditoreForm"
+			input="/WEB-INF/jsp/pages/gestionestampe/editori/stampaTitoliEditore.jsp"
+			parameter="methodStampaTitoliEditore"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.gestionestampe.editori.StampaTitoliEditoreAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/gestionestampe/editori/outputStampaTitoliEditore.do" />
+			<forward
+				name="lenteBiblio"
+				path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+			<forward name="cartiglioEditore"
+				path="/acquisizioni/fornitori/fornitoriRicercaParziale.do?CARTIGLIOEDITORE=TRUE" />
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources
+		key="gestioneStampeLabels"
+		parameter="it.iccu.sbn.web.resources.GestioneStampeLabels"
+		null="false" />
+	<message-resources
+		key="gestioneStampeMessages"
+		parameter="it.iccu.sbn.web.resources.GestioneStampeMessages"
+		null="false" />
+
+</struts-config>

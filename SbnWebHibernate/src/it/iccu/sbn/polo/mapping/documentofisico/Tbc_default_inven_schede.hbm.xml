@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_default_inven_schede" table="tbc_default_inven_schede" schema="sbnweb" >
+		<meta attribute="class-description">
+			DATI DI SERVIZIO RELATIVI ALL'INVENTARIO
+		</meta>
+		<id name="id_default_inven_scheda" column="id_default_inven_scheda" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" cascade="save-update,lock" unique="true" not-null="true" update="false" lazy="proxy" access="field">
+			<column name="cd_biblioteca"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="n_copie_tit" column="n_copie_tit" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede per catalogo titoli
+			</meta>
+		</property>
+		<property name="n_copie_edi" column="n_copie_edi" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede per catalogo editori
+			</meta>
+		</property>
+		<property name="n_copie_poss" column="n_copie_poss" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede per catalogo possessori
+			</meta>
+		</property>
+		<property name="n_copie_richiamo" column="n_copie_richiamo" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede di richiamo
+			</meta>
+		</property>
+		<property name="cd_unimarc" column="cd_unimarc" type="string" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice di default del tipo di scarico unimarc utilizzato dalla biblioteca
+			</meta>
+		</property>
+		<property name="sch_autori" column="sch_autori" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo autori
+			</meta>
+		</property>
+		<property name="fl_coll_aut" column="fl_coll_aut" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa per collocazione su schede per autori
+			</meta>
+		</property>
+		<property name="fl_tipo_leg" column="fl_tipo_leg" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				flag dei tipi di legame da stampare sulle schede del catalogo autori (t=tutti, p=solo principali, r=solo richiami)
+			</meta>
+		</property>
+		<property name="sch_topog" column="sch_topog" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo topografico
+			</meta>
+		</property>
+		<property name="fl_coll_top" column="fl_coll_top" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede per topografico
+			</meta>
+		</property>
+		<property name="sch_soggetti" column="sch_soggetti" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo soggetti
+			</meta>
+		</property>
+		<property name="fl_coll_sog" column="fl_coll_sog" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede per soggetti
+			</meta>
+		</property>
+		<property name="sch_classi" column="sch_classi" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo classi
+			</meta>
+		</property>
+		<property name="fl_coll_cla" column="fl_coll_cla" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede per classi
+			</meta>
+		</property>
+		<property name="sch_titoli" column="sch_titoli" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo titoli
+			</meta>
+		</property>
+		<property name="fl_coll_tit" column="fl_coll_tit" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede per titoli
+			</meta>
+		</property>
+		<property name="sch_edit" column="sch_edit" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo editori
+			</meta>
+		</property>
+		<property name="fl_coll_edi" column="fl_coll_edi" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede per editori
+			</meta>
+		</property>
+		<property name="sch_poss" column="sch_poss" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=schede per catalogo possessori
+			</meta>
+		</property>
+		<property name="fl_coll_poss" column="fl_coll_poss" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede per possessori
+			</meta>
+		</property>
+		<property name="flg_coll_richiamo" column="flg_coll_richiamo" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa collocazione su schede di richiamo
+			</meta>
+		</property>
+		<property name="fl_non_inv" column="fl_non_inv" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				s=stampa schede anche per notizie non possedute
+			</meta>
+		</property>
+		<property name="tipo" column="tipo" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="n_serie" column="n_serie" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indicatore di utilizzo di serie inventariali da parte della biblioteca (0=la biblioteca non gestisce serie, 1=la biblioteca gestisce le serie inventarialI)
+			</meta>
+		</property>
+		<property name="n_piste" column="n_piste" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di piste sul modulo etichette
+			</meta>
+		</property>
+		<property name="n_copie" column="n_copie" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di una etichetta
+			</meta>
+		</property>
+		<property name="n_copie_aut" column="n_copie_aut" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero delle copie di schede per catalogo autori
+			</meta>
+		</property>
+		<property name="n_copie_top" column="n_copie_top" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede per catalogo topografico
+			</meta>
+		</property>
+		<property name="n_copie_sog" column="n_copie_sog" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede per catalogo soggetti
+			</meta>
+		</property>
+		<property name="n_copie_cla" column="n_copie_cla" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di copie di schede per catalogo classi
+			</meta>
+		</property>
+		<property name="formato_stampa" column="formato_stampa" type="string" length="3" not-null="false" lazy="false"/>
+		<many-to-one name="id_modello" cascade="lock" column="id_modello" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_modelli_stampe" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+	</class>
+</hibernate-mapping>

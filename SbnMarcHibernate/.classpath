@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/classes12.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-8.1dev-403.jdbc2ee.jar"/>
+	<classpathentry kind="lib" path="/sbnmarc/lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida SBNWEB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script>
+</head>
+<body>
+<table summary= "summary" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td   valign="top" bgcolor="#dde8f0"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+        <p></p>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="listaInventariTitolo" id="listaInventariTitolo"></a></span></span>Esamina Posseduto </h1>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="listaInventariTitolo" id="listaInventariTitolo"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Lista </span></strong></span>Inventari del Titolo </h1>
+        <ul>
+          <li><a href="#DescrizioneInvTit">Descrizione</a></li>
+          <li><a href="#IngressoInvTit">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiInvTit">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiInvTit">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliInvTit">Area canali</a></li>
+              <li><a href="#FiltriInvTit">Area filtri</a></li>
+              <li><a href="#MiscellaneaInvTit">Area miscellanea </a></li>
+              <li><a href="#DefaultInvTit">Valori di default</a></li>
+              <li><a href="#AzioniInvTit">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliInvTit">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneInvTit" id="DescrizioneInvTit"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave;  consente al Bibliotecario di  esaminare il posseduto relativo al bid in gestione in Gestione Bibliografica, in particolare gli inventari del titolo.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoInvTit" id="IngressoInvTit"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Interrogazione &gt; <a href="../Interrogazione/SinteticaTitoli.htm">Sintetica Titoli</a> &gt;Esamina Posseduto &gt; folder &quot;Inventari del Titolo&quot;;</li>
+          <li>Interrogazione &gt; Sintetica Titoli &gt; <a href="../Interrogazione/AnaliticaConVaiA.htm">Analitica</a> &gt;  Esamina Posseduto &gt; folder &quot;Inventari del Titolo&quot;;</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiInvTit" id="PrerequisitiInvTit"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+          <li>Esistenza di almeno un  inventario legato al bid per la gestione. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiInvTit" id="ModuloDatiInvTit"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/possedutoListaInventariTitolo.PNG" alt="possListaInvTit" width="839" height="275"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliInvTit" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriInvTit" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaInvTit" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultInvTit" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniInvTit" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+        <ul>
+          <li>Check sull'option button corrispondente alla riga degli inventari non collocati;</li>
+          <li>link sui numeri di riga della colonna Prg., per <a href="DatiInventari.htm#esaminaInventario">esaminare</a> il dettaglio dell'inventario,</li>
+          <li>link sui folder <a href="EsaminaPosseduto.htm#listaCollocazioniTitolo">Collocazioni del Titolo</a> e <a href="EsaminaPosseduto.htm#listaEsemplariTitolo">Esemplari del Titolo</a>; </li>
+          <li>bottone <img src="Immagini/bottoneDisponibilita.PNG" alt="bottDisponibilta" width="94" height="20">, attiva la funzione <a href="../Servizi/RicercaUtenti.htm">esame delle disponibilit&agrave;</a> sul singolo inventario della lista;</li>
+          <li>bottone <img src="Immagini/bottonePossessori.PNG" alt="bottPossessori" width="88" height="20">, attiva la funzione <a href="InventariPossessore.htm">esame dei possessori</a> sul singolo inventario della lista;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="62" height="21">, per abbandonare la pagina e ritornare a Gestione Bibliografica.<br>
+          </li>
+          <p>Inoltre, per consentire la gestione delle liste in blocchi  a capo e piè di lista saranno prospettati:</p>
+          <li>bottone <img src="Immagini/freccia.PNG" alt="freccia" width="28" height="20"> , carica il numero di blocco indicato nel campo &quot;Carica pagina&quot;,</li>
+          <li>campo Carica Pagina, numerico, 3 max,</li>
+	  	<li>Elementi trovati, numero di totole elementi della lista, </li>
+	  	<li>Pagina n di m, numero di blocchi caricati dei blocchi totali </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliInvTit" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Se la ricerca non produce risultato il folder risulta disattivato.</li>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+          <li>Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.</li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="listaCollocazioniTitolo" id="listaCollocazioniTitolo"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Lista </span></strong></span>Collocazioni del Titolo </h1>
+        <ul>
+          <li><a href="#DescrizioneCollTit">Descrizione</a></li>
+          <li><a href="#IngressoCollTit">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiCollTit">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiCollTit">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliCollTit">Area canali</a></li>
+              <li><a href="#FiltriCollTit">Area filtri</a></li>
+              <li><a href="#MiscellaneaCollTit">Area miscellanea </a></li>
+              <li><a href="#DefaultCollTit">Valori di default</a></li>
+              <li><a href="#AzioniCollTit">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliCollTit">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneCollTit" id="DescrizioneCollTit"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave;  consente al Bibliotecario di  esaminare il posseduto relativo al bid in gestione in Gestione Bibliografica,  in particolare le collocazioni del titolo.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="IngressoCollTit"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Interrogazione &gt; <a href="../Interrogazione/SinteticaTitoli.htm">Sintetica Titoli</a> &gt;Esamina Posseduto &gt; folder &quot;Collocazioni del Titolo&quot;;</li>
+          <li>Interrogazione &gt; Sintetica Titoli &gt; <a href="../Interrogazione/AnaliticaConVaiA.htm">Analitica</a> &gt;  Esamina Posseduto &gt; folder &quot;Collocazioni del Titolo&quot;;</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiCollTit" id="PrerequisitiCollTit"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+          <li>Esistenza di almeno un  inventario legato al bid per la gestione. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiCollTit" id="ModuloDatiCollTit"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/possedutoListaCollocazioniTitolo.PNG" alt="possListaCollTit" width="840" height="363"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliCollTit" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriCollTit" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaCollTit" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultCollTit" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniCollTit" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+        <ul>
+          <li>Check sull'option button corrispondente alla riga degli inventari non collocati;</li>
+          <li>link sui folder <a href="EsaminaPosseduto.htm#listaInventariTitolo">Inventari del Titolo</a> e <a href="EsaminaPosseduto.htm#listaEsemplariTitolo">Esemplari del Titolo</a>; </li>
+          <li>link sui numeri di riga della colonna Prg., per <a href="SceltaEsemplare.htm#esaminaEsemplare">esaminare</a> il dettaglio dell'esemplare legato alla collocazione,</li>
+          <li>bottone <img src="Immagini/bottoneInventari.PNG" alt="bottInventari" width="70" height="20">, attiva la funzione <a href="ListeInventari.htm#listaInvDiCollocazione">lista degli inventari di collocazione</a> sul singolo inventario della lista previa selezione dello stesso;</li>
+          <li>bottone <img src="Immagini/bottoneEsameEsempl.PNG" alt="bottEsameEsempl" width="115" height="20">, attiva la funzione  per <a href="SceltaEsemplare.htm#esaminaEsemplare">esaminare</a> il dettaglio dell'esemplare legato alla collocazionea;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="62" height="21">, per abbandonare la pagina e ritornare a Gestione Bibliografica.<br>
+          </li>
+          <p>Inoltre, per consentire la gestione delle liste in blocchi  a capo e piè di lista saranno prospettati:</p>
+          <li>bottone <img src="Immagini/freccia.PNG" alt="freccia" width="28" height="20"> , carica il numero di blocco indicato nel campo &quot;Carica pagina&quot;,</li>
+          <li>campo Carica Pagina, numerico, 3 max,</li>
+	  	<li>Elementi trovati, numero di totole elementi della lista, </li>
+	  	<li>Pagina n di m, numero di blocchi caricati dei blocchi totali </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliCollTit" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+          <li>Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.</li>
+          <li>Se la ricerca non produce risultato il folder risulta disattivato.</li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="listaEsemplariTitolo" id="listaEsemplariTitolo"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Lista </span></strong></span>Esemplari del Titolo </h1>
+        <ul>
+          <li><a href="#DescrizioneEsemplTit">Descrizione</a></li>
+          <li><a href="#IngressoEsemplTit">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiEsemplTit">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiEsemplTit">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliEsemplTit">Area canali</a></li>
+              <li><a href="#FiltriEsemplTit">Area filtri</a></li>
+              <li><a href="#MiscellaneaEsemplTit">Area miscellanea </a></li>
+              <li><a href="#DefaultEsemplTit">Valori di default</a></li>
+              <li><a href="#AzioniEsemplTit">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliEsemplTit">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneEsemplTit" id="DescrizioneEsemplTit"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave;  consente al Bibliotecario di  esaminare il posseduto relativo al bid in gestione in Gestione Bibliografica,  in particolare le collocazioni del titolo.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoEsemplTit" id="IngressoEsemplTit"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Interrogazione &gt; <a href="../Interrogazione/SinteticaTitoli.htm">Sintetica Titoli</a> &gt;Esamina Posseduto &gt; folder &quot;Esemplari del Titolo&quot;;</li>
+          <li>Interrogazione &gt; Sintetica Titoli &gt; <a href="../Interrogazione/AnaliticaConVaiA.htm">Analitica</a> &gt;  Esamina Posseduto &gt; folder &quot;Esemplari del Titolo&quot;;</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiEsemplTit" id="PrerequisitiEsemplTit"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+          <li>Esistenza di almeno un  inventario legato al bid per la gestione. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiEsemplTit" id="ModuloDatiEsemplTit"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/possedutoListaEsemplariTitolo.PNG" alt="possListEsemplTit" width="841" height="277"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliEsemplTit" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriEsemplTit" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaEsemplTit" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultEsemplTit" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniEsemplTit" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+        <ul>
+          <li>Check sull'option button corrispondente alla riga degli inventari non collocati;</li>
+          <li>link sui folder <a href="EsaminaPosseduto.htm#listaInventariTitolo">Inventari del Titolo</a> e <a href="EsaminaPosseduto.htm#listaCollocazioniTitolo">Collocazioni del Titolo</a>; </li>
+          <li>bottone <img src="Immagini/bottoneCollocazioni.PNG" alt="bottCollocazioni" width="93" height="20">, attiva la funzione <a href="ListeCollocazioni.htm#listaCollocazioniDiEsem">lista delle collocazioni di esemplare</a> sul singolo esemplare della lista previa selezione dello stesso;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="62" height="21">, per abbandonare la pagina e ritornare a Gestione Bibliografica. </li>
+          <p>Inoltre, per consentire la gestione delle liste in blocchi  a capo e piè di lista saranno prospettati:</p>
+          <li>bottone <img src="Immagini/freccia.PNG" alt="freccia" width="28" height="20"> , carica il numero di blocco indicato nel campo &quot;Carica pagina&quot;,</li>
+          <li>campo Carica Pagina, numerico, 3 max,</li>
+	  	<li>Elementi trovati, numero di totole elementi della lista, </li>
+	  	<li>Pagina n di m, numero di blocchi caricati dei blocchi totali </li>
+        </ul>
+        <br>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliEsemplTit" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+          <li>Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.</li>
+          <li>Se la ricerca non produce risultato il folder risulta disattivato.</li>
+        </ul>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_tit_cla" polymorphism="explicit" table="TR_TIT_CLA" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="CD_SISTEMA" class="it.finsiel.sbn.polo.orm.Tb_classe1">
+				<column name="CD_SISTEMA" index="SYS_C0014349"/>
+				<column name="CD_EDIZIONE" index="SYS_C0014349"/>
+				<column name="CLASSE" index="SYS_C0014349"/>
+			</key-many-to-one>
+			<key-many-to-one name="TB_TITOLO" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			-->
+                        <key-property name="BID" column="BID" type="string"/>
+			<key-property name="CD_SISTEMA" column="CD_SISTEMA"	type="string"/>
+			<key-property name="CD_EDIZIONE" column="CD_EDIZIONE" type="string" />
+                        <key-property name="CLASSE" column="CLASSE" type="it.finsiel.sbn.util.DataTypeCHAR" />
+
+		</composite-id>
+		<property name="BID" column="BID" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="true" insert="false" update="false"/>
+		<property name="NOTA_TIT_CLA" column="NOTA_TIT_CLA" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TR_TIT_CLA_selectPerKey"
+				condition="bid = :XXXbid
+						   AND cd_edizione = :XXXcd_edizione
+						   AND cd_sistema = :XXXcd_sistema
+						   AND classe = :XXXclasse
+						   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_CLA_selectTitoloPerClasse"
+				condition="cd_edizione = :XXXcd_edizione
+						   AND cd_sistema = :XXXcd_sistema
+						   AND classe = :XXXclasse
+						   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_CLA_selectPerTitolo"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_CLA_countFrequenzaPerBid"
+				condition="fl_canc != 'S' and bid = :XXXbid "/>
+
+		<filter name="TR_TIT_CLA_countTitoloClasse"
+				condition=" fl_canc != 'S' "/>
+
+	</class>
+</hibernate-mapping>

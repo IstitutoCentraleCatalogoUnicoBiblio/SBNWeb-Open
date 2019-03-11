@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_audiovideo" polymorphism="explicit" table="TB_AUDIOVIDEO" lazy="false">
+		<id name="BID" column="BID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="TP_MATER_AUDIOVIS" column="TP_MATER_AUDIOVIS" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="LUNGHEZZA" column="LUNGHEZZA" type="integer" length="19" not-null="false"/>
+		<property name="CD_COLORE" column="CD_COLORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_SUONO" column="CD_SUONO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_MEDIA_SUONO" column="TP_MEDIA_SUONO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_DIMENSIONE" column="CD_DIMENSIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_FORMA_VIDEO" column="CD_FORMA_VIDEO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_TECNICA" column="CD_TECNICA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_FORMATO_FILM" column="TP_FORMATO_FILM" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+
+		<property name="CD_MAT_ACCOMP_1" column="CD_MAT_ACCOMP_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_MAT_ACCOMP_2" column="CD_MAT_ACCOMP_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_MAT_ACCOMP_3" column="CD_MAT_ACCOMP_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_MAT_ACCOMP_4" column="CD_MAT_ACCOMP_4" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+
+		<property name="CD_FORMA_REGIST" column="CD_FORMA_REGIST" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_FORMATO_VIDEO" column="TP_FORMATO_VIDEO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_MATERIALE_BASE" column="CD_MATERIALE_BASE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_SUPPORTO_SECOND" column="CD_SUPPORTO_SECOND" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_BROADCAST" column="CD_BROADCAST" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_GENERAZIONE" column="TP_GENERAZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_ELEMENTI" column="CD_ELEMENTI" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_CATEG_COLORE" column="CD_CATEG_COLORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_POLARITA" column="CD_POLARITA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_PELLICOLA" column="CD_PELLICOLA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_SUONO" column="TP_SUONO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_STAMPA_FILM" column="TP_STAMPA_FILM" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_DETERIORE" column="CD_DETERIORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_COMPLETO" column="CD_COMPLETO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="DT_ISPEZIONE" column="DT_ISPEZIONE" type="integer" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_AUDIOVIDEO_selectPerKey"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+	</class>
+</hibernate-mapping>

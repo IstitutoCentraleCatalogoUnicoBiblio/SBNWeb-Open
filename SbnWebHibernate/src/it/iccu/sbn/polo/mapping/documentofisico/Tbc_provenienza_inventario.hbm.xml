@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_provenienza_inventario" table="tbc_provenienza_inventario" >
+		<meta attribute="class-description">
+			PROVENIENZE INVENTARIO
+		</meta>
+		<composite-id>
+			<key-property name="cd_proven" column="cd_proven" type="string"/>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="descr" column="descr" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione della provenienza dell'inventario
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tbc_inventario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="false">
+				<column name="cd_proven"/>
+				<column name="cd_biblioteca_proven"/>
+				<column name="cd_polo_proven"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario"/>
+		</set>
+	</class>
+</hibernate-mapping>

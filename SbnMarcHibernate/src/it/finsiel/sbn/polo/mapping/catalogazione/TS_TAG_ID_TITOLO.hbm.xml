@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_tag_id_titolo" polymorphism="explicit" table="TS_TAG_ID_TITOLO" lazy="false">
+		<id name="ID_TAG_MARC" column="ID_TAG_MARC" type="long" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="BID_MARC" column="BID_MARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="33" not-null="false"/>
+		<property name="STATO" column="STATO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TIPOMATERIALE" column="TIPOMATERIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="NATURA" column="NATURA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="LIVELLOAUT" column="LIVELLOAUT" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="TIPORECORD" column="TIPORECORD" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="LIVELLOGERARCHICO" column="LIVELLOGERARCHICO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_termini_termini" polymorphism="explicit" table="VL_TERMINI_TERMINI" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="DID_1" column="DID_1" type="string"/>
+			<key-property name="DID" column="DID" type="string"/>
+		</composite-id>
+		<property name="TIPO_COLL" type="it.finsiel.sbn.util.DataTypeCHAR" length="5" not-null="false" lazy="false"/>
+		<property name="DS_TERMINE_THESAURO" type="string" length="160" not-null="true" lazy="false"/>
+		<property name="KY_TERMINE_THESAURO" type="it.finsiel.sbn.util.DataTypeCHAR" length="80" not-null="true" lazy="false"/>
+		<property name="TP_FORMA_THE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="CD_THE" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="NOTA_TERMINE_THESAURO" type="string" length="160" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<!-- property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/  -->
+		<!-- property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/  -->
+
+
+		<filter name="VL_TERMINI_TERMINI_selectTerminiPerRinvii"
+				condition="did_1 = :XXXdid_1 "/>
+
+		<filter name="VL_TERMINI_TERMINI_selectLegamiPerTipo"
+				condition="did_1 = :XXXdid_1
+						   AND tipo_coll = :XXXtipo_coll "/>
+
+		<filter name="VL_TERMINI_TERMINI_cercaLegamiTerminiTermini"
+				condition="did = :XXXdid
+						  AND TP_FORMA_THE ='R'
+						  OR ( did = :XXXdid_1
+						  and did_1 = :XXXdid) "/>
+
+	</class>
+</hibernate-mapping>

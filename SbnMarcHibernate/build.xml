@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="BUILD HIBERNATE" default="build" basedir=".">
+    <property file="build.properties"/>
+    <path id="sbnmarc.hibernate.class.path">
+        <fileset dir="${sbnmarc.hibernate.lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+	<target name="prepare">
+        <mkdir dir="${sbnmarc.hibernate.dist.dir}"/>
+		<mkdir dir="${sbnmarc.hibernate.classes.dir}"/>
+    </target>
+	
+    <target name="build" depends="prepare">
+
+        <echo>+-----------------------------------------------------+</echo>
+        <echo>|                                                     |</echo>
+        <echo>| B U I L D   S O L U Z I O N E    H I B E R N A T E  |</echo>
+        <echo>|                                                     |</echo>
+        <echo>+-----------------------------------------------------+</echo>
+		
+		<javac encoding="UTF-8" includeantruntime="false" destdir="${sbnmarc.hibernate.classes.dir}" source="1.5" target="1.5">
+			<src path="${sbnmarc.hibernate.src.dir}" />
+			<classpath>
+				<path refid="sbnmarc.hibernate.class.path" />
+			</classpath>
+		</javac>
+		
+    	<jar destfile="${sbnmarc.hibernate.dist.dir}/${module.hib.name}.har">
+			<zipfileset dir="${sbnmarc.hibernate.src.dir}" includes="**/*.xml" />
+			<zipfileset dir="${sbnmarc.hibernate.classes.dir}" />
+			<manifest>
+				<attribute name="Class-Path" value="commons-lang-2.1.jar" />
+			</manifest>
+		</jar>
+
+    </target>
+
+    <target name="build-debug" depends="prepare">
+
+        <echo>+-----------------------------------------------------+</echo>
+        <echo>|                                                     |</echo>
+        <echo>| B U I L D   S O L U Z I O N E    H I B E R N A T E  |</echo>
+        <echo>|                                                     |</echo>
+        <echo>+-----------------------------------------------------+</echo>
+    	<jar destfile="${sbnmarc.hibernate.dist.dir}/${module.hib.name}.har">
+			<zipfileset dir="${sbnmarc.hibernate.classes.dir}" />
+			<manifest>
+				<attribute name="Class-Path" value=". commons-lang-2.1.jar" />
+			</manifest>
+		</jar>
+
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Clean                                                               -->
+    <!-- =================================================================== -->
+    <target name="clean">
+        <delete dir="${sbnmarc.hibernate.dist.dir}"/>
+		<delete dir="${sbnmarc.hibernate.dir}/build"/>
+    </target>
+
+</project>

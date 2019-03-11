@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Tbf_par_sem" table="tbf_par_sem" lazy="false">
+		<composite-id>
+			<key-property name="tp_tabella_codici" column="tp_tabella_codici" type="string"/>
+			<key-property name="cd_tabella_codici" column="cd_tabella_codici" type="string"/>
+			<key-many-to-one name="id_parametro" column="id_parametro" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_parametro">
+			</key-many-to-one>
+		</composite-id>
+		<property name="sololocale" column="sololocale" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

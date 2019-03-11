@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" table="tbf_biblioteca_in_polo" lazy="false">
+		<meta attribute="class-description">
+			BIBLIOTECHE ABILITATE AD OPERARE NEL POLO (TPFSBI)
+		</meta>
+		<composite-id>
+			<!--
+			<key-property name="cod_polo" column="cd_polo"/>
+			 -->
+			<key-property name="cd_biblioteca" column="cd_biblioteca" type="string"/>
+			<key-many-to-one name="Cd_polo" column="cd_polo" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_polo">
+			</key-many-to-one>
+		</composite-id>
+		<property name="cod_polo" column="cd_polo" insert="false" update="false"/>
+		<!--
+		<many-to-one name="Cd_polo" column="cd_polo" insert="false" update="false"  class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_polo"/>
+		 -->
+
+		<many-to-one name="id_parametro" cascade="lock" column="id_parametro" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_parametro" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_gruppo_attivita_polo" cascade="lock" column="id_gruppo_attivita_polo" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_biblioteca" cascade="lock" column="id_biblioteca" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_biblioteca" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="ky_biblioteca" column="ky_biblioteca" type="string" length="13" not-null="false" lazy="false"/>
+		<property name="cd_ana_biblioteca" column="cd_ana_biblioteca" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="ds_biblioteca" column="ds_biblioteca" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="ds_citta" column="ds_citta" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tbf_contatore" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_contatore"/>
+		</set>
+		<set name="Tbf_profilo_abilitazione" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_profilo_abilitazione"/>
+		</set>
+		<set name="Trf_utente_professionale_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Trf_utente_professionale_biblioteca"/>
+		</set>
+		<set name="Tr_soggettari_biblioteche" lazy="false" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_soggettari_biblioteche"/>
+		</set>
+		<set name="Tr_thesauri_biblioteche" lazy="false" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_thesauri_biblioteche"/>
+		</set>
+
+		<set name="Tr_sistemi_classi_biblioteche" lazy="false" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_sistemi_classi_biblioteche"/>
+		</set>
+
+		<filter name="TBF_BIBLIOTECA_IN_POLO_selectPerCd_Polo"
+				condition="cd_polo = :XXXcd_polo
+				AND fl_canc != 'S' "/>
+
+		<filter name="TBF_BIBLIOTECA_IN_POLO_selectPerAnagrafe"
+				condition="cd_ana_biblioteca = :XXXcd_ana_biblioteca
+				AND fl_canc != 'S' "/>
+
+		<filter name="TBF_BIBLIOTECA_IN_POLO_selectPerPoloLike"
+				condition="cd_polo LIKE UPPER(:XXXcd_polo)||'%'
+				AND fl_canc != 'S' "/>
+
+		<filter name="TBF_BIBLIOTECA_IN_POLO_selectPerKey"
+				condition="cd_biblioteca = :XXXcd_biblioteca
+				  AND cd_polo = :XXXcd_polo
+  				  AND fl_canc != 'S' "/>
+
+		<filter name="TBF_BIBLIOTECA_IN_POLO_selectAll"
+				condition="fl_canc != 'S' "/>
+
+	</class>
+</hibernate-mapping>

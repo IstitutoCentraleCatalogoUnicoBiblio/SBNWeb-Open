@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="interrogazioneTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.InterrogazioneTitoloForm" />
+		<form-bean name="interrogazioneTitoloPerGestionaliForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.InterrogazioneTitoloPerGestionaliForm" />
+		<form-bean name="richiestaAllineamentiForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.RichiestaAllineamentiForm" />
+		<form-bean name="interrogazionePropostaDiCorrezioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.InterrogazionePropostaDiCorrezioneForm" />
+		<form-bean name="sinteticaPropostaDiCorrezioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.SinteticaPropostaDiCorrezioneForm" />
+		<form-bean name="dettaglioPropostaDiCorrezioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.DettaglioPropostaDiCorrezioneForm" />
+		<form-bean name="sinteticaTitoliForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.SinteticaTitoliForm" />
+		<form-bean name="catalogazioneTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.CatalogazioneTitoloForm" />
+		<form-bean name="analiticaTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.AnaliticaTitoloForm" />
+		<form-bean name="dettaglioTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.DettaglioTitoloForm" />
+		<form-bean name="gestioneLegameTitoloTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTitoloTitoloForm" />
+		<form-bean name="gestioneLegameTitoloAutoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTitoloAutoreForm" />
+		<form-bean name="gestioneLegameTitoloMarcaForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTitoloMarcaForm" />
+		<form-bean name="gestioneLegameTitoloLuogoForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTitoloLuogoForm" />
+		<form-bean name="gestioneLegameTitoloEditoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTitoloEditoreForm" />
+		<form-bean name="gestioneLegameFraAutorityForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.autore.GestioneLegameFraAutorityForm" />
+		<form-bean name="esaminaTitoliConFiltroForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.EsaminaTitoliConFiltroForm" />
+		<form-bean name="interrogazioneVaiAForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.InterrogazioneVaiAForm" />
+		<form-bean name="interrogazioneAutoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.autore.InterrogazioneAutoreForm" />
+		<form-bean name="sinteticaAutoriForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.autore.SinteticaAutoriForm" />
+		<form-bean name="dettaglioAutoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.autore.DettaglioAutoreForm" />
+		<form-bean name="interrogazioneMarcaForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.marca.InterrogazioneMarcaForm" />
+		<form-bean name="sinteticaMarcheForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.marca.SinteticaMarcheForm" />
+		<form-bean name="sinteticaImmaginiMarcheForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.marca.SinteticaImmaginiMarcheForm" />
+		<form-bean name="dettaglioMarcaForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.marca.DettaglioMarcaForm" />
+		<form-bean name="dettaglioLuogoForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.DettaglioLuogoForm" />
+		<form-bean name="dettaglioLegameTitoloSemanticiForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.DettaglioLegameTitoloSemanticiForm" />
+		<form-bean name="sinteticaLocalizzazioniForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.SinteticaLocalizzazioniForm" />
+		<form-bean name="dettaglioLocalizzazioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.DettaglioLocalizzazioneForm" />
+		<form-bean name="sifRicercaRepertoriForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.SifRicercaRepertoriForm" />
+		<form-bean name="sifRicercaElementiOrganicoForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.SifRicercaElementiOrganicoForm" />
+		<form-bean name="interrogazioneLuogoForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.luogo.InterrogazioneLuogoForm" />
+		<form-bean name="sinteticaLuoghiForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.luogo.SinteticaLuoghiForm" />
+		<form-bean name="gestioneIncipitForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneIncipitForm" />
+		<form-bean name="interrogazioneListeDiConfrontoForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.InterrogazioneListeDiConfrontoForm" />
+		<form-bean name="sinteticaSchedeTitoliForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.SinteticaSchedeTitoliForm" />
+		<form-bean name="richiestaLocalizzazioneForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.RichiestaLocalizzazioneForm" />
+		<form-bean name="importaLegamiBidAltroIdForm"
+			type="it.iccu.sbn.web.actionforms.gestionebibliografica.ImportaLegamiBidAltroIdForm" />
+
+	</form-beans>
+
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards></global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+
+		<action
+			path="/gestionebibliografica/titolo/interrogazioneTitolo"
+			name="interrogazioneTitoloForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/interrogazioneTitolo.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.InterrogazioneTitoloAction"
+			parameter="methodInterrogTit">
+			<forward name="sinteticaTitoli"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="creaTitoloPartecipato"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE" />
+			<forward name="creaTitoloLocale"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE" />
+			<forward name="sinteticaTitoliPerLegame"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SINTNEWLEGAME=TRUE" />
+			<forward name="sinteticaTitoliPerServizi"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SERVIZI=TRUE" />
+			<forward name="sinteticaTitoliPerMovimentiUtente"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?MOVIMENTI_UTENTE=TRUE" />
+			<forward name="sinteticaTitoliPerAcquisizioni"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?ACQUISIZIONI=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+
+			<forward name="creaSpoglioPartecipato51"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE&amp;GEST51=TRUE&amp;SPOGLIO=TRUE" />
+			<forward name="creaSpoglioLocale51"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE&amp;GEST51=TRUE&amp;SPOGLIO=TRUE" />
+		</action>
+
+		<action
+			path="/gestionebibliografica/titolo/interrogazioneTitoloPerGestionali"
+			name="interrogazioneTitoloPerGestionaliForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/interrogazioneTitoloPerGestionali.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.InterrogazioneTitoloPerGestionaliAction"
+			parameter="methodInterrogPerGestionaliTit">
+			<forward name="sinteticaTitoli"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="creaTitoloPartecipato"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE" />
+			<forward name="creaTitoloLocale"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE" />
+			<forward name="sinteticaTitoliPerLegame"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SINTNEWLEGAME=TRUE" />
+		</action>
+
+
+		<action path="/gestionebibliografica/titolo/sinteticaTitoli"
+			name="sinteticaTitoliForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/sinteticaTitolo.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.SinteticaTitoliAction"
+			parameter="methodSinteticaTit">
+			<forward name="interrogazioneTitolo"
+				path="/gestionebibliografica/titolo/interrogazioneTitolo.do" />
+			<forward name="creaTitoloPartecipato"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE" />
+			<forward name="creaTitoloLocale"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="interrVaiA"
+				path="/gestionebibliografica/titolo/interrogazioneVaiA.do" />
+			<forward name="gestioneLegameTitolo"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloTitolo.do" />
+			<forward name="meStesso"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="servizi"
+				path="/servizi/erogazione/ErogazioneRicerca.do?SERVIZI=TRUE" />
+			<forward name="stampaServizi"
+				path="/gestionestampe/servizi/stampaServizi.do?STAMPASERVIZI=TRUE" />
+			<forward name="movimentiUtente"
+				path="/servizi/erogazione/ListaMovimenti.do?SERVIZI=TRUE" />
+			<forward name="dettaglioTitolo"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do" />
+			<forward name="sifinventario"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do?INVRICERCA=EROGAZIONE_RICERCA" />
+			<forward name="gestioneLegamiEditTitoli"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloEditore.do" />
+			<forward name="creazLegameTitEdit"
+				path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/analiticaTitolo"
+			name="analiticaTitoloForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/analitica.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.AnaliticaTitoloAction"
+			parameter="methodAnalitTitolo">
+
+			<forward name="vaiA" path="/gestioneVaiA.do" />
+
+			<forward name="input"
+				path="/WEB-INF/jsp/pages/gestionebibliografica/titolo/analitica.jsp" />
+			<forward name="annullaOperazione"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="ritornaSinteticaTitolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="ritornaSinteticaAutore"
+				path="/gestionebibliografica/autore/sinteticaAutori.do" />
+			<forward name="ritornaSinteticaMarca"
+				path="/gestionebibliografica/marca/sinteticaMarche.do" />
+			<forward name="ritornaSinteticaLuogo"
+				path="/gestionebibliografica/luogo/sinteticaLuoghi.do" />
+
+			<forward name="dettaglioTitolo"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do" />
+			<forward name="dettaglioAutore"
+				path="/gestionebibliografica/autore/dettaglioAutore.do" />
+			<forward name="dettaglioPossessore"
+				path="/documentofisico/possessori/possessoriVisualizza.do" />
+			<forward name="inventariPossessori"
+				 path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward name="dettaglioMarca"
+				path="/gestionebibliografica/marca/dettaglioMarca.do" />
+			<forward name="dettaglioSemantici"
+				path="/gestionebibliografica/titolo/dettaglioLegameTitoloSemantici.do" />
+			<forward name="dettaglioLuogo"
+				path="/gestionebibliografica/titolo/dettaglioLuogo.do" />
+
+			<forward name="interrogazionePerLegamiTitoloTitolo"
+				path="/gestionebibliografica/titolo/interrogazioneTitolo.do?NEWLEGAME=TRUE" />
+			<forward name="interrogazionePerLegamiTitoloAutore"
+				path="/gestionebibliografica/autore/interrogazioneAutore.do?NEWLEGAME=TRUE" />
+			<forward name="interrogazionePerLegamiTitoloMarca"
+				path="/gestionebibliografica/marca/interrogazioneMarca.do?NEWLEGAME=TRUE" />
+			<forward name="interrogazionePerLegamiTitoloLuogo"
+				path="/gestionebibliografica/luogo/interrogazioneLuogo.do?NEWLEGAME=TRUE" />
+			<forward name="interrogazionePerLegamiAutoreAutore"
+				path="/gestionebibliografica/autore/interrogazioneAutore.do?NEWLEGAME=TRUE" />
+			<forward name="interrogazionePerLegamiLuogoLuogo"
+				path="/gestionebibliografica/luogo/interrogazioneLuogo.do?NEWLEGAME=TRUE" />
+			<forward name="gestionePerLegamiAutoreRinvio"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do?INSRINVIO=TRUE" />
+			<forward name="gestionePerLegamiLuogoRinvio"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do?INSRINVIO=TRUE" />
+			<forward name="interrogazionePerLegamiAutoreMarca"
+				path="/gestionebibliografica/marca/interrogazioneMarca.do?NEWLEGAME=TRUE" />
+			<forward name="interrogazionePerLegamiMarcaAutore"
+				path="/gestionebibliografica/autore/interrogazioneAutore.do?NEWLEGAME=TRUE" />
+			<forward name="variazionePerLegamiTitoloTitolo"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloTitolo.do" />
+			<forward name="variazionePerLegamiTitoloAutore"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloAutore.do" />
+			<forward name="variazionePerLegamiTitoloMarca"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloMarca.do" />
+			<forward name="variazionePerLegamiTitoloLuogo"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloLuogo.do" />
+			<forward name="variazionePerLegamiTitoloEditore"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloEditore.do" />
+
+
+			<forward name="ordineDopoCatturaASuggerimento"
+				path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+
+			<forward name="variazionePerLegamiFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+			<forward name="gestionePerLegamiTitoloInferiore"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloTitolo.do?CREALEGINF=TRUE" />
+			<forward name="gestionePerLegamiTitoloUniRinvio"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE&amp;RINVIO_TIT_UNI=TRUE" />
+
+			<forward name="creaTitoloPartecipato51"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE&amp;GEST51=TRUE" />
+			<forward name="creaTitoloLocale51"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE&amp;GEST51=TRUE" />
+
+			<forward name="creaSpoglioPartecipato51"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE&amp;GEST51=TRUE&amp;SPOGLIO=TRUE" />
+			<forward name="creaSpoglioLocale51"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE&amp;GEST51=TRUE&amp;SPOGLIO=TRUE" />
+
+
+			<forward name="sinteticaTitoli"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+
+			<forward name="interrogazioneTitolo"
+				path="/gestionebibliografica/titolo/interrogazioneTitolo.do" />
+			<forward name="interrogazioneAutore"
+				path="/gestionebibliografica/autore/interrogazioneAutore.do" />
+			<forward name="interrogazioneMarca"
+				path="/gestionebibliografica/marca/interrogazioneMarca.do" />
+			<forward name="interrogazioneLuogo"
+				path="/gestionebibliografica/luogo/interrogazioneLuogo.do" />
+			<forward name="interrogazionePossessore"
+				path="/documentofisico/possessori/possessoriRicerca.do" />
+
+			<forward name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+
+			<forward name="sinteticaTitoliPerCondividi"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SINTSIMILICONDIVIDI=TRUE" />
+			<forward name="sinteticaAutoriPerCondividi"
+				path="/gestionebibliografica/autore/sinteticaAutori.do?SINTSIMILICONDIVIDI=TRUE" />
+
+			<forward name="propostaDiCorrezione"
+				path="/gestionebibliografica/utility/interrogazionePropostaDiCorrezione.do?SINTETICA=TRUE" />
+
+			<forward name="stampaSchedeCatalografiche"
+				path="/gestionestampe/schede/stampaSchede.do?PROVENIENZA=ANALITICA" />
+			<forward name="gestionelegamiTitoloEditore"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?EDITCOLLTITOLI=TRUE" />
+
+
+
+			<forward name="sifinventario"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do?INVRICERCA=EROGAZIONE_RICERCA" />
+
+		</action>
+
+		<action path="/gestionebibliografica/titolo/dettaglioTitolo"
+			name="dettaglioTitoloForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/dettaglioTitolo.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.DettaglioTitoloAction"
+			parameter="methodDettaglioTit">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="sinteticaSimili"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SINTSIMILI=TRUE" />
+			<forward name="gestioneLegameTitolo"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloTitolo.do" />
+			<forward name="cercaRepertori"
+				path="/gestionebibliografica/sifRicercaRepertori.do" />
+
+
+			<forward name="inserVariaIncipit"
+				path="/gestionebibliografica/titolo/gestioneIncipit.do" />
+			<forward name="hlpElementiOrganico"
+				path="/gestionebibliografica/sifRicercaElementiOrganico.do" />
+
+		</action>
+
+		<action path="/gestionebibliografica/titolo/gestioneLegameTitoloTitolo"
+			name="gestioneLegameTitoloTitoloForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/gestioneLegameTitoloTitolo.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.GestioneLegameTitoloTitoloAction"
+			parameter="methodGestLegTitTit">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/gestioneLegameTitoloAutore"
+			name="gestioneLegameTitoloAutoreForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/gestioneLegameTitoloAutore.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.GestioneLegameTitoloAutoreAction"
+			parameter="methodGestLegTitAut">
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/gestioneLegameTitoloMarca"
+			name="gestioneLegameTitoloMarcaForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/gestioneLegameTitoloMarca.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.GestioneLegameTitoloMarcaAction"
+			parameter="methodGestLegTitMar">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/gestioneLegameTitoloLuogo"
+			name="gestioneLegameTitoloLuogoForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/gestioneLegameTitoloLuogo.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.GestioneLegameTitoloLuogoAction"
+			parameter="methodGestLegTitLuo">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/gestioneLegameTitoloEditore"
+			name="gestioneLegameTitoloEditoreForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/gestioneLegameTitoloEditore.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.GestioneLegameTitoloEditoreAction"
+			parameter="methodGestLegTitEdi">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+
+		<action path="/gestionebibliografica/autore/gestioneLegameFraAutority"
+			name="gestioneLegameFraAutorityForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/autore/gestioneLegameFraAutority.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.autore.GestioneLegameFraAutorityAction"
+			parameter="methodGestLegFraAutor">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/catalogazioneTitolo"
+			name="catalogazioneTitoloForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/catalogazioneTitolo.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.CatalogazioneTitoloAction"
+			parameter="methodCatalogTit">
+			<forward name="sinteticaTitoli"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+		</action>
+
+		<action
+			path="/gestionebibliografica/titolo/esaminaTitoliConFiltro"
+			name="esaminaTitoliConFiltroForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/esaminaTitoliConFiltro.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.EsaminaTitoliConFiltroAction"
+			parameter="methodInterrogTit">
+			<forward name="sinteticaTitoli"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/interrogazioneVaiA"
+			name="interrogazioneVaiAForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/interrogazioneVaiA.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.InterrogazioneVaiAAction"
+			parameter="methodVaiA">
+			<forward name="sinteticaTitoli"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="vaiADatiInventari"
+				path="/documentofisico/datiInventari/vaiAListaInventari.do" />
+		</action>
+
+		<action
+			path="/gestionebibliografica/autore/interrogazioneAutore"
+			name="interrogazioneAutoreForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/autore/interrogazioneAutore.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.autore.InterrogazioneAutoreAction"
+			parameter="methodInterrogAut">
+			<forward name="sinteticaAutori"
+				path="/gestionebibliografica/autore/sinteticaAutori.do" />
+			<forward name="sinteticaAutoriPerLegame"
+				path="/gestionebibliografica/autore/sinteticaAutori.do?SINTNEWLEGAME=TRUE" />
+			<forward name="creaAutore"
+				path="/gestionebibliografica/autore/dettaglioAutore.do?CONDIVISO=TRUE" />
+			<forward name="creaAutoreLocale"
+				path="/gestionebibliografica/autore/dettaglioAutore.do?CONDIVISO=FALSE" />
+		</action>
+
+		<action path="/gestionebibliografica/autore/sinteticaAutori"
+			name="sinteticaAutoriForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/autore/sinteticaAutori.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.autore.SinteticaAutoriAction"
+			parameter="methodSinteticaAut">
+			<forward name="interrogazioneAutore"
+				path="/gestionebibliografica/autore/interrogazioneAutore.do" />
+			<forward name="creaAutore"
+				path="/gestionebibliografica/autore/dettaglioAutore.do?CONDIVISO=TRUE" />
+			<forward name="creaAutoreLocale"
+				path="/gestionebibliografica/autore/dettaglioAutore.do?CONDIVISO=FALSE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="gestioneLegameTitoloAutore"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloAutore.do" />
+			<forward name="gestioneLegameFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+			<forward name="dettaglioAutore"
+				path="/gestionebibliografica/autore/dettaglioAutore.do" />
+		</action>
+
+		<action path="/gestionebibliografica/autore/dettaglioAutore"
+			name="dettaglioAutoreForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/autore/dettaglioAutore.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.autore.DettaglioAutoreAction"
+			parameter="methodDettaglioAut">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="sinteticaSimili"
+				path="/gestionebibliografica/autore/sinteticaAutori.do?SINTSIMILI=TRUE" />
+			<forward name="cercaRepertori"
+				path="/gestionebibliografica/sifRicercaRepertori.do" />
+			<forward name="gestioneLegameTitoloAutore"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloAutore.do" />
+			<forward name="gestioneLegameFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+		</action>
+
+		<action path="/gestionebibliografica/marca/interrogazioneMarca"
+			name="interrogazioneMarcaForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/marca/interrogazioneMarca.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.marca.InterrogazioneMarcaAction"
+			parameter="methodInterrogMar">
+			<forward name="sinteticaMarche"
+				path="/gestionebibliografica/marca/sinteticaMarche.do" />
+			<forward name="sinteticaMarchePerLegame"
+				path="/gestionebibliografica/marca/sinteticaMarche.do?SINTNEWLEGAME=TRUE" />
+			<forward name="creaMarca"
+				path="/gestionebibliografica/marca/dettaglioMarca.do?CONDIVISO=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/marca/sinteticaMarche"
+			name="sinteticaMarcheForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/marca/sinteticaMarche.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.marca.SinteticaMarcheAction"
+			parameter="methodSinteticaMar">
+			<forward name="interrogazioneMarca"
+				path="/gestionebibliografica/marca/interrogazioneMarca.do" />
+			<forward name="interrogazioneMarca"
+				path="/gestionebibliografica/marca/interrogazioneMarca.do" />
+			<forward name="sintImmagini"
+				path="/gestionebibliografica/marca/sinteticaImmaginiMarche.do" />
+			<forward name="sintImmaginiPerLegame"
+				path="/gestionebibliografica/marca/sinteticaImmaginiMarche.do?SINTNEWLEGAME=TRUE" />
+			<forward name="creaMarca"
+				path="/gestionebibliografica/marca/dettaglioMarca.do?CONDIVISO=TRUE" />
+			<forward name="creaMarcaLocale"
+				path="/gestionebibliografica/marca/dettaglioMarca.do?CONDIVISO=FALSE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="gestioneLegameTitoloMarca"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloMarca.do" />
+			<forward name="gestioneLegameFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+		</action>
+
+		<action path="/gestionebibliografica/marca/sinteticaImmaginiMarche"
+			name="sinteticaImmaginiMarcheForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/marca/sinteticaImmaginiMarche.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.marca.SinteticaImmaginiMarcheAction"
+			parameter="methodSintImmMar">
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="gestioneLegameTitoloMarca"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloMarca.do" />
+			<forward name="gestioneLegameFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+		</action>
+
+
+		<action path="/gestionebibliografica/marca/dettaglioMarca"
+			name="dettaglioMarcaForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/marca/dettaglioMarca.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.marca.DettaglioMarcaAction"
+			parameter="methodDettaglioMar">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="gestioneLegameTitoloMarca"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloMarca.do" />
+			<forward name="gestioneLegameFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+		</action>
+
+		<action
+			path="/gestionebibliografica/titolo/dettaglioLegameTitoloSemantici"
+			name="dettaglioLegameTitoloSemanticiForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/dettaglioLegameTitoloSemantici.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.DettaglioLegameTitoloSemanticiAction"
+			parameter="methodDettLegTitSem">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/sinteticaLocalizzazioni"
+			name="sinteticaLocalizzazioniForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/sinteticaLocalizzazioni.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.SinteticaLocalizzazioniAction"
+			parameter="methodSinteticaLoc">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="dettaglioLocalizzazione"
+				path="/gestionebibliografica/dettaglioLocalizzazione.do" />
+			<forward name="vaiADatiInventari"
+				path="/documentofisico/datiInventari/vaiAListaInventari.do" />
+
+		</action>
+
+		<action path="/gestionebibliografica/dettaglioLocalizzazione"
+			name="dettaglioLocalizzazioneForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/dettaglioLocalizzazione.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.DettaglioLocalizzazioneAction"
+			parameter="methodDettaglioLoc">
+			<forward name="annulla"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+
+		</action>
+
+
+		<action path="/gestionebibliografica/sifRicercaRepertori"
+			name="sifRicercaRepertoriForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/sifRicercaRepertori.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.SifRicercaRepertoriAction"
+			parameter="methodSifRepertoriTit">
+		</action>
+
+		<action path="/gestionebibliografica/sifRicercaElementiOrganico"
+			name="sifRicercaElementiOrganicoForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/sifRicercaElementiOrganico.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.SifRicercaElementiOrganicoAction"
+			parameter="methodSifElementiOrganico">
+		</action>
+
+
+		<action path="/gestionebibliografica/luogo/interrogazioneLuogo"
+			name="interrogazioneLuogoForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/luogo/interrogazioneLuogo.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.luogo.InterrogazioneLuogoAction"
+			parameter="methodInterrogLuo">
+			<forward name="sinteticaLuoghi"
+				path="/gestionebibliografica/luogo/sinteticaLuoghi.do" />
+			<forward name="sinteticaLuoghiPerLegame"
+				path="/gestionebibliografica/luogo/sinteticaLuoghi.do?SINTNEWLEGAME=TRUE" />
+			<forward name="creaLuogo"
+				path="/gestionebibliografica/titolo/dettaglioLuogo.do?CONDIVISO=TRUE" />
+			<forward name="creaLuogoLocale"
+				path="/gestionebibliografica/titolo/dettaglioLuogo.do?CONDIVISO=FALSE" />
+		</action>
+
+		<action path="/gestionebibliografica/luogo/sinteticaLuoghi"
+			name="sinteticaLuoghiForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/luogo/sinteticaLuoghi.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.luogo.SinteticaLuoghiAction"
+			parameter="methodSinteticaLuo">
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="gestioneLegameTitoloLuogo"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloLuogo.do" />
+			<forward name="gestioneLegameFraAutority"
+				path="/gestionebibliografica/autore/gestioneLegameFraAutority.do" />
+			<forward name="creaLuogo"
+				path="/gestionebibliografica/titolo/dettaglioLuogo.do?CONDIVISO=TRUE" />
+			<forward name="creaLuogoLocale"
+				path="/gestionebibliografica/titolo/dettaglioLuogo.do?CONDIVISO=FALSE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/dettaglioLuogo"
+			name="dettaglioLuogoForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/dettaglioLuogo.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.DettaglioLuogoAction"
+			parameter="methodDettaglioLuo">
+			<forward name="annulla"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="sinteticaSimili"
+				path="/gestionebibliografica/luogo/sinteticaLuoghi.do?SINTSIMILI=TRUE" />
+			<forward name="cercaRepertori"
+				path="/gestionebibliografica/sifRicercaRepertori.do" />
+			<forward name="gestioneLegameTitoloLuogo"
+				path="/gestionebibliografica/titolo/gestioneLegameTitoloLuogo.do" />
+
+		</action>
+
+		<action path="/gestionebibliografica/utility/richiestaAllineamenti"
+			name="richiestaAllineamentiForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/richiestaAllineamenti.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.utility.RichiestaAllineamentiAction"
+			parameter="methodRichAllineamenti">
+			<forward name="richAllineamenti"
+				path="/gestionebibliografica/utility/richiestaAllineamenti.do" />
+		</action>
+
+
+		<action path="/gestionebibliografica/utility/interrogazionePropostaDiCorrezione"
+			name="interrogazionePropostaDiCorrezioneForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/interrogazionePropostaDiCorrezione.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.utility.InterrogazionePropostaDiCorrezioneAction"
+			parameter="methodInterrogPropCorrez">
+			<forward name="sinteticaPropostaCorr"
+				path="/gestionebibliografica/utility/sinteticaPropostaDiCorrezione.do" />
+			<forward name="creaPropostaCorr"
+				path="/gestionebibliografica/utility/dettaglioPropostaDiCorrezione.do" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/utility/sinteticaPropostaDiCorrezione"
+			name="sinteticaPropostaDiCorrezioneForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/sinteticaPropostaDiCorrezione.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.utility.SinteticaPropostaDiCorrezioneAction"
+			parameter="methodSintPropCorrez">
+			<forward name="creaPropostaCorr"
+				path="/gestionebibliografica/utility/dettaglioPropostaDiCorrezione.do" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/utility/dettaglioPropostaDiCorrezione"
+			name="dettaglioPropostaDiCorrezioneForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/dettaglioPropostaDiCorrezione.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.utility.DettaglioPropostaDiCorrezioneAction"
+			parameter="methodDettagPropCorrez">
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RICARICA=TRUE" />
+			<forward name="propostaDiCorrezione"
+				path="/gestionebibliografica/utility/interrogazionePropostaDiCorrezione.do?SINTETICA=TRUE" />
+		</action>
+
+
+		<action
+			path="/gestionebibliografica/titolo/gestioneIncipit"
+			name="gestioneIncipitForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/gestioneIncipit.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.GestioneIncipitAction"
+			parameter="methodGestIncipit">
+			<forward name="dettaglioTitolo"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do" />
+		</action>
+
+		<action
+			path="/gestionebibliografica/titolo/interrogazioneListeDiConfronto"
+			name="interrogazioneListeDiConfrontoForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/interrogazioneListeDiConfronto.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.InterrogazioneListeDiConfrontoAction"
+			parameter="methodInterrogLisConf">
+			<forward name="sinteticaTitoliPerConfronto"
+				path="/gestionebibliografica/titolo/sinteticaTitoliPerConfronto.do" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="sinteticaSchedeTitoli"
+				path="/gestionebibliografica/titolo/sinteticaSchedeTitoli.do?LISTECONFRONTO=TRUE" />
+		</action>
+
+		<action path="/gestionebibliografica/titolo/sinteticaSchedeTitoli"
+			name="sinteticaSchedeTitoliForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/titolo/sinteticaSchedeTitoli.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.titolo.SinteticaSchedeTitoliAction"
+			parameter="methodSinteticaSchedeTit">
+			<forward name="interrogazioneTitolo"
+				path="/gestionebibliografica/titolo/interrogazioneTitolo.do" />
+			<forward name="creaTitoloPartecipato"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=TRUE" />
+			<forward name="creaTitoloLocale"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do?CONDIVISO=FALSE" />
+			<forward name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="interrVaiA"
+				path="/gestionebibliografica/titolo/interrogazioneVaiA.do" />
+			<forward name="meStesso"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do" />
+			<forward name="dettaglioTitolo"
+				path="/gestionebibliografica/titolo/dettaglioTitolo.do" />
+			<forward name="interrogazioneListeDiConfronto"
+				path="/gestionebibliografica/titolo/interrogazioneListeDiConfronto.do" />
+
+		</action>
+
+		<action path="/gestionebibliografica/utility/richiestaLocalizzazione"
+			name="richiestaLocalizzazioneForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/richiestaLocalizzazione.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.utility.RichiestaLocalizzazioneAction"
+			parameter="methodRichAllineamenti">
+		</action>
+
+		<action path="/gestionebibliografica/utility/importaLegamiBidAltroId"
+			name="importaLegamiBidAltroIdForm"
+			input="/WEB-INF/jsp/pages/gestionebibliografica/richiestaImportaLegamiBidAltroId.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionebibliografica.utility.ImportaLegamiBidAltroIdAction"
+			parameter="methodRichAllineamenti">
+		</action>
+
+
+
+	</action-mappings>
+	<controller nocache="true"></controller>
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="gestioneBibliograficaLabels"
+		parameter="it.iccu.sbn.web.resources.GestioneBibliograficaLabels"
+		null="false" />
+	<message-resources key="gestioneBibliograficaMessages"
+		parameter="it.iccu.sbn.web.resources.GestioneBibliograficaMessages"
+		null="false" />
+
+	<!-- ======================================== Plug-in Definitions -->
+
+	<plug-in className="org.apache.struts.plugins.DigestingPlugIn">
+		<set-property property="key" value="serverTypes" />
+		<set-property property="configPath"
+			value="/WEB-INF/struts-config/labelEsamina.xml" />
+		<set-property property="digesterPath"
+			value="/WEB-INF/struts-config/esamina-digester-rules.xml" />
+	</plug-in>
+
+</struts-config>

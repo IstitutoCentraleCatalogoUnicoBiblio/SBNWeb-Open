@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE server
+    PUBLIC "-//JBoss//DTD MBean Service 4.2//EN"
+    "http://www.jboss.org/j2ee/dtd/jboss-service_4_2.dtd">
+
+<server>
+
+	<mbean code="org.hibernate.jmx.HibernateService" name="sbn.db:service=SbnWebHibernateMap">
+
+		<attribute name="JndiName">java:/sbnWeb/HibernateSessionFactory</attribute>
+		<attribute name="Datasource">java:jdbc/sbnHibernatePostgresqlDS</attribute>
+		<attribute name="Dialect">it.iccu.sbn.polo.SbnPostgreSQLDialect</attribute>
+		<attribute name="TransactionStrategy">org.hibernate.transaction.JTATransactionFactory</attribute>
+		<attribute name="TransactionManagerLookupStrategy">org.hibernate.transaction.JBossTransactionManagerLookup</attribute>
+		<attribute name="MaximumFetchDepth">1</attribute>
+		<attribute name="ShowSqlEnabled">true</attribute>
+		<attribute name="SecondLevelCacheEnabled">false</attribute>
+
+		<attribute name="MapResources">
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_buono_ordine.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_cambi_ufficiali.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_fatture.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_offerte_fornitore.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_ordini.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_parametri_buono_ordine.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_parametri_ordine.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_profili_acquisto.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_richieste_offerta.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_righe_fatture.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_sez_acquis_bibliografiche.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tba_suggerimenti_bibliografici.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tbb_bilanci.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tbb_capitoli_bilanci.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tbr_fornitori.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tbr_fornitori_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_elementi_buono_ordine.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_fornitori_offerte.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_messaggi.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_ordine_inventari.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_ordini_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_sez_acquisizione_fornitori.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_sez_acq_storico.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/Tra_ordine_carrello_spedizione.hbm.xml,
+			it/iccu/sbn/polo/mapping/acquisizioni/query_servizio_acquisizioni.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/query_servizio_amm.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_anagrafe_utenti_professionali.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_attivita.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_attivita_sbnmarc.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_batch_servizi.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_bibliotecario.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_bibliotecario_default.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_biblioteca_default.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_biblioteca_in_polo.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_coda_jms.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_config_default.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_contatore.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_default.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_dizionario_errori.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_gruppi_default.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_gruppo_attivita.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_intranet_range.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_lingua_supportata.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_mail.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_modelli_stampe.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_modello_profilazione_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_modello_profilazione_bibliotecario.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_moduli_funzionali.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_parametro.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_par_auth.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_par_mat.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_par_sem.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_polo.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_polo_default.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_profilo_abilitazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_utenti_professionali_web.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tb_codici.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_attivita_affiliate.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_attivita_polo.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_funzioni_denominazioni.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_gruppo_attivita_polo.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_profilo_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_utente_professionale_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Trf_utente_professionale_polo.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tr_modello_sistemi_classi_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tr_modello_soggettari_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tr_modello_thesauri_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/amministrazione/Tbf_js_script.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_arte_tridimens.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_audiovideo.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_autore.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_cartografia.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_composizione.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_disco_sonoro.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_grafica.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_impronta.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_incipit.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_luogo.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_marca.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_microforma.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_musica.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_nota.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_numero_std.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_parola.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_personaggio.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_rappresent.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_repertorio.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_report_indice.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_report_indice_id_arrivo.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_report_indice_id_locali.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_risorsa_elettr.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_titolo.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_aut_aut.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_aut_bib.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_aut_mar.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_luo_luo.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_mar_bib.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_per_int.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_rep_aut.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_rep_mar.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_rep_tit.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_tit_aut.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_tit_bib.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_tit_luo.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_tit_mar.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_tit_tit.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tb_loc_indice.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/Tr_bid_altroid.hbm.xml,
+			it/iccu/sbn/polo/mapping/bibliografica/viste/V_catalogo_editoria.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/query_servizio_documento_fisico.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_collocazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_default_inven_schede.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_esemplare_titolo.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_inventario.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_nota_inv.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_possessore_provenienza.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_provenienza_inventario.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_serie_inventariale.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Tbc_sezione_collocazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Trc_formati_sezioni.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Trc_possessori_possessori.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/Trc_poss_prov_inventari.hbm.xml,
+			it/iccu/sbn/polo/mapping/documentofisico/viste/Vc_inventario_coll.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/query_servizio_semantica.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tb_abstract.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tb_classe.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tb_descrittore.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tb_soggetto.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tb_termine_thesauro.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Trs_termini_titoli_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_des_des.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_sistemi_classi_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_soggettari_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_sogp_sogi.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_sog_des.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_termini_termini.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_thesauri_biblioteche.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_tit_cla.hbm.xml,
+			it/iccu/sbn/polo/mapping/gestionesemantica/Tr_tit_sog_bib.hbm.xml,
+			it/iccu/sbn/polo/mapping/periodici/query_servizio_periodici.hbm.xml,
+			it/iccu/sbn/polo/mapping/periodici/Tbp_esemplare_fascicolo.hbm.xml,
+			it/iccu/sbn/polo/mapping/periodici/Tbp_fascicolo.hbm.xml,
+			it/iccu/sbn/polo/mapping/periodici/Tbp_modello_previsionale.hbm.xml,
+			it/iccu/sbn/polo/mapping/periodici/Trp_messaggio_fascicolo.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/query_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_modello_calendario.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_posto_sala_categoria_mediazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_prenotazione_posto.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_calendario_servizi.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_controllo_iter.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_disponibilita_precatalogati.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_documenti_lettori.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_esemplare_documento_lettore.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_iter_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_materie.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_messaggio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_modalita_erogazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_modalita_pagamento.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_occupazioni.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_parametri_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_penalita_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_posti_sala.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_richiesta_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_sale.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_servizio_web_dati_richiesti.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_solleciti.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_specificita_titoli_studio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_storico_richieste_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_supporti_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_tipi_autorizzazioni.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_tipo_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_utenti.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_accesso_utente.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_attivita_bibliotecario.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_autorizzazioni_servizi.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_diritti_utente.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_materie_utenti.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_posti_sala_utenti_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_relazioni_servizi.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_supporti_modalita_erogazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_tariffe_modalita_erogazione.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Trl_utenti_biblioteca.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Vl_richiesta_servizio.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_dati_richiesta_ill.hbm.xml,
+			it/iccu/sbn/polo/mapping/servizi/Tbl_biblioteca_ill.hbm.xml,
+			it/iccu/sbn/polo/mapping/statistiche/query_statistiche.hbm.xml,
+			it/iccu/sbn/polo/mapping/statistiche/Tbf_config_statistiche.hbm.xml,
+			it/iccu/sbn/polo/mapping/statistiche/Tb_statistiche.hbm.xml,
+			it/iccu/sbn/polo/mapping/statistiche/Tb_stat_parameter.hbm.xml,
+			it/iccu/sbn/polo/mapping/importunimarc/Import1.hbm.xml
+		</attribute>
+
+		<depends>sbn.service:name=HibernateClusteredCache</depends>
+
+	</mbean>
+
+	<mbean code="org.jboss.cache.TreeCache" name="sbn.service:name=HibernateClusteredCache">
+
+		<attribute name="TransactionManagerLookupClass">
+			org.jboss.cache.JBossTransactionManagerLookup
+		</attribute>
+
+		<attribute name="IsolationLevel">READ_COMMITTED</attribute>
+		<attribute name="CacheMode">LOCAL</attribute>
+		<attribute name="ClusterName">HibernateClusteredCache</attribute>
+
+		<attribute name="EvictionPolicyConfig">
+			<config>
+				<attribute name="wakeUpIntervalSeconds">5</attribute>
+				<region name="/it/iccu/sbn" policyClass="org.jboss.cache.eviction.LFUPolicy">
+					<attribute name="maxNodes">10000</attribute>
+					<attribute name="timeToLiveSeconds">3600</attribute>
+				</region>
+			</config>
+		</attribute>
+
+		<depends>jboss:service=Naming</depends>
+		<depends>jboss:service=TransactionManager</depends>
+
+	</mbean>
+
+</server>

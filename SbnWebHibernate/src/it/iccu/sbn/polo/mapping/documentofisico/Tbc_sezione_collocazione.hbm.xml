@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_sezione_collocazione" table="tbc_sezione_collocazione" >
+		<meta attribute="class-description">
+			SEZIONI DI COLLOCAZIONE
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<composite-id>
+			<key-property name="cd_sez" column="cd_sez" type="string"/>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="note_sez" column="note_sez" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note relative alla sezione
+			</meta>
+		</property>
+		<property name="tot_inv" column="tot_inv" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				totale degli inventari collocati nella sezione
+			</meta>
+		</property>
+		<property name="descr" column="descr" type="string" length="30" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione della sezione
+			</meta>
+		</property>
+		<property name="cd_colloc" column="cd_colloc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice tipo collocazione
+			</meta>
+		</property>
+		<property name="tipo_sez" column="tipo_sez" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo di sezione
+			</meta>
+		</property>
+		<property name="cd_cla" column="cd_cla" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del sistema di classificazione
+			</meta>
+		</property>
+		<property name="tot_inv_max" column="tot_inv_max" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di inventari previsti per la sezione di collocazione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tbc_collocazione" lazy="extra" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_sez"/>
+				<column name="cd_biblioteca_sezione"/>
+				<column name="cd_polo_sezione"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione"/>
+		</set>
+		<set name="Trc_formati_sezioni" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_sezione"/>
+				<column name="cd_bib_sezione"/>
+				<column name="cd_polo_sezione"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Trc_formati_sezioni"/>
+		</set>
+	</class>
+</hibernate-mapping>

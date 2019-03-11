@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Trf_profilo_biblioteca" table="trf_profilo_biblioteca" >
+		<meta attribute="class-description">
+			FUNZIONI ASSOCIATE AI PROFILI DI ABILITAZIONE (TLFPFU)
+		</meta>
+		<id name="id_profilo_abilitazione_biblioteca" column="id_profilo_abilitazione_biblioteca" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_attivita" cascade="lock" column="cd_attivita" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_attivita" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cd_prof" cascade="lock" column="id_profilo_abilitazione" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_profilo_abilitazione" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="ejbModule"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebHibernate"/>
+	<classpathentry kind="lib" path="lib/classes12.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/jbossall-client.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-common-client.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-system.jar"/>
+	<classpathentry kind="lib" path="lib/jnp-client.jar"/>
+	<classpathentry kind="lib" path="lib/log4j.jar" sourcepath="lib/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/resolver.jar"/>
+	<classpathentry kind="lib" path="lib/xalan.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/unimarcmodel.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebCommon"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-beanutils-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/icu4j.jar"/>
+	<classpathentry kind="lib" path="lib/OsterMillerUtils.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-3.2.6.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jboss-cache.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jfreechart-1.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/quartz-all-1.6.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/trove-2.1.0.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jxl-2.6.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/hibernate/ehcache-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/castor-0.9.9-sbnweb.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/sbn-periodico.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/lambdaj-2.3.3-sbnweb.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/stream-1.1.5-jdk5.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/sbnmarc_gateway.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/resteasy/jaxrs-api-2.0.1.GA.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/symmetric-csv-3.5.19.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jboss-serialization.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/joda-time-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/chardet.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jasperreports-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/kefirbb-1.5.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jakarta-oro.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/compile/javax.ejb-3.0.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/compile/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/resteasy/resteasy-jaxrs-2.0.1.GA.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/marc4j-2.6.5-jdk5.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jzkit_client.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/axis.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-logging-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/saaj.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/hibernate/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jgroups.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

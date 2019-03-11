@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="ricercaSaleForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.sale.RicercaSaleForm" />
+		<form-bean name="listaSaleForm"
+			type="it.iccu.sbn.web.actionforms.servizi.sale.SinteticaSaleForm" />
+		<form-bean name="dettaglioSalaForm"
+			type="it.iccu.sbn.web.actionforms.servizi.sale.DettaglioSalaForm" />
+		<form-bean name="postoMediazioneForm"
+			type="it.iccu.sbn.web.actionforms.servizi.sale.PostoMediazioneForm" />
+		<form-bean name="gestionePrenotazionePostoForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.sale.GestionePrenotazionePostoForm" />
+
+		<form-bean name="calendarioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.calendario.CalendarioForm" />
+		<form-bean name="intervalloForm"
+			type="it.iccu.sbn.web.actionforms.servizi.calendario.IntervalloForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions/>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards/>
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings >
+
+		<action path="/servizi/sale/ricercaSale"
+			name     ="ricercaSaleForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.integration.action.sale.RicercaSaleAction"
+			input    ="/WEB-INF/jsp/pages/servizi/sale/ricercaSale.jsp"
+			scope    ="session"
+			parameter="methodRicercaSale">
+
+			<forward name="listaSale" path="/servizi/sale/listaSale.do" />
+			<forward name="nuovaSala" path="/servizi/sale/dettaglioSala.do" />
+			<forward name="calendario" path="/servizi/calendario/calendario.do" />
+			<forward name="movimento" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="prenotazione" path="/servizi/sale/gestionePrenotazionePosto.do" />
+			<forward name="sif_utente" path="/servizi/utenti/RicercaUtenti.do?UTERICERCA=ricerca_sale" />
+
+		</action>
+
+		<action path="/servizi/sale/listaSale"
+			name     ="listaSaleForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.sale.SinteticaSaleAction"
+			input    ="/WEB-INF/jsp/pages/servizi/sale/sinteticaSale.jsp"
+			scope    ="session"
+			parameter="methodListaSale">
+
+			<forward name="nuovaSala" path="/servizi/sale/dettaglioSala.do" />
+			<forward name="dettaglio" path="/servizi/sale/dettaglioSala.do" />
+
+		</action>
+
+		<action path="/servizi/sale/dettaglioSala"
+			name     ="dettaglioSalaForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.sale.DettaglioSalaAction"
+			input    ="/WEB-INF/jsp/pages/servizi/sale/dettaglioSala.jsp"
+			scope    ="session"
+			parameter="methodDettSala">
+
+			<forward name="calendario" path="/servizi/calendario/calendario.do" />
+			<forward name="supporti" path="/servizi/sale/postoMediazione.do" />
+
+		</action>
+
+		<action path="/servizi/sale/postoMediazione"
+			name     ="postoMediazioneForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.sale.PostoMediazioneAction"
+			input    ="/WEB-INF/jsp/pages/servizi/sale/postoMediazione.jsp"
+			scope    ="session"
+			parameter="methodPostoMed">
+
+		</action>
+
+		<action path="/servizi/sale/gestionePrenotazionePosto"
+			name     ="gestionePrenotazionePostoForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.integration.action.sale.GestionePrenotazionePostoAction"
+			input    ="/WEB-INF/jsp/pages/servizi/sale/gestionePrenotazionePosto.jsp"
+			scope    ="session"
+			parameter="methodGestPrenPosto">
+
+			<forward name="sif_utente" path="/servizi/utenti/RicercaUtenti.do?UTERICERCA=prenot_posto" />
+			<forward name="sposta" path="/servizi/sale/gestionePrenotazionePosto.do" />
+		</action>
+
+		<action path="/servizi/calendario/calendario"
+			name     ="calendarioForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.calendario.CalendarioAction"
+			input    ="/WEB-INF/jsp/pages/servizi/calendario/calendario.jsp"
+			scope    ="session"
+			parameter="methodCalendario">
+
+			<forward name="intervallo" path="/servizi/calendario/intervallo.do" />
+
+		</action>
+
+		<action path="/servizi/calendario/intervallo"
+			name     ="intervalloForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.calendario.IntervalloAction"
+			input    ="/WEB-INF/jsp/pages/servizi/calendario/intervallo.jsp"
+			scope    ="session"
+			parameter="methodIntervallo">
+
+		</action>
+
+	</action-mappings>
+
+</struts-config>

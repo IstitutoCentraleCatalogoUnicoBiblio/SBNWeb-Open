@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_calendario_servizi" table="tbl_calendario_servizi" >
+		<meta attribute="class-description">
+			Calendario erogazione servizi
+		</meta>
+		<composite-id>
+			<key-property name="progr_fascia" column="progr_fascia" type="integer"/>
+			<key-property name="id_tipo_servizio_id_tipo_servizio" column="id_tipo_servizio" type="integer"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_tipo_servizio" column="id_tipo_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_tipo_servizio" insert="false" update="false">
+		</many-to-one>
+		<property name="ore_in" column="ore_in" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				ora di inizio della fascia oraria di validita'
+			</meta>
+		</property>
+		<property name="ore_fi" column="ore_fi" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				ora di fine della fascia oraria di validita'
+			</meta>
+		</property>
+		<property name="data" column="data" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data del giorno
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

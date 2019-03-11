@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.V_aut_aut" polymorphism="explicit" table="V_AUT_AUT" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="VID_1" column="VID_1" type="string"/>
+			<key-property name="VID_2" column="VID_2" type="string"/>
+			<key-property name="TP_LEGAME" column="TP_LEGAME" type="string"/>
+		</composite-id>
+		<property name="NOTA_AUT_AUT" type="string" length="320" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

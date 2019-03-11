@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Guida SBNWEB</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Acquisizioni - Ricerca Comunicazioni&nbsp; </h1>
+<ul>
+<li><a href="#Descrizione">Descrizione</a></li>
+<li><a href="#Ingresso">Punti di ingresso</a>
+</li>
+<li><a href="#Prerequisiti">Prerequisiti</a></li>
+<li><a href="#ModuloDati">Modulo immissione
+dati</a>
+<ul>
+<li><a href="#Canali">Area canali</a></li>
+<li><a href="#Filtri">Area filtri</a></li>
+<li><a href="#Miscellanea">Area
+miscellanea </a></li>
+<li><a href="#Default">Valori di default</a>
+</li>
+<li><a href="#Azioni">Azioni utente</a></li>
+</ul>
+</li>
+<li><a href="#Controlli">Controlli del
+sistema</a><br>
+</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+La funzione consente all'utente bibliotecario di effettuare ricerche sulla base dati allo scopo di individuare e visualizzare uno o più comunicazioni da e per i fornitori relativi agli ordini ed alle fatture effettuate dalle Biblioteche. Tale ricerca può essere finalizzata alla modifica/cancellazione di singole voci o alla semplice consultazione delle informazioni. Nel contesto dell'esportazione può essere finalizzata anche alla selezione di voci da esportare.
+Esso consente in particolare:
+<ul>
+<li>l'indicazione degli estremi di ricerca nella base informativa</li>
+<li>la visualizzazione della lista dei dati di sintesi delle comunicazioni presenti nella base informativa rispondenti ai parametri indicati (include caso d'uso Sintetica Comunicazioni)</li>
+<li>la visualizzazione dei dati di dettaglio (include caso d'uso Dettaglio Comunicazione) dell'elemento selezionato sulla "Sintetica Comunicazioni"</li>
+<li>l'attivazione di altri casi d'uso</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span>Punti
+di ingresso </h2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Comunicazioni</li>
+<li>Barra di navigazione</li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+<ul>
+<li>Il bibliotecario deve avere superato con successo l'autenticazione e l'abilitazione alla funzione</li>
+</ul>
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span>Modulo
+immissione dati</h2>
+<p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/RicercaComunicazioni.gif" alt=""></p>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<ul>
+<li><u>Cod. bibl.</u>: 3 caratteri alfanumerici.</li>
+<li><u>Tipo Doc.</u>: 1 carattere alfanumerico. Selezione da lista di valori ammessi: Tutti, F-Fattura, O-Ordine.</li>
+<li><u>Direzione.</u>: 1 carattere alfanumerico. Selezione da lista di valori ammessi: Tutti, A-Per fornitore, D-Da fornitore.</li>
+<li><u>Stato.</u> Stato della Comunicazione. Valori ammessi: 1=ricevuto; 2=spedito; 3=non spedito.</li> 
+<li><u>Tipo Msg.</u>: 2 caratteri alfanumerici. Selezione da lista di valori ammessi: 01=note di precisazione; 02=reclamo ordine; 03=notifica annullamento ordine; 04=notifica chiusura ordine; 05=richiesta annullamento ordine; 06=note ordine; 07=note fattura; 08=reclamo fattura; 10=già fornito; 11=non rintracciabile; 12=non trattato; 13=non venduto separatamente; 14=temporaneamente non in stock; 15=aumento considerevole del prezzo;16=non ottenibile; 17=fuori commercio; 18=esaurito in brossura, disponibile rilegato; 19=non ancora pubblicato; 20=pubblicazione esaurita; 21=pubblicazione esaurita, sostituita da altra edizione; 22=esaurito in rilegatura, disponibile in brossura; 23=in attesa di ristampa; 24=sollecito ordine; 25=reclamo e sollecito ordine.</li>
+<li><u>Cod. Msg.</u>: valore numerico. </li>
+<li><u>Fornitore</u>: Codice:valore numerico; Denominazione:50 caratteri alfanumerici.</li>
+<li><u>Da Data .. A data.</u>:formato data (gg/mm/aaaa). Intervallo di date (in formato gg/mm/aaaa) entro cui effettuare le ricerca. Può essere indicato anche uno solo dei due estremi, in tal caso il sistema prende in considerazione la sola data indicata.</li>
+<li><u>Ordine (Tipo , Anno, Codice)</u>: Tipo:1 carattere alfanumerico. Elenco dei tipi di ordine: "A-acquisto", "L-deposito legale", "D-dono", "V-visione trattenuta", "C-cambio", "R-Rilegatura"; Anno: valore numerico(4 cifre); Codice: valore numerico. Identificativo Ordine</li>
+<li><u>Fattura (Anno, progr.)</u>: Anno: valore numerico(4 cifre); progr: valore numerico. Identificativo fattura.</li>
+</ul> 
+<br>
+<p>Le ricerche verranno effettuate ponendo tutti i
+parametri in AND.</p>
+
+<h3><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Miscellanea" id="InterrogazioneTitoloCanali"></a></span>Area
+miscellanea </span></h3>
+<ul>
+<li><em><u>Elem. Blocco</u></em>:
+permette l&#8217;indicazione del numero di elementi da richiedere al
+sistema per la suddivisione in blocchi della lista. Se non viene
+indicato nulla in questo campo il sistema applicherà il valore di
+default associato all&#8217;utente attivo. 
+</li>
+<li><em><u>Parametri di Ordinamento</u></em>:<br>
+- Data (disc),<br>
+- Data (asc),<br>
+- Nome fornitore, <br>
+- tipo msg. 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li> <strong>'Codice Bibl. (Icona lista)'</strong>.&nbsp; Elenco delle biblioteche affiliate a quella di appartenenza, con possibilità di scelta tramite selezione per consentire di operare per conto della biblioteca selezionata.</li>
+<li> Bottone <strong>'<a href="SinteticaComunicazioni.htm">Cerca</a>'</strong>.&nbsp; Esegue i controlli e attiva la ricerca in base ai parametri specificati e all'ordinamento prescelti, a condizione che siano
+stati superati i controlli. Gli elementi trovati verranno esposti, in forma sintetica, con il primo blocco della lista ordinata dei risultati a cui è possibile aggiungere successivamente i blocchi di interesse dell'utente se il numero dei risultati supera il valore indicato nel campo "Elem. Blocco".</li>
+<li> Bottone <strong>'<a href="CreaComunicazione.htm">Crea</a>'</strong>.&nbsp; Attiva la funzione di inserimento.</li>
+<li> '<a href="../Interrogazione/RicercaTitolo.htm">Bid (Icona lente ricerca)</a>' <strong></strong>.&nbsp; Ricerca della notizia bibliografica il cui risultato, se scelto, viene riportato nel campo bid.</li>
+<li> '<a href="ListaSupportoOrdini.htm">Ordine (Icona lente ricerca)</a>' <strong></strong>.&nbsp; Ricerca puntuale dell'ordine il cui risultato, se scelto, viene riportato nei campi dell'ordine.</li>
+<li> '<a href="ListaSupportoFornitori.htm">Fornitore (Icona lente ricerca)</a>' <strong></strong>.&nbsp; Ricerca del fornitore il cui risultato, se scelto, viene riportato nei campi del fornitore.</li>
+<li> '<a href="ListaSupportoFatture.htm">Fattura (Icona lente ricerca)</a>' <strong></strong>.&nbsp; Ricerca della fattura il cui risultato, se scelto, viene riportato nei campi del fornitore.</li>
+</ul>
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli
+del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li>
+<u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.
+</li>
+<li>
+La scelta del tipo documento fra Fattura e Ordine inibisce l'immissione dei criteri relativi alla  tipologia esclusa
+</li>
+<li>
+Nei range di date deve sempre essere indicato l'estremo anteriore (da), se non viene indicato l'estremo recente (a) la ricerca verrà eseguita per data esatta
+</li>
+<li>
+Nei range di date o valori verrà verificato che il "Da" sia <= all'"A"
+</li>
+<li>
+Nel caso di ricerca puntuale tutti gli ulteriori criteri eventualmente specificati non verranno presi in considerazione.
+</li>
+<li>
+Effettuata la scelta del tipo doc e direzione il sistema configura dinamicamente la lista sui tipo msg e si abilitano/disabilitano  le aree fattura/ordine.
+</li>
+</ul>
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body></html>

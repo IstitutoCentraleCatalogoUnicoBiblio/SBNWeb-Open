@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_disponibilita_precatalogati" table="tbl_disponibilita_precatalogati" >
+		<meta attribute="class-description">
+			Disponibilit&#224; precatalogati
+		</meta>
+		<id name="id_disponibilita_precatalogati" column="id_disponibilita_precatalogati" type="integer" unsaved-value="0">
+			<generator class="sequence">
+				<param name="sequence">tbl_disponibilita_precataloga_id_disponibilita_precatalogat_seq</param>
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="cod_segn" column="cod_segn" type="integer" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice che identifica univocamente i range di segnatura
+			</meta>
+		</property>
+		<property name="segn_inizio" column="segn_inizio" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				segnatura iniziale
+			</meta>
+		</property>
+		<property name="segn_fine" column="segn_fine" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				segnatura finale
+			</meta>
+		</property>
+		<property name="cod_no_disp" column="cod_no_disp" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice di non disponibilita' del documento
+			</meta>
+		</property>
+		<property name="cod_frui" column="cod_frui" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della fruizione
+			</meta>
+		</property>
+		<property name="segn_da" column="segn_da" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				ESTREMO INIZIALE DELL&#8217;INTERVALLO (normalizzato)
+			</meta>
+		</property>
+		<property name="segn_a" column="segn_a" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				ESTREMO FINALE DELL&#8217;INTERVALLO (normalizzato)
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,501 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida SBNWEB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script>
+</head>
+<body>
+<table summary= "summary" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td   valign="top" bgcolor="#dde8f0"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Dati di Inventario </h1>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="listaInventariTitolo" id="listaInventariTitolo"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Lista </span></strong></span>Inventari del Titolo </h1>
+        <ul>
+          <li><a href="#DescrizioneListaInvTit">Descrizione</a></li>
+          <li><a href="#IngressoListaInvTit">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiListaInvTit">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiListaInvTit">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliListaInvTit">Area canali</a></li>
+              <li><a href="#FiltriListaInvTit">Area filtri</a></li>
+              <li><a href="#MiscellaneaListaInvTit">Area miscellanea </a></li>
+              <li><a href="#DefaultListaInvTit">Valori di default</a></li>
+              <li><a href="#AzioniListaInvTit">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliListaInvTit">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneListaInvTit" id="DescrizioneListaInvTit"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di  visualizzare la lista dedegli inventari del titolo per il BID passato dal <a href="../Interrogazione/AnaliticaConVaiA.htm">VAIA dell'analitica di Gestione Bibliografica</a>.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoListaInvTit" id="IngressoListaInvTit"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>VaiA &gt; <a href="../Interrogazione/AnaliticaConVaiA.htm#Titolo_Da_Documento_Fisico">Gestione Inventari e Collocazioni </a> &gt; bottone &quot;Conferma&quot; </li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiListaInvTit" id="PrerequisitiListaInvTit"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+          <li>Esistenza di almeno un  inventario legato al bid per la gestione, </li>
+          <li>la notizia deve esser di natura W, M o S. </li>
+       </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiListaInvTit" id="ModuloDatiListaInvTit"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/listaInvnetariDelTitolo.PNG" alt="listaInventariTitolo" width="841" height="412"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliListaInvTit" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriListaInvTit" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaListaInvTit" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultListaInvTit" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniListaInvTit" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+        <ul>
+           <li>bottone <img src="Immagini/cartiglio.PNG" alt="bottBiblio">, presente soltanto se la biblioteca operante &egrave; un centro sistema, attiva la <a href="SezioniCollocazioni.htm#listaSupportoBib">lista di supporto delle biblioteche</a> del polo, </li>
+         <li>Check sull'option button corrispondente alla riga degli inventari del titolo;</li>
+          <li>link sui numeri di riga della colonna Prg., per <a href="DatiInventari.htm#esaminaInventario">esaminare</a> un inventario non collocato esistente previa selezione dalla lista,</li>
+          <li>bottone <img src="Immagini/bottoneAggiornaDatiPossessoIndice.PNG" alt="bottAggiornaDatiPossessoIndice" width="200" height="20">, attiva la funzione <a href="InvioConsistenzaIndice.htm">Invio Consistenza Indice</a> (esclusivamente  nel caso di notizia <strong><u>non</u></strong> [loc]); il bottone &egrave; sempre attivo nella lista; il BID  utilizzato per l&rsquo;Aggiornamento dati di possesso in Indice &egrave; quello selezionato  nel &lsquo;Vai A&rsquo; (BID degli inventari). Non vengono passano i dati mnemonici per il copia  incolla.</li>
+          <li>bottone <img src="Immagini/bottoneSceltaModCollocazione.PNG" alt="bottSceltaModCollocazione" width="200" height="20">, attiva la funzione di <a href="SceltaCollocazione.htm">Inserimento Collocazione</a> se l'inventario &egrave; precisato oppure la funzione di <a href="SceltaCollocazione.htm#modificaCollocazione">Modifica Collocazione</a> se l'inventario &egrave; collocato, previa selezione della riga che riguarda l'inventario;</li>
+          <li>bottone <img src="Immagini/bottoneAltroInv.PNG" alt="bottAltroInv" width="70" height="20"> , attiva la funzione di <a href="DatiInventari.htm#inserimentoInventario">Inserimento Nuovo Inventario</a>;</li>
+          <li>bottone <img src="Immagini/bottoneCancInv.PNG" alt="bottCancInv" width="77" height="20">, attiva la funzione di <a href="DatiInventari.htm#cancellazioneInventario">Cancellazione Inventario</a> previa selezione della riga da cancellare,</li>
+          <li>bottone <img src="Immagini/bottoneOrdini.PNG" alt="bottOrdini" width="55" height="20">, attiva la <a href="../Acquisizioni/ListaSupportoOrdiniInv.htm">lista di supporto ordini</a> che consente di ottenere la lista degli ordini legati al bid in gestione, scegliere un ordine, ricercare la <a href="ListeInventari.htm#listaInvOrdine">lista degli inventari dell'ordine</a> e se la lista presenta almeno un elemento, scegliere e attivare la mappa di inserimento inventario riportando la serie e il numero di <a href="DatiInventari.htm#insInvConOrd">inventario da creare</a> come &quot;Presente nel sistema&quot;, oppure se la lista degli inventari dell'ordine &egrave; vuota, non esistono inventari legati all'ordine, attivare la mappa di inserimento <a href="DatiInventari.htm#insInvSenzaOrd">inventario</a> per creare un nuovo inventario,</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="62" height="21">, per abbandonare la pagina e ritornare all'<a href="../Interrogazione/AnaliticaConVaiA.htm#Titolo_Da_Documento_Fisico">Analitica di Gestione Bibliografica</a>.</li>
+          <p>Inoltre, per consentire la gestione delle liste in blocchi  a capo e piè di lista saranno prospettati:</p>
+          <li>bottone <img src="Immagini/freccia.PNG" alt="freccia" width="28" height="20"> , carica il numero di blocco indicato nel campo &quot;Carica pagina&quot;,</li>
+          <li>campo Carica Pagina, numerico, 3 max,</li>
+	  	<li>Elementi trovati, numero di totole elementi della lista, </li>
+	  	<li>Pagina n di m, numero di blocchi caricati dei blocchi totali </li>
+	  	</ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliListaInvTit" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+          <li>Se non viene effettuata alcuna selezione e scelto uno dei bottoni &quot;Scelta/Modifica Collocazione&quot;,   &quot;Canc. Inv.&quot; viene emesso l'opportuno diagnostico;</li>
+          <li>Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.</li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="inserimentoInventario" id="inserimentoInventario"></a></span></span>Inserimento Inventario (da Dati Inventario)</h1>
+        <ul>
+          <li><a href="#DescrizioneIns">Descrizione</a></li>
+          <li><a href="#IngressoIns">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiIns">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiIns">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliIns">Area canali</a></li>
+              <li><a href="#FiltriIns">Area filtri</a></li>
+              <li><a href="#MiscellaneaIns">Area miscellanea </a></li>
+              <li><a href="#DefaultIns">Valori di default</a></li>
+              <li><a href="#AzioniIns">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliIns">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneIns" id="DescrizioneIns"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di effettuare la creazione di un nuovo inventario per il bid in gestione.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoIns" id="IngressoIns"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>VaiA &gt; Dati Inventari &gt; <a href="DatiInventari.htm#listaInventariTitolo">Lista Inventari del Titolo</a> &gt; bottone <img src="Immagini/bottoneAltroInv.PNG" alt="bootAltroInv" width="70" height="20">,</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiIns" id="PrerequisitiIns"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiIns" id="ModuloDatiIns"></a></span>Modulo di immissione dati</h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoInventario.PNG" alt="inserimentoInventario" width="841" height="202"></p>
+        <p class="style5 style8 style4 Stile3" align="center">&nbsp;</p>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoInventarioConOrdine.PNG" id="insInvConOrd" alt="insInvConOrd" width="841" height="201"></p>
+        <p class="style5 style8 style4 Stile3" align="center">&nbsp;</p>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoInventarioSenzaOrdine.PNG" id="insInvSenzaOrd" alt="insInvSenzaOrd" width="841" height="245"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliIns" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriIns" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaIns" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultIns" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2">Azioni utente</span></h3>
+        <ul>
+          <li>Elenco campi di input valorizzabili:
+            <ul>
+              <li>check Non presente nel sistema<span class="Stile3 style8"><em><em>,</em></em></span></li>
+              <li>check Presente nel sistema,</li>
+              <li>check Progressivo Automatico,</li>
+              <li>check Vecchio Accessionamento,</li>
+              <li><span class="style5 style8 style4 Stile3">serie :</span><span class="Stile3 style8"><em> nome della serie, alfanumerico, 3 max, obbligatorio, selezionabile dalla lista a discesa,</em></span></li>
+              <li><span class="style5 style8 style4 Stile3">numero inventario :</span><span class="Stile3 style8"><em> numero d'inventario del documento,</em></span></li>
+              <li><span class="style5 style8 style4 Stile3">precisazione del volume :</span><span class="Stile3 style8"><em> precisazione dell'inventario,</em></span></li>
+              <li></li>
+            </ul>
+          </li>
+          <li>bottone <img src="Immagini/bottoneOrdini.PNG" alt="bottOrdini" width="55" height="20">, attiva la <a href="../Acquisizioni/ListaSupportoOrdiniInv.htm">lista di supporto ordini</a> che consente di ottenere la lista degli ordini legati al bid in gestione, scegliere un ordine, ricercare la <a href="ListeInventari.htm#listaInvOrdine">lista degli inventari dell'ordine</a> e se la lista presenta almeno un elemento, scegliere e attivare la mappa di inserimento inventario riportando la serie e il numero di <a href="DatiInventari.htm#insInvConOrd">inventario da creare</a> come &quot;Presente nel sistema&quot;, oppure se la lista degli inventari dell'ordine &egrave; vuota, non esistono inventari legati all'ordine, attivare la mappa di inserimento <a href="DatiInventari.htm#insInvSenzaOrd">inventario</a> per creare un nuovo inventario,</li>
+          <li>bottone <img src="Immagini/bottoneCreaColloca.PNG" alt="bottCreaColloca" width="109" height="20">, crea un inventario per il bid in gestione e attiva direttamente la funzione di <a href="SceltaCollocazione.htm#inserimentoCollocazione">inserimento collocazione</a>;</li>
+          <li>bottone <img src="Immagini/bottoneCrea.PNG" alt="bottCrea" width="49" height="20">, attiva crea un inventario con i dati minimi e ritorna alla <a href="DatiInventari.htm#listaInventariTitolo">Lista  Inventari del Titolo</a> proponendo la lista aggiornata, </li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina  e tornare alla <a href="DatiInventari.htm#listaInventariTitolo">Lista  Inventari del Titolo</a>,<br>
+          </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliIns" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="inserimentoInventarioO" id="inserimentoInventarioO"></a></span></span>Inserimento Inventario (da Ordine)</h1>
+        <ul>
+          <li><a href="#DescrizioneInsO">Descrizione</a></li>
+          <li><a href="#IngressoInsO">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiInsO">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiInsO">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliInsO">Area canali</a></li>
+              <li><a href="#FiltriInsO">Area filtri</a></li>
+              <li><a href="#MiscellaneaInsO">Area miscellanea </a></li>
+              <li><a href="#DefaultInsO">Valori di default</a></li>
+              <li><a href="#AzioniInsO">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliInsO">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneInsO" id="DescrizioneInsO"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di effettuare la creazione di uno o pi&ugrave;  inventari per l'ordine del titolo in gestione .</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoInsO" id="IngressoInsO"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Menu &gt; Ordine &gt; Crea &gt; <a href="../Acquisizioni/DettaglioOrdine.htm">Esamina Ordine</a> &gt; bottone <img src="Immagini/bottoneInventari.PNG" alt="bottInventari" width="70" height="20">,</li>
+          <li>Menu &gt; Ordine &gt; Ricerca Ordine &gt; Lista Ordini &gt; <a href="../Acquisizioni/CreaGaraDacquisto.htm">Dettaglio Ordine</a> &gt; bottone <img src="Immagini/bottoneInventari.PNG" alt="bottInventari" width="70" height="20"> </li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiInsO" id="PrerequisitiInsO"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiInsO" id="ModuloDatiInsO"></a></span>Modulo di immissione dati</h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoInventarioOrdine.PNG" alt="inserimentoInvOrd" width="841" height="197"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliInsO" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriInsO" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaInsO" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultInsO" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultInsO" id="InterrogazioneTitoloCanali"></a></span>Azioni utente</h3>
+        <ul>
+          <li>Elenco campi di input valorizzabili:
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">serie :</span><span class="Stile3 style8"><em> nome della serie, alfanumerico, 3 max, obbligatorio, selezionabile dalla lista a discesa,</em></span></li>
+              <li><span class="style5 style8 style4 Stile3" align="left">numero inventario :</span><span class="Stile3 style8"><em> numero d'inventario del documento,</em></span> all'emissione della pagina &egrave; impostato a 1, </li>
+            </ul>
+          </li>
+          <li>bottone <img src="Immagini/bottoneCrea.PNG" alt="bottCrea" width="49" height="20">, inserisce un nuovo inventario nella base informativa e prospetta la mappa di modifica inventario (riportando sulla linguetta del folder Inventario il numero dell'inventario creato e l'indicazione della progressione della creazione) per completare l'inventario con i dati obbligatori, </li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina  e tornare alla pagina chiamante (<a href="../Acquisizioni/DettaglioOrdine.htm">crea ordine</a> o <a href="../Acquisizioni/DettaglioOrdine.htm">dettaglio ordine</a>),<br>
+          </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliInsO" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="modificaInventario" id="modificaInventario"></a></span></span>Modifica Inventario</h1>
+        <ul>
+          <li><a href="#DescrizioneMod">Descrizione</a></li>
+          <li><a href="#PuntiIngressoMod">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiMod">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiMod">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliMod">Area canali</a></li>
+              <li><a href="#FiltriMod">Area filtri</a></li>
+              <li><a href="#MiscellaneaMod">Area miscellanea </a></li>
+              <li><a href="#DefaultMod">Valori di default</a></li>
+              <li><a href="#AzioniMod">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliMod">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneMod" id="DescrizioneMod"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di effettuare la modifica di un inventario gi&agrave; inserito nel sistema.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PuntiIngressoMod" id="PuntiIngressoMod"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Menu &gt; Esame Collocazioni &gt; Lista Collocazioni &gt; <a href="ListeInventari.htm#listaInvDiCollocazione">Lista Inventari di Collocazione</a> &gt; bottone <img src="Immagini/bottoneModificaInv.PNG" alt="bottModificaInv" width="94" height="20">,</li>
+          <li><a href="DatiInventari.htm#esaminaInventario">Esame Inventario</a> &gt; bottone <img src="Immagini/bottoneModificaInv.PNG" alt="bottModificaInv" width="94" height="20">,</li>
+          <li><a href="SceltaCollocazione.htm#modificaCollocazione">Modifica Collocazione</a> &gt; bottone <img src="Immagini/bottoneModificaInv.PNG" alt="bottModificaInv" width="94" height="20">, </li>
+          <li><a href="SceltaCollocazione.htm#inserimentoCollocazione">Inserimento Collocazione</a> &gt; bottone <img src="Immagini/bottoneSalva.PNG" alt="bottSalva" width="55" height="20"></li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiMod" id="PrerequisitiMod"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; di Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvTab1" id="modificaInvTab1"></a></span>Modulo di immissione dati - folder Inventario </h2>
+        <p align="center" class="style5 style8 style4 Stile3"><img src="Immagini/modificaInventario.PNG" alt="modificaInv"></p>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvTab11NoOrd" id="modificaInvTab11NoOrd"></a></span>Modulo di immissione dati - folder Copia Digitale </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaInventarioTab11NoOrd.PNG" alt="modificaInvTab11NoOrd">&nbsp;</p>
+        <p class="style5 style8 style4 Stile3" align="center">&nbsp;</p>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvNote" id="modificaInvNote"></a></span>Modulo di immissione dati - folder Inventario con gestione note</h2>
+        <p align="center" class="style5 style8 style4 Stile3"><img src="Immagini/modificaInventarioNote.PNG" alt="modificaInv"></p>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvTab2" id="modificaInvTab2"></a></span>Modulo di immissione dati - folder Carico Inventariale / Fattura </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaInventarioTab2NoOrd.PNG" alt="modificaInvTab2NoOrd"> 
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvTab3" id="modificaInvTab3"></a></span>Modulo di immissione dati - folder Scarico Inventariale </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaInventarioTab3.PNG" alt="modificaInvTab3"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliMod" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriMod" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaMod" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultMod" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2">Azioni utente</span></h3>
+        <ul>
+          <li>Elenco campi di input valorizzabili folder Inventario:
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">sequenza:</span><span class="Stile3 style8"><em> sequenza della collocazione, alfanumerico 20 max, </em></span></li>
+              <li><span class="style5 style8 style4 Stile3" align="left">tipo materiale:</span><span class="Stile3 style8"><em> codice identificativo del materiale da inventariare, selezionabile da lista a discesa,</em></span><em> obbligatorio,</em></li>
+              <li><span class="style5 style8 style4 Stile3">tipo acquisizione:</span><em> selezionabile da lista a discesa,</em> <em>obbligatorio,</em></li>
+              <li><span class="style5 style8 style4 Stile3">data di ingresso:</span> <em>data in cui &egrave; avvenuto l'inserimento dell'inventario nella base informativa, in formato dd/mm/aaaa</em>,</li>
+              <li><span class="style5 style8 style4 Stile3" align="left">provenienza:</span><span class="Stile3 style8"><em> descrizione della provenienza dell'inventario ,</em></span></li>
+              <li>bottone <img src="Immagini/bottoneProvenienza.PNG" alt="bottProv" width="95" height="20">, attiva la <a href="CodiciProvenienza.htm#listaCodici">lista di supporto dei codici di provenienza</a> dalla quale viene scelto una riga corrispondente ad un codice per riportarne la descrizione </li>
+              <li><span class="style5 style8 style4 Stile3" align="left">precisazione del volume : </span><span class="Stile3 style8"><em>precisazione dell'inventario , 30 max,</em></span></li>
+              <li><em><strong>Tipo fruizione</strong></em>, <em>codice della fruizione, selezionabile da lista a discesa, obbligatorio, </em></li>
+              <li><em><strong>Stato di Conservazione</strong></em>, <em>codice dello stato di conservazione, selezionabile da lista a discesa,</em></li>
+              <li><em><strong>Non disponibile per</strong></em>, <em>codice di non disponibilit&agrave; del documento, selezionabile da lista a discesa,</em></li>
+              <li><em><strong>Fino al </strong></em>, <em>data in cui termina la non disponibilit&agrave; ,</em></li>
+              <li><em><strong>Valore Inventariale</strong></em>, <em>valore inventariale, numerico 9 max, </em><em>obbligatorio, </em></li>
+              <li><em><strong>Prezzo Reale</strong></em>, <em>prezzo reale, numerico 9 max, </em></li>
+              <li><em><strong>Altro supporto</strong></em>, <em>supporto della copia, selezionabile da lista a discesa, </em></li>
+              <li><em><strong>Riproducibilità</strong></em>, <em>supporto ammesso per la riproducibilià del documento, selezionabile da lista a discesa, </em></li>
+              <li><em><strong>Note</strong></em>, <em> bottone <img src="Immagini/bottoneNoteInventario.PNG" alt="bottNoteInv" width="18" height="19">, attiva le funzionalit&agrave; di gestione delle <a href="DatiInventari.htm#noteInventaro"></a>note all'inventario e aggiunge  altre righe dopo la prima; </em></li>
+              <li>bottone <img src="Immagini/bottoneNoteElimina.PNG" alt="bottNoteInv" width="18" height="19"> elimina la nota;</li>
+            </ul>
+          </li>
+          <p></p>
+          <li>Elenco campi di input valorizzabili folder <strong>Copia Digitale</strong>:
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">tipo digitalizzazione:</span><em> tipo digitalizzazione, selezionabile da lista a discesa</em>; </li>
+              <li><span class="style5 style8 style4 Stile3" align="left">riferimento teca digitale:</span><em> teca digitale di riferimento, selezionabile da lista a discesa;</em></li>
+              <li><span class="style5 style8 style4 Stile3" align="left">N&deg; disponibilit&agrave; da remoto: </span><span class="Stile3 style8"><em><em>tipo di accesso al documento da remoto, selezionabile da lista a discesa;</em></em></span></li>
+               <li><span class="style5 style8 style4 Stile3" align="left">dati per l'accesso da remoto: </span><span class="Stile3 style8"><em><em>localizzazione per realizzare l'accesso alla copia digitale da remoto, alfanumerico, 30 max;</em></em></span></li>
+           </ul></li>		  
+          <p></p>
+          <li>Elenco campi di input valorizzabili folder <strong>Carico Inventariale / Fattura</strong>:
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">Motivo del carico :</span><em> codice di carico, selezionabile da lista a discesa</em>; </li>
+              <li><span class="style5 style8 style4 Stile3" align="left">Data di Carico: </span>, <em>data del carico,</em> <em> in formato dd/mm/aaaa</em>,</li>
+              <li><span class="style5 style8 style4 Stile3" align="left">N&deg; buono di carico: </span><span class="Stile3 style8"><em><em>numero del buono di carico, numerico, 9 <em>max,</em></em></em></span></li>
+            </ul>
+            <p align="left">Se l'inventario &egrave; stato creato da Ordine ma senza inserire la fattura nel folder <strong><a href="DatiInventari.htm#modificaInvOTab2">Carico Inventariale / Fattura</a></strong> si ha la possibilit&agrave; di inserire una fattura &quot;veloce&quot; immettendo i valori di N&deg; fattura e data fattura,</p>
+          </li>
+          <li>Elenco campi di input valorizzabili folder <strong>Scarico Inventariale</strong>: </li>
+        </ul>
+        <ul>
+          <ul>
+            <li><span class="style5 style8 style4 Stile3" align="left">verso la biblioteca: </span><span class="Stile3 style8"><em><em>codice della biblioteca verso cui viene effettuato lo scarico , alfanumerico, alfanumerico 3 max,</em></em></span></li>
+            <li><span class="style5 style8 style4 Stile3" align="left">Polo: </span><span class="Stile3 style8"><em><em>polo di appartenenza della biblioteca , <em>alfanumerico, alfanumerico 3 max,</em></em></em></span></li>
+            <li><span class="style5 style8 style4 Stile3">Motivo dello scarico: </span><span class="Stile3 style8"><em><em>codice dello scarico, selezionabile da lista a discesa,</em></em></span></li>
+            <li><em><strong>Data dello scarico</strong></em>, <em>data di scarico,</em> <em> in formato dd/mm/aaaa</em>,</li>
+            <li><em><strong>N&deg; buono di scarico</strong></em>, <em>numero del buono di scarico, </em></li>
+            <li><em><strong>Data della delibera</strong></em>, <em>data della delibera di scarico</em>, <em> in formato dd/mm/aaaa</em></li>
+            <li><em><strong>Testo della delibera</strong></em>, <em>testo della delibera di scarico.</em> </li>
+          </ul>
+        </ul>
+        <blockquote>
+          <p>&nbsp;</p>
+        </blockquote>
+        <ul>
+          <li>bottone <img src="Immagini/bottoneAggiornaDatiPossessoIndice.PNG" alt="bottAggiornaDatiPossessoIndice" width="200" height="20">, attiva la funzione <a href="InvioConsistenzaIndice.htm">Invio Consistenza Indice</a> (esclusivamente  nel caso di notizia <strong><u>non</u></strong> [loc]); il bottone &egrave; sempre attivo nella lista; il BID  utilizzato per l&rsquo;Aggiornamento dati di possesso in Indice &egrave; quello selezionato  nel &lsquo;Vai A&rsquo; (BID degli inventari). Vengono riportati i dati mnemonici URI e Tipo  digitalizzazione dell&rsquo;inventario.</li>
+           <li>bottone <img src="Immagini/bottoneEsemplare.PNG" alt="bottEsemplare" width="86" height="20">, attiva la funzione <a href="SceltaEsemplare.htm#ricercaEsemplare">Ricerca esemplare </a>, </li>
+          <li>bottone <img src="Immagini/bottoneCancInv.PNG" alt="bottCancInv" width="77" height="20">, permette di <a href="DatiInventari.htm#cancellazioneInventario">cancellare</a> l'inventario che di sta modificando previa richiesta di conferma dell'operazione,</li>
+          <li>bottone <img src="Immagini/bottoneSalva.PNG" alt="bottSalva" width="55" height="20">, per salvare i dati nella base informativa, </li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina  e tornare alla pagina chiamante,</li>
+        </ul>
+        <p>Sulla pagina di conferma dell'operazione: </p>
+        <ul>
+          <li>bottone <img src="Immagini/bottoneSi.PNG" alt="bottSi" width="32" height="20">, procede con l'aggiornamento della Base informativa <a href="DatiInventari.htm#modificaInvTab1"></a> , </li>
+          <li>bottone <img src="Immagini/bottoneNo.PNG" alt="bottNo" width="38" height="20">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+          <li>Se si sta effettuando una nuova collocazione viene scelto il bottone Esemplare prima del bottone Salva viene richesto il salvataggio dell'inventario da collocare per poter procedere con la Ricerca Esemplare. </li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="modificaInventarioO" id="modificaInventarioO"></a></span></span>Modifica Inventario (da Ordini) </h1>
+        <ul>
+          <li><a href="#DescrizioneModO">Descrizione</a></li>
+          <li><a href="#IngressoModO">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiModO">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiModO">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliModO">Area canali</a></li>
+              <li><a href="#FiltriModO">Area filtri</a></li>
+              <li><a href="#MiscellaneaModO">Area miscellanea </a></li>
+              <li><a href="#DefaultModO">Valori di default</a></li>
+              <li><a href="#AzioniModO">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliModO">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneModO" id="DescrizioneModO"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di  completare l'inserimento di un inventario da Ordine.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoModO" id="IngressoModO"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Menu &gt; Ordine &gt; Crea &gt; Esamina Ordine &gt; <a href="DatiInventari.htm#inserimentoInventarioO">Inserimento inventari da Ordine</a> &gt; bottone <img src="Immagini/bottoneCrea.PNG" alt="bottCrea" width="49" height="20"></li>
+          <li>Menu &gt; Ordine &gt; Ricerca Ordine &gt; Lista Ordini &gt; Dettaglio Ordine &gt; <a href="DatiInventari.htm#inserimentoInventarioO">Inserimento inventari da Ordine</a> &gt; bottone <img src="Immagini/bottoneCrea.PNG" alt="bottCrea" width="49" height="20"> ,</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiModO" id="PrerequisitiModO"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; di Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiModO" id="ModuloDatiModO"></a></span>Modulo di immissione dati - folder Inventario </h2>
+        <p align="center" class="style5 style8 style4 Stile3"><img src="Immagini/modificaInventarioOrdine.PNG" alt="modificaInvO" width="841" height="454"></p>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvOTab2" id="modificaInvOTab2"></a></span>Modulo di immissione dati - folder Carico Inventariale / Fattura </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaInventarioOrdineTab2.PNG" alt="modificaInvOTab2" width="839" height="399"></p>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="modificaInvOTab2" id="modificaInvOTab2"></a></span>Modulo di immissione dati - folder <a href="DatiInventari.htm#modificaInvTab3">Scarico Inventariale</a> </h2>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliModO" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriModO" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaModO" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultModO" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2">Azioni utente</span></h3>
+        <ul>
+          <li>Elenco campi di input valorizzabili folder Inventario:
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">sequenza:</span><span class="Stile3 style8"><em> sequenza della collocazione, alfanumerico 20 max, </em></span></li>
+              <li><span class="style5 style8 style4 Stile3" align="left">tipo materiale:</span><span class="Stile3 style8"><em> codice identificativo del materiale da inventariare, selezionabile da lista a discesa,</em></span><em> <strong>obbligatorio</strong>,</em> </li>
+              <li><span class="style5 style8 style4 Stile3">data di ingresso:</span> <em>data in cui &egrave; avvenuto l'inserimento dell'inventario nella base informativa, in formato dd/mm/aaaa</em>,</li>
+              <li><span class="style5 style8 style4 Stile3" align="left">provenienza:</span><span class="Stile3 style8"><em> descrizione della provenienza dell'inventario ,</em></span></li>
+              <li>bottone <img src="Immagini/bottoneProvenienza.PNG" alt="bottProv" width="95" height="20">, attiva la <a href="CodiciProvenienza.htm#listaCodici">lista di supporto dei codici di provenienza</a> dalla quale viene scelto una riga corrispondente ad un codice per riportarne la descrizione </li>
+              <li><span class="style5 style8 style4 Stile3" align="left">precisazione del volume : </span><span class="Stile3 style8"><em>precisazione dell'inventario , 30 max,</em></span></li>
+              <li><em><strong>Tipo fruizione</strong></em>, <em>codice della fruizione, selezionabile da lista a discesa, </em></li>
+              <li><em><strong>Stato di Conservazione</strong></em>, <em>codice dello stato di conservazione, selezionabile da lista a discesa,</em></li>
+              <li><em><strong>Non disponibile per</strong></em>, <em>codice di non disponibilit&agrave; del documento, selezionabile da lista a discesa,</em></li>
+              <li><em><strong>Valore Inventariale</strong></em>, <em>valore inventariale, numerico 9 max, <strong>obbligatorio</strong>, </em></li>
+              <li><em><strong>Prezzo Reale</strong></em>, <em>prezzo reale, numerico 9 max, </em></li>
+            </ul>
+          </li>
+          <p></p>
+          <li>Elenco campi di input valorizzabili folder <strong>Carico Inventariale / Fattura</strong>: </li>
+          <ul>
+            <li><em><strong>Fattura N&deg;</strong></em>: <em>nome della fattura</em>, </li>
+            <li><em><strong>Data fattura</strong></em>: <em>data relativa alla fattura,</em> <em> in formato dd/mm/aaaa</em>,</li>
+            <li><span class="style5 style8 style4 Stile3" align="left">Motivo del carico :</span><em> codice di carico, selezionabile da lista a discesa</em>; </li>
+            <li><span class="style5 style8 style4 Stile3" align="left">Data di Carico: </span><span class="style8 Stile3" align="left"><em>, data del carico,  in formato dd/mm/aaaa,</em></span></li>
+            <li><span class="style5 style8 style4 Stile3" align="left">N&deg; buono di carico: </span><span class="Stile3 style8"><em><em>numero del buono di carico, numerico, 9 <em>max,</em></em></em></span></li>
+          </ul>
+          <li>bottone <img src="Immagini/bottoneSalva.PNG" alt="bottSalva" width="55" height="20">, per salvare i dati nella base informativa, </li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina  e tornare alla pagina chiamante,</li>
+          <li>bottone <img src="Immagini/bottoneSi.PNG" alt="bottSi" width="32" height="20">, torna all'ordine con l'indicazione di ordine da chiudere, </li>
+          <li>bottone <img src="Immagini/bottoneNo.PNG" alt="bottNo" width="38" height="20">, torna all'ordine senza indicazioni (se il bibliotecario vuole creare altri inventari deve selezionare nuovamente il tasto Inventari). </li>
+          <p></p>
+          <p>&nbsp;</p>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliModO" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+          <li>Al salvataggio dell'ultimo inventario viene emessa la richiesta di &quot;Ordine completamente ricevuto?&quot; </li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="esaminaInventario" id="esaminaInventario"></a></span></span>Esamina Inventario </h1>
+        <ul>
+          <li><a href="#DescrizioneEsame">Descrizione</a></li>
+          <li><a href="#IngressoEsame">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiEsame">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiEsame">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliEsame">Area canali</a></li>
+              <li><a href="#FiltriEsame">Area filtri</a></li>
+              <li><a href="#MiscellaneaEsame">Area miscellanea </a></li>
+              <li><a href="#DefaultEsame">Valori di default</a></li>
+              <li><a href="#AzioniEsame">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliEsame">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneEsame" id="DescrizioneEsame"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di effettuare l'esame di un inventario gi&agrave; esistente nella base informativa.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoEsame" id="IngressoEsame"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Esame Collocazioni &gt; <a href="ListeInventari.htm#listaInvNonCollocati">Inventari Non Collocati</a> , bottone <img src="Immagini/bottoneEsameInv.PNG" alt="bottEsameInv" width="86" height="20">; </li>
+          <li>Esamina Posseduto &gt; folder <a href="EsaminaPosseduto.htm#listaInventariTitolo">Inventari del Titolo</a> &gt; colonna  Prg. link sul numero della riga;</li>
+          <li><a href="DatiInventari.htm#listaInventariTitolo">Lista Inventari del Titolo</a> &gt; colonna  Prg. link sul numero della riga;</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiEsame" id="PrerequisitiEsame"></a></span></span>Prerequisiti</h2>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiEsame" id="ModuloDatiEsame"></a></span>Modulo  dati Inventario precisato </h2>
+        <p align="center" class="style5 style8 style4 Stile3"><img src="Immagini/esameInventarioCollocato.PNG" alt="esameInvCollocato" width="841" height="407"></p>
+         <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiEsame" id="ModuloDatiEsame"></a></span>Modulo  dati Inventario Collocato </h2>
+        <p align="center" class="style5 style8 style4 Stile3"><img src="Immagini/esameInventarioCollocato.PNG" alt="esameInvCollocato" width="841" height="407"></p>
+       <p align="center" class="style5 style8 style4 Stile3">&nbsp;</p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliEsame" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriEsame" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaEsame" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultEsame" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2">Azioni utente</span></h3>
+        <ul>
+          <li>bottone <img src="Immagini/bottoneDisponibilita.PNG" alt="bottDisponibilta" width="94" height="20">, attiva la funzione <a href="../Servizi/RicercaUtenti.htm">esame delle disponibilit&agrave;</a> sul singolo inventario della lista;</li>
+          <li>bottone <img src="Immagini/bottoneEtichetta.PNG" alt="bottEtichetta" width="71" height="20">, apre la schermata dela stampa delle etichette,</li>
+          <li>bottone <img src="Immagini/bottoneModificaInv.PNG" alt="bottModificaInv" width="94" height="20"> , visualizza la mappa di <a href="DatiInventari.htm#modificaInventario">modifica inventario</a> con i dati dell'inventario;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina  e tornare alla funzione attivante.<br>
+          </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliEsame" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+           <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+       </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="cancellazioneInventario" id="cancellazioneInventario"></a></span></span>Cancellazione Inventario </h1>
+        <ul>
+          <li><a href="#DescrizioneCanc">Descrizione</a></li>
+          <li><a href="#IngressoCanc">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiCanc">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiCanc">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliCanc">Area canali</a></li>
+              <li><a href="#FiltriCanc">Area filtri</a></li>
+              <li><a href="#MiscellaneaCanc">Area miscellanea </a></li>
+              <li><a href="#DefaultCanc">Valori di default</a></li>
+              <li><a href="#AzioniCanc">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliCanc">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneCanc" id="DescrizioneCanc"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente al Bibliotecario di cancellare un inventario esistente.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoEsame" id="IngressoEsame"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>VaiA &gt; Dati Inventari &gt; <a href="DatiInventari.htm#listaInventariTitolo">Lista Inventari del Titolo</a> &gt; bottone <img src="Immagini/bottoneCancInv.PNG" alt="bottCancInv" width="77" height="20">,</li>
+          <li><a href="DatiInventari.htm#modificaInventario">Modifica Inventario</a> &gt; bottone <img src="Immagini/bottoneCancInv.PNG" alt="bottCancInv" width="77" height="20">,</li>
+          <li><a href="SceltaCollocazione.htm#modificaCollocazione">Modifica Collocazione</a> &gt; bottone <img src="Immagini/bottoneCancInv.PNG" alt="bottCancInv" width="77" height="20">, </li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiCanc" id="PrerequisitiCanc"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+          <li>Esistenza di almeno un  inventario legato al bid per la gestione. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiCanc" id="ModuloDatiCanc"></a></span>Modulo di immissione dati </h2>
+        <p align="center" class="style5 style8 style4 Stile3"><img src="Immagini/cancellazioneInventarioConferma.PNG" alt="cancellaInvConferma" width="840" height="533"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliCanc" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriCanc" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaCanc" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultCanc" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2">Azioni utente</span></h3>
+        <ul>
+          <li>bottone <img src="Immagini/bottoneSi.PNG" alt="bottSi" width="32" height="20">, procede con la cancellazione dell'inventario e degli oggetti ad esso collegato (collocazione, esemplare) e ritorno alla pagina chiamante aggiornata con emissione di un diagnostico;</li>
+          <li>bottone <img src="Immagini/bottoneNo.PNG" alt="bottNo" width="38" height="20">, abbandono della pagina senza apportare modifiche alla base informativa e ritorno alla pagina chiamante.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliCanc" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni. </li>
+        </ul>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

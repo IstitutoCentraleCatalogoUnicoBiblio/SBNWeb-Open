@@ -1,0 +1,40 @@
+body {
+	 background-color: #FEF1E2;
+div {
+    width: 100%;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 5mm;
+    margin-bottom: 5mm;
+}
+
+#header span.title {
+	font-family: "times new roman", sans-serif;
+	font-size: 200%;
+	font-wight: bold;
+	color: #0d0089;
+	margin-left: 8px;
+}
+
+#header span.aoo {
+	font-family: "verdana", sans-serif;
+	font-size: 80%;
+}
+
+input.submit {
+	font-size: 100%;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 0;
+	margin-right: 6px;
+    border-width: 1px;
+}
+
+table {
+	width: 100%;
+    margin-top: 1cm;
+}
+
+td {
+	width: 50%;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_the_cla" polymorphism="explicit" table="tr_the_cla" lazy="false">
+		<composite-id>
+			<key-property name="CD_SISTEMA" column="CD_SISTEMA" type="it.finsiel.sbn.util.DataTypeCHAR"/>
+			<key-property name="CD_EDIZIONE" column="CD_EDIZIONE" type="it.finsiel.sbn.util.DataTypeCHAR"/>
+            <key-property name="CLASSE" column="CLASSE" type="it.finsiel.sbn.util.DataTypeCHAR"/>
+			<key-property name="DID" column="DID" type="string"/>
+		</composite-id>
+		<version name="TS_VAR" type="timestamp" />
+		<property name="CD_THE" column="CD_THE" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true"/>
+		<property name="NOTA_THE_CLA" column="NOTA_THE_CLA" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" length="8" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<!-- <property name="TS_VAR" column="TS_VAR" type="timestamp" length="8" not-null="true"/>  -->
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="POSIZIONE" type="short" not-null="true" lazy="false"/>
+		<property name="CL_KEY" type="string" not-null="true" lazy="false">
+			<formula>CD_SISTEMA||CD_EDIZIONE||CLASSE</formula>
+		</property>
+	</class>
+</hibernate-mapping>
+

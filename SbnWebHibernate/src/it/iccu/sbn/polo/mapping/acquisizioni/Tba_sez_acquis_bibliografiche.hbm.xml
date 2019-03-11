@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_sez_acquis_bibliografiche" table="tba_sez_acquis_bibliografiche" schema="sbnweb" >
+		<meta attribute="class-description">
+			Sezioni d'acquisizione bibliografiche
+		</meta>
+		<id name="id_sez_acquis_bibliografiche" column="id_sez_acquis_bibliografiche" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib" index="xpk_sez_acquis_bibliografiche"/>
+			<column name="cd_polo" index="xpk_sez_acquis_bibliografiche"/>
+		</many-to-one>
+		<property name="cod_sezione" column="cod_sezione" type="string" length="7" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della sezione d'acquisizione
+			</meta>
+		</property>
+		<property name="nome" column="nome" type="string" length="30" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione della sezione d'acquisizione
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note relative alla sezione d'acquisizione
+			</meta>
+		</property>
+		<property name="somma_disp" column="somma_disp" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				somma disponibile per la sezione relativa agli acquisti
+			</meta>
+		</property>
+		<property name="budget" column="budget" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				somma iniziale disponibile per la sezione relativa agli acquisti
+			</meta>
+		</property>
+		<property name="anno_val" column="anno_val" type="big_decimal" precision="4" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				anno di validita della sezione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="data_val" column="data_val" type="date" not-null="false" lazy="false"/>
+		<set name="Tba_ordini" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_sez_acquis_bibliografiche" not-null="false" />
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini"/>
+		</set>
+		<set name="Tba_profili_acquisto" lazy="false" cascade="save-update,lock" inverse="true">
+			<key column="id_sez_acquis_bibliografiche" not-null="true"   />
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_profili_acquisto"/>
+		</set>
+		<set name="Tba_suggerimenti_bibliografici" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_sez_acquis_bibliografiche" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_suggerimenti_bibliografici"/>
+		</set>
+
+	</class>
+</hibernate-mapping>

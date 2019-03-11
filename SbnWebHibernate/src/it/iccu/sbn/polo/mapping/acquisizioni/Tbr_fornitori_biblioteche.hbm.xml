@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori_biblioteche" table="tbr_fornitori_biblioteche" schema="sbnweb" >
+		<meta attribute="class-description">
+			Dati di fornitore in Biblioteca
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="cod_fornitore" column="cod_fornitore" type="integer" />
+		</composite-id>
+		<!--
+		<generator class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori">
+		<param name="property">Tbr_fornitori</param>
+		</generator>
+		-->
+		<!--
+		<list name="stories" cascade="all">
+		<key column="parent_id"/>
+		<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori"/>
+		</list>
+		-->
+		<!--<one-to-one name="Tbr_fornitori" class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori" property-ref="cod_fornitore"  constrained="true" />-->
+		<property name="tipo_pagamento" column="tipo_pagamento" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione del modo di pagamento o titolo c/c bancario con il quale il fornitore vuole essere pagato dalla biblioteca
+			</meta>
+		</property>
+		<property name="cod_cliente" column="cod_cliente" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice cliente che ha la biblioteca presso il fornitore
+			</meta>
+		</property>
+		<property name="nom_contatto" column="nom_contatto" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione del personale da contattare nel caso in cui il fornitore sia un ente
+			</meta>
+		</property>
+		<property name="tel_contatto" column="tel_contatto" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di telefono del personale da contattare nel caso in cui il fornitore sia un ente
+			</meta>
+		</property>
+		<property name="fax_contatto" column="fax_contatto" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di fax del personale da contattare nel caso in cui il fornitore sia un ente
+			</meta>
+		</property>
+		<property name="valuta" column="valuta" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della valuta di pagamento
+			</meta>
+		</property>
+		<property name="cod_polo" column="cod_polo" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice polo
+			</meta>
+		</property>
+		<property name="allinea" column="allinea" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				flag allinea
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+
+		<set name="Tra_sez_acquisizione_fornitori" lazy="true" cascade="save-update,lock" inverse="true">
+			<key  not-null="false" >
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+				<column name="cod_fornitore"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tra_sez_acquisizione_fornitori"/>
+		</set>
+
+		<!--
+			<key  not-null="false" foreign-key="tra_sez_acquisizione_fornitori_pkey" unique="true">
+
+		cascade="all, delete-orphan"
+		<set name="Tba_profili_acquisto" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="false" property-ref="cod_fornitore"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_profili_acquisto"/>
+		</set>
+		-->
+	</class>
+</hibernate-mapping>

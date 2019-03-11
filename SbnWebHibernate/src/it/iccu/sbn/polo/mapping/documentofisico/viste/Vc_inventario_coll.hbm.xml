@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.viste.Vc_inventario_coll" table="vc_inventario_coll" polymorphism="explicit" >
+		<meta attribute="class-description">
+			INVENTARI
+		</meta>
+		<cache usage="read-only"/>
+		<composite-id>
+			<key-many-to-one name="cd_serie" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_serie_inventariale">
+				<column name="cd_serie"/>
+				<column name="cd_bib"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="cd_inven" column="cd_inven" type="integer"/>
+		</composite-id>
+		<many-to-one name="cd_proven" cascade="lock" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_provenienza_inventario" not-null="false" lazy="proxy" access="field">
+			<column name="cd_proven"/>
+			<column name="cd_biblioteca_proven"/>
+			<column name="cd_polo_proven"/>
+		</many-to-one>
+		<many-to-one name="key_loc" cascade="lock" column="key_loc" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+<!-- 		<many-to-one name="b" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="save-update,lock" unique="true" not-null="false" lazy="proxy" access="field"> -->
+ 		<many-to-one name="b" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="key_loc_old" column="key_loc_old" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				chiave della collocazione definitiva (utilizzato nella funzione di spostamento temporaneo di collocazioni)
+			</meta>
+		</property>
+		<property name="seq_coll" column="seq_coll" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				sequenza della collocazione
+			</meta>
+		</property>
+		<property name="precis_inv" column="precis_inv" type="string" length="160" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				precisazione dell'inventario
+			</meta>
+		</property>
+		<property name="cd_sit" column="cd_sit" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della situazione amministrativa
+			</meta>
+		</property>
+		<property name="valore" column="valore" type="big_decimal" precision="12" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				valore inventariale
+			</meta>
+		</property>
+		<property name="importo" column="importo" type="big_decimal" precision="12" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				importo reale
+			</meta>
+		</property>
+		<property name="num_vol" column="num_vol" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero dei volumi in cui risultano rilegati i periodici aventi uno stesso numero di inventario
+			</meta>
+		</property>
+		<property name="tot_loc" column="tot_loc" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				totale dei prestiti locali dell'inventario
+			</meta>
+		</property>
+		<property name="tot_inter" column="tot_inter" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				totale dei prestiti interbibliotecari
+			</meta>
+		</property>
+		<property name="anno_abb" column="anno_abb" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno di abbonamento dell'inventario (per periodici)
+			</meta>
+		</property>
+		<property name="flg_disp" column="flg_disp" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di disponibilia'/non disponibilita'
+			</meta>
+		</property>
+		<property name="flg_nuovo_usato" column="flg_nuovo_usato" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di inventario acquisto usato ammette i valori ' ' =nuovo, 'u' = usato
+			</meta>
+		</property>
+		<property name="stato_con" column="stato_con" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice dello stato di conservazione
+			</meta>
+		</property>
+		<property name="cd_fornitore" column="cd_fornitore" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice del fornitore
+			</meta>
+		</property>
+		<property name="cd_mat_inv" column="cd_mat_inv" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del materiale da inventariare
+			</meta>
+		</property>
+		<property name="cd_bib_ord" column="cd_bib_ord" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca che ha effettuato l'ordine
+			</meta>
+		</property>
+		<property name="cd_tip_ord" column="cd_tip_ord" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia dell'ordine
+			</meta>
+		</property>
+		<property name="anno_ord" column="anno_ord" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno d'acquisizione dell'ordine
+			</meta>
+		</property>
+		<property name="cd_ord" column="cd_ord" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'ordine
+			</meta>
+		</property>
+		<property name="riga_ord" column="riga_ord" type="integer" not-null="false" lazy="false"/>
+		<property name="cd_bib_fatt" column="cd_bib_fatt" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca che ha emesso la fattura
+			</meta>
+		</property>
+		<property name="anno_fattura" column="anno_fattura" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno di registrazione della fattura
+			</meta>
+		</property>
+		<property name="prg_fattura" column="prg_fattura" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				progressivo che identifica la fattura nell'ambito dell'anno
+			</meta>
+		</property>
+		<property name="riga_fattura" column="riga_fattura" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero della riga della fattura
+			</meta>
+		</property>
+		<property name="cd_no_disp" column="cd_no_disp" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice di non disponibilita' del documento
+			</meta>
+		</property>
+		<property name="cd_frui" column="cd_frui" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice della fruizione: ammette i valori dati dalla combinazione dei vari tipi di servizio ammissibili per un inventario: ad esempio consultazione e prestito solo locale
+			</meta>
+		</property>
+		<property name="cd_carico" column="cd_carico" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice di carico
+			</meta>
+		</property>
+		<property name="num_carico" column="num_carico" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del buono di scarico o di carico
+			</meta>
+		</property>
+		<property name="data_carico" column="data_carico" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di scarico o carico
+			</meta>
+		</property>
+		<property name="cd_polo_scar" column="cd_polo_scar" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice polo della biblioteca verso cui si scarica
+			</meta>
+		</property>
+		<property name="cd_bib_scar" column="cd_bib_scar" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca verso cui si effettua lo scarico
+			</meta>
+		</property>
+		<property name="cd_scarico" column="cd_scarico" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice di scarico
+			</meta>
+		</property>
+		<property name="num_scarico" column="num_scarico" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del buono di scarico o di carico
+			</meta>
+		</property>
+		<property name="data_scarico" column="data_scarico" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di scarico o carico
+			</meta>
+		</property>
+		<property name="data_delibera" column="data_delibera" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data della delibera di scarico
+			</meta>
+		</property>
+		<property name="delibera_scar" column="delibera_scar" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				testo della delibera di scarico
+			</meta>
+		</property>
+		<property name="sez_old" column="sez_old" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				sezione precedente
+			</meta>
+		</property>
+		<property name="loc_old" column="loc_old" type="string" length="24" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				collocazione precedente
+			</meta>
+		</property>
+		<property name="spec_old" column="spec_old" type="string" length="12" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				specificazione della collocazione precedente
+			</meta>
+		</property>
+		<property name="cd_supporto" column="cd_supporto" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice di tipo supporto
+			</meta>
+		</property>
+		<property name="ute_ins_prima_coll" column="ute_ins_prima_coll" type="string" length="12" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la prima collocazione dell'inventario
+			</meta>
+		</property>
+		<property name="ts_ins_prima_coll" column="ts_ins_prima_coll" type="timestamp" length="8" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento della prima collocazione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="tipo_acquisizione" column="tipo_acquisizione" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Codice del tipo di acquisizione del materiale; se presente l'ordine deve essere coerente con tipo ordine
+			</meta>
+		</property>
+		<property name="supporto_copia" column="supporto_copia" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Codice del tipo di supporto utilizzato per la copia del documento.
+			</meta>
+		</property>
+		<property name="digitalizzazione" column="digitalizzazione" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				se diverso da null esprime la presenza di una digitalizzazione: 0=parziale, 1=completa, 2=born digital (l'orginale e' gia' digitale)
+			</meta>
+		</property>
+		<property name="disp_copia_digitale" column="disp_copia_digitale" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indica se e come e' accessibile la copia digitale; valorizzato in base ai contenuti dell'apposita tabella codici
+			</meta>
+		</property>
+		<property name="id_accesso_remoto" column="id_accesso_remoto" type="string" length="1280" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				identificativo da fornire all''applicazione che gestisce la teca delle copie digitali
+			</meta>
+		</property>
+		<property name="rif_teca_digitale" column="rif_teca_digitale" type="string" length="4" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della teca digitale; valori in tabella codici
+			</meta>
+		</property>
+		<property name="cd_riproducibilita" column="cd_riproducibilita" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice che descrive il gruppo di supporti per i quali e' ammesso servizio di riproduzione
+			</meta>
+		</property>
+		<property name="data_ingresso" column="data_ingresso" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data di ingresso in biblioteca
+			</meta>
+		</property>
+		<property name="data_redisp_prev" column="data_redisp_prev" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data di redisponibilita' presunta
+			</meta>
+		</property>
+
+		<property name="id_bib_scar" column="id_bib_scar" type="integer" not-null="false" lazy="false" />
+
+		<set name="Trc_poss_prov_inventari" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="false">
+				<column name="cd_polo"/>
+				<column name="cd_biblioteca"/>
+				<column name="cd_serie"/>
+				<column name="cd_inven"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Trc_poss_prov_inventari"/>
+		</set>
+		<set name="Tbl_richiesta_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="false">
+				<column name="cd_polo_inv"/>
+				<column name="cod_bib_inv"/>
+				<column name="cod_serie_inv"/>
+				<column name="cod_inven_inv"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio"/>
+		</set>
+		<set name="Tra_ordine_inventari" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_polo"/>
+				<column name="cd_bib"/>
+				<column name="cd_serie"/>
+				<column name="cd_inven"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tra_ordine_inventari"/>
+		</set>
+		<set name="Tbc_nota_inv" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_polo"/>
+				<column name="cd_bib"/>
+				<column name="cd_serie"/>
+				<column name="cd_inven"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_nota_inv"/>
+		</set>
+		<set name="Tbp_esemplare_fascicolo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="false">
+				<column name="cd_polo_inv"/>
+				<column name="cd_bib_inv"/>
+				<column name="cd_serie"/>
+				<column name="cd_inven"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo"/>
+		</set>
+		<property name="cd_loc" column="cd_loc" type="string" length="24" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				collocazione
+			</meta>
+		</property>
+		<property name="spec_loc" column="spec_loc" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				specificazione della collocazione
+			</meta>
+		</property>
+		<property name="cd_bib_sez" column="cd_bib" type="string" length="3" not-null="true" lazy="false" insert="false" update="false" />
+		<property name="cd_sez" column="cd_sez" type="string" length="10" not-null="true" lazy="false" />
+		<property name="bid_coll" column="bid_coll" type="string" length="10" not-null="true" lazy="false" />
+		<property name="ord_loc" column="ord_loc" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave per ordinamento alfabetico calcolata dalla stringa di collocazione cd_loc
+			</meta>
+		</property>
+		<property name="ord_spec" column="ord_spec" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave per ordinamento alfabetico calcolata dalla stringa di specificazione spec_loc
+			</meta>
+		</property>
+		<property name="tot_inv" column="tot_inv" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero totale degli inventari collocati
+			</meta>
+		</property>
+
+	</class>
+</hibernate-mapping>

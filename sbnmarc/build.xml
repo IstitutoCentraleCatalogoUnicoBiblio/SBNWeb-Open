@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="Ear SbnMarc" default="deploy-debug" basedir=".">
+	<property name="sbnMarcEar.root.dir" value="${basedir}" />
+	<property file="local-settings.properties" />
+
+	<target name="prepare">
+		<mkdir dir="${sbnmarc.dist.dir}" />
+	</target>
+
+	<target name="prepare-debug">
+		<mkdir dir="${sbnmarc.dist.dir}/${module.name}.ear" />
+	</target>
+
+	<target name="deploy" depends="prepare, earContent">
+		<copy file="${sbnmarc.dist.dir}/${module.name}.ear" todir="${jboss.deploy.dir}" />
+	</target>
+
+	<target name="deploy-debug" depends="prepare-debug, earContent-debug">
+		<copy todir="${jboss.deploy.dir}/${module.name}.ear">
+			<fileset dir="${sbnmarc.dist.dir}/${module.name}.ear">
+			</fileset>
+		</copy>
+		<touch file="${jboss.deploy.dir}/${module.name}.ear/META-INF/application.xml" />
+		<touch file="${jboss.deploy.dir}/${module.name}.ear/META-INF/jboss-app.xml" />
+	</target>
+
+	<target name="earContent-debug">
+		<echo>+---------------------------------------------------+</echo>
+		<echo>|                                                   |</echo>
+		<echo>| R U N N I N G   E a r C o n t e n t               |</echo>
+		<echo>|                                                   |</echo>
+		<echo>+---------------------------------------------------+</echo>
+
+		<ant antfile="../${module.hibernate}/build.xml" dir="../${module.hibernate}">
+			<property file="../${module.hibernate}/build.properties" />
+		</ant>
+		
+		<ant antfile="../${module.ejb}/build.xml" dir="../${module.ejb}">
+			<property file="../${module.ejb}/build.properties" />
+		</ant>
+
+		<ant antfile="../${module.web}/build.xml" dir="../${module.web}">
+			<property file="../${module.web}/build.properties" />
+		</ant>
+
+		<copy todir="${sbnmarc.dist.dir}/${module.name}.ear">
+			<fileset dir="${sbnmarc.earContent.dir}" includes="**/*" />
+		</copy>
+		<copy todir="${sbnmarc.dist.dir}/${module.name}.ear/lib">
+			<fileset dir="${sbnmarc.lib.dir}" />
+		</copy>
+		<copy todir="${sbnmarc.dist.dir}/${module.name}.ear">
+			<fileset dir="../${module.ejb}/target">
+			</fileset>
+		</copy>
+		<copy todir="${sbnmarc.dist.dir}/${module.name}.ear">
+			<fileset file="../${module.hibernate}/target/${module.hibernate}.*" />
+		</copy>
+		<copy todir="${sbnmarc.dist.dir}/${module.name}.ear">
+			<fileset dir="../${module.web}/target">
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="earContent">
+		<echo>+---------------------------------------------------+</echo>
+		<echo>|                                                   |</echo>
+		<echo>| R U N N I N G   E a r C o n t e n t               |</echo>
+		<echo>|                                                   |</echo>
+		<echo>+---------------------------------------------------+</echo>
+
+		<ant antfile="../${module.hibernate}/build.xml" dir="../${module.hibernate}">
+			<property file="../${module.hibernate}/build.properties" />
+		</ant>
+		
+		<ant antfile="../${module.ejb}/build.xml" dir="../${module.ejb}">
+			<property file="../${module.ejb}/build.properties" />
+		</ant>
+
+		<ant antfile="../${module.web}/build.xml" dir="../${module.web}">
+			<property file="../${module.web}/build.properties" />
+		</ant>
+		<buildnumber />
+		<propertyfile file="${sbnmarc.dist.dir}/sbnmarc_build_time.properties">
+			<!-- <entry key="SBNMARC_BUILD_TIME" type="date" value="now" pattern="yyyy-MM-dd HH:mm:ss" /> -->
+			<entry key="SBNMARC_BUILD_TIME" type="string" value="${version}" />
+			<entry key="SBNMARC_BUILD_NUMBER" value="${build.number}" />
+		</propertyfile>
+		<jar destfile="${sbnmarc.dist.dir}/${module.name}.ear">
+			<zipfileset file="${sbnmarc.dist.dir}/sbnmarc_build_time.properties" />
+			<zipfileset dir="${sbnmarc.earContent.dir}" />
+			<zipfileset dir="${sbnmarc.lib.dir}" prefix="lib" />
+			<zipfileset dir="../${module.ejb}/target" />
+			<zipfileset dir="../${module.hibernate}/target" />
+			<zipfileset dir="../${module.web}/target" />
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="${sbnmarc.dist.dir}" />
+		
+		<ant antfile="../${module.hibernate}/build.xml" dir="../${module.hibernate}" target="clean">
+			<property file="../${module.hibernate}/build.properties" />
+		</ant>
+		
+		<ant antfile="../${module.ejb}/build.xml" dir="../${module.ejb}" target="clean">
+			<property file="../${module.ejb}/build.properties" />
+		</ant>
+
+		<ant antfile="../${module.web}/build.xml" dir="../${module.web}" target="clean">
+			<property file="../${module.web}/build.properties" />
+		</ant>
+	</target>
+
+</project>

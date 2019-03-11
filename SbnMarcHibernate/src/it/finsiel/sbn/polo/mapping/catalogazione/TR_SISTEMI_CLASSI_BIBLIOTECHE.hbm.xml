@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_sistemi_classi_biblioteche" polymorphism="explicit" table="TR_SISTEMI_CLASSI_BIBLIOTECHE" lazy="false">
+		<composite-id>
+			<key-property name="CD_BIBLIOTECA" column="CD_BIBLIOTECA" type="string"/>
+			<key-property name="CD_POLO" column="CD_POLO" type="string"/>
+			<key-property name="CD_SISTEMA" column="CD_SISTEMA"	type="string"/>
+			<key-property name="CD_EDIZIONE" column="CD_EDIZIONE" type="string" />
+		</composite-id>
+		<property name="FLG_ATT" column="FLG_ATT" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" length="8" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" length="8" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+	</class>
+</hibernate-mapping>
+
+

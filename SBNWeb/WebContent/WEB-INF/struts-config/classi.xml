@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="CreaLegameClassificazioneTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CreaLegameClassificazioneTitoloForm" />
+		<form-bean name="VariaLegameClassificazioneTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.VariaLegameClassificazioneTitoloForm" />
+		<form-bean name="CancellaLegameClassificazioneTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CancellaLegameClassificazioneTitoloForm" />
+		<form-bean name="CatturaClassificazioneDaIndiceForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CatturaClassificazioneDaIndiceForm" />
+		<form-bean name="RicercaClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.RicercaClasseForm" />
+		<form-bean name="ListaClassiForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.ListaClassiForm" />
+		<form-bean name="CreaClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.CreaClasseForm" />
+		<form-bean name="EsaminaClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.EsaminaClasseForm" />
+		<form-bean name="GestioneClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.GestioneClasseForm" />
+		<form-bean name="ImportaClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.ImportaClasseForm" />
+		<form-bean name="TrascinaTitoliClassiForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.TrascinaTitoliClassiForm" />
+		<form-bean name="FondiClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.FondiClasseForm" />
+		<form-bean name="SIFListaClassiCollegateForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.SIFListaClassiCollegateForm" />
+		<form-bean name="listaClassiTermineForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.classificazione.ListaClassiTermineForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+		<forward name="sifClassiLegateTitolo"
+			path="/gestionesemantica/classificazione/SIFListaClassiCollegate.do" />
+	</global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CatturaClassificazioneDaIndice"
+			name="CatturaClassificazioneDaIndiceForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CatturaClassificazioneDaIndiceAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/catturaClassificazioneDaIndice.jsp"
+			scope="session" parameter="methodCatturaCla">
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+
+		<action path="/gestionesemantica/classificazione/RicercaClasse"
+			name="RicercaClasseForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.RicercaClasseAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/ricercaClasse.jsp"
+			scope="session" parameter="methodRicercaClasse">
+			<forward name="trovatolista"
+				path="/gestionesemantica/classificazione/ListaClassi.do" />
+			<forward name="nontrovato"
+				path="/gestionesemantica/classificazione/CreaClasse.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CreaLegameClassificazioneTitolo"
+			name="CreaLegameClassificazioneTitoloForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CreaLegameClassificazioneTitoloAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/creaLegameClassificazioneTitolo.jsp"
+			scope="session" parameter="methodCreaLegameTitCla">
+			<forward name="ok"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="invioInIndice"
+				path="/gestionesemantica/catalogazionesemantica/InvioInIndice.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/VariaLegameClassificazioneTitolo"
+			name="VariaLegameClassificazioneTitoloForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.VariaLegameClassificazioneTitoloAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/variaLegameClassificazioneTitolo.jsp"
+			scope="session" parameter="methodVariaLegameTitCla">
+			<forward name="ok"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="invioInIndice"
+				path="/gestionesemantica/catalogazionesemantica/InvioInIndice.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CancellaLegameClassificazioneTitolo"
+			name="CancellaLegameClassificazioneTitoloForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CancellaLegameClassificazioneTitoloAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/cancellaLegameClassificazioneTitolo.jsp"
+			scope="session" parameter="methodCancellaLegameTitCla">
+			<forward name="ok"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+
+		<action path="/gestionesemantica/classificazione/ListaClassi"
+			name="ListaClassiForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.ListaClassiAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/listaClassi.jsp"
+			scope="session" parameter="methodSinteticaCla">
+			<forward name="creaClasse"
+				path="/gestionesemantica/classificazione/CreaClasse.do" />
+			<forward name="esaminaClasse"
+				path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+			<forward name="gestioneClasse"
+				path="/gestionesemantica/classificazione/GestioneClasse.do" />
+			<forward name="importaClasse"
+				path="/gestionesemantica/classificazione/ImportaClasse.do" />
+			<forward name="sintetica"
+				path="/gestionesemantica/classificazione/ListaClassi.do" />
+			<forward name="ok"
+				path="/gestionesemantica/classificazione/TrascinaTitoliClassi.do" />
+			<forward name="titoliCollegatiPolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiBiblio"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="stampa" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="creaLegameClassificazioneTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameClassificazioneTitolo.do" />
+
+			<forward name="gestioneLegame" path="/gestionesemantica/classificazione/listaClassiTermine.do" />
+		</action>
+
+		<action path="/gestionesemantica/classificazione/CreaClasse"
+			name="CreaClasseForm"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/creaClasse.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.CreaClasseAction"
+			parameter="methodCreaCla">
+			<forward name="stampa"
+				path="/gestionesemantica/classificazione/Stampa.do" />
+			<forward name="esaminaClasse"
+				path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+			<forward name="ok"
+				path="/gestionesemantica/classificazione/TrascinaTitoliClassi.do" />
+			<forward name="creaLegameClasseTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameClassificazioneTitolo.do" />
+			<forward name="gestioneLegame" path="/gestionesemantica/classificazione/listaClassiTermine.do" />
+		</action>
+
+		<action path="/gestionesemantica/classificazione/EsaminaClasse"
+			name="EsaminaClasseForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.EsaminaClasseAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/esaminaClasse.jsp"
+			scope="session" parameter="methodEsaCla">
+			<forward name="gestioneClasse"
+				path="/gestionesemantica/classificazione/GestioneClasse.do" />
+			<forward name="importaClasse"
+				path="/gestionesemantica/classificazione/ImportaClasse.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/classificazione/Stampa.do" />
+			<forward name="ricerca"
+				path="/gestionesemantica/classificazione/RicercaClasse.do" />
+			<forward name="ok"
+				path="/gestionesemantica/classificazione/TrascinaTitoliClassi.do" />
+			<forward name="titoliCollegatiPolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiBiblio"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiIndice"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiIndiceFiltro"
+				path="/gestionebibliografica/titolo/interrogazioneTitolo.do?SIFSINTETICA=TRUE" />
+		</action>
+
+		<action path="/gestionesemantica/classificazione/GestioneClasse"
+			name="GestioneClasseForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.GestioneClasseAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/gestioneClasse.jsp"
+			scope="session" parameter="methodGestCla">
+			<forward name="esaminaClasse"
+				path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+			<forward name="ricerca"
+				path="/gestionesemantica/classificazione/RicercaClasse.do" />
+			<forward name="fondi"
+				path="/gestionesemantica/classificazione/FondiClasse.do" />
+			<forward name="trascina"
+				path="/gestionesemantica/classificazione/RicercaClasse.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/classificazione/Stampa.do" />
+			<forward name="titoliCollegatiPolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiBiblio"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiIndice"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+		</action>
+
+		<action path="/gestionesemantica/classificazione/ImportaClasse"
+			name="ImportaClasseForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.ImportaClasseAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/importaClasse.jsp"
+			scope="session" parameter="methodImpCla">
+			<forward name="esaminaClasse"
+				path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+			<forward name="trascina"
+				path="/gestionesemantica/classificazione/TrascinaTitoliClassi.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameClassificazioneTitolo.do" />
+			<forward name="gestioneLegame" path="/gestionesemantica/classificazione/listaClassiTermine.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/classificazione/TrascinaTitoliClassi"
+			name="TrascinaTitoliClassiForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.TrascinaTitoliClassiAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/trascinaTitoliClassi.jsp"
+			scope="session" parameter="methodTraTit">
+			<forward name="listaSintetica"
+				path="/gestionesemantica/classificazione/ListaClassi.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/classificazione/Stampa.do" />
+			<forward name="esamina"
+				path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+		</action>
+
+		<action path="/gestionesemantica/classificazione/FondiClasse"
+			name="FondiClasseForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.FondiClasseAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/fondiClasse.jsp"
+			scope="session" parameter="methodFondiCla">
+			<forward name="listaSintetica"
+				path="/gestionesemantica/classificazione/ListaClassi.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/classificazione/Stampa.do" />
+		</action>
+
+		<action path="/gestionesemantica/classificazione/SIFListaClassiCollegate"
+			name="SIFListaClassiCollegateForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.SIFListaClassiCollegateAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/sifListaClassiCollegate.jsp"
+			scope="session" parameter="methodSinteticaCla">
+		</action>
+
+		<action path="/gestionesemantica/classificazione/listaClassiTermine"
+			name="listaClassiTermineForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.classificazione.ListaClassiTermineAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/classificazione/listaClassiTermine.jsp"
+			scope="session" parameter="methodSintTheCla">
+
+			<forward name="esaminaClasse" path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+			<forward name="ricercaClasse" path="/gestionesemantica/classificazione/RicercaClasse.do" />
+			<forward name="gestioneLegame" path="/gestionesemantica/thesauro/gestioneLegameTermineClasse.do" />
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="gestioneSemanticaLabels"
+		parameter="it.iccu.sbn.web.resources.GestioneSemanticaLabels"
+		null="false" />
+
+	<message-resources key="gestioneSemanticaMessages"
+		parameter="it.iccu.sbn.web.resources.GestioneSemanticaMessages"
+		null="false" />
+
+</struts-config>

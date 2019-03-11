@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="deploy" name="SBN - build">
+
+	<property file="local-settings.properties" />
+
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="build.dir" value="build" />
+
+	<property name="src.common.dir" value="${basedir}/JavaSource" />
+	<property name="classes.common.dir" value="${basedir}/build/classes" />
+
+	<property name="srv.src.common.dir" value="${basedir}/../SbnWebServizi/JavaSource" />
+	<property name="srv.classes.common.dir" value="${basedir}/../SbnWebServizi/build/classes" />
+	<property name="srv.web.content.dir" value="${basedir}/../SbnWebServizi/WebContent" />
+
+	<property name="int_jar" value="${build.dir}/integration.jar" />
+
+	<path id="common_libs">
+		<fileset dir="${lib.common.dir}" />
+		<fileset dir="${lib.resteasy}" />
+	</path>
+
+	<pathconvert property="common.classpath" pathsep=" ">
+		<path refid="common_libs" />
+		<map from="${basedir}/${lib.common.dir}/" to="lib/" />
+		<map from="${basedir}/${lib.resteasy}/" to="lib/" />
+	</pathconvert>
+
+	<property name="sbnweb.common.struts.location" location="../SbnWebCommon/dist/struts/" />
+	<mkdir dir="${sbnweb.common.struts.location}" />
+	<path id="sbnweb_common_struts_libs">
+		<fileset dir="${sbnweb.common.struts.location}" />
+	</path>
+	<property name="sbnweb.common.vo.location" location="../SbnWebCommon/dist/vo/" />
+	<mkdir dir="${sbnweb.common.vo.location}" />
+	<path id="sbnweb_common_vo_libs">
+		<fileset dir="${sbnweb.common.vo.location}" />
+	</path>
+	<pathconvert property="sbnweb.common.vo.classpath" pathsep=" ">
+		<path refid="sbnweb_common_vo_libs" />
+		<map from="${sbnweb.common.vo.location}" to="lib/" />
+	</pathconvert>
+
+	<pathconvert property="common.classpath" pathsep=" ">
+		<path refid="common_libs" />
+		<map from="${basedir}/${lib.common.dir}/" to="lib/" />
+	</pathconvert>
+
+	<path id="cp">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<macrodef name="compilazione">
+		<attribute name="srcdir" />
+		<attribute name="destdir" />
+		<attribute name="classpath" default="" />
+		<attribute name="classpathref" default="cp" />
+		<attribute name="excludes" default="" />
+		<attribute name="source" default="1.5" />
+		<attribute name="target" default="1.5" />
+		<attribute name="fork" default="true" />
+		<sequential>
+			<javac encoding="UTF-8" includeantruntime="false" srcdir="@{srcdir}" destdir="@{destdir}" classpath="@{classpath}" classpathref="@{classpathref}" debug="off" source="@{source}" target="@{target}" fork="@{fork}" memoryInitialSize="180m" memoryMaximumSize="512m">
+				<classpath>
+					<pathelement path="../SbnWebDomainEjb/build/classes" />
+					<pathelement path="../SbnWebCommon/classes/struts" />
+					<pathelement path="../SbnWebCommon/classes/vo" />
+					<pathelement path="build/classes" />
+					<pathelement path="../SbnWebServizi/build/classes" />
+				</classpath>
+			</javac>
+		</sequential>
+	</macrodef>
+
+	<target name="init">
+		<delete dir="${build.dir}/classes" />
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/classes" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${basedir}/target" />
+		<delete dir="${basedir}/../SbnWebServizi/build" />
+		
+		<ant antfile="../SbnWebHibernate/build.xml" target="clean" dir="../SbnWebHibernate" inheritall="false">
+			<property file="../SbnWebHibernate/build.properties" />
+		</ant>
+		
+		<ant antfile="../SbnWebCommon/build.xml" target="clean" dir="../SbnWebCommon" inheritall="false">
+			<property file="../SbnWebCommon/build.properties" />
+		</ant>
+		
+		<ant antfile="../SbnWebDomainEjb/build.xml" dir="../SbnWebDomainEjb" target="clean" inheritall="false">
+			<property file="../SbnWebDomainEjb/build.properties" />
+		</ant>
+	</target>
+
+	<target name="compile" description="Compilazione classi java">
+		<mkdir dir="../SbnWebServizi/build/classes" />
+		<compilazione srcdir="${src.common.dir}" destdir="${classes.common.dir}" fork="true" />
+		<compilazione srcdir="${srv.src.common.dir}" destdir="${srv.classes.common.dir}" fork="true" />
+	</target>
+
+	<target name="make-common" description="Assemblaggio Modulo Common" depends="make-hibernate">
+		<ant antfile="../SbnWebCommon/build.xml" target="build" dir="../SbnWebCommon" inheritall="false">
+			<property file="../SbnWebCommon/build.properties" />
+		</ant>
+	</target>
+
+	<target name="make-ejb-domain" description="Assemblaggio Modulo Ejb Domain">
+		<ant antfile="../SbnWebDomainEjb/build.xml" dir="../SbnWebDomainEjb" target="build" inheritall="false">
+			<property file="../SbnWebDomainEjb/build.properties" />
+		</ant>
+	</target>
+
+	<target name="make-hibernate" description="Assemblaggio Modulo Hibernate">
+		<ant antfile="../SbnWebHibernate/build.xml" target="build" dir="../SbnWebHibernate" inheritall="false">
+			<property file="../SbnWebHibernate/build.properties" />
+		</ant>
+	</target>
+
+	<target name="make-ejb" description="Assemblaggio Modulo EJB" depends="compile">
+		<jar destfile="${build.dir}/${module.name}-ejb.jar">
+			<manifest>
+				<attribute name="Class-Path" value="${common.classpath} ${hibernate.classpath} ${sbnweb.common.vo.classpath}" />
+			</manifest>
+
+			<zipfileset dir="${config.ejb.dir}" prefix="META-INF" />
+			<zipfileset dir="${build.dir}/classes">
+				<include name="it/iccu/sbn/ejb/**" />
+			</zipfileset>
+		</jar>
+	</target>
+
+	<target name="make-web" description="Assemblaggio Modulo Web" depends="compile, make-int">
+		<mkdir dir="${lib.extension.web.dir}" />
+		<jar destfile="${build.dir}/${module.name}-web.war">
+			<zipfileset dir="WebContent" />
+			<!--zipfileset dir="${build.dir}/${module.name}-web" prefix="WEB-INF/classes" /-->
+			<zipfileset dir="${config.web.dir}" prefix="WEB-INF/classes" />
+			<zipfileset dir="${build.dir}/classes" prefix="WEB-INF/classes">
+				<include name="it/iccu/sbn/web/**" />
+				<exclude name="it/iccu/sbn/web/integration/**" />
+			</zipfileset>
+			<zipfileset dir="${lib.web.dir}" prefix="WEB-INF/lib" />
+			<zipfileset file="${int_jar}" prefix="WEB-INF/lib" />
+			<zipfileset dir="${sbnweb.common.struts.location}" prefix="WEB-INF/lib" />
+			<zipfileset dir="${lib.extension.web.dir}" prefix="WEB-INF/lib" />
+
+			<zipfileset dir="Documentazione" prefix="Documentazione" />
+
+			<manifest>
+				<attribute name="Class-Path" value="${common.classpath} ${sbnweb.common.vo.classpath}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="make-web-servizi" description="Assemblaggio Modulo Servizi Web" depends="compile, make-int">
+
+		<jar destfile="${build.dir}/${servizi.war.name}">
+			<zipfileset dir="${srv.web.content.dir}" />
+			<zipfileset dir="${srv.classes.common.dir}" prefix="WEB-INF/classes">
+				<include name="it/iccu/sbn/web/**" />
+			</zipfileset>
+			<zipfileset file="${int_jar}" prefix="WEB-INF/lib" />
+			<zipfileset dir="${lib.web.dir}" prefix="WEB-INF/lib" />
+			<zipfileset dir="${sbnweb.common.struts.location}" prefix="WEB-INF/lib" />
+
+			<manifest>
+				<attribute name="Class-Path" value="${common.classpath} ${sbnweb.common.vo.classpath}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="make-int" description="Assemblaggio Modulo Integration" depends="compile">
+		<jar destfile="${int_jar}">
+			<zipfileset dir="${build.dir}/classes">
+				<include name="it/iccu/sbn/web/integration/**" />
+			</zipfileset>
+		</jar>
+	</target>
+
+	<target name="make-ear" description="Assemblaggio Applicazione EAR">
+		<buildnumber />
+		<propertyfile file="${build.dir}/build_time.properties">
+			<!-- <entry key="BUILD_TIME" type="date" value="now" pattern="yyyy-MM-dd HH:mm:ss" /> -->
+			<entry key="BUILD_TIME" type="string" value="${version}" />
+			<entry key="BUILD_NUMBER" value="${build.number}" />
+		</propertyfile>
+
+		<mkdir dir="${lib.extension.dir}" />
+		<jar destfile="${build.dir}/${module.name}.ear">
+			<zipfileset dir="${config.ear.dir}" prefix="META-INF" />
+			<zipfileset dir="${build.dir}">
+				<include name="${module.name}-ejb.jar" />
+				<include name="${module.name}-web.war" />
+				<include name="${servizi.war.name}" />
+				<include name="build_time.properties" />
+			</zipfileset>
+
+			<zipfileset dir="${lib.hibernate.dir}" prefix="lib" />
+			<zipfileset dir="${lib.common.dir}" prefix="lib" />
+			<zipfileset dir="${sbnweb.common.vo.location}" prefix="lib" />
+			<zipfileset dir="${lib.resteasy}" prefix="lib" />
+			<zipfileset dir="${lib.extension.dir}" prefix="lib" />
+
+			<zipfileset dir="../SbnWebDomainEjb/target" />
+			<zipfileset dir="../SbnWebHibernate/target" />
+
+			<zipfileset dir="${build.dir}/jrxml" prefix="jrxml" />
+
+		</jar>
+	</target>
+
+	<target name="make-jrxml" description="Assemblaggio Modulo Jrxml">
+		<copy todir="${build.dir}/jrxml">
+			<fileset dir="jrxml" />
+		</copy>
+	</target>
+
+	<target name="build" depends="init">
+		<antcall target="make-hibernate" />
+		<antcall target="make-common" />
+		<antcall target="make-ejb-domain" />
+		<antcall target="make-ejb" />
+		<antcall target="make-web" />
+		<antcall target="make-web-servizi" />
+		<antcall target="make-jrxml" />
+		<antcall target="make-ear" />
+	</target>
+
+	<target name="deploy" depends="build">
+		<copy file="${build.dir}/${module.name}.ear" todir="${deploy.dir}" />
+	</target>
+
+	<target name="undeploy">
+		<delete file="${deploy.dir}/${module.name}.ear" />
+	</target>
+</project>

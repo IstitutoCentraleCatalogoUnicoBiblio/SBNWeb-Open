@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Trf_amministrazione_polo" table="trf_amministrazione_polo" lazy="false">
+		<composite-id>
+			<key-many-to-one name="Id_amministratore" column="id_amministratore" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_amministrazione">
+			</key-many-to-one>
+			<key-many-to-one name="Cd_polo" column="cd_polo" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_polo">
+			</key-many-to-one>
+		</composite-id>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_descrittore_sog" polymorphism="explicit" table="VL_DESCRITTORE_SOG" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="CID" column="CID" type="string"/>
+			<key-property name="DID" column="DID" type="string"/>
+		</composite-id>
+		<property name="FL_PRIMAVOCE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_POSIZIONE" column="FL_POSIZIONE" type="integer" not-null="true"/>
+		<property name="DS_DESCRITTORE" type="string" length="160" not-null="true" lazy="false"/>
+		<property name="TP_FORMA_DES" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="KY_NORM_DESCRITT" type="it.finsiel.sbn.util.DataTypeCHAR" length="80" not-null="true" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="CD_SOGGETTARIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="CD_EDIZIONE" column="CD_EDIZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CAT_TERMINE" column="CAT_TERMINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="NOTA_DESCRITTORE" type="string" length="160" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="VL_DESCRITTORE_SOG_selectDescrittorePerSoggetto"
+				condition="cid = :XXXcid
+						   AND fl_canc != 'S' "/>
+
+		<filter name="VL_DESCRITTORE_SOG_selectLegameDescrittore"
+				condition="did = :XXXdid
+						   AND fl_canc != 'S' "/>
+
+		<filter name="VL_DESCRITTORE_SOG_countLegameDescrittore"
+				condition="did = :XXXdid
+						   AND fl_canc != 'S' "/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_stop_list" polymorphism="explicit" table="TS_STOP_LIST" lazy="false">
+		<id name="ID_STOP_LIST" column="ID_STOP_LIST" type="long" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="TP_STOP_LIST" column="TP_STOP_LIST" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="CD_LINGUA" column="CD_LINGUA" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true"/>
+		<property name="PAROLA" column="PAROLA" type="string" length="80" not-null="true"/>
+		<property name="NOTA_STOP_LIST" column="NOTA_STOP_LIST" type="string" length="320" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TS_STOP_LIST_selectPerKey"
+				condition="id_stop_list = :XXXid_stop_list "/>
+
+		<filter name="TS_STOP_LIST_verificaNomeEnte"
+				condition="UPPER tp_stop_list = 'V' AND parola LIKE UPPER(:XXXtp_stop_list)||'%' "/>
+
+		<filter name="TS_STOP_LIST_selectElencoArticoli"
+				condition="tp_stop_list = 'A' ORDER BY cd_lingua "/>
+
+		<filter name="TS_STOP_LIST_selectElencoParoleTipiEeD"
+				condition="tp_stop_list in ('E','D') "/>
+
+		<filter name="TS_STOP_LIST_selectElencoForme"
+				condition="tp_stop_list = 'F' ORDER BY cd_lingua "/>
+
+		<filter name="TS_STOP_LIST_selectElencoFormeU"
+				condition="tp_stop_list = 'U' ORDER BY cd_lingua "/>
+
+		<filter name="TS_STOP_LIST_selectElencoParole"
+				condition="tp_stop_list = 'P' ORDER BY cd_lingua "/>
+
+		<filter name="TS_STOP_LIST_selectElencoS"
+				condition="tp_stop_list = 'S' ORDER BY cd_lingua "/>
+
+		<filter name="TS_STOP_LIST_selectElencoV"
+				condition="tp_stop_list = 'S' ORDER BY cd_lingua "/>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,1325 @@
+
+/* ATTENZIONE: se si modifica il carattere modificare anche lo stile TEXTAREA */
+body {
+/* 	tutti i colori relativi al background-color: #FEF1E2; devono diventare #fff (cioè bianco */
+	background-color: #fff;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	font-family: Arial; /* sans-serif*/
+	font-size: 9pt;
+	
+}	
+
+#divContainer1 { /* ex 'container1' */
+	width: 100%;
+	background-color: #fff;
+
+}
+
+
+#divHeader { /* ex 'header' */
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 67px;
+
+	width: 100%;
+	/* LARA	immagine da url(images/TopShort.gif); diventa url(images/logo2_SbnWEBServizi.png);
+	abbiamo aggiunto background-size: auto 68px; cambiato color: white; in color: #b12d3a; */
+	background-image: url(images/logo2_SbnWEBServizi.png);
+	background-size: auto 68px;
+	background-repeat: no-repeat;
+	background-color: #02508d;
+	background-color: #fff;
+	list-style-type: decimal;
+
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	
+	/* LARA	 cambiato color: white; in color: #b12d3a; 
+	questa è la scritta sotto il logo con il nome del Polo/Utente*/
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	color: #b12d3a;
+}
+/* LARA	 nuova classe*/
+.formattazioneCodPolo {
+	margin-left: 73px;
+    font-family: Tw Cen MT Condensed; /* almaviva2 Impact Tw Cen MT Condensed;*/
+    font-size: 18pt;
+    font-weight: bold
+}
+.formattazioneCodUtente {
+	margin-left: 73px;
+}
+
+
+
+#divHeader div.language {
+	top: 50px;
+	right: 5px;
+	position:absolute;
+	/* LARA	 cambiato color: white; in color: #b12d3a;  (riga del Guida e bandierine)*/
+	color: #b12d3a;
+
+}
+
+#divHeader div.language a {
+	/* LARA	 cambiato color: white; in color: #b12d3a; */
+	color: #b12d3a;
+	text-decoration: underline;
+}
+
+#divMenu { /* ex 'nav-bar' */ 
+	position: absolute;
+	/* LARA	 cambiato top: 67px; diventato top: 70px; per dare più spazio fra testata e parte della mappa vera e propria  */
+	top: 70px;
+	left: 0px;
+	width: 170px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	z-index: 3;	
+	font-family: Arial; /* sans-serif*/
+	font-size: 9pt;
+}
+
+/* bug IE per il font-size in tabelle */
+table {
+	font-size: 100%;
+	/* LARA	nuova impostazione del colore bordo border-color: #4c91df; e nuove impostazioni a seguire*/
+    border-color: #4c91df;
+    border-width: 2px;
+    border-collapse: collapse;
+	}	
+
+	
+.etichetta {
+	text-align: left;
+}
+
+.testoNormale {
+	text-align: left;
+}
+
+.testoBold {
+	font-weight: bold;
+}
+
+.testoTop {
+	vertical-align: text-top;
+}	
+
+.expandedLabel {
+	text-align: left;
+	width: 100%;
+}
+
+
+TEXTAREA {
+	font-family: Arial;
+	font-size: 10pt;
+}
+
+.TabellaForm {
+	width: 90%;
+	border: 0px;
+}
+
+.IntestazioneBiblioteca {
+	font-family: Verdana, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	
+	/* LARA	 cambiato color: white; in color: #b12d3a; inserito height: 30px; (riga nome Polo in fondo a destra)*/
+	height: 30px;
+	color: #b12d3a;
+	text-align: right;
+	/* LARA	 margin-top: 0px; diventa margin-top: -38px */
+	margin-top: -38px;
+	vertical-align: top;
+
+}
+
+.buildTime {
+	font-family: Tahoma, sans-serif;
+	font-size: 70%;
+	text-align: right;
+	margin-top: 0px;
+	vertical-align: bottom;
+	padding-left: 5px;
+}
+
+#divNavPath { /* ex 'nav-path' */ 
+	width: auto;
+	right: 0px;
+	/* LARA	 cambiato height: auto; in 19*/
+	height: 19px;
+	/* LARA	 cambiato background-color: #FFCC66; in background-color: #1b74a6; inserito color: #fff; per testo bianco*/
+	background-color: #1b74a6;
+	color: #fff;
+/* LARA	 cambiato margin-top: 0px; in 3px e padding-top: 0px; in 6px*/	
+	margin-top: 3px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 6px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	vertical-align: center;
+	z-index: 4;	
+	
+}
+/* LARA	 metodo nuovo per colorare la navigazione non attiva */
+#divNavPath a {
+    color: white;
+}
+
+
+#divForm { 
+	width: 100%;
+	right: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	z-index: 5;	
+}
+
+#divContent { /* ex 'content' */ 
+	
+	position: absolute;  
+
+	top: 70px;  
+	left: 0px; 
+	right:0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 170px;
+	z-index: 2;	
+}
+
+#divFooter {
+	right: 0px;
+	/* LARA	 cambiato background-color: #FFCC66; in background-color: white; */
+	background-color: white;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 3px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	z-index: 4;
+	vertical-align: bottom;
+	overflow: hidden;
+	width: 100%;
+}
+
+#divFooterCommon {
+	right: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 3px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	z-index: 4;
+	vertical-align: bottom;
+	overflow: hidden;
+	width: 100%;
+	border-top-style: solid;
+	border-top-color: #dde8f0;
+	border-top-width: 1px;
+}
+
+/* menu.css */
+
+#divMenu ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+#divMenu ul.aree li {
+	width: 153px;
+	margin: 3px;
+	vertical-align: middle;
+	text-indent: 12px;
+	background-color: #DDE8F0;
+	background-image: url(images/spigolo_menu.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #4C91DF;
+	border-bottom-width: 1px;
+}
+
+#divMenu ul.aree a, #divMenu ul.aree span {
+	display: block;
+	width: 143px;
+	padding: 5px;
+	padding-right: 0px;
+	margin: 0px;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+#divMenu ul.aree a {
+	background-image: url(images/freccia_chiusa.jpg);
+}
+
+#divMenu ul.aree span {
+	background-image: url(images/freccia_aperta.jpg);
+}
+
+#divMenu ul.sottoaree, #divMenu ul.sottoaree li, #divMenu ul.sottoaree a {
+	background-color: #fff;
+}
+
+#divMenu ul.sottoaree {
+	width: 152px;
+	vertical-align: middle;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+}
+
+#divMenu ul.sottoaree li {
+	width: 152px;
+	margin: 0px;
+	vertical-align: middle;
+	background-image: none;
+	border-style: none;
+	border-width: 0px;
+}
+
+#divMenu ul.sottoaree a {
+	border-style: none;
+	border-width: 0px;
+	/* LARA	immagine da url(images/puntoelenco.jpg);; diventa url(images/puntoelencoWhite.jpg);*/
+	background-image: url(images/puntoelencoWhite.jpg);
+	background-position: 8px center;
+	text-indent: 16px;
+}
+div#divMessaggio {
+	height:auto;
+	width: auto;
+	background-color:#FFFFFF;
+	margin: 1px;
+	font-family: Arial; /* sans-serif*/
+	font-size: 10pt;
+	font-weight: bold;
+	border: 1px;
+	border-color: #000000;
+	border-style: solid;
+	color: #000000;
+	align: center;
+	text-align: center;
+}
+
+
+#divMessaggio .messaggioInfo {
+	color: #008000;
+}
+
+
+#divMessaggio .messaggioInfoNotCenter {
+	color: #008000;
+	align: left;
+	text-align: left;
+}
+
+#divMessaggio .messaggioAvviso {
+	color: #FA8201;
+}
+
+
+#divMessaggio .messaggioErrore {
+	color: #BC0128;
+}
+
+#divMessaggio .messaggioErroreRosso {
+	color: red;
+}
+
+#divMessaggio .messaggioErroreNotCenter {
+	color: #BC0128;
+	align: left;
+	text-align: left;
+}
+
+
+#divMessaggio .messaggioRichiesta {
+	color: #000000;
+} 
+
+
+.buttonImage {
+	width: 18px;
+ 	height: 21px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 0px;
+	background-image: url(images/lente.GIF);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0px;
+}
+
+.buttonImageListaSezione {
+	width: 17px;
+ 	height: 22px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	font-size: 1px;
+	font-weight: normal;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+ 	background-image: url(images/Lista_completa.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: transparent;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+.buttonImageNote {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px; 
+	font-size: 1px;
+	font-weight: normal;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+ 	background-image: url(images/note.GIF);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+  	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+.buttonImageRisp {
+	width: 16px;
+ 	height: 16px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px; 
+	font-size: 1px;
+	font-weight: normal;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+ 	background-image: url(images/Risp.jpg);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+.buttonImageInv {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px; 
+	font-size: 1px;
+	font-weight: normal;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	background-image: url(images/inv.GIF);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonHide {
+	width: 5px;
+ 	height: 5px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 0px; 
+	font-size: 1px;
+	font-weight: normal;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	background-color : transparent;
+	background-image : none;
+	background-repeat: no-repeat;
+	background-position: right top;
+	cursor: text; /* hand-shaped cursor */
+	vertical-align : text-top;
+}
+
+
+
+/* 
+DA VERIFICARE: Inserito da almaviva2 03.08.2007 
+Bottoni utilizzati nelle sintetiche per richiedere la selezione/deselezione di tutti gli elementi.
+*/
+.buttonSelezTutti {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/selezTutti.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+
+}
+
+.buttonSelezTuttiR {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	font-size: 1px;
+	font-weight: normal;
+	border: 1px;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	color: #333333;
+	text-decoration: none;
+	background-image: url(images/selezTutti.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+}
+
+
+.buttonSelezNessuno {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/selezNessuno.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonSelezNessunoR {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	font-size: 1px;
+	font-weight: normal;
+	border: 1px;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	color: #333333;
+	text-decoration: none;
+	background-image: url(images/selezNessuno.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+}
+
+.buttonCleanCampi {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+ 	background-image: url(images/clear.png);
+	background-repeat: no-repeat;
+	background-position: center; 
+	/*text-indent: -1000em;*/
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0px;
+
+}
+
+.caselle {
+  background-color: #FF0000;
+}
+
+.buttonSelezMarcheImmagini {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/selezMarcheImmagini.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+/* 
+FINE   DA VERIFICARE: Inserito da almaviva2 03.08.2007 
+*/
+
+
+/*Antonio 30 Gennaio 2008*/
+.buttonFrecciaSinistra {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/fsx.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+.buttonFrecciaDestra {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/fdx.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonFrecciaGiu {
+	width: 22px;
+ 	height: 22px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/fgiu.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : middle;
+
+}
+
+.buttonFrecciaSu {
+	width: 22px;
+ 	height: 22px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/fsu.gif);
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : middle;
+}
+
+/*Fine - Antonio 30 Gennaio 2008*/
+
+
+.buttonImageNewLine {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/insert16.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonImageNewImpronta {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/insert16.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonImageModLine {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/find16.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+.buttonImageDelLine {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/delete16.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonImageHlpRep {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/find16.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+.buttonTagDestra {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/destra.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0%;
+	
+}
+
+.buttonTagSinistra {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/sinistra.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0%;
+}
+
+.buttonTagAlto {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/alto.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0%;
+}
+
+.buttonTagBasso {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/basso.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0%;
+}
+
+.buttonTagRadice {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/radice.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+	font-size: 0%;
+}
+
+/* tab acquisizioni */
+
+.tagCentroOff {
+	background-image: url(images/centroOff2.gif);
+	background-color: #AAC5DA;
+	background-position: left top;
+	background-repeat: repeat-x;
+	vertical-align: text-top;
+	color: #AAC5DA;
+}
+
+.tagDxFinale {
+	vertical-align: text-top;
+	background-color: #fff;
+}
+
+.tagDxBottomFinale {
+	vertical-align: text-top;
+	background-color: #fff;
+	border-bottom-color: #5A96DF;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+.tagCentroOn {
+	background-image: url(images/centroOn2.gif);
+	background-color: #FEF1E1;
+	background-position: left top;
+	background-repeat: repeat-x;
+	vertical-align: text-top;
+	color: #FEF1E1;
+}
+
+.tagSxTopOn {
+	background-image: url(images/TagAngoloSxOn.gif);
+	background-color: #FEF1E1;
+	background-position: left top;
+	background-repeat: no-repeat;
+	vertical-align: text-top;
+}
+
+.tagBottomOff {
+	color: #2B2B57;
+	background-color: #AAC5DA;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-left-color: #4C91DF;
+	border-bottom-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-right-color: #4C91DF;
+	border-right-style: solid;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tagBottomOn {
+	color: #8A2300;
+	background-color: #FEF1E1;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-right-color: #4C91DF;
+	border-right-style: solid;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tagBottomOn2 {
+	color: #8A2300;
+	background-color: #FEF1E1;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tagBottomOff2 {
+	color: #2B2B57;
+	background-color: #AAC5DA;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tagBottomOnA {
+	background-color: #FEF1E1;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	vertical-align: middle;
+}
+
+.tagBottomOnB {
+	background-color: #FEF1E1;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 1px;
+	vertical-align: middle;
+}
+
+.tagBottomOffA {
+	background-color: #AAC5DA;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	vertical-align: middle;
+}
+
+.tagBottomOffB {
+	background-color: #AAC5DA;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	vertical-align: middle;
+}
+
+.tagSxTopOff {
+	background-image: url(images/TagAngoloSx.gif);
+	background-color: #AAC5DA;
+	background-repeat: no-repeat;
+	background-position: left top;
+	vertical-align: text-top;
+}
+
+.tagDxTopOff {
+	background-image: url(images/TagAngoloDx.gif);
+	background-color: #AAC5DA;
+	background-repeat: no-repeat;
+	background-position: right top;
+	vertical-align: text-top;
+}
+
+.tagDxTopOn {
+	background-image: url(images/TagAngoloDxOn.gif);
+	background-color: #FEF1E1;
+	background-repeat: no-repeat;
+	background-position: right top;
+	vertical-align: text-top;
+}
+
+
+/* stile default per barra gestione blocchi */
+
+.blocchiDefault {	
+	color: #333333;
+}
+
+table.blocchiDefault { 
+	width: 100%;
+	border: 0px;
+	padding: 0px;
+}
+
+table.sintetica { 
+	width: 100%;
+	border: 1px;
+	border-style: dotted;
+}
+
+th.header {
+	background-color: #dde8f0;
+	text-align: center;
+	/* LARA	eliminata la riduzione del font font-size: 90%; */
+	
+}
+
+tr.row {
+	font-size: 90%;
+	text-align: center;
+}
+
+/*almaviva2 gestione tab 9/8/07*/
+
+.schedaOff {
+	/* LARA	 cambiato background: #AAC5DA; in dde8f0 */
+	background: #dde8f0;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #4C91DF;
+	border-bottom-width: 1px;
+	border-right-width: 0px;
+	border-right-color: #4C91DF;
+	border-right-style: solid;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 0px;
+	/* LARA	immagine da url(images/TagAngoloDx.gif); diventa url(images/TagAngoloDxWhite.gif);*/
+	background-image: url(images/TagAngoloDxWhite.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	vertical-align: middle;
+	
+	
+}
+
+.schedaOn {
+	/* LARA	 color: #8A2300; in #333333 */
+	color: #333333;
+	/* LARA	 background-color: #FEF1E1; in fff */
+	background-color: #fff;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #4C91DF;
+	border-bottom-width: 0px;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 0px;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	
+/*	background-image: url(images/TagAngoloDxOn.gif);*/
+	background-repeat: no-repeat;
+	background-position: right top;
+	vertical-align: middle;
+}
+
+/*almaviva2 pulsante meno per gestione serie inv 23/11/2009*/
+.buttonTminus {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/tminus.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: right top;
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+
+/*gestione treeview*/
+
+.analitica {
+	border: none;
+	border-collapse: collapse;
+	vertical-align: middle;
+}
+
+.analitica img {
+	border: none;
+	vertical-align: middle;
+}
+
+div#nodo {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #FFCC99;
+	text-decoration: none;
+	z-index: 1;
+}	
+
+input.inputNoBorderTree {
+	border: none !important;
+	background: transparent;
+	color: black !important;
+}
+
+input.navBtn {
+	background-color: transparent;
+	text-decoration: underline !important;
+ 	text-indent: 0px;
+	border: 0px solid;
+ 	cursor: pointer;
+ 	cursor: hand;
+ 	margin: 0px;
+ 	padding: 0px;
+	/*font-size: 95%; */ 
+	display: inline; 
+	overflow: visible;
+	<!--[if IE]>
+		width: 0px;
+	<![endif]-->
+}
+
+/* LARA	 nuova classe*/
+input[type="submit" i]:hover {
+    background-color: #0275d8;
+    color: #fff;
+}
+
+
+.sintButtonLinkDefault {
+	color: #333333;
+	margin: 0px; 
+	padding: 0px; 
+	background: transparent; 
+	border: 0px;
+	text-decoration: underline;
+	cursor: pointer; 	
+}
+
+input.sintButtonLinkDefault {
+	display:block; 
+}
+
+a.sintButtonLinkDefault {
+	display:inline; 
+}
+
+.buttonTastiera {
+	width: 25px;
+ 	height: 25px;
+ 	margin: 0px;
+ 	padding: 0px;
+/* 	border: 1px;	+/
+	color: #333333;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : middle;
+}
+
+.buttonLinkTastiera {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 1px;
+	background-image: url(images/vkb.gif);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.nota {
+	color: green;
+	font-size: 100%;
+	font-style: italic;
+}
+
+.msgOK1 {
+	color: green;
+	font-size: 100%;
+	font-style: italic;
+}
+
+.msgOK1n {
+	color: green;
+	font-size: 100%;
+	float:left;
+}
+
+.msgWarning1 { 
+	color: #2b7eb7;
+	font-size: 100%;
+	font-style: italic;
+}
+
+.msgKO1 {
+	color: red;
+	font-size: 100%;
+	font-style: italic;
+}
+
+.wide_input {
+	width: 100%;
+	background-color: transparent;
+	border: 0px;
+}
+	
+.minimal {
+	width: 1px; 
+	overflow: visible; 
+	white-space: nowrap;
+	margin-left: 5px;
+	margin-right: 5px;
+}	
+
+#posiziona {
+	width: 1px; 
+	overflow: visible; 
+	white-space: nowrap;
+}
+
+#toTop {
+	font-size: 75%;
+	border: 0;
+	text-align: center;
+	position: fixed;
+	bottom: 5px;
+	right: 10px;
+	cursor: pointer;
+	display: none;
+	opacity: 0.5;
+	z-index: 2;
+}
+
+#toTop:hover,#toTop:focus {
+	opacity: 1;
+}
+
+.js-only {
+	display: none;
+}
+
+.w10em {
+	width: 10em;
+}
+
+#toBottom {
+	font-size: 75%;
+	border: 0;
+	text-align: center;
+	position: fixed;
+	margin-top: 5px;
+	right: 10px;
+	cursor: pointer;
+	display: none;
+	opacity: 0.5;
+	z-index: 2;
+}
+
+img.mailto {
+	vertical-align: middle;
+	padding-bottom: 0.4%;
+}

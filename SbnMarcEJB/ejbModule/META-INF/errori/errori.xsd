@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:annotation>
+		<xsd:documentation>
+			Descrizione degli errori
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="Errori">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="referente_default">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="nome_ref_def" type="xsd:string"/>
+							<xsd:element name="mail_ref_def" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Errore" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="nota" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="descrizione" type="xsd:string"/>
+							<xsd:element name="referente" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="nome" type="xsd:string"/>
+										<xsd:element name="mail" type="xsd:string" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="id" type="xsd:int" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

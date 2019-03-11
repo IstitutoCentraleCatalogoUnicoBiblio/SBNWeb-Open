@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_note_proposta" polymorphism="explicit" table="TS_NOTE_PROPOSTA" lazy="false">
+		<composite-id>
+			<key-property name="ID_PROPOSTA" column="ID_PROPOSTA" type="long"/>
+			<key-property name="PROGR_RISPOSTA" column="PROGR_RISPOSTA" type="long"/>
+		</composite-id>
+		<property name="UTE_DESTINATARIO" column="UTE_DESTINATARIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="NOTE_PRO" column="NOTE_PRO" type="string" length="320" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TS_NOTE_PROPOSTA_selectPerKey"
+				condition="id_proposta = :XXXid_proposta AND progr_risposta = :XXXprogr_risposta "/>
+
+		<filter name="TS_NOTE_PROPOSTA_selectLastProgRisposta"
+				condition="SELECT nvl(MAX(progr_risposta),0) + 1
+						  FROM ts_note_proposta
+						  WHERE id_proposta = :XXXid_proposta "/>
+
+		<filter name="TS_NOTE_PROPOSTA_selectPropostaPerDestinatario"
+				condition="ute_destinatario like :XXXute_destinatario || '%' AND fl_canc != 'S' "/>
+
+		<filter name="TS_NOTE_PROPOSTA_selectNotaPerProposta"
+				condition="id_proposta  = :XXXid_proposta AND fl_canc != 'S' "/>
+
+		<filter name="TS_NOTE_PROPOSTA_selectNotaPerPropostaDestinatario"
+				condition="id_proposta  = :XXXid_proposta
+						  AND ute_destinatario  = :XXXute_destinatario
+						  AND fl_canc != 'S' "/>
+
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_tipo_servizio" table="tbl_tipo_servizio" >
+		<meta attribute="class-description">
+			TIPI DI SERVIZIO EROGATI DALLA BIBLIOTECA
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_tipo_servizio" column="id_tipo_servizio" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="cod_tipo_serv" column="cod_tipo_serv" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice tipo servizio
+			</meta>
+		</property>
+		<property name="num_max_mov" column="num_max_mov" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di movimenti contemporaneamente attivi previsti
+			</meta>
+		</property>
+		<property name="ore_ridis" column="ore_ridis" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				tempo in ore necessario per la ridisponibilita' di un documento (ricollocazione). valore da utilizzare per il calcolo della data presunta di inizio del servizio.
+			</meta>
+		</property>
+		<property name="penalita" column="penalita" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di tipo servizio con penalita' per inosservanza del regolamento
+			</meta>
+		</property>
+
+		<property name="coda_richieste" column="coda_richieste" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di tipo servizio con possibilita' di prenotazione
+			</meta>
+		</property>
+<!--
+		<property name="coda_richieste" column="coda_richieste" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di richieste inevase
+			</meta>
+		</property>
+
+-->
+		<property name="ins_richieste_utente" column="ins_richieste_utente" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di tipo servizio con possibilita' di inserimento della richiesta da parte dell'utente
+			</meta>
+		</property>
+
+		<property name="anche_da_remoto" column="anche_da_remoto" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di tipo servizio con possibilita' di inserimento da remoto
+			</meta>
+		</property>
+
+		<property name="cd_iso_ill" column="cd_iso_ill" type="string" length="2" not-null="false" lazy="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Trl_tariffe_modalita_erogazione" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_tipo_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_tariffe_modalita_erogazione"/>
+		</set>
+		<set name="Tbl_calendario_servizi" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_tipo_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_calendario_servizi"/>
+		</set>
+		<set name="Tbl_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_tipo_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_servizio"/>
+		</set>
+		<set name="Tbl_iter_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_tipo_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_iter_servizio"/>
+		</set>
+		<set name="Tbl_servizio_web_dati_richiesti" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_tipo_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_servizio_web_dati_richiesti"/>
+		</set>
+	</class>
+</hibernate-mapping>

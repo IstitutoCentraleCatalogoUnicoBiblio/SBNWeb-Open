@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Trf_attivita_polo" table="trf_attivita_polo" >
+		<id name="id_attivita_polo" column="id_attivita_polo" type="integer" unsaved-value="0">
+			<generator class="sequence">
+                <param name="sequence">sbnweb.trf_attivita_polo_id_attivita_polo_seq</param>
+            </generator>
+		</id>
+		<many-to-one name="cd_polo" cascade="lock" column="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cd_attivita" cascade="lock" column="cd_attivita" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_attivita" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Trf_gruppo_attivita_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_attivita_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_gruppo_attivita_polo"/>
+		</set>
+	</class>
+</hibernate-mapping>

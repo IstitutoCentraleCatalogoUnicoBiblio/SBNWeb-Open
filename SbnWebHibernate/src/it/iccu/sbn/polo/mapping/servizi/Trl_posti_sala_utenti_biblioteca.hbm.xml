@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_posti_sala_utenti_biblioteca" table="trl_posti_sala_utenti_biblioteca" >
+		<composite-id>
+			<key-property name="id_posti_sala_id_posti_sala" column="id_posti_sala" type="integer"/>
+			<key-property name="id_utenti_biblioteca_id_utenti_biblioteca" column="id_utenti_biblioteca" type="integer"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_posti_sala" column="id_posti_sala" class="it.iccu.sbn.polo.orm.servizi.Tbl_posti_sala" insert="false" update="false">
+		</many-to-one>
+		<many-to-one name="id_utenti_biblioteca" column="id_utenti_biblioteca" class="it.iccu.sbn.polo.orm.servizi.Trl_utenti_biblioteca" insert="false" update="false">
+		</many-to-one>
+		<property name="ts_ingresso" column="ts_ingresso" type="timestamp" not-null="false" lazy="false"/>
+		<property name="ts_uscita" column="ts_uscita" type="timestamp" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

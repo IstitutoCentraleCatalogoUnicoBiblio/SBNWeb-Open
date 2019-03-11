@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_abstract" polymorphism="explicit" table="TB_ABSTRACT" lazy="false">
+		<id name="BID" column="BID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="DS_ABSTRACT" column="DS_ABSTRACT" type="string" length="2160" not-null="true"/>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" length="8" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" length="8" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_ABSTRACT_selectPerKey" condition="fl_canc !='S' AND bid = :XXXbid "/>
+		<!--  <filter name="TB_ABSTRACT_selectEsistenzaId" condition="vid = :XXXbid "/> -->
+
+	</class>
+
+</hibernate-mapping>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_utenti_biblioteca" table="trl_utenti_biblioteca" >
+		<meta attribute="class-description">
+			Utenti di biblioteca
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_utenti_biblioteca" column="id_utenti_biblioteca" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_utenti" cascade="lock" column="id_utenti" class="it.iccu.sbn.polo.orm.servizi.Tbl_utenti" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cd_biblioteca" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_biblioteca"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<many-to-one name="id_specificita_titoli_studio" column="id_specificita_titoli_studio" class="it.iccu.sbn.polo.orm.servizi.Tbl_specificita_titoli_studio" cascade="save-update,lock" unique="true" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_occupazioni" column="id_occupazioni" class="it.iccu.sbn.polo.orm.servizi.Tbl_occupazioni" cascade="save-update,lock" unique="true" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="credito_bib" column="credito_bib" type="big_decimal" precision="12" scale="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				credito a disposizione dell'utente per i servizi di biblioteca
+			</meta>
+		</property>
+		<property name="note_bib" column="note_bib" type="string" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note della biblioteca riguardanti l'utente
+			</meta>
+		</property>
+		<property name="data_inizio_aut" column="data_inizio_aut" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data d'inizio dell'autorizzazione concessa all'utente
+			</meta>
+		</property>
+		<property name="data_fine_aut" column="data_fine_aut" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di scadenza dell'autorizzazione concessa all'utente
+			</meta>
+		</property>
+		<property name="data_inizio_sosp" column="data_inizio_sosp" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di inizio della sospensione dell'utente. la sospensione a questo livello disabilita tutti i servizi.
+			</meta>
+		</property>
+		<property name="data_fine_sosp" column="data_fine_sosp" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di scadenza  della sospensione  dell'utente. la scadenza di tale sospensione riabilita l'utente a tutti i servizi
+			</meta>
+		</property>
+		<property name="cod_tipo_aut" column="cod_tipo_aut" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo autorizzazione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				utente che varia
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica valori ammessi S/N
+			</meta>
+		</property>
+		<set name="Tbl_richiesta_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utenti_biblioteca" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio"/>
+		</set>
+		<set name="Trl_posti_sala_utenti_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utenti_biblioteca" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_posti_sala_utenti_biblioteca"/>
+		</set>
+	</class>
+</hibernate-mapping>

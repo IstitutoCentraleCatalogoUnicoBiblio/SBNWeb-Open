@@ -1,0 +1,106 @@
+
+body {
+	/* LARA	tutti i colori relativi al background-color: #FEF1E2; devono diventare #fff (cioè bianco)*/
+	 background-color: #fff;
+
+}
+
+div {
+    width: 100%;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 5mm;
+    /* margin-bottom: 5mm; */
+}
+
+#header {
+	height: 83px;
+	max-height: 83px;
+	/* LARA	immagine da url(images/top.jpg); diventa url(images/logo_SbnWEBServizi.png)*/
+	background-image: url(images/logo2_SbnWEBServizi.png);
+	background-position: center top;
+	background-repeat: no-repeat;
+	color: #ff0;
+}
+
+#header div.language{
+	top: 55px;
+	left: 720px;
+	position:absolute;
+}
+
+#header span.title {
+	font-family: "times new roman", sans-serif;
+	font-size: 200%;
+	font-wight: bold;
+	color: #0d0089;
+	margin-left: 8px;
+}
+
+#divForm {
+	width: 70%;
+	background-position: center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	
+}	
+
+div#data {
+	position: relative;
+    margin-top: 0px;
+}
+
+
+input.submit {
+	font-size: 100%;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 0;
+	margin-right: 6px;
+    border-width: 1px;
+}
+
+table {
+	width: 100%;
+    margin-top: 3cm;
+  	color: black;
+  	 /* LARA	nuova impostazione del colore bordo border-color: #4c91df;*/
+  	border-color: #4c91df;
+}
+
+td {
+	width: 50%;
+}
+
+.msgOK1 {
+	color: green;
+	font-size: 100%;
+	font-style: italic;
+	text-align: left;
+}
+
+table.ill_warning {
+	margin-top: 10px;
+	border-collapse: collapse;
+	border: 2px;
+	border-style: solid;
+	border-color: #FFCC99;
+	width: 100%;
+	padding: 5px;
+}
+
+.ill_warning td {
+	padding: 5px;
+}
+
+/* LARA	 nuove classi*/
+.intestazioneBiblioteca {
+	color: #b12d3a;
+	padding-bottom: 0px;
+}
+
+input[type="submit" i]:hover {
+    background-color: #0275d8;
+    color: #fff;
+}

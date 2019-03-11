@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_luo" table="tr_tit_luo" >
+		<meta attribute="class-description">
+			LUOGO DI PUBBLICAZIONE DEL TITOLO
+		</meta>
+		<composite-id>
+			<key-many-to-one name="B" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo">
+			</key-many-to-one>
+			<key-many-to-one name="L" column="lid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_luogo">
+			</key-many-to-one>
+			<key-property name="tp_luogo" column="tp_luogo" type="character"/>
+		</composite-id>
+		<property name="nota_tit_luo" column="nota_tit_luo" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

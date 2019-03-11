@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_termine_thesauro" polymorphism="explicit" table="TB_TERMINE_THESAURO" lazy="false">
+		<id name="DID" column="DID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="CD_THE" column="CD_THE" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true"/>
+		<property name="DS_TERMINE_THESAURO" column="DS_TERMINE_THESAURO" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="true"/>
+		<property name="NOTA_TERMINE_THESAURO" column="NOTA_TERMINE_THESAURO" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<property name="KY_TERMINE_THESAURO" column="KY_TERMINE_THESAURO" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" length="8" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" length="8" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="TP_FORMA_THE" column="TP_FORMA_THE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_TERMINE_THESAURO_selectPerKey"
+				condition="did = :XXXdid AND fl_canc != 'S' "/>
+
+		<filter name="TB_TERMINE_THESAURO_selectPerNomeLike"
+				condition="fl_canc !='S'
+	  					  AND ky_termine_thesauro LIKE :XXXstringaLike ||'%' "/>
+
+		<filter name="TB_TERMINE_THESAURO_countPerNomeLike"
+				condition="fl_canc !='S'
+						  AND ky_termine_thesauro LIKE :XXXstringaLike ||'%' "/>
+<!-- POSTGRESS -->
+		<filter name="TB_TERMINE_THESAURO_selectPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_TERMINE_THESAURO_countPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+<!-- END POSTGRESS -->
+		<filter name="TB_TERMINE_THESAURO_selectPerParoleNome"
+				condition="fl_canc !='S' AND
+	  				  	  CONTAINS(ds_termine_thesauro, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_TERMINE_THESAURO_countPerParoleNome"
+				condition="fl_canc !='S' AND
+					  	  CONTAINS(ds_termine_thesauro, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_TERMINE_THESAURO_selectPerNomeEsatto"
+				condition="fl_canc !='S'
+	   					   AND ky_termine_thesauro = :XXXstringaEsatta "/>
+
+		<filter name="TB_TERMINE_THESAURO_countPerNomeEsatto"
+				condition="fl_canc !='S'
+						   AND ky_termine_thesauro = :XXXstringaEsatta "/>
+
+		<filter name="TB_TERMINE_THESAURO_selectPerKyNormTermine"
+				condition="ky_termine_thesauro = :XXXky_termine_thesauro
+						   AND cd_the = :XXXcd_the
+						   AND fl_canc !='S'  "/>
+
+		<filter name="TB_TERMINE_THESAURO_selectPerEsistenza"
+				condition="did = :XXXdid "/>
+
+		<filter name="TB_SOGGETTO_selectSimili"
+				condition="fl_canc != 'S' AND ky_termine_thesauro = :XXXky_termine_thesauro "/>
+
+		<filter name="TB_SOGGETTO_selectSimiliConferma"
+				condition="fl_canc != 'S'
+				  AND ky_termine_thesauro = :XXXky_termine_thesauro
+				  AND UPPER( TRIM(ds_termine_thesauro) ) = :XXXds_termine_thesauro "/>
+
+	</class>
+</hibernate-mapping>
+

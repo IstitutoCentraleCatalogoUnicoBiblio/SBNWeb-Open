@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>SbnWeb</display-name>
+
+	<!-- Filters -->
+	<filter>
+		<filter-name>XForwardedFilter</filter-name>
+		<filter-class>fr.xebia.servlet.filter.XForwardedFilter</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>UTF8CharsetEncodingFilter</filter-name>
+		<filter-class>
+			it.iccu.sbn.web.filters.SbnWebUTF8CharsetEncodingFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>LocaleFilter</filter-name>
+		<filter-class>
+			it.iccu.sbn.web.filters.DefaultLocaleFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>MenuFilter</filter-name>
+		<filter-class>
+			it.iccu.sbn.web.filters.SbnFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>XForwardedFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>UTF8CharsetEncodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>LocaleFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>MenuFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+
+	<listener>
+		<description>Listener per pulizia blocchi</description>
+		<listener-class>
+			it.iccu.sbn.web.servlet.PuliziaBlocchiSessionListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<description>quartz scheduler</description>
+		<listener-class>
+			org.quartz.ee.servlet.QuartzInitializerListener
+		</listener-class>
+	</listener>
+
+	<!--
+	<listener>
+		<description>Test per elementi serializzabili</description>
+		<listener-class>
+			it.iccu.sbn.web.servlet.ClusterSessionAttributeTester
+		</listener-class>
+	</listener>
+ 	-->
+
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/api</param-value>
+	</context-param>
+
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>resteasy</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>it.iccu.sbn.webservices.WSInvocationEntryPoint</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+	<security-constraint>
+		<web-resource-collection>
+    		<web-resource-name>ws-periodici</web-resource-name>
+			<url-pattern>/api/1.0/periodici/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+
+		<web-resource-collection>
+    		<web-resource-name>ws-docfisico</web-resource-name>
+			<url-pattern>/api/1.0/docfisico/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+
+		<auth-constraint>
+			<role-name>ws-client</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>sbnweb-api</realm-name>
+	</login-config>
+
+	<security-role>
+		<role-name>ws-client</role-name>
+	</security-role>
+
+    <servlet-mapping>
+        <servlet-name>resteasy</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			it.iccu.sbn.web.servlet.SbnActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/struts-config/common.xml,
+				/WEB-INF/struts-config/gestionesemantica.xml,
+				/WEB-INF/struts-config/classi.xml,
+				/WEB-INF/struts-config/thesauro.xml,
+				/WEB-INF/struts-config/documentofisico.xml,
+				/WEB-INF/struts-config/acquisizioni.xml,
+				/WEB-INF/struts-config/servizi.xml,
+				/WEB-INF/struts-config/servizi2.xml,
+				/WEB-INF/struts-config/periodici.xml,
+				/WEB-INF/struts-config/amministrazionesistema.xml,
+				/WEB-INF/struts-config/statistiche.xml,
+				/WEB-INF/struts-config/stampe.xml,
+				/WEB-INF/struts-config/gestionestampe.xml,
+				/WEB-INF/struts-config/catalogazionederivata.xml,
+				/WEB-INF/struts-config/esporta.xml,
+				/WEB-INF/struts-config/importa.xml,
+				/WEB-INF/struts-config/gestionebibliografica.xml,
+				/WEB-INF/struts-config/elaborazioniDifferite.xml,
+
+				<!--  ATTENZIONE!! l'xml di navigazione va SEMPRE per ultimo -->
+				/WEB-INF/struts-config/navigation.xml
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MarcaImageServlet</servlet-name>
+		<servlet-class>
+			it.iccu.sbn.web.servlet.MarcaImageServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MarcaImageServlet</servlet-name>
+		<url-pattern>/caricaImmagineMarca.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>BatchDownloadServlet</servlet-name>
+		<servlet-class>
+			it.iccu.sbn.web.servlet.BatchDownloadServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>BatchDownloadServlet</servlet-name>
+		<url-pattern>/downloadBatch.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ImageServlet</servlet-name>
+		<servlet-class>
+			net.sf.jasperreports.j2ee.servlets.ImageServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ImageServlet</servlet-name>
+		<url-pattern>/images</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>Apache-Axis Servlet</display-name>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/servlet/AxisServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>*.jws</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/api/ext/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>Axis Admin Servlet</display-name>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/servlet/AdminServlet</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--
+		<resource-ref>
+		<res-ref-name>jms/QueueConnectionFactory</res-ref-name>
+		<res-type>javax.jms.QueueConnectionFactory</res-type>
+		<res-auth>Application</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+		</resource-ref>
+
+		<resource-ref>
+		<res-ref-name>queue/sbnStampe</res-ref-name>
+		<res-type>javax.jms.Queue</res-type>
+		<res-auth>Application</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+		</resource-ref>
+	-->
+
+   <!-- ==================== Default Session Configuration ================= -->
+   <!-- You can set the default session timeout (in minutes) for all newly   -->
+   <!-- created sessions by modifying the value below.                       -->
+
+   <session-config>
+      <session-timeout>30</session-timeout>
+   </session-config>
+
+</web-app>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_buono_ordine" table="tba_buono_ordine" schema="sbnweb" >
+		<meta attribute="class-description">
+			Buono d'ordine
+		</meta>
+		<id name="id_buono_ordine" column="id_buono_ordine" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cod_mat" cascade="lock" class="it.iccu.sbn.polo.orm.acquisizioni.Tbb_bilanci" not-null="false" lazy="proxy" access="field">
+			<column name="cod_mat"/>
+			<column name="id_capitoli_bilanci"/>
+		</many-to-one>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="buono_ord" column="buono_ord" type="string" length="9" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				identificativo del buono d'ordine
+			</meta>
+		</property>
+		<many-to-one name="cod_fornitore" cascade="lock" column="cod_fornitore" class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="stato_buono" column="stato_buono" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				stato del buono d'ordine
+			</meta>
+		</property>
+		<property name="data_buono" column="data_buono" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data del buono d'ordine
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<!--
+		<set name="Tbb_capitoli_bilanci" lazy="false" cascade="save-update,lock" inverse="true">
+			<key column="id_capitoli_bilanci" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tbb_capitoli_bilanci"/>
+		</set>
+		-->
+		<set name="Tbb_bilanci" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_buono_ordine" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tbb_bilanci"/>
+		</set>
+		<set name="Tra_elementi_buono_ordine" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="buono_ord"  property-ref="buono_ord" not-null="true" unique="true" />
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tra_elementi_buono_ordine"/>
+		</set>
+
+	</class>
+</hibernate-mapping>

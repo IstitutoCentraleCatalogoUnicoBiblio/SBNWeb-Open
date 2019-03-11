@@ -1,0 +1,3973 @@
+<?xml version="1.0"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping
+        SYSTEM
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_ABSTRACT.hbm.xml ######################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_ABSTRACT_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_AUTORE.hbm.xml ######################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_AUTORE_selectPerKey">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectEsistenzaId">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerIsadn">
+		<filter-param name="XXXisadn" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerNomeLike"> </filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerNome">
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectSimile">
+		<filter-param name="XXXky_cautun" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_auteur" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectSimile_2">
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectSimileEnti_1">
+		<filter-param name="XXXky_cautun" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXtp_nome_aut" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_auteur" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectSimileEnti_2">
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectSimileConferma">
+		<filter-param name="XXXky_cautun" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_auteur" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXds_nome_aut" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerDatavar">
+		<filter-param name="XXXdata_var_Da" type="java.lang.String" />
+		<filter-param name="XXXdata_var_A" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+<!--  POSTGRESS -->
+	<filter-def name="TB_AUTORE_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_countPerParoleNome_postgress">
+	</filter-def>
+
+<!--  END POSTGRESS -->
+
+	<filter-def name="TB_AUTORE_countPerNomeLike"> </filter-def>
+
+	<filter-def name="TB_AUTORE_countPerNome">	</filter-def>
+
+	<filter-def name="TB_AUTORE_countSimile">
+		<filter-param name="XXXky_cautun" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_auteur" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_countPerDatavar">
+		<filter-param name="XXXdata_var_Da" type="java.lang.String" />
+		<filter-param name="XXXdata_var_A" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerCautun">
+		<filter-param name="XXXKy_cautun" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_countPerCautun">
+		<filter-param name="XXXKy_cautun" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectPerAuteur">
+		<filter-param name="XXXKy_auteur" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_countPerAuteur">
+		<filter-param name="XXXKy_auteur" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_AUTORE_selectDirettaPerDatavar">
+		<filter-param name="XXXdata_var_da" type="java.lang.String" />
+		<filter-param name="XXXdata_var_a" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TBF_BIBLIOTECA_IN_POLO.hbm.xml #################################### -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TBF_BIBLIOTECA_IN_POLO_selectPerCd_Polo">
+		<filter-param name="XXXcd_polo" type="string" />
+	</filter-def>
+
+	<filter-def name="TBF_BIBLIOTECA_IN_POLO_selectPerAnagrafe">
+		<filter-param name="XXXcd_ana_biblioteca" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TBF_BIBLIOTECA_IN_POLO_selectPerPoloLike">
+		<filter-param name="XXXcd_polo" type="string" />
+	</filter-def>
+
+	<filter-def name="TBF_BIBLIOTECA_IN_POLO_selectPerKey">
+		<filter-param name="XXXcd_biblioteca" type="string" />
+		<filter-param name="XXXcd_polo" type="string" />
+	</filter-def>
+
+	<filter-def name="TBF_BIBLIOTECA_IN_POLO_selectAll">	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_CARTOGRAFIA.hbm.xml ################################### -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_CARTOGRAFIA_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_CLASSI.hbm.xml ######################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_CLASSI_selectPerKey">
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_CLASSI_selectEsistenzaId">
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_CLASSI_selectPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_CLASSI_countPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+<!-- POSTGRESS -->
+	<filter-def name="TB_CLASSI_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_CLASSI_countPerParoleNome_postgress">
+	</filter-def>
+<!-- END POSTGRESS -->
+	<filter-def name="TB_CLASSI_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_CLASSI_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_COMPOSIZIONE.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_COMPOSIZIONE_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_COMPOSIZIONE_verificaEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_COMPOSIZIONE_selectCreazioneIsbd">	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_DESCRITTORE.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_DESCRITTORE_selectPerKey">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_selectPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_countPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+<!--  POSTGRESS -->
+	<filter-def name="TB_DESCRITTORE_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_countPerParoleNome_postgress">
+	</filter-def>
+
+<!--  END POSTGRESS -->
+	<filter-def name="TB_DESCRITTORE_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_selectPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_countPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_selectPerKyNormDescrittore">
+		<filter-param name="XXXky_norm_descritt" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXcd_soggettario" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_DESCRITTORE_selectPerEsistenza">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TERMINE_THESAURO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_TERMINE_THESAURO_selectPerKey">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_selectPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_countPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+<!--  POSTGRESS -->
+	<filter-def name="TB_TERMINE_THESAURO_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_countPerParoleNome_postgress">
+	</filter-def>
+
+<!--  END POSTGRESS -->
+	<filter-def name="TB_TERMINE_THESAURO_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_selectPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_countPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_selectPerKyNormTermine">
+		<filter-param name="XXXky_termine_thesauro" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXcd_the" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_selectPerEsistenza">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_selectSimili">
+		<filter-param name="XXXky_termine_thesauro" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TERMINE_THESAURO_selectSimiliConferma">
+		<filter-param name="XXXky_termine_thesauro" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXds_termine_thesauro" type="java.lang.String" />
+	</filter-def>
+
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_GRAFICA.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_GRAFICA_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_GRUPPO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_GRUPPO_selectPerKey">
+		<filter-param name="XXXid_gruppo" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_GRUPPO_selectAllGruppi"></filter-def>
+
+	<filter-def name="TB_GRUPPO_selectIdGruppoCancellati"></filter-def>
+
+	<filter-def name="TB_GRUPPO_selectCd_polo"></filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_IMPRONTA.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_IMPRONTA_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXimpronta_1" type="java.lang.String" />
+		<filter-param name="XXXimpronta_2" type="java.lang.String" />
+		<filter-param name="XXXimpronta_3" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_IMPRONTA_verificaEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXimpronta_1" type="java.lang.String" />
+		<filter-param name="XXXimpronta_2" type="java.lang.String" />
+		<filter-param name="XXXimpronta_3" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_IMPRONTA_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_IMPRONTA_selectTuttiPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_INCIPIT.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_INCIPIT_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXnumero_mov" type="java.lang.String" />
+		<filter-param name="XXXnumero_p_mov" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_INCIPIT_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_INCIPIT_verificaEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXnumero_mov" type="java.lang.String" />
+		<filter-param name="XXXnumero_p_mov" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_LUOGO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_LUOGO_selectPerKey">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_LUOGO_selectPerEsistenza">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_LUOGO_selectPerNomeLike">
+		<filter-param name="XXXky_norm_luogo" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+	<filter-def name="TB_LUOGO_countPerNomeLike">
+		<filter-param name="XXXky_norm_luogo" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+	<filter-def name="TB_LUOGO_selectPerNome">
+		<filter-param name="XXXky_norm_luogo" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+	<filter-def name="TB_LUOGO_countPerNome">
+		<filter-param name="XXXky_norm_luogo" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+	<filter-def name="TB_LUOGO_selectLuoghiSimili">
+		<filter-param name="XXXky_norm_luogo" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXds_luogo" type="java.lang.String" />
+		<filter-param name="XXXidDaModificare" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="TB_LUOGO_selectSimili">
+		<filter-param name="XXXky_norm_luogo" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXds_luogo" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_MARCA.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<!--  controllare i tip String String etc etc -->
+
+	<filter-def name="TB_MARCA_selectPerKey">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_MARCA_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_MARCA_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+<!--  CONTAINS POSTGRESS-->
+	<filter-def name="TB_MARCA_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_MARCA_countPerParoleNome_postgress">
+	</filter-def>
+
+<!--  END CONTAINS POSTGRESS-->
+
+	<filter-def name="TB_MARCA_selectPerMotto">
+		<filter-param name="XXXmotto" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_MARCA_countPerMotto">
+		<filter-param name="XXXmotto" type="java.lang.String" />
+	</filter-def>
+
+
+	<filter-def name="TB_MARCA_selectPerDatavar">
+		<filter-param name="XXXdata_var_Da" type="java.lang.String" />
+		<filter-param name="XXXdata_var_A" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_MARCA_countPerDatavar">
+		<filter-param name="XXXdata_var_Da" type="java.lang.String" />
+		<filter-param name="XXXdata_var_A" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_MUSICA.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<!--  controllare i tip String String etc etc -->
+
+	<filter-def name="TB_MUSICA_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_MUSICA_selectEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_NOTA.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<!--  controllare i tip String String etc etc -->
+
+	<filter-def name="TB_NOTA_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXprogr_nota" type="java.lang.Long" />
+		<filter-param name="XXXtp_nota" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_NOTA_selectMaxProg">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXtp_nota" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_NOTA_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   GESTIONE NOTE AGGIUNTIVE 3204 ; Inizio almaviva2 modifica riportata in Polo il 26 ottobre 2009 BUG 3274 -->
+	<filter-def name="TB_NOTA_selectPerBidTutte">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+<!--   GESTIONE NOTE AGGIUNTIVE 3204 ; Fine almaviva2 modifica riportata in Polo il 26 ottobre 2009 BUG 3274 -->
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_NUMERO_STD.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_NUMERO_STD_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXnumero_std" type="java.lang.String" />
+		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_NUMERO_STD_selectEsistenzaID">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXnumero_std" type="java.lang.String" />
+		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_NUMERO_STD_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_NUMERO_STD_selectTuttiPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_PAR_AUTH.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_PAR_AUTH_selectPerKey">
+		<filter-param name="XXXcd_par_auth" type="java.lang.String" />
+		<filter-param name="XXXid_parametro" type="java.lang.Long" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_PAR_MAT.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_PAR_MAT_selectPerKey">
+		<filter-param name="XXXcd_par_mat" type="java.lang.String" />
+		<filter-param name="XXXid_parametro" type="java.lang.Long" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_PAR_SEM.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_PAR_SEM_selectPerKey">
+		<filter-param name="XXXcd_tabella_codici" type="java.lang.String" />
+		<filter-param name="XXXid_parametro" type="java.lang.Long" />
+		<filter-param name="XXXtp_tabella_codici" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_PARAMETRO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_PARAMETRO_selectPerKey">
+		<filter-param name="XXXid_parametro" type="java.lang.Long" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_PAROLA.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_PAROLA_selectPerKey">
+		<filter-param name="XXXid_parola" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_PAROLA_verificaEsistenzaParola">
+		<filter-param name="XXXid_parola" type="java.lang.Long" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_PAROLA_selectPerNome">
+		<filter-param name="XXXparola1" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_PAROLA_selectPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_PAROLA_selectParolaMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXparola" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_PERSONAGGIO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_PERSONAGGIO_selectPerKey">
+		<filter-param name="XXXid_personaggio" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_PERSONAGGIO_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_RAPPRESENT.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_RAPPRESENT_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_RAPPRESENT_verificaEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_REPERTORIO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_REPERTORIO_selectPerKey">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_selectPerCd_sig_repertorio">
+		<filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+	</filter-def>
+
+
+	<!-- // evolutive ottobre 2015 almaviva2 -  Nella gestione dei luoghi viene data la possibilità di gestire
+	 i campi nota informativa , nota catalogatore e legame a repertor -->
+	 <filter-def name="TB_REPERTORIO_selectPerCd_sig_repertorio_tp_repertorio">
+		<filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+		<filter-param name="XXXtp_repertorio" type="java.lang.String" />
+	</filter-def>
+
+
+
+	<!-- almaviva5_20090722 #3086 -->
+	<filter-def name="TB_REPERTORIO_selectPerCd_sig_repertorioAncheCancellato">
+		<filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_selectPerNomeLike">
+		<filter-param name="XXXstringaLike" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_countPerNomeLike">
+		<filter-param name="XXXstringaLike" type="java.lang.String" />
+	</filter-def>
+<!-- POSTGRESS -->
+	<filter-def name="TB_REPERTORIO_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_countPerParoleNome_postgress">
+	</filter-def>
+
+<!-- END POSTGRESS -->
+	<filter-def name="TB_REPERTORIO_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_selectPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_REPERTORIO_countPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="java.lang.String" />
+	</filter-def>
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_SCRIPT.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+			<!--  IN ATTESA DI CAPIRE SE SERVE  -->
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_SERVER.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_SERVER_selectPerKey">
+		<filter-param name="XXXid_server" type="java.lang.Long" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_SOGGETTO.hbm.xml ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_SOGGETTO_selectPerKey">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_selectPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_countPerNomeLike">
+		<filter-param name="XXXstringaLike" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+<!-- POSTGRESS -->
+	<filter-def name="TB_SOGGETTO_selectPerParoleNome_postgress">
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_countPerParoleNome_postgress">
+	</filter-def>
+<!--  END POSTGRESS -->
+	<filter-def name="TB_SOGGETTO_selectPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_countPerParoleNome">
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_selectPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_countPerNomeEsatto">
+		<filter-param name="XXXstringaEsatta" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_selectEsistenzaId">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_selectSimili">
+		<filter-param name="XXXky_cles1_s" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_SOGGETTO_selectSimiliConferma">
+		<filter-param name="XXXky_cles1_s" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXds_soggetto" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TIM.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_TIM_selectPerKey">
+		<filter-param name="XXXid_tim" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_TIM_selectIntervalloData">
+		<filter-param name="XXXts_start" type="java.lang.String" />
+		<filter-param name="XXXts_end" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TIM_truncate">
+	</filter-def>
+
+	<filter-def name="TB_TIM_selectGiornateDistinte">
+	</filter-def>
+
+	<filter-def name="TB_TIM_selectGiornateDistinte">
+		<filter-param name="XXXdata_attivita" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TITOLO.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_TITOLO_selectEsistenzaId">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectPerNomeLike">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_countPerNomeLike">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_countPerNomeEsatto">
+	</filter-def>
+
+<!--	<filter-def name="TB_TITOLO_selectPerNomeEsatto">-->
+<!--		<filter-param name="XXXstringaEsatta1" type="java.lang.String" />-->
+<!--		<filter-param name="XXXstringaEsatta2" type="java.lang.String" />-->
+<!--		<filter-param name="XXXclet2_ricerca" type="java.lang.String" />-->
+<!--	</filter-def>-->
+<!--	-->
+<!--	<filter-def name="TB_TITOLO_countPerNomeEsatto">-->
+<!--		<filter-param name="XXXstringaEsatta1" type="java.lang.String" />-->
+<!--		<filter-param name="XXXstringaEsatta2" type="java.lang.String" />-->
+<!--		<filter-param name="XXXclet2_ricerca" type="java.lang.String" />-->
+<!--	</filter-def>-->
+
+	<filter-def name="TB_TITOLO_selectPerClet">
+		<filter-param name="XXXstringaClet1" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXstringaClet2" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_countPerClet">
+		<filter-param name="XXXstringaClet1" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXstringaClet2" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectPerISBD">
+		<filter-param name="XXXisbd" type="java.lang.String" />
+	</filter-def>
+
+
+
+	<filter-def name="TB_TITOLO_selectSimili">
+		<filter-param name="XXXky_cles1_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_cles2_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_clet1_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_clet2_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectSimiliTU">
+		<filter-param name="XXXky_cles1_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_cles2_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_clet1_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXky_clet2_t" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_sequenceNextVal">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_sequenceENextVal">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_sequenceMUSNextVal">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_sequenceMSMNextVal">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_sequenceCMPNextVal">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_sequenceIsadnNextVal">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectSimiliAntico">
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectPerIsadn">
+		<filter-param name="XXXisadn" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_countPerIsadn">
+		<filter-param name="XXXisadn" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TITOLO_selectCancellatiPerTsVar">
+		<filter-param name="XXXesporta_ts_var_da" type="java.lang.String" />
+		<filter-param name="XXXesporta_ts_var_a" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="TB_TITOLO_LOCALIZZAZIONI">
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TP_ATTIVITA.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_TP_ATTIVITA_selectPerKey">
+		<filter-param name="XXXid_tipo_attivita" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_TP_ATTIVITA_selectAllAttivita"> </filter-def>
+
+	<filter-def name="TB_TP_ATTIVITA_selectAllAttivitaFS"> </filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TP_PROBLEMA.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_TP_PROBLEMA_selectPerKey">
+		<filter-param name="XXXid_problema" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TB_TP_PROBLEMA_selectProblemaPerDescrizione">
+		<filter-param name="XXXds_tipo_problema" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_TP_PROBLEMA_selectAll">
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_UTENTE.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TB_UTENTE_selectPerKey">
+		<filter-param name="XXXcd_utente_amm" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_UTENTE_selectAllUtenti"> </filter-def>
+
+	<filter-def name="TB_UTENTE_selectCdUtenteCancellati"> </filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_AUT_AUT.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+
+	<filter-def name="TR_AUT_AUT_selectPerKey">
+		<filter-param name="XXXtp_legame" type="java.lang.String" />
+		<filter-param name="XXXvid_base" type="java.lang.String" />
+		<filter-param name="XXXvid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_AUT_selectPerKeys2">
+		<filter-param name="XXXvid_1" type="java.lang.String" />
+		<filter-param name="XXXvid_2" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_AUT_selectPerAutoreBaseOColl">
+		<filter-param name="XXXvid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_AUT_selectLegami"></filter-def>
+
+	<filter-def name="TR_AUT_AUT_selectEsistenza">
+		<filter-param name="XXXvid_base" type="java.lang.String" />
+		<filter-param name="XXXvid_coll" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_AUT_BIB.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+
+	<filter-def name="TR_AUT_BIB_selectPerKey">
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_selectPerPolo">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_selectPerPoloDiverso">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_selectPerFiltraLocalizza">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_selectPerAllineamento">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_verificaEsistenza">
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_selectPerFlagAllinea">
+		<filter-param name="XXXfl_allinea" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_BIB_selectPerFlagAllineaDiverso">
+		<filter-param name="XXXfl_allinea" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_AUT_MAR.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_AUT_MAR_selectPerKey">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_MAR_selectAutoreMarca">
+		<filter-param name="XXXvid" type="java.lang.String" />
+		<filter-param name="XXXfl_canc" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_MAR_selectAutoriMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXfl_canc" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_MAR_selectEsistenza">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_MAR_selectPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_AUT_MAR_selectPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_DES_DES.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_DES_DES_selectPerKey">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_DES_DES_selectLegamePerDid"> </filter-def>
+
+	<filter-def name="TR_DES_DES_cercaLegamiPerDid">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_DES_DES_cercaDescrittoreDescrittore">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_DES_DES_cercaLegamiDescrittoreDescrittore">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TERMINI_TERMINI.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TERMINI_TERMINI_selectPerKey">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TERMINI_TERMINI_selectLegamePerDid"> </filter-def>
+
+	<filter-def name="TR_TERMINI_TERMINI_cercaLegamiPerDid">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TERMINI_TERMINI_cercaTerminiTermini">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TERMINI_TERMINI_cercaLegamiTerminiTermini">
+		<filter-param name="XXXdid_base" type="java.lang.String" />
+		<filter-param name="XXXdid_coll" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_LUO_LUO.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_LUO_LUO_selectPerKey">
+		<filter-param name="XXXlid_base" type="java.lang.String" />
+		<filter-param name="XXXlid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_LUO_LUO_verifica">
+		<filter-param name="XXXlid_base" type="java.lang.String" />
+		<filter-param name="XXXlid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_LUO_LUO_selectPerLidBase">
+		<filter-param name="XXXlid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_LUO_LUO_selectPerLidColl">
+		<filter-param name="XXXlid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_LUO_LUO_selectLegami">
+	</filter-def>
+
+	<filter-def name="TR_LUO_LUO_cercaLegamiPerLid">
+		<filter-param name="XXXlid_base" type="java.lang.String" />
+		<filter-param name="XXXlid_coll" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_MAR_BIB.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<!--  controllare i tip String String etc etc -->
+
+	<filter-def name="TR_MAR_BIB_selectPerKey">
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_MAR_BIB_selectPerPolo">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_MAR_BIB_selectPerPoloDiverso">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_MAR_BIB_selectPerFiltraLocalizza">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_MAR_BIB_selectPerAllineamento">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_MAR_BIB_verificaEsistenza">
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_PER_INT.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<!--  controllare i tip String String etc etc -->
+
+	<filter-def name="TR_PER_INT_selectPerKey">
+		<filter-param name="XXXid_personaggio" type="java.lang.Long" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_PER_INT_selectPerPersonaggio">
+		<filter-param name="XXXid_personaggio" type="java.lang.Long" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_REP_AUT.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_REP_AUT_selectPerKey">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_AUT_selectPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_AUT_selectRepertorioPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_AUT_countRepertorioPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_AUT_selectPerKeyCancellato">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_AUT_selectEsistenza">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_REP_MAR.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<!--  controllare i tip String String etc etc -->
+
+	<filter-def name="TR_REP_MAR_selectPerKey">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXprogr_repertorio" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TR_REP_MAR_selectMarcaPerRepertorio">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TR_REP_MAR_countRepertorioPerCitazione">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXprogr_repertorio" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TR_REP_MAR_contaCitazioniInRepertorio">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_MAR_selectRepertorioPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<!--  filter-param name="XXXfl_canc" type="java.lang.String" / -->
+	</filter-def>
+
+	<filter-def name="TR_REP_MAR_countRepertorioPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<!--   filter-param name="XXXfl_canc" type="java.lang.String" / -->
+	</filter-def>
+
+	<filter-def name="TR_REP_MAR_spostaLegami">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXfl_canc" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_REP_TIT.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_REP_TIT_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TR_REP_TIT_selectRepertorioPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_TIT_countRepertorioPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_TIT_selectPerKeyCancellato">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_REP_LUO.hbm.xml    ################################## -->
+<!--   ####Nella gestione dei luoghi viene data la possibilità di gestire legame a repertori ####-->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_REP_LUO_selectPerKey">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_LUO_selectPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_LUO_selectRepertorioPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_LUO_countRepertorioPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_LUO_selectPerKeyCancellato">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_REP_LUO_selectEsistenza">
+		<filter-param name="XXXid_repertorio" type="java.lang.Long" />
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_SOG_DES.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_SOG_DES_selectPerKey">
+		<filter-param name="XXXcid" type="java.lang.String" />
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_SOG_DES_selectDescrittorePerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_SOG_DES_selectLegameDescrittore">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_SOG_DES_countSoggettoPerDescrittore">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_SOG_DES_verificaEsistenzaId">
+		<filter-param name="XXXcid" type="java.lang.String" />
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_AUT.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TIT_AUT_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_relazione" type="java.lang.String" />
+		<filter-param name="XXXtp_responsabilita" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_AUT_selectPerRespRelazione">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+	<filter-def name="TR_TIT_AUT_selectPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_AUT_countPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_AUT_selectPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_AUT_selectPerBideVid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ###################################################################### -->
+<!-- Inizio manutenzione riportata da Indice Su SbnWEB BUG 2982 -->
+	<filter-def name="TR_TIT_AUT_selectPerKeyResp">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+		<filter-param name="XXXtp_responsabilita" type="java.lang.String" />
+	</filter-def>
+<!-- Fine manutenzione riportata da Indice Su SbnWEB BUG 2982 -->
+<!--   ###################################################################### -->
+
+
+	<filter-def name="TR_TIT_AUT_selectEsistenzaPerBideVid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_AUT_selectPerKeyCancellato">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_relazione" type="java.lang.String" />
+
+		<filter-param name="XXXcd_strumento_mus" type="java.lang.String" />
+
+		<filter-param name="XXXtp_responsabilita" type="java.lang.String" />
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_BIB.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+
+	<filter-def name="TR_TIT_BIB_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerPolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerPoloDiverso">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_countPerBid">
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerAllineamento">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_verificaLocalizzazioni">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_countPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerPoloUguale">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectCancellato">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerPoloBibliotecaUguale">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_selectPerFlagAllinea">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXfl_allinea" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_BIB_verificaLocalizzazioniPerBiblioteca">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_CLA.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TIT_CLA_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_CLA_selectTitoloPerClasse">
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_CLA_selectPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_CLA_countFrequenzaPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_CLA_countTitoloClasse">
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_LUO.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TIT_LUO_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXlid" type="java.lang.String" />
+		<filter-param name="XXXtp_luogo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_LUO_selectPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_LUO_selectPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_LUO_verificaEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_LUO_selectPerBidELid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_MAR.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TIT_MAR_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_MAR_selectPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_MAR_selectPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_SOG_BIB.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TIT_SOG_BIB_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_SOG_BIB_selectTitoloPerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_SOG_BIB_selectPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_SOG_BIB_countFrequenzaPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_SOG_BIB_countTitoloSoggetto">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_SOG_BIB_selectPerKeyEsistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TRS_TERMINI_TITOLI_BIBLIOTECHE.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TRS_TERMINI_TITOLI_BIBLIOTECHE_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TRS_TERMINI_TITOLI_BIBLIOTECHE_selectTitoloPerThesauro">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TRS_TERMINI_TITOLI_BIBLIOTECHE_selectPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TRS_TERMINI_TITOLI_BIBLIOTECHE_countFrequenzaPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TRS_TERMINI_TITOLI_BIBLIOTECHE_countTitoloThesauro">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_TIT_TIT.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_TIT_TIT_selectPerKey">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_selectPerBidBaseEColl">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+
+
+	<filter-def name="TR_TIT_TIT_selectPerBidBaseNaturaColl">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+		<filter-param name="XXXcd_natura_coll" type="java.lang.String" />
+	</filter-def>
+
+
+
+	<filter-def name="TR_TIT_TIT_selectPerBidColl">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_countPerBidColl">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_countPerBidBase">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_countPerLivelloColl">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_countPerLivelloBase">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_selectMusica">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TR_TIT_TIT_selectCancellato">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+		<filter-param name="XXXtp_legame" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TR_CID_VAR.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TR_CID_VAR_selectPerKey">
+		<filter-param name="XXXcid_acc" type="java.lang.String" />
+		<filter-param name="XXXcid_var" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TS_LINK_MULTIM.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TS_LINK_MULTIM_selectPerKey">
+		<filter-param name="XXXid_link_multim" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TS_LINK_MULTIM_selectPerKy">
+		<filter-param name="XXXky_link_multim" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TS_STOP_LIST    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TS_STOP_LIST_selectPerKey">
+		<filter-param name="XXXid_stop_list" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_verificaNomeEnte">
+		<filter-param name="XXXtp_stop_list" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoArticoli">
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoParoleTipiEeD">
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoForme">
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoFormeU">
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoParole">
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoS">
+	</filter-def>
+
+	<filter-def name="TS_STOP_LIST_selectElencoV">
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TS_STOP_LIST    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TS_NOTE_PROPOSTA_selectPerKey">
+		<filter-param name="XXXid_proposta" type="java.lang.Long" />
+		<filter-param name="XXXprogr_risposta" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TS_NOTE_PROPOSTA_selectLastProgRisposta">
+		<filter-param name="XXXid_proposta" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TS_NOTE_PROPOSTA_selectPropostaPerDestinatario">
+		<filter-param name="XXXute_destinatario" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TS_NOTE_PROPOSTA_selectNotaPerProposta">
+		<filter-param name="XXXid_proposta" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TS_NOTE_PROPOSTA_selectNotaPerPropostaDestinatario">
+		<filter-param name="XXXid_proposta" type="java.lang.Long" />
+		<filter-param name="XXXute_destinatario" type="java.lang.String" />
+	</filter-def>
+
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## TS_PROPOSTA_MARC    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="TS_PROPOSTA_MARC_selectPerKey">
+		<filter-param name="XXXid_proposta" type="java.lang.Long" />
+	</filter-def>
+
+	<filter-def name="TS_PROPOSTA_MARC_selectPropostaPerData">
+	</filter-def>
+
+	<filter-def name="TS_PROPOSTA_MARC_selectPropostaPerIdOggetto">
+		<filter-param name="XXXid_oggetto" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TS_PROPOSTA_MARC_selectPropostaPerMittente">
+		<filter-param name="XXXute_mittente" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## V_CARTOGRAFIA.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="V_CARTOGRAFIA_selectPerCoordinate">	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_countPerCoordinate">	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_selectPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_countPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_selectPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_countPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_selectPerClet">
+		<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_countPerClet">
+		<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_selectElencoTitoli"> </filter-def>
+
+	<filter-def name="V_CARTOGRAFIA_countElencoTitoli">	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ############################## V_COMPOSIZIONE.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="V_COMPOSIZIONE_selectPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_countPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_selectPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_countPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_selectPerClet">
+			<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_countPerClet">
+			<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_selectPerComposizione"></filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_countPerComposizione"></filter-def>
+
+	<filter-def name="V_COMPOSIZIONE_selectPerBid">
+			<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  V_MUSICA.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="V_MUSICA_selectPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_MUSICA_countPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_MUSICA_selectPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_MUSICA_countPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_MUSICA_selectPerClet">
+		<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_MUSICA_countPerClet">
+		<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_MUSICA_selectPerISBD">
+		<filter-param name="XXXisbd" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  V_GRAFICA.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="V_GRAFICA_selectPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_GRAFICA_countPerNomeLike">
+	</filter-def>
+
+	<filter-def name="V_GRAFICA_selectPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_GRAFICA_countPerNomeEsatto">
+	</filter-def>
+
+	<filter-def name="V_GRAFICA_selectPerClet">
+		<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_GRAFICA_countPerClet">
+		<filter-param name="XXXstringaClet" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="V_GRAFICA_selectPerISBD">
+		<filter-param name="XXXisbd" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_AUT_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_AUT_AUT_selectPerAutore">
+			<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_AUT_AUT_countPerAutore">
+			<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_AUT_LUO.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_AUT_LUO_selectPerAutore">
+			<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_AUT_LUO_countPerAutore">
+			<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_CLA_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_CLA_AUT_selectPerClasse">
+			<filter-param name="XXXcd_edizione" type="java.lang.String" />
+			<filter-param name="XXXcd_sistema" type="java.lang.String" />
+                        <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_CLA_AUT_countPerClasse">
+			<filter-param name="XXXcd_edizione" type="java.lang.String" />
+			<filter-param name="XXXcd_sistema" type="java.lang.String" />
+                        <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_CLA_LUO.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_CLA_LUO_selectPerClasse">
+			<filter-param name="XXXcd_edizione" type="java.lang.String" />
+			<filter-param name="XXXcd_sistema" type="java.lang.String" />
+                        <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_CLA_LUO_countPerClasse">
+			<filter-param name="XXXcd_edizione" type="java.lang.String" />
+			<filter-param name="XXXcd_sistema" type="java.lang.String" />
+                        <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_LUO_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_LUO_AUT_selectPerLuogo">
+			<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_LUO_AUT_countPerLuogo">
+			<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_MAR_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_MAR_AUT_selectPerMarca">
+			<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_MAR_AUT_countPerMarca">
+			<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_MAR_LUO.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_MAR_LUO_selectPerMarca">
+			<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_MAR_LUO_countPerMarca">
+			<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_SOG_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_SOG_AUT_selectPerSoggetto">
+			<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_SOG_AUT_countPerSoggetto">
+			<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_THE_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_THE_AUT_selectPerThesauro">
+			<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_THE_AUT_countPerThesauro">
+			<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_SOG_LUO.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_SOG_LUO_selectPerSoggetto">
+			<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_SOG_LUO_countPerSoggetto">
+			<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_THE_LUO.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_THE_LUO_selectPerThesauro">
+			<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_THE_LUO_countPerThesauro">
+			<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_TIT_C_AUT.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_TIT_C_AUT_selectPerTitolo">
+			<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_TIT_C_AUT_countPerTitolo">
+			<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################  					######################################## -->
+<!--   ##############################  VE_CARTOGRAFIA_TIT_C_LUO.hbm.xml ########################## -->
+<!--   ############################## 					######################################## -->
+
+	<filter-def name="VE_CARTOGRAFIA_TIT_C_LUO_selectPerTitolo">
+			<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VE_CARTOGRAFIA_TIT_C_LUO_countPerTitolo">
+			<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_AUT_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_AUT_AUT_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_AUT_AUT_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_AUT_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_AUT_LUO_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_AUT_LUO_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_CLA_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_CLA_AUT_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_CLA_AUT_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_CLA_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_CLA_LUO_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_CLA_LUO_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_LUO_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_LUO_AUT_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_LUO_AUT_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_MAR_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_MAR_AUT_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_MAR_AUT_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_MAR_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_MAR_LUO_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_MAR_LUO_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_SOG_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_SOG_AUT_selectPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_SOG_AUT_countPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_THE_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_THE_AUT_selectPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_THE_AUT_countPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_SOG_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_SOG_LUO_selectPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_SOG_LUO_countPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_THE_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_THE_LUO_selectPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_THE_LUO_countPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_TIT_C_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_TIT_C_AUT_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_TIT_C_AUT_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_GRAFICA_TIT_C_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_GRAFICA_TIT_C_LUO_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_GRAFICA_TIT_C_LUO_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_AUT_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_AUT_AUT_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_AUT_AUT_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_AUT_COM.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_AUT_COM_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_AUT_COM_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_AUT_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_AUT_LUO_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_AUT_LUO_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_CLA_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_CLA_AUT_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_CLA_AUT_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_CLA_COM.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_CLA_COM_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_CLA_COM_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_CLA_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_CLA_LUO_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_CLA_LUO_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_LUO_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_LUO_AUT_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_LUO_AUT_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_LUO_COM.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_LUO_COM_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_LUO_COM_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_MAR_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_MAR_AUT_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_MAR_AUT_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_MAR_COM.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_MAR_COM_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_MAR_COM_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_MAR_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_MAR_LUO_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_MAR_LUO_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_TIT_C_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_TIT_C_AUT_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_TIT_C_AUT_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_TIT_C_COM.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_TIT_C_COM_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_TIT_C_COM_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_MUSICA_TIT_C_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_MUSICA_TIT_C_LUO_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_MUSICA_TIT_C_LUO_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_AUT_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_AUT_AUT_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_AUT_AUT_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_AUT_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_AUT_LUO_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_AUT_LUO_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_AUT_MAR.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_AUT_MAR_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_AUT_MAR_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_AUT_NSTD.hbm.xml ########################## -->
+<!--   ##############################  tp_numero_std = XXXtp_numero_std ######################################## -->
+
+        <filter-def name="VE_TITOLO_AUT_NSTD_selectPerNumero">
+                <filter-param name="XXXtp_numero_std" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_AUT_NSTD_countPerNumero">
+                <filter-param name="XXXtp_numero_std" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_CLA_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_CLA_AUT_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_CLA_AUT_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_CLA_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_CLA_LUO_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_CLA_LUO_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_CLA_MAR.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_CLA_MAR_selectPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_CLA_MAR_countPerClasse">
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_LUO_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_LUO_AUT_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_LUO_AUT_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_LUO_MAR.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_LUO_MAR_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_LUO_MAR_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_MAR_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_MAR_AUT_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_MAR_AUT_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_MAR_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_MAR_LUO_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_MAR_LUO_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_SOG_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_SOG_AUT_selectPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_SOG_AUT_countPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_THE_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_THE_AUT_selectPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_THE_AUT_countPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_SOG_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_SOG_LUO_selectPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_SOG_LUO_countPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_THE_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_THE_LUO_selectPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_THE_LUO_countPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_SOG_MAR.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_SOG_MAR_selectPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_SOG_MAR_countPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_THE_MAR.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_THE_MAR_selectPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_THE_MAR_countPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_TIT_C_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_TIT_C_AUT_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_TIT_C_AUT_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_TIT_C_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_TIT_C_LUO_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_TIT_C_LUO_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+		<!--  Inizio modifica almaviva2 28.09.2010 bug mantis 3749
+		 viene riportata la stessa modifica fatta nel corrispondente oggetto di Indice countPerTitolo diventa countPerTitolo_Coll -->
+
+        <filter-def name="VE_TITOLO_TIT_C_LUO_selectPerTitolo_Coll">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_TIT_C_LUO_countPerTitolo_Coll">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+		<!--  Fine  modifica almaviva2 28.09.2010 bug mantis 3749 -->
+
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VE_TITOLO_TIT_C_MAR.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VE_TITOLO_TIT_C_MAR_selectPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VE_TITOLO_TIT_C_MAR_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VF_CARTOGRAFIA_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VF_CARTOGRAFIA_AUT_selectPerCoordinate">
+                <filter-param name="XXXtipoScala" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_CARTOGRAFIA_AUT_countPerCoordinate">
+                <filter-param name="XXXtipoScala" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VF_CARTOGRAFIA_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VF_CARTOGRAFIA_LUO_selectPerCoordinate">
+                <filter-param name="XXXtipoScala" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_CARTOGRAFIA_LUO_countPerCoordinate">
+                <filter-param name="XXXtipoScala" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VF_GRAFICA_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VF_GRAFICA_AUT_selectPerCoordinate">
+                <filter-param name="XXXstringaLike1" type="java.lang.String" />
+                <filter-param name="XXXclet2_ricerca" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_AUT_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_AUT_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_AUT_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_AUT_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_AUT_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VF_GRAFICA_LUO.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+
+        <filter-def name="VF_GRAFICA_LUO_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_LUO_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_LUO_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_LUO_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_GRAFICA_LUO_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                                   ######################################## -->
+<!--   ##############################  VF_MUSICA_AUT.hbm.xml ########################## -->
+<!--   ##############################                                   ######################################## -->
+        <filter-def name="VF_MUSICA_AUT_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_AUT_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_AUT_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_AUT_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_AUT_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_AUT_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_MUSICA_COM.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_MUSICA_COM_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_selectPerComposizione"> </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_countPerComposizione"> </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_selectElencoTitoli"> </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_countElencoTitoli"> </filter-def>
+
+        <filter-def name="VF_MUSICA_COM_selectPerBid">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_MUSICA_COMAUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_MUSICA_COMAUT_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_selectPerComposizione"> </filter-def>
+
+        <filter-def name="VF_MUSICA_COMAUT_countPerComposizione"> </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_MUSICA_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_MUSICA_LUO_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_LUO_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_LUO_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_LUO_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_LUO_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_MUSICA_LUO_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_TITOLO_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_TITOLO_AUT_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_AUT_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_AUT_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_AUT_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_AUT_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_AUT_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_TITOLO_COM.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_TITOLO_COM_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_COM_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_COM_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_COM_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_COM_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_COM_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_TITOLO_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_TITOLO_LUO_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_LUO_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_LUO_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_LUO_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_LUO_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_LUO_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VF_TITOLO_MAR.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VF_TITOLO_MAR_selectPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_MAR_countPerNomeLike">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_MAR_selectPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_MAR_countPerNomeEsatto">
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_MAR_selectPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VF_TITOLO_MAR_countPerClet">
+                <filter-param name="XXXstringaClet" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_AUTORE_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_AUTORE_AUT_selectAutorePerRinvii">
+		<filter-param name="XXXvid_1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_AUT_selectAutorePerLegame">
+		<filter-param name="XXXvid_1" type="java.lang.String" />
+		<filter-param name="XXXtp_legame" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_AUTORE_BIB.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_AUTORE_BIB_selectPerPolo">
+		<filter-param name="XXXvid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_BIB_selectPerAnagrafe">
+		<filter-param name="XXXvid" type="java.lang.String" />
+		<filter-param name="XXXcd_ana_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_BIB_selectPerAnagrafeLike">
+		<filter-param name="XXXvid" type="java.lang.String" />
+		<filter-param name="XXXcd_ana_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_BIB_selectPerVid">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_AUTORE_MAR.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_AUTORE_MAR_selectAutorePerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_MAR_countAutorePerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ############################## UTILIZZATA SOLO PER BIS ####################################### -->
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_AUTORE_REP.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_AUTORE_TIT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_AUTORE_TIT_selectAutorePerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_countAutorePerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_selectPerNomeLike">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_selectPerNome">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_selectPerParoleNome">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_countPerParoleNome">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+		<filter-param name="XXXparola1" type="java.lang.String" />
+	</filter-def>
+<!-- POSTGRESS -->
+	<filter-def name="VL_AUTORE_TIT_selectPerParoleNome_postgress">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_countPerParoleNome_postgress">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+	</filter-def>
+<!--  END POSTGRESS -->
+	<filter-def name="VL_AUTORE_TIT_countPerNomeLike">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_AUTORE_TIT_countPerNome">
+		<filter-param name="XXXrelatorCode" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_BIBLIOTECA_CLA.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_BIBLIOTECA_CLA_selectPerFiltraLocalizza">
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_BIBLIOTECA_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_BIBLIOTECA_LUO_selectPerFiltraLocalizza">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_BIBLIOTECA_SOG.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_BIBLIOTECA_SOG_selectPerFiltraLocalizza">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_BIBLIOTECA_TIT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_BIBLIOTECA_TIT_selectPerPolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_BIBLIOTECA_TIT_selectPerAnagrafe">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_ana_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+
+	<filter-def name="VL_BIBLIOTECA_TIT_selectPerAnagrafeLike">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_ana_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_BIBLIOTECA_TIT_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_BIBLIOTECA_TIT_selectPerFiltraLocalizza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_AUT_selectPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_AUT_countPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_CLA.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_CLA_selectPerClasse">
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_CLA_countPerClasse">
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_LUO_selectPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_LUO_countPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_MAR.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_MAR_selectPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_MAR_countPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_SOG.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_SOG_selectPerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_SOG_countPerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_THE.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_THE_selectPerThesauro">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_THE_countPerThesauro">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CARTOGRAFIA_TIT_C.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CARTOGRAFIA_TIT_C_selectPerDocumento">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CARTOGRAFIA_TIT_C_countPerDocumento">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_CLASSE_TIT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_CLASSE_TIT_selectClassePerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+        <filter-def name="VL_CLASSE_TIT_countClassePerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+	<filter-def name="VL_CLASSE_TIT_selectClassePerTitoloSistemaEdizione">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_CLASSE_TIT_countClassePerTitoloSistemaEdizione">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_COMPOSIZIONE_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_COMPOSIZIONE_AUT_selectPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_COMPOSIZIONE_AUT_countPerAutore">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_DESCRITTORE_DES.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_DESCRITTORE_DES_selectDescrittorePerRinvii">
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_DESCRITTORE_DES_selectLegamiPerTipo">
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+		<filter-param name="XXXtp_legame" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="VL_DESCRITTORE_DES_cercaLegamiDescrittoreDescrittore">
+		<filter-param name="XXXdid" type="java.lang.String" />
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_DESCRITTORE_DES_cercaDescrittorePerLegami">
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TERMINI_TERMINI.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_TERMINI_TERMINI_selectTerminiPerRinvii">
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TERMINI_TERMINI_selectLegamiPerTipo">
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+		<filter-param name="XXXtipo_coll" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TERMINI_TERMINI_cercaLegamiTerminiTermini">
+		<filter-param name="XXXdid" type="java.lang.String" />
+		<filter-param name="XXXdid_1" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_DESCRITTORE_SOG.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_DESCRITTORE_SOG_selectDescrittorePerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_DESCRITTORE_SOG_selectLegameDescrittore">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_DESCRITTORE_SOG_countLegameDescrittore">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_AUT_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_AUT_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_CLA.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_CLA_selectPerClasse">
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_CLA_countPerClasse">
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_LUO_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_LUO_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_MAR.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_MAR_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_MAR_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_SOG.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_SOG_selectPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_SOG_countPerSoggetto">
+                <filter-param name="XXXcid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_THE.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_THE_selectPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_THE_countPerThesauro">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_GRAFICA_TIT_C.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_GRAFICA_TIT_C_selectPerDocumento">
+                <filter-param name="XXXbid_coll" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_GRAFICA_TIT_C_countPerDocumento">
+                <filter-param name="XXXbid_coll" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_LUOGO_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_LUOGO_LUO_selectLuogoPerRinvii">
+                <filter-param name="XXXlid_1" type="java.lang.String" />
+        </filter-def>
+        <filter-def name="VL_LUOGO_LUO_selectLuogoPerAltriRinvii">
+                <filter-param name="XXXlid_1" type="java.lang.String" />
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+        <filter-def name="VL_LUOGO_LUO_selectPerLid">
+                <filter-param name="XXXlid_1" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_LUOGO_TIT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_LUOGO_TIT_selectLuogoPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_LUOGO_TIT_countLuogoPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MARCA_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_MARCA_AUT_selectPerKey">	</filter-def>
+
+	<filter-def name="VL_MARCA_AUT_selectPerMid">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_AUT_selectPerVid">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="VL_MARCA_AUT_countAutorePerLegameVid">
+		<filter-param name="XXXvid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MARCA_BIB.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_MARCA_BIB_selectPerPolo">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_BIB_selectPerAnagrafe">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXcd_ana_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_BIB_selectPerAnagrafeLike">
+		<filter-param name="XXXmid" type="java.lang.String" />
+		<filter-param name="XXXcd_ana_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_BIB_selectPerMid">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MARCA_PAR.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_MARCA_PAR_selectPerPolo">
+		<filter-param name="XXXparola" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_PAR_selectParolaMarca">
+		<filter-param name="XXXparola" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_PAR_selectPerParole">
+		<filter-param name="XXXparola" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VL_MARCA_PAR_countPerParole">
+		<filter-param name="XXXparola" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MARCA_REP.hbm.xml ########################## -->
+<!--   ##############################  NON USATA             ######################################## -->
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MARCA_TIT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_MARCA_TIT_selectMarcaPerTitolo">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_AUT.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_AUT_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_AUT_countPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_BIB.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_BIB_selectLocalizzazione">
+                <filter-param name="XXXcd_polo" type="java.lang.String" />
+                <filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_BIB_countLocalizzazione">
+                <filter-param name="XXXcd_polo" type="java.lang.String" />
+                <filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+        </filter-def>
+
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_CLA.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_CLA_selectPerClasse">
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_CLA_countPerClasse">
+                <filter-param name="XXXcd_sistema" type="java.lang.String" />
+                <filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_IMP.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_IMP_selectPerImpronta">
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_IMP_countPerImpronta">
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_LUO.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_LUO_selectPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_LUO_countPerLuogo">
+                <filter-param name="XXXlid" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_MAR.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_MAR_selectPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_MAR_countPerMarca">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_MUSICA_TIT_C.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_MUSICA_TIT_C_selectPerDocumento">
+                <filter-param name="XXXbid_coll" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_MUSICA_TIT_C_countPerDocumento">
+                <filter-param name="XXXbid_coll" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_REPERTORIO_MAR.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_REPERTORIO_MAR_selectPerMid">
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_REPERTORIO_MAR_selectPerRepertorio">
+                <filter-param name="XXXmid" type="java.lang.String" />
+                <filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+                <filter-param name="XXXprogr_repertorio" type="java.lang.Long" />
+        </filter-def>
+
+        <filter-def name="VL_REPERTORIO_MAR_selectPerRepertorioCitazione">
+                <filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+                <filter-param name="XXXprogr_repertorio" type="java.lang.Long" />
+        </filter-def>
+        <filter-def name="VL_REPERTORIO_MAR_countRepertorioPerCitazione">
+                <filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+                <filter-param name="XXXprogr_repertorio" type="java.lang.Long" />
+        </filter-def>
+        <filter-def name="VL_REPERTORIO_MAR_contaCitazioniInRepertorio">
+                <filter-param name="XXXcd_sig_repertorio" type="java.lang.String" />
+                <filter-param name="XXXmid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_SOGGETTO_DES.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_SOGGETTO_DES_selectLegameDescrittore">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_SOGGETTO_DES_countSoggettoPerDescrittore">
+                <filter-param name="XXXdid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_SOGGETTO_DES_selectLegameDescrittore_IN">
+                <filter-param name="XXXdid_IN" type="java.lang.String" />
+        </filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_SOGGETTO_TIT.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_SOGGETTO_TIT_selectSoggettoPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_SOGGETTO_TIT_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_THESAURO_TIT.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+        <filter-def name="VL_THESAURO_TIT_selectThesauroPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+        <filter-def name="VL_THESAURO_TIT_countPerTitolo">
+                <filter-param name="XXXbid" type="java.lang.String" />
+        </filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_AUT.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+		<!--  SELECT DI TIPO distinct -->
+        <filter-def name="VL_TITOLO_AUT_selectPerAutore">
+                <filter-param name="XXXvid" type="java.lang.String" />
+        </filter-def>
+
+
+		<filter-def name="VL_TITOLO_AUT_countPerAutore">
+			<filter-param name="XXXvid" type="java.lang.String" />
+		</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_BIB.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_TITOLO_BIB_selectPerPolo">
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_CLA.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_TITOLO_CLA_selectPerClasse">
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_CLA_countPerClasse">
+		<filter-param name="XXXcd_sistema" type="java.lang.String" />
+		<filter-param name="XXXcd_edizione" type="java.lang.String" />
+                <filter-param name="XXXclasse" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_IMP.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_TITOLO_IMP_selectPerImpronta">
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_IMP_countPerImpronta">
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_IMP_selectPerImprontaDue">
+		<filter-param name="XXXimpronta_2" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_LUO.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_TITOLO_LUO_selectPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_LUO_countPerLuogo">
+		<filter-param name="XXXlid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_MAR.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+
+	<filter-def name="VL_TITOLO_MAR_selectPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_MAR_countPerMarca">
+		<filter-param name="XXXmid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_NUM_STD.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_TITOLO_NUM_STD_selectPerNumero">
+		<filter-param name="XXXnumero_std" type="java.lang.String" />
+		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_NUM_STD_selectPerListaNumeri">
+		<filter-param name="XXXnumero_std" type="java.lang.String" />
+		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_NUM_STD_selectPerBid">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_NUM_STD_selectPerLastra">
+		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_NUM_STD_countPerLastra">
+		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_SOG.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_TITOLO_SOG_selectPerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_SOG_countPerSoggetto">
+		<filter-param name="XXXcid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_THE.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_TITOLO_THE_selectPerThesauro">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_THE_countPerThesauro">
+		<filter-param name="XXXdid" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_TIT_B.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_TITOLO_TIT_B_selectTitoloPerLegame">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectDocumentoPerLegame">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectTitoloPerTitoloAccesso">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerTitAccesso">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerTitUniforme">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerDocumento">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerTitAccesso">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerTitUniforme">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerDocumento">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectLegameSuperiore">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectMonografiaSuperiore">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+
+
+
+<!-- Inizio Modifica almaviva2 BUG MANTIS 4501 esercizio : inserita nuova select VL_TITOLO_TIT_B_selectMonografiaSuperioreBis
+	per consentire doppio legame M01S  (vedi commento almaviva4 01/08/2011 su software di Indice) -->
+	<filter-def name="VL_TITOLO_TIT_B_selectMonografiaSuperioreBis">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+
+
+	<filter-def name="VL_TITOLO_TIT_B_selectCollane">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectRelTitUniMus">
+		<filter-param name="XXXbid_base" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerDocumentoPerTpLegame">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerDocumentoPerTpLegame">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerNomeLikePerTpLegame">
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<!--<filter-param name="XXXstringaLike1" type="java.lang.String" />-->
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerNomeLikePerTpLegame">
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<!--filter-param name="XXXstringaLike1" type="java.lang.String" / -->
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerNomeEsattoPerTpLegame">
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXstringaEsatta1" type="java.lang.String" />
+		<filter-param name="XXXstringaEsatta2" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerNomeEsattoPerTpLegame">
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXstringaEsatta1" type="java.lang.String" />
+		<filter-param name="XXXstringaEsatta2" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_selectPerCletPerTpLegame">
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXstringaClet1" type="java.lang.String" />
+		<filter-param name="XXXstringaClet2" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_TITOLO_TIT_B_countPerCletPerTpLegame">
+		<filter-param name="XXXtp_legame_musica" type="it.finsiel.sbn.util.DataTypeCHAR" />
+		<filter-param name="XXXstringaClet1" type="java.lang.String" />
+		<filter-param name="XXXstringaClet2" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_TITOLO_TIT_C.hbm.xml #################################### -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_TITOLO_TIT_C_selectLegamiDiMonografie">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="VL_TITOLO_TIT_C_selectPerDocumento">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="VL_TITOLO_TIT_C_countPerDocumento">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+	</filter-def>
+	<filter-def name="VL_TITOLO_TIT_C_selectPerBidCollENaturaBase">
+		<filter-param name="XXXbid_coll" type="java.lang.String" />
+		<filter-param name="XXXcd_natura_base" type="java.lang.String" />
+	</filter-def>
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_SOG_TIT_BIB.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_SOG_TIT_BIB_verifica_esistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXcid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_SOG_TIT_BIB_count_tit_coll_bib">
+		<filter-param name="XXXcid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   ##############################                        ######################################## -->
+<!--   ##############################  VL_THE_TIT_BIB.hbm.xml ########################## -->
+<!--   ##############################                        ######################################## -->
+
+	<filter-def name="VL_THE_TIT_BIB_verifica_esistenza">
+		<filter-param name="XXXbid" type="java.lang.String" />
+		<filter-param name="XXXdid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="VL_THE_TIT_BIB_count_tit_coll_bib">
+		<filter-param name="XXXdid" type="java.lang.String" />
+		<filter-param name="XXXcd_polo" type="java.lang.String" />
+		<filter-param name="XXXcd_biblioteca" type="java.lang.String" />
+	</filter-def>
+
+
+<!--   almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi -->
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TITSET_1.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+
+	<filter-def name="TB_TITSET_1_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_AUDIOVIDEO_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_DISCO_SONORO_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+	<filter-def name="TB_RISORSA_ELETTR_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+
+
+
+<!--   almaviva2 Evolutiva  Manutenzione evolutiva  protocollo 2.03: trattamento etichetta 231 per titoliUniformi A nella nuova versione
+ -->
+<!--   ##############################  					######################################## -->
+<!--   ############################## TB_TITSET_2.hbm.xml    ################################## -->
+<!--   ############################## 					######################################## -->
+
+
+	<filter-def name="TB_TITSET_2_selectPerKey">
+		<filter-param name="XXXbid" type="java.lang.String" />
+	</filter-def>
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+<!--   ##############################  					######################################## -->
+
+
+</hibernate-mapping>

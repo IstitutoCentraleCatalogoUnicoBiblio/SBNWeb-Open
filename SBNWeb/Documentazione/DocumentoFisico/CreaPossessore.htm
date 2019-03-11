@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>SBNWEB Guida online</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script>
+</head>
+<body>
+<table summary= "summary" width="100%" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Inserimento/Variazione
+Possessore </h1>
+<ul>
+<li><a href="#Descrizione">Descrizione</a></li>
+<li><a href="#Ingresso">Punti di ingresso</a></li>
+<li><a href="#Prerequisiti">Prerequisiti</a></li>
+<li><a href="#ModuloDati">Modulo immissione
+dati</a>
+<ul>
+<li><a href="#Canali">Area canali</a></li>
+<li><a href="#Filtri">Area filtri</a></li>
+<li><a href="#Miscellanea">Area
+miscellanea </a></li>
+<li><a href="#Default">Valori di default</a></li>
+<li><a href="#Azioni">Azioni utente</a></li>
+</ul>
+</li>
+<li><a href="#Controlli">Controlli del
+sistema</a><br>
+</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span><strong>Punti
+di ingresso </strong></h2>
+<ol>
+<li>Menu-&gt;Documento Fisico-&gt;Possessore-&gt;<a href="RicercaPossessore.htm">Ricerca possessore </a></li>
+<li><a href="SinteticaPossessore.htm">Sintetica</a> -&gt; Pulsante CREA </li>
+<li>Barra di navigazione </li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="Stile3 style8">Modulo immissione dati</span></h2>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Maschera di Inserimento nuovo Possessore</span></p>
+<p align="center"><img src="immagini/crea_possessore.png" width="987" height="235"></p>
+<p align="center"><span class="Stile3 style8"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"></span></span></p>
+
+<p align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+comune </span></p>
+<ul>
+  <li><strong>PID</strong> identificativo univoco del possessore di 10 caratteri  alfanumerici; </li>
+  <li><strong>Livello  di autorit&agrave;, </strong>obbligatorio, default  = livello utente attivo, pu&ograve; essere impostato dall&rsquo;utente ad un valore  inferiore rispetto a quello di default. Valori ammessi 5-97.</li>
+  <li><strong>Forma, </strong>di sola visualizzazione. Impostato  dal sistema ad A.&nbsp; <strong></strong></li>
+  <li><strong>Tipo  Nome, </strong>obbligatorio. Valori ammessi:  A, B, C, D per le persone, E, G, R&nbsp; per  gli Enti. Il sistema verifica la coerenza tra il tipo nome indicato e la  sintassi del nome</li>
+  <li><strong>Nome, </strong>obbligatorio, 320 caratteri  alfanumerici. Il sistema verificher&agrave; la correttezza della sintassi e la  coerenza tra il nominativo fornito e il tipo nome indicato. <strong></strong></li>
+   <li><strong>Nota  , </strong>  320 caratteri alfanumerici<br>
+</li>
+  </ul>
+<p>La maschera di Variazione possessore &egrave; in tutto uguale a quella di Creazione fatto salva che tutti i campi vengono preimpostati con i dati letti dalla base dati di Polo e possono venire quindi aggiornati. Gli unici campi non modificabile sono quelli relativi a <strong>PID</strong>;</p>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li> Vedi immagini delle mappe </li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+<ul>
+<li> Bottone '<strong>Salva</strong>' in fase di Creazione; attiva la procedura di creazione di un Possessore condiviso sulla Base Dati  Locale 
+<li>Bottone '<strong>Salva</strong>' in fase di Variazione attiva la procedura di salvataggio delle variazioni fatte sulla Base Dati di competenza 
+<li>Bottone '<strong>Annulla</strong>' provvede a chiudere la mappa di inserimento/variazione, eliminandola anche dalla riga di Navigazione, e torna alla mappa da cui era stata richiamata. </li>
+</ul>
+<h3 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style8"><strong>Controlli del sistema</strong></span>
+
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;</p></td>
+</tr>
+<tr>
+  <td bgcolor="#dde8f0" valign="top">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Trf_gruppo_attivita_polo" table="trf_gruppo_attivita_polo" lazy="false">
+		<composite-id>
+			<key-many-to-one name="id_attivita_polo" column="id_attivita_polo" class="it.finsiel.sbn.polo.orm.amministrazione.Trf_attivita_polo">
+			</key-many-to-one>
+			<key-many-to-one name="id_gruppo_attivita_polo" column="id_gruppo_attivita_polo" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita">
+			</key-many-to-one>
+		</composite-id>
+		<property name="fl_include" column="fl_include" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di inclusione od esclusione (S include, N esclude)
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="RicercaUtentiForm"
+			type="it.iccu.sbn.web.actionforms.servizi.utenti.RicercaUtentiForm" />
+		<form-bean name="ListaUtentiForm"
+			type="it.iccu.sbn.web.actionforms.servizi.utenti.ListaUtentiForm" />
+		<form-bean name="DettaglioUtentiAnaForm"
+			type="it.iccu.sbn.web.actionforms.servizi.utenti.DettaglioUtentiAnaForm" />
+		<form-bean name="ListaServiziForm"
+			type="it.iccu.sbn.web.actionforms.servizi.utenti.ListaServiziForm" />
+		<form-bean name="AltriDatiUtenteForm"
+			type="it.iccu.sbn.web.actionforms.servizi.utenti.AltriDatiUtenteForm" />
+		<form-bean name="RicercaAutorizzazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.autorizzazioni.RicercaAutorizzazioniForm" />
+		<form-bean name="ListaAutorizzazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.autorizzazioni.ListaAutorizzazioniForm" />
+		<form-bean name="DettaglioAutorizzazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.autorizzazioni.DettaglioAutorizzazioniForm" />
+		<form-bean name="ListaAnagServiziForm"
+			type="it.iccu.sbn.web.actionforms.servizi.autorizzazioni.ListaAnagServiziForm" />
+    	<form-bean name="RicercaSegnatureForm"
+			type="it.iccu.sbn.web.actionforms.servizi.segnature.RicercaSegnatureForm" />
+		<form-bean name="ListaSegnatureForm"
+			type="it.iccu.sbn.web.actionforms.servizi.segnature.ListaSegnatureForm" />
+		<form-bean name="DettaglioSegnatureForm"
+			type="it.iccu.sbn.web.actionforms.servizi.segnature.DettaglioSegnatureForm" />
+    	<form-bean name="RicercaOccupazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.occupazioni.RicercaOccupazioniForm" />
+		<form-bean name="ListaOccupazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.occupazioni.ListaOccupazioniForm" />
+		<form-bean name="DettaglioOccupazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.occupazioni.DettaglioOccupazioniForm" />
+    	<form-bean name="RicercaMaterieInteresseForm"
+			type="it.iccu.sbn.web.actionforms.servizi.materieinteresse.RicercaMaterieInteresseForm" />
+		<form-bean name="ListaMaterieInteresseForm"
+			type="it.iccu.sbn.web.actionforms.servizi.materieinteresse.ListaMaterieInteresseForm" />
+		<form-bean name="DettaglioMaterieInteresseForm"
+			type="it.iccu.sbn.web.actionforms.servizi.materieinteresse.DettaglioMaterieInteresseForm" />
+    	<form-bean name="RicercaSpecTitoloStudioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.spectitolostudio.RicercaSpecTitoloStudioForm" />
+		<form-bean name="ListaSpecTitoloStudioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.spectitolostudio.ListaSpecTitoloStudioForm" />
+		<form-bean name="DettaglioSpecTitoloStudioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.spectitolostudio.DettaglioSpecTitoloStudioForm" />
+		<form-bean name="ErogazioneRicercaForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.ErogazioneRicercaForm" />
+		<form-bean name="ListaMovimentiForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.ListaMovimentiForm" />
+		<form-bean name="InserimentoRichiestaForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.InserimentoRichiestaForm" />
+		<form-bean name="DettaglioMovimentoForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.DettaglioMovimentoForm" />
+		<form-bean name="ConfigurazioneForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.ConfigurazioneForm" />
+		<form-bean name="ConfigurazioneTipoServizioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.ConfigurazioneTipoServizioForm" />
+		<form-bean name="DettaglioTipoServizioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioTipoServizioForm" />
+		<form-bean name="DettaglioServizioForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioServizioForm" />
+		<form-bean name="DettaglioModalitaForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioModalitaForm" />
+		<form-bean name="DettaglioModalitaSupportoForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioModalitaSupportoForm" />
+		<form-bean name="DettaglioModalitaErogazioneForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioModalitaErogazioneForm" />
+		<form-bean name="AssociaBibliotecarioAttivitaForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.AttivitaBibliotecarioForm" />
+		<form-bean name="DettaglioAttivitaForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioAttivitaForm" />
+		<form-bean name="ConfigurazioneControlloIterForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.ConfigurazioneControlloIterForm" />
+		<form-bean name="DettaglioControlloIterForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioControlloIterForm" />
+		<form-bean name="DettaglioSupportoForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.DettaglioSupportoForm" />
+		<form-bean name="ListaPrenotazioniForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.prenotazioni.ListaPrenotazioniForm" />
+		<form-bean name="ListaMaterieForm"
+			type="it.iccu.sbn.web.actionforms.servizi.utenti.ListaMaterieForm" />
+		<form-bean name="GestioneRelazioniForm"
+			type="it.iccu.sbn.web.actionforms.servizi.relazioni.GestioneRelazioniForm" />
+
+		<form-bean name="ricercaDocumentiForm"
+			type="it.iccu.sbn.web.actionforms.servizi.documenti.RicercaDocumentoForm" />
+		<form-bean name="listaDocumentiForm"
+			type="it.iccu.sbn.web.actionforms.servizi.documenti.ListaDocumentiForm" />
+		<form-bean name="gestioneDocumentoForm"
+			type="it.iccu.sbn.web.actionforms.servizi.documenti.GestioneDocumentoForm" />
+    	<form-bean name="archiviazioneMovLocForm"
+			type="it.iccu.sbn.web.actionforms.servizi.elaborazioniDifferite.ArchiviazioneMovLocForm" />
+    	<form-bean name="rinnovoAutorizzazioniUtenteForm"
+			type="it.iccu.sbn.web.actionforms.servizi.elaborazioniDifferite.RinnovoAutorizzazioniUtenteForm" />
+		<form-bean name="importaUtentiForm"
+			type="it.iccu.sbn.web.actionforms.servizi.elaborazioniDifferite.ImportaUtentiForm" />
+
+		<form-bean name="modelloSollecitoForm"
+			type="it.iccu.sbn.web.actionforms.servizi.configurazione.ModelloSollecitoForm" />
+		<form-bean name="erogazioneRicercaILLForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.ill.ErogazioneRicercaILLForm" />
+		<form-bean name="datiRichiestaILLForm"
+			type="it.iccu.sbn.web.integration.actionforms.servizi.erogazione.ill.DatiRichiestaILLForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+		<forward name="sifListaDocumentiNonSbn" path="/servizi/documenti/RicercaDocumenti.do" />
+		<forward name="sifDettaglioUtente" path="/servizi/utenti/DettaglioUtentiAna.do" />
+		<forward name="sifDettaglioDocumentoNonSbn" path="/servizi/documenti/GestioneDocumento.do" />
+	</global-forwards>
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings >
+		<action path="/servizi/utenti/RicercaUtenti"
+			name="RicercaUtentiForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.utenti.RicercaUtentiAction"
+			input="/WEB-INF/jsp/pages/servizi/utenti/ricercaUtenti.jsp" scope="session" parameter="methodRicerca">
+			<forward name="ok" path="/servizi/utenti/ListaUtenti.do" />
+			<forward name="nuovo" path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<forward name="utilityUte" path="/servizi/erogazione/ErogazioneRicerca.do?UTERICERCA=true" />
+			<forward name="importaDaBiblioteca" path="/servizi/utenti/AmministrazioneBiblioteche.do?CHIAMANTE=IMPORTA_DA_BIBLIOTECA" />
+		</action>
+		<action path="/servizi/utenti/ListaUtenti"
+			name="ListaUtentiForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.utenti.ListaUtentiAction"
+			input="/WEB-INF/jsp/pages/servizi/utenti/listaUtenti.jsp" scope="session" parameter="methodLista">
+			<forward name="esamina"                   path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<forward name="nuovo"                     path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<forward name="cancella"                  path="/servizi/utenti/RicercaUtenti.do" />
+			<forward name="rinnovaaut"                path="/servizi/utenti/RicercaUtenti.do" />
+			<forward name="annulla"                   path="/servizi/utenti/RicercaUtenti.do" />
+			<!--forward name="utilityUte"                path="/servizi/erogazione/ErogazioneRicerca.do?UTERICERCA=true" /-->
+			<forward name="ricerca_sale"              path="/servizi/sale/ricercaSale.do" />
+			<forward name="prenot_posto"              path="/servizi/sale/gestionePrenotazionePosto.do" />
+			<forward name="erogazione_ricerca_utente" path="/servizi/erogazione/ErogazioneRicerca.do?UTERICERCA=true" />
+			<forward name="lista_movimenti_utente"    path="/servizi/erogazione/ListaMovimenti.do?UTERICERCA=true" />
+			<forward name="stampaUtenti"              path="/gestionestampe/stampaOnLine/StampaOnLine.do"/>
+			<forward name="acquisizioni_suggLett"     path="/acquisizioni/documenti/documentiRicercaParziale.do?UTERICERCA=true" />
+			<forward name="erogazione_ricerca_ill"    path="/servizi/erogazione/erogazioneRicercaILL.do?UTERICERCA=true" />
+		</action>
+		<action path="/servizi/utenti/DettaglioUtentiAna"
+			name="DettaglioUtentiAnaForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.utenti.DettaglioUtentiAnaAction"
+			input="/WEB-INF/jsp/pages/servizi/utenti/dettaglioUtenti.jsp" scope="session" parameter="methodDettaglio">
+			<forward name="ok" path="/servizi/utenti/RicercaUtenti.do" />
+			<forward name="nuovo" path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<forward name="cancella" path="/servizi/utenti/RicercaUtenti.do" />
+			<forward name="tesserino" path="/gestionestampe/utenti/Tesserino.do" />   <!-- path="/servizi/utenti/Tesserino.do" />  -->
+			<forward name="impbiblio" path="/servizi/utenti/ImportaBiblioteca.do" />
+			<forward name="insServizio" path="/servizi/utenti/ListaServizi.do" />
+			<forward name="altriDati" path="/servizi/utenti/AltriDatiUtente.do" />
+			<forward name="annulla" path="/servizi/utenti/ListaUtenti.do" />
+			<forward name="listaUtentiPolo" path="/servizi/utenti/ListaUtenti.do?UTENTI_POLO=Y" />
+			<forward name="materie" path="/servizi/utenti/ListaMaterie.do" />
+			<forward name="importaBibl" path="/amministrazionesistema/ricercaBiblioteca.do" />
+		</action>
+		<action path="/servizi/utenti/ListaServizi"
+			name="ListaServiziForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.utenti.ListaServiziAction"
+			input="/WEB-INF/jsp/pages/servizi/utenti/listaServizi.jsp" scope="session" parameter="methodListaSer">
+			<forward name="ok" path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<forward name="annulla" path="/servizi/utenti/DettaglioUtentiAna.do" />
+		</action>
+		<action path="/servizi/utenti/AltriDatiUtente"
+			name="AltriDatiUtenteForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.utenti.AltriDatiUtenteAction"
+			input="/WEB-INF/jsp/pages/servizi/utenti/altriDatiUtente.jsp" scope="session" parameter="methodAltriDati">
+			<forward name="ok" path="/servizi/utenti/DettaglioUtentiAna.do" />
+			<forward name="annulla" path="/servizi/utenti/DettaglioUtentiAna.do" />
+		</action>
+		<action path="/servizi/utenti/ListaMaterie"
+			name="ListaMaterieForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.utenti.ListaMaterieAction"
+			input="/WEB-INF/jsp/pages/servizi/utenti/listaMaterie.jsp" scope="session" parameter="methodListaMaterieUtente">
+		</action>
+
+		<action path="/servizi/autorizzazioni/RicercaAutorizzazioni"
+			name="RicercaAutorizzazioniForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.autorizzazioni.RicercaAutorizzazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/autorizzazioni/ricercaAutorizzazioni.jsp" scope="session" parameter="methodRicAut">
+			<forward name="ok" path="/servizi/autorizzazioni/ListaAutorizzazioni.do" />
+			<forward name="nuovo" path="/servizi/autorizzazioni/DettaglioAutorizzazioni.do" />
+		</action>
+		<action path="/servizi/autorizzazioni/ListaAutorizzazioni"
+			name="ListaAutorizzazioniForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.autorizzazioni.ListaAutorizzazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/autorizzazioni/listaAutorizzazioni.jsp" scope="session" parameter="methodListaAnagAut">
+			<forward name="esamina" path="/servizi/autorizzazioni/DettaglioAutorizzazioni.do" />
+			<forward name="nuovo" path="/servizi/autorizzazioni/DettaglioAutorizzazioni.do" />
+			<forward name="annulla" path="/servizi/autorizzazioni/RicercaAutorizzazioni.do"/>
+
+		</action>
+		<action path="/servizi/autorizzazioni/DettaglioAutorizzazioni"
+			name="DettaglioAutorizzazioniForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.autorizzazioni.DettaglioAutorizzazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/autorizzazioni/dettaglioAutorizzazioni.jsp" scope="session" parameter="methodDettAnagAut">
+			<forward name="okRicerca" path="/servizi/autorizzazioni/RicercaAutorizzazioni.do" />
+			<forward name="okLista" path="/servizi/autorizzazioni/ListaAutorizzazioni.do" />
+			<forward name="annulla" path="/servizi/autorizzazioni/ListaAutorizzazioni.do" />
+			<forward name="ricerca" path="/servizi/autorizzazioni/RicercaAutorizzazioni.do" />
+			<forward name="cancella" path="/servizi/autorizzazioni/RicercaAutorizzazioni.do" />
+			<forward name="insServizio" path="/servizi/autorizzazioni/ListaAnagServizi.do" />
+		</action>
+		<action path="/servizi/autorizzazioni/ListaAnagServizi"
+			name="ListaAnagServiziForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.autorizzazioni.ListaAnagServiziAction"
+			input="/WEB-INF/jsp/pages/servizi/autorizzazioni/listaAnagServizi.jsp" scope="session" parameter="methodAnagListaSer">
+			<forward name="ok" path="/servizi/autorizzazioni/DettaglioAutorizzazioni.do" />
+			<forward name="annulla" path="/servizi/autorizzazioni/DettaglioAutorizzazioni.do" />
+		</action>
+		<action path="/servizi/segnature/RicercaSegnature"
+			name="RicercaSegnatureForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.segnature.RicercaSegnatureAction"
+			input="/WEB-INF/jsp/pages/servizi/segnature/ricercaSegnature.jsp" scope="session" parameter="methodRicSegna">
+			<forward name="ok"    path="/servizi/segnature/ListaSegnature.do" />
+			<forward name="nuovo" path="/servizi/segnature/DettaglioSegnature.do" />
+		</action>
+		<action path="/servizi/segnature/ListaSegnature"
+			name="ListaSegnatureForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.segnature.ListaSegnatureAction"
+			input="/WEB-INF/jsp/pages/servizi/segnature/listaSegnature.jsp" scope="session" parameter="methodListaSegna">
+			<forward name="esamina"  path="/servizi/segnature/DettaglioSegnature.do" />
+			<forward name="nuovo"    path="/servizi/segnature/DettaglioSegnature.do" />
+			<forward name="annulla"  path="/servizi/segnature/RicercaSegnature.do"/>
+			<forward name="cancella" path="/servizi/segnature/RicercaSegnature.do"/>
+		</action>
+		<action path="/servizi/segnature/DettaglioSegnature"
+			name="DettaglioSegnatureForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.segnature.DettaglioSegnatureAction"
+			input="/WEB-INF/jsp/pages/servizi/segnature/dettaglioSegnature.jsp" scope="session" parameter="methodDettSegna">
+			<forward name="ok"       path="/servizi/segnature/RicercaSegnature.do" />
+			<forward name="nuovo"    path="/servizi/segnature/DettaglioSegnature.do" />
+			<forward name="annulla"  path="/servizi/segnature/RicercaSegnature.do" />
+			<forward name="cancella" path="/servizi/segnature/ListaSegnature.do" />
+		</action>
+		<action path="/servizi/occupazioni/RicercaOccupazioni"
+			name="RicercaOccupazioniForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.occupazioni.RicercaOccupazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/occupazioni/ricercaOccupazioni.jsp" scope="session" parameter="methodRicOccup">
+			<forward name="ok" path="/servizi/occupazioni/ListaOccupazioni.do" />
+			<forward name="nuovo" path="/servizi/occupazioni/DettaglioOccupazioni.do" />
+		</action>
+		<action path="/servizi/occupazioni/ListaOccupazioni"
+			name="ListaOccupazioniForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.occupazioni.ListaOccupazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/occupazioni/listaOccupazioni.jsp" scope="session" parameter="methodListaOccup">
+			<forward name="esamina" path="/servizi/occupazioni/DettaglioOccupazioni.do" />
+			<forward name="nuovo" path="/servizi/occupazioni/DettaglioOccupazioni.do" />
+			<forward name="annulla" path="/servizi/occupazioni/RicercaOccupazioni.do"/>
+			<forward name="cancella" path="/servizi/occupazioni/RicercaOccupazioni.do"/>
+		</action>
+		<action path="/servizi/occupazioni/DettaglioOccupazioni"
+			name="DettaglioOccupazioniForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.occupazioni.DettaglioOccupazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/occupazioni/dettaglioOccupazioni.jsp" scope="session" parameter="methodDettOccup">
+			<forward name="ok" path="/servizi/occupazioni/RicercaOccupazioni.do" />
+			<forward name="nuovo" path="/servizi/occupazioni/DettaglioOccupazioni.do" />
+			<forward name="annulla" path="/servizi/occupazioni/RicercaOccupazioni.do" />
+			<forward name="cancella" path="/servizi/occupazioni/RicercaOccupazioni.do" />
+		</action>
+		<action path="/servizi/materieinteresse/RicercaMaterieInteresse"
+			name="RicercaMaterieInteresseForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.materieinteresse.RicercaMaterieInteresseAction"
+			input="/WEB-INF/jsp/pages/servizi/materieinteresse/ricercaMaterieInteresse.jsp" scope="session" parameter="methodRicMaterie">
+			<forward name="ok" path="/servizi/materieinteresse/ListaMaterieInteresse.do" />
+		</action>
+		<action path="/servizi/materieinteresse/ListaMaterieInteresse"
+			name="ListaMaterieInteresseForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.materieinteresse.ListaMaterieInteresseAction"
+			input="/WEB-INF/jsp/pages/servizi/materieinteresse/listaMaterieInteresse.jsp" scope="session" parameter="methodListaMaterie">
+			<forward name="esamina" path="/servizi/materieinteresse/DettaglioMaterieInteresse.do" />
+			<forward name="nuovo" path="/servizi/materieinteresse/DettaglioMaterieInteresse.do" />
+			<forward name="annulla" path="/servizi/materieinteresse/RicercaMaterieInteresse.do"/>
+			<forward name="cancella" path="/servizi/materieinteresse/RicercaMaterieInteresse.do" />
+		</action>
+		<action path="/servizi/materieinteresse/DettaglioMaterieInteresse"
+			name="DettaglioMaterieInteresseForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.materieinteresse.DettaglioMaterieInteresseAction"
+			input="/WEB-INF/jsp/pages/servizi/materieinteresse/dettaglioMaterieInteresse.jsp" scope="session" parameter="methodDettMaterie">
+			<forward name="annulla" path="/servizi/materieinteresse/ListaMaterieInteresse.do" />
+		</action>
+		<action path="/servizi/spectitolostudio/RicercaSpecTitoloStudio"
+			name="RicercaSpecTitoloStudioForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.spectitolostudio.RicercaSpecTitoloStudioAction"
+			input="/WEB-INF/jsp/pages/servizi/spectitolostudio/ricercaSpecTitoloStudio.jsp" scope="session" parameter="methodRicSpecialita">
+			<forward name="ok" path="/servizi/spectitolostudio/ListaSpecTitoloStudio.do" />
+			<forward name="nuovo" path="/servizi/spectitolostudio/DettaglioSpecTitoloStudio.do" />
+		</action>
+		<action path="/servizi/spectitolostudio/ListaSpecTitoloStudio"
+			name="ListaSpecTitoloStudioForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.spectitolostudio.ListaSpecTitoloStudioAction"
+			input="/WEB-INF/jsp/pages/servizi/spectitolostudio/listaSpecTitoloStudio.jsp" scope="session" parameter="methodListaSpecialita">
+			<forward name="esamina"  path="/servizi/spectitolostudio/DettaglioSpecTitoloStudio.do" />
+			<forward name="nuovo"    path="/servizi/spectitolostudio/DettaglioSpecTitoloStudio.do" />
+			<forward name="annulla"  path="/servizi/spectitolostudio/RicercaSpecTitoloStudio.do"/>
+			<forward name="cancella" path="/servizi/spectitolostudio/RicercaSpecTitoloStudio.do"/>
+		</action>
+		<action path="/servizi/spectitolostudio/DettaglioSpecTitoloStudio"
+			name="DettaglioSpecTitoloStudioForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.spectitolostudio.DettaglioSpecTitoloStudioAction"
+			input="/WEB-INF/jsp/pages/servizi/spectitolostudio/dettaglioSpecTitoloStudio.jsp" scope="session" parameter="methodDettSpecialita">
+			<forward name="ok" path="/servizi/spectitolostudio/RicercaSpecTitoloStudio.do" />
+			<forward name="nuovo" path="/servizi/spectitolostudio/DettaglioSpecTitoloStudio.do" />
+			<forward name="annulla" path="/servizi/spectitolostudio/RicercaSpecTitoloStudio.do" />
+			<forward name="cancella" path="/servizi/spectitolostudio/RicercaSpecTitoloStudio.do" />
+		</action>
+		<action path="/servizi/erogazione/ErogazioneRicerca"
+			name="ErogazioneRicercaForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.ErogazioneRicercaAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/erogazioneRicerca.jsp" scope="session" parameter="methodErogazione">
+			<forward name="ok" path="/servizi/erogazione/ListaMovimenti.do" />
+			<forward name="sifutente" path="/servizi/utenti/RicercaUtenti.do?UTERICERCA=erogazione_ricerca_utente" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?SERVIZI=true" />
+			<forward name="sifinventario" path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do?INVRICERCA=EROGAZIONE_RICERCA" />
+			<forward name="prenotazioni" path="/servizi/erogazione/ListaPrenotazioni.do?CHIAMANTE=EROGAZIONE_RICERCA" />
+			<forward name="dettaglio" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="stampaRichiesta" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="nuovoDocumento" path="/servizi/documenti/GestioneDocumento.do" />
+			<forward name="prenotazioniMov" path="/servizi/erogazione/ListaPrenotazioni.do?CHIAMANTE=EROGAZIONE_RICERCA" />
+		</action>
+
+		<action path="/servizi/erogazione/ListaMovimenti"
+			name="ListaMovimentiForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.ListaMovimentiAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/listaMovimenti.jsp" scope="session" parameter="methodListaMovimentiUte">
+			<forward name="avanti"              path="/servizi/erogazione/InserimentoRichiesta.do" />
+			<forward name="ok"                  path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="nuovo"               path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="cancella"            path="/servizi/erogazione/ErogazioneRicerca.do" />
+			<forward name="rifiuta"             path="/servizi/erogazione/ErogazioneRicerca.do" />
+			<forward name="annulla"             path="/servizi/erogazione/ErogazioneRicerca.do" />
+			<forward name="interrogaTitolo"     path="/gestionebibliografica/titolo/interrogazioneTitolo.do?MOVIMENTI_UTENTE=true" />
+			<forward name="interrogaInventario" path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do?INVRICERCA=MOVIMENTI_UTENTE" />
+			<forward name="interrogaUtente"     path="/servizi/utenti/RicercaUtenti.do?UTERICERCA=erogazione_ricerca_utente" />
+			<forward name="stampaRichiesta" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="nuovoDocumento" path="/servizi/documenti/GestioneDocumento.do" />
+			<forward name="dettaglio" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="prenotaPosto" path="/servizi/sale/gestionePrenotazionePosto.do" />
+		</action>
+
+		<action path="/servizi/erogazione/InserimentoRichiesta"
+			name="InserimentoRichiestaForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.InserimentoRichiestaAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/inserimentoRichiesta.jsp" scope="session" parameter="methodInserimentoRichiesta">
+			<forward name="ok"                  path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="annulla"             path="/servizi/erogazione/ErogazioneRicerca.do" />
+		</action>
+
+		<action path="/servizi/erogazione/DettaglioMovimento"
+			name="DettaglioMovimentoForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.DettaglioMovimentoAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/dettaglioMovimento.jsp" scope="session" parameter="methodDettaglioMovimentiUte">
+			<forward name="stampa" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="ok" path="/servizi/erogazione/ErogazioneRicerca.do" />
+			<forward name="annulla" path="/servizi/erogazione/ListaMovimenti.do" />
+			<forward name="cancella" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="rifiuta" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="rinnova" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="avanza" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="prenotazioni" path="/servizi/erogazione/ListaPrenotazioni.do?CHIAMANTE=DETTAGLIO_MOVIMENTO" />
+			<forward name="cambiaServ" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="stampaRichiesta" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="datiRichiestaILL" path="/servizi/erogazione/datiRichiestaILL.do" />
+		</action>
+
+		<action path="/servizi/configurazione/Configurazione"
+			name     ="ConfigurazioneForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.ConfigurazioneAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/configurazione.jsp"
+			scope    ="session"
+			parameter="methodConfigurazione">
+			<forward name="configura"           path="/servizi/configurazione/ConfigurazioneTipoServizio.do" />
+			<forward name="nuovo"               path="/servizi/configurazione/DettaglioTipoServizio.do" />
+			<forward name="esaminaTipoServizio" path="/servizi/configurazione/DettaglioTipoServizio.do" />
+			<forward name="nuovaModalita"       path="/servizi/configurazione/DettaglioModalitaErogazione.do" />
+			<forward name="esaminaModalita"     path="/servizi/configurazione/DettaglioModalitaErogazione.do" />
+			<forward name="aggiungiSupporto"    path="/servizi/configurazione/DettaglioSupporto.do" />
+			<forward name="esaminaSupporto"     path="/servizi/configurazione/DettaglioSupporto.do" />
+
+			<forward name="modelloSollecito"    path="/servizi/configurazione/modelloSollecito.do" />
+			<forward name="calendario"		    path="/servizi/calendario/calendario.do" />
+		</action>
+
+		<action path="/servizi/configurazione/ConfigurazioneTipoServizio"
+			name     ="ConfigurazioneTipoServizioForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.ConfigurazioneTipoServizioAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/configurazioneTipoServizio.jsp"
+			scope    ="session"
+			parameter="methodConfigurazioneTipoServizio">
+			<forward name="indietro"           path="/servizi/configurazione/Configurazione.do" />
+			<forward name="nuovoServizio"      path="/servizi/configurazione/DettaglioServizio.do" />
+			<forward name="esaminaServizio"    path="/servizi/configurazione/DettaglioServizio.do" />
+ 			<forward name="nuovaModalita"      path="/servizi/configurazione/DettaglioModalita.do" />
+			<forward name="esaminaModalita"    path="/servizi/configurazione/DettaglioModalita.do" />
+			<forward name="esaminaAttivita"    path="/servizi/configurazione/DettaglioAttivita.do" />
+			<forward name="aggiungiAttivita"   path="/servizi/configurazione/DettaglioAttivita.do?tipo_operazione=A" />
+			<forward name="inserisciAttivita"  path="/servizi/configurazione/DettaglioAttivita.do?tipo_operazione=I" />
+		</action>
+
+		<action path="/servizi/configurazione/DettaglioTipoServizio"
+			name     ="DettaglioTipoServizioForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioTipoServizioAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioTipoServizio.jsp"
+			scope    ="session"
+			parameter="methodDettaglioTipoServizio">
+			<forward name="indietro" path="/servizi/configurazione/Configurazione.do" />
+		</action>
+
+		<action path="/servizi/configurazione/DettaglioServizio"
+			name     ="DettaglioServizioForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioServizioAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioServizio.jsp"
+			scope    ="session"
+			parameter="methodDettaglioServizio">
+			<forward name="indietro" path="/servizi/configurazione/ConfigurazioneTipoServizio.do" />
+		</action>
+
+		<action path="/servizi/configurazione/DettaglioModalita"
+			name     ="DettaglioModalitaForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioModalitaAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioModalita.jsp"
+			scope    ="session"
+			parameter="methodDettaglioModalita">
+			<forward name="indietro" path="/servizi/configurazione/ConfigurazioneTipoServizio.do" />
+		</action>
+
+		<action path="/servizi/configurazione/DettaglioModalitaSupporto"
+			name     ="DettaglioModalitaSupportoForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioModalitaSupportoAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioModalitaSupporto.jsp"
+			scope    ="session"
+			parameter="methodDettaglioModalitaSupporto">
+			<forward name="indietro" path="/servizi/configurazione/DettaglioSupporto.do" />
+		</action>
+
+		<action path="/servizi/configurazione/DettaglioModalitaErogazione"
+			name     ="DettaglioModalitaErogazioneForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioModalitaErogazioneAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioModalitaErogazione.jsp"
+			scope    ="session"
+			parameter="methodDettaglioModalitaErogazione">
+			<forward name="indietro" path="/servizi/configurazione/Configurazione.do" />
+		</action>
+
+		<action path="/servizi/erogazione/ListaPrenotazioni"
+			name="ListaPrenotazioniForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.prenotazioni.ListaPrenotazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/listaPrenotazioni.jsp"
+			scope="session"
+			parameter="methodListaPrenotazioni">
+			<forward name="esamina"         path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="listaMovimenti"  path="/servizi/erogazione/ListaMovimenti.do" />
+			<forward name="stampaRichiesta" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<!-- CONFIGURAZIONE ITER -->
+		<action path="/servizi/configurazione/DettaglioAttivita"
+			name     ="DettaglioAttivitaForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioAttivitaAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioAttivita.jsp"
+			scope    ="session"
+			parameter="methodDettaglioAttivita">
+			<forward name="indietro"      path="/servizi/configurazione/Configurazione.do"/>
+			<forward name="bibliotecari"  path="/servizi/configurazione/AttivitaBibliotecario.do" />
+			<forward name="configuraControlloIter"   path="/servizi/configurazione/ConfigurazioneControlloIter.do" />
+		</action>
+		<action path="/servizi/configurazione/AttivitaBibliotecario"
+			name     ="AssociaBibliotecarioAttivitaForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.AttivitaBibliotecarioAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/attivitaBibliotecario.jsp"
+			scope    ="session"
+			parameter="methodAttivitaBibliotecario">
+			<forward name="indietro" path="/servizi/configurazione/DettaglioAttivita.do" />
+		</action>
+		<action path="/servizi/configurazione/ConfigurazioneControlloIter"
+			name     ="ConfigurazioneControlloIterForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.ConfigurazioneControlloIterAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/configurazioneControlloIter.jsp"
+			scope    ="session"
+			parameter="methodConfigurazioneControlloIter">
+			<forward name="esaminaControllo"   path="/servizi/configurazione/DettaglioControlloIter.do" />
+			<forward name="aggiungiControllo"  path="/servizi/configurazione/DettaglioControlloIter.do?tipoOperazione=A" />
+			<forward name="inserisciControllo" path="/servizi/configurazione/DettaglioControlloIter.do?tipoOperazione=I" />
+		</action>
+		<action path="/servizi/configurazione/DettaglioControlloIter"
+			name     ="DettaglioControlloIterForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioControlloIterAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioControlloIter.jsp"
+			scope    ="session"
+			parameter="methodDettaglioControlloIter">
+			<forward name="indietro" path="/servizi/configurazione/ConfigurazioneControlloIter.do?ricaricaLista=true" />
+		</action>
+		<action path="/servizi/configurazione/DettaglioSupporto"
+			name     ="DettaglioSupportoForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.DettaglioSupportoAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/dettaglioSupporto.jsp"
+			scope    ="session"
+			parameter="methodDettaglioSupporto">
+			<forward name="indietro" path="/servizi/configurazione/Configurazione.do" />
+ 			<forward name="nuovaModalita" path="/servizi/configurazione/DettaglioModalitaSupporto.do" />
+		</action>
+
+		<action path="/servizi/relazioni/GestioneRelazioni"
+			name="GestioneRelazioniForm"
+			validate="false"
+			type="it.iccu.sbn.web.actions.servizi.relazioni.GestioneRelazioniAction"
+			input="/WEB-INF/jsp/pages/servizi/relazioni/gestioneRelazioni.jsp"
+			scope="session"
+			parameter="methodGestioneRelazioni">
+		</action>
+
+		<action path="/servizi/documenti/RicercaDocumenti"
+			name="ricercaDocumentiForm"
+			validate="false"
+			type="it.iccu.sbn.web.actions.servizi.documenti.RicercaDocumentiAction"
+			input="/WEB-INF/jsp/pages/servizi/documenti/ricercaDocumenti.jsp"
+			scope="session"
+			parameter="methodRicercaDoc">
+
+			<forward name="listaDocumenti" path="/servizi/documenti/ListaDocumenti.do" />
+			<forward name="nuovoDocumento" path="/servizi/documenti/GestioneDocumento.do" />
+		</action>
+
+		<action path="/servizi/documenti/ListaDocumenti"
+			name="listaDocumentiForm"
+			validate="false"
+			type="it.iccu.sbn.web.actions.servizi.documenti.ListaDocumentiAction"
+			input="/WEB-INF/jsp/pages/servizi/documenti/sinteticaDocumenti.jsp"
+			scope="session"
+			parameter="methodListaDoc">
+
+			<forward name="gestioneDocumento" path="/servizi/documenti/GestioneDocumento.do" />
+			<forward name="stampaServizi" path="/gestionestampe/servizi/stampaServizi.do?SEGNATURARICERCA=true" />
+		</action>
+
+		<action path="/servizi/documenti/GestioneDocumento"
+			name="gestioneDocumentoForm"
+			validate="false"
+			type="it.iccu.sbn.web.actions.servizi.documenti.GestioneDocumentoAction"
+			input="/WEB-INF/jsp/pages/servizi/documenti/gestioneDocumento.jsp"
+			scope="session"
+			parameter="methodGestioneDoc">
+
+			<forward name="ok" path="/servizi/documenti/GestioneDocumento.do" />
+			<forward name="SIFServizi" path="/servizi/erogazione/ListaMovimenti.do?CHIAMANTE=DOCUMENTO_NO_SBN" />
+			<forward name="stampaServizi" path="/gestionestampe/servizi/stampaServizi.do?SEGNATURARICERCA=true" />
+		</action>
+
+		<action path="/servizi/elaborazioniDifferite/archiviazioneMovLoc"
+			name="archiviazioneMovLocForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.elaborazioniDifferite.ArchiviazioneMovLocAction"
+			input="/WEB-INF/jsp/pages/servizi/elaborazioniDifferite/archiviazioneMovLoc.jsp" scope="session" parameter="methodArchMovLoc">
+			<forward name="ok" path="/servizi/elaborazioniDifferite/archiviazioneMovLoc.do" />
+			<forward name="lenteBiblio" path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+		</action>
+
+		<action path="/servizi/elaborazioniDifferite/rinnovoAutorizzazioniUtente"
+			name="rinnovoAutorizzazioniUtenteForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.elaborazioniDifferite.RinnovoAutorizzazioniUtenteAction"
+			input="/WEB-INF/jsp/pages/servizi/elaborazioniDifferite/rinnovoAutorizzazioniUtente.jsp" scope="session" parameter="methodRinnAutUte">
+			<forward name="ok" path="/servizi/elaborazioniDifferite/rinnovoAutorizzazioniUtente.do" />
+			<forward name="lenteBiblio" path="/documentofisico/serieInventariali/listaBiblioteche.do" />
+
+		</action>
+
+		<action path="/servizi/elaborazioniDifferite/importaUtenti"
+			name="importaUtentiForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.elaborazioniDifferite.ImportaUtentiAction"
+			input="/WEB-INF/jsp/pages/servizi/elaborazioniDifferite/importaUtenti.jsp" scope="session"
+			parameter="methodImportaUte">
+
+		</action>
+
+		<action path="/servizi/configurazione/modelloSollecito"
+			name     ="modelloSollecitoForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.configurazione.ModelloSollecitoAction"
+			input    ="/WEB-INF/jsp/pages/servizi/configurazione/modelloSollecito.jsp"
+			scope    ="session"
+			parameter="methodModSoll">
+
+		</action>
+
+		<action path="/servizi/erogazione/erogazioneRicercaILL"
+			name="erogazioneRicercaILLForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.ill.ErogazioneRicercaILLAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/ill/erogazioneRicercaILL.jsp" scope="session" parameter="methodRicercaILL">
+			<forward name="esaminaILL" path="/servizi/erogazione/datiRichiestaILL.do" />
+			<forward name="esaminaLoc" path="/servizi/erogazione/DettaglioMovimento.do" />
+			<forward name="utente" path="/servizi/utenti/RicercaUtenti.do?UTERICERCA=erogazione_ricerca_ill" />
+		</action>
+
+		<action path="/servizi/erogazione/datiRichiestaILL"
+			name="datiRichiestaILLForm" validate="false"
+			type="it.iccu.sbn.web.integration.action.erogazione.ill.DatiRichiestaILLAction"
+			input="/WEB-INF/jsp/pages/servizi/erogazione/ill/datiRichiestaILL.jsp" scope="session" parameter="methodDatiILL">
+			<forward name="sif_titolo" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?SERVIZI=true" />
+			<forward name="richiestaLocale" path="/servizi/erogazione/DettaglioMovimento.do" />
+		</action>
+
+
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+	<message-resources key="serviziLabels"
+		parameter="it.iccu.sbn.web.resources.ServiziLabels" null="false" />
+	<message-resources key="serviziMessages"
+		parameter="it.iccu.sbn.web.resources.ServiziMessages" null="false" />
+</struts-config>

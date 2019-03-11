@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_des_des" polymorphism="explicit" table="TR_DES_DES" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="DID_BASE" column="DID_BASE" class="it.finsiel.sbn.polo.orm.Tb_descrittore1">
+			</key-many-to-one>
+			<key-many-to-one name="DID_COLL" column="DID_COLL" class="it.finsiel.sbn.polo.orm.Tb_descrittore1">
+			</key-many-to-one>
+			-->
+			<key-property name="DID_BASE" column="DID_BASE" type="string"/>
+			<key-property name="DID_COLL" column="DID_COLL" type="string"/>
+		</composite-id>
+		<property name="TP_LEGAME" column="TP_LEGAME" type="it.finsiel.sbn.util.DataTypeCHAR" length="5" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="NOTA_DES_DES" column="NOTA_DES_DES" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<filter name="TR_DES_DES_selectPerKey"
+				condition="did_base = :XXXdid_base
+						  AND did_coll = :XXXdid_coll "/>
+
+		<filter name="TR_DES_DES_selectLegamePerDid"
+				condition="1=1 "/>
+
+		<filter name="TR_DES_DES_cercaLegamiPerDid"
+				condition="did_base = :XXXdid_base
+		 				   OR did_coll = :XXXdid_coll "/>
+
+		<filter name="TR_DES_DES_cercaDescrittoreDescrittore"
+				condition="( did_base = :XXXdid_base
+		  				  AND did_coll = :XXXdid_coll)
+						  OR ( did_base = :XXXdid_coll
+				  		  AND did_coll = :XXXdid_base) "/>
+
+		<filter name="TR_DES_DES_cercaLegamiDescrittoreDescrittore"
+				condition="( did_base = :XXXdid_base
+		  				  OR did_coll = :XXXdid_coll)
+						  OR ( did_base = :XXXdid_coll
+				  		  AND did_coll = :XXXdid_base) "/>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_tit_sog_bib" polymorphism="explicit" table="TR_TIT_SOG_BIB" lazy="false">
+		<composite-id>
+		    <key-property name="CID" column="CID"	type="string"/>
+		    <key-property name="BID" column="BID"	type="string"/>
+		    <key-property name="CD_BIBLIOTECA" column="CD_BIBLIOTECA"	type="string"/>
+		    <key-property name="CD_POLO" column="CD_POLO"	type="string"/>
+		</composite-id>
+	    <property name="CD_SOGG" column="CD_SOGG" type="string" length="3" not-null="true"/>
+		<property name="NOTA_TIT_SOG_BIB" column="NOTA_TIT_SOG_BIB" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="POSIZIONE" type="short" not-null="true" lazy="false"/>
+
+
+		<filter name="TR_TIT_SOG_BIB_selectPerKey"
+			condition="bid = :XXXbid
+					   AND cid = :XXXcid
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_SOG_BIB_selectTitoloPerSoggetto"
+			condition="cid = :XXXcid
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_SOG_BIB_selectPerTitolo"
+			condition="bid = :XXXbid
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_SOG_BIB_countFrequenzaPerBid"
+			condition="fl_canc != 'S'
+					   AND bid = :XXXbid "/>
+
+		<filter name="TR_TIT_SOG_BIB_countTitoloSoggetto"
+			condition="fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_SOG_BIB_selectPerKeyEsistenza"
+			condition="bid = :XXXbid
+					   AND cid = :XXXcid
+					   AND fl_canc != 'S' "/>
+
+
+
+
+	</class>
+</hibernate-mapping>
+
+

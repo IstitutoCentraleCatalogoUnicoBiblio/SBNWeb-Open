@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_posti_sala" table="tbl_posti_sala" >
+		<meta attribute="class-description">
+			Posti in sala
+		</meta>
+		<id name="id_posti_sala" column="id_posti_sala" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_sale" cascade="lock" column="id_sale" class="it.iccu.sbn.polo.orm.servizi.Tbl_sale" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="num_posto" column="num_posto" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero del posto della sala
+			</meta>
+		</property>
+		<property name="occupato" column="occupato" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indica se il posto e' occupato o libero
+			</meta>
+		</property>
+		<property name="gruppo" column="gruppo" type="short" length="2" not-null="true" lazy="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+		<set name="Trl_posti_sala_utenti_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_posti_sala" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_posti_sala_utenti_biblioteca"/>
+		</set>
+
+		<set name="trl_posto_sala_categoria_mediazione" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_posto_sala" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_posto_sala_categoria_mediazione"/>
+		</set>
+	</class>
+</hibernate-mapping>

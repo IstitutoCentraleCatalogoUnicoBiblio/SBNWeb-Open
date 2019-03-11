@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Servizio bibliotecario</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0" width="100%" summary=summary>
+
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><A href="../GuidaSbnweb.htm">SBNWEB Guida 
+      Online</A></STRONG></STRONG></P>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></A></SPAN></SPAN>Acquisizioni - Scheda di dettaglio di 
+      un bilancio</H1>
+<ul>
+<li><A href="#Descrizione">Descrizione</A></li>
+<li><A href="#Ingresso">Punti di ingresso</A></li>
+<li><A href="#Prerequisiti">Prerequisiti</A></li>
+<li><A href="#ModuloDati">Modulo immissione dati</A></li>
+<ul>
+<li><A href="#Canali">Area canali</A></li>
+<li><A href="#Filtri">Area filtri</A></li><li><A href="#Default">Valori di default</A></li>
+<li><A href="#Azioni">Azioni utente</A></LI></UL>
+<li><A href="#Controlli">Controlli del sistema</A><br></LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></A></SPAN></SPAN>Descrizione</H2>
+La funzione consente all'utente bibliotecario esaminare il dettaglio dell'elemento selezionato dalla <a href="SinteticaBilanci.htm">Sintetica Bilanci</a>. 
+Esso consente in particolare:
+<ul>
+<li>La prospettazione dei bilanci su 
+        pagine successive rendendo disponibili le opzioni di scorrimento in 
+        avanti o indietro, se l'utente ha effettuato una selezione multipla. 
+</li>        
+<li>La modifica (al bibliotecario che ha un profilo 
+        utente abilitato alla modifica) delle informazioni 
+        prospettate, rendendo editabili tutti i campi della pagina prospettata, 
+        attivando ulteriori azioni e controlli del sistema per la variazione e 
+        registrazione delle modifiche. </LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></A></SPAN></SPAN><strong>Punti di ingresso </STRONG></H2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Bilancio-&gt;<A href="RicercaBilanci.htm">Ricerca bilanci</A>-&gt;<A href="SinteticaBilanci.htm">Sintetica bilanci</A>-&gt;Bottone <strong>'Esamina'</STRONG>' 
+</li>        
+<li>Barra di navigazione </li>
+<li>Lista di supporto bilanci</li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></A></SPAN></SPAN>Prerequisiti</H2>
+<ul>
+	<li>Il bibliotecario deve avere superato con 
+        successo l'autenticazione e l'abilitazione alla funzione </LI></UL>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></A></SPAN></SPAN><span class="Stile3 style8">Modulo immissione dati</SPAN></H2>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/DettaglioBilancio.gif"></P>
+<p>Di seguito viene descritto il contenuto della schermata<em>:</EM></P>
+<ul>
+<li>Codice Bibl.</li>        
+<li>Esercizio: anno di esercizio del capitolo di bilancio</li> 
+<li>Capitolo: numero di capitolo di Bilancio</li> 
+<li>Budget : budget iniziale sul capitolo</li>
+<li>Tabella: riporta la lista delle righe di impegno. Tale lista presenta per ciascuna riga le seguenti informazioni:</li>
+   <ul>
+	<li>Numero dell'impegno. Valori ammessi: 1=monografie e periodici non in abbonamento; 2=periodici in abbonamento; 3=collane; 4 =altre spese</li>
+	<li>Budget. Stanziamento iniziale attribuito all'impegno</li>
+	<li>Impegnato. Dato calcolato da sistema riportante la somma dei prezzi degli ordini </li>
+	<li>Impegnato da fatturare. Dato calcolato da sistema riportante la differenza fra l'impegnato e il fatturato</li>
+	<li>Acquisito. Dato calcolato da sistema riportante la somma dei prezzi reali degli inventari legati agli ordini</li>
+	<li>Fatturato. Dato calcolato da sistema riportante la somma degli importi delle fatture controllate</li>
+	<li>Pagato. Dato calcolato da sistema riportante la somma degli importi delle fatture pagate</li>
+	<li>disponibilità di cassa. Dato calcolato da sistema riportante la differenza tra il budget e il pagato</li>  
+	<li>disponibilità di competenza rispetto all'impegnato. Dato calcolato da sistema riportante la differenza tra il budget e l'impegnato</li>
+	<li>disponibilità di competenza rispetto all'acquisito. Dato calcolato da sistema riportante la differenza tra il budget e l'acquisito</li>
+	<li>Campo check (per consentire la selezione dell'elemento da cancellare)</li>
+	</ul>
+</ul>
+
+
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li>Bottone '&lt;': consente lo scorrimento in indietro delle pagine di dettaglio risultanti dalla selezione multipla effettuata dalla sintetica (assente per selezione singola)</li>
+<li>Bottone '&gt;': consente lo scorrimento in avanti delle pagine di dettaglio risultanti dalla selezione multipla effettuata nella sintetica (assente per selezione singola)</li> 
+<li>Bottone 'Salva': effettua la validazione delle informazioni immesse, conferma le modifiche effettuate e le registra a sistema</li> 
+<li>Bottone 'Ripristina': consente di annullare tutte le modifiche effettuate sulla pagina prima del "Salva", recuperando le informazioni registrate in base dati. </li> 
+<li>Bottone 'Cancella': elimina l'intero capitolo di bilancio</li>		
+<li>Bottone 'Ins. riga': inserisce una riga vuota nella tabella degli impegni con i campi di input attivi. I campi editabili sono num. Impegno e Budget.
+<li>Bottone 'Canc. riga': cancella la riga selezionata della tabella degli impegni
+<li>Bottone 'Indietro': consente l'abbandono della pagina visualizzata e il ritorno a quella di livello superiore.    
+</ul>
+
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li><u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+<li>A seconda delle abilitazioni attribuite dal sistema al bibliotecario, dinamicamente le azioni si rendono disponibili all'utente.</li>
+<li>Il sistema segnala il superamento del budget  sommando i budget delle righe di impegno.</li>
+<li>Il sistema segnala la duplicazione del tipo di impegno.</li>
+<li>Il sistema segnala l'obbligatorietà della presenza di almeno un riga di impegno.</li>
+<li>La cancellazione del bilancio viene inibita e segnalata se esistono legami con altri oggetti.</li>
+
+</ul>
+
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY></HTML>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" table="tbp_esemplare_fascicolo" schema="sbnweb" >
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_ese_fascicolo" column="id_ese_fascicolo" type="integer" unsaved-value="0">
+			<generator class="identity" />
+		</id>
+
+		<version name="ts_var" column="ts_var" type="timestamp">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</version>
+
+		<many-to-one name="fascicolo" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" not-null="true">
+			<column name="bid"/>
+			<column name="fid"/>
+		</many-to-one>
+
+		<many-to-one name="inventario" cascade="lock" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" not-null="false" lazy="proxy" access="field">
+			<column name="cd_serie" />
+			<column name="cd_bib_inv" />
+			<column name="cd_polo_inv" />
+			<column name="cd_inven" />
+		</many-to-one>
+
+		<many-to-one name="ordine" column="id_ordine" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" not-null="false" />
+
+		<property name="cd_bib_abb" column="cd_bib_abb" type="string" length="3" not-null="false" />
+		<property name="data_arrivo" column="data_arrivo" type="date" not-null="false" />
+		<property name="grp_fasc" column="grp_fasc" type="integer" not-null="false" />
+		<property name="note" column="note" type="string" length="240" not-null="false" />
+		<property name="cd_no_disp" column="cd_no_disp" type="character" length="1" not-null="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

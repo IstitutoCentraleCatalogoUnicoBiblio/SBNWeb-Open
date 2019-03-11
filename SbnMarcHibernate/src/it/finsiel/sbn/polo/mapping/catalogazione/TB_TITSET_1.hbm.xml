@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_titset_1" polymorphism="explicit" table="TB_TITSET_1" lazy="false">
+		<id name="BID" column="BID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="S105_TP_TESTO_LETTERARIO" column="S105_TP_TESTO_LETTERARIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S125_INDICATORE_TESTO" column="S125_INDICATORE_TESTO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S140_TP_TESTO_LETTERARIO" column="S140_TP_TESTO_LETTERARIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="S181_TP_FORMA_CONTENUTO_1" column="S181_TP_FORMA_CONTENUTO_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_TIPO_CONTENUTO_1" column="S181_CD_TIPO_CONTENUTO_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_MOVIMENTO_1" column="S181_CD_MOVIMENTO_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_DIMENSIONE_1" column="S181_CD_DIMENSIONE_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_SENSORIALE_1_1" column="S181_CD_SENSORIALE_1_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_SENSORIALE_2_1" column="S181_CD_SENSORIALE_2_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_SENSORIALE_3_1" column="S181_CD_SENSORIALE_3_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_TP_FORMA_CONTENUTO_2" column="S181_TP_FORMA_CONTENUTO_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_TIPO_CONTENUTO_2" column="S181_CD_TIPO_CONTENUTO_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_MOVIMENTO_2" column="S181_CD_MOVIMENTO_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_DIMENSIONE_2" column="S181_CD_DIMENSIONE_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_SENSORIALE_1_2" column="S181_CD_SENSORIALE_1_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_SENSORIALE_2_2" column="S181_CD_SENSORIALE_2_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S181_CD_SENSORIALE_3_2" column="S181_CD_SENSORIALE_3_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S182_TP_MEDIAZIONE_1" column="S182_TP_MEDIAZIONE_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="S182_TP_MEDIAZIONE_2" column="S182_TP_MEDIAZIONE_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+
+		<property name="S183_TP_SUPPORTO_1" column="S183_TP_SUPPORTO_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="S183_TP_SUPPORTO_2" column="S183_TP_SUPPORTO_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="S210_IND_PUBBLICATO" column="S210_IND_PUBBLICATO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_TITSET_1_selectPerKey"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+
+	</class>
+</hibernate-mapping>

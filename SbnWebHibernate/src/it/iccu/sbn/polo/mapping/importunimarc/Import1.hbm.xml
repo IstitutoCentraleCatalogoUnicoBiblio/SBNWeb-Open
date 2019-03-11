@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Licensee: almaviva License Type: Purchased -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.importunimarc.Import1" table="import1"
+		schema="sbnweb">
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="id_input" column="id_input" type="string"
+			length="30" not-null="false" lazy="false" />
+		<property name="leader" column="leader" type="string" length="24"
+			not-null="false" lazy="false" />
+		<property name="tag" column="tag" type="string" length="3"
+			not-null="false" lazy="false" />
+		<property name="indicatore1" column="indicatore1" type="character"
+			not-null="false" lazy="false" />
+		<property name="indicatore2" column="indicatore2" type="character"
+			not-null="false" lazy="false" />
+		<property name="id_link" column="id_link" type="string"
+			length="30" not-null="false" lazy="false" />
+		<property name="dati" column="dati" type="string" not-null="false"
+			lazy="false" />
+		<property name="nr_richiesta" column="nr_richiesta" type="integer"
+			not-null="false" lazy="false" />
+
+		<property name="stato_id_input" column="stato_id_input" type="character"
+			not-null="false" lazy="false" />
+		<property name="stato_tag" column="stato_tag" type="character"
+			not-null="false" lazy="false" />
+		<property name="id_batch" column="id_batch" type="integer"
+			not-null="false" lazy="false" />
+
+	</class>
+</hibernate-mapping>

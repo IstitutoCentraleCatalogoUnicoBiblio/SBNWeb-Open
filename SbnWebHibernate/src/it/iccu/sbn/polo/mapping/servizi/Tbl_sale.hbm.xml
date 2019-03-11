@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_sale" table="tbl_sale" >
+		<meta attribute="class-description">
+			Sale
+		</meta>
+		<id name="id_sale" column="id_sale" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="cod_sala" column="cod_sala" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della sala
+			</meta>
+		</property>
+		<property name="descr" column="descr" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione della sala
+			</meta>
+		</property>
+		<property name="num_max_posti" column="num_max_posti" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di posti disponibili
+			</meta>
+		</property>
+		<property name="num_prg_posti" column="num_prg_posti" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero dei posti occupati in sala
+			</meta>
+		</property>
+		<property name="durata_fascia" column="durata_fascia" type="short" not-null="true" lazy="false" />
+		<property name="num_max_fasce_prenot" column="num_max_fasce_prenot" type="short" not-null="true" lazy="false" />
+		<property name="num_max_utenti_per_prenot" column="num_max_utenti_per_prenot" type="short" not-null="true" lazy="false" />
+		<property name="fl_prenot_remoto" column="fl_prenot_remoto" type="character" not-null="true" lazy="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+		<set name="Tbl_posti_sala" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_sale" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_posti_sala"/>
+		</set>
+
+		<set name="calendari" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_sala" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_modello_calendario"/>
+		</set>
+	</class>
+</hibernate-mapping>

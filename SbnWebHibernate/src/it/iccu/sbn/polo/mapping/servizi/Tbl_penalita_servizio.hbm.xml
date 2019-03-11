@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_penalita_servizio" table="tbl_penalita_servizio" >
+		<meta attribute="class-description">
+			Penalit&#224; servizio
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id column="id_servizio" type="integer">
+			<generator class="foreign">
+				<param name="property">id_servizio</param>
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<one-to-one name="id_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_servizio" cascade="all" constrained="true"/>
+		<property name="gg_sosp" column="gg_sosp" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di giorni di sospensione, tale numero e' fisso ed e' un valore, puo' essere omesso nel caso in cui venga inserito il coefficente di sospensione
+			</meta>
+		</property>
+		<property name="coeff_sosp" column="coeff_sosp" type="big_decimal" precision="2" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				coefficiente per cui deve essere moltiplicato il numero dei giorni di ritardo. tale attributo non e' valorizzato nel caso in cui sia valorizzato l'attributo "gg sospensione"
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

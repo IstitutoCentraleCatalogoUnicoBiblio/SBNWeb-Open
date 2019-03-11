@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_dati_richiesta_ill" table="tbl_dati_richiesta_ill" >
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_dati_richiesta" column="id_dati_richiesta" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+
+		<many-to-one name="richiesta" column="cod_rich_serv" class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio" unique="false" not-null="false" />
+		<many-to-one name="documento" column="id_documento" class="it.iccu.sbn.polo.orm.servizi.Tbl_documenti_lettori" unique="false" not-null="false" />
+
+		<many-to-one name="inventario" cascade="lock" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" not-null="false" lazy="proxy" access="field">
+			<column name="cd_serie" />
+			<column name="cd_bib_inv" />
+			<column name="cd_polo_inv" />
+			<column name="cd_inven" />
+		</many-to-one>
+
+		<property name="transactionId" column="transaction_id" type="long" not-null="true" />
+		<property name="requesterId" column="requester_id" type="string" length="12" not-null="true" />
+		<property name="responderId" column="responder_id" type="string" length="12" not-null="true" />
+		<property name="clientId" column="client_id" type="string" length="20" not-null="false" />
+
+		<property name="fl_ruolo" column="fl_ruolo" type="character" length="1" not-null="false" />
+		<property name="data_inizio" column="data_inizio" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="data_fine" column="data_fine" type="timestamp" length="8" not-null="false" lazy="false"/>
+
+		<property name="cd_stato" column="cd_stato" type="string" length="5" not-null="false" />
+		<property name="cd_servizio" column="cd_servizio" type="string" length="2" not-null="false" />
+
+		<property name="clientName" column="client_name" type="string" length="160" not-null="false" />
+		<property name="client_email" column="client_email" type="string" length="80" not-null="false" />
+
+		<property name="requester_email" column="requester_email" type="string" length="80" not-null="false" />
+		<property name="via" column="via" type="string" length="160" not-null="false" />
+		<property name="comune" column="comune" type="string" length="160" not-null="false" />
+		<property name="prov" column="prov" type="string" length="60" not-null="false" />
+		<property name="cap" column="cap" type="string" length="7" not-null="false" />
+		<property name="cd_paese" column="cd_paese" type="string" length="2" not-null="false" />
+
+		<property name="dt_data_desiderata" column="dt_data_desiderata" type="date" not-null="false" />
+		<property name="dt_data_massima" column="dt_data_massima" type="date" not-null="false" />
+		<property name="dt_data_scadenza" column="dt_data_scadenza" type="date" not-null="false" />
+
+		<property name="cod_erog" column="cod_erog" type="string" length="2" not-null="false" />
+		<property name="cd_supporto" column="cd_supporto" type="string" length="2" not-null="false" />
+		<property name="cd_valuta" column="cd_valuta" type="string" length="3" not-null="false" />
+		<property name="importo" column="importo" type="big_decimal" precision="12" scale="3" not-null="false" />
+		<property name="costo_max" column="costo_max" type="big_decimal" precision="12" scale="3" not-null="false" />
+		<property name="cod_rich_serv_old" column="cod_rich_serv_old" type="long" not-null="false" />
+
+		<property name="ts_last_cambio_stato" column="ts_last_cambio_stato" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="biblioteche" column="biblioteche" type="string" not-null="false" />
+
+		<property name="intervallo_copia" column="intervallo_copia" type="string" length="30" not-null="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+		<set name="messaggio" lazy="true" cascade="save-update,lock,delete" inverse="true" order-by="data_messaggio desc">
+			<key column="id_dati_richiesta" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_messaggio"/>
+		</set>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<project name="xdocletBuild" default="ejbdoclet" basedir=".">
+
+   <!-- Init -->
+   <target name="init">
+      <property file="build.properties"/>
+
+      <property name="ejb.dd.dir" value="${ejb.project.dir}/${ejb.module.src}/META-INF"/>
+      <property name="xdoclet.force" value="true"/>
+      <property name="container.type" value="ejb-jar"/>
+
+      <path id="project.class.path">
+        <pathelement location="${ejb.project.dir}/${ejb.bin.dir}" />
+        <fileset dir="${xdoclet.home}">
+            	<include name="**/*.jar"/>
+        </fileset>
+        <pathelement path="${java.class.path}" />
+     </path>
+
+
+   </target>
+
+   <!-- Run EJBDoclet -->
+   <target name="ejbdoclet" depends="init">
+
+    <taskdef name="ejbdoclet" classname="xdoclet.modules.ejb.EjbDocletTask">
+		<classpath refid="project.class.path"/>
+	</taskdef>
+
+
+   	<ejbdoclet
+            destdir="${ejb.project.dir}/${ejb.module.gen}"
+            mergedir="${ejb.dd.dir}"
+            excludedtags="@version,@author,@todo"
+            addedtags="@wtp generated"
+            ejbspec="${ejb.spec.version}"
+            force="${xdoclet.force}"
+            verbose="true" >
+
+
+
+   		<!-- BEANS START -->
+   		<fileset dir="${ejb.project.dir}/${ejb.module.src}">
+   			<include name="**/ejb/**/*Bean.java" />
+<!--
+   			<include name="**/amministrazione/*Bean.java" />
+   			<include name="**/bibliografica/*Bean.java" />
+   			<include name="**/documentofisico/*Bean.java" />
+   			<include name="**/semantica/*Bean.java" />
+-->
+   		</fileset>
+		<!-- BEANS END -->
+   		<!--
+        <packageSubstitution packages="ejb" substituteWith="interfaces"/>
+		-->
+   		<deploymentdescriptor
+   			useIds="true"
+   			displayname="${ejb.dd.displayname}"
+   			description="${ejb.dd.description}"
+   			validatexml="false"
+   			mergedir="${ejb.dd.dir}"
+   			destdir="${ejb.dd.dir}" />
+   		<remoteinterface/>
+   		<homeinterface/>
+   		<localinterface  />
+   		<localhomeinterface  />
+
+   		<utilobject
+   			cacheHomes="true"
+   			includeGUID="true"
+   			kind="physical" />
+		<dataobject  />
+
+   		<dao  />
+   		<valueobject  />
+   		<entitypk  />
+   		<entitycmp  />
+   		<entitybmp  />
+
+   		<session />
+   		<mdb  />
+   		<jboss
+   			version="4.0"
+   			xmlencoding="UTF-8"
+   			validatexml="false"
+   			mergedir="${ejb.dd.dir}"
+   			preferredrelationmapping="relation-table"
+   			destdir="${ejb.dd.dir}" />
+
+   	</ejbdoclet>
+   </target>
+
+</project>

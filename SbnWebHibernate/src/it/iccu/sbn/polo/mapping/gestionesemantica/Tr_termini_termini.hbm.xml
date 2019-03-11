@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.gestionesemantica.Tr_termini_termini" table="tr_termini_termini" >
+		<meta attribute="class-description">
+			COLLEGAMENTI TRA DESCRITTORI DI THESAURO (TPSCDT))
+		</meta>
+		<composite-id>
+			<key-many-to-one name="Did_base" column="did_base" class="it.iccu.sbn.polo.orm.gestionesemantica.Tb_termine_thesauro">
+			</key-many-to-one>
+			<key-many-to-one name="Did_coll" column="did_coll" class="it.iccu.sbn.polo.orm.gestionesemantica.Tb_termine_thesauro">
+			</key-many-to-one>
+		</composite-id>
+		<property name="nota_termini_termini" column="nota_termini_termini" type="string" length="240" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note al legame
+			</meta>
+		</property>
+		<property name="tipo_coll" column="tipo_coll" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice legame tra descrittori
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

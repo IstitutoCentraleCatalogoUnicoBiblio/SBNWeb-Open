@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_documenti_lettori" table="tbl_documenti_lettori" >
+		<meta attribute="class-description">
+			Documenti inseriti dai lettori
+		</meta>
+		<id name="id_documenti_lettore" column="id_documenti_lettore" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="tipo_doc_lett" column="tipo_doc_lett" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia del documento lettore
+			</meta>
+		</property>
+		<property name="cod_doc_lett" column="cod_doc_lett" type="long" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del documento lettore
+			</meta>
+		</property>
+		<many-to-one name="id_utenti" cascade="lock" column="id_utenti" class="it.iccu.sbn.polo.orm.servizi.Tbl_utenti" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="titolo" column="titolo" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				titolo proprio
+			</meta>
+		</property>
+		<property name="luogo_edizione" column="luogo_edizione" type="string" length="30" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				luogo di edizione
+			</meta>
+		</property>
+		<property name="editore" column="editore" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				editore
+			</meta>
+		</property>
+		<property name="anno_edizione" column="anno_edizione" type="big_decimal" precision="4" scale="0" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno di edizione
+			</meta>
+		</property>
+		<property name="autore" column="autore" type="string" length="160" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				primo autore
+			</meta>
+		</property>
+		<property name="num_volume" column="num_volume" type="string" length="30" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del volume della monografia
+			</meta>
+		</property>
+		<property name="annata" column="annata" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno descrittivo dell'abbonamento
+			</meta>
+		</property>
+		<property name="tipo_data" column="tipo_data" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di data
+			</meta>
+		</property>
+		<property name="prima_data" column="prima_data" type="big_decimal" precision="4" scale="0" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				prima data
+			</meta>
+		</property>
+		<property name="seconda_data" column="seconda_data" type="big_decimal" precision="4" scale="0" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				seconda data
+			</meta>
+		</property>
+		<property name="stato_catal" column="stato_catal" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice dello stato di catalogazione
+			</meta>
+		</property>
+		<property name="natura" column="natura" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della natura bibliografica
+			</meta>
+		</property>
+		<property name="paese" column="paese" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+		<property name="lingua" column="lingua" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della lingua
+			</meta>
+		</property>
+		<property name="fonte" column="fonte" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia di riproduzione di un documento
+			</meta>
+		</property>
+		<property name="stato_sugg" column="stato_sugg" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				stato del suggerimento ("w" = attesa di risposta, "a" = accettato, "r" = rifiutato, "o" = ordinato)
+			</meta>
+		</property>
+		<property name="bid" column="bid" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'oggetto bibliografico
+			</meta>
+		</property>
+		<property name="data_sugg_lett" column="data_sugg_lett" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data di registrazione del suggerimento
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="160" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note relative al suggerimento dato dal lettore
+			</meta>
+		</property>
+		<property name="msg_lettore" column="msg_lettore" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				messaggio per il lettore relativo al suggerimento
+			</meta>
+		</property>
+		<property name="segnatura" column="segnatura" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di segnatura (campo obbligatorio per tipo_doc_lett=p)
+			</meta>
+		</property>
+		<property name="ord_segnatura" column="ord_segnatura" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="cod_bib_inv" column="cod_bib_inv" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca che possiede il documento richiesto
+			</meta>
+		</property>
+		<property name="cod_serie" column="cod_serie" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della serie inventariale del documento richiesto
+			</meta>
+		</property>
+		<property name="cod_inven" column="cod_inven" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero d'inventario del documento richiesto
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Tbl_richiesta_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_documenti_lettore" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio"/>
+		</set>
+		<set name="Tbl_esemplare_documento_lettore" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_documenti_lettore" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_esemplare_documento_lettore"/>
+		</set>
+
+		<property name="cd_no_disp" column="cd_no_disp" type="string" length="2" not-null="false" lazy="false" />
+		<property name="cd_catfrui" column="cd_catfrui" type="string" length="2" not-null="false" lazy="false" />
+		<property name="denom_biblioteca_doc" column="denom_biblioteca_doc" type="string" length="160" not-null="false" lazy="false" />
+
+		<property name="tp_numero_std" column="tp_numero_std" type="character" length="1" not-null="false" />
+		<property name="numero_std" column="numero_std"  type="string" length="25" not-null="false" />
+		<property name="biblioteche" column="biblioteche"  type="string" not-null="false" />
+		<property name="tp_record_uni" column="tp_record_uni" type="character" length="1" not-null="false" />
+
+		<property name="ente_curatore" column="ente_curatore" type="string" length="50" not-null="false" />
+		<property name="fa_parte" column="fa_parte" type="string" length="50" not-null="false" />
+		<property name="fascicolo" column="fascicolo" type="string" length="50" not-null="false" />
+		<property name="data_pubb" column="data_pubb" type="string" length="20" not-null="false" />
+		<property name="autore_articolo" column="autore_articolo" type="string" length="50" not-null="false" />
+		<property name="titolo_articolo" column="titolo_articolo" type="string" length="50" not-null="false" />
+		<property name="pagine" column="pagine" type="string" length="50" not-null="false" />
+		<property name="fonte_rif" column="fonte_rif" type="string" length="50" not-null="false" />
+
+	</class>
+</hibernate-mapping>

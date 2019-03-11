@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_codici" polymorphism="explicit" table="TB_CODICI" lazy="false">
+
+		<composite-id>
+			<key-property name="TP_TABELLA" column="TP_TABELLA" type="string"/>
+			<key-property name="CD_TABELLA" column="CD_TABELLA" type="string"/>
+		</composite-id>
+		<property name="DS_TABELLA" column="DS_TABELLA" type="string" length="160" not-null="true"/>
+		<property name="CD_UNIMARC" column="CD_UNIMARC" type="string" length="16" not-null="false"/>
+		<property name="CD_MARC_21" column="CD_MARC_21" type="string" length="16" not-null="false"/>
+		<property name="TP_MATERIALE" column="TP_MATERIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="DT_FINE_VALIDITA" column="DT_FINE_VALIDITA" type="date" not-null="false"/>
+		<property name="ds_cdsbn_ulteriore" column="ds_cdsbn_ulteriore" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Ulteriore decrizione associata al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg1" column="cd_flg1" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Primo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg2" column="cd_flg2" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Secondo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg3" column="cd_flg3" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Terzo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg4" column="cd_flg4" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Quarto eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg5" column="cd_flg5" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Quinto eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg6" column="cd_flg6" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Sesto eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg7" column="cd_flg7" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Settimo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg8" column="cd_flg8" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Ottavo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg9" column="cd_flg9" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Nono eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg10" column="cd_flg10" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Decimo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg11" column="cd_flg11" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Undicesimo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

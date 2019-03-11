@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<sbn>
+	<keys>
+		<!-- COMBINATI MAIUSCOLI -->
+
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA ACCENTO GRAVE">00C0</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA ACCENTO ACUTO">00C1</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA ACCENTO CIRCONFLESSO">00C2</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON TILDE">00C3</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON LUNGA SOPRASCRITTA">0100</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON BREVE SOPRASCRITTA">0102</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON PUNTO SOPRASCRITTO">0226</key>
+
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON DIERESI">00C4</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON UMLAUT">00C4</key>
+
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON CIRCOLETTO SOPRASCRITTO">00C5</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON HACEK">01CD</key>
+		<key category="Combinati Maiuscoli" ordkey="A" name="A MAIUSCOLA CON GANCIO A DESTRA">0104</key>
+		<key category="Combinati Maiuscoli" ordkey="C" name="C MAIUSCOLA CON ACCENTO ACUTO">0106</key>
+		<key category="Combinati Maiuscoli" ordkey="C" name="C MAIUSCOLA CON ACCENTO CIRCONFLESSO">0108</key>
+		<key category="Combinati Maiuscoli" ordkey="C" name="C MAIUSCOLA CON PUNTO SOPRASCRITTO">010A</key>
+		<key category="Combinati Maiuscoli" ordkey="C" name="C MAIUSCOLA CON HACEK">010C</key>
+		<key category="Combinati Maiuscoli" ordkey="C" name="C MAIUSCOLA CON CEDIGLIA">00C7</key>
+		<key category="Combinati Maiuscoli" ordkey="D" name="D MAIUSCOLA CON HACEK">010E</key>
+		<key category="Combinati Maiuscoli" ordkey="D" name="D MAIUSCOLA CON SOTTOLINEATURA">1E0E</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON ACCENTO GRAVE">00C8</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON ACCENTO ACUTO">00C9</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON ACCENTO CIRCONFLESSO">00CA</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON LUNGA SOPRASCRITTA">0112</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON BREVE SOPRASCRITTA">0114</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON PUNTO SOPRASCRITTO">0116</key>
+
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON DIERESI">00CB</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON UMLAUT">00CB</key>
+
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON HACEK">011A</key>
+		<key category="Combinati Maiuscoli" ordkey="E" name="E MAIUSCOLA CON GANCIO A DESTRA">0118</key>
+		<key category="Combinati Maiuscoli" ordkey="F" name="F MAIUSCOLA CON PUNTO SOPRASCRITTO">1E1E</key>
+		<key category="Combinati Maiuscoli" ordkey="G" name="G MAIUSCOLA CON ACCENTO CIRCONFLESSO">011C</key>
+		<key category="Combinati Maiuscoli" ordkey="G" name="G MAIUSCOLA CON LUNGA SOPRASCRITTA">1E20</key>
+		<key category="Combinati Maiuscoli" ordkey="G" name="G MAIUSCOLA CON BREVE SOPRASCRITTA">011E</key>
+		<key category="Combinati Maiuscoli" ordkey="G" name="G MAIUSCOLA CON PUNTO SOPRASCRITTO">0120</key>
+		<key category="Combinati Maiuscoli" ordkey="G" name="G MAIUSCOLA CON HACEK">01E6</key>
+		<key category="Combinati Maiuscoli" ordkey="G" name="G MAIUSCOLA CON CEDIGLIA">0122</key>
+		<key category="Combinati Maiuscoli" ordkey="H" name="H MAIUSCOLA CON ACCENTO CIRCONFLESSO">0124</key>
+		<key category="Combinati Maiuscoli" ordkey="H" name="H MAIUSCOLA CON BREVE SOTTOSCRITTA">1E2A</key>
+		<key category="Combinati Maiuscoli" ordkey="H" name="H MAIUSCOLA CON PUNTO SOTTOSCRITTO">1E24</key>
+		<!--<key category="Combinati Maiuscoli" ordkey="H" name="H MAIUSCOLA CON SOTTOLINEATURA">9948</key>	-->
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON ACCENTO GRAVE">00CC</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON ACCENTO ACUTO">00CD</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON ACCENTO CIRCONFLESSO">00CE</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON TILDE">0128</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON LUNGA SOPRASCRITTA">012A</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON BREVE SOPRASCRITTA">012C</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON PUNTO SOPRASCRITTO">0130</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON DIERESI">00CF</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON HACEK">01CF</key>
+		<key category="Combinati Maiuscoli" ordkey="I" name="I MAIUSCOLA CON GANCIO A DESTRA">012E</key>
+		<key category="Combinati Maiuscoli" ordkey="J" name="J MAIUSCOLA CON ACCENTO CIRCONFLESSO">0134</key>
+		<key category="Combinati Maiuscoli" ordkey="K" name="K MAIUSCOLA CON ACCENTO ACUTO">1E30</key>
+		<key category="Combinati Maiuscoli" ordkey="K" name="K MAIUSCOLA CON HACEK">01E8</key>
+		<key category="Combinati Maiuscoli" ordkey="K" name="K MAIUSCOLA CON CEDIGLIA">0136</key>
+		<key category="Combinati Maiuscoli" ordkey="K" name="K MAIUSCOLA CON SOTTOLINEATURA">1E34</key>
+		<key category="Combinati Maiuscoli" ordkey="L" name="L MAIUSCOLA CON ACCENTO ACUTO">0139</key>
+		<key category="Combinati Maiuscoli" ordkey="L" name="L MAIUSCOLA CON HACEK">013D</key>
+		<key category="Combinati Maiuscoli" ordkey="L" name="L MAIUSCOLA CON CEDIGLIA">013B</key>
+		<key category="Combinati Maiuscoli" ordkey="M" name="M MAIUSCOLA CON ACCENTO ACUTO">1E3E</key>
+		<key category="Combinati Maiuscoli" ordkey="N" name="N MAIUSCOLA CON ACCENTO ACUTO">0143</key>
+		<key category="Combinati Maiuscoli" ordkey="N" name="N MAIUSCOLA CON TILDE">00D1</key>
+		<key category="Combinati Maiuscoli" ordkey="N" name="N MAIUSCOLA CON HACEK">0147</key>
+		<key category="Combinati Maiuscoli" ordkey="N" name="N MAIUSCOLA CON CEDIGLIA">0145</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON ACCENTO GRAVE">00D2</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON ACCENTO ACUTO">00D3</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON ACCENTO CIRCONFLESSO">00D4</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON TILDE">00D5</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON LUNGA SOPRASCRITTA">014C</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON BREVE SOPRASCRITTA">014E</key>
+
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON DIERESI">00D6</key>
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON UMLAUT">00D6</key>
+
+		<key category="Combinati Maiuscoli" ordkey="O" name="O MAIUSCOLA CON DOPPIO ACCENTO ACUTO">0150</key>
+		<key category="Combinati Maiuscoli" ordkey="P" name="P MAIUSCOLA CON ACCENTO ACUTO">1E54</key>
+		<key category="Combinati Maiuscoli" ordkey="R" name="R MAIUSCOLA CON ACCENTO ACUTO">0154</key>
+		<key category="Combinati Maiuscoli" ordkey="R" name="R MAIUSCOLA CON HACEK">0158</key>
+		<key category="Combinati Maiuscoli" ordkey="R" name="R MAIUSCOLA CON CEDIGLIA">0156</key>
+		<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON ACCENTO ACUTO">015A</key>
+		<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON ACCENTO CIRCONFLESSO">015C</key>
+		<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON HACEK">0160</key>
+		<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON CEDIGLIA">015E</key>
+		<!--<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON GANCIO A SINISTRA">9953</key>	-->
+		<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON VIRGOLA SOTTOSCRITTA">0218</key>
+		<key category="Combinati Maiuscoli" ordkey="S" name="S MAIUSCOLA CON PUNTO SOTTOSCRITTO">1E62</key>
+		<key category="Combinati Maiuscoli" ordkey="T" name="T MAIUSCOLA CON HACEK">0164</key>
+		<key category="Combinati Maiuscoli" ordkey="T" name="T MAIUSCOLA CON GANCIO A SINISTRA">01AC</key>
+		<key category="Combinati Maiuscoli" ordkey="T" name="T MAIUSCOLA CON PUNTO SOTTOSCRITTO">1E6C</key>
+		<key category="Combinati Maiuscoli" ordkey="T" name="T MAIUSCOLA CON SOTTOLINEATURA">1E6E</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON ACCENTO GRAVE">00D9</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON ACCENTO ACUTO">00DA</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON ACCENTO CIRCONFLESSO">00DB</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON TILDE">0168</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON LUNGA SOPRASCRITTA">016A</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON BREVE SOPRASCRITTA">016C</key>
+
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON DIERESI">00DC</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON UMLAUT">00DC</key>
+
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON CIRCOLETTO SOPRASCRITTO">016E</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON DOPPIO ACCENTO ACUTO">0170</key>
+		<key category="Combinati Maiuscoli" ordkey="U" name="U MAIUSCOLA CON GANCIO A DESTRA">0172</key>
+		<key category="Combinati Maiuscoli" ordkey="W" name="W MAIUSCOLA CON ACCENTO ACUTO">1E82</key>
+		<key category="Combinati Maiuscoli" ordkey="W" name="W MAIUSCOLA CON ACCENTO CIRCONFLESSO">0174</key>
+		<key category="Combinati Maiuscoli" ordkey="Y" name="Y MAIUSCOLA CON ACCENTO ACUTO">00DD</key>
+		<key category="Combinati Maiuscoli" ordkey="Y" name="Y MAIUSCOLA CON ACCENTO CIRCONFLESSO">0176</key>
+		<key category="Combinati Maiuscoli" ordkey="Y" name="Y MAIUSCOLA CON PUNTO SOPRASCRITTO">1E8E</key>
+
+		<key category="Combinati Maiuscoli" ordkey="Y" name="Y MAIUSCOLA CON DIERESI">0178</key>
+		<key category="Combinati Maiuscoli" ordkey="Y" name="Y MAIUSCOLA CON UMLAUT">0178</key>
+
+		<key category="Combinati Maiuscoli" ordkey="Z" name="Z MAIUSCOLA CON ACCENTO ACUTO">0179</key>
+		<key category="Combinati Maiuscoli" ordkey="Z" name="Z MAIUSCOLA CON PUNTO SOPRASCRITTO">017B</key>
+		<key category="Combinati Maiuscoli" ordkey="Z" name="Z MAIUSCOLA CON PUNTO SOTTOSCRITTO">1E92</key>
+		<key category="Combinati Maiuscoli" ordkey="Z" name="Z MAIUSCOLA CON HACEK">017D</key>
+		<key category="Combinati Maiuscoli" ordkey="Z" name="Z MAIUSCOLA CON SOTTOLINEATURA">1E94</key>
+
+		<!-- COMBINATI MINUSCOLI -->
+
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON ACCENTO GRAVE">00E0</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON ACENTO ACUTO">00E1</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON ACCENTO CIRCONFLESSO">00E2</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON TILDE">00E3</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON LUNGA SOPRASCRITTA">0101</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON BREVE SOPRASCRITTA">0103</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON PUNTO SOPRASCRITTO">0227</key>
+
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON DIERESI">00E4</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON UMLAUT">00E4</key>
+
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON CIRCOLETTO SOPRASCRITTO">00E5</key>
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON HACEK">01CE</key>
+		<!--<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON GANCIO A SINISTRA">9961</key> -->
+		<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON GANCIO A DESTRA">0105</key>
+		<!--<key category="Combinati Minuscoli" ordkey="A" name="A MINUSCOLA CON SOTTOLINEATURA">9861</key>	-->
+		<key category="Combinati Minuscoli" ordkey="C" name="C MINUSCOLA CON ACCENTO ACUTO">0107</key>
+		<key category="Combinati Minuscoli" ordkey="C" name="C MINUSCOLA CON ACCENTO CIRCONFLESSO">0109</key>
+		<key category="Combinati Minuscoli" ordkey="C" name="C MINUSCOLA CON PUNTO SOPRASCRITTO">010B</key>
+		<key category="Combinati Minuscoli" ordkey="C" name="C MINUSCOLA CON HACEK">010D</key>
+		<key category="Combinati Minuscoli" ordkey="C" name="C MINUSCOLA CON CEDIGLIA">00E7</key>
+		<!--<key category="Combinati Minuscoli" ordkey="D" name="D MINUSCOLA CON HACEK">010F</key> -->
+		<key category="Combinati Minuscoli" ordkey="D" name="D MINUSCOLA CON HACEK">010F</key>
+		<key category="Combinati Minuscoli" ordkey="D" name="D MINUSCOLA CON PUNTO SOTTOSCRITTO">1E0D</key>
+		<key category="Combinati Minuscoli" ordkey="D" name="D MINUSCOLA CON SOTTOLINEATURA">1E0F</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON ACCENTO GRAVE">00E8</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON ACCENTO ACUTO">00E9</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON ACCENTO CIRCONFLESSO">00EA</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON LUNGA SOPRASCRITTA">0113</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON BREVE SOPRASCRITTA">0115</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON PUNTO SOPRASCRITTO">0117</key>
+
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON CEDIGLIA">0229</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON DIERESI">00EB</key>
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON UMLAUT">00EB</key>
+
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON HACEK">011B</key>
+		<!--<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON GANCIO A SINISTRA">9965</key> -->
+		<key category="Combinati Minuscoli" ordkey="E" name="E MINUSCOLA CON GANCIO A DESTRA">0119</key>
+		<key category="Combinati Minuscoli" ordkey="F" name="F MINUSCOLA CON PUNTO SOPRASCRITTO">1E1F</key>
+		<key category="Combinati Minuscoli" ordkey="G" name="G MINUSCOLA CON ACCENTO ACUTO">01F5</key>
+		<key category="Combinati Minuscoli" ordkey="G" name="G MINUSCOLA CON ACCENTO CIRCONFLESSO">011D</key>
+		<key category="Combinati Minuscoli" ordkey="G" name="G MINUSCOLA CON LUNGA SOPRASCRITTA">1E21</key>
+		<key category="Combinati Minuscoli" ordkey="G" name="G MINUSCOLA CON BREVE SOPRASCRITTA">011F</key>
+		<key category="Combinati Minuscoli" ordkey="G" name="G MINUSCOLA CON PUNTO SOPRASCRITTO">0121</key>
+		<key category="Combinati Minuscoli" ordkey="G" name="G MINUSCOLA CON HACEK">01E7</key>
+		<key category="Combinati Minuscoli" ordkey="H" name="H MINUSCOLA CON ACCENTO CIRCONFLESSO">0125</key>
+		<key category="Combinati Minuscoli" ordkey="H" name="H MINUSCOLA CON BREVE SOTTOSCRITTA">1E2B</key>
+		<key category="Combinati Minuscoli" ordkey="H" name="H MINUSCOLA CON PUNTO SOTTOSCRITTO">1E25</key>
+		<key category="Combinati Minuscoli" ordkey="H" name="H MINUSCOLA CON SOTTOLINEATURA">1E96</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON ACCENTO GRAVE">00EC</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON ACCENTO ACUTO">00ED</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON ACCENTO CIRCONFLESSO">00EE</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON TILDE">0129</key>
+
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON LUNGA SOPRASCRITTA">012B</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON LUNGA SOPRASCRITTA-SBL">012B</key>
+
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON BREVE SOPRASCRITTA">012D</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON DIERESI">00EF</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON HACEK">01D0</key>
+		<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON GANCIO A DESTRA">012F</key>
+		<!--<key category="Combinati Minuscoli" ordkey="I" name="I MINUSCOLA CON SOTTOLINEATURA">9969</key>	-->
+		<key category="Combinati Minuscoli" ordkey="J" name="J MINUSCOLA CON ACCENTO CIRCONFLESSO">0135</key>
+		<key category="Combinati Minuscoli" ordkey="K" name="K MINUSCOLA CON ACCENTO ACUTO">1E31</key>
+		<key category="Combinati Minuscoli" ordkey="K" name="K MINUSCOLA CON HACEK">01E9</key>
+		<key category="Combinati Minuscoli" ordkey="K" name="K MINUSCOLA CON CEDIGLIA">0137</key>
+		<key category="Combinati Minuscoli" ordkey="K" name="K MINUSCOLA CON SOTTOLINEATURA">1E35</key>
+		<key category="Combinati Minuscoli" ordkey="L" name="L MINUSCOLA CON ACCENTO ACUTO">013A</key>
+
+		<!--<key category="Combinati Minuscoli" ordkey="L" name="L MINUSCOLA CON VIRGOLA SOPRASCRITTA DECENTRATA">E011</key> -->
+		<key category="Combinati Minuscoli" ordkey="L" name="L MINUSCOLA CON VIRGOLA SOPRASCRITTA DECENTRATA">013E</key>
+		<key category="Combinati Minuscoli" ordkey="L" name="L MINUSCOLA CON HACEK">013E</key>
+
+		<key category="Combinati Minuscoli" ordkey="L" name="L MINUSCOLA CON CEDIGLIA">013C</key>
+		<key category="Combinati Minuscoli" ordkey="M" name="M MINUSCOLA CON ACCENTO ACUTO">1E3F</key>
+		<key category="Combinati Minuscoli" ordkey="M" name="M MINUSCOLA CON PUNTO SOTTOSCRITTO">1E43</key>
+		<key category="Combinati Minuscoli" ordkey="N" name="N MINUSCOLA CON ACCENTO ACUTO">0144</key>
+		<key category="Combinati Minuscoli" ordkey="N" name="N MINUSCOLA CON TILDE">00F1</key>
+		<key category="Combinati Minuscoli" ordkey="N" name="N MINUSCOLA CON PUNTO SOPRASCRITTO">1E45</key>
+		<key category="Combinati Minuscoli" ordkey="N" name="N MINUSCOLA CON HACEK">0148</key>
+		<key category="Combinati Minuscoli" ordkey="N" name="N MINUSCOLA CON CEDIGLIA">0146</key>
+		<key category="Combinati Minuscoli" ordkey="N" name="N MINUSCOLA CON PUNTO SOTTOSCRITTO">1E47</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON ACCENTO GRAVE">00F2</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON ACCENTO ACUTO">00F3</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON ACCENTO CIRCONFLESSO">00F4</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="0 MINUSCOLA CON TILDE">00F5</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON LUNGA SOPRASCRITTA">014D</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON BREVE SOPRASCRITTA">014F</key>
+
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON DIERESI">00F6</key>
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON UMLAUT">00F6</key>
+
+		<key category="Combinati Minuscoli" ordkey="O" name="O MINUSCOLA CON DOPPIO ACCENTO ACUTO">0151</key>
+		<key category="Combinati Minuscoli" ordkey="P" name="P MINUSCOLA CON ACCENTO ACUTO">1E55</key>
+		<key category="Combinati Minuscoli" ordkey="R" name="R MINUSCOLA CON ACCENTO ACUTO">0155</key>
+		<key category="Combinati Minuscoli" ordkey="R" name="R MINUSCOLA CON HACEK">0159</key>
+		<key category="Combinati Minuscoli" ordkey="R" name="R MINUSCOLA CON CEDIGLIA">0157</key>
+		<key category="Combinati Minuscoli" ordkey="R" name="R MINUSCOLA CON PUNTO SOTTOSCRITTO">1E5B</key>
+		<key category="Combinati Minuscoli" ordkey="S" name="S MINUSCOLA CON ACCENTO ACUTO">015B</key>
+		<key category="Combinati Minuscoli" ordkey="S" name="S MINUSCOLA CON ACCENTO CIRCONFLESSO">015D</key>
+		<key category="Combinati Minuscoli" ordkey="S" name="S MINUSCOLA CON HACEK">0161</key>
+		<key category="Combinati Minuscoli" ordkey="S" name="S MINUSCOLA CON CEDIGLIA">015F</key>
+		<key category="Combinati Minuscoli" ordkey="S" name="S MINUSCOLA CON GANCIO A SINISTRA">0282</key>
+		<key category="Combinati Minuscoli" ordkey="S" name="S MINUSCOLA CON PUNTO SOTTOSCRITTO">1E63</key>
+		<!--<key category="Combinati Minuscoli" ordkey="T" name="T MINUSCOLA CON VIRGOLA SOPRASCRITTA DECENTRATA">0165</key> -->
+		<key category="Combinati Minuscoli" ordkey="T" name="T MINUSCOLA CON HACEK">0165</key>
+		<!--<key category="Combinati Minuscoli" ordkey="T" name="T MINUSCOLA CON GANCIO A SINISTRA">9979</key>	-->
+		<key category="Combinati Minuscoli" ordkey="T" name="T MINUSCOLA CON GANCIO A SINISTRA">01AB</key>
+		<key category="Combinati Minuscoli" ordkey="T" name="T MINUSCOLA CON PUNTO SOTTOSCRITTO">1E6D</key>
+		<key category="Combinati Minuscoli" ordkey="T" name="T MINUSCOLA CON SOTTOLINEATURA">1E6F</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON ACCENTO GRAVE">00F9</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON ACCENTO ACUTO">00FA</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON ACCENTO CIRCONFLESSO">00FB</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON TILDE">0169</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON LUNGA SOPRASCRITTA">016B</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON BREVE SOPRASCRITTA">016D</key>
+
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON DIERESI">00FC</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON UMLAUT">00FC</key>
+
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON CIRCOLETTO SOPRASCRITTO">016F</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON DOPPIO ACCENTO ACUTO">0171</key>
+		<key category="Combinati Minuscoli" ordkey="U" name="U MINUSCOLA CON GANCIO A DESTRA">0173</key>
+		<key category="Combinati Minuscoli" ordkey="W" name="W MINUSCOLA CON ACCENTO ACUTO">1E83</key>
+		<key category="Combinati Minuscoli" ordkey="W" name="W MINUSCOLA CON ACCENTO CIRCONFLESSO">0175</key>
+		<key category="Combinati Minuscoli" ordkey="Y" name="Y MINUSCOLA CON ACCENTO ACUTO">00FD</key>
+		<key category="Combinati Minuscoli" ordkey="Y" name="Y MINUSCOLA CON ACCENTO CIRCONFLESSO">0177</key>
+		<key category="Combinati Minuscoli" ordkey="Y" name="Y MINUSCOLA CON PUNTO SOPRASCRITTO">1E8F</key>
+
+		<key category="Combinati Minuscoli" ordkey="Y" name="Y MINUSCOLA CON DIERESI">00FF</key>
+		<key category="Combinati Minuscoli" ordkey="Y" name="Y MINUSCOLA CON UMLAUT">00FF</key>
+
+		<key category="Combinati Minuscoli" ordkey="Z" name="Z MINUSCOLA CON ACCENTO ACUTO">017A</key>
+		<key category="Combinati Minuscoli" ordkey="Z" name="Z MINUSCOLA CON PUNTO SOPRASCRITTO">017C</key>
+		<key category="Combinati Minuscoli" ordkey="Z" name="Z MINUSCOLA CON PUNTO SOTTOSCRITTO">1E93</key>
+		<key category="Combinati Minuscoli" ordkey="Z" name="Z MINUSCOLA CON HACEK">017E</key>
+		<key category="Combinati Minuscoli" ordkey="Z" name="Z MINUSCOLA CON SOTTOLINEATURA">1E95</key>
+
+		<!-- 5426 -->
+
+		<key category="5426" ordkey="" name="PUNTO ESCLAMATIVO ROVESCIATO">00A1</key>
+		<key category="5426" ordkey="," name="VIRGOLETTE SOTTO LINEA APERTE">201E</key>
+		<key category="5426" ordkey=" " name="STERLINA">00A3</key>
+		<key category="5426" ordkey=" " name="DOLLARO">0024</key>
+		<key category="5426" ordkey=" " name="YEN">00A5</key>
+		<!-- <key category="5426" ordkey=" " name="CROCE SEMPLICE">271D</key> -->
+		<key category="5426" ordkey=" " name="CROCE SEMPLICE">2020</key>
+		<key category="5426" ordkey="" name="PARAGRAFO">00A7</key>
+		<key category="5426" ordkey=" " name="PRIMO SOPRASCRITTO">00B9</key>
+		<key category="5426" ordkey=" 1" name="ESPONENTE 1">00B9</key>
+		<key category="5426" ordkey=" " name="SECONDO SOPRASCRITTO">00B2</key>
+		<key category="5426" ordkey=" 2" name="ESPONENTE 2">00B2</key>
+		<key category="5426" ordkey=" 3" name="ESPONENTE 3">00B3</key>
+		<key category="5426" ordkey="" name="VIRGOLETTA SOPRA LINEA APERTA">2018</key>
+		<key category="5426" ordkey="" name="VIRGOLETTE AD ANGOLO APERTE">00AB</key>
+		<key category="5426" ordkey="B" name="BEMOLLE">266D</key>
+		<key category="5426" ordkey="C" name="COPYRIGHT">00A9</key>
+		<key category="5426" ordkey="P" name="PHONOGRAPHE">2117</key>
+		<key category="5426" ordkey="R" name="MARCHIO REGISTRATO">00AE</key> <!-- R -->
+		<key category="5426" ordkey="TM" name="TRADE MARK">2122</key>  		 <!-- TM -->
+
+		<!-- <key category="5426" ordkey="" name="AIN">FEC9</key>  -->
+		<key category="5426" ordkey="" name="AIN">02BB</key>
+		<!-- <key category="5426" ordkey="" name="ALIF">FE84</key>  -->
+		<key category="5426" ordkey="" name="ALIF">02BC</key>
+		<key category="5426" ordkey="" name="VIRGOLETTE SOTTO LINEA APERTA">201A</key>
+		<!--<key category="5426" ordkey=" " name="CROCE DOPPIA">271F</key>	-->
+		<key category="5426" ordkey=" " name="CROCE DOPPIA">01C2</key>
+
+		<key category="5426" ordkey="X" name="PUNTO IN MEZZO CATALANO">00B7</key>
+		<!-- <key category="5426" ordkey="X" name="PUNTO IN MEZZO MATEMATICO">00B7</key> -->
+		<key category="5426" ordkey="X" name="PUNTO IN MEZZO MATEMATICO">2219</key>
+
+		<key category="5426" ordkey="" name="VIRGOLETTA SOPRA LINEA CHIUSA">2019</key>
+		<key category="5426" ordkey="" name="VIRGOLETTE AD ANGOLO CHIUSE">00BB</key>
+
+		<!-- almaviva5_20090408 #2798
+		<key category="5426" ordkey="" name="SEGNO DI DEBOLE MINUSCOLO">044C</key>
+		<key category="5426" ordkey="" name="SEGNO DI DEBOLE MAIUSCOLO">042C</key>
+		<key category="5426" ordkey="" name="SEGNO DI FORTE">044A</key>
+		-->
+		<key category="5426" ordkey="" name="SEGNO DI DEBOLE">02B9</key>
+		<key category="5426" ordkey="" name="SEGNO DI FORTE">02BA</key>
+
+		<key category="5426" ordkey="" name="PUNTO INTERROGATIVO ROVESCIATO">00BF</key>
+		<key category="5426" ordkey="AE" name="NESSO AE MAIUSCOLO">00C6</key>
+		<key category="5426" ordkey="D" name="D TAGLIATA MAIUSCOLA">0110</key>
+		<key category="5426" ordkey="IJ" name="IJ OLANDESE MAIUSCOLA">0132</key>
+		<key category="5426" ordkey="L" name="L TAGLIATA MAIUSCOLA">0141</key>
+		<key category="5426" ordkey="O" name="O TAGLIATA MAIUSCOLA">00D8</key>
+		<key category="5426" ordkey="OE" name="NESSO OE MAIUSCOLO">0152</key>
+		<key category="5426" ordkey="TH" name="THORN MAIUSCOLO">00DE</key>
+		<key category="5426" ordkey="AE" name="NESSO AE MINUSCOLO">00E6</key>
+		<key category="5426" ordkey="D" name="D TAGLIATA MINUSCOLA">0111</key>
+		<key category="5426" ordkey="D" name="ETH ISLANDESE">00F0</key>
+		<key category="5426" ordkey="I" name="I MINUSCOLA TURCA">0131</key>
+		<key category="5426" ordkey="IJ" name="IJ OLANDESE MINUSCOLA">0133</key>
+		<key category="5426" ordkey="L" name="L TAGLIATA MINUSCOLA">0142</key>
+		<key category="5426" ordkey="O" name="O TAGLIATA MINUSCOLA">00F8</key>
+		<key category="5426" ordkey="OE" name="NESSO OE MINUSCOLO">0153</key>
+		<key category="5426" ordkey="SS" name="SZ TEDESCO">00DF</key>
+		<key category="5426" ordkey="TH" name="THORN MINUSCOLO">00FE</key>
+
+		<!-- 6937 -->
+
+		<key category="6937" ordkey=" " name="CENT">00A2</key>
+		<key category="6937" ordkey=" " name="GRADO">00B0</key>
+		<key category="6937" ordkey=" " name="PIU MENO">00B1</key>
+		<key category="6937" ordkey="X" name="MOLTIPLICATO">00D7</key>
+
+		<key category="6937" ordkey="MM" name="MICRON">00B5</key>
+		<key category="6937" ordkey="" name="SEZIONE">00B6</key>
+		<!--<key category="6937" ordkey=" " name="DA A">99F7</key> -->
+		<key category="6937" ordkey=" " name="SIMBOLO DI DIVISIONE">00F7</key>
+		<!-- <key category="6937" ordkey=" " name="NOTA DI MUSICA">0669</key> -->
+		<key category="6937" ordkey=" " name="NOTA DI MUSICA">266A</key>
+		<key category="6937" ordkey="OHM" name="OHM">2126</key>
+		<key category="6937" ordkey="A" name="INDICATORE DI ORDINALE FEMMINILE">00AA</key>
+		<key category="6937" ordkey="H" name="H TAGLIATA MAIUSCOLA">0126</key>
+		<key category="6937" ordkey="L" name="L CON PUNTO MAIUSCOLA">013F</key>
+		<key category="6937" ordkey="O" name="INDICATORE DI ORDINALE MASCHILE">00BA</key>
+		<key category="6937" ordkey="T" name="T TAGLIATA MAIUSCOLA">0166</key>
+		<key category="6937" ordkey="N" name="ENG MAIUSCOLO">014A</key>
+		<key category="6937" ordkey="N" name="N CON APOSTROFO MINUSCOLA">0149</key>
+		<!--<key category="6937" ordkey="K" name="K RIDOTTA">996B</key>	-->
+		<key category="6937" ordkey="K" name="K RIDOTTA">0138</key>
+		<key category="6937" ordkey="H" name="H TAGLIATA MINUSCOLA">0127</key>
+		<key category="6937" ordkey="L" name="L CON PUNTO MINUSCOLA">0140</key>
+		<key category="6937" ordkey="T" name="T TAGLIATA MINUSCOLA">0167</key>
+		<key category="6937" ordkey="N" name="ENG MINUSCOLO">014B</key>
+
+		<!-- 5428 -->
+
+		<key category="5428" ordkey="A" name="ALFA MAIUSCOLA">0391</key>
+		<key category="5428" ordkey="B" name="BETA MAIUSCOLA">0392</key>
+		<key category="5428" ordkey="G" name="GAMMA MAIUSCOLA">0393</key>
+		<key category="5428" ordkey="D" name="DELA MAIUSCOLA">0394</key>
+		<key category="5428" ordkey="E" name="EPSILON MAIUSCOLA">0395</key>
+		<key category="5428" ordkey="6" name="STIGMA MAIUSCOLA">03DA</key>
+		<key category="5428" ordkey="6" name="DIGAMMA MAIUSCOLA">03DC</key>
+		<key category="5428" ordkey="Z" name="ZETA MAIUSCOLA">0396</key>
+		<key category="5428" ordkey="E" name="ETA MAIUSCOLA">0397</key>
+		<key category="5428" ordkey="TH" name="TETA MAIUSCOLA">0398</key>
+		<key category="5428" ordkey="I" name="IOTA MAIUSCOLA">0399</key>
+		<key category="5428" ordkey="K" name="KAPPA MAIUSCOLA">039A</key>
+		<key category="5428" ordkey="L" name="LAMBDA MAIUSCOLA">039B</key>
+		<key category="5428" ordkey="M" name="MI MAIUSCOLA">039C</key>
+		<key category="5428" ordkey="N" name="NI MAIUSCOLA">039D</key>
+		<key category="5428" ordkey="X" name="XI MAIUSCOLA">039E</key>
+		<key category="5428" ordkey="O" name="OMICRON MAIUSCOLA">039F</key>
+		<key category="5428" ordkey="P" name="PI GRECO MAIUSCOLA">03A0</key>
+		<!--<key category="5428" ordkey="90" name="KOPPA MAIUSCOLA">03D8</key> -->
+		<key category="5428" ordkey="90" name="KOPPA MAIUSCOLA GRECO ARCAICO">03D8</key>
+		<key category="5428" ordkey="R" name="RO MAIUSCOLA">03A1</key>
+		<key category="5428" ordkey="S" name="SIGMA MAIUSCOLA">03A3</key>
+		<key category="5428" ordkey="T" name="TAU MAIUSCOLA">03A4</key>
+		<key category="5428" ordkey="Y" name="UPSILON MAIUSCOLA">03A5</key>
+		<key category="5428" ordkey="PH" name="FI MAIUSCOLA">03A6</key>
+		<key category="5428" ordkey="CH" name="CHI MAIUSCOLA">03A7</key>
+		<key category="5428" ordkey="PS" name="PSI MAIUSCOLA">03A8</key>
+		<key category="5428" ordkey="O" name="OMEGA MAIUSCOLA">03A9</key>
+
+		<key category="5428" ordkey="900" name="SAMPI MAIUSCOLO">03E0</key>
+
+		<key category="5428" ordkey="A" name="ALFA MINUSCOLA">03B1</key>
+		<key category="5428" ordkey="B" name="BETA MINUSCOLA">03B2</key>
+		<key category="5428" ordkey="G" name="GAMMA MINUSCOLA">03B3</key>
+		<key category="5428" ordkey="D" name="DELTA MINUSCOLA">03B4</key>
+		<key category="5428" ordkey="E" name="EPSILON MINUSCOLA">03B5</key>
+		<key category="5428" ordkey="6" name="STIGMA MINUSCOLA">03DB</key>
+		<key category="5428" ordkey="6" name="DIGAMMA MINUSCOLA">03DD</key>
+		<key category="5428" ordkey="Z" name="ZETA MINUSCOLA">03B6</key>
+		<key category="5428" ordkey="E" name="ETA MINUSCOLA">03B7</key>
+		<key category="5428" ordkey="TH" name="TETA MINUSCOLA">03B8</key>
+		<key category="5428" ordkey="I" name="IOTA MINUSCOLA ">03B9</key>
+		<key category="5428" ordkey="K" name="KAPPA MINUSCOLA">03BA</key>
+		<key category="5428" ordkey="L" name="LAMBDA MINUSCOLA">03BB</key>
+		<key category="5428" ordkey="M" name="MI MINUSCOLA">03BC</key>
+		<key category="5428" ordkey="N" name="NI MINUSCOLA">03BD</key>
+		<key category="5428" ordkey="X" name="XI MINUSCOLA">03BE</key>
+		<key category="5428" ordkey="O" name="OMICRON MINUSCOLA">03BF</key>
+
+		<key category="5428" ordkey="P" name="PI GRECO MINUSCOLA">03C0</key>
+
+		<!--<key category="5428" ordkey="90" name="KOPPA MINUSCOLO">03D9</key> -->
+		<key category="5428" ordkey="90" name="KOPPA MINUSCOLO GRECO ARCAICO">03D9</key>
+		<key category="5428" ordkey="R" name="RO MINUSCOLA">03C1</key>
+		<key category="5428" ordkey="S" name="SIGMA MINUSCOLA">03C3</key>
+		<key category="5428" ordkey="T" name="TAU MINUSCOLA">03C4</key>
+		<key category="5428" ordkey="Y" name="UPSILON MINUSCOLA">03C5</key>
+		<key category="5428" ordkey="PH" name="FI MINUSCOLA">03C6</key>
+
+		<key category="5428" ordkey="CH" name="CHI MINUSCOLA">03C7</key>
+		<key category="5428" ordkey="CH" name="CHI GRECO MINUSCOLO ESPONENTE">03C7</key>
+
+		<key category="5428" ordkey="PS" name="PSI MINUSCOLA">03C8</key>
+		<key category="5428" ordkey="O" name="OMEGA MINUSCOLA">03C9</key>
+		<key category="5428" ordkey="900" name="SAMPI MINUSCOLO">03E1</key>
+
+		<!-- Esponenti/Deponenti -->
+
+		<key category="Esponenti/Deponenti" ordkey="0" name="ZERO SOTTOSCRITTO">2080</key>
+		<key category="Esponenti/Deponenti" ordkey="1" name="UNO SOTTOSCRITTO">2081</key>
+		<key category="Esponenti/Deponenti" ordkey="2" name="DUE SOTTOSCRITTO">2082</key>
+		<key category="Esponenti/Deponenti" ordkey="3" name="TRE SOTTOSCRITTO">2083</key>
+		<key category="Esponenti/Deponenti" ordkey="4" name="QUATTRO SOTTOSCRITTO">2084</key>
+		<key category="Esponenti/Deponenti" ordkey="5" name="CINQUE SOTTOSCRITTO">2085</key>
+		<key category="Esponenti/Deponenti" ordkey="6" name="SEI SOTTOSCRITTO">2086</key>
+		<key category="Esponenti/Deponenti" ordkey="7" name="SETTE SOTTOSCRITTO">2087</key>
+		<key category="Esponenti/Deponenti" ordkey="8" name="OTTO SOTTOSCRITTO">2088</key>
+		<key category="Esponenti/Deponenti" ordkey="9" name="NOVE SOTTOSCRITTO">2089</key>
+		<key category="Esponenti/Deponenti" ordkey="0" name="ZERO SOPRASCRITTO">2070</key>
+		<key category="Esponenti/Deponenti" ordkey="1" name="UNO SOPRASCRITTO">00B9</key>
+		<key category="Esponenti/Deponenti" ordkey="2" name="DUE SOPRASCRITTO">00B2</key>
+		<key category="Esponenti/Deponenti" ordkey="3" name="TRE SOPRASCRITTO ">00B3</key>
+		<key category="Esponenti/Deponenti" ordkey="4" name="QUATTRO SOPRASCRITTO">2074</key>
+		<key category="Esponenti/Deponenti" ordkey="5" name="CINQUE SOPRASCRITTO">2075</key>
+		<key category="Esponenti/Deponenti" ordkey="6" name="SEI SOPRASCRITTO">2076</key>
+		<key category="Esponenti/Deponenti" ordkey="7" name="SETTE SOPRASCRITTO">2077</key>
+		<key category="Esponenti/Deponenti" ordkey="8" name="OTTO SOPRASCRITTO">2078</key>
+		<key category="Esponenti/Deponenti" ordkey="9" name="NOVE SOPRASCRITTO">2079</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="100 IN NUMERI ROMANI">216D</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="500 IN NUMERI ROMANI">216E</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="1 IN NUMERI ROMANI">2160</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="50 IN NUMERI ROMANI">216C</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="1000 IN NUMERI ROMANI">216F</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="5 IN NUMERI ROMANI">2164</key>
+		<key category="Esponenti/Deponenti" ordkey=" " name="10 IN NUMERI ROMANI">2169</key>
+
+		<!-- altri caratteri senza categoria -->
+		<key ordkey="" name="PARENTESI GRAFFA APERTA">007B</key>
+		<key ordkey="" name="PARENTESI GRAFFA CHIUSA">007D</key>
+		<key ordkey="" name="PARENTESI QUADRA APERTA">005B</key>
+		<key ordkey="" name="PARENTESI QUADRA CHIUSA">005D</key>
+		<key ordkey="" name="PARENTESI TONDA APERTA">0028</key>
+		<key ordkey="" name="PARENTESI TONDA CHIUSA">0029</key>
+		<key ordkey="" name="VIRGOLA">002C</key>
+		<key ordkey="" name="PUNTO">002E</key>
+		<key ordkey="" name="SLASH">002F</key>
+		<key ordkey="" name="PUNTO E VIRGOLA">003B</key>
+		<key ordkey="" name="PUNTO ESCLAMATIVO">0021</key>
+		<key ordkey="" name="PUNTO INTERROGATIVO">003F</key>
+		<key ordkey="" name="TRATTINO">002D</key>
+		<key ordkey="" name="DUE PUNTI">003A</key>
+		<key ordkey="" name="UNDERSCORE">005F</key>
+		<key ordkey="" name="ASCII160">00A0</key>
+		<key ordkey="" name="ASTERISCO">002A</key>
+		<key ordkey="" name="PIPE">007C</key>
+		<key ordkey="" name="VIRGOLETTE">0022</key>
+
+		<key ordkey=" " name="APOSTROFO">0027</key>
+		<key ordkey=" " name="CANCELLETTO">0023</key>
+		<key ordkey=" " name="E COMMERCIALE">0026</key>
+		<key ordkey=" " name="ACCENTO CIRCONFLESSO">005E</key>
+		<key ordkey=" " name="APOSTROFO2">0060</key>
+		<key ordkey="%" name="SEGNO DI PERCENTUALE">0025</key>
+		<!-- almaviva5_20090715 #3066 -->
+		<key ordkey=" " name="A COMMERCIALE">0040</key>
+
+		<!-- almaviva5_20090408 allineamento con caratteri indice -->
+		<key ordkey="" name="CEDILLA">00B8</key>
+		<key ordkey="D" name="CAPITAL ICELANDIC LETTER ETH">00D0</key>
+		<key ordkey="G" name="SMALL G WITH CEDILLA">0123</key>
+		<key ordkey="T" name="CAPITAL T WITH CEDILLA">0162</key>
+		<key ordkey="T" name="SMALL T WITH CEDILLA">0163</key>
+		<key ordkey="O" name="CAPITAL O WITH HORN">01A0</key>
+		<key ordkey="O" name="SMALL O WITH HORN">01A1</key>
+		<key ordkey="U" name="CAPITAL U WITH HORN">01AF</key>
+		<key ordkey="U" name="SMALL U WITH HORN">01B0</key>
+		<key ordkey="O" name="CAPITAL O WITH CARON">01D1</key>
+		<key ordkey="O" name="SMALL O WITH CARON">01D2</key>
+		<key ordkey="U" name="CAPITAL U WITH CARON">01D3</key>
+		<key ordkey="U" name="SMALL U WITH CARON">01D4</key>
+		<key ordkey="AE" name="CAPITAL AE WITH MACRON">01E2</key>
+		<key ordkey="AE" name="SMALL AE WITH MACRON">01E3</key>
+		<key ordkey="O" name="CAPITAL O WITH OGONEK">01EA</key>
+		<key ordkey="O" name="SMALL O WITH OGONEK">01EB</key>
+		<key ordkey="J" name="SMALL J WITH CARON">01F0</key>
+		<key ordkey="G" name="CAPITAL G WITH ACUTE">01F4</key>
+		<key ordkey="AE" name="CAPITAL AE WITH ACUTE">01FC</key>
+		<key ordkey="AE" name="SMALL AE WITH ACUTE">01FD</key>
+
+		<key ordkey="" name="MODIFIED LETTER REVERSED COMMA">02BD</key>
+		<key ordkey="" name="MODIFIER LETTER RIGHT HALF RING">02BE</key>
+		<key ordkey="" name="MODIFIER LETTER LEFT HALF RING">02BF</key>
+
+		<key ordkey="" name="GRAVE ACCENT">0300</key>
+		<key ordkey="" name="ACUTE ACCENT">0301</key>
+		<key ordkey="" name="CIRCUMFLEX ACCENT">0302</key>
+		<key ordkey="" name="TILDE">0303</key>
+		<key ordkey="" name="COMBINING MACRON">0304</key>
+		<key ordkey="" name="BREVE">0306</key>
+		<key ordkey="" name="DOT ABOVE">0307</key>
+		<key ordkey="" name="COMBINING DIAERIS (DIALYTICA)">0308</key>
+		<key ordkey="" name="HOOK ABOVE">0309</key>
+		<key ordkey="" name="RING ABOVE">030A</key>
+		<key ordkey="" name="DOUBLE ACUTE ACCENT">030B</key>
+		<key ordkey="" name="CARON">030C</key>
+		<key ordkey="" name="CANDRABINDU">0310</key>
+ 		<key ordkey="" name="COMMA ABOVE">0313</key>
+ 		<key ordkey="" name="COMMA ABOVE right">0315</key>
+ 		<key ordkey="" name="COMBINING HALF RING BELOW">031C</key>
+		<key ordkey="" name="DOT BELOW">0323</key>
+		<key ordkey="" name="DIAERESIS BELOW">0324</key>
+		<key ordkey="" name="RING BELOW">0325</key>
+		<key ordkey="" name="COMMA BELOW">0326</key>
+		<key ordkey="" name="COMBINING CEDILLA">0327</key>
+		<key ordkey="" name="OGONEK">0328</key>
+		<key ordkey="" name="BREVE BELOW">032E</key>
+		<key ordkey="" name="LOW LINE">0332</key>
+		<key ordkey="" name="DOUBLE LOW LINE">0333</key>
+		<key ordkey="A" name="CAPITAL A WITH RING BELOW">1E00</key>
+		<key ordkey="A" name="SMALL A WITH RING BELOW">1E01</key>
+		<key ordkey="B" name="CAPITAL B WITH DOT ABOVE">1E02</key>
+		<key ordkey="B" name="SMALL B WITH DOT ABOVE">1E03</key>
+		<key ordkey="B" name="CAPITAL B WITH DOT BELOW">1E04</key>
+		<key ordkey="B" name="SMALL B WITH DOT BELOW">1E05</key>
+		<key ordkey="D" name="CAPITAL D WITH DOT ABOVE">1E0A</key>
+		<key ordkey="D" name="SMALL D WITH DOT ABOVE">1E0B</key>
+ 		<key ordkey="D" name="CAPITAL D WITH DOT BELOW">1E0C</key>
+
+	</keys>
+</sbn>
+

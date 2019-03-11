@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_autore_bib" polymorphism="explicit" table="VL_AUTORE_BIB" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="VID" column="VID" type="string"/>
+			<key-property name="CD_POLO" column="CD_POLO" type="string"/>
+			<key-property name="CD_BIBLIOTECA" column="CD_BIBLIOTECA" type="string"/>
+		</composite-id>
+		<property name="FL_ALLINEA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_SBNMARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="KY_BIBLIOTECA" type="it.finsiel.sbn.util.DataTypeCHAR" length="13" not-null="false" lazy="false"/>
+		<property name="CD_ANA_BIBLIOTECA" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="DS_BIBLIOTECA" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="DS_CITTA" type="string" length="30" not-null="false" lazy="false"/>
+        <filter name="VL_AUTORE_BIB_selectPerPolo"
+        		condition="vid = :XXXvid
+				  	 AND cd_polo = :XXXcd_polo "/>
+
+        <filter name="VL_AUTORE_BIB_selectPerAnagrafe"
+        		condition="vid = :XXXvid
+				  	AND cd_ana_biblioteca= :XXXcd_ana_biblioteca "/>
+
+        <filter name="VL_AUTORE_BIB_selectPerAnagrafeLike"
+        		condition="vid = :XXXvid
+				  AND upper(trim(cd_ana_biblioteca)) like upper(trim(:XXXcd_ana_biblioteca))||'%' "/>
+
+        <filter name="VL_AUTORE_BIB_selectPerVid"
+        		condition="vid = :XXXvid "/>
+	</class>
+</hibernate-mapping>

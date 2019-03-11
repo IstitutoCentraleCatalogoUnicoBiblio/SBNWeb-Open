@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Servizio bibliotecario</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0" width="100%" summary=summary>
+
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><A href="../GuidaSbnweb.htm">SBNWEB Guida 
+      Online</A></STRONG></STRONG></P>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></A></SPAN></SPAN>Acquisizioni - Scheda di dettaglio di 
+      un suggerimento del lettore</H1>
+<ul>
+<li><A href="#Descrizione">Descrizione</A></li>
+<li><A href="#Ingresso">Punti di ingresso</A></li>
+<li><A href="#Prerequisiti">Prerequisiti</A></li>
+<li><A href="#ModuloDati">Modulo immissione dati</A></li>
+<ul>
+<li><A href="#Canali">Area canali</A></li>
+<li><A href="#Filtri">Area filtri</A></li><li><A href="#Default">Valori di default</A></li>
+<li><A href="#Azioni">Azioni utente</A></LI></UL>
+<li><A href="#Controlli">Controlli del sistema</A><br></LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></A></SPAN></SPAN>Descrizione</H2>
+La funzione consente all'utente bibliotecario di esaminare il dettaglio dell'elemento selezionato dalla <A href="SinteticaSuggerimentiLettore.htm">Sintetica 
+      Suggerimenti lettore</A>.
+Esso consente in particolare:
+<ul>
+<li>La prospettazione dei suggerimenti dei lettori su 
+        pagine successive rendendo disponibili le opzioni di scorrimento in 
+        avanti o indietro, se l'utente ha effettuato una selezione multipla. 
+</li>        
+<li>La modifica (al bibliotecario che ha un profilo 
+        utente abilitato alla modifica) delle informazioni 
+        prospettate, rendendo editabili tutti i campi della pagina prospettata, 
+        attivando ulteriori azioni e controlli del sistema per la variazione e 
+        registrazione delle modifiche. </LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></A></SPAN></SPAN><strong>Punti di ingresso </STRONG></H2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Gare
+d'acquisto-&gt;<A href="RicercaSuggerimentoLettore.htm">Ricerca suggerimento lettore</A>-&gt;<A href="SinteticSuggerimentoLettore.htm">Sintetica suggerimento lettore</A>-&gt;Bottone <strong>'Esamina'</STRONG>' 
+</li>        
+<li>Barra di navigazione </li>
+<li>Dalla lista di supporto suggerimenti lettore.</li>
+
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></A></SPAN></SPAN>Prerequisiti</H2>
+<ul>
+	<li>Il bibliotecario deve avere superato con 
+        successo l'autenticazione e l'abilitazione alla funzione </LI></UL>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></A></SPAN></SPAN><span class="Stile3 style8">Modulo immissione dati</SPAN></H2>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/DettaglioSuggerimentoLettore.gif"></P>
+<p>Di seguito viene descritto il contenuto della schermata<em>:</EM></P>
+<ul>
+<li>Cod. Bibl. 3 caratteri alfanumerici. Codice Biblioteca</li>
+<li>Numero. 10 caratteri numerici. Codice documento</li>
+<li>Cod Utente. Codice (12 caratteri numerici) del lettore che ha creato il suggerimento</li>
+<li>Nome. Nominativo (50 caratteri alfanumerici) del lettore che ha creato il suggerimento</li>
+<li>Stato.  1 carattere alfanumerico. Stato del Suggerimento. Valori ammessi: A=accettato; O=ordinato;  W=attesa di risposta.</li> 
+<li>Bid. 10 caratteri alfanumerici. Identificativo del titolo per cui è stato fatto un Suggerimento</li>
+<li>Data ins. Data di inserimento</li>
+<li>Data ult. agg. Data di aggiornamento</li>
+<li>Titolo. 240 caratteri alfanumerici. Titolo del documento per cui è stato fatto un suggerimento di acquisto</li>
+<li>Autore.  160 caratteri alfanumerici. Nome dell'autore</li>
+<li>Note.  160 caratteri alfanumerici. Eventuali note del suggerimento di acquisto</li>
+<li>Editore. Nome dell'editore</li>
+<li>Luogo.  30 caratteri alfanumerici. Luogo di edizione</li> 
+<li>Paese. 2 caratteri alfanumerici. Paese di pubblicazione. Selezione da valori estratti da tabella DB.</li>
+<li>Lingua. 3 caratteri alfanumerici. Lingua di pubblicazione. Selezione di valori estratti da tabella DB.</li>
+<li>Anno. Anno di pubblicazione</li>
+<li>Note per il lettore.  255 caratteri alfanumerici. Eventuali note inserite per il lettore</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li> <STRONG>'<A href="../Interrogazione/RicercaTitolo.htm">Bid (Icona lente ricerca)</A>'</STRONG>.&nbsp; Ricerca della notizia bibliografica il cui risultato, se scelto, viene riportato nel campo bid.</li> 
+<li>Bottone '&lt;': consente lo scorrimento in indietro delle pagine di dettaglio risultanti dalla selezione multipla effettuata dalla sintetica (assente per selezione singola)</li>
+<li>Bottone '&gt;': consente lo scorrimento in avanti delle pagine di dettaglio risultanti dalla selezione multipla effettuata nella sintetica (assente per selezione singola)</li> 
+<li>Bottone 'Salva': effettua la validazione delle informazioni immesse, conferma le modifiche effettuate e le registra a sistema</li> 
+<li>Bottone 'Ripristina': consente di annullare tutte le modifiche effettuate sulla pagina prima del "Salva", recuperando le informazioni registrate in base dati. </li> 
+<li>Accetta. Il bibliotecario decide di accettare il suggerimento e può anche comunicare i motivi dell'approvazione nell'opportuno spazio "note al lettore".
+<li>Rifiuta. Il bibliotecario decide di rifiutare il suggerimento e può anche comunicare al  lettore i motivi del rifiuto nell'opportuno spazio "note al lettore".</li>
+<li>Bottone 'Stampa': produce la stampa delle informazioni del suggerimento</li>
+<!--- <li>Bottone 'Cancella': elimina l'intero suggerimento del lettore</li>		
+ --->
+<li>Bottone 'Indietro': consente l'abbandono della pagina visualizzata e il ritorno a quella di livello superiore. </li>		
+</ul>
+	
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li><u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+<li>A seconda delle abilitazioni attribuite dal sistema al bibliotecario, dinamicamente le azioni si rendono disponibili all'utente.</li>
+<li>Per accettare un suggerimento, il bibliotecario deve associarlo ad un titolo esistente</li>
+<!--- <li>Sono cancellabili i soli suggerimenti ancora in stato di "attesa"</li> --->
+<li>I suggerimenti accettati vengono posti nello stato di "accettato"</li>
+ <li>I suggerimenti rifiutati vengono posti nello stato di "rifiutato".</li>
+</ul>
+
+
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY></HTML>

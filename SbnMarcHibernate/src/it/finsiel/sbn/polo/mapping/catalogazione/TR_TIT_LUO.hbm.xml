@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_tit_luo" polymorphism="explicit" table="TR_TIT_LUO" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="TB_TITOLO" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			<key-many-to-one name="TB_LUOGO" column="LID" class="it.finsiel.sbn.polo.orm.Tb_luogo11">
+			</key-many-to-one>
+			-->
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="LID" column="LID" type="string"/>
+			<key-property name="TP_LUOGO" column="TP_LUOGO" type="string"/>
+		</composite-id>
+		<property name="NOTA_TIT_LUO" column="NOTA_TIT_LUO" type="string" length="80" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TR_TIT_LUO_selectPerKey"
+			condition="bid = :XXXbid
+					   AND lid = :XXXlid
+					   AND tp_luogo = :XXXtp_luogo
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_LUO_selectPerTitolo"
+			condition="bid = :XXXbid
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_LUO_selectPerLuogo"
+			condition="lid = :XXXlid
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_LUO_verificaEsistenza"
+			condition="bid = :XXXbid
+					   AND lid = :XXXlid "/>
+
+		<filter name="TR_TIT_LUO_selectPerBidELid"
+			condition="bid = :XXXbid
+					   AND lid = :XXXlid
+					   AND fl_canc != 'S' "/>
+
+
+
+	</class>
+</hibernate-mapping>

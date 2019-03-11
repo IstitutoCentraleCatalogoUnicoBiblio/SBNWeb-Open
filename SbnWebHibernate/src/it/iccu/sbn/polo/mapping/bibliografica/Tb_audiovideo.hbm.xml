@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_audiovideo" table="tb_audiovideo" >
+		<meta attribute="class-description">
+			AUDIOVISIVI
+		</meta>
+		<id column="bid" type="string">
+			<generator class="foreign">
+				<param name="property">b</param>
+			</generator>
+		</id>
+		<one-to-one name="b" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="all" constrained="true"/>
+		<property name="tp_mater_audiovis" column="tp_mater_audiovis" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="lunghezza" column="lunghezza" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="cd_colore" column="cd_colore" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_suono" column="cd_suono" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="tp_media_suono" column="tp_media_suono" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_dimensione" column="cd_dimensione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_forma_video" column="cd_forma_video" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_tecnica" column="cd_tecnica" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_formato_film" column="tp_formato_film" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_mat_accomp" column="cd_mat_accomp" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="cd_forma_regist" column="cd_forma_regist" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_formato_video" column="tp_formato_video" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_materiale_base" column="cd_materiale_base" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_supporto_second" column="cd_supporto_second" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_broadcast" column="cd_broadcast" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_generazione" column="tp_generazione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_elementi" column="cd_elementi" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_categ_colore" column="cd_categ_colore" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_polarita" column="cd_polarita" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_pellicola" column="cd_pellicola" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_suono" column="tp_suono" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_stampa_film" column="tp_stampa_film" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_deteriore" column="cd_deteriore" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_completo" column="cd_completo" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="dt_ispezione" column="dt_ispezione" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

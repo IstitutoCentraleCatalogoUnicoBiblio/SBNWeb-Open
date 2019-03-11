@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_tit_tit" polymorphism="explicit" table="TR_TIT_TIT" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="BID_BASE" column="BID_BASE" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			<key-many-to-one name="BID_COLL" column="BID_COLL" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			-->
+			<key-property name="BID_BASE" column="BID_BASE" type="string"/>
+			<key-property name="BID_COLL" column="BID_COLL" type="string"/>
+			<key-property name="TP_LEGAME" column="TP_LEGAME" type="string"/>
+		</composite-id>
+ 		<property name="TP_LEGAME_MUSICA" column="TP_LEGAME_MUSICA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_NATURA_BASE" column="CD_NATURA_BASE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="CD_NATURA_COLL" column="CD_NATURA_COLL" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="SEQUENZA" column="SEQUENZA" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="NOTA_TIT_TIT" column="NOTA_TIT_TIT" type="string" length="80" not-null="false"/>
+		<property name="SEQUENZA_MUSICA" column="SEQUENZA_MUSICA" type="string" length="80" not-null="false"/>
+		<property name="SICI" column="SICI" type="string" length="80" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp"  not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+
+
+		<filter name="TR_TIT_TIT_selectPerKey"
+			condition="bid_base = :XXXbid_base
+					   AND bid_coll = :XXXbid_coll
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_TIT_selectPerBidBaseEColl"
+			condition="fl_canc != 'S'
+					   AND  bid_coll = :XXXbid_coll
+					   AND  bid_base = :XXXbid_base "/>
+
+
+		<!-- modifica almaviva2 04.07.2012 - i legami a raccolta fattizia vanno spostati dal titolo fuso a quello di arrivo
+		-->
+		<filter name="TR_TIT_TIT_selectPerBidBaseNaturaColl"
+			condition="fl_canc != 'S'
+					   AND  bid_base = :XXXbid_base
+					   AND  cd_natura_coll = :XXXcd_natura_coll "/>
+
+
+
+
+
+		<filter name="TR_TIT_TIT_selectPerBidColl"
+			condition="fl_canc != 'S'
+					   AND  bid_coll = :XXXbid_coll "/>
+
+		<filter name="TR_TIT_TIT_countPerBidColl"
+			condition="fl_canc != 'S'
+					   AND  bid_coll = :XXXbid_coll "/>
+
+		<filter name="TR_TIT_TIT_countPerBidBase"
+			condition="fl_canc != 'S'
+					   AND  bid_base = :XXXbid_base
+					   AND tp_legame = '01' "/>
+
+		<filter name="TR_TIT_TIT_countPerLivelloColl"
+			condition="fl_canc != 'S'
+					   AND  bid_coll = :XXXbid_coll
+					   AND tp_legame = '01'
+					   AND ( (cd_natura_base = 'C' and cd_natura_coll = 'C')
+					   		OR (cd_natura_base != 'C' and cd_natura_coll != 'C') )
+					   AND ( (cd_natura_base = 'S' and cd_natura_coll = 'S')
+					   		OR (cd_natura_base != 'S' and cd_natura_coll != 'S') ) "/>
+
+		<filter name="TR_TIT_TIT_countPerLivelloBase"
+			condition="fl_canc != 'S'
+					   AND  bid_base = :XXXbid_base
+					   AND tp_legame = '01'
+					   AND ( (cd_natura_base = 'C' and cd_natura_coll = 'C')
+					         OR (cd_natura_base != 'C' and cd_natura_coll != 'C') )
+					   AND ( (cd_natura_base = 'S' and cd_natura_coll = 'S')
+					         OR (cd_natura_base != 'S' and cd_natura_coll != 'S') ) "/>
+
+		<filter name="TR_TIT_TIT_selectMusica"
+			condition="fl_canc != 'S'
+		   			  AND  bid_coll = :XXXbid_coll
+		   			  AND tp_legame_musica is not null "/>
+
+		<filter name="TR_TIT_TIT_selectCancellato"
+			condition="fl_canc != 'S'
+		   			  AND bid_coll = :XXXbid_coll
+					  AND bid_base = :XXXbid_base
+					  AND tp_legame = :XXXtp_legame "/>
+
+
+	</class>
+</hibernate-mapping>

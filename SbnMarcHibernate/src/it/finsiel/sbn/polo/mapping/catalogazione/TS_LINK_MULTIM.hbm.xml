@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_link_multim" polymorphism="explicit" table="TS_LINK_MULTIM" lazy="false">
+		<id name="ID_LINK_MULTIM" column="ID_LINK_MULTIM" type="long" unsaved-value="0">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="KY_LINK_MULTIM" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="true" lazy="false"/>
+		<property name="URI_MULTIM" type="string" length="320" not-null="false" lazy="false"/>
+<!--		<property name="IMMAGINE" type="blob" not-null="false" lazy="true"/> -->
+		<property name="IMMAGINE" type="it.finsiel.sbn.util.BinaryBlobType" not-null="false" lazy="true"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+
+		<filter name="TS_LINK_MULTIM_selectPerKey"
+			condition="id_link_multim = :XXXid_link_multim
+					   AND fl_canc != 'S' "/>
+
+		<filter name="TS_LINK_MULTIM_selectPerKy"
+			condition="ky_link_multim = :XXXky_link_multim
+					   AND fl_canc != 'S'"/>
+	</class>
+</hibernate-mapping>

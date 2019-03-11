@@ -1,0 +1,96 @@
+   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Servizio bibliotecario</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+</head>
+
+
+<script type="text/javascript">
+function goThere(loc)
+   {
+   window.location.href=loc;
+   }
+</script> 
+
+<body>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0" summary="summary">
+
+  <tr>
+    <td  valign="top" bgcolor="#DDE8F0"><p align="center" class="style3 Stile3 style8"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+      <h1 ><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Scheda di dettaglio autore</h1>
+      <ul>
+        <li><a href="#Descrizione">Descrizione</a></li>
+        <li><a href="#Ingresso">Punti di ingresso</a> </li>
+        <li><a href="#Prerequisiti">Prerequisiti</a></li>
+        <li><a href="#ModuloDati">Modulo immissione dati</a>
+          <ul>
+            <li><a href="#Canali">Area canali</a></li>
+            <li><a href="#Filtri">Area filtri</a></li>
+            <li><a href="#Miscellanea">Area miscellanea </a></li>
+            <li><a href="#Default">Valori di default</a> </li>
+            <li><a href="#Azioni">Azioni utente</a></li>
+          </ul>
+        </li>
+        <li><a href="#Controlli">Controlli del sistema</a><br>
+        </li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+      <p>Il sistema invia in risposta il dettaglio  dell&rsquo;elemento selezionato sull&rsquo;analitica autore e, nel caso in cui non sia  l&rsquo;elemento radice anche le informazioni relative al legame con l&rsquo;elemento  gerarchicamente superiore nell&rsquo;Analitica.<br>
+  Sulla finestra &ldquo;Dettaglio&rdquo; verranno prospettati i dati  di dettaglio dell&rsquo;elemento selezionato sul &ldquo;Analitica Autore&rdquo;. In generale tale  finestra prevedr&agrave; dati e opzioni diverse a seconda della tipologia di elemento  selezionato e della sua posizione sul reticolo. In&nbsp; particolare, sulla linea Autore tale pannello  potr&agrave; contenere i dati dell&rsquo;autore &ldquo;radice&rdquo; del Reticolo, quelli di una sua  forma di rinvio, di una autore collegato o di una marca collegata. A meno del  caso di selezione dell&rsquo;elemento &ldquo;radice&rdquo;, oltre ai dati specifici della  tipologia dell&rsquo;elemento, verranno prospettati sul pannello anche i dati di  legame con l&rsquo;elemento &ldquo;gerarchicamente&rdquo; superiore sul reticolo precedente.<br>
+  Nel seguito viene descritto il contenuto della  finestra &ldquo;Dettaglio&rdquo; nel caso ci si riferisca ad un elemento di tipo &ldquo;autore&rdquo;.  Per la descrizione dei contenuti di tale finestra per gli elementi di authority  marche si rimanda a quanto riportato nella descrizione della linea funzionale  relativa. </p>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span><strong>Punti di ingresso </strong></h2>
+      <ol>
+        <li>Menu-&gt;Menu-&gt;Interrogazione-&gt;<a href="SinteticaAutore.htm">Sintetica autore</a>-&gt;<a href="AnaliticaOggettiBibliografici.htm">Analitica</a> </li>
+        <li>Barra di navigazione </li>
+      </ol>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+      <ul>
+        <li>Aver individuato un autore in Polo od in Indice.</li>
+      </ul>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="Stile3 style8">Modulo immissione dati</span></h2>
+      <p align="center" class="Stile3 style8"><em><span class="Stile3 style8"><span class="Stile2"><a name="Titolo_DaIndic" id="SinteticaDaIndice"></a></span>Dettaglio autore senza legami</span></em><span class="Stile3 style8"><em> ad oggetto superiore</em></span><em> (l'autore &egrave; radice del reticolo dell'Analitica) </em></p>
+      <p align="center" class="style5 style8 style4 Stile3"><img src="immagini/DettaglioAutoreRadice.gif" width="727" height="469"></p>
+      <p align="center" class="Stile3 style8"><em><span class="Stile3 style8"><em><span class="Stile2"><a name="Titolo_DaIndic" id="SinteticaDaIndice"></a></span>Dettaglio autore con legame ad oggetto superiore (l'autore non radice del reticolo dell'Analitica); in questo caso legame a Titolo </em></span></em></p>
+      <p align="center" class="style5 style8 style4 Stile3"><img src="immagini/DettaglioAutoreConLegameTitolo.gif" width="723" height="628"></p>
+      <p align="center"><span class="style5 style8 Stile3"><em><em><span class="Stile2"><a name="Titolo_DaIndic" id="SinteticaDaIndice"></a></span>Dettaglio autore con legame ad oggetto superiore (l'autore non radice del reticolo dell'Analitica); in questo caso legame a Marca</em></em></span> </p>
+      <p align="center"><img src="immagini/DettaglioAutoreConLegameMarca.gif" width="721" height="599"></p>
+      <p align="center" class="Stile3 style8"><em><span class="Stile3 style8"><em><em><span class="Stile2"><a name="Titolo_DaIndic" id="SinteticaDaIndice"></a></span>Dettaglio forma Rinvio autore con legame ad autore in forma Accettata</em></em></span></em></p>
+      <p align="center" class="style5 style8 style4 Stile3"><img src="immagini/DettaglioAutoreRinvio.gif" width="720" height="425"></p>
+      <h3 align="left" class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area Dati </h3>
+      <ul>
+        <li>Tutte le informazioni relative al dettaglio dell'oggetto richiesto sono prospettate con la sola finalit&agrave;  informativa quindi non sono modificabili;</li>
+        <li>Passando con il mouse sui campi in cui &egrave; presente il codice viene illuminato un campo in cui &egrave; contenuta la descrizione dello stesso (Vedi nella figura relativa alla mappa <em><em>Dettaglio autore con legame ad oggetto superiore</em></em> la decodifica del Campo Tipo Nome C: Cognome semplice);</li>
+        <li><strong>Fonti</strong>, riporta in formato editato i legami ai  repertori. Nell&rsquo;esposizione delle informazioni l&rsquo;applicativo avr&agrave; cura di  riportare dapprima i legami con&nbsp; esito  positivo e, successivamente, i legami con esito negativo; tra i due gruppi di  informazioni verr&agrave; apposta la sequenza di caratteri separatori &ldquo; // &ldquo; (spazio,  barra, barra, spazio). Per ciascun legame a repertorio le informazioni verranno  riportate secondo la seguente sintassi: Sigla Repertorio, &ldquo;/&rdquo; (barra), Nota. La  barra verr&agrave; inserita solo in caso di presenza della nota. Tra un legame e il  successivo verr&agrave; apposto la sequenza di caratteri separatori &ldquo;, &ldquo; (virgola,  spazio).</li>
+      </ul>
+      <h3 align="left" class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+      <ul>
+        <li>          Vedi immagine </li>
+      </ul>
+      <h3 align="left" class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span> </h3>
+      <ul>
+        <li>          Bottone <strong>'Annulla'</strong>. Ritorna all'<a href="AnaliticaOggettiBibliografici.htm">Analitica</a>  chiamante.</li>
+      </ul>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style8"><strong>Controlli del sistema</strong></span></h2>
+      <ul>
+        <li>La finestra &ldquo;Dettaglio&rdquo; ha la sola finalit&agrave;  informativa e non contiene quindi azioni e/o controlli.</li>
+      </ul>      
+      <hr>
+    <p align="left" class="style5 style8 style4 Stile3">&nbsp;</p>      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+</html>

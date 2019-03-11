@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="JavaSource"/>
+	<classpathentry kind="lib" path="lib/common/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="lib/common/commons-logging-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/common/commons-logging-api-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/common/dictionarymodel.jar"/>
+	<classpathentry kind="lib" path="lib/common/repertorymodel.jar"/>
+	<classpathentry kind="lib" path="lib/compile/commons-httpclient.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/c3p0-0.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/web/antlr.jar"/>
+	<classpathentry kind="lib" path="lib/compile/j2ee.jar"/>
+	<classpathentry kind="lib" path="lib/compile/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/ehcache-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/web/commons-validator.jar"/>
+	<classpathentry kind="lib" path="lib/web/displaytag-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/web/jstl.jar"/>
+	<classpathentry kind="lib" path="lib/web/standard.jar"/>
+	<classpathentry kind="lib" path="lib/web/struts.jar" sourcepath="lib/web"/>
+	<classpathentry kind="lib" path="lib/web/struts-el.jar"/>
+	<classpathentry kind="lib" path="lib/web/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/common/jakarta-oro.jar"/>
+	<classpathentry kind="lib" path="lib/common/unimarcmodel.jar" sourcepath="lib/common/unimarcmodel.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebDomainEjb"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebCommon"/>
+	<classpathentry kind="lib" path="lib/common/commons-beanutils-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate/hibernate-3.2.6.jar"/>
+	<classpathentry kind="lib" path="lib/web/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/web/commons-io-1.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebHibernate"/>
+	<classpathentry kind="lib" path="lib/common/jfreechart-1.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/common/jcommon-1.0.16.jar"/>
+	<classpathentry kind="lib" path="lib/common/BcImage.jar"/>
+	<classpathentry kind="lib" path="lib/common/joda-time-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/common/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="lib/common/iText-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/common/jxl-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/common/poi-3.2-FINAL-20081019.jar"/>
+	<classpathentry kind="lib" path="lib/common/symmetric-csv-3.5.19.jar"/>
+	<classpathentry kind="lib" path="lib/common/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/common/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/common/castor-0.9.9-sbnweb.jar"/>
+	<classpathentry kind="lib" path="lib/common/lambdaj-2.3.3-sbnweb.jar"/>
+	<classpathentry kind="lib" path="lib/common/jasperreports-4.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/common/stream-1.1.5-jdk5.jar"/>
+	<classpathentry kind="lib" path="lib/common/axis.jar"/>
+	<classpathentry kind="lib" path="lib/common/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="lib/common/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="lib/common/saaj.jar"/>
+	<classpathentry kind="lib" path="lib/common/wsdl4j.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

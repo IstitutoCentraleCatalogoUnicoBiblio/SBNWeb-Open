@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_id_errati" polymorphism="explicit" table="TS_ID_ERRATI" lazy="false">
+		<id name="ID" column="ID" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="NOTAID" column="NOTAID" type="it.finsiel.sbn.util.DataTypeCHAR" length="254" not-null="false"/>
+	</class>
+</hibernate-mapping>

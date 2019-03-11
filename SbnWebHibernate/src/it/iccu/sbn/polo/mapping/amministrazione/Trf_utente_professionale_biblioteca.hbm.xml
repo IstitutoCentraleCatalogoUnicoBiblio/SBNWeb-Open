@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Trf_utente_professionale_biblioteca" table="trf_utente_professionale_biblioteca" >
+		<composite-id>
+			<key-many-to-one name="id_utente_professionale" column="id_utente_professionale" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_anagrafe_utenti_professionali">
+			</key-many-to-one>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="tp_ruolo" column="tp_ruolo" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				null = dipendente della biblioteca
+		admin =
+		dipendente della biblioteca
+		con diritti di amministratore semplice
+		super Admin =
+		dipendente della biblioteca
+		con diritti
+		amministratore con tutti i privilegi
+			</meta>
+		</property>
+		<property name="note_competenze" column="note_competenze" type="string" length="160" not-null="false" lazy="false"/>
+		<property name="ufficio_appart" column="ufficio_appart" type="string" length="50" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

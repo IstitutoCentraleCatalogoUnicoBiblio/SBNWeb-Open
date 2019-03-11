@@ -1,0 +1,57 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PERSONA">
+    <xs:complexType>
+      <xs:all>
+        <xs:element type="xs:string" name="TIPO_RECORD" minOccurs="1"/>
+        <xs:element type="xs:string" name="USER_ID" minOccurs="1"/>
+        <xs:element type="xs:byte" name="DISABLE_FLG" minOccurs="0"/>
+        <xs:element type="xs:long" name="ANA_ID" minOccurs="1"/>
+        <xs:element type="xs:string" name="COGNOME" minOccurs="0"/>
+        <xs:element type="xs:string" name="NOME" minOccurs="0"/>
+        <xs:element type="xs:string" name="SESSO" minOccurs="0"/>
+        <xs:element type="xs:date" name="DATA_NASCITA" minOccurs="0"/>
+        <xs:element type="xs:string" name="COD_FIS" minOccurs="1"/>
+        <xs:element type="xs:string" name="EMAIL" minOccurs="0"/>
+        <xs:element type="xs:string" name="EMAIL_ATE" minOccurs="0"/>
+        <xs:element type="xs:string" name="CELLULARE" minOccurs="0"/>
+        <xs:element type="xs:short" name="NAZ_NASC_COD" minOccurs="0"/>
+        <xs:element type="xs:string" name="NAZ_NASC_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="COM_NASC_COD" minOccurs="0"/>
+        <xs:element type="xs:int" name="COM_NASC_COD_ISTAT" minOccurs="0"/>
+        <xs:element type="xs:string" name="COM_NASC_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="CITSTRA_NASC" minOccurs="0"/>
+        <xs:element type="xs:int" name="NAZ_RES_COD" minOccurs="0"/>
+        <xs:element type="xs:string" name="NAZ_RES_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="PROV_RES_SIGLA" minOccurs="0"/>
+        <xs:element type="xs:int" name="PROV_RES_COD" minOccurs="0"/>
+        <xs:element type="xs:string" name="PROV_RES_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="COM_RES_COD" minOccurs="0"/>
+        <xs:element type="xs:int" name="COM_RES_COD_ISTAT" minOccurs="0"/>
+        <xs:element type="xs:string" name="COM_RES_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="LOC_RES_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="INDIRIZZO_RES" minOccurs="0"/>
+        <xs:element type="xs:string" name="INDIRIZZO_RES_CIVICO" minOccurs="0"/>
+        <xs:element type="xs:int" name="CAP_RES" minOccurs="0"/>
+        <xs:element type="xs:string" name="TEL_RES" minOccurs="0"/>
+        <xs:element type="xs:int" name="NAZ_DOM_COD" minOccurs="0"/>
+        <xs:element type="xs:string" name="NAZ_DOM_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="PROV_DOM_SIGLA" minOccurs="0"/>
+        <xs:element type="xs:int" name="PROV_DOM_COD" minOccurs="0"/>
+        <xs:element type="xs:string" name="PROV_DOM_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="COM_DOM_COD" minOccurs="0"/>
+        <xs:element type="xs:int" name="COM_DOM_COD_ISTAT" minOccurs="0"/>
+        <xs:element type="xs:string" name="COM_DOM_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="LOC_DOM_DES" minOccurs="0"/>
+        <xs:element type="xs:string" name="INDIRIZZO_DOM" minOccurs="0"/>
+        <xs:element type="xs:string" name="INDIRIZZO_DOM_CIVICO" minOccurs="0"/>
+        <xs:element type="xs:int" name="CAP_DOM" minOccurs="0"/>
+        <xs:element type="xs:string" name="TEL_DOM" minOccurs="0"/>
+        <xs:element type="xs:date" name="DATA_MOD_ANA" minOccurs="0"/>
+        <xs:element type="xs:string" name="STA_STU_COD" minOccurs="0"/>
+        <xs:element type="xs:string" name="MATRICOLA" minOccurs="0"/>
+        <xs:element type="xs:date" name="DATA_INI_ATT" minOccurs="0"/>
+		<xs:element type="xs:date" name="DATA_FIN_ATT" minOccurs="0"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

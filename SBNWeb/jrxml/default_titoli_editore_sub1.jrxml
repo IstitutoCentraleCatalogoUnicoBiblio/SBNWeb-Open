@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="default_titoli_editore_xls_sub1" pageWidth="784" pageHeight="500" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="784" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true">
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="Main" isDefault="true" forecolor="#000000" isBlankWhenNull="false" fontSize="8"/>
+	<style name="AltRow" style="Main" backcolor="#FEF1E2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue() % 2 == 0)]]></conditionExpression>
+			<style backcolor="#FFCC99"/>
+		</conditionalStyle>
+	</style>
+	<style name="Header" backcolor="#FFCC66" fontSize="10" isBold="true"/>
+	<parameter name="PROVA" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[prova passaggio parametri]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Nessun Nome"]]></defaultValueExpression>
+	</parameter>
+	<field name="editore" class="java.lang.String"/>
+	<field name="nomeEditore" class="java.lang.String"/>
+	<field name="regione" class="java.lang.String"/>
+	<field name="descrRegione" class="java.lang.String"/>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="descrProvincia" class="java.lang.String"/>
+	<field name="comune" class="java.lang.String"/>
+	<field name="descrComune" class="java.lang.String"/>
+	<field name="isbn" class="java.lang.String"/>
+	<field name="bid" class="java.lang.String"/>
+	<field name="dataPubbl" class="java.lang.String"/>
+	<field name="lingua" class="java.lang.String"/>
+	<field name="descrLingua" class="java.lang.String"/>
+	<field name="titolo" class="java.lang.String"/>
+	<field name="bidKyCles2t" class="java.lang.String"/>
+	<field name="bidDescrSup" class="java.lang.String"/>
+	<field name="tipoRecord" class="java.lang.String"/>
+	<field name="descrTipoRecord" class="java.lang.String"/>
+	<field name="codPolo" class="java.lang.String"/>
+	<field name="codBib" class="java.lang.String"/>
+	<field name="codSerie" class="java.lang.String"/>
+	<field name="inventario" class="java.lang.String"/>
+	<field name="dataIngresso" class="java.lang.String"/>
+	<field name="dataIngressoDate" class="java.util.Date"/>
+	<field name="codTipoAcq" class="java.lang.String"/>
+	<field name="descrTipoAcq" class="java.lang.String"/>
+	<field name="codTipoMat" class="java.lang.String"/>
+	<field name="descrTipoMat" class="java.lang.String"/>
+	<field name="classe" class="java.lang.String"/>
+	<field name="simbolo" class="java.lang.String"/>
+	<field name="dirittoDiStampa" class="java.lang.String"/>
+	<field name="altriTipiAcq" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="540" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{descrTipoRecord} != null && !$F{descrTipoRecord}.trim().equals("")) ? $F{descrTipoRecord} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="148" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{descrProvincia} != null && !$F{descrProvincia}.trim().equals("")) ? $F{descrProvincia} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="736" y="0" width="48" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{simbolo} != null && !$F{simbolo}.trim().equals("")) ? $F{simbolo} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="197" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{isbn} != null && !$F{isbn}.trim().equals("")) ? $F{isbn} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="246" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{dataPubbl} != null && !$F{dataPubbl}.trim().equals("")) ? $F{dataPubbl} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="687" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{classe} != null && !$F{classe}.trim().equals("")) ? $F{classe} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="50" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{nomeEditore} != null && !$F{nomeEditore}.trim().equals("")) ? $F{nomeEditore} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText-3" style="Header" mode="Transparent" x="1" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{editore} != null ? $F{editore} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="295" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{lingua} != null && !$F{lingua}.trim().equals("")) ? $F{lingua} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="344" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{bid} != null && !$F{bid}.trim().equals("")) ? $F{bid} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="99" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{descrComune} != null && !$F{descrComune}.trim().equals("")) ? $F{descrComune} : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="staticText" style="Header" mode="Transparent" x="638" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{altriTipiAcq}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="staticText" style="Header" mode="Transparent" x="589" y="0" width="49" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dirittoDiStampa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText" style="Header" mode="Transparent" x="393" y="0" width="147" height="32" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{titolo} != null && !$F{titolo}.trim().equals("")) ? $F{titolo} : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

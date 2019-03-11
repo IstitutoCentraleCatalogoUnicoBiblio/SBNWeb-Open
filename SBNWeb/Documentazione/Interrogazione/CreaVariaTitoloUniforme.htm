@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>SBNWEB Guida online</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script>
+</head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Inserimento/Variazione
+Titolo Uniforme (Musicale e non) </h1>
+<ul>
+<li><a href="#Descrizione">Descrizione</a></li>
+<li><a href="#Ingresso">Punti di ingresso</a></li>
+<li><a href="#Prerequisiti">Prerequisiti</a></li>
+<li><a href="#ModuloDati">Modulo immissione
+dati</a>
+<ul>
+<li><a href="#Canali">Area canali</a></li>
+<li><a href="#Filtri">Area filtri</a></li>
+<li><a href="#Miscellanea">Area
+miscellanea </a></li>
+<li><a href="#Default">Valori di default</a></li>
+<li><a href="#Azioni">Azioni utente</a></li>
+</ul>
+</li>
+<li><a href="#Controlli">Controlli del
+sistema</a><br>
+</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span><strong>Punti
+di ingresso </strong></h2>
+<ol>
+<li>Menu-&gt;Interrogazione-&gt;Titolo-&gt;<a href="RicercaAutore.htm">Ricerca Titolo </a></li>
+<li>Selezione di un oggetto titolo  dall'<a href="AnaliticaOggettiBibliografici.htm">Analitica</a> -&gt; Selezione della funzione <a href="AnaliticaConVaiA.htm">Vai a</a> - Variazione descrizione </li>
+<li>Barra di navigazione </li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="Stile3 style8">Modulo immissione dati</span></h2>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Maschera di Inserimento nuovo Titolo Uniforme </span></p>
+<p align="center"><img src="immagini/CreaTitUniforme.gif" width="789" height="450"></p>
+<p align="center"><span class="Stile3 style8"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Maschera di Variazione Dati Titolo Uniforme </span></span></p>
+<p align="center"><img src="immagini/VariaTitUniforme.gif" width="787" height="454"></p>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Maschera di Inserimento nuovo Titolo Uniforme Musicale </span></p>
+<p align="center"><img src="immagini/CreaTitUniformeMusicale.gif" width="776" height="847"></p>
+<p align="center"><span class="Stile3 style8"><span class="style5 style8 style4 Stile3" style="font-weight: normal;"><a name="GaraDacquisto"></a>Maschera di Variazione Dati Titolo Uniforme Musicale </span></span></p>
+<p align="center"><img src="immagini/VariaTitUniformeMusicale.gif" width="741" height="846"></p>
+<p align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+comune </span></p>
+<ul>
+  <li><strong>Natura</strong> (=&rdquo;A&rdquo;, non modificabile) &ndash; 1 carattere  alfanumerico</li>
+  <li><strong>Tipo materiale</strong> (&ldquo;Musica&rdquo; o &ldquo;altro&rdquo;) &ndash; 1 caratteri  alfanumerici</li>
+  <li><strong>BID</strong> (non digitabile) &ndash; 10 caratteri alfanumerici</li>
+  <li><strong>Livello  di autorit&agrave;</strong> (tabella  LIVE, obbligatorio) &ndash; 2 caratteri numerici</li>
+  <li><strong>Lingua</strong> (tabella LING) &ndash; 3 caratteri alfanumerici</li>
+  <li><strong>Norme</strong> (obbligatorio, facoltativo in musica,  default &ldquo;RICA&rdquo;) &ndash; 10 caratteri alfanumerici</li>
+  <li><strong>Sigla Agenzia</strong> (default =  &ldquo;ICCU&rdquo;) &ndash; 4 caratteri  alfanumerici </li>
+  <li><strong>Numero ISADN</strong> &ndash; 30 caratteri alfanumerici</li>
+  <li><strong>Titolo</strong> &ndash; 1200 caratteri alfanumerici (obbligatorio, controllo  almeno 1 asterisco,&nbsp; non digitabile per  &ldquo;Musica&rdquo;)</li>
+  <li><strong>Nota informativa</strong> &ndash; 320 caratteri alfanumerici</li>
+  <li><strong>Note del catalogatore</strong> (obbligatorio,  facoltativo  in musica) &ndash; 320 caratteri alfanumerici</li>
+  <li><strong>Fonti, </strong>riporta l&rsquo;elenco dei legami tra l&rsquo;autore e l&rsquo;archivio dei repertori. Data  la ripetitivit&agrave; e la struttura dell&rsquo;informazione, i dati verranno gestiti su di  una griglia contenente le seguenti colonne:<strong></strong>
+    <ul>
+      <li><strong>si/no, </strong>obbligatorio, default: si, valori  ammessi: si, no<strong></strong></li>
+      <li><strong>Sigla  Repertorio, </strong>obbligatorio, valori  ammessi: tabella dei repertori autori<strong></strong></li>
+      <li><strong>Nota, </strong>160 caratteri alfanumerici</li>
+    </ul>
+    In corrispondenza della <em>griglia  dei legami ai repertori</em> saranno inoltre disponibili le seguenti opzioni:
+    <ul>
+      <li><em>Nuova citazione</em>, per inserire una nuova  riga sulla griglia </li>
+      <li><em>Cancella citazione, </em>permette la  cancellazione della riga selezionata. </li>
+      <li><em>Cerca  Repertori, </em>attiva il <a href="HelpRepertori.htm">pannello di ricerca dei repertori</a> per l&rsquo;individuazione di quello da inserire/aggiornare sulla riga selezionata </li>
+    </ul>
+  </li>
+  
+  <li><strong>Data di ultimo aggiornamento</strong> (sola visualizzazione) &ndash;  formato data (gg/mm/aaaa)</li>
+  <li><strong>Data di inserimento</strong> (sola visualizzazione) &ndash; formato  data (gg/mm/aaaa)</li>
+  </ul>
+<p>A seguire, solo per il Titolo Uniforme Musicale:</p>
+<ul>
+  <li><strong>Livello  di autorit&agrave; per la specificit&agrave; Musica </strong> (tabella  LIVE, obbligatorio) &ndash; 2 caratteri numerici</li>
+  <li><strong>Titolo di ordinamento</strong> (obbligatorio,  controllo almeno 1 asterisco) &ndash; 240 caratteri alfanumerici</li>
+  <li><strong>Titolo dell&rsquo;estratto</strong>  &ndash; 240  caratteri alfanumerici</li>
+  <li><strong>Appellativo</strong> &ndash; 240 caratteri  alfanumerici</li>
+  <li><strong>Forma della composizione musicale</strong> (    ripetitivo fino a 3) &ndash; 255 caratteri alfanumerici</li>
+  <li><strong>Organico sintetico</strong> &ndash; 80 caratteri alfanumerici; sul campo &egrave; presente la funzione di <a href="HelpOrganici.htm">Help per l'inserimento dei codici di Organico</a> attivabile dall'icona posto a fianco del campo stesso; </li>
+  <li><strong>Organico analitico</strong> &ndash; 320 caratteri  alfanumerici; sul campo &egrave; presente la funzione di <a href="HelpOrganici.htm">Help per l'inserimento dei codici di Organico</a> attivabile dall'icona posto a fianco del campo stesso</li>
+  <li><strong>N. ordine</strong>  &ndash; 20 caratteri  alfanumerici</li>
+  <li><strong>N. d&rsquo;opera</strong> &ndash; 20 caratteri  alfanumerici</li>
+  <li><strong>N. catalogo tematico</strong>  &ndash; 20 caratteri  alfanumerici</li>
+  <li><strong>Datazione</strong>  &ndash; 10 caratteri  alfanumerici</li>
+  <li><strong>Tonalit&agrave;</strong>&ndash; 20 caratteri  alfanumerici</li>
+  <li><strong>Sezioni</strong>  &ndash; 20 caratteri alfanumerici</li>
+  </ul>
+<p>La maschera di Variazione Titolo Uniforme, Muiscale e non, &egrave; in tutto uguale a quella di Creazione fatto salva che tutti i campi vengono preimpostati con i dati letti dalla base dati di Indice e possono venire quindi aggiornati. Gli unici campi non modificabile sono quelli relativi a <strong>BID,  data di inserimento, data di  ultima variazione</strong>;</p>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li> Vedi immagini delle mappe </li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+<ul>
+<li> Bottone '<strong>OK</strong>' in fase di Creazione; attiva la procedura di creazione di un Autore condiviso sulla Base Dati di Indice e poi Locale se la richiesta di creazione &egrave; stata fatta tramite pressione del Bottone '<strong>Crea</strong>' e attiva la procedura di creazione di un Autore <em>non</em> condiviso sulla sola Base Dati i Locale se la richiesta di creazione &egrave; stata fatta tramite pressione del Bottone '<strong>Crea in locale </strong>'</li>
+<li>Bottone '<strong>OK</strong>' in fase di Variazione attiva la procedura di salvataggio delle variazioni fatte sulla Base Dati di competenza (se l'Autore &egrave; condiviso il salvataggio viene fatto sia sulla Base dati di Indice che locale; se l'autore <em>non</em> &egrave; &egrave; condoviso il salavatggio viene fatto solo sulla Base dati locale) </li>
+<li>Bottone '<strong>Annulla</strong>' provvede a chiudere la mappa di inserimento/variazione, eliminandola anche dalla riga di Navigazione, e torna alla mappa da cui era stata richiamata. </li>
+</ul>
+<h3><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>A</span>zioni aggiuntive (solo per &ldquo;Musica&rdquo;)</h3>
+<ul>
+  <li> Bottone &quot;<strong>Calcola ISBD</strong>&quot; che attua la ricomposizione  degli elementi del titolo uniforme secondo il formato ISBD, in base allo  specifico algoritmo fornito dall&rsquo;Istituto, e lo prospetta nel campo ISBD;</li>
+</ul>
+<h3 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style8"><strong>Controlli del sistema</strong></span></h3>
+<p>
+  <ul>
+  <li>
+</p>
+<p>Livello  di autorit&agrave;:
+  in caso di variazione di un documento esistente,  se il livello di  autorit&agrave; del  titolo &egrave; superiore al livello di autorit&agrave; dell&rsquo;utente le variazione &egrave;  inibita; l&rsquo;utente pu&ograve; immettere un valore minore o uguale  al suo livello di autorit&agrave;</p>
+<p>Nota del Catalogatore non visibile a chi &egrave; abilitato  alla sola interrogazione</p>
+<p>tutti i campi con tabella associata possono assumere  solo i valori previsti in tabella o nessuno</p>
+<p>verifica della presenza di &ldquo;simili&rdquo;: sia in caso di Aggiornamento che di Inserimento il sistema effettua  il controllo di &ldquo;uguaglianza&rdquo; tra i dati inseriti dall&rsquo;utente e i dati presenti  nella base informativa su cui &egrave; stata effettuata l'interrogazione quindi di Indice per i Titoli Uniformi, musicali e non, condivisi e Locale per gli Titoli Uniformi, musicali e non, <em>non</em> condivisi). Nel caso rilevi la presenza di un altro Titolo Uniforme, musicale e non,  per il  quale le informazioni siano del tutto identiche a quelle fornite dall&rsquo;utente,  il sistema invier&agrave; un opportuno messaggio di errore. A fronte di questa  specifica tipologia di errore, l&rsquo;applicativo rimarr&agrave; sul pannello attivo, non  permetter&agrave; la forzatura dell&rsquo;inserimento, ma render&agrave; disponibili i campi sul  pannello per la loro modifica e/o implementazione. 
+  Nel caso in cui in fase di inserimento/aggiornamento il sistema rilevi  la presenza di elementi &ldquo;simili&rdquo;  verra prospettata   anche la maschera della <a href="SinteticaAutoriSimili.htm">Sintetica Titolo Uniforme Simili</a> contenente la lista degli  elementi simili rilevati.<br>
+</p>
+<hr><p class="style5 style8 style4 Stile3" align="left">&nbsp;</p></td>
+</tr>
+<tr>
+  <td bgcolor="#dde8f0" valign="top">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body></html>

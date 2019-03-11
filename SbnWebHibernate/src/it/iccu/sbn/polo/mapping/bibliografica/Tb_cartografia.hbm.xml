@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_cartografia" table="tb_cartografia" >
+		<meta attribute="class-description">
+			MATERIALE CARTOGRAFICO
+		</meta>
+		<id column="bid" type="string">
+			<generator class="foreign">
+				<param name="property">b</param>
+			</generator>
+		</id>
+		<one-to-one name="b" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="all" constrained="true"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="tp_pubb_gov" column="tp_pubb_gov" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_colore" column="cd_colore" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_meridiano" column="cd_meridiano" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_supporto_fisico" column="cd_supporto_fisico" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_tecnica" column="cd_tecnica" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_forma_ripr" column="cd_forma_ripr" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_forma_pubb" column="cd_forma_pubb" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_altitudine" column="cd_altitudine" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_tiposcala" column="cd_tiposcala" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_scala" column="tp_scala" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="scala_oriz" column="scala_oriz" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="scala_vert" column="scala_vert" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="longitudine_ovest" column="longitudine_ovest" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="longitudine_est" column="longitudine_est" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="latitudine_nord" column="latitudine_nord" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="latitudine_sud" column="latitudine_sud" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="tp_immagine" column="tp_immagine" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_forma_cart" column="cd_forma_cart" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_piattaforma" column="cd_piattaforma" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_categ_satellite" column="cd_categ_satellite" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

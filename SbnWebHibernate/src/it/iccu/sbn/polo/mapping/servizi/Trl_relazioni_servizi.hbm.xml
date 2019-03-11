@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_relazioni_servizi" table="trl_relazioni_servizi" >
+		<meta attribute="class-description">
+			Tabella che mette in relazione le tabelle dei servizi con le tabelle dei codici
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="cd_relazione" column="cd_relazione" type="string" length="10" not-null="true" lazy="false"/>
+		<property name="tabella_di_relazione" column="tabella_di_relazione" type="string" length="255" not-null="true" lazy="false"/>
+		<property name="id_relazione_tabella_di_relazione" column="id_relazione_tabella_di_relazione" type="integer" not-null="true" lazy="false"/>
+		<property name="tabella_tb_codici" column="tabella_tb_codici" type="string" length="255" not-null="true" lazy="false"/>
+		<property name="id_relazione_tb_codici" column="id_relazione_tb_codici" type="string" length="255" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="uet_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_is" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

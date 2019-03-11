@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_materie_utenti" table="trl_materie_utenti" >
+		<meta attribute="class-description">
+			Materia d'interesse degli utenti
+		</meta>
+		<composite-id>
+			<key-property name="id_utenti_id_utenti" column="id_utenti" type="integer"/>
+			<key-property name="id_materia_id_materia" column="id_materia" type="integer"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_utenti" column="id_utenti" class="it.iccu.sbn.polo.orm.servizi.Tbl_utenti" insert="false" update="false">
+		</many-to-one>
+		<many-to-one name="id_materia" column="id_materia" class="it.iccu.sbn.polo.orm.servizi.Tbl_materie" insert="false" update="false">
+		</many-to-one>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

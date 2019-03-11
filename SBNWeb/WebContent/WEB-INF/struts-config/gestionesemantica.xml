@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<!-- SOGGETTO -->
+		<form-bean name="RicercaSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.RicercaSoggettoForm" />
+		<form-bean name="ListaSoggettiForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.ListaSoggettiForm" />
+		<form-bean name="AnaliticaSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.AnaliticaSoggettoForm" />
+		<form-bean name="CreaSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.CreaSoggettoForm" />
+		<form-bean name="AnaliticaDescrittoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.AnaliticaDescrittoreForm" />
+		<form-bean name="SinteticaDescrittoriForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.SinteticaDescrittoriForm" />
+		<form-bean name="SinteticaDescrittoriSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.SinteticaDescrittoriSoggettoForm" />
+		<form-bean name="SinteticaDescrittoriParoleForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.SinteticaDescrittoriParoleForm" />
+		<form-bean name="EsaminaSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.EsaminaSoggettoForm" />
+		<form-bean name="EsaminaDescrittoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.EsaminaDescrittoreForm" />
+		<form-bean name="GestioneSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.GestioneSoggettoForm" />
+		<form-bean name="GestioneDescrittoreForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.GestioneDescrittoreForm" />
+		<form-bean name="InsLegameSogDescrForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.InsLegameSogDescrForm" />
+		<form-bean name="InsDescrPerLegameDescrForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.InsDescrPerLegameDescrForm" />
+		<form-bean name="InsLegameTraDescrForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.InsLegameTraDescrForm" />
+		<form-bean name="ModLegameTraDescrForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.ModLegameTraDescrForm" />
+		<form-bean name="ImportaSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.ImportaSoggettoForm" />
+		<form-bean name="TrascinaTitoliForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.TrascinaTitoliForm" />
+		<form-bean name="FondiSoggettoForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.FondiSoggettoForm" />
+		<form-bean name="CatalogazioneSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CatalogazioneSemanticaForm" />
+		<form-bean name="CreaLegameSoggettoTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CreaLegameSoggettoTitoloForm" />
+		<form-bean name="VariaLegameSoggettoTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.VariaLegameSoggettoTitoloForm" />
+		<form-bean name="CancellaLegameSoggettoTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CancellaLegameSoggettoTitoloForm" />
+		<form-bean name="CatturaSoggettoDaIndiceForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CatturaSoggettoDaIndiceForm" />
+
+		<form-bean name="CreaLegameAbstractTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CreaLegameAbstractTitoloForm" />
+		<form-bean name="VariaLegameAbstractTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.VariaLegameAbstractTitoloForm" />
+		<form-bean name="CancellaLegameAbstractTitoloForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.CancellaLegameAbstractTitoloForm" />
+
+		<form-bean name="prenotaBatchSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.batch.PrenotaBatchSemanticaForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards></global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+
+		<!-- PAGINA DI RICERCA (INIZIALE) /gestionesemantica/soggetto/RicercaSoggetto.do-->
+		<action path="/gestionesemantica/soggetto/RicercaSoggetto"
+			name="RicercaSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.RicercaSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/ricercaSoggetto.jsp"
+			scope="session" parameter="methodRicerca">
+			<!-- LISTA DEI SOGGETTI VADO A  /gestionesemantica/soggetto/ListaSoggetti.do-->
+			<forward name="trovatolista"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="trovatouno"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="nontrovato"
+				path="/gestionesemantica/soggetto/CreaSoggetto.do" />
+			<forward name="trovatounodescr"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="trovatolistadescrittorisoggetto"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto.do" />
+			<forward name="trovatolistadescrittori"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="trovatolistadescrittoriparole"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriParole.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/ListaSoggetti"
+			name="ListaSoggettiForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.ListaSoggettiAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/listaSoggetti.jsp"
+			scope="session" parameter="methodSinteticaSog">
+			<forward name="ricercaSoggetto"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="caricaBlocco"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="titoliCollegatiPolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiBiblio"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="trovatolista"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="cercaIndicePerParole"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="importaSoggetto"
+				path="/gestionesemantica/soggetto/ImportaSoggetto.do" />
+			<forward name="creaSoggetto"
+				path="/gestionesemantica/soggetto/CreaSoggetto.do" />
+			<forward name="analiticaSoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="ok"
+				path="/gestionesemantica/soggetto/TrascinaTitoli.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="sinteticadescrittorisoggetto"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto.do" />
+			<forward name="sinteticadescrittori"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="sinteticadescrittoriparole"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriParole.do" />
+			<forward name="creaLegameSoggettoTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameSoggettoTitolo.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/CreaSoggetto"
+			name="CreaSoggettoForm"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/creaSoggetto.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.CreaSoggettoAction"
+			parameter="methodCreaSog">
+			<forward name="analiticaSoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="creaLegameSoggettoTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameSoggettoTitolo.do" />
+			<forward name="ok"
+				path="/gestionesemantica/soggetto/TrascinaTitoli.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/AnaliticaSoggetto"
+			name="AnaliticaSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.AnaliticaSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/analiticaSoggetto.jsp"
+			scope="session" parameter="methodAnaSog">
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="cercaInIndice"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="creaSoggetto"
+				path="/gestionesemantica/soggetto/CreaSoggetto.do" />
+			<forward name="titoliCollegati"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiFiltro"
+				path="/gestionebibliografica/titolo/interrogazioneTitolo.do?SIFSINTETICA=TRUE" />
+			<forward name="cercaIndicePerParole"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="esaminaSoggetto"
+				path="/gestionesemantica/soggetto/EsaminaSoggetto.do" />
+			<forward name="esaminaDescrittore"
+				path="/gestionesemantica/soggetto/EsaminaDescrittore.do" />
+			<forward name="gestioneSoggetto"
+				path="/gestionesemantica/soggetto/GestioneSoggetto.do" />
+			<forward name="gestioneDescrittore"
+				path="/gestionesemantica/soggetto/GestioneDescrittore.do" />
+			<forward name="inserisciLegameSogDescr"
+				path="/gestionesemantica/soggetto/InsLegameSogDescr.do" />
+			<forward name="inserisciDescrLegameDescr"
+				path="/gestionesemantica/soggetto/InsDescrPerLegameDescr.do" />
+			<forward name="modificaLegameTraDescr"
+				path="/gestionesemantica/soggetto/ModLegameTraDescr.do" />
+			<forward name="importaSoggetto"
+				path="/gestionesemantica/soggetto/ImportaSoggetto.do" />
+			<forward name="analiticasoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="sinteticadescrittorisoggetto"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto.do" />
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="ok"
+				path="/gestionesemantica/soggetto/TrascinaTitoli.do" />
+			<forward name="ricerca"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="sinteticadescrittorisoggetto"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto.do" />
+			<forward name="sinteticadescrittori"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="sinteticadescrittoriparole"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriParole.do" />
+			<forward name="creaLegameSoggettoTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameSoggettoTitolo.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/AnaliticaDescrittore"
+			name="AnaliticaDescrittoreForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.AnaliticaDescrittoreAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/analiticaDescrittore.jsp"
+			scope="session" parameter="methodAnaDet">
+			<forward name="analiticadescrittore"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="sinteticadescrittori"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="esaminaDescrittore"
+				path="/gestionesemantica/soggetto/EsaminaDescrittore.do" />
+			<forward name="gestioneDescrittore"
+				path="/gestionesemantica/soggetto/GestioneDescrittore.do" />
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="sinteticadescrittorisoggetto"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto.do" />
+			<forward name="sinteticadescrittori"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="sinteticaparole"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriParole.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="inserisciDescrLegameDescr"
+				path="/gestionesemantica/soggetto/InsDescrPerLegameDescr.do" />
+			<forward name="modificaLegameTraDescr"
+				path="/gestionesemantica/soggetto/ModLegameTraDescr.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/SinteticaDescrittori"
+			name="SinteticaDescrittoriForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.SinteticaDescrittoriAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/sinteticaDescrittori.jsp"
+			scope="session" parameter="methodSinteticaDes">
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="caricablocco"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="cercaInIndice"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="soggetti"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="analiticaDescrittore"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="sinteticadescrittorisoggetto"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto.do" />
+			<forward name="sinteticaparole"
+				path="/gestionesemantica/soggetto/SinteticaDescrittoriParole.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/soggetto/SinteticaDescrittoriSoggetto"
+			name="SinteticaDescrittoriSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.SinteticaDescrittoriSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/sinteticaDescrittoriSoggetto.jsp"
+			scope="session" parameter="methodSinteticaDescrittori">
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="listadescrittori"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/soggetto/SinteticaDescrittoriParole"
+			name="SinteticaDescrittoriParoleForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.SinteticaDescrittoriParoleAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/sinteticaDescrittoriParole.jsp"
+			scope="session" parameter="methodSinteticaParole">
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/SinteticaDescrittori.do" />
+			<forward name="paroleTutte"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/EsaminaSoggetto"
+			name="EsaminaSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.EsaminaSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/esaminaSoggetto.jsp"
+			scope="session" parameter="methodEsaSog">
+			<forward name="gestioneSoggetto"
+				path="/gestionesemantica/soggetto/GestioneSoggetto.do" />
+			<forward name="importaSoggetto"
+				path="/gestionesemantica/soggetto/ImportaSoggetto.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="titoliCollegatiPolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiBiblio"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiIndice"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/EsaminaDescrittore"
+			name="EsaminaDescrittoreForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.EsaminaDescrittoreAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/esaminaDescrittore.jsp"
+			scope="session" parameter="methodEsaDes">
+			<forward name="analiticasoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="analiticadescrittore"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="gestione"
+				path="/gestionesemantica/soggetto/GestioneDescrittore.do" />
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/GestioneSoggetto"
+			name="GestioneSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.GestioneSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/gestioneSoggetto.jsp"
+			scope="session" parameter="methodGestSog">
+			<forward name="analiticasoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="trascina"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="fondi"
+				path="/gestionesemantica/soggetto/FondiSoggetto.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="titoliCollegatiPolo"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiBiblio"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="titoliCollegatiIndice"
+				path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+			<forward name="ricerca"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/GestioneDescrittore"
+			name="GestioneDescrittoreForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.GestioneDescrittoreAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/gestioneDescrittore.jsp"
+			scope="session" parameter="methodGestDes">
+			<forward name="analiticasoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="analiticadescrittore"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="listasintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="ricerca"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/InsLegameSogDescr"
+			name="InsLegameSogDescrForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.InsLegameSogDescrAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/insLegameSogDescr.jsp"
+			scope="session" parameter="methodInsSogDes">
+			<forward name="ok"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/soggetto/InsDescrPerLegameDescr"
+			name="InsDescrPerLegameDescrForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.InsDescrPerLegameDescrAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/insDescrPerLegameDescr.jsp"
+			scope="session" parameter="methodInsDesDes">
+			<forward name="ok"
+				path="/gestionesemantica/soggetto/InsLegameTraDescr.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/InsLegameTraDescr"
+			name="InsLegameTraDescrForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.InsLegameTraDescrAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/insLegameTraDescr.jsp"
+			scope="session" parameter="methodInsTraDes">
+			<forward name="analiticasoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="analiticadescrittore"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="ricerca"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+
+		</action>
+
+		<action path="/gestionesemantica/soggetto/ModLegameTraDescr"
+			name="ModLegameTraDescrForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.ModLegameTraDescrAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/modLegameTraDescr.jsp"
+			scope="session" parameter="methodModTraDes">
+			<forward name="analiticasoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="analiticadescrittore"
+				path="/gestionesemantica/soggetto/AnaliticaDescrittore.do" />
+			<forward name="annulla"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/ImportaSoggetto"
+			name="ImportaSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.ImportaSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/importaSoggetto.jsp"
+			scope="session" parameter="methodImpSog">
+			<forward name="ok"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="ricerca"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="trascina"
+				path="/gestionesemantica/soggetto/TrascinaTitoli.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameSoggettoTitolo.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/TrascinaTitoli"
+			name="TrascinaTitoliForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.TrascinaTitoliAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/trascinaTitoli.jsp"
+			scope="session" parameter="methodTraTit">
+			<forward name="analiticaSoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="listaSintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+		</action>
+
+		<action path="/gestionesemantica/soggetto/FondiSoggetto"
+			name="FondiSoggettoForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.soggetto.FondiSoggettoAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/fondiSoggetto.jsp"
+			scope="session" parameter="methodFondiSog">
+			<forward name="analiticaSoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="listaSintetica"
+				path="/gestionesemantica/soggetto/ListaSoggetti.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+		</action>
+
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica"
+			name="CatalogazioneSemanticaForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CatalogazioneSemanticaAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/catSemanticaComune.jsp"
+			scope="session" parameter="methodCatalogazione">
+			<forward name="recuperaLegameSoggettoTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameSoggettoTitolo.do" />
+			<forward name="catturaSoggettoDaIndice"
+				path="/gestionesemantica/catalogazionesemantica/CatturaSoggettoDaIndice.do" />
+			<forward name="catturaClasseDaIndice"
+				path="/gestionesemantica/catalogazionesemantica/CatturaClassificazioneDaIndice.do" />
+			<forward name="creaLegameSoggetto"
+				path="/gestionesemantica/soggetto/RicercaSoggetto.do" />
+			<forward name="creaLegameClasse"
+				path="/gestionesemantica/classificazione/RicercaClasse.do" />
+			<forward name="variaLegameSoggetto"
+				path="/gestionesemantica/catalogazionesemantica/VariaLegameSoggettoTitolo.do" />
+			<forward name="cancellaLegameSoggetto"
+				path="/gestionesemantica/catalogazionesemantica/CancellaLegameSoggettoTitolo.do" />
+			<forward name="analiticaSoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+			<forward name="esaminaClasse"
+				path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+			<forward name="analiticaTitolo"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward name="variaLegameClasse"
+				path="/gestionesemantica/catalogazionesemantica/VariaLegameClassificazioneTitolo.do" />
+			<forward name="cancellaLegameClasse"
+				path="/gestionesemantica/catalogazionesemantica/CancellaLegameClassificazioneTitolo.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+			<forward name="gestioneLegameTitoloTermine"
+				path="/gestionesemantica/catalogazionesemantica/GestioneLegameTitoloTermine.do" />
+			<forward name="inserisciLegameTitoloTermine"
+				path="/gestionesemantica/thesauro/RicercaThesauro.do" />
+		</action>
+
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CreaLegameSoggettoTitolo"
+			name="CreaLegameSoggettoTitoloForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CreaLegameSoggettoTitoloAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/creaLegameSoggettoTitolo.jsp"
+			scope="session" parameter="methodCreaLegameTitSog">
+			<forward name="ok"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="invioInIndice"
+				path="/gestionesemantica/catalogazionesemantica/InvioInIndice.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/VariaLegameSoggettoTitolo"
+			name="VariaLegameSoggettoTitoloForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.VariaLegameSoggettoTitoloAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/variaLegameSoggettoTitolo.jsp"
+			scope="session" parameter="methodVariaLegameTitSog">
+			<forward name="ok"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="invioInIndice"
+				path="/gestionesemantica/catalogazionesemantica/InvioInIndice.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/soggetto/Stampa.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CancellaLegameSoggettoTitolo"
+			name="CancellaLegameSoggettoTitoloForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CancellaLegameSoggettoTitoloAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/cancellaLegameSoggettoTitolo.jsp"
+			scope="session" parameter="methodCancellaLegameTitSog">
+			<forward name="ok"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/catalogazionesemantica/CatturaSoggettoDaIndice"
+			name="CatturaSoggettoDaIndiceForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.CatturaSoggettoDaIndiceAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/catturaSoggettoDaIndice.jsp"
+			scope="session" parameter="methodCatturaSog">
+			<forward name="catalogazioneSemantica"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+			<forward name="analiticaSoggetto"
+				path="/gestionesemantica/soggetto/AnaliticaSoggetto.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/soggetto/PrenotaElaborazioneDifferita"
+			name="prenotaBatchSemanticaForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.batch.PrenotaBatchSemanticaAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/soggetto/prenotaBatchSemantica.jsp"
+			scope="session" parameter="methodBatchSog">
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="gestioneSemanticaLabels"
+		parameter="it.iccu.sbn.web.resources.GestioneSemanticaLabels"
+		null="false" />
+
+	<message-resources key="gestioneSemanticaMessages"
+		parameter="it.iccu.sbn.web.resources.GestioneSemanticaMessages"
+		null="false" />
+
+	<plug-in className="org.apache.struts.plugins.DigestingPlugIn" id="GS">
+		<set-property property="key" value="labelGestioneSemantica" />
+		<set-property property="configPath"
+			value="/WEB-INF/struts-config/labelGestioneSemantica.xml" />
+		<set-property property="digesterPath"
+			value="/WEB-INF/struts-config/labelGestioneSemantica-digester-rules.xml" />
+	</plug-in>
+
+</struts-config>

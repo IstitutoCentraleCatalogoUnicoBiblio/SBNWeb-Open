@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione" table="tbc_collocazione" >
+		<meta attribute="class-description">
+			COLLOCAZIONE (LOC)
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="key_loc" column="key_loc" type="integer" unsaved-value="0">
+			<generator class="sequence">
+                <param name="sequence">sbnweb.tbc_collocazione_key_loc_seq</param>
+            </generator>
+        </id>
+		<many-to-one name="cd_sistema" class="it.iccu.sbn.polo.orm.gestionesemantica.Tb_classe" cascade="save-update,lock" unique="true" not-null="false" lazy="proxy" access="field">
+			<column name="cd_sistema"/>
+			<column name="cd_edizione"/>
+			<column name="classe"/>
+		</many-to-one>
+		<many-to-one name="cd_sez" cascade="lock" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_sezione_collocazione" not-null="true" lazy="proxy" access="field">
+			<column name="cd_sez"/>
+			<column name="cd_biblioteca_sezione"/>
+			<column name="cd_polo_sezione"/>
+		</many-to-one>
+		<many-to-one name="cd_biblioteca_doc" cascade="lock" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_esemplare_titolo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_doc"/>
+			<column name="bid_doc"/>
+			<column name="cd_biblioteca_doc"/>
+			<column name="cd_polo_doc"/>
+		</many-to-one>
+		<many-to-one name="b" cascade="lock" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="cd_loc" column="cd_loc" type="string" length="24" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				collocazione
+			</meta>
+		</property>
+		<property name="spec_loc" column="spec_loc" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				specificazione della collocazione
+			</meta>
+		</property>
+		<property name="consis" column="consis" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				consistenza della collocazione
+			</meta>
+		</property>
+		<property name="tot_inv" column="tot_inv" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero totale degli inventari collocati
+			</meta>
+		</property>
+		<property name="indice" column="indice" type="string" length="31" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				simbolo di classificazione
+			</meta>
+		</property>
+		<property name="ord_loc" column="ord_loc" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave per ordinamento alfabetico calcolata dalla stringa di collocazione cd_loc
+			</meta>
+		</property>
+		<property name="ord_spec" column="ord_spec" type="string" length="40" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave per ordinamento alfabetico calcolata dalla stringa di specificazione spec_loc
+			</meta>
+		</property>
+		<property name="tot_inv_prov" column="tot_inv_prov" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di inventari spostati in una collocazione temporanea
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tbc_inventario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="key_loc" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario"/>
+		</set>
+	</class>
+</hibernate-mapping>

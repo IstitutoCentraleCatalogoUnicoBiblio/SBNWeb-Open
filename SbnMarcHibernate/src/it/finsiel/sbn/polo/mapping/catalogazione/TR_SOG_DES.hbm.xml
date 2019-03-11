@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_sog_des" polymorphism="explicit" table="TR_SOG_DES" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="TB_SOGGETTO" column="CID" class="it.finsiel.sbn.polo.orm.Tb_soggetto1">
+			</key-many-to-one>
+			<key-many-to-one name="TB_DESCRITTORE" column="DID" class="it.finsiel.sbn.polo.orm.Tb_descrittore1">
+			</key-many-to-one>
+			-->
+			<key-property name="DID" column="DID" type="string"/>
+			<key-property name="CID" column="CID" type="string"/>
+
+		</composite-id>
+		<property name="FL_PRIMAVOCE" column="FL_PRIMAVOCE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_POSIZIONE" column="FL_POSIZIONE" type="integer" not-null="true"/>
+
+
+
+
+		<filter name="TR_SOG_DES_selectPerKey"
+				condition="cid = :XXXcid
+						  AND did = :XXXdid
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_SOG_DES_selectDescrittorePerSoggetto"
+				condition="cid = :XXXcid
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_SOG_DES_selectLegameDescrittore"
+				condition="did = :XXXdid
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_SOG_DES_countSoggettoPerDescrittore"
+				condition="did = XXXdid
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_SOG_DES_verificaEsistenzaId"
+				condition="cid = :XXXcid
+						  AND did = :XXXdid "/>
+
+
+	</class>
+</hibernate-mapping>

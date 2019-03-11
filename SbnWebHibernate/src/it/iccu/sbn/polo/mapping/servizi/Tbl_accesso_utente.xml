@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_accesso_utente" table="tbl_accesso_utente" >
+		<meta attribute="class-description">
+			Documenti inseriti dai lettori
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="biblioteca" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<many-to-one name="utente" cascade="lock" column="id_utente" class="it.iccu.sbn.polo.orm.servizi.Tbl_utenti" not-null="false" lazy="proxy" access="field" />
+		<many-to-one name="posto" cascade="lock" column="id_posto" class="it.iccu.sbn.polo.orm.servizi.Tbl_posti_sala" not-null="false" lazy="proxy" access="field" />
+
+		<property name="id_tessera" column="id_tessera" type="string" length="50" not-null="true" lazy="false" />
+		<property name="ts_evento" column="ts_evento" type="timestamp" not-null="true" lazy="false" />
+		<property name="fl_evento" column="fl_evento" type="character" length="1" not-null="true" lazy="false" />
+		<property name="fl_autenticato" column="fl_autenticato" type="character" length="1" not-null="true" lazy="false" />
+		<property name="fl_forzatura" column="fl_forzatura" type="character" length="1" not-null="true" lazy="false" />
+
+ 		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

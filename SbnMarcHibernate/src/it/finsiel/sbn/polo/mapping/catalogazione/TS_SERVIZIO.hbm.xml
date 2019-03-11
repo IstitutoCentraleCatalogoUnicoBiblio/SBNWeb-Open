@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_servizio" polymorphism="explicit" table="TS_SERVIZIO" lazy="false">
+		<id name="CD_RECORD" column="CD_RECORD" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="CAMPO1" column="CAMPO1" type="string" length="20" not-null="false"/>
+		<property name="CAMPO2" column="CAMPO2" type="string" length="20" not-null="false"/>
+		<property name="CAMPO3" column="CAMPO3" type="string" length="20" not-null="false"/>
+	</class>
+</hibernate-mapping>

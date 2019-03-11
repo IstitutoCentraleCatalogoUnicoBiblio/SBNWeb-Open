@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.gestionesemantica.Tr_thesauri_biblioteche" table="tr_thesauri_biblioteche" schema="sbnweb" >
+		<meta attribute="class-description">
+			SISTEMI DI THESAURO IN BIBLIOTECA (TPSTBI)
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="cd_the" column="cd_the" type="string"/>
+		</composite-id>
+		<property name="fl_att" column="fl_att" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore dell'attuale utilizzo del thesauro da parte della biblioteca
+			</meta>
+		</property>
+		<property name="fl_auto_loc" column="fl_auto_loc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di localizzazione automatica legami a termini di thesauro inseriti da altra biblioteca
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="sololocale" column="sololocale" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Trs_termini_titoli_biblioteche" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+				<column name="cd_the"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Trs_termini_titoli_biblioteche"/>
+		</set>
+	</class>
+</hibernate-mapping>

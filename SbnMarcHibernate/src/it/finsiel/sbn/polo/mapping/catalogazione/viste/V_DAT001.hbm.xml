@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.V_dat001" polymorphism="explicit" table="V_DAT001" lazy="false">
+	<cache usage="read-only"/>
+		<id name="BID" column="BID" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="NATURA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

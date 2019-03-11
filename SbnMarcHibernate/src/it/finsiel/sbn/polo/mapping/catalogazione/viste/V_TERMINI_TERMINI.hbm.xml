@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.V_termini_termini" polymorphism="explicit" table="V_TERMINI_TERMINI" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="DID_1" column="DID_1" type="string"/>
+			<key-property name="DID_2" column="DID_2" type="string"/>
+		</composite-id>
+		<property name="TIPO_COLL" type="it.finsiel.sbn.util.DataTypeCHAR" length="5" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

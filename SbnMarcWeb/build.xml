@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="BUIL WEB" default="build" basedir=".">
+    <property file="build.properties"/>
+
+    <path id="sbnmarc.web.class.path">
+        <fileset dir="${sbnmarc.web.lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+		<fileset dir="../sbnmarc/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="../sbnmarc/lib-compile">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="../SbnMarcEJB/target">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="../SbnMarcEJB/lib">
+			<include name="*.jar" />
+		</fileset>
+    </path>
+
+	<target name="prepare">
+        <mkdir dir="${sbnmarc.web.dist.dir}"/>
+		<mkdir dir="${sbnmarc.web.classes.dir}"/>
+    </target>
+
+	<target name="build" depends="prepare">
+
+        <echo>+---------------------------------------------------+</echo>
+        <echo>|                                                   |</echo>
+        <echo>| B U I L D   S O L U Z I O N E    W E B            |</echo>
+        <echo>|                                                   |</echo>
+        <echo>+---------------------------------------------------+</echo>
+		
+		<javac encoding="UTF-8" includeantruntime="false" destdir="${sbnmarc.web.classes.dir}" source="1.5" target="1.5">
+			<src path="${sbnmarc.web.src.dir}" />
+			<classpath>
+				<path refid="sbnmarc.web.class.path" />
+			</classpath>
+		</javac>
+		
+    	<jar destfile="${sbnmarc.web.dist.dir}/${module.web.name}.war">
+			<zipfileset dir="${sbnmarc.web.webcontent.dir}" />
+			<zipfileset prefix="${sbnmarc.web.webcontent.classes.dir}" dir="${sbnmarc.web.classes.dir}" />
+		</jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${sbnmarc.web.dist.dir}"/>
+		<delete dir="${sbnmarc.web.dir}/build"/>
+    </target>
+
+</project>

@@ -1,0 +1,122 @@
+   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Servizio bibliotecario</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+</head>
+
+
+<script type="text/javascript">
+function goThere(loc)
+   {
+   window.location.href=loc;
+   }
+</script> 
+
+<body>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0" summary="summary">
+
+  <tr>
+    <td  valign="top" bgcolor="#DDE8F0"><p align="center" class="style3 Stile3 style8"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+      <h1 ><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Ricerca utenti  </h1>
+      <ul>
+        <li><a href="#Descrizione">Descrizione</a></li>
+        <li><a href="#Ingresso">Punti di ingresso</a> </li>
+        <li><a href="#Prerequisiti">Prerequisiti</a></li>
+        <li><a href="#ModuloDati">Modulo immissione dati</a>
+          <ul>
+            <li><a href="#Canali">Area canali</a></li>
+            <li><a href="#Filtri">Area filtri</a></li>
+            <li><a href="#Miscellanea">Area miscellanea </a></li>
+            <li><a href="#Default">Valori di default</a> </li>
+            <li><a href="#Azioni">Azioni utente</a></li>
+          </ul>
+        </li>
+        <li><a href="#Controlli">Controlli del sistema</a><br>
+        </li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+      <p>Il Caso d&rsquo;Uso consente al bibliotecario di effettuare la  ricerca l&rsquo;inserimento la cancellazione e la modifica dei dati dell&rsquo;utente sulla  base dati della biblioteca. Il flusso principale consente  l&rsquo;interrogazione e relativa prospettazione della lista sintetica degli utenti  presenti in base dati filtrati per le informazioni indicate nei campi della  mappa di richiesta.</p>
+      <p>I canali primari consentono una identificazione certa ed  univoca dell&rsquo;utente, i secondari possono produrre uno o pi&ugrave; risultati<br>
+Le ricerche verranno effettuate ponendo tutti i parametri in  AND; nei casi in cui sar&agrave; possibile indicare pi&ugrave; valori per un medesimo  parametro,&nbsp; tali valori verranno  considerati tra di loro in OR.</p>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span><strong>Punti di ingresso </strong></h2>
+      <ol>
+        <li>Menu-&gt;Servizi-&gt;Utenti</li>
+        <li>Barra di navigazione </li>
+        <li>In caso di ricerca fallita </li>
+      </ol>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+	  <ul>
+		<li>Il bibliotecario deve avere superato con successo l'autenticazione e l'abilitazione alla funzione</li>
+	  </ul>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="Stile3 style8">Modulo immissione dati</span></h2>
+      <p align="center" class="style5 style8 style4 Stile3"><img src="immagini/RicercaUtente.gif" alt="Ricerca utente" ></p>
+      <h3 align="left" class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area canali  </h3>
+      <p align="left" class="style5 style8 style4 Stile3">Nell'area dei canali troviamo:</p>
+      <ul>
+        <li>Nominativo (Cognome Nome) / Denominazione: nome dell'utente (da indicare nell'ordine Cognome e/o Nome) o denominazione dell'ente</li>
+        <li>Opzione di ricerca testuale da effettuare sul nominativo: 
+			<br>
+          - Inizio = per parte iniziale<br>
+          - Esatto = per termine esatto <br>
+          - Parole = individuazione della/e parola/e specificate<br>
+		</li>
+        <li>Cod. Utente</li>
+        <li>Codice fiscale</li>
+        <li>Cod. Ateneo e Codice Matricola</li>
+        <li>E mail</li>
+      </ul>
+      <p><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area filtri</p>
+      <ul>
+        <li>Data Nascita (gg/mm/aaaa) (da, a)</li>
+        <li>Tipo Autorizzazione:  selezione da elenco</li>
+        <li>Data fine Autorizzazione (gg/mm/aaaa) (da, a)</li>
+        <li>Naz. Cittadinanza</li>
+        <li>Professione: selezione da elenco</li>
+        <li>Titolo di studio: selezione da elenco</li>
+        <li>Prov. Residenza: selezione da elenco</li>
+        <li>Tipo pers. giuridica: selezione da elenco</li>
+      </ul>
+      <p><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Miscellanea" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea </span></p>
+      <ul>
+        <li>Elementi da visualizzare per blocco</li>
+        <li>Ordinamento  per: <br>
+		- Cognome + Nome (asc),<br>
+		- Cognome + Nome (desc),<br>
+		- Cod.Utente (asc), <br>
+		- Cod.Utente (desc). <br>
+        </li>
+      </ul>
+      <h3 align="left" class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+      <ul>
+        <li>          Vedi immagine </li>
+      </ul>
+      <h3 align="left" class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span> </h3>
+      <ul>
+        <li>Bottone '<strong>Cerca</strong>'. Esegue la ricerca e produce una lista <a href="SinteticaUtenti.htm">sintetica</a> degli utenti in caso positivo. </li>
+        <li>Bottone '<strong>Nuovo</strong>'. Attiva la creazione di un <a href="NuovoUtente.htm">nuovo utente</a> </li>
+      </ul>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style8"><strong>Controlli del sistema</strong></span></h2>
+      <ul>
+        <li>Se codice fiscale inserito viene ignorato nome, cognome e data di nascita </li>
+        <li>L'indicazione di chiavi univoche (codice utente, codice fiscale, ateneo + matricola, e-mail) innesca la la ricerca su tutti gli utenti di Polo e non solo su quelli della biblioteca operante</li>
+      </ul>      
+      <hr>
+    <p align="left" class="style5 style8 style4 Stile3">&nbsp;</p>      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+</html>

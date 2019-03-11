@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo" table="tbf_polo" >
+		<!-- <cache usage="transactional" /> -->
+		<id name="cd_polo" column="cd_polo" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="id_parametro" cascade="lock" column="id_parametro" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_parametro" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="url_indice" column="url_indice" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="username" column="username" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="password" column="password" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="denominazione" column="denominazione" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Denominazione del polo
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="false" lazy="false"/>
+		<property name="url_polo" column="url_polo" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="username_polo" column="username_polo" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="email" column="email" type="string" length="255" not-null="true" lazy="false"/>
+
+
+		<many-to-one name="id_gruppo_attivita" column="id_gruppo_attivita" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita" cascade="save-update,lock" unique="true" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+
+		<set name="Tbf_gruppo_attivita" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita"/>
+		</set>
+		<set name="Tbf_biblioteca_in_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo"/>
+		</set>
+		<set name="Trf_utente_professionale_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_utente_professionale_polo"/>
+		</set>
+		<set name="Trf_attivita_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_attivita_polo"/>
+		</set>
+
+			<set name="Tbf_polo_default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo_default"/>
+		</set>
+
+	</class>
+</hibernate-mapping>

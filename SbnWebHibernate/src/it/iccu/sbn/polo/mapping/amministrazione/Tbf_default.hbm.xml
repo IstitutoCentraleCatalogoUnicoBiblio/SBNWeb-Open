@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_default" table="tbf_default" >
+		<id name="id_default" column="id_default" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="key" column="`key`" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="tipo" column="tipo" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="lunghezza" column="lunghezza" type="integer" not-null="false" lazy="false"/>
+		<property name="id_etichetta" column="id_etichetta" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Potrebbe non esssere utilizzata se al posto usiamo il campo key per prendere l'etichetta in lingua a un file di properties
+			</meta>
+		</property>
+		<property name="codice_attivita" column="codice_attivita" type="string" length="5" not-null="true" lazy="false"/>
+		<property name="codice_tabella_validazione" column="codice_tabella_validazione" type="string" length="4" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Per prendere le liste (eg. lingua) dalle tabelle di validazione
+			</meta>
+		</property>
+		<property name="seq_ordinamento" column="seq_ordinamento" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Identifica il posizionamento nella maschera di prospettazione
+			</meta>
+		</property>
+		<many-to-one name="tbf_gruppi_default" cascade="lock" column="tbf_gruppi_defaultid" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppi_default" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="tbf_config_default__id_config" cascade="lock" column="tbf_config_default__id_config" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_config_default" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="bundle" column="bundle" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Indicazione del bundle per le properties
+			</meta>
+		</property>
+		<set name="Tbf_bibliotecario_Default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_default" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario_default"/>
+		</set>
+		<set name="Tbf_biblioteca_default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_default" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_default"/>
+		</set>
+		<set name="Tbf_polo_default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_default" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo_default"/>
+		</set>
+	</class>
+</hibernate-mapping>

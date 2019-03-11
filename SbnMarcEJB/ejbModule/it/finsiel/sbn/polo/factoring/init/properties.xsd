@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:annotation>
+		<xsd:documentation>
+		Properties utilizzate in tutto il progetto indice
+	</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="proprieta">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="sezione_comune">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="SERVLET_INDICE_CONTROLLER" type="xsd:string"/>
+							<xsd:element name="ICCU_TEST" type="xsd:string"/>
+							<xsd:element name="ICCU_HOME" type="xsd:string"/>
+							<xsd:element name="SIGLA_INDICE" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_naming">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="DEFAULT_DATASOURCE_JNDINAME" type="xsd:string"/>
+							<xsd:element name="EMPTY_DATASOURCE_JNDINAME" type="xsd:string"/>
+							<xsd:element name="TEST_DATASOURCE_JNDINAME" type="xsd:string"/>
+							<xsd:element name="USERTRANSACTION_JNDINAME" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_box">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="USE_LDAP_FOR_BIS" type="xsd:string"/>
+							<xsd:element name="LDAP_INITIAL_CONTEXT_FACTORY" type="xsd:string"/>
+							<xsd:element name="LDAP_PROVIDER_URL" type="xsd:string"/>
+							<xsd:element name="LDAP_SECURITY_AUTHENTICATION" type="xsd:string"/>
+							<xsd:element name="LDAP_SECURITY_PRINCIPAL" type="xsd:string"/>
+							<xsd:element name="LDAP_SECURITY_CREDENTIALS" type="xsd:string"/>
+							<xsd:element name="LDAP_BIS_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_BIS_DA_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_BIS_DU_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_BIS_PO_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_BIS_SI_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_BIS_SQ_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_SBNMARC_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_DIFFERITA_STORAGE_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_GARBAGE_COLLECTOR_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="LDAP_MONITOR_STORAGE_TIMEOUT" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_bis">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="BIS_MAX_NUMERO_RECORD" type="xsd:string"/>
+							<xsd:element name="BIS_MAX_NUMERO_FILE_OUTPUT" type="xsd:string"/>
+							<xsd:element name="BIS_RIGHE_PER_FOGLIO" type="xsd:string"/>
+							<xsd:element name="BIS_FOGLI_PER_FILE" type="xsd:string"/>
+							<xsd:element name="BIS_RIGHE_PER_BLOCCO_SBNMARC" type="xsd:string"/>
+							<xsd:element name="EXCEL_XSL_FILE" type="xsd:string"/>
+							<xsd:element name="PDF_XSL_FILE" type="xsd:string"/>
+							<xsd:element name="JSP_SCHEDULE_PER_PAGE" type="xsd:string"/>
+							<xsd:element name="STARTNOW_DELAY_IN_MILLIS" type="xsd:string"/>
+							<xsd:element name="MAX_CONCURRED_SCHEDULE" type="xsd:string"/>
+							<xsd:element name="BIS_PARAMETRI_FILE" type="xsd:string"/>
+							<xsd:element name="BIS_XML_BUFFER_CAPACITY" type="xsd:string"/>
+							<xsd:element name="BIS_DIRECTORY_TEMPORANEA" type="xsd:string"/>
+							<xsd:element name="BIS_DIRECTORY_INFORMAZIONI_DB" type="xsd:string"/>
+							<xsd:element name="BIS_INFORMAZIONI_DB_MAX_NUMERO_RECORD" type="xsd:string"/>
+							<xsd:element name="SCHEDULER_THREAD_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="SCHEDULER_LDAP_CHECK_TIMEOUT" type="xsd:string"/>
+							<xsd:element name="BIS_ELABORA_SBNMARC" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_database">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="DB_DRIVER" type="xsd:string"/>
+							<xsd:element name="DB_URL" type="xsd:string"/>
+							<xsd:element name="DB_USER" type="xsd:string"/>
+							<xsd:element name="DB_PASSWORD" type="xsd:string"/>
+							<xsd:element name="DB_STAT_USER" type="xsd:string"/>
+							<xsd:element name="DB_STAT_PASSWORD" type="xsd:string"/>
+							<xsd:element name="DEFAULT_DS_URL" type="xsd:string"/>
+							<xsd:element name="DB_IMPORT_USER" type="xsd:string"/>
+							<xsd:element name="DB_IMPORT_PASSWORD" type="xsd:string"/>
+							<xsd:element name="TEST_DS_URL" type="xsd:string"/>
+							<xsd:element name="DB_IMPORT_T_USER" type="xsd:string"/>
+							<xsd:element name="DB_IMPORT_T_PASSWORD" type="xsd:string"/>
+							<xsd:element name="EMPTY_DS_URL" type="xsd:string"/>
+							<xsd:element name="DB_IMPORT_E_USER" type="xsd:string"/>
+							<xsd:element name="DB_IMPORT_E_PASSWORD" type="xsd:string"/>
+							<xsd:element name="DB_CONN_NO" type="xsd:string"/>
+							<xsd:element name="REMOVER_DELAY" type="xsd:string"/>
+							<xsd:element name="REMOVER_TIMER" type="xsd:string"/>
+							<!-- DEFAULT_DS: URL UTENTE E PSW per le operazioni di IMPORT -->
+							<!-- TEST_DS: URL UTENTE E PSW per le operazioni di IMPORT -->
+							<!-- EMPTY_DS: URL UTENTE E PSW per le operazioni di IMPORT -->
+							<!-- Username e password per operazioni di import unimarc e marc21 DB DEFAULT -->
+							<!-- Username e password per operazioni di import unimarc e marc21 DB TEST -->
+							<!-- Username e password per operazioni di import unimarc e marc21 DB EMPTY -->
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_xml">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="PATH_XML_TAVOLE" type="xsd:string"/>
+							<xsd:element name="FILE_XSD_TAVOLE" type="xsd:string"/>
+							<xsd:element name="FILE_XML_ERRORI" type="xsd:string"/>
+							<xsd:element name="FILE_XSD_ERRORI" type="xsd:string"/>
+							<xsd:element name="FILE_XSD_SBNMARC" type="xsd:string"/>
+							<xsd:element name="FILE_DOM_RESPONSE" type="xsd:string"/>
+							<xsd:element name="SCHEMA_VERSION" type="xsd:string"/>
+							<xsd:element name="SCHEMA_URL" type="xsd:string"/>
+							<xsd:element name="FILE_XSD_TEST" type="xsd:string"/>
+							<xsd:element name="FILE_XML_TEST" type="xsd:string"/>
+							<xsd:element name="FILE_XSD_SCHEDULES" type="xsd:string"/>
+							<xsd:element name="FILE_XML_SCHEDULES" type="xsd:string"/>
+							<xsd:element name="FILE_XSD_JOBSCHEDULER" type="xsd:string"/>
+							<xsd:element name="FILE_XML_JOBSCHEDULER" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_serversbnmarc">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="RIGHE_PER_BLOCCO_SBNMARC" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_GG_PER_RANGE_ALLINEA" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_CHIEDI_ALLINEA" type="xsd:string"/>
+							<xsd:element name="RIGHE_PER_BLOCCO_ALLINEA" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_SPOSTAMENTO_LEGAMI" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_RIGHE_RICHIESTA" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_monitoraggio">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ORA_AVVIO" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_OPERAZIONI_CONSECUTIVE" type="xsd:string"/>
+							<xsd:element name="GAP_OPERAZIONI_CONSECUTIVE" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_OPERAZIONI_OUT_MEDIA" type="xsd:string"/>
+							<xsd:element name="VALORE_MEDIO_LIMITE" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_OPERAZIONI" type="xsd:string"/>
+							<xsd:element name="GAP_OPERAZIONI" type="xsd:string"/>
+							<xsd:element name="NRO_MAX_RICHIESTE_ECCESSIVE" type="xsd:string"/>
+							<xsd:element name="GAP_RICHIESTE_ECCESSIVE" type="xsd:string"/>
+							<xsd:element name="MAX_VARIANZA_TEMPI_RISPOSTA" type="xsd:string"/>
+							<xsd:element name="NUM_DAYS_BACKWARD_CHECK" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_test">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="TEST_XML_DB" type="xsd:string"/>
+							<xsd:element name="TEST_XML_TEMP" type="xsd:string"/>
+							<xsd:element name="TEST_XML_CORRETTI" type="xsd:string"/>
+							<xsd:element name="TEST_XML_TEST" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_processi_differita">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CONTENT_TYPE" type="xsd:string"/>
+							<xsd:element name="FROM_ADDRESS" type="xsd:string"/>
+							<xsd:element name="FROM_NAME" type="xsd:string"/>
+							<xsd:element name="SERVICE_MAIL" type="xsd:string"/>
+							<xsd:element name="ADMIN_MAIL" type="xsd:string"/>
+							<xsd:element name="SMTP_HOST" type="xsd:string"/>
+							<xsd:element name="TB_SCRIPT_MILLISECONDI_VITA" type="xsd:string"/>
+							<xsd:element name="DIRECTORY_UPLOAD_DOWNLOAD" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sezione_opac">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="GIORNI_ATTESA_EXPORT_OPAC" type="xsd:string"/>
+							<xsd:element name="DIRECTORY_OPAC" type="xsd:string"/>
+							<xsd:element name="DIRECTORY_OPAC_PERIODICO" type="xsd:string"/>
+							<xsd:element name="FILE_INPUT_OPAC" type="xsd:string"/>
+							<xsd:element name="NOME_FILE_BID_CANCELLATI" type="xsd:string"/>
+							<xsd:element name="NOME_FILE_BID_FUSI" type="xsd:string"/>
+							<xsd:element name="NOME_FILE_BID_VARIATI" type="xsd:string"/>
+							<xsd:element name="NOME_FILE_BID_LOC_DA_CANC" type="xsd:string"/>
+							<xsd:element name="NOME_FILE_UNIMARC_RIDOTTO" type="xsd:string"/>
+							<xsd:element name="NOME_FILE_UNIMARC_OPAC" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

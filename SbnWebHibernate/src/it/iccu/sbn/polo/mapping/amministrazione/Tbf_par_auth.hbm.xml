@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_par_auth" table="tbf_par_auth" >
+		<composite-id>
+			<key-property name="cd_par_auth" column="cd_par_auth" type="string"/>
+			<key-many-to-one name="id_parametro" column="id_parametro" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_parametro">
+			</key-many-to-one>
+		</composite-id>
+		<property name="tp_abil_auth" column="tp_abil_auth" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_abil_legame" column="fl_abil_legame" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_leg_auth" column="fl_leg_auth" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="cd_contr_sim" column="cd_contr_sim" type="string" length="3" not-null="true" lazy="false"/>
+		<property name="fl_abil_forzat" column="fl_abil_forzat" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="sololocale" column="sololocale" type="character" length="1" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

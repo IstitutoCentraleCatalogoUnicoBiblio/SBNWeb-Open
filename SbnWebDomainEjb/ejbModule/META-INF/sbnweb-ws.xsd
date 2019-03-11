@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:sbn="http://www.iccu.sbn.it/sbnweb/sbnweb-ws" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.iccu.sbn.it/sbnweb/sbnweb-ws" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+	<xs:element name="sbnweb" type="sbn:sbnwebType">
+		<xs:annotation>
+			<xs:documentation>elemento root</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="sbnwebType">
+		<xs:annotation>
+			<xs:documentation>risposta sbnweb-ws</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="esito" type="sbn:EsitoType"/>
+			<xs:element name="documento" type="sbn:DocumentoType" minOccurs="0"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="kardex" type="sbn:KardexType" minOccurs="0"/>
+				<xs:element name="disponibilita" type="sbn:DisponibilitaType" minOccurs="0"/>
+				<xs:element name="posseduto" type="sbn:PossedutoType" minOccurs="0"/>
+				<xs:element name="utente" type="sbn:UtenteType" minOccurs="0"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EsitoType">
+		<xs:annotation>
+			<xs:documentation>esito dell'operazione</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="returnCode">
+				<xs:annotation>
+					<xs:documentation>Codice di ritorno dell'operazione</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="9999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="message">
+				<xs:annotation>
+					<xs:documentation>Messaggio di dettaglio sull'esito dell'operazione</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numeroRighe" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Numero di righe restituite dall'operazione</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FascicoloType">
+		<xs:annotation>
+			<xs:documentation>dati del fascicolo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numerazione">
+				<xs:annotation>
+					<xs:documentation>Numerazione del fascicolo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="160"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="tipo">
+				<xs:annotation>
+					<xs:documentation>Tipo del fascicolo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dataPubblicazione" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Data di pubblicazione del fascicolo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodicita" type="sbn:PeriodicitaType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo periodicità del fascicolo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="volume" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Numero del volume associato al fascicolo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:short">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="annata" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Annata associata al fascicolo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="descrizione" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descrizione bibliografica del fascicolo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="240"/>
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PeriodicitaType">
+		<xs:annotation>
+			<xs:documentation>periodicità del fascicolo</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="G"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="J"/>
+			<xs:enumeration value="K"/>
+			<xs:enumeration value="L"/>
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="Z"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="O"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DocumentoType">
+		<xs:annotation>
+			<xs:documentation>dati del documento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bid">
+				<xs:annotation>
+					<xs:documentation>Identificativo SBN del documento</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="isbd" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descrizione bibliografica del documento</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1260"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CollocazioneType">
+		<xs:annotation>
+			<xs:documentation>dati della collocazione</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documento" type="sbn:DocumentoType" minOccurs="0"/>
+			<xs:element name="inventario" type="sbn:InventarioType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="bib" use="required">
+			<xs:annotation>
+				<xs:documentation>Biblioteca della collocazione</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="sez" use="required">
+			<xs:annotation>
+				<xs:documentation>Sezione di collocazione</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="10"/>
+					<xs:whiteSpace value="collapse"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="loc" use="required">
+			<xs:annotation>
+				<xs:documentation>Stringa di collocazione</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="24"/>
+					<xs:whiteSpace value="collapse"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="spec" use="optional">
+			<xs:annotation>
+				<xs:documentation>Specificazione di collocazione</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="12"/>
+					<xs:whiteSpace value="collapse"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="consis" use="optional">
+			<xs:annotation>
+				<xs:documentation>Consistenza della collocazione</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="255"/>
+					<xs:whiteSpace value="collapse"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="InventarioType">
+		<xs:annotation>
+			<xs:documentation>dati dell'inventario</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documento" type="sbn:DocumentoType" minOccurs="0"/>
+			<xs:element name="collocazione" type="sbn:CollocazioneType" minOccurs="0"/>
+			<xs:element name="fascicolo" type="sbn:FascicoloType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="possessore" type="sbn:PossessoreType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="disponibilita" type="sbn:DisponibilitaType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="bib" use="required">
+			<xs:annotation>
+				<xs:documentation>Biblioteca dell'inventario</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="serie" use="required">
+			<xs:annotation>
+				<xs:documentation>Serie inventariale</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="3"/>
+					<xs:whiteSpace value="preserve"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="numero" use="required">
+			<xs:annotation>
+				<xs:documentation>Numero progressivo dell'inventario</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:long">
+					<xs:maxInclusive value="999999999"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="precis" use="optional">
+			<xs:annotation>
+				<xs:documentation>Precisazione dell'inventario</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="160"/>
+					<xs:whiteSpace value="collapse"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="anno">
+			<xs:annotation>
+				<xs:documentation>Anno di riferimento per l'inventario</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:int">
+					<xs:maxInclusive value="9999"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="codFrui" use="optional">
+			<xs:annotation>
+				<xs:documentation>Categoria di fruizione associata all'inventario</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="codNoDisp" use="optional">
+			<xs:annotation>
+				<xs:documentation>Codice di non disponibilità per l'inventario</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="numeroFascicoli" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Numero di fascicoli del periodico presenti sull'inventario</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="cdCons">
+			<xs:annotation>
+				<xs:documentation>codice SBN dello stato di conservazione</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="cons" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>decodifica dello stato di conservazione</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="seq" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>sequenza di collocazione</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="url" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>url per la copia digitale</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="KardexType">
+		<xs:annotation>
+			<xs:documentation>kardex del periodico</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fascicolo" type="sbn:FascicoloType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="collocazione" type="sbn:CollocazioneType" minOccurs="0"/>
+			<xs:element name="inventario" type="sbn:InventarioType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DisponibilitaType">
+		<xs:annotation>
+			<xs:documentation>disponibilità dell'inventario</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="prenotazioni" type="sbn:PrenotazioniType" minOccurs="0"/>
+			<xs:element name="inventario" type="sbn:InventarioType" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="disponibile" type="xs:boolean" use="required">
+			<xs:annotation>
+				<xs:documentation>flag di disponibilità dell'inventario</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="dataDisponibilita" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>Data di rientro dell'inventario</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="motivo" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Motivazione della non disponibilità</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PrenotazioniType">
+		<xs:annotation>
+			<xs:documentation>dati sulla prenotabilità del documento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="servizio" type="sbn:ServizioType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="numeroPrenotazioni" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Numero di prenotazioni pendenti per l'inventario</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="prenotabile" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="ServizioType">
+		<xs:annotation>
+			<xs:documentation>descrizione del servizio</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="160"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PossedutoType">
+		<xs:annotation>
+			<xs:documentation>posseduto del documento in biblioteca</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="collocazione" type="sbn:CollocazioneType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="nonCollocato" type="sbn:NonCollocatoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NonCollocatoType">
+		<xs:annotation>
+			<xs:documentation>inventari non collocati</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="inventario" type="sbn:InventarioType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PossessoreType">
+		<xs:annotation>
+			<xs:documentation>Dati del possessore/provenienza di inventario</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="id" use="required">
+			<xs:annotation>
+				<xs:documentation>Identificativo SBN del possessore/provenienza</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="10"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="nome" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>descrizione del possessore/provenienza</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="rel" use="required">
+			<xs:annotation>
+				<xs:documentation>tag unimarc del possessore/provenienza: 320=provenienza, 390=possessore</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="320"/>
+					<xs:enumeration value="390"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="UtenteType">
+		<xs:sequence>
+			<xs:element name="accesso" type="sbn:AccessoType" minOccurs="0" maxOccurs="1" />
+			<xs:element name="user-id" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>codice utente</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"></xs:maxLength>
+						<xs:whiteSpace value="collapse"></xs:whiteSpace>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="cod-fiscale">
+				<xs:annotation>
+					<xs:documentation>codice fiscale</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="16"></xs:maxLength>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:sequence>
+					<xs:element name="cognome" minOccurs="1" maxOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="80"/>
+								<xs:whiteSpace value="collapse"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="nome" minOccurs="1" maxOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="25"/>
+								<xs:whiteSpace value="collapse"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="sesso">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="M"/>
+								<xs:enumeration value="F"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="denominazione" minOccurs="1" maxOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="80"></xs:maxLength>
+								<xs:whiteSpace value="collapse"></xs:whiteSpace>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="tipo-ente" type="xs:string"></xs:element>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="email" minOccurs="0" maxOccurs="2">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="80"></xs:maxLength>
+						<xs:whiteSpace value="collapse"></xs:whiteSpace>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccessoType">
+		<xs:sequence>
+			<xs:element name="autenticato" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+			<xs:element name="evento" type="sbn:EventoType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="dataEvento" type="xs:string" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EventoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ENTRATA" />
+			<xs:enumeration value="USCITA" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

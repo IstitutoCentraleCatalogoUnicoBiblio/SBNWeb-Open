@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE jboss PUBLIC
+      "-//JBoss//DTD JBOSS 4.0//EN"
+      "http://www.jboss.org/j2ee/dtd/jboss_4_0.dtd">
+
+<jboss>
+	<jmx-name>sbn.service:name=SbnWebBridgeBeans</jmx-name>
+	<enterprise-beans>
+		<session>
+			<ejb-name>AmministrazioneSistema</ejb-name>
+			<jndi-name>AmministrazioneSistema</jndi-name>
+			<method-attributes>
+			</method-attributes>
+			<depends>sbn.service:name=SbnWebDomainBusinessBeans</depends>
+		</session>
+
+		<session>
+			<ejb-name>GestioneCodici</ejb-name>
+			<jndi-name>GestioneCodici</jndi-name>
+			<method-attributes>
+			</method-attributes>
+			<depends>sbn.service:name=SbnWebDomainBusinessBeans</depends>
+		</session>
+
+		<session>
+			<ejb-name>GestioneRepertorio</ejb-name>
+			<jndi-name>sbn/GestioneRepertorio</jndi-name>
+			<method-attributes>
+			</method-attributes>
+		</session>
+	</enterprise-beans>
+</jboss>

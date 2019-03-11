@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ordine_buono"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="595"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="predefinito"
+		isDefault="true"
+		fontSize="10"
+	/>
+	<style 
+		name="grassetto"
+		isDefault="false"
+		fontSize="10"
+		isBold="true"
+	/>
+
+	<parameter name="primoOrdine" isForPrompting="true" class="java.lang.String"/>
+
+	<field name="noteOrdine" class="java.lang.String"/>
+	<field name="codOrdine" class="java.lang.String"/>
+	<field name="titoloIsbn" class="java.lang.String"/>
+	<field name="dataFineAbbOrdine" class="java.lang.String"/>
+	<field name="dataOrdine" class="java.lang.String"/>
+	<field name="annoAbbOrdine" class="java.lang.String"/>
+	<field name="titoloIssn" class="java.lang.String"/>
+	<field name="prezzoEuroOrdine" class="java.lang.Double"/>
+	<field name="titolo.descrizione" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="36"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="predefinito"
+						x="279"
+						y="16"
+						width="61"
+						height="16"
+						forecolor="#0000FF"
+						key="staticText-1"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean ($V{PAGE_NUMBER}.intValue() > 1)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Bold" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Continua]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="predefinito"
+						x="5"
+						y="1"
+						width="473"
+						height="15"
+						forecolor="#3333FF"
+						key="textField-18"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean ($V{PAGE_NUMBER}.intValue() > 1)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{primoOrdine}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="120"  isSplitAllowed="false" >
+				<staticText>
+					<reportElement
+						x="50"
+						y="0"
+						width="79"
+						height="15"
+						forecolor="#003399"
+						key="staticText-4"
+						positionType="FixRelativeToBottom"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Ordine n.:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="50"
+						y="45"
+						width="79"
+						height="15"
+						forecolor="#003399"
+						key="staticText-5"
+						positionType="FixRelativeToBottom"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{titoloIsbn})).trim().equals( "" ) && ((java.lang.String)($F{titoloIsbn})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[ISBN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="129"
+						y="15"
+						width="32"
+						height="15"
+						forecolor="#003399"
+						key="staticText-6"
+						positionType="FixRelativeToBottom"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{dataOrdine})).trim().equals( "" ) && ((java.lang.String)($F{dataOrdine})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Inizio:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="249"
+						y="15"
+						width="80"
+						height="15"
+						forecolor="#003399"
+						key="staticText-7"
+						positionType="FixRelativeToBottom"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{dataFineAbbOrdine})).trim().equals( "" ) && ((java.lang.String)($F{dataFineAbbOrdine})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Fine abbonamento:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="129"
+						y="104"
+						width="120"
+						height="15"
+						key="textField-19"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{noteOrdine}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="129"
+						y="0"
+						width="120"
+						height="15"
+						key="textField-20"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{codOrdine}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="129"
+						y="45"
+						width="121"
+						height="15"
+						key="textField-21"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{titoloIsbn}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="329"
+						y="15"
+						width="99"
+						height="15"
+						key="textField-22"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dataFineAbbOrdine}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="161"
+						y="15"
+						width="88"
+						height="15"
+						key="textField-23"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dataOrdine}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="50"
+						y="104"
+						width="79"
+						height="15"
+						forecolor="#003399"
+						key="staticText-8"
+						positionType="FixRelativeToBottom"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{noteOrdine})).trim().equals( "" ) && ((java.lang.String)($F{noteOrdine})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Note:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="249"
+						y="30"
+						width="80"
+						height="15"
+						key="textField-24"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{annoAbbOrdine}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="129"
+						y="60"
+						width="121"
+						height="15"
+						key="textField-25"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{titoloIssn}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						style="predefinito"
+						x="50"
+						y="15"
+						width="79"
+						height="15"
+						forecolor="#003399"
+						key="staticText-9"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{dataOrdine})).trim().equals( "" ) && !((java.lang.String)(
+$F{dataFineAbbOrdine})).trim().equals( "" ) && !((java.lang.String)($F{annoAbbOrdine})).trim().equals( "" ) && ((java.lang.String)($F{dataOrdine})!= null) && ((java.lang.String)($F{dataFineAbbOrdine})!= null) && ((java.lang.String)($F{annoAbbOrdine})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Abbonamento:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="predefinito"
+						x="129"
+						y="30"
+						width="120"
+						height="15"
+						forecolor="#003399"
+						key="staticText-10"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{annoAbbOrdine})).trim().equals( "" ) && ((java.lang.String)($F{annoAbbOrdine})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Anno di Riferimento:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="predefinito"
+						x="50"
+						y="60"
+						width="79"
+						height="15"
+						forecolor="#003399"
+						key="staticText-11"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (!((java.lang.String)($F{titoloIssn})).trim().equals( "" ) && ((java.lang.String)($F{titoloIssn})!= null))]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[ISSN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="predefinito"
+						x="129"
+						y="89"
+						width="120"
+						height="15"
+						forecolor="#003399"
+						key="staticText-12"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[new Boolean (((java.lang.Double)($F{prezzoEuroOrdine})).intValue()!= 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Oblique" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Prezzo:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="predefinito"
+						x="249"
+						y="89"
+						width="80"
+						height="15"
+						key="textField-26">
+							<printWhenExpression><![CDATA[new Boolean (((java.lang.Double)($F{prezzoEuroOrdine})).intValue()!= 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{prezzoEuroOrdine}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="predefinito"
+						x="50"
+						y="75"
+						width="378"
+						height="14"
+						key="textField-27"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Bold" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{titolo.descrizione}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="27"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="predefinito"
+						x="279"
+						y="5"
+						width="41"
+						height="17"
+						forecolor="#0002FF"
+						key="staticText-2"
+						positionType="FixRelativeToBottom"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Serif" pdfFontName="Helvetica-Bold" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+				<text><![CDATA[Segue]]></text>
+				</staticText>
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="8"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

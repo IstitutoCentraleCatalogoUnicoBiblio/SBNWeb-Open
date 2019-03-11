@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<!-- Configurazioni per SbnWeb -->
+
+	<!-- STDOUT: Outputs log information to the standard output/console -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="DEBUG" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="%d %-5p - [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- DAILY: Outputs log information to a file -->
+	<appender name="SBNWEB_DAILY"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="ALL" />
+		<param name="File" value="${jboss.server.log.dir}/sbnweb/sbnweb.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d %-5p - [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="SBNMARC_DAILY"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${jboss.server.log.dir}/sbnweb/sbnmarc_xml.log" />
+		<param name="Threshold" value="INFO" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d %-5p - [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="it.iccu">
+		<level value="ALL" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+	<category name="sbnmarc">
+		<level value="ALL" />
+		<appender-ref ref="SBNMARC_DAILY" />
+	</category>
+
+	<logger name="it.finsiel">
+		<level value="DEBUG" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+	<logger name="it.almaviva">
+		<level value="DEBUG" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+	<logger name="iccu.serversbnmarc">
+		<level value="DEBUG" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+	<logger name="iccu.box">
+		<level value="DEBUG" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+	<logger name="iccu.amministrazione">
+		<level value="DEBUG" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+	<logger name="sbnmarcPolo">
+		<level value="DEBUG" />
+		<appender-ref ref="SBNWEB_DAILY" />
+	</logger>
+
+</log4j:configuration>

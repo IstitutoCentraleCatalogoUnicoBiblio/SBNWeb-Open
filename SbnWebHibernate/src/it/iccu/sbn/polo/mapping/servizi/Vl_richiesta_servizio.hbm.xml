@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Vl_richiesta_servizio" table="vl_richiesta_servizio" mutable="false" polymorphism="explicit">
+		<cache usage="read-only"/>
+		<id name="cod_rich_serv" column="cod_rich_serv" type="long" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_polo_inv" cascade="lock" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" not-null="false" lazy="proxy" access="field">
+			<column name="cod_serie_inv" index="tbl_erogazione_servizi_iinv_dx"/>
+			<column name="cod_bib_inv" index="tbl_erogazione_servizi_iinv_dx"/>
+			<column name="cd_polo_inv"/>
+			<column name="cod_inven_inv" index="tbl_erogazione_servizi_iinv_dx"/>
+		</many-to-one>
+		<many-to-one name="id_documenti_lettore" cascade="lock" column="id_documenti_lettore" class="it.iccu.sbn.polo.orm.servizi.Tbl_documenti_lettori" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_esemplare_documenti_lettore" cascade="lock" column="id_esemplare_documenti_lettore" class="it.iccu.sbn.polo.orm.servizi.Tbl_esemplare_documento_lettore" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_utenti_biblioteca" cascade="lock" column="id_utenti_biblioteca" class="it.iccu.sbn.polo.orm.servizi.Trl_utenti_biblioteca" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_modalita_pagamento" cascade="lock" column="id_modalita_pagamento" class="it.iccu.sbn.polo.orm.servizi.Tbl_modalita_pagamento" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_supporti_biblioteca" cascade="lock" column="id_supporti_biblioteca" class="it.iccu.sbn.polo.orm.servizi.Tbl_supporti_biblioteca" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_servizio" cascade="lock" column="id_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_servizio" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_iter_servizio" cascade="lock" column="id_iter_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_iter_servizio" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="fl_tipo_rec" column="fl_tipo_rec" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="note_bibliotecario" column="note_bibliotecario" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="costo_servizio" column="costo_servizio" type="big_decimal" precision="12" scale="3" not-null="false" lazy="false"/>
+		<property name="num_fasc" column="num_fasc" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="num_volume" column="num_volume" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="anno_period" column="anno_period" type="big_decimal" precision="4" scale="0" not-null="false" lazy="false"/>
+		<property name="cod_tipo_serv_rich" column="cod_tipo_serv_rich" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cod_tipo_serv_alt" column="cod_tipo_serv_alt" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cod_stato_rich" column="cod_stato_rich" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cod_stato_mov" column="cod_stato_mov" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="data_in_eff" column="data_in_eff" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="data_fine_eff" column="data_fine_eff" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="num_rinnovi" column="num_rinnovi" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="bid" column="bid" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="cod_attivita" column="cod_attivita" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="data_richiesta" column="data_richiesta" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="num_pezzi" column="num_pezzi" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="note_ut" column="note_ut" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="prezzo_max" column="prezzo_max" type="big_decimal" precision="12" scale="3" not-null="false" lazy="false"/>
+		<property name="data_massima" column="data_massima" type="date" not-null="false" lazy="false"/>
+		<property name="data_proroga" column="data_proroga" type="date" not-null="false" lazy="false"/>
+		<property name="data_in_prev" column="data_in_prev" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="data_fine_prev" column="data_fine_prev" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="fl_svolg" column="fl_svolg" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="copyright" column="copyright" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_erog" column="cod_erog" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="cod_risp" column="cod_risp" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="fl_condiz" column="fl_condiz" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="fl_inoltro" column="fl_inoltro" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_bib_dest" column="cod_bib_dest" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cod_bib_prelievo" column="cod_bib_prelievo" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Biblioteca del sistema metropolitano indicata come consegnataria del documento
+			</meta>
+		</property>
+		<property name="cod_bib_restituzione" column="cod_bib_restituzione" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Biblioteca del sistema metropolitano indicata come destinataria della riconsegna
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Tbl_solleciti" lazy="true"   cascade="delete"  inverse="true">
+			<key column="cod_rich_serv" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_solleciti"/>
+		</set>
+
+		<property name="cod_tipo_serv" column="cod_tipo_serv" type="string" />
+		<property name="progr_iter" column="progr_iter" type="short" />
+		<property name="fl_inventario" column="fl_inventario" type="boolean" />
+		<property name="isbd" column="isbd" type="string" />
+		<property name="indice_isbd" column="indice_isbd" type="string" not-null="false" />
+		<property name="kcles" column="kcles" type="string" not-null="false" />
+
+		<property name="bib_doc_lett" column="bib_doc_lett" type="string" not-null="false" />
+		<property name="tipo_doc_lett" column="tipo_doc_lett" type="character" length="1"  not-null="false" />
+		<property name="cod_doc_lett" column="cod_doc_lett" type="long"  not-null="false" />
+		<property name="segnatura" column="segnatura" type="string" not-null="false" />
+
+		<property name="cd_sez" column="cd_sez" type="string" not-null="false" />
+		<property name="cd_loc" column="cd_loc" type="string" not-null="false" />
+		<property name="spec_loc" column="spec_loc" type="string" not-null="false" />
+		<property name="cognome" column="cognome" type="string" not-null="false" />
+		<property name="nome" column="nome" type="string" not-null="false" />
+		<property name="cd_natura" column="cd_natura" type="character" not-null="false" />
+
+		<property name="seq_coll" column="seq_coll" type="string" length="20" not-null="false" />
+		<property name="anno_abb" column="anno_abb" type="integer" not-null="false" />
+
+		<property name="cd_polo" column="cd_polo" type="string" />
+		<property name="cd_bib" column="cd_bib" type="string" />
+
+		<property name="progr_sollecito" column="progr_sollecito" not-null="false" />
+		<property name="data_invio" column="data_invio" type="date" not-null="false" />
+
+		<one-to-one name="dati_richiesta_ill" class="it.iccu.sbn.polo.orm.servizi.Tbl_dati_richiesta_ill" cascade="save-update,lock" property-ref="richiesta"
+			lazy="proxy" access="field" />
+
+		<property name="intervallo_copia" column="intervallo_copia" type="string" length="30" not-null="false" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vf_titolo_com" polymorphism="explicit" table="VF_TITOLO_COM" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="BID_COM" column="BID_COM" type="string"/>
+			<key-property name="BID" column="BID" type="string"/>
+		</composite-id>
+		<property name="CD_FORMA_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="CD_FORMA_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="CD_FORMA_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="NUMERO_ORDINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false" lazy="false"/>
+		<property name="NUMERO_OPERA" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false" lazy="false"/>
+		<property name="NUMERO_CAT_TEM" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false" lazy="false"/>
+		<property name="CD_TONALITA" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="DATAZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false" lazy="false"/>
+		<property name="KY_ORD_RIC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false" lazy="false"/>
+		<property name="KY_EST_RIC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false" lazy="false"/>
+		<property name="KY_APP_RIC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false" lazy="false"/>
+		<property name="TP_LEGAME_MUSICA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="ISADN" type="it.finsiel.sbn.util.DataTypeCHAR" length="30" not-null="false" lazy="false"/>
+		<property name="TP_MATERIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="TP_RECORD_UNI" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_NATURA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="CD_PAESE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_LINGUA_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false" lazy="false"/>
+		<property name="CD_LINGUA_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false" lazy="false"/>
+		<property name="CD_LINGUA_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false" lazy="false"/>
+		<property name="AA_PUBB_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="AA_PUBB_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="TP_AA_PUBB" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_4" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="KY_CLES1_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="KY_CLES2_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="44" not-null="true" lazy="false"/>
+		<property name="KY_CLET1_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="KY_CLET2_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="KY_CLES1_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="KY_CLES2_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="44" not-null="true" lazy="false"/>
+		<property name="KY_CLET1_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="KY_CLET2_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="ISBD" type="string" length="1200" not-null="true" lazy="false"/>
+		<property name="INDICE_ISBD" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="KY_EDITORE" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="CD_AGENZIA" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false" lazy="false"/>
+		<property name="CD_NORME_CAT" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="NOTA_CAT_TIT" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="NOTA_INF_TIT" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="BID_LINK" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false" lazy="false"/>
+		<property name="TP_LINK" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_FORZA_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false" lazy="false"/>
+		<property name="UTE_FORZA_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="DS_ORG_SINT" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="DS_ORG_ANAL" type="string" length="320" not-null="false" lazy="false"/>
+        <filter name="VF_TITOLO_COM_selectPerNomeLike"
+        		condition="fl_canc !='S' "/>
+
+        <filter name="VF_TITOLO_COM_countPerNomeLike"
+        		condition="fl_canc !='S' "/>
+
+        <filter name="VF_TITOLO_COM_selectPerNomeEsatto"
+        		condition="fl_canc !='S' "/>
+
+        <filter name="VF_TITOLO_COM_countPerNomeEsatto"
+        		condition="fl_canc !='S' "/>
+
+        <filter name="VF_TITOLO_COM_selectPerClet"
+        		condition="fl_canc !='S' AND
+				( ky_clet1_t || ky_clet2_t  LIKE UPPER( :XXXstringaClet)||'%' ) "/>
+
+        <filter name="VF_TITOLO_COM_countPerClet"
+        		condition="fl_canc !='S' AND
+				( ky_clet1_t || ky_clet2_t  LIKE UPPER( :XXXstringaClet)||'%' ) "/>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+
+/* stile default per barra gestione blocchi */
+
+.blocchiDefault {	
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #333333;
+}
+
+table.blocchiDefault { 
+	width: 100%;
+	border: 0px;
+	padding: 0px;
+}
+
+.sintButtonLinkDefault {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #333333;
+}
+
+input.sintButtonLinkDefault {
+	display:block; 
+	margin:0; 
+	padding:0; 
+	background:transparent; 
+	border:0;
+	text-decoration: underline;
+	cursor:pointer; 
+	color: #footer.a.color;
+}
+
+

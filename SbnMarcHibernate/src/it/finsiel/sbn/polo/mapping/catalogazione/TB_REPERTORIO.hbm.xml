@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_repertorio" polymorphism="explicit" table="TB_REPERTORIO" lazy="false">
+		<id name="ID_REPERTORIO" column="ID_REPERTORIO" type="long" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="CD_SIG_REPERTORIO" column="CD_SIG_REPERTORIO" type="string" length="30" not-null="true"/>
+
+		<property name="DS_REPERTORIO" column="DS_REPERTORIO" type="string" length="1200" not-null="true"/>
+		<property name="TP_REPERTORIO" column="TP_REPERTORIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<!--
+		<set name="TR_REP_AUT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="ID_REPERTORIO" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_rep_aut"/>
+		</set>
+		<set name="TR_REP_MAR" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="ID_REPERTORIO" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_rep_mar"/>
+		</set>
+		<set name="TR_REP_TIT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="ID_REPERTORIO" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_rep_tit"/>
+		</set>
+		 -->
+		<filter name="TB_REPERTORIO_selectPerKey"
+				condition="id_repertorio = :XXXid_repertorio AND fl_canc != 'S' "/>
+
+		<filter name="TB_REPERTORIO_selectPerCd_sig_repertorio"
+				condition="cd_sig_repertorio = :XXXcd_sig_repertorio AND fl_canc != 'S' "/>
+
+		<!-- // evolutive ottobre 2015 almaviva2 -  Nella gestione dei luoghi viene data la possibilità di gestire
+		 i campi nota informativa , nota catalogatore e legame a repertor -->
+		<filter name="TB_REPERTORIO_selectPerCd_sig_repertorio_tp_repertorio"
+				condition="cd_sig_repertorio = :XXXcd_sig_repertorio AND tp_repertorio = :XXXtp_repertorio
+				AND fl_canc != 'S' "/>
+
+
+		<!-- almaviva5_20090722 #3086 -->
+		<filter name="TB_REPERTORIO_selectPerCd_sig_repertorioAncheCancellato"
+				condition="cd_sig_repertorio = :XXXcd_sig_repertorio "/>
+
+		<filter name="TB_REPERTORIO_selectPerNomeLike"
+				condition="fl_canc !='S' AND (UPPER(ds_repertorio) LIKE UPPER( :XXXstringaLike)||'%') "/>
+
+		<filter name="TB_REPERTORIO_countPerNomeLike"
+				condition="fl_canc !='S' AND (UPPER(ds_repertorio) LIKE UPPER( :XXXstringaLike)||'%') "/>
+<!-- POSTGRESS -->
+		<filter name="TB_REPERTORIO_selectPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_REPERTORIO_countPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+<!-- POSTGRESS -->
+		<filter name="TB_REPERTORIO_selectPerParoleNome"
+				condition="fl_canc !='S' AND CONTAINS(ds_repertorio, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_REPERTORIO_countPerParoleNome"
+				condition="fl_canc !='S' AND CONTAINS(ds_repertorio, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_REPERTORIO_selectPerNomeEsatto"
+				condition="fl_canc !='S' AND (UPPER(ds_repertorio) = UPPER( :XXXstringaEsatta)||'%') "/>
+
+		<filter name="TB_REPERTORIO_countPerNomeEsatto"
+				condition="fl_canc !='S' AND (UPPER(ds_repertorio) = UPPER( :XXXstringaEsatta)||'%') "/>
+
+	</class>
+</hibernate-mapping>

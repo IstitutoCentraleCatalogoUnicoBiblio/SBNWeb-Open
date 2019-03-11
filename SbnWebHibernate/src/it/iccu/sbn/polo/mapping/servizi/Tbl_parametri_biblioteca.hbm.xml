@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_parametri_biblioteca" table="tbl_parametri_biblioteca" >
+		<id name="id_parametri_biblioteca" column="id_parametri_biblioteca" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_bib" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" cascade="save-update,lock" unique="true" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+
+		<property name="fl_catfrui_nosbndoc" column="fl_catfrui_nosbndoc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_catfrui_nosbndoc" column="cd_catfrui_nosbndoc" type="string" length="2" not-null="false" lazy="false"/>
+
+		<property name="cd_catriprod_nosbndoc" column="cd_catriprod_nosbndoc" type="string" length="2" not-null="false" lazy="false"/>
+
+		<property name="num_lettere" column="num_lettere" type="short" length="5" not-null="true" lazy="false"/>
+		<property name="num_gg_ritardo1" column="num_gg_ritardo1" type="short" length="5" not-null="true" lazy="false"/>
+		<property name="num_gg_ritardo2" column="num_gg_ritardo2" type="short" length="5" not-null="true" lazy="false"/>
+		<property name="num_gg_ritardo3" column="num_gg_ritardo3" type="short" length="5" not-null="true" lazy="false"/>
+		<property name="num_prenotazioni" column="num_prenotazioni" type="short" length="5" not-null="true" lazy="false"/>
+
+		<property name="cod_modalita_invio1_sollecito1" column="cod_modalita_invio1_sollecito1" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_modalita_invio2_sollecito1" column="cod_modalita_invio2_sollecito1" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_modalita_invio3_sollecito1" column="cod_modalita_invio3_sollecito1" type="character" length="1" not-null="false" lazy="false"/>
+
+		<property name="cod_modalita_invio1_sollecito2" column="cod_modalita_invio1_sollecito2" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_modalita_invio2_sollecito2" column="cod_modalita_invio2_sollecito2" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_modalita_invio3_sollecito2" column="cod_modalita_invio3_sollecito2" type="character" length="1" not-null="false" lazy="false"/>
+
+		<property name="cod_modalita_invio1_sollecito3" column="cod_modalita_invio1_sollecito3" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_modalita_invio2_sollecito3" column="cod_modalita_invio2_sollecito3" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_modalita_invio3_sollecito3" column="cod_modalita_invio3_sollecito3" type="character" length="1" not-null="false" lazy="false"/>
+
+		<property name="num_gg_validita_prelazione" column="num_gg_validita_prelazione" type="short" length="5" not-null="true" lazy="false"/>
+		<property name="ammessa_autoregistrazione_utente" column="ammessa_autoregistrazione_utente" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ammesso_inserimento_utente" column="ammesso_inserimento_utente" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="anche_da_remoto" column="anche_da_remoto" type="character" length="1" not-null="true" lazy="false"/>
+
+		<property name="cd_cat_med_digit" column="cd_cat_med_digit" type="string" length="2" not-null="false" lazy="true" />
+
+		<property name="xml_modello_soll" column="xml_modello_soll" type="string" not-null="false" lazy="true" />
+		<property name="fl_tipo_rinnovo" column="fl_tipo_rinnovo" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="num_gg_rinnovo_richiesta" column="num_gg_rinnovo_richiesta" type="short" length="5" not-null="false" lazy="false"/>
+
+		<property name="fl_att_servizi_ill" column="fl_att_servizi_ill" type="character" length="1" not-null="false" lazy="false"/>
+		<many-to-one name="id_autorizzazione_ill" class="it.iccu.sbn.polo.orm.servizi.Tbl_tipi_autorizzazioni" not-null="false" />
+
+		<property name="fl_priorita_prenot" column="fl_priorita_prenot" type="character" length="1" not-null="false" lazy="false"/>
+
+		<property name="email_notifica" column="email_notifica" type="string" length="160" not-null="false" lazy="false" />
+
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

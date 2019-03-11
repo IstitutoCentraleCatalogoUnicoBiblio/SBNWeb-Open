@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_utenti" table="tbl_utenti" >
+		<meta attribute="class-description">
+			Utenti
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_utenti" column="id_utenti" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="cod_utente" column="cod_utente" type="string" length="25" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				seconda parte del codice identificativo dell'utente , costituita dal progressivo numerico assegnatogli dalla prima biblioteca del polo alla quale l'utente SI E' ISCRITTO
+			</meta>
+		</property>
+		<property name="password" column="password" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				password dell'utente
+			</meta>
+		</property>
+		<property name="cognome" column="cognome" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				cognome dell'utente
+			</meta>
+		</property>
+		<property name="nome" column="nome" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				nome dell''utente
+			</meta>
+		</property>
+		<property name="indirizzo_res" column="indirizzo_res" type="string" length="105" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indirizzo di residenza
+			</meta>
+		</property>
+		<property name="citta_res" column="citta_res" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				denominazione della citta' di residenza
+			</meta>
+		</property>
+		<property name="cap_res" column="cap_res" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice di avviamento postale di residenza
+			</meta>
+		</property>
+		<property name="tel_res" column="tel_res" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di telefono di residenza
+			</meta>
+		</property>
+		<property name="fax_res" column="fax_res" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di fax di residenza
+			</meta>
+		</property>
+		<property name="indirizzo_dom" column="indirizzo_dom" type="string" length="105" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indirizzo di domicilio
+			</meta>
+		</property>
+		<property name="citta_dom" column="citta_dom" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				denominazione della citta' di domicilio
+			</meta>
+		</property>
+		<property name="cap_dom" column="cap_dom" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice di avviamento postale di domicilio
+			</meta>
+		</property>
+		<property name="tel_dom" column="tel_dom" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di telefono di domicilio
+			</meta>
+		</property>
+		<property name="fax_dom" column="fax_dom" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di fax di domicilio
+			</meta>
+		</property>
+		<property name="sesso" column="sesso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				sesso
+			</meta>
+		</property>
+		<property name="data_nascita" column="data_nascita" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data di nascita
+			</meta>
+		</property>
+		<property name="luogo_nascita" column="luogo_nascita" type="string" length="30" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione del luogo di nascita
+			</meta>
+		</property>
+		<property name="cod_fiscale" column="cod_fiscale"  index="tbl_utenti_cod_fiscale_key"  type="string" length="16" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice fiscale
+			</meta>
+		</property>
+		<property name="cod_ateneo" column="cod_ateneo" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice dell'ateneo di appartenenza nel caso di studente/ssa universitario/a
+			</meta>
+		</property>
+		<property name="cod_matricola" column="cod_matricola" type="string" length="25" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice matricola universitaria
+			</meta>
+		</property>
+		<property name="corso_laurea" column="corso_laurea" type="string" length="26" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				descrizione del corso di laurea
+			</meta>
+		</property>
+		<property name="ind_posta_elettr" column="ind_posta_elettr" type="string" length="80" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indirizzo di posta elettronica primario
+			</meta>
+		</property>
+		<property name="ind_posta_elettr2" column="ind_posta_elettr2" type="string" length="80" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indirizzo di posta elettronica secondario
+			</meta>
+		</property>
+		<property name="persona_giuridica" column="persona_giuridica" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indica se l'utente e' una persona giuridica ammette i valori "s" = si, "n" = no
+			</meta>
+		</property>
+		<property name="nome_referente" column="nome_referente" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				nome del referente nel caso in cui l'utente sia una persona giuridica
+			</meta>
+		</property>
+		<property name="data_reg" column="data_reg" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data della prima registrazione dell'utente da parte della biblioteca
+			</meta>
+		</property>
+		<property name="credito_polo" column="credito_polo" type="big_decimal" precision="12" scale="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				credito a disposizione dell'utente per i servizi di polo
+			</meta>
+		</property>
+		<property name="note_polo" column="note_polo" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note riguardanti l'utente a livello di polo
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				eventuali infrazioni effettuate a livello di polo
+			</meta>
+		</property>
+		<property name="cod_proven" column="cod_proven" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della provenienza dell'utente
+			</meta>
+		</property>
+		<property name="tipo_pers_giur" column="tipo_pers_giur" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo di persona giuridica
+			</meta>
+		</property>
+		<property name="paese_res" column="paese_res" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese di residenza
+			</meta>
+		</property>
+		<property name="paese_citt" column="paese_citt" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese di cittadinanza
+			</meta>
+		</property>
+		<property name="tipo_docum1" column="tipo_docum1" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo del primo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="num_docum1" column="num_docum1" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del primo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="aut_ril_docum1" column="aut_ril_docum1" type="string" length="40" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				autorita' di rilascio del primo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="tipo_docum2" column="tipo_docum2" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo del secondo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="num_docum2" column="num_docum2" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del secondo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="aut_ril_docum2" column="aut_ril_docum2" type="string" length="40" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				autorita' di rilascio del secondo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="tipo_docum3" column="tipo_docum3" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo del terzo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="num_docum3" column="num_docum3" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del terzo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="aut_ril_docum3" column="aut_ril_docum3" type="string" length="40" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				autorita' di rilascio del terzo documento di riconoscimento
+			</meta>
+		</property>
+		<property name="tipo_docum4" column="tipo_docum4" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo del quarto documento di riconoscimento
+			</meta>
+		</property>
+		<property name="num_docum4" column="num_docum4" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del quarto documento di riconoscimento
+			</meta>
+		</property>
+		<property name="aut_ril_docum4" column="aut_ril_docum4" type="string" length="40" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				autorita' di rilascio del quarto documento di riconoscimento
+			</meta>
+		</property>
+		<property name="cod_bib" column="cod_bib" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				per l'utente-biblioteca, codice identificativo della biblioteca corrispondente
+			</meta>
+		</property>
+		<property name="prov_dom" column="prov_dom" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				provincia di domicilio
+			</meta>
+		</property>
+		<property name="prov_res" column="prov_res" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				provincia di residenza
+			</meta>
+		</property>
+		<property name="cod_polo_bib" column="cod_polo_bib" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				per l'utente-biblioteca, codice identificativo del polo della biblioteca corrispondente
+			</meta>
+		</property>
+		<property name="allinea" column="allinea" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indicatore della necessita' di allineamento
+			</meta>
+		</property>
+		<property name="chiave_ute" column="chiave_ute" index="xmk1_utenti" type="string" length="130" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				chiave nome utente
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				flag di cancellazione
+			</meta>
+		</property>
+
+		<property name="ts_var_password" column="ts_var_password" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Ultima variazione della password
+			</meta>
+		</property>
+
+		<property name="last_access" column="last_access" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Ultimo accesso effettuato dall'utente
+			</meta>
+		</property>
+
+		<property name="change_password" column="change_password" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				flag segnalazione cambio password (n,s)
+			</meta>
+		</property>
+		<property name="codice_anagrafe" column="codice_anagrafe" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice anagrafe
+			</meta>
+		</property>
+
+		<property name="tit_studio" column="tit_studio" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del titolo di studio
+			</meta>
+		</property>
+		<property name="professione" column="professione" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della professione
+			</meta>
+		</property>
+
+		<property name="cd_bib_iscrizione" column="cd_bib" insert="false" update="false" />
+
+		<set name="Trl_diritti_utente" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utenti" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_diritti_utente"/>
+		</set>
+		<set name="Trl_materie_utenti" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utenti" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_materie_utenti"/>
+		</set>
+		<set name="Trl_utenti_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utenti" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_utenti_biblioteca"/>
+		</set>
+		<set name="Tbl_documenti_lettori" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utenti" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_documenti_lettori"/>
+		</set>
+
+        <set name="prenotazioni_posti" table="trl_utente_prenotazione_posto"
+        	inverse="true" lazy="true" fetch="select" cascade="lock" >
+            <key>
+                <column name="id_utenti" not-null="true" />
+            </key>
+            <many-to-many entity-name="it.iccu.sbn.polo.orm.servizi.Tbl_prenotazione_posto">
+                <column name="id_prenotazione" not-null="true" />
+            </many-to-many>
+        </set>
+
+
+		<one-to-one name="biblioteca_ill" class="it.iccu.sbn.polo.orm.servizi.Tbl_biblioteca_ill" />
+		<property name="cd_tipo_ute" column="cd_tipo_ute" type="character" length="1" not-null="false" lazy="false" />
+	</class>
+</hibernate-mapping>

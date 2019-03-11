@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_coda_jms" table="tbf_coda_jms" >
+		<id name="id_coda" column="id_coda" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="nome_jms" column="nome_jms" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Nome della coda JMS
+			</meta>
+		</property>
+		<property name="sincrona" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Coda di tipo sincrona (S) o asincrona (N)
+			</meta>
+			<column name="sincrona" default="N"/>
+		</property>
+		<property name="cron_expression" type="string" length="255" not-null="true" lazy="false">
+			<column name="cron_expression" default="0 0/5 * * * ? 9999"/>
+		</property>
+		<property name="id_descrizione" column="id_descrizione" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="id_descr_orario_attivazione" column="id_descr_orario_attivazione" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="id_orario_di_attivazione" column="id_orario_di_attivazione" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Orario di attivazione in chiaro eg. aaaa/mm/gg hh:mm
+			</meta>
+		</property>
+		<set name="Tbf_batch_servizi" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_coda_input" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_batch_servizi"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_the_tit_bib" polymorphism="explicit" table="VL_THE_TIT_BIB" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="DID" column="DID" type="string"/>
+			<key-property name="CD_THE" type="string"/>
+			<key-property name="CD_POLO" type="string"/>
+			<key-property name="CD_BIBLIOTECA" type="string"/>
+		</composite-id>
+		<filter name="VL_THE_TIT_BIB_verifica_esistenza"
+				condition="bid = :XXXbid
+							AND did = :XXXdid
+							AND cd_polo = :XXXcd_polo
+							AND cd_biblioteca = :XXXcd_biblioteca
+				"/>
+
+		<filter name="VL_THE_TIT_BIB_count_tit_coll_bib"
+				condition="did = :XXXdid
+							AND cd_polo = :XXXcd_polo
+							AND cd_biblioteca = :XXXcd_biblioteca
+				"/>
+
+
+	</class>
+</hibernate-mapping>

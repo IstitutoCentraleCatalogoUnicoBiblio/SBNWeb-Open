@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<!-- Usata in  listaBiblioteche -->
+		<form-bean
+			name="listaAltreBibliotecheForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.ListaAltreBibliotecheForm" />
+
+		<!-- Usata in serieInventarialeLista -->
+		<form-bean
+			name="serieInventarialeListaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.serieInventariali.SerieInventarialeListaForm" />
+
+		<!-- Usata in  serieInventarialeInserimento serieInventarialeEsamina serieInventarialeModifica -->
+		<form-bean
+			name="serieInventarialeGestioneForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.serieInventariali.SerieInventarialeGestioneForm" />
+
+		<!-- Usata in sezioniCollocazioniLista -->
+		<form-bean
+			name="sezioniCollocazioniListaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.sezioniCollocazioni.SezioniCollocazioniListaForm" />
+
+		<!-- Usata in  	sezioniCollocazioniInserimento sezioniInventarialeEsamina sezioniInventarialeModifica -->
+		<form-bean
+			name="sezioniCollocazioniGestioneForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.sezioniCollocazioni.SezioniCollocazioniGestioneForm" />
+
+		<!-- Usata in sezioniCollocazioniFormatiLista -->
+		<form-bean
+			name="sezioniCollocazioniFormatiListaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.sezioniCollocazioni.SezioniCollocazioniFormatiListaForm" />
+
+		<!-- Usata in  	sezioniCollocazioniFormatiInserimento sezioniInventarialeFormatiModifica -->
+		<form-bean
+			name="sezioniCollocazioniFormatiGestioneForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.sezioniCollocazioni.SezioniCollocazioniFormatiGestioneForm" />
+
+		<form-bean
+			name="codiciProvenienzaListaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.codiciProvenienza.CodiciProvenienzaListaForm" />
+
+		<!-- Usata in  	codiciProvenienzaInserimento codiciProvenienzaModifica -->
+		<form-bean
+			name="codiciProvenienzaGestioneForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.codiciProvenienza.CodiciProvenienzaGestioneForm" />
+
+		<form-bean
+			name="spostamentoCollocazioniForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.elaborazioniDifferite.SpostamentoCollocazioniForm" />
+
+		<form-bean
+			name="scaricoInventarialeForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.elaborazioniDifferite.ScaricoInventarialeForm" />
+
+		<form-bean
+			name="aggiornamentoDisponibilitaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.elaborazioniDifferite.AggiornamentoDisponibilitaForm" />
+
+		<form-bean
+			name="parametriBiblioForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.parametriBiblio.ParametriBiblioForm" />
+
+		<form-bean
+			name="esameCollocRicercaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocRicercaForm" />
+
+		<form-bean
+			name="listeInventariForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.datiInventari.ListeInventariForm" />
+
+		<form-bean
+			name="modificaInvCollForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.datiInventari.ModificaInvCollForm" />
+
+		<!-- Usata in  esameCollocEsaminaEsemplare esameCollocInserimentoEsemplare esameCollocModificaEsemplare -->
+		<form-bean
+			name="esameCollocGestioneEsemplareForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocGestioneEsemplareForm" />
+
+		<form-bean
+			name="esameCollocListaInvDiCollocForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocListaInvDiCollocForm" />
+
+		<form-bean
+			name="esameCollocEsaminaInventarioForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocEsaminaInventarioForm" />
+
+		<form-bean
+			name="esameCollocListeCollocazioniForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniForm" />
+
+		<form-bean
+			name="esameCollocListeCollocazioniSpecForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniForm" />
+
+		<form-bean
+			name="vaiAListaInventariTitoloForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.datiInventari.VaiAListaInventariTitoloForm" />
+
+		<form-bean
+			name="vaiAInserimentoCollForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.datiInventari.VaiAInserimentoCollForm" />
+
+		<form-bean
+			name="vaiAInserimentoInvForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.datiInventari.VaiAInserimentoInvForm" />
+
+		<form-bean
+			name="vaiAModificaCollForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.datiInventari.VaiAModificaCollForm" />
+
+		<form-bean
+			name="esameCollocRicercaEsemplareForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocRicercaEsemplareForm" />
+
+		<form-bean
+			name="esameCollocEsaminaPossedutoForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.esameCollocazioni.EsameCollocEsaminaPossedutoForm" />
+
+		<form-bean
+			name="modelliEtichetteListaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.modelliEtichette.ModelliEtichetteListaForm" />
+
+		<form-bean
+			name="modelliEtichetteGestioneForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.modelliEtichette.ModelliEtichetteGestioneForm" />
+
+		<!-- ========================================= possessori -->
+		<form-bean
+			name="possessoriRicercaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriRicercaForm" />
+
+		<form-bean
+			name="possessoriDettaglioForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriDettaglioForm" />
+
+		<form-bean
+			name="possessoriSinteticaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriSinteticaForm" />
+
+		<form-bean
+			name="possessoriAnaliticaForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriAnaliticaForm" />
+
+		<form-bean
+			name="possessoriLegameForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriLegameForm" />
+
+		<form-bean
+			name="possessoriVariaLegameForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriVariaLegameForm" />
+
+		<form-bean
+			name="possessoriDiInventarioForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriDiInventarioSinteticaForm" />
+
+		<form-bean
+			name="possessoriLegameInventarioForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriLegameInventarioForm" />
+
+		<form-bean
+			name="acquisizioneUriCopiaDigitaleForm"
+			type="it.iccu.sbn.web.actionforms.documentofisico.elaborazioniDifferite.AcquisizioneUriCopiaDigitaleForm" />
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+		<forward name="sifEsameInventario" path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" />
+		<forward name="sifListaSezioni"	path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+	</global-forwards>
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+		<action
+			path="/documentofisico/serieInventariali/serieInventarialeLista"
+			name="serieInventarialeListaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/serieInventariali/serieInventarialeLista.jsp"
+			scope="session"
+			parameter="methodSerieLista"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.serieInventariali.SerieInventarialeListaAction">
+			<forward
+				name="nuova"
+				path="/documentofisico/serieInventariali/serieInventarialeInserimento.do" />
+			<forward
+				name="esamina"
+				path="/documentofisico/serieInventariali/serieInventarialeEsamina.do" />
+			<forward
+				name="modifica"
+				path="/documentofisico/serieInventariali/serieInventarialeModifica.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+		</action>
+
+		<action
+			path="/documentofisico/serieInventariali/serieInventarialeInserimento"
+			name="serieInventarialeGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/serieInventariali/serieInventarialeInserimento.jsp"
+			scope="session"
+			parameter="methodSerieGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.serieInventariali.SerieInventarialeGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/serieInventariali/serieInventarialeLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/serieInventariali/serieInventarialeLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/serieInventariali/serieInventarialeEsamina"
+			name="serieInventarialeGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/serieInventariali/serieInventarialeEsamina.jsp"
+			scope="session"
+			parameter="methodSerieGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.serieInventariali.SerieInventarialeGestioneAction">
+			<forward
+				name="chiudi"
+				path="/documentofisico/serieInventariali/serieInventarialeLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/serieInventariali/serieInventarialeModifica"
+			name="serieInventarialeGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/serieInventariali/serieInventarialeModifica.jsp"
+			scope="session"
+			parameter="methodSerieGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.serieInventariali.SerieInventarialeGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/serieInventariali/serieInventarialeLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/serieInventariali/serieInventarialeLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista"
+			name="sezioniCollocazioniListaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.jsp"
+			scope="session"
+			parameter="methodSezColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniListaAction">
+			<forward
+				name="nuova"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniInserimento.do" />
+			<forward
+				name="esamina"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniEsamina.do" />
+			<forward
+				name="modifica"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniModifica.do" />
+			<!-- 			<forward name="cancella"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniCancella.do" />
+				è stato sostituito dalla richiesta di conferma cancellazione  -->
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniInserimento"
+			name="sezioniCollocazioniGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniInserimento.jsp"
+			scope="session"
+			parameter="methodSezCollGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="formati"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniEsamina"
+			name="sezioniCollocazioniGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniEsamina.jsp"
+			scope="session"
+			parameter="methodSezCollGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniGestioneAction">
+			<forward
+				name="chiudi"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="formati"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniModifica"
+			name="sezioniCollocazioniGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniModifica.jsp"
+			scope="session"
+			parameter="methodSezCollGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="formati"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista"
+			name="sezioniCollocazioniFormatiListaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.jsp"
+			scope="session"
+			parameter="methodSezCollFor"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniFormatiListaAction">
+			<forward
+				name="nuova"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiInserimento.do" />
+			<forward
+				name="modifica"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiModifica.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="ok"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="inserimentoSezione"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniInserimento.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiInserimento"
+			name="sezioniCollocazioniFormatiGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiInserimento.jsp"
+			scope="session"
+			parameter="methodSezCollForGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniFormatiGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+			<forward
+				name="lenteForBib"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiModifica"
+			name="sezioniCollocazioniFormatiGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiModifica.jsp"
+			scope="session"
+			parameter="methodSezCollForGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.sezioniCollocazioni.SezioniCollocazioniFormatiGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" /><!--
+				<forward name="lenteForBib"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniFormatiLista.do" /> -->
+		</action>
+
+		<action
+			path="/documentofisico/codiciProvenienza/codiciProvenienzaLista"
+			name="codiciProvenienzaListaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/codiciProvenienza/codiciProvenienzaLista.jsp"
+			scope="session"
+			parameter="methodProvInvLista"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.codiciProvenienza.CodiciProvenienzaListaAction">
+			<forward
+				name="nuova"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaInserimento.do" />
+			<forward
+				name="modifica"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaModifica.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+		</action>
+
+		<action
+			path="/documentofisico/codiciProvenienza/codiciProvenienzaInserimento"
+			name="codiciProvenienzaGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/codiciProvenienza/codiciProvenienzaInserimento.jsp"
+			scope="session"
+			parameter="methodProvInvGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.codiciProvenienza.CodiciProvenienzaGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/codiciProvenienza/codiciProvenienzaModifica"
+			name="codiciProvenienzaGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/codiciProvenienza/codiciProvenienzaModifica.jsp"
+			scope="session"
+			parameter="methodProvInvGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.codiciProvenienza.CodiciProvenienzaGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/elaborazioniDifferite/spostamentoCollocazioni"
+			name="spostamentoCollocazioniForm"
+			input="/WEB-INF/jsp/pages/documentofisico/elaborazioniDifferite/spostamentoCollocazioni.jsp"
+			scope="session"
+			parameter="methodSpostamentoColloc"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.elaborazioniDifferite.SpostamentoCollocazioniAction">
+			<forward
+				name="ok"
+				path="/documentofisico/elaborazioniDifferite/spostamentoCollocazioni.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+		</action>
+
+		<action
+			path="/documentofisico/elaborazioniDifferite/scaricoInventariale"
+			name="scaricoInventarialeForm"
+			input="/WEB-INF/jsp/pages/documentofisico/elaborazioniDifferite/scaricoInventariale.jsp"
+			scope="session"
+			parameter="methodScaricoInventariale"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.elaborazioniDifferite.ScaricoInventarialeAction">
+			<forward name="SIFbibl" path="/amministrazionesistema/ricercaBiblioteca.do" />
+			<forward
+				name="ok"
+				path="/documentofisico/elaborazioniDifferite/scaricoInventariale.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+		</action>
+
+		<action
+			path="/documentofisico/elaborazioniDifferite/aggiornamentoDisponibilita"
+			name="aggiornamentoDisponibilitaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/elaborazioniDifferite/aggiornamentoDisponibilita.jsp"
+			scope="session"
+			parameter="methodAggDisp"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.elaborazioniDifferite.AggiornamentoDisponibilitaAction">
+			<forward
+				name="ok"
+				path="/documentofisico/elaborazioniDifferite/aggiornamentoDisponibilita.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+		</action>
+
+		<action
+			path="/documentofisico/parametriBiblio/parametriBiblio"
+			name="parametriBiblioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/parametriBiblio/parametriBiblio.jsp"
+			scope="session"
+			parameter="methodParBiblio"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.parametriBiblio.ParametriBiblioAction">
+			<forward
+				name="ok"
+				path="/documentofisico/parametriBiblio/parametriBiblio.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+			<forward
+				name="lenteModelli"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocRicerca"
+			name="esameCollocRicercaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocRicerca.jsp"
+			scope="session"
+			parameter="methodEsameCollRicerca"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocRicercaAction">
+			<forward
+				name="listaCollocazioni"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+			<forward
+				name="invNoncolloc"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="esameInventario"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward
+				name="stampaRegistroIngresso"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+		</action>
+
+		<action
+			path="/documentofisico/datiInventari/listeInventari"
+			name="listeInventariForm"
+			input="/WEB-INF/jsp/pages/documentofisico/datiInventari/listeInventari.jsp"
+			scope="session"
+			parameter="methodListeInv"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.datiInventari.ListeInventariAction">
+			<forward
+				name="chiudi"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="esameInventario"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" />
+			<forward
+				name="possessori"
+				path="/documentofisico/possessori/legamePossessoreInventario.do" />
+			<forward
+				name="SIFServizi"
+				path="/servizi/erogazione/ListaMovimenti.do?CHIAMANTE=DOCUMENTO_FISICO" />
+			<forward
+				name="collocazioneDefinitiva"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" />
+			<forward
+				name="modificaInv"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+			<forward
+				name="modificaColl"
+				path="/documentofisico/datiInventari/vaiAModificaColl.do" />
+			<forward
+				name="esameCollocRicerca"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="vaiAInserimentoInv"
+				path="/documentofisico/datiInventari/vaiAInserimentoInv.do" />
+		</action>
+
+		<action
+			path="/documentofisico/datiInventari/modificaInvColl"
+			name="modificaInvCollForm"
+			input="/WEB-INF/jsp/pages/documentofisico/datiInventari/modificaInvColl.jsp"
+			scope="session"
+			parameter="methodModInvColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.datiInventari.ModificaInvCollAction">
+			<!--			<forward name="ok"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" /> --><!--
+				<forward name="chiudi"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			-->
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="listaInventariNonColl"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="ricercaEsemplare"
+				path="/documentofisico/esameCollocazioni/esameCollocRicercaEsemplare.do" />
+			<forward
+				name="modificaEsemplare"
+				path="/documentofisico/esameCollocazioni/esameCollocModificaEsemplare.do" />
+			<forward
+				name="lenteProven"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaLista.do" />
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="esaminaOrdineMod"
+				path="/acquisizioni/ordini/esaminaOrdineMod.do" />
+			<forward
+				name="esaminaOrdine"
+				path="/acquisizioni/ordini/esaminaOrdine.do" />
+			<forward
+				name="stampaSintetica"
+				path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="SIFbibl" path="/amministrazionesistema/ricercaBiblioteca.do" />
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocEsaminaEsemplare"
+			name="esameCollocGestioneEsemplareForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocEsaminaEsemplare.jsp"
+			scope="session"
+			parameter="methodEsameCollGestEsempl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocGestioneEsemplareAction">
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/vaiAInserimentoColl.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/vaiAInserimentoColl.do" />
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocInserimentoEsemplare"
+			name="esameCollocGestioneEsemplareForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocInserimentoEsemplare.jsp"
+			scope="session"
+			parameter="methodEsameCollGestEsempl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocGestioneEsemplareAction">
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<!--
+				<forward name="ok"
+				path="/documentofisico/esameCollocazioni/esameCollocRicercaEsemplare.do" />
+			-->
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="fascicoli"
+				path="/documentofisico/esameCollocazioni/esameCollocInserimentoEsemplare.do" />
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocModificaEsemplare"
+			name="esameCollocGestioneEsemplareForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocModificaEsemplare.jsp"
+			scope="session"
+			parameter="methodEsameCollGestEsempl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocGestioneEsemplareAction">
+			<forward
+				name="fascicoli"
+				path="/documentofisico/esameCollocazioni/esameCollocModificaEsemplare.do" />
+			<forward
+				name="cambiaEsempl"
+				path="/documentofisico/esameCollocazioni/esameCollocRicercaEsemplare.do" />
+			<forward
+				name="cancEsempl"
+				path="/documentofisico/esameCollocazioni/esameCollocModificaEsemplare.do" />
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario"
+			name="esameCollocEsaminaInventarioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.jsp"
+			scope="session"
+			parameter="methodEsameCollEsInv"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocEsaminaInventarioAction">
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="esameCollocRicerca"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="SIFServizi"
+				path="/servizi/erogazione/ListaMovimenti.do?CHIAMANTE=DOCUMENTO_FISICO" />
+			<forward
+				name="modificaInv"
+				path="/documentofisico/datiInventari/modificaInvColl.do" /><!--
+				<forward name="etichetta"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			-->
+			<forward
+				name="stampaSintetica"
+				path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni"
+			name="esameCollocListeCollocazioniForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.jsp"
+			scope="session"
+			parameter="methodEsameCollListeColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniAction">
+			<forward
+				name="ok"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" /><!--
+				<forward name="chiudi"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			-->
+			<forward
+				name="inventari"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<!--<forward name="inventari"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />-->
+			<forward
+				name="esemplare"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaEsemplare.do" />
+			<forward
+				name="listaCollSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do?LISTA_COLL_SUPP=Y" />
+			<forward
+				name="listaSpecSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do?LISTA_SPEC_SUPP=Y" />
+			<forward
+				name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do" />
+			<forward
+				name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto"
+			name="esameCollocListeCollocazioniForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.jsp"
+			scope="session"
+			parameter="methodEsameCollListeColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniAction">
+			<forward
+				name="ok"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="listaCollSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward
+				name="listaSpecSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward
+				name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do" /><!--
+				<forward name="listaCollSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do?LISTA_COLL_SUPP=Y" />
+				<forward name="listaSpecSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do?LISTA_SPEC_SUPP=Y" />
+				<forward name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do?LISTA_ULT_SPEC=Y" />
+			-->
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto"
+			name="esameCollocListeCollocazioniForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.jsp"
+			scope="session"
+			parameter="methodEsameCollListeColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniAction">
+			<forward
+				name="ok"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/esameCollocazioni/esameCollocRicerca.do" />
+			<forward
+				name="listaCollSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do?LISTA_COLL_SUPP=Y" />
+			<forward
+				name="listaSpecSupp"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do?LISTA_SPEC_SUPP=Y" />
+		</action>
+
+		<action
+			path="/documentofisico/datiInventari/vaiAListaInventariTitolo"
+			name="vaiAListaInventariTitoloForm"
+			input="/WEB-INF/jsp/pages/documentofisico/datiInventari/vaiAListaInventariTitolo.jsp"
+			scope="session"
+			parameter="methodVaiAListaInv"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.datiInventari.VaiAListaInventariTitoloAction">
+			<forward
+				name="chiudi"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="vaiAModificaColl"
+				path="/documentofisico/datiInventari/vaiAModificaColl.do" />
+			<forward
+				name="vaiAInserimentoColl"
+				path="/documentofisico/datiInventari/vaiAInserimentoColl.do" />
+			<forward
+				name="vaiAInserimentoInv"
+				path="/documentofisico/datiInventari/vaiAInserimentoInv.do" />
+			<forward
+				name="ordini"
+				path="/acquisizioni/ordini/listaOrdini.do" />
+			<forward
+				name="listaInventariOrdine"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="esameInventario"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" />
+			<forward
+				name="serviziErogazione"
+				path="/servizi/erogazione/ErogazioneRicerca.do?INVRICERCA=true" />
+			<forward
+				name="movimenti_utente"
+				path="/servizi/erogazione/ListaMovimenti.do?MOVIMENTI_UTENTE=true" />
+			<forward
+				name="stampaServizi"
+				path="/gestionestampe/servizi/stampaServizi.do?INVRICERCA=true" />
+			<forward
+				name="esaminaPosseduto"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.do" />
+			<forward
+				name="SIFServizi"
+				path="/servizi/erogazione/ListaMovimenti.do?CHIAMANTE=DOCUMENTO_FISICO" />
+			<forward
+				name="possessori"
+				path="/documentofisico/possessori/legamePossessoreInventario.do" />
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+		</action>
+
+		<action
+			path="/documentofisico/datiInventari/vaiAInserimentoColl"
+			name="vaiAInserimentoCollForm"
+			input="/WEB-INF/jsp/pages/documentofisico/datiInventari/vaiAInserimentoColl.jsp"
+			scope="session"
+			parameter="methodVaiAInsColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.datiInventari.VaiAInserimentoCollAction">
+			<forward
+				name="lenteClassi"
+				path="/documentofisico/datiInventari/vaiAInserimentoColl.do" />
+			<forward
+				name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do" />
+			<forward
+				name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do" /><!--
+				<forward name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do?LISTA_ULT_COLL=Y" />
+				<forward name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do?LISTA_ULT_SPEC=Y" />
+			-->
+			<forward
+				name="sceltaColl"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+			<forward
+				name="esEsempl"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaEsemplare.do" />
+			<forward
+				name="esInv"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="sceltaTit"
+				path="/documentofisico/datiInventari/vaiAInserimentoColl.do" />
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="lenteProven"
+				path="/documentofisico/codiciProvenienza/codiciProvenienzaLista.do" />
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+		</action>
+
+		<action
+			path="/documentofisico/datiInventari/vaiAInserimentoInv"
+			name="vaiAInserimentoInvForm"
+			input="/WEB-INF/jsp/pages/documentofisico/datiInventari/vaiAInserimentoInv.jsp"
+			scope="session"
+			parameter="methodVaiAInsInv"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.datiInventari.VaiAInserimentoInvAction">
+			<forward
+				name="ordini"
+				path="/acquisizioni/ordini/listaOrdini.do" />
+			<forward
+				name="insCollocazione"
+				path="/documentofisico/datiInventari/vaiAInserimentoColl.do" />
+			<forward
+				name="modInvColl"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="listaInventariOrdine"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+		</action>
+
+		<action
+			path="/documentofisico/datiInventari/vaiAModificaColl"
+			name="vaiAModificaCollForm"
+			input="/WEB-INF/jsp/pages/documentofisico/datiInventari/vaiAModificaColl.jsp"
+			scope="session"
+			parameter="methodVaiAModColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.datiInventari.VaiAModificaCollAction">
+			<forward
+				name="modificaInv"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+			<forward
+				name="modificaEsemplare"
+				path="/documentofisico/esameCollocazioni/esameCollocModificaEsemplare.do" />
+			<forward
+				name="ricercaEsemplare"
+				path="/documentofisico/esameCollocazioni/esameCollocRicercaEsemplare.do" />
+			<forward
+				name="listaInventariDelTitolo"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="cancellaInv"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/vaiAListaInventariTitolo.do" />
+			<forward
+				name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward
+				name="lenteClassi"
+				path="/documentofisico/datiInventari/vaiAModificaColl.do" />
+			<forward
+				name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do" />
+			<forward
+				name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do" /><!--
+				<forward name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do?LISTA_ULT_COLL=Y" />
+				<forward name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do?LISTA_ULT_SPEC=Y"  />
+			-->
+			<forward
+				name="sinteticaLocalizzazioni"
+				path="/gestionebibliografica/sinteticaLocalizzazioni.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocRicercaEsemplare"
+			name="esameCollocRicercaEsemplareForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocRicercaEsemplare.jsp"
+			scope="session"
+			parameter="methodEsameCollRicEsempl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocRicercaEsemplareAction">
+			<forward
+				name="sceltaEsempl"
+				path="/documentofisico/esameCollocazioni/esameCollocModificaEsemplare.do" /><!--
+				<forward name="esameColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocEsemplare.do" />
+			-->
+			<forward
+				name="esameColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />
+			<forward
+				name="sceltaTitolo"
+				path="/documentofisico/esameCollocazioni/esameCollocInserimentoEsemplare.do" />
+			<forward
+				name="ok"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/datiInventari/modificaInvColl.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni"
+			name="esameCollocListeCollocazioniForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.jsp"
+			scope="session"
+			parameter="methodEsameCollListeColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniAction">
+			<!--
+				<forward name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do?LISTA_ULT_SPEC=Y" />
+				<forward name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do?LISTA_ULT_COLL=Y" />
+			-->
+			<forward
+				name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do" />
+			<forward
+				name="listaUltColl"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltCollocazioni.do" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni"
+			name="esameCollocListeCollocazioniForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.jsp"
+			scope="session"
+			parameter="methodEsameCollListeColl"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocListeCollocazioniAction">
+			<!--
+				<forward name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do?LISTA_ULT_SPEC=Y" />
+			-->
+			<forward
+				name="listaUltSpec"
+				path="/documentofisico/esameCollocazioni/esameCollocListaUltSpecificazioni.do" />
+		</action>
+		<action
+			path="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto"
+			name="esameCollocEsaminaPossedutoForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.jsp"
+			scope="session"
+			parameter="methodEsaminaPoss"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.EsameCollocEsaminaPossedutoAction">
+			<forward
+				name="ok"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.do" />
+			<forward
+				name="possessori"
+				path="/documentofisico/possessori/legamePossessoreInventario.do" />
+			<forward
+				name="SIFServizi"
+				path="/servizi/erogazione/ListaMovimenti.do?CHIAMANTE=DOCUMENTO_FISICO" />
+			<forward
+				name="esameInventario"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaInventario.do" />
+			<forward
+				name="esEsempl"
+				path="/documentofisico/esameCollocazioni/esameCollocEsaminaEsemplare.do" />
+			<forward
+				name="inventari"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="collocazioni"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />
+			<forward
+				name="altreBib"
+				path="/documentofisico/esameCollocazioni/listaAltreBiblioteche.do" />
+			<forward
+				name="chiudi"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action
+			path="/documentofisico/esameCollocazioni/listaAltreBiblioteche"
+			name="listaAltreBibliotecheForm"
+			input="/WEB-INF/jsp/pages/documentofisico/esameCollocazioni/listaAltreBiblioteche.jsp"
+			scope="session"
+			parameter="methodListaBib"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.esameCollocazioni.ListaAltreBibliotecheAction">
+		</action>
+
+		<!-- ======================================== Modelli Etichette -->
+		<action
+			path="/documentofisico/modelliEtichette/modelliEtichetteLista"
+			name="modelliEtichetteListaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/modelliEtichette/modelliEtichetteLista.jsp"
+			scope="session"
+			parameter="methodModelli"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.modelliEtichette.ModelliEtichetteListaAction">
+			<forward
+				name="nuova"
+				path="/documentofisico/modelliEtichette/modelliEtichetteInserimento.do" />
+			<forward
+				name="esamina"
+				path="/documentofisico/modelliEtichette/modelliEtichetteEsamina.do" />
+			<forward
+				name="modifica"
+				path="/documentofisico/modelliEtichette/modelliEtichetteModifica.do" />
+		</action>
+
+		<action
+			path="/documentofisico/modelliEtichette/modelliEtichetteInserimento"
+			name="modelliEtichetteGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/modelliEtichette/modelliEtichetteInserimento.jsp"
+			scope="session"
+			parameter="methodModelliGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.modelliEtichette.ModelliEtichetteGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/modelliEtichetteLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+			<forward
+				name="formati"
+				path="/documentofisico/modelliEtichette/modelliEtichetteFormatiLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/modelliEtichette/modelliEtichetteEsamina"
+			name="modelliEtichetteGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/modelliEtichette/modelliEtichetteEsamina.jsp"
+			scope="session"
+			parameter="methodModelliGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.modelliEtichette.ModelliEtichetteGestioneAction">
+			<forward
+				name="chiudi"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+			<forward
+				name="formati"
+				path="/documentofisico/modelliEtichette/modelliEtichetteFormatiLista.do" />
+		</action>
+
+		<action
+			path="/documentofisico/modelliEtichette/modelliEtichetteModifica"
+			name="modelliEtichetteGestioneForm"
+			input="/WEB-INF/jsp/pages/documentofisico/modelliEtichette/modelliEtichetteModifica.jsp"
+			scope="session"
+			parameter="methodModelliGest"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.modelliEtichette.ModelliEtichetteGestioneAction">
+			<forward
+				name="ok"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+			<forward
+				name="chiudi"
+				path="/documentofisico/modelliEtichette/modelliEtichetteLista.do" />
+			<forward
+				name="formati"
+				path="/documentofisico/modelliEtichette/modelliEtichetteFormatiLista.do" />
+		</action>
+
+		<!-- ======================================== Possessori -->
+
+		<action
+			path="/documentofisico/possessori/possessoriRicerca"
+			name="possessoriRicercaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriRicerca.jsp"
+			scope="session"
+			parameter="methodPossRicerca"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriRicercaAction">
+			<forward
+				name="cerca"
+				path="/documentofisico/possessori/possessoriRicerca.do" />
+			<forward
+				name="creaPossessore"
+				path="/documentofisico/possessori/possessoriCrea.do" />
+			<forward
+				name="sinteticaPossessore"
+				path="/documentofisico/possessori/sinteticaPossessori.do" />
+			<forward
+				name="chiudi"
+				path="/blank.do" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/possessoriCrea"
+			name="possessoriDettaglioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriDettaglio.jsp"
+			scope="session"
+			parameter="methodPossDettaglio"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriDettaglioAction">
+			<forward
+				name="salva"
+				path="/documentofisico/possessori/possessoriCrea.do" />
+			<forward
+				name="annulla"
+				path="/documentofisico/possessori/possessoriRicerca.do" />
+			<forward
+				name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="attivaPossessorePerInventario"
+				path="/documentofisico/possessori/creaLegameInventarioPossessore.do" />
+			<forward
+				name="sinteticaPossessore"
+				path="/documentofisico/possessori/sinteticaPossessori.do" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/sinteticaPossessori"
+			name="possessoriSinteticaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/sinteticaPossessori.jsp"
+			scope="session"
+			parameter="methodPossSintetica"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriSinteticaAction">
+			<forward
+				name="salva"
+				path="/documentofisico/possessori/possessoriCrea.do" />
+			<forward
+				name="annulla"
+				path="/documentofisico/possessori/possessoriRicerca.do" />
+			<forward
+				name="analiticaPossessori"
+				path="/documentofisico/possessori/analiticaPossessori.do" />
+			<forward
+				name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="inventariPossessori"
+				path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward
+				name="attivaPossessorePerInventario"
+				path="/documentofisico/possessori/creaLegameInventarioPossessore.do" />
+			<forward
+				name="creaPossessoredaSintetica"
+				path="/documentofisico/possessori/possessoriCrea.do" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/analiticaPossessori"
+			name="possessoriAnaliticaForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriAnalitica.jsp"
+			scope="session"
+			parameter="methodPossAnalitica"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriAnaliticaAction">
+			<forward
+				name="dettaglioPossessore"
+				path="/documentofisico/possessori/possessoriDettaglio.do" />
+			<forward
+				name="legamePossessore"
+				path="/documentofisico/possessori/legamePossessori.do" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/possessoriDettaglio"
+			name="possessoriDettaglioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriDettaglio.jsp"
+			scope="session"
+			parameter="methodPossDettaglio"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriVisualizzaAction">
+			<forward
+				name="annulla"
+				path="/documentofisico/possessori/analiticaPossessori.do" />
+			<forward
+				name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/possessoriVisualizza"
+			name="possessoriDettaglioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriVisualizza.jsp"
+			scope="session"
+			parameter="methodPossVisualizza"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriVisualizzaAction">
+			<forward
+				name="indietro"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/legamePossessori"
+			name="possessoriLegameForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriLegame.jsp"
+			scope="session"
+			parameter="methodPossLegame"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriLegameAction">
+			<forward
+				name="salvaLegame"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="annullaLegame"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/variazioneLegame"
+			name="possessoriVariaLegameForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriNotaLegame.jsp"
+			scope="session"
+			parameter="methodPossNotaLegame"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriNotaLegameAction">
+			<forward
+				name="salvaNotaLegame"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="annullaNotaLegame"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/variazioneDescrizioneFormaAccettata"
+			name="possessoriDettaglioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriModificaDettaglioFAccettata.jsp"
+			scope="session"
+			parameter="methodPossDettaglioFA"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriVariaDescAccettataAction">
+			<forward
+				name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="sinteticaPossessore"
+				path="/documentofisico/possessori/sinteticaPossessori.do" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/variazioneDescrizioneFormaRinvio"
+			name="possessoriLegameForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/possessoriModificaDettaglioFRinvio.jsp"
+			scope="session"
+			parameter="methodPossDettaglioFR"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriVariaDescRinvioAction">
+			<forward
+				name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+			<forward
+				name="sinteticaPossessore"
+				path="/documentofisico/possessori/sinteticaPossessori.do" />
+		</action>
+
+
+		<action
+			path="/documentofisico/possessori/legamePossessoreInventario"
+			name="possessoriDiInventarioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/listaPossessodiDiInventario.jsp"
+			scope="session"
+			parameter="methodPossDiInventatio"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.PossessoriDiInventarioAction">
+			<forward
+				name="newPossessorePerInventario"
+				path="/documentofisico/possessori/possessoriRicerca.do" />
+			<forward
+				name="modPossessorePerInventario"
+				path="/documentofisico/possessori/creaLegameInventarioPossessore.do" />
+			<forward
+				name="analitica"
+				path="/gestionebibliografica/titolo/analiticaTitolo.do?RETICOLO=TRUE" />
+		</action>
+
+		<action
+			path="/documentofisico/possessori/creaLegameInventarioPossessore"
+			name="possessoriLegameInventarioForm"
+			input="/WEB-INF/jsp/pages/documentofisico/possessori/legamePossessoreInventario.jsp"
+			scope="session"
+			parameter="methodPossLegInv"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.possessori.LegameInventarioPossessoreAction">
+			<forward
+				name="indietro"
+				path="/documentofisico/possessori/legamePossessoreInventario.do" />
+			<forward
+				name="possessoriInventario"
+				path="/documentofisico/possessori/legamePossessoreInventario.do" />
+		</action>
+
+		<action
+			path="/documentofisico/elaborazioniDifferite/acquisizioneUriCopiaDigitale"
+			name="acquisizioneUriCopiaDigitaleForm"
+			input="/WEB-INF/jsp/pages/documentofisico/elaborazioniDifferite/AcquisizioneUriCopiaDigitale.jsp"
+			scope="session"
+			parameter="methodAcqUriCopiaDigitale"
+			validate="false"
+			type="it.iccu.sbn.web.actions.documentofisico.elaborazioniDifferite.AcquisizioneUriCopiaDigitaleAction">
+
+		</action>
+	</action-mappings>
+
+
+
+	<!-- ======================================== Message Resources Definitions -->
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources
+		key="documentoFisicoLabels"
+		parameter="it.iccu.sbn.web.resources.DocumentoFisicoLabels"
+		null="false" />
+	<message-resources
+		key="documentoFisicoMessages"
+		parameter="it.iccu.sbn.web.resources.DocumentoFisicoMessages"
+		null="false" />
+
+	<message-resources
+		key="documentoFisicoLabels"
+		parameter="it.iccu.sbn.web.resources.DocumentoFisicoLabels"
+		null="false" />
+
+</struts-config>

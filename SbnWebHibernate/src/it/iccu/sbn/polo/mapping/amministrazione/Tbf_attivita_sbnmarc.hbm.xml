@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_attivita_sbnmarc" table="tbf_attivita_sbnmarc" >
+		<id name="id_attivita_sbnmarc" column="id_attivita_sbnmarc" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="id_tipo_attivita" column="id_tipo_attivita" type="integer" not-null="false" lazy="false"/>
+		<property name="tp_attivita" column="tp_attivita" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ds_attivita" column="ds_attivita" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="nota_tipo_attivita" column="nota_tipo_attivita" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="livello" column="livello" type="integer" not-null="false" lazy="false"/>
+		<property name="codice_attivita" column="codice_attivita" type="string" length="10" not-null="false" lazy="false"/>
+		<many-to-one name="id_modulo" cascade="lock" column="id_modulo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_moduli_funzionali" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<one-to-one name="Tbf_attivita" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_attivita" cascade="save-update,lock" property-ref="id_attivita_sbnmarc" lazy="proxy" access="field"/>
+	</class>
+</hibernate-mapping>

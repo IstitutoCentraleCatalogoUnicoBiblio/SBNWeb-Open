@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Trc_formati_sezioni" table="trc_formati_sezioni" schema="sbnweb" >
+		<meta attribute="class-description">
+			FORMATI DEFINITI PER LA SEZIONE (solo per sezioni a formato)
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_sezione" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_sezione_collocazione">
+				<column name="cd_sezione"/>
+				<column name="cd_bib_sezione"/>
+				<column name="cd_polo_sezione"/>
+			</key-many-to-one>
+			<key-property name="cd_formato" column="cd_formato" type="string"/>
+			<!-- <key-property name="prog_serie" column="prog_serie" type="integer"/> -->
+		</composite-id>
+		<property name="prog_num" column="prog_num" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				ultimo progressivo di collocazione interno alla serie
+			</meta>
+		</property>
+		<property name="prog_serie" column="prog_serie" type="integer" not-null="true" lazy="false"/>
+		<property name="descr" column="descr" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="n_pezzi" column="n_pezzi" type="integer" not-null="true" lazy="false" />
+		<property name="n_pezzi_misc" column="n_pezzi_misc" type="integer" not-null="true" lazy="false" >
+			<meta attribute="field-description">
+				numero pezzi da riservare all'interno del progressivo del formato se il tipo sezione di collocazione è miscellanea</meta></property>
+		<property name="prog_serie_num1_misc" column="prog_serie_num1_misc" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				serie del primo progressivo da incrementare all'interno dell'intervallo riservato per la miscellanea
+			</meta></property>
+		<property name="progr_num1_misc" column="progr_num1_misc" type="integer" not-null="true" lazy="false">
+		<meta attribute="field-description">
+				progressivo da incrementare all'interno dell'intervallo riservato per la miscellanea </meta></property>
+		<property name="prog_serie_num2_misc" column="prog_serie_num2_misc" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				serie del progressivo limite all'interno dell'intervallo riservato per la miscellanea
+			</meta></property>
+		<property name="progr_num2_misc" column="progr_num2_misc" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo limite all'interno dell'intervallo riservato per la miscellanea			</meta></property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

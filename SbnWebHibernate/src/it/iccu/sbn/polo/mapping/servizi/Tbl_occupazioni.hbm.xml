@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_occupazioni" table="tbl_occupazioni" >
+		<meta attribute="class-description">
+			Occupazioni
+		</meta>
+		<id name="id_occupazioni" column="id_occupazioni" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_biblioteca" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_biblioteca"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="professione" column="professione" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della professione
+			</meta>
+		</property>
+		<property name="occupazione" column="occupazione" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice dell'occupazione
+			</meta>
+		</property>
+		<property name="descr" column="descr" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione dell'occupazione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<one-to-one name="Trl_utenti_biblioteca" class="it.iccu.sbn.polo.orm.servizi.Trl_utenti_biblioteca" cascade="save-update,lock" lazy="proxy" access="field"/>
+	</class>
+</hibernate-mapping>

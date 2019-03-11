@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="JavaSource"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebDomainEjb"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebCommon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SBNWeb"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/antlr.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/commons-validator.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/displaytag-1.0.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/jstl.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/standard.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/struts-el.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/struts.jar" sourcepath="/SBNWeb/lib/web"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/compile/commons-httpclient.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/compile/j2ee.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/compile/log4j.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-beanutils-1.7.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-logging-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-logging-api-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/dictionarymodel.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jakarta-oro.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/repertorymodel.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/stream-1.1.5-jdk5.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/unimarcmodel.jar" sourcepath="/SBNWeb/lib/common/unimarcmodel.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/web/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/trove-2.1.0.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/castor-0.9.9-sbnweb.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebHibernate"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

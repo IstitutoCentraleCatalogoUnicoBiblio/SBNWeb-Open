@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_serie_inventariale" table="tbc_serie_inventariale" >
+		<meta attribute="class-description">
+			SERIE INVENTARIALI
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<composite-id>
+			<key-property name="cd_serie" column="cd_serie" type="string"/>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="descr" column="descr" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione della serie inventariale
+			</meta>
+		</property>
+		<property name="prg_inv_corrente" column="prg_inv_corrente" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo per l'assegnazione automatica del n. inventario corrente
+			</meta>
+		</property>
+		<property name="prg_inv_pregresso" column="prg_inv_pregresso" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo per l'assegnazione automatica del n. inventario pregresso
+			</meta>
+		</property>
+		<property name="num_man" column="num_man" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di inventario di soglia per l'assegnazione manuale
+			</meta>
+		</property>
+		<property name="inizio_man" column="inizio_man" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di inizio intervallo per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="fine_man" column="fine_man" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di fine intervallo per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="flg_chiusa" column="flg_chiusa" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di serie chiusa 1= serie non utilizzabile per assegnazione automatica
+			</meta>
+		</property>
+		<property name="buono_carico" column="buono_carico" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo del buono di carico
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="dt_ingr_inv_man" column="dt_ingr_inv_man" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data convenzionale da assumere come data di ingresso di default per l'inserimento di inventari manuali (n.ro num_man)
+			</meta>
+		</property>
+		<property name="dt_ingr_inv_preg" column="dt_ingr_inv_preg" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data convenzionale da assumere come data di ingresso di default per l'inserimento di inventari pregressi
+			</meta>
+		</property>
+		<property name="dt_ingr_inv_ris1" column="dt_ingr_inv_ris1" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data convenzionale di ingresso, default per l'inserimento di inventari nel primo intervallo riservato (inizo_man n.ro fine_man)
+			</meta>
+		</property>
+		<property name="inizio_man2" column="inizio_man2" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di inizio secondo intervallo riservato per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="fine_man2" column="fine_man2" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di fine secondo intervallo riservato per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="dt_ingr_inv_ris2" column="dt_ingr_inv_ris2" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data convenzionale di ingresso, default per l'inserimento di inventari nel secondo intervallo riservato (inizo_man2 n.ro fine_man2)
+			</meta>
+		</property>
+		<property name="inizio_man3" column="inizio_man3" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di inizio terzo intervallo riservato per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="fine_man3" column="fine_man3" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di fine terzo intervallo riservato per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="dt_ingr_inv_ris3" column="dt_ingr_inv_ris3" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data convenzionale di ingresso, default per l'inserimento di inventari nel terzo intervallo riservato (inizo_man3 n.ro fine_man3)
+			</meta>
+		</property>
+		<property name="inizio_man4" column="inizio_man4" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di inizio quarto intervallo riservato per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="fine_man4" column="fine_man4" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero di fine quarto intervallo riservato per l'attribuzione manuale
+			</meta>
+		</property>
+		<property name="dt_ingr_inv_ris4" column="dt_ingr_inv_ris4" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data convenzionale di ingresso, default per l'inserimento di inventari nel quarto intervallo riservato (inizo_man4 n.ro fine_man4)
+			</meta>
+		</property>
+		<property name="fl_default" column="fl_default" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di serie da proporre come default in creazione nuovo inventario
+			</meta>
+		</property>
+
+		<set name="Tbc_inventario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="true">
+				<column name="cd_serie"/>
+				<column name="cd_bib"/>
+				<column name="cd_polo"/>
+			</key>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario"/>
+		</set>
+	</class>
+</hibernate-mapping>

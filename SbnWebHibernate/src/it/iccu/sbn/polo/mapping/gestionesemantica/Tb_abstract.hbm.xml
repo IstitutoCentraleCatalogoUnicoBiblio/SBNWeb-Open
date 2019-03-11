@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.gestionesemantica.Tb_abstract" table="tb_abstract" >
+		<meta attribute="class-description">
+			ABSTRACT (TPSABS)
+		</meta>
+		<id column="bid" type="string">
+			<generator class="foreign">
+				<param name="property">b</param>
+			</generator>
+		</id>
+		<one-to-one name="b" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="all" constrained="true"/>
+		<property name="ds_abstract" column="ds_abstract" type="string" length="2160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione dell'abstract
+			</meta>
+		</property>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del livello di autorita'
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

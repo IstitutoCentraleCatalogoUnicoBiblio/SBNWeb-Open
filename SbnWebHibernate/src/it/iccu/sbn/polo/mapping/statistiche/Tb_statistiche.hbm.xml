@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.statistiche.Tb_statistiche" table="tb_stat" schema="sbnweb">
+		<meta attribute="class-description">
+			Statistiche
+		</meta>
+		<id name="id_stat" column="id_stat" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="titolo" column="titolo" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="tipo_conn" column="tipo_conn" type="string" length="1"  not-null="true" lazy="false"/>
+		<property name="query_str" column="query_str" type="string"  not-null="true" lazy="false"/>
+		<property name="tipo_query" column="tipo_query" type="string" length="15"  not-null="true" lazy="false"/>
+		<set name="Tb_stat_parameter" lazy="false" cascade="save-update,lock" inverse="true">
+			<key column="id_stat" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.statistiche.Tb_stat_parameter"/>
+		</set>
+	</class>
+</hibernate-mapping>

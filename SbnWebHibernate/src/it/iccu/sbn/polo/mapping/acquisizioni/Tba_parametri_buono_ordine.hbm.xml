@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_parametri_buono_ordine" table="tba_parametri_buono_ordine" schema="sbnweb" >
+		<meta attribute="class-description">
+			Parametri per buono d'ordine (intestazioni / fondo pagina)
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="progr" column="progr" type="big_decimal"/>
+		</composite-id>
+		<property name="codice_buono" column="codice_buono" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore del tipo di numerazione del buono d'ordine (a=progressivo automatico; m=manuale)
+			</meta>
+		</property>
+		<property name="descr_test" column="descr_test" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				intestazione buono d'ordine
+			</meta>
+		</property>
+		<property name="descr_foot" column="descr_foot" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				testo finale del buono d'ordine
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="descr_oggetto" column="descr_oggetto" type="text" not-null="true" lazy="false"/>
+		<property name="descr_formulaintr" column="descr_formulaintr" type="text" not-null="true" lazy="false"/>
+		<property name="area_titolo" column="area_titolo" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="area_ediz" column="area_ediz" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="area_num" column="area_num" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="area_pub" column="area_pub" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="logo" type="boolean" not-null="true" lazy="false">
+			<column name="logo" default="false"/>
+		</property>
+		<property name="logo_img" column="logo_img" type="string" length="100" not-null="true" lazy="false"/>
+		<property name="prezzo" type="boolean" not-null="true" lazy="false">
+			<column name="prezzo" default="false"/>
+		</property>
+		<property name="nprot" type="boolean" not-null="true" lazy="false">
+			<column name="nprot" default="false"/>
+		</property>
+		<property name="dataprot" type="boolean" not-null="true" lazy="false">
+			<column name="dataprot" default="false"/>
+		</property>
+		<property name="rinnovo" column="rinnovo" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="firmadigit" type="boolean" not-null="true" lazy="false">
+			<column name="firmadigit" default="false"/>
+		</property>
+		<property name="firmadigit_img" column="firmadigit_img" type="string" length="100" not-null="true" lazy="false"/>
+		<property name="ristampa" type="boolean" not-null="true" lazy="false">
+			<column name="ristampa" default="false"/>
+		</property>
+	</class>
+</hibernate-mapping>

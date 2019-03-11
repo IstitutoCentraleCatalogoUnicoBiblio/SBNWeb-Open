@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_offerte_fornitore" table="tba_offerte_fornitore" schema="sbnweb" >
+		<meta attribute="class-description">
+			Offerte del fornitore
+		</meta>
+		<id name="id_offerte_fornitore" column="id_offerte_fornitore" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<many-to-one name="cod_fornitore" cascade="lock" column="cod_fornitore" class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="bid_p" column="bid_p" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'offerta del fornitore
+			</meta>
+		</property>
+		<property name="tip_rec" column="tip_rec" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo provenienza dei dati
+			</meta>
+		</property>
+		<property name="natura" column="natura" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della natura bibliografica
+			</meta>
+		</property>
+		<property name="paese" column="paese" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+		<property name="lingua" column="lingua" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della lingua
+			</meta>
+		</property>
+		<property name="tipo_data" column="tipo_data" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di data
+			</meta>
+		</property>
+		<property name="data1" column="data1" type="string" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				anno di pubblicazione
+			</meta>
+		</property>
+		<property name="num_standard" column="num_standard" type="string" length="11" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice isbn/issn
+			</meta>
+		</property>
+		<property name="aut1" column="aut1" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				primo autore
+			</meta>
+		</property>
+		<property name="k_aut1" column="k_aut1" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del primo autore
+			</meta>
+		</property>
+		<property name="tip_aut1" column="tip_aut1" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				tipologia dell'autore
+			</meta>
+		</property>
+		<property name="resp_aut1" column="resp_aut1" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di responsabilita' dell'autore
+			</meta>
+		</property>
+		<property name="aut2" column="aut2" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				secondo autore
+			</meta>
+		</property>
+		<property name="k_aut2" column="k_aut2" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del secondo autore
+			</meta>
+		</property>
+		<property name="tip_aut2" column="tip_aut2" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				tipologia dell'autore
+			</meta>
+		</property>
+		<property name="resp_aut2" column="resp_aut2" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di responsabilita' dell'autore
+			</meta>
+		</property>
+		<property name="aut3" column="aut3" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				terzo autore
+			</meta>
+		</property>
+		<property name="k_aut3" column="k_aut3" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del terzo autore
+			</meta>
+		</property>
+		<property name="tip_aut3" column="tip_aut3" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				tipologia dell'autore
+			</meta>
+		</property>
+		<property name="resp_aut3" column="resp_aut3" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di responsabilita' dell'autore
+			</meta>
+		</property>
+		<property name="aut4" column="aut4" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				quarto autore
+			</meta>
+		</property>
+		<property name="k_aut4" column="k_aut4" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del quarto autore
+			</meta>
+		</property>
+		<property name="tip_aut4" column="tip_aut4" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				tipologia dell'autore
+			</meta>
+		</property>
+		<property name="resp_aut4" column="resp_aut4" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di responsabilita' dell'autore
+			</meta>
+		</property>
+		<property name="isbd_1" column="isbd_1" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione in formato isbd
+			</meta>
+		</property>
+		<property name="isbd_2" column="isbd_2" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione in formato isbd
+			</meta>
+		</property>
+		<property name="k_titolo" column="k_titolo" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del titolo
+			</meta>
+		</property>
+		<property name="serie1" column="serie1" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				collana
+			</meta>
+		</property>
+		<property name="k1_serie" column="k1_serie" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata della collana
+			</meta>
+		</property>
+		<property name="num1_serie" column="num1_serie" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero della collana
+			</meta>
+		</property>
+		<property name="serie2" column="serie2" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				collana
+			</meta>
+		</property>
+		<property name="k2_serie" column="k2_serie" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata della collana
+			</meta>
+		</property>
+		<property name="num2_serie" column="num2_serie" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero della collana
+			</meta>
+		</property>
+		<property name="serie3" column="serie3" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				collana
+			</meta>
+		</property>
+		<property name="k3_serie" column="k3_serie" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata della collana
+			</meta>
+		</property>
+		<property name="num3_serie" column="num3_serie" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero della collana
+			</meta>
+		</property>
+		<property name="tipo1_classe" column="tipo1_classe" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del sistema di classificazione
+			</meta>
+		</property>
+		<property name="classe1" column="classe1" type="string" length="31" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della classe
+			</meta>
+		</property>
+		<property name="tipo2_classe" column="tipo2_classe" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del sistema di classificazione
+			</meta>
+		</property>
+		<property name="classe2" column="classe2" type="string" length="31" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della classe
+			</meta>
+		</property>
+		<property name="tipo3_classe" column="tipo3_classe" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del sistema di classificazione
+			</meta>
+		</property>
+		<property name="classe3" column="classe3" type="string" length="31" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della classe
+			</meta>
+		</property>
+		<property name="sog1" column="sog1" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				soggetto
+			</meta>
+		</property>
+		<property name="k_sog1" column="k_sog1" type="string" length="120" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del soggetto
+			</meta>
+		</property>
+		<property name="sog2" column="sog2" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				soggetto
+			</meta>
+		</property>
+		<property name="k_sog2" column="k_sog2" type="string" length="120" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del soggetto
+			</meta>
+		</property>
+		<property name="sog3" column="sog3" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				soggetto
+			</meta>
+		</property>
+		<property name="k_sog3" column="k_sog3" type="string" length="120" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave normalizzata del soggetto
+			</meta>
+		</property>
+		<property name="num_stand_pro" column="num_stand_pro" type="string" length="35" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero standard assegnato dal libraio o dal db esterno
+			</meta>
+		</property>
+		<property name="data_offerta" column="data_offerta" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data dell'offerta (edi)
+			</meta>
+		</property>
+		<property name="num_offerta_g" column="num_offerta_g" type="string" length="35" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero dell'offerta generale
+			</meta>
+		</property>
+		<property name="num_linea" column="num_linea" type="big_decimal" precision="6" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di linea dell'offerta
+			</meta>
+		</property>
+		<property name="valuta" column="valuta" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della valuta
+			</meta>
+		</property>
+		<property name="prezzo" column="prezzo" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				prezzo
+			</meta>
+		</property>
+		<property name="tipo_prezzo" column="tipo_prezzo" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della tipologia di prezzo (ca=catalogo, ct=contratto, di=prezzo del distributore)
+			</meta>
+		</property>
+		<property name="inf_sul_prezzo" column="inf_sul_prezzo" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				informazioni sul prezzo
+			</meta>
+		</property>
+		<property name="altri_rif" column="altri_rif" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				altri riferimenti
+			</meta>
+		</property>
+		<property name="note_edi" column="note_edi" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note edi
+			</meta>
+		</property>
+		<property name="prot_edi" column="prot_edi" type="string" length="35" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				coordinate messaggio edi
+			</meta>
+		</property>
+		<property name="num_offerta_p" column="num_offerta_p" type="string" length="35" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero dell'offerta particolare
+			</meta>
+		</property>
+		<property name="bid" column="bid" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'oggetto bibliograficoe
+			</meta>
+		</property>
+		<property name="stato_offerta" column="stato_offerta" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				stato dell'offerta
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

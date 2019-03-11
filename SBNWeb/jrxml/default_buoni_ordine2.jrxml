@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="default_buoni_ordine2" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="jasperDir" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["."]]></defaultValueExpression>
+	</parameter>
+	<field name="denoBib" class="java.lang.String"/>
+	<field name="nomeLogoImg" class="java.lang.String"/>
+	<field name="numBuonoOrdine" class="java.lang.String"/>
+	<field name="listaDatiIntestazione" class="java.lang.String"/>
+	<field name="anagFornitore.nomeFornitore" class="java.lang.String"/>
+	<field name="anagFornitore.indirizzo" class="java.lang.String"/>
+	<field name="anagFornitore.cap" class="java.lang.String"/>
+	<field name="anagFornitore.citta" class="java.lang.String"/>
+	<field name="testoOggetto" class="java.lang.String"/>
+	<field name="testoIntroduttivo" class="java.lang.String"/>
+	<field name="listaOrdiniDaStampare" class="java.util.ArrayList"/>
+	<field name="importoFornitura" class="java.lang.String"/>
+	<field name="listaDatiFineStampa" class="java.lang.String"/>
+	<field name="nomeFirmaImg" class="java.lang.String"/>
+	<field name="etichettaRistampa" class="java.lang.String"/>
+	<field name="indicaRistampa" class="java.lang.Boolean"/>
+	<field name="presenzaPrezzo" class="java.lang.Boolean"/>
+	<field name="dataStampa" class="java.lang.String"/>
+	<field name="importoFornituraEur" class="java.lang.String"/>
+	<field name="valuta" class="java.lang.String"/>
+	<variable name="buono_page" class="java.lang.Integer" resetType="Group" resetGroup="Buono" incrementType="Page" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{PAGE_NUMBER}.intValue()-$V{buono_page}.intValue()-1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="Buono" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="184" splitType="Stretch">
+				<image scaleImage="RetainShape" onErrorType="Blank">
+					<reportElement key="image-1" x="0" y="0" width="84" height="88"/>
+					<imageExpression><![CDATA[$F{nomeLogoImg}]]></imageExpression>
+				</image>
+				<image scaleImage="RetainShape">
+					<reportElement key="image-2" x="0" y="0" width="84" height="88"/>
+					<imageExpression><![CDATA[$F{nomeLogoImg}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement key="textField" x="0" y="0" width="535" height="24" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{denoBib}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement key="textField" x="0" y="24" width="535" height="64" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{listaDatiIntestazione}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-1" x="0" y="88" width="106" height="21"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{numBuonoOrdine}==null || $F{numBuonoOrdine}.equals("")?"N.ro prot.":"N. Buono d'ordine"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-2" x="106" y="88" width="199" height="21"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{numBuonoOrdine}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-4" x="305" y="88" width="230" height="21"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{dataStampa}!=null && !$F{dataStampa}.trim().equals("") ? $F{dataStampa}.trim(): new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime())]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="textField-5" x="305" y="109" width="230" height="21"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Spett.le]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="305" y="130" width="230" height="18" isRemoveLineWhenBlank="true"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{anagFornitore.nomeFornitore}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="305" y="148" width="230" height="18" isRemoveLineWhenBlank="true"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{anagFornitore.indirizzo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="305" y="166" width="230" height="18" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($F{anagFornitore.cap}!=null && $F{anagFornitore.citta}!=null)]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{anagFornitore.cap}+" "+$F{anagFornitore.citta}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="99" splitType="Stretch">
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="347" y="24" width="86" height="21" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($F{presenzaPrezzo}.booleanValue())]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{importoFornitura}==null?"":$F{importoFornitura}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-9" positionType="Float" x="0" y="24" width="308" height="21" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($F{presenzaPrezzo}.booleanValue())]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="2" bottomPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{importoFornitura}==null || $F{importoFornitura}.trim().equals("")?"":"Importo della fornitura"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement key="textField-10" positionType="Float" x="0" y="45" width="535" height="21" isRemoveLineWhenBlank="true"/>
+					<box topPadding="2" bottomPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{listaDatiFineStampa}]]></textFieldExpression>
+				</textField>
+				<image scaleImage="RetainShape" hAlign="Right" vAlign="Middle" onErrorType="Blank">
+					<reportElement key="image-3" positionType="Float" x="0" y="66" width="535" height="32" isRemoveLineWhenBlank="true"/>
+					<box topPadding="2" bottomPadding="2" rightPadding="2"/>
+					<imageExpression><![CDATA[$F{nomeFirmaImg}]]></imageExpression>
+				</image>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="433" y="24" width="102" height="21" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($F{presenzaPrezzo}.booleanValue())]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{valuta}!=null && $F{valuta}.trim().equals("EUR")?"":$F{importoFornituraEur}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="308" y="24" width="39" height="21" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($F{presenzaPrezzo}.booleanValue())]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{valuta}==null?"":$F{valuta}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" positionType="Float" x="433" y="3" width="102" height="21" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($F{presenzaPrezzo}.booleanValue())]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valuta}!=null && $F{valuta}.trim().equals("EUR")?"":"Importo in Euro"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement key="textField-6" x="0" y="0" width="84" height="21"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Oggetto:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="textField-7" x="84" y="0" width="451" height="21"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{testoOggetto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement key="textField-8" positionType="Float" x="0" y="21" width="535" height="21" isRemoveLineWhenBlank="true"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{testoIntroduttivo}]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-1" positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="53" width="535" height="21">
+					<printWhenExpression><![CDATA[new Boolean($F{listaOrdiniDaStampare}.size()>0)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="jasperDir">
+					<subreportParameterExpression><![CDATA[$P{jasperDir}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{listaOrdiniDaStampare})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{jasperDir}+"default_buoni_ordine_sub1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-16" x="305" y="0" width="105" height="24"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["pagina "+(new Integer($V{PAGE_NUMBER}.intValue()-$V{buono_page}.intValue()).toString())+" d"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="Buono" isBlankWhenNull="false">
+				<reportElement key="textField-17" x="410" y="0" width="125" height="24"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["i "+(new Integer($V{PAGE_NUMBER}.intValue()-$V{buono_page}.intValue()).toString())]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-18" x="0" y="0" width="105" height="24">
+					<printWhenExpression><![CDATA[new Boolean($F{indicaRistampa}.booleanValue())]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{etichettaRistampa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

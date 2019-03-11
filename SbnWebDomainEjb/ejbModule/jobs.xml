@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<quartz xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData
+        http://www.quartz-scheduler.org/xml/job_scheduling_data_1_5.xsd"
+	version="1.5">
+
+	<job>
+		<job-detail>
+			<name>ChiusuraPrenotazioniPosto</name>
+			<group>Sale</group>
+			<description>chiusura automatica prenotazioni posto scadute</description>
+			<job-class>it.iccu.sbn.batch.servizi.sale.ChiusuraPrenotazioniPostoJob</job-class>
+		</job-detail>
+
+		<trigger>
+			<cron>
+				<name>ChiusuraPrenotazioniPosto_Trigger</name>
+				<job-name>ChiusuraPrenotazioniPosto</job-name>
+				<job-group>Sale</job-group>
+				<cron-expression>30 0 0 ? * MON-FRI</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+
+	<!-- Servizi ILL -->
+	<job>
+		<job-detail>
+			<name>ServiziILLUpdate</name>
+			<group>ServiziILL</group>
+			<description>allineamento richieste e biblioteche al server ILL</description>
+			<job-class>it.iccu.sbn.servizi.ill.batch.ServiziILLUpdateJob</job-class>
+		</job-detail>
+
+		<trigger>
+			<cron>
+				<name>ServiziILLUpdate_Trigger</name>
+				<job-name>ServiziILLUpdate</job-name>
+				<job-group>ServiziILL</job-group>
+				<!-- tutti i giorni alle 8:00 -->
+				<cron-expression>0 0 8 * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+
+</quartz>

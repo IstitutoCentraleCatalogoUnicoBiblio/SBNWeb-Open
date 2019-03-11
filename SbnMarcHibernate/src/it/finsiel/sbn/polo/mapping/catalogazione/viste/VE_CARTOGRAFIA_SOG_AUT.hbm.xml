@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Ve_cartografia_sog_aut" polymorphism="explicit" table="VE_CARTOGRAFIA_SOG_AUT" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="CID" column="CID" type="string"/>
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="TP_RESPONSABILITA" column="TP_RESPONSABILITA" type="string"/>
+			<key-property name="CD_RELAZIONE" column="CD_RELAZIONE" type="string"/>
+			<key-property name="VID" column="VID" type="string"/>
+		</composite-id>
+		<property name="CD_LIVELLO_C" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="TP_PUBB_GOV" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_COLORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_MERIDIANO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_SUPPORTO_FISICO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_TECNICA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_FORMA_RIPR" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_FORMA_PUBB" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_ALTITUDINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_TIPOSCALA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="TP_SCALA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="SCALA_ORIZ" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="SCALA_VERT" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="LONGITUDINE_OVEST" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="LONGITUDINE_EST" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="LATITUDINE_NORD" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="LATITUDINE_SUD" type="string" length="8" not-null="false" lazy="false"/>
+		<property name="TP_IMMAGINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_FORMA_CART" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_PIATTAFORMA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_CATEG_SATELLITE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+
+		<property name="TP_PROIEZIONE" column="TP_PROIEZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+
+		<property name="ISADN" type="it.finsiel.sbn.util.DataTypeCHAR" length="30" not-null="false" lazy="false"/>
+		<property name="TP_MATERIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="TP_RECORD_UNI" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_NATURA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="CD_PAESE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_LINGUA_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false" lazy="false"/>
+		<property name="CD_LINGUA_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false" lazy="false"/>
+		<property name="CD_LINGUA_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false" lazy="false"/>
+		<property name="AA_PUBB_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="AA_PUBB_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false" lazy="false"/>
+		<property name="TP_AA_PUBB" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="CD_GENERE_4" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="KY_CLES1_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="KY_CLES2_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="44" not-null="true" lazy="false"/>
+		<property name="KY_CLET1_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="KY_CLET2_T" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="KY_CLES1_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="KY_CLES2_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="44" not-null="true" lazy="false"/>
+		<property name="KY_CLET1_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="KY_CLET2_CT" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="ISBD" type="string" length="1200" not-null="true" lazy="false"/>
+		<property name="INDICE_ISBD" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="KY_EDITORE" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="CD_AGENZIA" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false" lazy="false"/>
+		<property name="CD_NORME_CAT" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="NOTA_INF_TIT" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="NOTA_CAT_TIT" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="BID_LINK" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false" lazy="false"/>
+		<property name="TP_LINK" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_FORZA_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false" lazy="false"/>
+		<property name="UTE_FORZA_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_SUPERFLUO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="KY_AUTEUR" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="true" lazy="false"/>
+		<property name="KY_CAUTUN" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="KY_CLES1_A" type="it.finsiel.sbn.util.DataTypeCHAR" length="50" not-null="true" lazy="false"/>
+		<property name="KY_CLES2_A" type="it.finsiel.sbn.util.DataTypeCHAR" length="30" not-null="false" lazy="false"/>
+        <filter name="VE_CARTOGRAFIA_SOG_AUT_selectPerSoggetto"
+				condition="cid = :XXXcid "/>
+
+		<filter name="VE_CARTOGRAFIA_SOG_AUT_countPerSoggetto"
+				condition="cid = :XXXcid "/>
+
+	</class>
+</hibernate-mapping>

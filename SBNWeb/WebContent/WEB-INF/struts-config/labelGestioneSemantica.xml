@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<labels>
+
+<!-- G: gestione - E: esamina - L: legame -->
+
+<label type="G" id="MODIFICA_SOGGETTO" tipoOggetto="SO" key="semantica.modifica.soggetto" livelloBaseDati="P" method="gestione" />
+<label type="G" id="CANCELLA_SOGGETTO" tipoOggetto="SO" key="semantica.cancella.soggetto" livelloBaseDati="P" method="cancellaSoggetto" />
+<label type="G" id="TRASCINA_SOGGETTO" tipoOggetto="SO" key="semantica.trascina.soggetto" livelloBaseDati="P" method="trascina" />
+<label type="G" id="INS_LEGAME_SOG_DES" tipoOggetto="SO" key="semantica.insLegameSO.DE" livelloBaseDati="P" method="inserisci" />
+<!--
+	<label type="G" id="FONDI_SOGGETTO"    tipoOggetto="SO" key="semantica.fondi.soggetto" livelloBaseDati="P" method="fondi" />
+	<label type="G" id="CONDIVIDI" tipoOggetto="SO" key="semantica.invioIndice" livelloBaseDati="P" method="inviaIndice" />
+-->
+
+<label type="G" id="MODIFICA_DESCRITTORE" tipoOggetto="DE" key="semantica.modifica.descrittore" livelloBaseDati="P" method="gestione" />
+<label type="G" id="CANCELLA_DESCRITTORE" tipoOggetto="DE" key="semantica.cancella.descrittore" livelloBaseDati="P" method="cancellaDescrittore" />
+<label type="G" id="INS_LEGAME_DES_DES" tipoOggetto="DE" key="semantica.insLegameDE.DE" livelloBaseDati="P" method="inserisci" />
+<label type="G" id="MOD_LEGAME_DES" tipoOggetto="DE" key="semantica.modLegameDE.DE" livelloBaseDati="P" method="modifica" />
+<label type="G" id="CANCELLA_LEGAME_DES" tipoOggetto="DE" key="semantica.cancLegameDE.DE" livelloBaseDati="P" method="elimina" />
+<!-- <label type="G" id="SCAMBIA_FORMA" tipoOggetto="DE" key="semantica.scambia.forma" livelloBaseDati="P" method="scambia" /> -->
+
+
+<label type="G" id="MODIFICA_TERMINE" tipoOggetto="TH" key="semantica.modifica.termine" livelloBaseDati="P" method="gestione" />
+<label type="G" id="CANCELLA_TERMINE" tipoOggetto="TH" key="semantica.cancella.termine" livelloBaseDati="P" method="cancellaTermine" />
+<label type="G" id="TRASCINA_TERMINE" tipoOggetto="TH" key="semantica.trascina.termine" livelloBaseDati="P" method="trascina" />
+<label type="G" id="INS_LEGAME" tipoOggetto="TH" key="semantica.insLegame.thes" livelloBaseDati="P" method="inserisci" />
+<label type="G" id="MOD_LEGAME" tipoOggetto="TH" key="semantica.modLegame.thes" livelloBaseDati="P" method="modifica" />
+<label type="G" id="CANCELLA_LEGAME" tipoOggetto="TH" key="semantica.cancLegame.thes" livelloBaseDati="P" method="elimina" />
+<!-- <label type="G" id="SCAMBIA_FORMA" tipoOggetto="TH" key="semantica.scambia.forma" livelloBaseDati="P" method="scambia" /> -->
+
+<!-- almaviva5_20111019 evolutive CFI -->
+<label type="G" id="CLASSI_COLLEGATE" tipoOggetto="TH" key="semantica.classi.thes" livelloBaseDati="P" method="classi" />
+<label type="L" id="CREA_LEGAME_TERMINE_CLASSE" tipoOggetto="TH-CL" key="button.crea" livelloBaseDati="P" method="crea" />
+<!-- <label type="L" id="MODIFICA_LEGAME_TERMINE_CLASSE" tipoOggetto="TH-CL" key="button.modifica" livelloBaseDati="P" method="modifica" /> -->
+<label type="L" id="ELIMINA_LEGAME_TERMINE_CLASSE" tipoOggetto="TH-CL" key="button.elimina" livelloBaseDati="P" method="elimina" />
+<!--
+	<label type="E" id="TITOLI_COLL_BIBLIO" tipoOggetto="SO" key="semantica.titoli.coll.biblio" livelloBaseDati="P" method="biblio" />
+	<label type="E" id="TITOLI_COLL_BIBLIO_FILTRO" tipoOggetto="SO" key="semantica.titoli.coll.biblio.filtro" livelloBaseDati="P" method="biblioFiltro" />
+-->
+<label type="E" id="TITOLI_COLL_POLO" tipoOggetto="SO" key="semantica.titoli.coll.polo" livelloBaseDati="P" method="polo" />
+<label type="E" id="TITOLI_COLL_POLO_FILTRO" tipoOggetto="SO" key="semantica.titoli.coll.polo.filtro" livelloBaseDati="P" method="poloFiltro" />
+<label type="E" id="TITOLI_COLL_INDICE" tipoOggetto="SO" key="semantica.titoli.coll.indice" livelloBaseDati="P" method="indice" />
+<label type="E" id="SIMILI_INDICE" tipoOggetto="SO" key="semantica.simili.sogg.indice" livelloBaseDati="P" method="simili" />
+
+<!--
+	<label type="E" id="TITOLI_COLL_INDICE_FILTRO" tipoOggetto="SO" key="semantica.titoli.coll.indice.filtro" livelloBaseDati="P" method="indiceFiltro" />
+ -->
+
+<label type="E" id="SOGGETTI_COLLEGATI" tipoOggetto="DE" key="button.soggetti" livelloBaseDati="P" method="soggetti" />
+
+<!--
+	<label type="E" id="TITOLI_COLL_BIBLIO" tipoOggetto="TH" key="semantica.titoli.coll.biblio" livelloBaseDati="P" method="biblio" />
+	<label type="E" id="TITOLI_COLL_BIBLIO_FILTRO" tipoOggetto="TH" key="semantica.titoli.coll.biblio.filtro" livelloBaseDati="P" method="biblioFiltro" />
+ -->
+<label type="E" id="TITOLI_COLL_POLO" tipoOggetto="TH" key="semantica.titoli.coll.polo" livelloBaseDati="P" method="polo" />
+<label type="E" id="TITOLI_COLL_POLO_FILTRO" tipoOggetto="TH" key="semantica.titoli.coll.polo.filtro" livelloBaseDati="P" method="poloFiltro" />
+
+<label type="E" id="TITOLI_COLL_POLO" tipoOggetto="CL" key="semantica.titoli.coll.polo" livelloBaseDati="P" method="polo" />
+<label type="E" id="TITOLI_COLL_POLO_FILTRO" tipoOggetto="CL" key="semantica.titoli.coll.polo.filtro" livelloBaseDati="P" method="poloFiltro" />
+<label type="E" id="TITOLI_COLL_INDICE" tipoOggetto="CL" key="semantica.titoli.coll.indice" livelloBaseDati="P" method="indice" />
+
+
+<!-- <label type="L" id="RECUPERA_LEGAME_TITOLO" tipoOggetto="SO" key="button.recupera" livelloBaseDati="P" method="recupera" />  -->
+<label type="L" id="CREA_LEGAME_TITOLO" tipoOggetto="SO" key="button.crea" livelloBaseDati="P" method="crea" />
+<label type="L" id="MODIFICA_LEGAME_TITOLO" tipoOggetto="SO" key="button.modifica" livelloBaseDati="P" method="modifica" />
+<label type="L" id="ELIMINA_LEGAME_TITOLO" tipoOggetto="SO" key="button.elimina" livelloBaseDati="P" method="elimina" />
+<label type="L" id="INVIA_LEGAME_TITOLO" tipoOggetto="SO" key="button.invioIndice" livelloBaseDati="P" method="invioInIndice" />
+
+<!-- <label type="L" id="RECUPERA_LEGAME_TITOLO" tipoOggetto="CL" key="button.recupera" livelloBaseDati="P" method="recupera" />  -->
+<label type="L" id="CREA_LEGAME_TITOLO" tipoOggetto="CL" key="button.crea" livelloBaseDati="P" method="crea" />
+<label type="L" id="MODIFICA_LEGAME_TITOLO" tipoOggetto="CL" key="button.modifica" livelloBaseDati="P" method="modifica" />
+<label type="L" id="ELIMINA_LEGAME_TITOLO" tipoOggetto="CL" key="button.elimina" livelloBaseDati="P" method="elimina" />
+<label type="L" id="INVIA_LEGAME_TITOLO" tipoOggetto="CL" key="button.invioIndice" livelloBaseDati="P" method="invioInIndice" />
+
+<!-- <label type="L" id="RECUPERA_LEGAME_TITOLO" tipoOggetto="TH" key="button.recupera" livelloBaseDati="P" method="recupera" /> -->
+<label type="L" id="CREA_LEGAME_TITOLO" tipoOggetto="TH" key="button.crea" livelloBaseDati="P" method="crea" />
+<label type="L" id="MODIFICA_LEGAME_TITOLO" tipoOggetto="TH" key="button.modifica" livelloBaseDati="P" method="modifica" />
+<label type="L" id="ELIMINA_LEGAME_TITOLO" tipoOggetto="TH" key="button.elimina" livelloBaseDati="P" method="elimina" />
+
+<!-- PERIODICI -->
+<label type="E" id="COLLOCAZIONI" tipoOggetto="PR" key="esamina.periodici.collocazioni" livelloBaseDati="P" method="collocazioni" />
+<label type="E" id="ORDINI" tipoOggetto="PR" key="esamina.periodici.ordini" livelloBaseDati="P" method="ordini" />
+
+</labels>

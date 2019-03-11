@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="set_curcfg">
+		<return-scalar column="set_curcfg"	type="java.lang.String" />
+		select set_curcfg('default')
+	</sql-query>
+
+	<query name="contaSoggettiCollegatiDid">
+	<query-param name="did" type="string"/><![CDATA[
+		select count(sg) from Tr_sog_des sg where D.id=:did and fl_canc<>'S' and D.fl_canc<>'S' and C.fl_canc<>'S'
+	]]>
+	</query>
+
+  	<query name="contaSoggettiUtilizzatiCollegatiDid">
+		<query-param name="did" type="string"/>
+		<query-param name="bib" type="string"/>
+		<query-param name="polo" type="string"/>
+		<![CDATA[
+
+		select count(distinct sg.C) from Tr_sog_des sg
+			join sg.C.Tr_tit_sog_bib t
+			join t.cd_biblioteca.cd_biblioteca p
+			where sg.D.id=:did
+				and sg.fl_canc<>'S'
+				and sg.D.fl_canc<>'S'
+				and sg.C.fl_canc<>'S'
+				and t.fl_canc<>'S'
+				and p.cd_biblioteca=:bib
+				and p.cd_polo.id=:polo
+	]]>
+	</query>
+
+	<query name="titoliCollegatiClasseInBiblioteca">
+		<query-param name="bib" type="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" />
+		<query-param name="classe" type="it.iccu.sbn.polo.orm.gestionesemantica.Tb_classe" />
+		<![CDATA[
+			select cla from Tr_tit_cla cla
+			  join cla.B.Tr_tit_bib b
+			  where cla.Cd_sistema=:classe
+			    and cla.fl_canc<>'S'
+			    and b.Cd_polo=:bib
+		]]>
+	</query>
+
+	<sql-query cache-mode="ignore" name="descrittoriNonUtilizzati">
+		<return-scalar column="did" type="string"/>
+		<![CDATA[
+			select d.did from Tb_descrittore d
+			where d.cd_soggettario=:codSogg
+				and d.fl_canc<>'S'
+				and (:edizione='ALL' or d.cd_edizione in (:edizione) )
+				and not exists (
+					select sd.did from Tr_sog_des sd
+					where sd.did=d.did
+						and sd.fl_canc<>'S'
+			    )
+			    and not exists (
+			    	select sd2.cid from Tr_sog_des sd2
+			        inner join Tr_des_des dd on dd.did_base=d.did
+			        where sd2.fl_canc<>'S'
+						and dd.fl_canc<>'S'
+						and sd2.did=dd.did_coll
+				)
+			order by d.did
+			for update
+		]]>
+	</sql-query>
+
+	<query name="datiCondivisioneSoggettoDaPolo">
+		<query-param name="cidPolo" type="string" />
+		<![CDATA[
+			select sogg from Tr_sogp_sogi sogg
+			 where sogg.cid_p.id=:cidPolo
+   	     	   and sogg.fl_canc<>'S'
+		]]>
+	</query>
+
+	<query name="eliminaCondivisioneSoggetto">
+		<query-param name="sogg" type="it.iccu.sbn.polo.orm.gestionesemantica.Tb_soggetto" />
+		<query-param name="ute" type="string" />
+		<query-param name="var" type="timestamp" />
+		<![CDATA[
+			update Tr_sogp_sogi
+			   set fl_canc='S', ute_var=:ute, ts_var=:var
+			 where cid_p=:sogg
+   	     	   and fl_canc<>'S'
+		]]>
+	</query>
+
+	<query name="datiCondivisioneSoggettoDaIndice">
+		<query-param name="cidIndice" type="string" />
+		<![CDATA[
+			select sogg from Tr_sogp_sogi sogg
+			 where sogg.cid_i=:cidIndice
+   	     	   and sogg.fl_canc<>'S'
+		]]>
+	</query>
+
+	<query name="listaSoggettiCollegatiDid">
+		<query-param name="did" type="string"/>
+		<![CDATA[
+			select sg.D.ds_descrittore, sg.C.ds_soggetto
+			  from Tr_sog_des sg
+			 where sg.D.id=:did
+			   and sg.fl_canc<>'S'
+			   and sg.D.fl_canc<>'S'
+			   and sg.C.fl_canc<>'S'
+		]]>
+	</query>
+
+</hibernate-mapping>
+
+

@@ -1,0 +1,24 @@
+
+.banner {
+	background-color: white;
+	text-align: center;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+	font-variant: small-caps;	
+}
+
+tr.row {
+	/* LARA	cambiato font-size: 110%; a font-size: 102%; ed eliminato font-variant: small-caps;*/
+	font-size: 102%;
+
+}
+
+.w6em {
+	width: 6em;
+}
+
+.button {
+	/* LARA	eliminato font-variant: small-caps;*/
+	
+}

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Tbf_attivita" table="tbf_attivita" lazy="false">
+		<meta attribute="class-description">
+			CODICI DELLE FUNZIONI GESTITE DALL'APPLICATIVO (TVFDTB CON COD_TAB='69 ')
+		</meta>
+		<id name="cd_attivita" column="cd_attivita" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<many-to-one name="id_attivita_sbnmarc" column="id_attivita_sbnmarc" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_attivita_sbnmarc" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="flg_menu" column="flg_menu" type="string" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione da attivare da menu'
+			</meta>
+		</property>
+		<property name="prg_ordimanento" column="prg_ordimanento" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Ordinamento nel menu relativo di parent
+			</meta>
+		</property>
+		<property name="cd_funzione_parent" column="cd_funzione_parent" type="string" length="5" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Codice della funzione parent, significativo solo se flag_menu='S'
+			</meta>
+		</property>
+		<property name="fl_auto_abilita_figli" column="fl_auto_abilita_figli" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Se 'S'le funzioni di livello inferiore vengono abilitate all&#8217;atto dell&#8217;abilitazione della funzione in oggetto
+			</meta>
+		</property>
+		<property name="fl_assegna_a_cds" column="fl_assegna_a_cds" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Se 'N'la funzione non &#232; demandabile a cds, se 'E' &#232; demandabile in modo esclusivo, se 'C' &#232; demandabile in modo condiviso
+			</meta>
+		</property>
+		<property name="url_servizio" column="url_servizio" type="string" length="512" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				URL dell'action che svolge il servizio corrispondente alla richiesta
+			</meta>
+		</property>
+		<property name="fl_titolo" column="fl_titolo" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione valida per titolo: se vale 'S' la funzione deve essere presentata nel vai a di un titolo
+			</meta>
+		</property>
+		<property name="fl_autore" column="fl_autore" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione valida per titolo: se vale 'S' la funzione deve essere presentata nel vai a di un autore
+			</meta>
+		</property>
+		<property name="fl_marca" column="fl_marca" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione valida per titolo: se vale 'S' la funzione deve essere presentata nel vai a di una marca
+			</meta>
+		</property>
+		<property name="fl_luogo" column="fl_luogo" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione valida per titolo: se vale 'S' la funzione deve essere presentata nel vai a di un luogo
+			</meta>
+		</property>
+		<property name="fl_soggetto" column="fl_soggetto" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione valida per titolo: se vale 'S' la funzione deve essere presentata nel vai a di un soggetto
+			</meta>
+		</property>
+		<property name="fl_classe" column="fl_classe" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di funzione valida per titolo: se vale 'S' la funzione deve essere presentata nel vai a di un classe
+			</meta>
+		</property>
+		<property name="liv_autorita_da" column="liv_autorita_da" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indica il livello di autorit&#224; minimo che deve avere l'oggetto corrente perch&#232; la funzione venga presentata nel menu 'Vai a'
+			</meta>
+		</property>
+		<property name="liv_autorita_a" column="liv_autorita_a" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indica il livello di autorit&#224; massimo che deve avere l'oggetto corrente perch&#232; la funzione venga presentata nel menu 'Vai a'
+			</meta>
+		</property>
+		<property name="gestione_in_indice" column="gestione_in_indice" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' solo per oggetti gestiti in Indice, se 'N' solo per oggetti non gestiti in Indice
+			</meta>
+		</property>
+		<property name="gestione_in_polo" column="gestione_in_polo" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' solo per oggetti gestiti in polo, se 'N' solo per oggetti non gestiti in polo
+			</meta>
+		</property>
+		<property name="natura_a" column="natura_a" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura A, se 'N' non deve essere presentata per titoli di natura A
+			</meta>
+		</property>
+		<property name="natura_b" column="natura_b" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura B, se 'N' non deve essere presentata per titoli di natura B
+			</meta>
+		</property>
+		<property name="natura_c" column="natura_c" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura C, se 'N' non deve essere presentata per titoli di natura C
+			</meta>
+		</property>
+		<property name="natura_d" column="natura_d" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura D, se 'N' non deve essere presentata per titoli di natura D
+			</meta>
+		</property>
+		<property name="natura_m" column="natura_m" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura M, se 'N' non deve essere presentata per titoli di natura M
+			</meta>
+		</property>
+		<property name="natura_n" column="natura_n" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura N, se 'N' non deve essere presentata per titoli di natura N
+			</meta>
+		</property>
+		<property name="natura_p" column="natura_p" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura P, se 'N' non deve essere presentata per titoli di natura P
+			</meta>
+		</property>
+		<property name="natura_s" column="natura_s" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura S, se 'N' non deve essere presentata per titoli di natura S
+			</meta>
+		</property>
+		<property name="natura_t" column="natura_t" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura T, se 'N' non deve essere presentata per titoli di natura T
+			</meta>
+		</property>
+		<property name="natura_w" column="natura_w" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura W, se 'N' non deve essere presentata per titoli di natura W
+			</meta>
+		</property>
+		<property name="natura_r" column="natura_r" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura R, se 'N' non deve essere presentata per titoli di natura R
+			</meta>
+		</property>
+		<property name="natura_x" column="natura_x" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per titoli di natura X, se 'N' non deve essere presentata per titoli di natura X
+			</meta>
+		</property>
+		<property name="forma_accettata" column="forma_accettata" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per autori o luoghi in forma accettata, se 'N' non deve essere presentata per autori o luoghi in forma accettata
+			</meta>
+		</property>
+		<property name="forma_rinvio" column="forma_rinvio" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Se 'S' la funzione deve essere presentata nel menu 'Vai a' per autori o luoghi in forma di rinvio, se 'N' non deve essere presentata per autori o luoghi in forma di rinvio7
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="classe_java_sbnmarc" column="classe_java_sbnmarc" type="string" length="256" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Nome della classe java per l'attivit&#224; in SBNMARC
+			</meta>
+		</property>
+		<set name="Trf_funzioni_denominazioni" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_funzione" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Trf_funzioni_denominazioni"/>
+		</set>
+		<set name="Trf_attivita_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_attivita" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Trf_attivita_polo"/>
+		</set>
+		<set name="Trf_profilo_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cd_attivita" not-null="false"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Trf_profilo_biblioteca"/>
+		</set>
+		<!--
+		<set name="Tbq_batch_attivabili" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cod_funz" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Tbq_batch_attivabili"/>
+		</set>
+		 -->
+	</class>
+</hibernate-mapping>

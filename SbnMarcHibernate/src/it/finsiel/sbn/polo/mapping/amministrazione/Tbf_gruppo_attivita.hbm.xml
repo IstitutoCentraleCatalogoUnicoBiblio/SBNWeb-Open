@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita" table="tbf_gruppo_attivita" lazy="false">
+		<id name="id_gruppo_attivita_polo" column="id_gruppo_attivita_polo" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_polo" cascade="lock" column="cd_polo" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_polo" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="ds_name" column="ds_name" type="string" length="255" not-null="false" lazy="false"/>
+		<set name="Id_gruppo_attivita_polo_base" table="trf_gruppo_attivita" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_gruppo_attivita_polo_coll" not-null="false"/>
+			<many-to-many column="id_gruppo_attivita_polo_base" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita">
+			</many-to-many>
+		</set>
+		<set name="Id_gruppo_attivita_polo_coll" table="trf_gruppo_attivita" lazy="true" cascade="save-update,lock">
+			<key column="id_gruppo_attivita_polo_base" not-null="true"/>
+			<many-to-many column="id_gruppo_attivita_polo_coll" class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita">
+			</many-to-many>
+		</set>
+		<set name="Tbf_biblioteca_in_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_gruppo_attivita_polo" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo"/>
+		</set>
+		<set name="Trf_gruppo_attivita_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_gruppo_attivita_polo" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Trf_gruppo_attivita_polo"/>
+		</set>
+	</class>
+</hibernate-mapping>

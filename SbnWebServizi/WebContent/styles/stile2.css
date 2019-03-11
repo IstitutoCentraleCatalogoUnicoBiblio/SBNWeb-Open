@@ -1,0 +1,528 @@
+.etichetta {
+	font-family: Arial Narrow, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #333333;
+}
+
+.testoNormale {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #333333;
+}
+
+.testoMsg {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	color: #0000EE;
+}
+
+.testo {
+	font-family: Arial Narrow, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #333333;
+}
+
+.testoNoBold {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+}
+
+.navigazione1 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #8A2300;
+}
+
+.navigazione2 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2B2B57;
+}
+
+.navigazione3 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #8A2300;
+}
+
+.schedaOff {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2B2B57;
+}
+
+.schedaOff2 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	color: #2B2B57;
+}
+
+.schedaOn {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #8A2300;
+}
+
+.schedaOn2 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	color: #8A2300;
+}
+
+.disbgrd {
+	background-color: #F0E1E2;
+	color: #000000;
+}
+
+.pulsanti {
+	background-color: #E8EFF4;
+	/*color: #2B2B57;*/
+	font-size: 11px;
+	font-weight: bold;
+	border: 1px solid #39739D;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.pulsanti2 {
+	background-color: #E8EFF4;
+	color: #2B2B57;
+	font-size: 11px;
+	border: 1px solid #39739D;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.tblContenuti {
+	bordercolor: #FEF1E2;
+}
+
+.tblMenu1 {
+	background: no-repeat url(images/navig_aperta.gif);
+}
+
+.tblMenu2 {
+	background: no-repeat url(images/navig.gif);
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2B2B57;
+}
+
+.tblSFunzioni {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #FEF1E2;
+	border-bottom-color: #4C91DF;
+	border-left-color: #4C91DF;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-left-style: solid;
+}
+
+.tblSFunzionib {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #FEF1E2;
+	border-bottom-color: #4C91DF;
+	border-right-color: #4C91DF;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-right-style: solid;
+}
+
+.tblSxMenu {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #DDE8F0;
+	border-left-style: solid;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #4C91DF;
+	border-left-color: #4C91DF;
+	border-bottom-color: #4C91DF;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+}
+
+.tblSxMenuOff {
+	background-image: url(images/freccia_chiusa.jpg);
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	vertical-align: middle;
+	text-indent: 12px;
+	background-color: #DDE8F0;
+	border-left-style: solid;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #4C91DF;
+	border-left-color: #4C91DF;
+	border-bottom-color: #4C91DF;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+}
+
+.tblSxMenuOn {
+	background-image: url(images/freccia_aperta.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	vertical-align: middle;
+	text-indent: 12px;
+	background-color: #DDE8F0;
+	border-left-style: solid;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #4C91DF;
+	border-left-color: #4C91DF;
+	border-bottom-color: #4C91DF;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+}
+
+.puntoWhite {
+	background-image: url(images/puntoelenco.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.puntoBlack {
+	background-image: url(images/puntoelencob.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.tblSxMenu2a {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #ffffff;
+	background-image: url(images/SXMenuDx.gif);
+	background-repeat: no-repeat;
+}
+
+.tblSxMenu2b {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #DDE8F0;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	border-right-width: 1px;
+	border-right-color: #4C91DF;
+	border-right-style: solid;
+}
+
+.tagCentroOff {
+	background-image: url(images/centroOff2.gif);
+	background-color: #AAC5DA;
+	background-position: left top;
+	background-repeat: repeat-x;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+	color: #AAC5DA;
+	/*border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	width: 19%;*/
+}
+
+.tagDxFinale {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+	background-color: #FEF1E2;
+}
+
+.tagDxBottomFinale {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+	background-color: #FEF1E2;
+	border-bottom-color: #5A96DF;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	/*border-left-color: #5A96DF;
+    border-left-style: solid; 
+    border-left-width: 1px;*/
+}
+
+.tagCentroOn {
+	background-image: url(images/centroOn2.gif);
+	background-color: #FEF1E1;
+	background-position: left top;
+	background-repeat: repeat-x;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+	color: #FEF1E1;
+	/*border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	width: 19%;
+	height: 8px; */
+}
+
+.tagSxTopOn {
+	background-image: url(images/TagAngoloSxOn.gif);
+	background-color: #FEF1E1;
+	background-position: left top;
+	background-repeat: no-repeat;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+}
+
+.tagBottomOff {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2B2B57;
+	background-color: #AAC5DA;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-left-color: #4C91DF;
+	border-bottom-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-right-color: #4C91DF;
+	border-right-style: solid;
+	text-align: center;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOn {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #8A2300;
+	background-color: #FEF1E1;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-right-color: #4C91DF;
+	border-right-style: solid;
+	text-align: center;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOn2 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #8A2300;
+	background-color: #FEF1E1;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	text-align: center;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOff2 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #2B2B57;
+	background-color: #AAC5DA;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	text-align: center;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOnA {
+	background-color: #FEF1E1;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOnB {
+	background-color: #FEF1E1;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 1px;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOffA {
+	background-color: #AAC5DA;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagBottomOffB {
+	background-color: #AAC5DA;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-bottom-color: #4C91DF;
+	border-bottom-style: solid;
+	vertical-align: middle;
+	/*width: 20%;*/
+}
+
+.tagSxTopOff {
+	background-image: url(images/TagAngoloSx.gif);
+	background-color: #AAC5DA;
+	background-repeat: no-repeat;
+	background-position: left top;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+}
+
+.tagDxTopOff {
+	background-image: url(images/TagAngoloDx.gif);
+	background-color: #AAC5DA;
+	background-repeat: no-repeat;
+	background-position: right top;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+}
+
+.tagDxTopOn {
+	background-image: url(images/TagAngoloDxOn.gif);
+	background-color: #FEF1E1;
+	background-repeat: no-repeat;
+	background-position: right top;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1pt;
+	font-weight: normal;
+	vertical-align: text-top;
+}
+
+.style1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 36px;
+}
+
+.Stile2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #8A2300;
+}
+
+.style3 {
+	font-size: 14px
+}
+
+.style4 {
+	color: #FFFFFF
+}
+
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #CC3300;
+}
+
+.style8 {
+	color: #CC3300
+}
+
+.style9 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.style11 {
+	color: #000000
+}
+
+.style12 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.Stile3 {
+	color: #8A2300
+}
+
+.Stile5 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #2B2B57;
+}
+
+.freccia_off {
+	background-color: #ffffff;
+	background-image: url(images/freccia_chiusa.jpg);
+	background-repeat: no-repeat;
+}
+
+/*aggiunte*/
+.secondoLivello {
+	background: #AAC5DA;
+}
+
+.secondoLivello  A:visited {
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.secondoLivello  A:hover {
+	color: #2B2B57;
+}

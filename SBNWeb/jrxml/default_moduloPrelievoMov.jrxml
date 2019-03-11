@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 4.1.1  -->
+<!-- 2019-01-28T11:48:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="default_moduloPrelievo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="827" leftMargin="10" rightMargin="5" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="169"/>
+	<property name="ireport.y" value="83"/>
+	<property name="net.sf.jasperreports.image.dpi" value="300"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="start" class="java.lang.Integer"/>
+	<field name="idRichiesta" class="java.lang.String"/>
+	<field name="tipoServizio" class="java.lang.String"/>
+	<field name="codStatoRic" class="java.lang.String"/>
+	<field name="codBibUte" class="java.lang.String"/>
+	<field name="codUte" class="java.lang.String"/>
+	<field name="cognomeNome" class="java.lang.String"/>
+	<field name="dataInizioEff" class="java.lang.String"/>
+	<field name="dataInizio" class="java.lang.String"/>
+	<field name="consegnato" class="java.lang.Boolean"/>
+	<field name="dataFineEff" class="java.lang.String"/>
+	<field name="natura" class="java.lang.String"/>
+	<field name="dataProroga" class="java.lang.String"/>
+	<field name="segnatura" class="java.lang.String"/>
+	<field name="numVolume" class="java.lang.String"/>
+	<field name="annoPeriodico" class="java.lang.String"/>
+	<field name="bid" class="java.lang.String"/>
+	<field name="titolo" class="java.lang.String"/>
+	<field name="codBibInv" class="java.lang.String"/>
+	<field name="codSerieInv" class="java.lang.String"/>
+	<field name="codInvenInv" class="java.lang.String"/>
+	<field name="attivitaCorrente" class="java.lang.String"/>
+	<field name="costoServizio" class="java.lang.String"/>
+	<field name="numFascicolo" class="java.lang.String"/>
+	<field name="descBib" class="java.lang.String"/>
+	<field name="dataDiElaborazione" class="java.lang.String"/>
+	<field name="testoStampaModulo" class="java.lang.String"/>
+	<field name="pagine" class="java.lang.String"/>
+	<field name="datiDocumento" class="java.lang.String"/>
+	<field name="prenotazionePosto" class="java.lang.Boolean"/>
+	<field name="descrizioneSala" class="java.lang.String"/>
+	<field name="salaOrarioInizio" class="java.lang.String"/>
+	<field name="salaOrarioFine" class="java.lang.String"/>
+	<field name="barcodeInv" class="java.lang.String"/>
+	<field name="dataRichiesta" class="java.lang.String"/>
+	<variable name="countInput" class="java.lang.Integer" incrementType="Column" calculation="Count" incrementerFactoryClass="it.iccu.sbn.util.jasper.SbnIncrementerFactory">
+		<variableExpression><![CDATA[$V{countInput} != null]]></variableExpression>
+		<initialValueExpression><![CDATA[$P{start}.intValue()]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="412" splitType="Prevent">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="288" y="0" width="250" height="412"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="26" y="298" width="199" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipoServizio}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="150" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{segnatura}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="109" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Richiesta n. " + $F{idRichiesta}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="192" width="199" height="20"/>
+					<textFieldExpression><![CDATA[$F{codUte} + " " + $F{cognomeNome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="211" width="199" height="66"/>
+					<textFieldExpression><![CDATA[$F{titolo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="173" width="199" height="20"/>
+					<textFieldExpression><![CDATA[$F{bid}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="26" y="11" width="199" height="61"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false" barHeight="55">
+						<jr:codeExpression><![CDATA[$F{barcodeInv}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<componentElement>
+					<reportElement x="26" y="341" width="199" height="61"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false" barHeight="75">
+						<jr:codeExpression><![CDATA[$F{barcodeInv}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<staticText>
+					<reportElement x="26" y="90" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NEL DOCUMENTO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="26" y="131" width="199" height="15">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["del " + $F{dataRichiesta}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" x="561" y="0" width="250" height="412"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="26" y="173" width="199" height="20"/>
+					<textFieldExpression><![CDATA[$F{bid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="109" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Richiesta n. " + $F{idRichiesta}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="298" width="199" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipoServizio}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="26" y="11" width="199" height="61"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false" barHeight="55">
+						<jr:codeExpression><![CDATA[$F{barcodeInv}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="26" y="192" width="199" height="20"/>
+					<textFieldExpression><![CDATA[$F{codUte} + " " + $F{cognomeNome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="150" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{segnatura}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="211" width="199" height="66"/>
+					<textFieldExpression><![CDATA[$F{titolo}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="26" y="341" width="199" height="61"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false" barHeight="75">
+						<jr:codeExpression><![CDATA[$F{barcodeInv}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<staticText>
+					<reportElement x="26" y="90" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CONTROLLO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="26" y="131" width="199" height="15">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["del " + $F{dataRichiesta}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="12" y="0" width="250" height="412"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<componentElement>
+					<reportElement x="26" y="11" width="199" height="61"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false" barHeight="55">
+						<jr:codeExpression><![CDATA[$F{barcodeInv}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<textField>
+					<reportElement x="26" y="150" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{segnatura}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="109" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Richiesta n. " + $F{idRichiesta}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="173" width="199" height="20"/>
+					<textFieldExpression><![CDATA[$F{bid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="192" width="199" height="20"/>
+					<textFieldExpression><![CDATA[$F{codUte} + " " + $F{cognomeNome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="211" width="199" height="66"/>
+					<textFieldExpression><![CDATA[$F{titolo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="298" width="199" height="20"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipoServizio}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="26" y="341" width="199" height="61"/>
+					<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="true" checksumRequired="false" barHeight="75">
+						<jr:codeExpression><![CDATA[$F{barcodeInv}]]></jr:codeExpression>
+					</jr:barbecue>
+				</componentElement>
+				<staticText>
+					<reportElement x="26" y="90" width="199" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AL POSTO DEL DOCUMENTO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="26" y="131" width="199" height="15">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["del " +$F{dataRichiesta}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

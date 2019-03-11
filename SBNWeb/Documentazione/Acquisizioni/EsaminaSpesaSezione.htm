@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Servizio bibliotecario</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0" width="100%" summary=summary>
+
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><A href="../GuidaSbnweb.htm">SBNWEB Guida 
+      Online</A></STRONG></STRONG></P>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></A></SPAN></SPAN>Acquisizioni - Esame Spesa di una sezione d'acquisizione</H1>
+<ul>
+<li><A href="#Descrizione">Descrizione</A></li>
+<li><A href="#Ingresso">Punti di ingresso</A></li>
+<li><A href="#Prerequisiti">Prerequisiti</A></li>
+<li><A href="#ModuloDati">Modulo immissione dati</A></li>
+<ul>
+<li><A href="#Canali">Area canali</A></li>
+<li><A href="#Filtri">Area filtri</A></li><li><A href="#Default">Valori di default</A></li>
+<li><A href="#Azioni">Azioni utente</A></LI></UL>
+<li><A href="#Controlli">Controlli del sistema</A><br></LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></A></SPAN></SPAN>Descrizione</H2>
+La funzione consente all'utente bibliotecario di interrogare il sistema per avere un prospetto sintetico di ripartizione delle spese relative alla <A href="DettaglioSezione.htm">sezione</A> da cui è stata attivata.
+Esso consente in particolare:
+<ul>
+<li>in caso di biblioteca che gestisce il bilancio, la prospettazione delle somme dei prezzi (ordinato/acquisito) degli ordini associati alla sezione ripartendoli per esercizio, capitolo ed impegno.</li>        
+<li>in caso di biblioteca che non gestisce il bilancio, la prospettazione delle somme dei prezzi (ordinato/acquisito) degli ordini associati alla sezione ripartendoli per tipologia come di seguito schematizzato:</li>
+<br>
+<table  width="50%" border="1">
+<tr>
+  <td>Ordine</td>
+  <td>ordine non continuativo (natura del titolo M o S)</td>
+</tr>
+<tr>
+  <td>Spese diverse</td>
+  <td>ordine non continuativo senza bid relativo a inventari</td>
+</tr>
+<tr>
+  <td>Standing order</td>
+  <td>ordine continuativo (natura del titolo M o C) </td>
+</tr>
+<tr>
+  <td>Abbonamento</td>
+  <td>ordine continuativo (natura S) </td>
+</tr>
+
+</table>
+<br>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></A></SPAN></SPAN><strong>Punti di ingresso </STRONG></H2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Sezioni acquisizione-&gt;<A href="RicercaSezioni.htm">Ricerca sezioni
+        d'acquisizione</A>-&gt;<A href="SinteticaSezione.htm">Sintetica sezione d'acquisto</A>-&gt; <A href="DettaglioSezione.htm">Dettaglio sezione d'acquisizione</A>-&gt;Bottone <strong>'Esamina Spesa'</STRONG>' 
+</li>        
+<li>Barra di navigazione </li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></A></SPAN></SPAN>Prerequisiti</H2>
+<ul>
+	<li>Il bibliotecario deve avere superato con 
+        successo l'autenticazione e l'abilitazione alla funzione </LI></UL>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></A></SPAN></SPAN><span class="Stile3 style8">Modulo immissione dati</SPAN></H2>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/EsaminaSpesaSez.gif"></P>
+<br>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/EsaminaSpesaSezNObil.gif"></P>
+
+<p>Di seguito viene descritto il contenuto della schermata<em>:</EM></P>
+<ul>
+<li>Cod Bibl. Codice Biblioteca</li>
+<li>Codice Sezione. 7 caratteri alfanumerici. Codice della Sezione di Acquisto</li>
+<li>Nome Sezione. 30 caratteri alfanumerici. Nome della Sezione di Acquisto</li>
+<li>Somma disp. Dato calcolato non editabile che riporta la somma disponibile sulla Sezione di Acquisto ottenuta decrementando dal budget gli ordini imputati nel corso dell'anno di validità.</li>
+<li>Esercizio (presente solo se la biblioteca gestisce il bilancio). Anno rispetto al quale si vuole effettuare l'elaborazione.</li> 
+<li>Da data .. a data. Intervallo temporale rispetto al quale si vuole effettuare l'elaborazione </li> 
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li>Bottone 'Elabora': consente la prospettazione delle somme dei prezzi (ordinato/acquisito) degli ordini associati alla sezione con ripartizioni diverse a seconda della <a href="ConfigurazioneOrdini.htm">configurazione</a> della biblioteca. </li> 
+<li>Bottone 'Indietro': consente l'abbandono della pagina visualizzata e il ritorno a quella di livello superiore. </li>		
+
+</ul>
+
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li><u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+<li>A seconda delle abilitazioni attribuite dal sistema al bibliotecario, dinamicamente le azioni si rendono disponibili all'utente.</li>
+<li>Il sistema controlla la <a href="ConfigurazioneOrdini.htm">configurazione</a> riguardante la gestione del bilancio relativamente alla biblioteca operante.</li> 
+<li>Il sistema calcola la disponibilità</li>
+<li>L'indicazione della data di validità esprime il limite temporale entro il quale la sezione è da considerarsi attiva. Le sezioni chiuse sono le sezioni scadute rispetto alla data di fine validità indicata e non possono più essere utilizzate nè modificate.</li>
+<li>E' consentita la visualizzazione dell'esame della spesa anche per le sezioni chiuse.</li>
+</ul>
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY></HTML>

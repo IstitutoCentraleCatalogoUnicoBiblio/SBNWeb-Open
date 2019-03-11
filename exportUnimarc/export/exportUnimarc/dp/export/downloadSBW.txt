@@ -1,0 +1,81 @@
+#========================================================================================
+#
+# Elenco dei file da usare per esportare DB per creare unimarc offline
+#	downloadSBW.txt
+#========================================================================================
+downloadDir=/export/exportUnimarc/db_export/
+
+jdbcDriver=org.postgresql.Driver
+connectionUrl=jdbc:postgresql://192.168.20.42:5432/sbnwebCollaudo2
+userName=sbnweb
+userPassword=sbnweb
+
+fieldSeparator=&$%
+rimuoviNewline=true
+logFileOut=./downloadSBW.log
+# Progress counter in HEX Format
+progress=1FFF
+
+# Per l'export la query prende come TABLENAME il nome della tabella dall'elelnco
+query="select * from " $tableName " where fl_canc != 'S'";
+
+endConfig
+
+# Elenco delle tabelle da scaricare
+#============================================
+tba_ordini query="select * from tba_ordini  where fl_canc != 'S' and cod_tip_ord != 'R'"
+tbc_collocazione
+tbc_esemplare_titolo
+tbc_inventario
+tbc_possessore_provenienza
+trc_poss_prov_inventari query="select * from trc_poss_prov_inventari  where fl_canc != 'S'" lunghezze=0,10,0,0,0,0,0,0,0,0,0,0 leftPad=\0,0,\0,\0,\0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tbc_nota_inv query="select * from tbc_nota_inv  where fl_canc != 'S'" lunghezze=0,0,0,10,0,0,0,0,0,0,0 leftPad=\0,\0,\0,0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tbc_sezione_collocazione query="select * from tbc_sezione_collocazione  where fl_canc != 'S'" lunghezze=10,0,0,0,0,0,0,0,0,0,0,0,0,0,0 leftPad=0,\0,\0,\0,\0,\0,\0,\0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tbf_biblioteca query="select * from tbf_biblioteca  where fl_canc != 'S' and cd_polo is not null and cd_bib is not null"  chiudiConSeparatore=false
+tbf_biblioteca_in_polo
+tb_autore
+tb_cartografia
+tb_classe
+tb_composizione
+tb_grafica
+tb_impronta
+tb_incipit
+tb_luogo
+tb_marca
+tb_musica
+tb_numero_std
+tb_rappresent
+tb_soggetto
+tb_descrittore
+tr_sog_des
+tr_des_des
+tb_repertorio query="select * from tb_repertorio  where fl_canc != 'S'" lunghezze=10,0,0,0,0,0,0,0,0,0 leftPad=0,\0,\0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tb_titolo query="select * from tb_titolo"
+tr_aut_aut
+tr_tit_aut
+tr_tit_bib
+tr_tit_cla
+tr_tit_luo
+tr_tit_mar
+tr_tit_sog_bib
+tr_tit_tit
+tr_rep_mar query="select * from tr_rep_mar  where fl_canc != 'S'" lunghezze=10,0,10,0,0,0,0,0,0 leftPad=0,\0,0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tb_nota
+tb_personaggio query="select bid, id_personaggio, nome_personaggio, cd_timbro_vocale, ute_ins, ts_ins, ute_var, ts_var, fl_canc  from tb_personaggio where fl_canc != 'S'" lunghezze=0,0,0,0,0,0,0,0,0 leftPad=\0,\0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tr_per_int query="select id_personaggio, vid, ute_ins, ts_ins, ute_var, ts_var, fl_canc  from tr_per_int where fl_canc != 'S'" lunghezze=10,0,0,0,0,0,0 leftPad=0,\0,\0,\0,\0,\0,\0,  chiudiConSeparatore=true  
+tr_rep_aut
+ts_link_multim query="select id_link_multim, ky_link_multim, uri_multim, ute_ins, ts_ins, ute_var, ts_var, fl_canc  from ts_link_multim where fl_canc != 'S'" lunghezze=10,0,0,0,0,0,0,0 leftPad=0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true
+tb_parola query="select MID,ID_PAROLA,PAROLA,UTE_INS,TS_INS,UTE_VAR,TS_VAR,FL_CANC from tb_parola where fl_canc != 'S'" lunghezze=10,0,0,0,0,0,0,0 leftPad=\0,\0,\0,\0,\0,\0,\0,\0  chiudiConSeparatore=true 
+tb_codici_cnot query="select cd_tabella, ds_tabella from tb_codici where tp_tabella = 'CNOT'"
+# Leggi la query da file. "@query_" prefisso per riconoscere input da file
+tb_977 = query="@query_/export/exportUnimarc/dp/export/tb977.sql"
+tb_codici_ecla query="select cd_tabella, cd_marc_21 as cd_unimarc from tb_codici where tp_tabella = 'ECLA'"
+tb_codici_orga query="select cd_tabella, ds_tabella from tb_codici where tp_tabella = 'ORGA'"
+tb_audiovideo
+tb_disco_sonoro
+tb_titset_1
+tb_termine_thesauro
+trs_termini_titoli_biblioteche
+tb_titset_2
+tr_bid_altroid
+

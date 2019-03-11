@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_cartografia" polymorphism="explicit" table="TB_CARTOGRAFIA" lazy="false">
+		<id name="BID" column="BID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="TP_PUBB_GOV" column="TP_PUBB_GOV" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_COLORE" column="CD_COLORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_MERIDIANO" column="CD_MERIDIANO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_SUPPORTO_FISICO" column="CD_SUPPORTO_FISICO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_TECNICA" column="CD_TECNICA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_FORMA_RIPR" column="CD_FORMA_RIPR" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_FORMA_PUBB" column="CD_FORMA_PUBB" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_ALTITUDINE" column="CD_ALTITUDINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_TIPOSCALA" column="CD_TIPOSCALA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TP_SCALA" column="TP_SCALA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="SCALA_ORIZ" column="SCALA_ORIZ" type="string" length="16" not-null="false"/>
+		<property name="SCALA_VERT" column="SCALA_VERT" type="string" length="16" not-null="false"/>
+		<property name="LONGITUDINE_OVEST" column="LONGITUDINE_OVEST" type="string" length="16" not-null="false"/>
+		<property name="LONGITUDINE_EST" column="LONGITUDINE_EST" type="string" length="16" not-null="false"/>
+		<property name="LATITUDINE_NORD" column="LATITUDINE_NORD" type="string" length="16" not-null="false"/>
+		<property name="LATITUDINE_SUD" column="LATITUDINE_SUD" type="string" length="16" not-null="false"/>
+		<property name="TP_IMMAGINE" column="TP_IMMAGINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_FORMA_CART" column="CD_FORMA_CART" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_PIATTAFORMA" column="CD_PIATTAFORMA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_CATEG_SATELLITE" column="CD_CATEG_SATELLITE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+
+		<property name="TP_PROIEZIONE" column="TP_PROIEZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_CARTOGRAFIA_selectPerKey"
+				condition="bid = :XXXbid "/>
+
+
+	</class>
+</hibernate-mapping>

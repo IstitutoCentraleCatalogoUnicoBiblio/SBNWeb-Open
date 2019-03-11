@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Trc_poss_prov_inventari" table="trc_poss_prov_inventari" >
+		<meta attribute="class-description">
+			POSSESSORI E PROVENIENZE INVENTARI (solo libro antico)
+		</meta>
+		<composite-id>
+			<key-many-to-one name="p" column="pid" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_possessore_provenienza"/>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario">
+				<column name="cd_serie"/>
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+				<column name="cd_inven"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="cd_legame" column="cd_legame" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				esplicita il legame tra inventario e proprietario; "r" = provenienza, "p" = possessore
+			</meta>
+		</property>
+		<property name="nota" column="nota" type="string" length="320" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				nota sul legame
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

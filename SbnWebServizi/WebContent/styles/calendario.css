@@ -1,0 +1,157 @@
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+table.calendario {
+	width: 99%;
+	border: 1px;
+	border-style: dotted;
+}
+
+td.giorno {
+	width: 14.28%;
+	height: 5em;
+	text-align: center;
+	vertical-align: top;
+	border: 2px solid;
+	/* LARA	nuova impostazione del colore bordo border-color: #FEF1E2; a white*/
+	border-color: white;
+}
+
+td.oggi {
+	border: 2px solid;
+	border-color: blue;
+}
+
+td.aperto {
+	background-color: #FFCC99;
+}
+
+td.aperto:hover {
+	border: 2px solid;
+	/* LARA	nuova impostazione del colore bordo border-color: red; a #b12d3a*/
+	border-color: #b12d3a;
+	cursor: pointer;
+}
+
+td.chiuso {
+	background-color: lightgrey;
+}
+
+td.festivo {
+	background-color: red;
+}
+
+span.day-header {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	color: #000;
+	margin: 0;
+	padding: 0.2em 0.3em;
+	font-size: 0.9em;
+	font-family: monospace;
+	background-color: #DDE8F0;
+}
+
+span.stato {
+	line-height: 4em;
+}
+
+span.stato h2 {
+	margin: auto;
+	font-size: 2.77em;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.chiuso h2 {
+	color: grey;
+}
+
+.cal_intestazione {
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	/* height: 2em; */
+}
+
+.cal_intestazione > * {
+	vertical-align: middle;
+	display: inline-table;
+}
+
+#cal_intestazione_dati h2 {
+	margin: 0;
+}
+
+div#selection {
+	/* padding-top: 0.5em; */
+	font-size: 1.5em;
+/* 	height: 2em;
+	vertical-align: middle;
+	text-align: center; */
+}
+
+tr.disponibile:hover {
+	cursor: pointer;
+}
+
+.slot-float {
+	float: left;
+	display: table;
+	width: 150px;
+	height: 50px;
+	border: 2px solid;
+	background-color: #FFCC99;
+	/* LARA	nuova impostazione del colore bordo border-color: #FEF1E2; a white*/
+	border-color: white;
+}
+
+.slot-disponibile:hover {
+	border: 2px solid;
+	/* LARA	nuova impostazione del colore bordo border-color: red; a #b12d3a*/
+	border-color: #b12d3a;
+	cursor: pointer;
+}
+
+.slot-float p {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.checked {
+	border-color: green;
+	background-color: lightgreen;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+#listaPrenotazioniPosti p {
+	margin: 0px;
+}
+
+.sala-float {
+	display: table;
+	width: 40%;
+	height: 50px;
+	border: 2px solid;
+	background-color: #FFCC99;
+	border-color: #FEF1E2;
+}
+
+.sala-float:hover {
+	border: 2px solid;
+	border-color: red;
+	cursor: pointer;
+}
+
+.sala-float p {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#pp_descr {
+	border: 1px dotted;
+	background-color: #FFCC99;
+	padding: 0.1em;
+}

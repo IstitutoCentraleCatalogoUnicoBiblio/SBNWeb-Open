@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_proposta" polymorphism="explicit" table="TS_PROPOSTA" lazy="false">
+		<composite-id>
+			<key-property name="UTE_MITTENTE" column="UTE_MITTENTE" type="string"/>
+			<key-property name="PROGR_PROPOSTA" column="PROGR_PROPOSTA" type="long"/>
+		</composite-id>
+		<property name="UTE_DESTINATARIO" column="UTE_DESTINATARIO" index="XIE1PROPOSTA" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="BIDVID" column="BIDVID" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="true"/>
+		<property name="TP_MESSAGGIO" column="TP_MESSAGGIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="DS_PROPOSTA" column="DS_PROPOSTA" type="string" length="400" not-null="true"/>
+		<property name="DT_INOLTRO" column="DT_INOLTRO" type="date" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+	</class>
+</hibernate-mapping>

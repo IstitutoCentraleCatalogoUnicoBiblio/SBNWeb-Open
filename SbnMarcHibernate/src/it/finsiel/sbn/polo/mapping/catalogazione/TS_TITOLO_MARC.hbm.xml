@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_titolo_marc" polymorphism="explicit" table="TS_TITOLO_MARC" lazy="false">
+		<composite-id>
+			<key-property name="ID_TAG_MARC" column="ID_TAG_MARC" type="long"/>
+			<key-property name="ID_TITOLO_MARC" column="ID_TITOLO_MARC" type="long"/>
+		</composite-id>
+		<property name="BID_MARC" column="BID_MARC" index="XIE3TITOLO_MARC" type="string" length="33" not-null="true"/>
+		<property name="IDPARTENZA" column="IDPARTENZA" index="XIE12TITOLO_MARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="IDINDICE" column="IDINDICE" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="NOTAID" column="NOTAID" type="string" length="254" not-null="false"/>
+		<property name="TP_OPERAZIONE" column="TP_OPERAZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="KCERCA" column="KCERCA" type="string" length="960" not-null="false"/>
+		<property name="STATO" column="STATO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="TIPOMATERIALE" column="TIPOMATERIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="NATURA" column="NATURA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="LIVELLOAUT" column="LIVELLOAUT" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="TIPORECORD" column="TIPORECORD" index="XIE12TITOLO_MARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="LIVELLOGERARCHICO" column="LIVELLOGERARCHICO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_aut" table="tr_tit_aut" >
+		<meta attribute="class-description">
+			AUTORI DI OGGETTI BIBLIOGRAFICI
+		</meta>
+		<composite-id>
+			<key-many-to-one name="B" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo">
+			</key-many-to-one>
+			<key-many-to-one name="V" column="vid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_autore">
+			</key-many-to-one>
+			<key-property name="tp_responsabilita" column="tp_responsabilita" type="character"/>
+			<key-property name="cd_relazione" column="cd_relazione" type="string"/>
+		</composite-id>
+		<property name="nota_tit_aut" column="nota_tit_aut" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="fl_incerto" column="fl_incerto" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di legame autore incerto, S=incerto, spazio=certo
+			</meta>
+		</property>
+		<property name="fl_superfluo" column="fl_superfluo" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di legame autore non obbligatorio, S=non obb, spazio=obbligatorio
+			</meta>
+		</property>
+		<property name="cd_strumento_mus" column="cd_strumento_mus" type="string" length="14" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di condivisione gestione del legame con indice
+			</meta>
+			<column name="fl_condiviso" default="S"/>
+		</property>
+		<property name="ute_condiviso" column="ute_condiviso" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha attivato la gestione condivisa del legame con indice
+			</meta>
+		</property>
+		<property name="ts_condiviso" column="ts_condiviso" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di condivisione gestione del legame con indice
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

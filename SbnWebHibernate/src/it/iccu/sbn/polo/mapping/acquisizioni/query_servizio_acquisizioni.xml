@@ -1,0 +1,49 @@
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="esisteLegameRigaBilancio">
+		<return-scalar column="leg_cnt" type="java.lang.Long" />
+		<![CDATA[
+			select sum(cnt) as leg_cnt from (
+				select count(*) as cnt from tba_ordini o
+				join tbb_bilanci b on b.id_capitoli_bilanci=o.id_capitoli_bilanci and b.cod_mat=o.tbb_bilancicod_mat
+				where true
+					and o.fl_canc<>'S'
+					and o.stato_ordine<>'N'
+					and o.id_capitoli_bilanci=:idBilancio
+					and o.tbb_bilancicod_mat=:cod_mat
+				union
+				select count(*) as cnt from tba_righe_fatture rf
+				join tbb_bilanci b on b.id_capitoli_bilanci=rf.id_capitoli_bilanci and b.cod_mat=rf.cod_mat
+				where true
+					and rf.fl_canc<>'S'
+					and rf.id_capitoli_bilanci=:idBilancio
+					and rf.cod_mat=:cod_mat
+				union
+				select count(*) as cnt from tba_buono_ordine bo
+				join tbb_bilanci b on b.id_capitoli_bilanci=bo.id_capitoli_bilanci and b.cod_mat=bo.cod_mat
+				where true
+					and bo.fl_canc<>'S'
+					and bo.id_capitoli_bilanci=:idBilancio
+					and bo.cod_mat=:cod_mat
+			) as legami
+		]]>
+	</sql-query>
+
+</hibernate-mapping>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_moduli_funzionali" table="tbf_moduli_funzionali" >
+		<id name="id_modulo" column="id_modulo" type="integer">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="ds_modulo" column="ds_modulo" type="string" length="255" not-null="true" lazy="false"/>
+		<set name="Tbf_attivita_sbnmarc" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_modulo" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_attivita_sbnmarc"/>
+		</set>
+	</class>
+</hibernate-mapping>

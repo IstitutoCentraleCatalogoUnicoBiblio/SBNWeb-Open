@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.gestionesemantica.Tb_descrittore" table="tb_descrittore" >
+		<meta attribute="class-description">
+			DESCRITTORI DI SOGGETTO (TPSDSO))
+		</meta>
+		<id name="did" column="did" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="ds_descrittore" column="ds_descrittore" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione
+			</meta>
+		</property>
+		<property name="ky_norm_descritt" column="ky_norm_descritt" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave di ricerca
+			</meta>
+		</property>
+		<property name="nota_descrittore" column="nota_descrittore" type="string" length="240" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note al descrittore
+			</meta>
+		</property>
+		<property name="cd_soggettario" column="cd_soggettario" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice di tipo di soggettario
+			</meta>
+		</property>
+		<property name="cd_edizione" column="cd_edizione" type="character" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				edizione del soggettario SBN
+			</meta>
+		</property>
+		<property name="cat_termine" column="cat_termine" type="character" not-null="false" lazy="false" />
+		<property name="tp_forma_des" column="tp_forma_des" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di descrizione acquisita a livello di polo (cioe' non accettati a livello di indice); ammette i valori: 1 = si, 0 = no
+			</meta>
+			<column name="fl_condiviso" default="N"/>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tr_des_des" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="did_base" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_des_des"/>
+		</set>
+		<set name="Tr_des_des1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="did_coll" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_des_des"/>
+		</set>
+		<set name="Tr_sog_des" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="did" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_sog_des"/>
+		</set>
+	</class>
+</hibernate-mapping>

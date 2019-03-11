@@ -1,0 +1,1291 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="ordineRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.OrdineRicercaParzialeForm" />
+		<form-bean name="ordineRicercaParzialeBoForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.OrdineRicercaParzialeBoForm" />
+		<form-bean name="sinteticaOrdineForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.SinteticaOrdineForm" />
+		<form-bean name="esaminaOrdineForm"  type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.EsaminaOrdineForm" />
+		<form-bean name="esaminaOrdineRForm" dynamic="true" type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.EsaminaOrdineRForm" >
+			<form-property name="elencaInventari" type="it.iccu.sbn.ejb.vo.acquisizioni.StrutturaInventariOrdVO[]"></form-property>
+			<form-property name="radioInv" type="java.lang.Integer[]"></form-property>
+			<form-property name="numRigheInv" type="java.lang.Integer"></form-property>
+			<form-property name="listaSerie" type="java.util.ArrayList"></form-property>
+			<form-property name="data" type="java.lang.String"></form-property>
+			<form-property name="tipoData" type="java.lang.String"></form-property>
+			<form-property name="listaTipoData" type="java.util.List"></form-property>
+			<form-property name="lockVol" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="esaminaOrdineModForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.EsaminaOrdineModForm" />
+		<form-bean name="listaBibliotecheAffiliateAcqForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.ListaBibliotecheAffiliateAcqForm" />
+		<form-bean name="operazioneSuOrdineForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.OperazioneSuOrdineForm" />
+		<form-bean name="inventariForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.InventariForm" />
+		<form-bean name="controllaOrdineForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.ControllaOrdineForm" />
+		<form-bean name="importaDaForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.ImportaDaForm" />
+		<form-bean name="listaOrdiniForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.ListaOrdiniForm" />
+		<form-bean name="buoniRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.buoniordine.BuoniRicercaParzialeForm" />
+		<form-bean name="inserisciBuonoOrdineForm" dynamic="true" type="it.iccu.sbn.web.actionforms.acquisizioni.buoniordine.InserisciBuonoOrdineForm" >
+			<form-property name="buono" type="it.iccu.sbn.ejb.vo.acquisizioni.BuoniOrdineVO"></form-property>
+			<form-property name="listaStatoBuono" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoOrdine" type="java.util.ArrayList"></form-property>
+			<form-property name="listaStato" type="java.util.ArrayList"></form-property>
+			<form-property name="elencaBuoni" type="it.iccu.sbn.ejb.vo.acquisizioni.OrdiniVO[]"></form-property>
+			<form-property name="numOrdini" type="java.lang.Integer"></form-property>
+			<form-property name="eleIns" type="java.lang.Integer"></form-property>
+			<form-property name="radioOrd" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+			<form-property name="visibilitaIndietroLS" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="esaminaBuonoOrdineForm" dynamic="true" type="it.iccu.sbn.web.actionforms.acquisizioni.buoniordine.EsaminaBuonoOrdineForm" >
+			<form-property name="buono" type="it.iccu.sbn.ejb.vo.acquisizioni.BuoniOrdineVO"></form-property>
+			<form-property name="listaStatoBuono" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoOrdine" type="java.util.ArrayList"></form-property>
+			<form-property name="listaStato" type="java.util.ArrayList"></form-property>
+			<form-property name="elencaBuoni" type="it.iccu.sbn.ejb.vo.acquisizioni.OrdiniVO[]"></form-property>
+			<form-property name="numOrdini" type="java.lang.Integer"></form-property>
+			<form-property name="radioOrd" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="enableScorrimento" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="sinteticaBuonoOrdineForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.buoniordine.SinteticaBuonoOrdineForm" />
+		<form-bean name="gareRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.gare.GareRicercaParzialeForm" />
+		<form-bean name="esaminaGaraForm"  dynamic="true" type="it.iccu.sbn.web.actionforms.acquisizioni.gare.EsaminaGaraForm" >
+			<form-property name="richOff" type="it.iccu.sbn.ejb.vo.acquisizioni.GaraVO"></form-property>
+			<form-property name="listaStatoRichiestaOfferta" type="java.util.ArrayList"></form-property>
+			<form-property name="listaStatoPartecipanteGara" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoInvio" type="java.util.ArrayList"></form-property>
+			<form-property name="elencaRighePartecipanti" type="it.iccu.sbn.ejb.vo.acquisizioni.PartecipantiGaraVO[]"></form-property>
+			<form-property name="numRighePartecipanti" type="java.lang.Integer"></form-property>
+			<form-property name="radioPartecipante" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="enableScorrimento" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="sinteticaGaraForm"
+		 	type="it.iccu.sbn.web.actionforms.acquisizioni.gare.SinteticaGaraForm" />
+		<form-bean name="inserisciGaraForm" dynamic="true"	type="it.iccu.sbn.web.actionforms.acquisizioni.gare.InserisciGaraForm" >
+			<form-property name="richOff" type="it.iccu.sbn.ejb.vo.acquisizioni.GaraVO"></form-property>
+			<form-property name="listaStatoRichiestaOfferta" type="java.util.ArrayList"></form-property>
+			<form-property name="listaStatoPartecipanteGara" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoInvio" type="java.util.ArrayList"></form-property>
+			<form-property name="elencaRighePartecipanti" type="it.iccu.sbn.ejb.vo.acquisizioni.PartecipantiGaraVO[]"></form-property>
+			<form-property name="numRighePartecipanti" type="java.lang.Integer"></form-property>
+			<form-property name="radioPartecipante" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="visibilitaIndietroLS" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+		</form-bean>
+
+		<form-bean name="offerteRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.offerte.OfferteRicercaParzialeForm" />
+		<form-bean name="esaminaOfferteForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.offerte.EsaminaOfferteForm" />
+		<form-bean name="sinteticaOfferteForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.offerte.SinteticaOfferteForm" />
+		<form-bean name="inserisciOfferteForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.offerte.InserisciOfferteForm" />
+		<form-bean name="fattureRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.FattureRicercaParzialeForm" />
+		<form-bean name="fattureRicercaParzialeNCForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.FattureRicercaParzialeNCForm" />
+		<form-bean name="esaminaFatturaForm" dynamic="true"	type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.EsaminaFatturaForm" >
+			<form-property name="datiFattura" type="it.iccu.sbn.ejb.vo.acquisizioni.FatturaVO"></form-property>
+			<form-property name="listaIva" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoOrdine" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoImpegno" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoFatt" type="java.util.ArrayList"></form-property>
+			<form-property name="listaStatoFatt" type="java.util.ArrayList"></form-property>
+			<form-property name="listaValuta" type="java.util.ArrayList"></form-property>
+			<form-property name="valuta" type="java.lang.String"></form-property>
+			<form-property name="elencaRigheFatt" type="it.iccu.sbn.ejb.vo.acquisizioni.StrutturaFatturaVO[]"></form-property>
+			<form-property name="numRigheFatt" type="java.lang.Integer"></form-property>
+			<form-property name="radioRFatt" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="enableScorrimento" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="sinteticaFatturaForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.SinteticaFatturaForm" />
+		<form-bean name="inserisciFatturaForm"  dynamic="true"	type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.InserisciFatturaForm" >
+			<form-property name="datiFattura" type="it.iccu.sbn.ejb.vo.acquisizioni.FatturaVO"></form-property>
+			<form-property name="listaIva" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoOrdine" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoImpegno" type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipoFatt" type="java.util.ArrayList"></form-property>
+			<form-property name="listaStatoFatt" type="java.util.ArrayList"></form-property>
+			<form-property name="listaValuta" type="java.util.ArrayList"></form-property>
+			<form-property name="valuta" type="java.lang.String"></form-property>
+			<form-property name="elencaRigheFatt" type="it.iccu.sbn.ejb.vo.acquisizioni.StrutturaFatturaVO[]"></form-property>
+			<form-property name="numRigheFatt" type="java.lang.Integer"></form-property>
+			<form-property name="radioRFatt" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+			<form-property name="visibilitaIndietroLS" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="listaFattureForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.ListaFattureForm" />
+		<form-bean name="esaminaFatturaNCForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fatture.EsaminaFatturaNCForm" />
+		<form-bean name="comunicazioniRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.comunicazioni.ComunicazioniRicercaParzialeForm" />
+		<form-bean name="esaminaComForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.comunicazioni.EsaminaComForm" />
+		<form-bean name="sinteticaComForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.comunicazioni.SinteticaComForm" />
+		<form-bean name="inserisciComForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.comunicazioni.InserisciComForm" />
+		<form-bean name="suggerimentiBiblRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.suggerimenti.SuggerimentiBiblRicercaParzialeForm" />
+		<form-bean name="esaminaSugBiblForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.suggerimenti.EsaminaSugBiblForm" />
+		<form-bean name="sinteticaSugBiblForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.suggerimenti.SinteticaSugBiblForm" />
+		<form-bean name="inserisciSugBiblForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.suggerimenti.InserisciSugBiblForm" />
+		<form-bean name="documentiRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.documenti.DocumentiRicercaParzialeForm" />
+		<form-bean name="esaminaDocForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.documenti.EsaminaDocForm" />
+		<form-bean name="sinteticaDocForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.documenti.SinteticaDocForm" />
+		<form-bean name="inserisciDocForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.documenti.InserisciDocForm" />
+		<form-bean name="fornitoriRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fornitori.FornitoriRicercaParzialeForm" />
+		<form-bean name="esaminaFornitoreForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fornitori.EsaminaFornitoreForm" />
+		<form-bean name="sinteticaFornitoriForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fornitori.SinteticaFornitoriForm" />
+		<form-bean name="listaSuppFornitoriForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fornitori.ListaSuppFornitoriForm" />
+		<form-bean name="inserisciFornitoreForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fornitori.InserisciFornitoreForm" />
+		<form-bean name="profiliAcqForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.fornitori.ProfiliAcqForm" />
+		<form-bean name="bilancioRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.bilancio.BilancioRicercaParzialeForm" />
+		<form-bean name="esaminaBilancioForm" dynamic="true" type="it.iccu.sbn.web.actionforms.acquisizioni.bilancio.EsaminaBilancioForm" >
+			<form-property name="bilancio" type="it.iccu.sbn.ejb.vo.acquisizioni.BilancioVO"></form-property>
+			<form-property name="elencaImpegni" type="it.iccu.sbn.ejb.vo.acquisizioni.BilancioDettVO[]"></form-property>
+			<form-property name="numImpegni" type="java.lang.Integer"></form-property>
+			<form-property name="listaTipoImpegno" type="java.util.ArrayList"></form-property>
+			<form-property name="radioImpegno" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="enableScorrimento" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="sinteticaBilancioForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.bilancio.SinteticaBilancioForm" />
+		<form-bean name="inserisciBilancioForm" dynamic="true"	type="it.iccu.sbn.web.actionforms.acquisizioni.bilancio.InserisciBilancioForm" >
+			<form-property name="bilancio" type="it.iccu.sbn.ejb.vo.acquisizioni.BilancioVO"></form-property>
+			<form-property name="elencaImpegni" type="it.iccu.sbn.ejb.vo.acquisizioni.BilancioDettVO[]"></form-property>
+			<form-property name="numImpegni" type="java.lang.Integer"></form-property>
+			<form-property name="listaTipoImpegno" type="java.util.ArrayList"></form-property>
+			<form-property name="radioImpegno" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+			<form-property name="visibilitaIndietroLS" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="sezioniRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.SezioniRicercaParzialeForm" />
+		<form-bean name="esaminaSezioneForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.EsaminaSezioneForm" />
+		<form-bean name="esaminaSpesaForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.EsaminaSpesaForm" />
+		<form-bean name="esameStoricoForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.EsameStoricoForm" />
+		<form-bean name="sinteticaSezioneForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.SinteticaSezioneForm" />
+		<form-bean name="inserisciSezioneForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.InserisciSezioneForm" />
+		<form-bean name="listaSezioniForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.sezioni.ListaSezioniForm" />
+		<form-bean name="profiliRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.profiliacquisto.ProfiliRicercaParzialeForm" />
+		<form-bean name="esaminaProfiloForm" dynamic="true"	type="it.iccu.sbn.web.actionforms.acquisizioni.profiliacquisto.EsaminaProfiloForm" >
+			<form-property name="datiProfilo" type="it.iccu.sbn.ejb.vo.acquisizioni.StrutturaProfiloVO"></form-property>
+			<form-property name="listaLingue" type="java.util.ArrayList"></form-property>
+			<form-property name="listaPaesi" type="java.util.ArrayList"></form-property>
+			<form-property name="elencaFornitori" type="it.iccu.sbn.ejb.vo.acquisizioni.common.StrutturaTerna[]"></form-property>
+			<form-property name="numForn" type="java.lang.Integer"></form-property>
+			<form-property name="radioForn" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="enableScorrimento" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="sinteticaProfiliForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.profiliacquisto.SinteticaProfiliForm" />
+		<form-bean name="inserisciProfiloForm" dynamic="true"	type="it.iccu.sbn.web.actionforms.acquisizioni.profiliacquisto.InserisciProfiloForm" >
+			<form-property name="datiProfilo" type="it.iccu.sbn.ejb.vo.acquisizioni.StrutturaProfiloVO"></form-property>
+			<form-property name="listaLingue" type="java.util.ArrayList"></form-property>
+			<form-property name="listaPaesi" type="java.util.ArrayList"></form-property>
+			<form-property name="elencaFornitori" type="it.iccu.sbn.ejb.vo.acquisizioni.common.StrutturaTerna[]"></form-property>
+			<form-property name="numForn" type="java.lang.Integer"></form-property>
+			<form-property name="radioForn" type="java.lang.Integer[]"></form-property>
+			<form-property name="disabilitaTutto" type="java.lang.Boolean"></form-property>
+			<form-property name="conferma" type="java.lang.Boolean"></form-property>
+			<form-property name="visibilitaIndietroLS" type="java.lang.Boolean"></form-property>
+		</form-bean>
+		<form-bean name="cambiRicercaParzialeForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.cambi.CambiRicercaParzialeForm" />
+		<form-bean name="esaminaCambioForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.cambi.EsaminaCambioForm" />
+		<form-bean name="sinteticaCambiForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.cambi.SinteticaCambiForm" />
+		<form-bean name="inserisciCambioForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.cambi.InserisciCambioForm" />
+		<form-bean name="configurazioneBOForm" dynamic="true" type="it.iccu.sbn.web.actionforms.acquisizioni.configurazione.ConfigurazioneBOForm">
+			<form-property name="selectedDatiIntest" type="java.lang.String[]"/>
+			<form-property name="selectedDatiFineStampa" type="java.lang.String[]"/>
+			<form-property name="selectedFormulaIntroduttiva" type="java.lang.String[]"/>
+			<form-property name="selectedTestoOggetto" type="java.lang.String[]"/>
+			<form-property name="datiIntest" type="it.iccu.sbn.ejb.vo.acquisizioni.common.StrutturaTerna[]"></form-property>
+			<form-property name="formulaIntroduttiva" type="it.iccu.sbn.ejb.vo.acquisizioni.common.StrutturaQuater[]"></form-property>
+			<form-property name="testoOggetto" type="it.iccu.sbn.ejb.vo.acquisizioni.common.StrutturaQuater[]"></form-property>
+			<form-property name="datiFineStampa" type="it.iccu.sbn.ejb.vo.acquisizioni.common.StrutturaTerna[]"></form-property>
+			<form-property name="datiConfigBO" type="it.iccu.sbn.ejb.vo.acquisizioni.ConfigurazioneBOVO"></form-property>
+			<form-property name="numAutomatica" type="java.lang.Boolean"></form-property>
+			<form-property name="numerazBuono" type="java.lang.String"></form-property>
+			<form-property name="areaTit" type="java.lang.String"></form-property>
+			<form-property name="areaEdi" type="java.lang.String"></form-property>
+			<form-property name="areaNum" type="java.lang.String"></form-property>
+			<form-property name="areaPub" type="java.lang.String"></form-property>
+			<form-property name="logo" type="java.lang.String"></form-property>
+			<form-property name="imgLogo" type="java.lang.String"></form-property>
+			<form-property name="prezzo" type="java.lang.String"></form-property>
+			<form-property name="numProt" type="java.lang.String"></form-property>
+			<form-property name="dataProt" type="java.lang.String"></form-property>
+			<form-property name="indicazioneRinnovo" type="java.lang.String"></form-property>
+			<form-property name="imgFirma" type="java.lang.String"></form-property>
+			<form-property name="ristampa" type="java.lang.String"></form-property>
+			<form-property name="tipoOrdine" type="java.lang.String"></form-property>
+			<form-property name="scegliLingua" type="java.lang.String"></form-property>
+			<form-property name="firmaDigit" type="java.lang.String"></form-property>
+			<form-property name="fileIdList" type="org.apache.struts.upload.FormFile"></form-property>
+			<form-property name="fileIdListFirma" type="org.apache.struts.upload.FormFile"></form-property>
+			<form-property name="listaTipoLavorazione" type="java.util.List"></form-property>
+			<form-property name="item" type="java.util.List"></form-property>
+			<form-property name="selectedFormulaIntroOrdineR" type="java.lang.Integer"></form-property>
+
+		</form-bean>
+		<form-bean name="configurazioneORDForm"  type="it.iccu.sbn.web.actionforms.acquisizioni.configurazione.ConfigurazioneORDForm" />
+		<form-bean
+			name="statisticheTempiForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.statistiche.StatisticheTempiForm" />
+		<form-bean
+			name="spedizioneOrdineForm"
+			type="it.iccu.sbn.web.actionforms.acquisizioni.ordini.SpedizioneOrdineForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards></global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+		<action path="/acquisizioni/ordini/ordineRicercaParziale"
+			name="ordineRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/ordineRicercaParziale.jsp"
+			parameter="methodOrdineRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.OrdineRicercaParzialeAction">
+			<forward name="nuovoA" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=A" />
+			<forward name="nuovoL" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=L" />
+			<forward name="nuovoD" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=D" />
+			<forward name="nuovoC" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=C" />
+			<forward name="nuovoV" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=V" />
+			<forward name="nuovoR" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=R" />
+			<forward name="cerca" path="/acquisizioni/ordini/sinteticaOrdine.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="bilancioCerca" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+			<forward name="biblioCerca" path="/acquisizioni/ordini/listaBibliotecheAffiliateAcq.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/ordini/ordineRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/ordini/ordineRicercaParzialeBo"
+			name="ordineRicercaParzialeBoForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/ordineRicercaParzialeBo.jsp"
+			parameter="methodOrdineRicercaParzialeBo"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.OrdineRicercaParzialeBoAction">
+			<forward name="nuovoA" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=A" />
+			<forward name="nuovoL" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=L" />
+			<forward name="nuovoD" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=D" />
+			<forward name="nuovoC" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=C" />
+			<forward name="nuovoV" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=V" />
+			<forward name="nuovoR" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=R" />
+			<forward name="cerca" path="/acquisizioni/ordini/listaOrdini.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="bilancioCerca" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+			<forward name="biblioCerca" path="/acquisizioni/ordini/listaBibliotecheAffiliateAcq.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/ordini/ordineRicercaParziale.do" />
+
+		</action>
+
+		<action path="/acquisizioni/ordini/sinteticaOrdine"
+			name="sinteticaOrdineForm" validate="true"  scope="session"
+			parameter="methodSinteticaOrdine"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.SinteticaOrdineAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/sinteticaOrdine.jsp">
+			<forward name="esamina"
+				path="/acquisizioni/ordini/esaminaOrdineMod.do" />
+			<forward name="indietro"
+				path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="controllaordine"
+				path="/acquisizioni/ordini/controllaOrdine.do" />
+			<forward name="operazionesuordine"
+				path="/acquisizioni/ordini/operazioneSuOrdine.do" />
+			<forward name="crea" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=A" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+            <forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+
+		</action>
+
+		<action path="/acquisizioni/ordini/operazioneSuOrdine"
+			name="operazioneSuOrdineForm" validate="true" scope="session"
+			parameter="methodOperazioneSuOrdine"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.OperazioneSuOrdineAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/operazioneSuOrdine.jsp">
+			<forward name="indietro4" path="/acquisizioni/ordini/sinteticaOrdine.do"></forward>
+			<forward name="indietro9" path="/acquisizioni/ordini/esaminaOrdineMod.do"></forward>
+			<forward name="salva" path="/acquisizioni/ordini/sinteticaOrdine.do"></forward>
+			<forward name="nuovoA" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=A" />
+			<forward name="nuovoL" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=L" />
+			<forward name="nuovoD" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=D" />
+			<forward name="nuovoC" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=C" />
+			<forward name="nuovoV" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=V" />
+			<forward name="nuovoR" path="/acquisizioni/ordini/esaminaOrdine.do?paramLink=R" />
+		</action>
+
+		<action path="/acquisizioni/ordini/inventari"
+			name="inventariForm" validate="true" scope="session"
+			parameter="methodInventari"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.InventariAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/inventari.jsp">
+			<forward name="indietro" path="/acquisizioni/ordini/esaminaOrdineMod.do"></forward>
+		</action>
+
+
+		<action path="/acquisizioni/ordini/controllaOrdine"
+			name="controllaOrdineForm" validate="true"
+			parameter="methodControllaOrdine"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.ControllaOrdineAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/controllaOrdine.jsp">
+			<forward name="indietro" path="/acquisizioni/ordini/sinteticaOrdine.do"></forward>
+		</action>
+
+		<action path="/acquisizioni/ordini/esaminaOrdine"
+			name="esaminaOrdineForm" validate="true"
+			parameter="methodEsaminaOrdine" scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.EsaminaOrdineAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/esaminaOrdine.jsp">
+			<forward name="indietro" path="/acquisizioni/ordini/ordineRicercaParziale.do"></forward>
+			<forward name="bibloaffil" path="/acquisizioni/ordini/listaBibliotecheAffiliateAcq.do"></forward>
+			<forward name="importada" path="/acquisizioni/ordini/importaDa.do"></forward>
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do"></forward>
+			<forward name="bilancioCerca" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/ordini/esaminaOrdine.do" />
+			<forward name="assInv" path="/acquisizioni/ordini/esaminaOrdineR.do" redirect="true"  />
+			<forward name="listaForn" path="/acquisizioni/fornitori/listaSuppFornitori.do" />
+            <forward name="sifInventario" path="/documentofisico/datiInventari/vaiAInserimentoInv.do"  />
+			<forward name="esamina"	path="/acquisizioni/ordini/esaminaOrdineMod.do" />
+			<forward name="esaminaCDL"	path="/acquisizioni/ordini/esaminaOrdineMod.do?VAIACREAINVENTARIO=true" />
+
+		</action>
+
+		<action path="/acquisizioni/ordini/esaminaOrdineR"
+			name="esaminaOrdineRForm" validate="true"
+			parameter="methodEsaminaOrdineR" scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.EsaminaOrdineRAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/esaminaOrdineR.jsp">
+			<forward name="indietro" path="/acquisizioni/ordini/esaminaOrdineMod.do" redirect="true" ></forward>
+		</action>
+
+		<action path="/acquisizioni/ordini/importaDa"
+			name="importaDaForm" validate="true"
+			parameter="methodImportaDa" scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.ImportaDaAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/importaDa.jsp">
+			<forward name="indietro" path="/acquisizioni/ordini/esaminaOrdine.do"></forward>
+			<forward name="salva1" path="/acquisizioni/documenti/documentiRicercaParziale.do"></forward>
+			<forward name="salva2" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do"></forward>
+			<forward name="salva3" path="/acquisizioni/offerte/offerteRicercaParziale.do"></forward>
+			<forward name="salva4" path="/acquisizioni/gare/gareRicercaParziale.do"></forward>
+		</action>
+
+		<action path="/acquisizioni/ordini/esaminaOrdineMod"
+			name="esaminaOrdineModForm" validate="true"  scope="session"
+			parameter="methodEsaminaOrdineMod"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.EsaminaOrdineModAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/esaminaOrdineMod.jsp">
+			<forward name="indietro" path="/acquisizioni/ordini/sinteticaOrdine.do" />
+			<forward name="bibloaffil" path="/acquisizioni/ordini/listaBibliotecheAffiliateAcq.do" />
+			<forward name="operazionesuordine" path="/acquisizioni/ordini/operazioneSuOrdine.do" />
+			<forward name="importada" path="/acquisizioni/ordini/operazioneSuOrdine.do" />
+			<forward name="buoniord" path="/acquisizioni/buoniordine/buoniRicercaParziale.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="bilancioCerca" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/ordini/esaminaOrdineMod.do" />
+			<forward name="pagRilegatura" path="/acquisizioni/ordini/esaminaOrdineR.do" redirect="true"  />
+			<forward name="assInv" path="/acquisizioni/ordini/esaminaOrdineR.do" redirect="true"  />
+            <forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+            <forward name="sifInventario" path="/documentofisico/datiInventari/vaiAInserimentoInv.do"  />
+			<forward name="listaForn" path="/acquisizioni/fornitori/listaSuppFornitori.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="spedizione" path="/acquisizioni/ordini/spedizioneOrdine.do" />
+			<forward name="esaminaBuono" path="/acquisizioni/buoniordine/esaminaBuonoOrdine.do" />
+
+		</action>
+
+		<action path="/acquisizioni/ordini/listaBibliotecheAffiliateAcq"
+			name="listaBibliotecheAffiliateAcqForm" validate="true" scope="session"
+			parameter="methodListaBibliotecheAffiliateAcq"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.ListaBibliotecheAffiliateAcqAction"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/listaBibliotecheAffiliateAcq.jsp">
+			<forward name="salva" path="/acquisizioni/ordini/listaBibliotecheAffiliateAcq.do" />
+		</action>
+
+		<action path="/acquisizioni/ordini/listaOrdini"
+			name="listaOrdiniForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/listaOrdini.jsp"
+			parameter="methodListaOrdini"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.ListaOrdiniAction">
+			<forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+		</action>
+
+
+		<action path="/acquisizioni/buoniordine/buoniRicercaParziale"
+			name="buoniRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/buoniordine/buoniRicercaParziale.jsp"
+			validate="true"  scope="session"
+			parameter="methodBuoniRicercaParziale"
+			type="it.iccu.sbn.web.actions.acquisizioni.buoniordine.BuoniRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/buoniordine/inserisciBuonoOrdine.do" />
+			<forward name="cerca" path="/acquisizioni/buoniordine/sinteticaBuonoOrdine.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="ordineCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+
+		</action>
+
+		<action path="/acquisizioni/buoniordine/inserisciBuonoOrdine"
+			name="inserisciBuonoOrdineForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/buoniordine/inserisciBuonoOrdine.jsp"
+			validate="true"  scope="session"
+			parameter="methodInserisciBuonoOrdine"
+			type="it.iccu.sbn.web.actions.acquisizioni.buoniordine.InserisciBuonoOrdineAction">
+			<forward name="indietro" path="/acquisizioni/buoniordine/buoniRicercaParziale.do" />
+			<forward name="chiudiBuono" path="/acquisizioni/buoniordine/*.do" />
+			<forward name="ordine" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="ordineBo" path="/acquisizioni/ordini/ordineRicercaParzialeBo.do" />
+			<forward name="ordiniLista" path="/acquisizioni/ordini/listaOrdini.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/buoniordine/sinteticaBuonoOrdine"
+			name="sinteticaBuonoOrdineForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/buoniordine/sinteticaBuonoOrdine.jsp"
+			validate="true"  scope="session"
+			parameter="methodSinteticaBuonoOrdine"
+			type="it.iccu.sbn.web.actions.acquisizioni.buoniordine.SinteticaBuonoOrdineAction">
+			<forward name="esamina" path="/acquisizioni/buoniordine/esaminaBuonoOrdine.do" />
+			<forward name="indietro" path="/acquisizioni/buoniordine/buoniRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/buoniordine/inserisciBuonoOrdine.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+
+		</action>
+
+		<action path="/acquisizioni/buoniordine/esaminaBuonoOrdine"
+			name="esaminaBuonoOrdineForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/buoniordine/esaminaBuonoOrdine.jsp"
+			validate="true"  scope="session"
+			parameter="methodEsaminaBuonoOrdine"
+			type="it.iccu.sbn.web.actions.acquisizioni.buoniordine.EsaminaBuonoOrdineAction">
+			<forward name="indietro" path="/acquisizioni/buoniordine/sinteticaBuonoOrdine.do" />
+			<forward name="chiudiBuono" path="/acquisizioni/buoniordine/*.do" />
+			<forward name="ordine" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do"></forward>
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/gare/gareRicercaParziale"
+			name="gareRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/gare/gareRicercaParziale.jsp"
+			parameter="methodGareRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.gare.GareRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/gare/inserisciGara.do" />
+			<forward name="cerca" path="/acquisizioni/gare/sinteticaGara.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/gare/gareRicercaParziale.do" />
+
+		</action>
+
+		<action path="/acquisizioni/gare/esaminaGara"
+			name="esaminaGaraForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/gare/esaminaGara.jsp"
+			validate="true"   scope="session"
+			parameter="methodEsaminaGara"
+			type="it.iccu.sbn.web.actions.acquisizioni.gare.EsaminaGaraAction">
+			<forward name="indietro" path="/acquisizioni/gare/sinteticaGara.do" />
+			<forward name="salva" path="/acquisizioni/gare/*.do" />
+			<forward name="cancella" path="/acquisizioni/gare/*.do" />
+			<forward name="suggBibl" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
+			<forward name="docum" path="/acquisizioni/documenti/documentiRicercaParziale.do" />
+			<forward name="fornitori" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/gare/esaminaGara.do" />
+
+		</action>
+
+		<action path="/acquisizioni/gare/inserisciGara"
+			name="inserisciGaraForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/gare/inserisciGara.jsp"
+			validate="true"   scope="session"
+			parameter="methodInserisciGara"
+			type="it.iccu.sbn.web.actions.acquisizioni.gare.InserisciGaraAction">
+			<forward name="indietro" path="/acquisizioni/gare/gareRicercaParziale.do" />
+			<forward name="suggBibl" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
+			<forward name="docum" path="/acquisizioni/documenti/documentiRicercaParziale.do" />
+			<forward name="fornitori" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" redirect="true" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/gare/inserisciGara.do" />
+
+		</action>
+
+		<action path="/acquisizioni/gare/sinteticaGara"
+			name="sinteticaGaraForm"
+			parameter="methodSinteticaGara"
+			input="/WEB-INF/jsp/pages/acquisizioni/gare/sinteticaGara.jsp"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.gare.SinteticaGaraAction">
+			<forward name="esamina" path="/acquisizioni/gare/esaminaGara.do" />
+			<forward name="indietro" path="/acquisizioni/gare/gareRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/gare/inserisciGara.do" />
+
+		</action>
+
+		<action path="/acquisizioni/offerte/offerteRicercaParziale"
+			name="offerteRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/offerte/offerteRicercaParziale.jsp"
+			validate="true"  scope="session"
+			parameter="methodOfferteRicercaParziale"
+			type="it.iccu.sbn.web.actions.acquisizioni.offerte.OfferteRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/offerte/inserisciOfferte.do" />
+			<forward name="cerca" path="/acquisizioni/offerte/sinteticaOfferte.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do"></forward>
+
+		</action>
+
+		<action path="/acquisizioni/offerte/esaminaOfferte"
+			name="esaminaOfferteForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/offerte/esaminaOfferte.jsp"
+			parameter="methodEsaminaOfferte"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.offerte.EsaminaOfferteAction">
+			<forward name="indietro" path="/acquisizioni/offerte/sinteticaOfferte.do" />
+			<forward name="salva" path="/acquisizioni/offerte/*.do" />
+			<forward name="cancella" path="/acquisizioni/offerte/*.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/offerte/esaminaOfferte.do" />
+
+		</action>
+
+		<action path="/acquisizioni/offerte/inserisciOfferte"
+			name="inserisciOfferteForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/offerte/inserisciOfferte.jsp"
+			parameter="methodInserisciOfferte"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.offerte.InserisciOfferteAction">
+			<forward name="indietro" path="/acquisizioni/offerte/offerteRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/offerte/sinteticaOfferte"
+			name="sinteticaOfferteForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/offerte/sinteticaOfferte.jsp"
+			parameter="methodSinteticaOfferte"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.offerte.SinteticaOfferteAction">
+			<forward name="esamina" path="/acquisizioni/offerte/esaminaOfferte.do" />
+			<forward name="indietro" path="/acquisizioni/offerte/offerteRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/offerte/inserisciOfferte.do" />
+
+		</action>
+
+		<action path="/acquisizioni/fatture/fattureRicercaParziale"
+			name="fattureRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/fattureRicercaParziale.jsp"
+			parameter="methodFattureRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.FattureRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/fatture/inserisciFattura.do" />
+			<forward name="ordiniCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do" redirect="true"/>
+			<forward name="cerca" path="/acquisizioni/fatture/sinteticaFattura.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/fatture/fattureRicercaParzialeNC"
+			name="fattureRicercaParzialeNCForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/fattureRicercaParzialeNC.jsp"
+			parameter="methodFattureRicercaParzialeNC"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.FattureRicercaParzialeNCAction">
+			<forward name="ordiniCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do" redirect="true"/>
+			<forward name="cerca" path="/acquisizioni/fatture/listaFatture.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+		</action>
+
+
+		<action path="/acquisizioni/fatture/esaminaFattura"
+			name="esaminaFatturaForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/esaminaFattura.jsp"
+			parameter="methodEsaminaFattura"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.EsaminaFatturaAction">
+			<forward name="indietro" path="/acquisizioni/fatture/sinteticaFattura.do" />
+			<forward name="bilancio" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="ordine" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="salva" path="/acquisizioni/fatture/*.do" />
+			<forward name="cancella" path="/acquisizioni/fatture/*.do" />
+			<forward name="listaNoteC" path="/acquisizioni/fatture/*.do" />
+			<forward name="listaInv" path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward name="stampa" path="/acquisizioni/fatture/*.do" />
+			<forward name="fatturaCerca" path="/acquisizioni/fatture/fattureRicercaParziale.do" redirect="true" />
+			<forward name="fatturaRicercaNC" path="/acquisizioni/fatture/fattureRicercaParzialeNC.do" redirect="true" />
+			<forward name="fatturaCercaLista" path="/acquisizioni/fatture/listaFatture.do" redirect="true" />
+			<forward name="fatturaCercaNC" path="/acquisizioni/fatture/esaminaFatturaNC.do" redirect="true" />
+            <forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/fatture/inserisciFattura"
+			name="inserisciFatturaForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/inserisciFattura.jsp"
+			parameter="methodInserisciFattura"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.InserisciFatturaAction">
+			<forward name="indietro" path="/acquisizioni/fatture/fattureRicercaParziale.do" />
+			<forward name="bilancio" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="ordine" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="listaNoteC" path="/acquisizioni/fatture/*.do" />
+			<forward name="salva" path="/acquisizioni/fatture/*.do" />
+			<forward name="ripristina" path="/acquisizioni/fatture/*.do" />
+			<forward name="stampa" path="/acquisizioni/fatture/*.do" />
+			<forward name="controllaordine" path="/acquisizioni/fatture/*.do" />
+			<forward name="listaInv" path="/documentofisico/datiInventari/listeInventari.do" />
+			<forward name="insRiga" path="/acquisizioni/fatture/*.do" />
+			<forward name="cancRiga" path="/acquisizioni/fatture/*.do" />
+			<forward name="fatturaCerca" path="/acquisizioni/fatture/fattureRicercaParziale.do" redirect="true" />
+			<forward name="fatturaRicercaNC" path="/acquisizioni/fatture/fattureRicercaParzialeNC.do" redirect="true" />
+			<forward name="fatturaCercaLista" path="/acquisizioni/fatture/listaFatture.do" redirect="true" />
+            <forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+			<forward name="fatturaCercaNC" path="/acquisizioni/fatture/esaminaFatturaNC.do" redirect="true" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/fatture/sinteticaFattura"
+			name="sinteticaFatturaForm"
+			parameter="methodSinteticaFattura"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/sinteticaFattura.jsp"
+			validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.SinteticaFatturaAction">
+			<forward name="esamina" path="/acquisizioni/fatture/esaminaFattura.do" />
+			<forward name="indietro" path="/acquisizioni/fatture/fattureRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/fatture/inserisciFattura.do" />
+
+		</action>
+
+		<action path="/acquisizioni/fatture/listaFatture"
+			name="listaFattureForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/listaFatture.jsp"
+			parameter="methodListaFatture"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.ListaFattureAction">
+			<forward name="esamina" path="/acquisizioni/fatture/esaminaFatturaNC.do" />
+		</action>
+
+		<action path="/acquisizioni/fatture/esaminaFatturaNC"
+			name="esaminaFatturaNCForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fatture/esaminaFatturaNC.jsp"
+			parameter="methodEsaminaFatturaNC"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fatture.EsaminaFatturaNCAction">
+			<forward name="indietro" path="/acquisizioni/fatture/listaFatture.do" />
+		</action>
+
+
+		<action path="/acquisizioni/comunicazioni/comunicazioniRicercaParziale"
+			name="comunicazioniRicercaParzialeForm"
+			parameter="methodComunicazioniRicercaParziale"
+			input="/WEB-INF/jsp/pages/acquisizioni/comunicazioni/comunicazioniRicercaParziale.jsp"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.comunicazioni.ComunicazioniRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/comunicazioni/inserisciCom.do" />
+			<forward name="cerca" path="/acquisizioni/comunicazioni/sinteticaCom.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="ordineCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="fatturaCerca" path="/acquisizioni/fatture/fattureRicercaParziale.do" redirect="true"/>
+
+		</action>
+
+		<action path="/acquisizioni/comunicazioni/esaminaCom"
+			name="esaminaComForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/comunicazioni/esaminaCom.jsp"
+			parameter="methodEsaminaCom"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.comunicazioni.EsaminaComAction">
+			<forward name="indietro" path="/acquisizioni/comunicazioni/sinteticaCom.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="ordineCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do"></forward>
+			<forward name="fatturaCerca" path="/acquisizioni/fatture/fattureRicercaParziale.do"></forward>
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/comunicazioni/inserisciCom"
+			name="inserisciComForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/comunicazioni/inserisciCom.jsp"
+			parameter="methodinserisciCom"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.comunicazioni.InserisciComAction">
+			<forward name="indietro" path="/acquisizioni/comunicazioni/comunicazioniRicercaParziale.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="ordineCerca" path="/acquisizioni/ordini/ordineRicercaParziale.do" />
+			<forward name="fatturaCerca" path="/acquisizioni/fatture/fattureRicercaParziale.do" />
+			<forward name="esamina" path="/acquisizioni/comunicazioni/esaminaCom.do" />
+		</action>
+
+		<action path="/acquisizioni/comunicazioni/sinteticaCom"
+			name="sinteticaComForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/comunicazioni/sinteticaCom.jsp"
+			parameter="methodSinteticaCom"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.comunicazioni.SinteticaComAction">
+			<forward name="esamina" path="/acquisizioni/comunicazioni/esaminaCom.do" />
+			<forward name="indietro" path="/acquisizioni/comunicazioni/comunicazioniRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/comunicazioni/inserisciCom.do" />
+
+		</action>
+
+		<action path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale"
+			name="suggerimentiBiblRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.jsp"
+			parameter="methodSuggerimentiBiblRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.suggerimenti.SuggerimentiBiblRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/suggerimenti/inserisciSugBibl.do" />
+			<forward name="cerca" path="/acquisizioni/suggerimenti/sinteticaSugBibl.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
+
+		</action>
+
+		<action path="/acquisizioni/suggerimenti/esaminaSugBibl"
+			name="esaminaSugBiblForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/suggerimenti/esaminaSugBibl.jsp"
+			parameter="methodEsaminaSugBibl"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.suggerimenti.EsaminaSugBiblAction">
+			<forward name="indietro" path="/acquisizioni/suggerimenti/sinteticaSugBibl.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+		</action>
+
+		<action path="/acquisizioni/suggerimenti/inserisciSugBibl"
+			name="inserisciSugBiblForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/suggerimenti/inserisciSugBibl.jsp"
+			parameter="methodInserisciSugBibl"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.suggerimenti.InserisciSugBiblAction">
+			<forward name="indietro" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/suggerimenti/inserisciSugBibl.do" />
+
+		</action>
+
+		<action path="/acquisizioni/suggerimenti/sinteticaSugBibl"
+			name="sinteticaSugBiblForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/suggerimenti/sinteticaSugBibl.jsp"
+			parameter="methodSinteticaSugBibl"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.suggerimenti.SinteticaSugBiblAction">
+			<forward name="esamina" path="/acquisizioni/suggerimenti/esaminaSugBibl.do" />
+			<forward name="indietro" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
+			<forward name="stampa" path="/acquisizioni/suggerimenti/*.do" />
+			<forward name="selTutti" path="/acquisizioni/suggerimenti/*.do" />
+			<forward name="deselTutti" path="/acquisizioni/suggerimenti/*.do" />
+			<forward name="crea" path="/acquisizioni/suggerimenti/inserisciSugBibl.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/documenti/documentiRicercaParziale"
+			name="documentiRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/documenti/documentiRicercaParziale.jsp"
+			parameter="methodDocumentiRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.documenti.DocumentiRicercaParzialeAction">
+			<forward name="cerca" path="/acquisizioni/documenti/sinteticaDoc.do" />
+			<forward name="sifutente" path="/servizi/utenti/RicercaUtenti.do?UTERICERCA=acquisizioni_suggLett" redirect="true"/>
+		</action>
+
+		<action path="/acquisizioni/documenti/esaminaDoc"
+			name="esaminaDocForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/documenti/esaminaDoc.jsp"
+			parameter="methodEsaminaDoc"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.documenti.EsaminaDocAction">
+			<forward name="indietro" path="/acquisizioni/documenti/sinteticaDoc.do" />
+			<forward name="salva" path="/acquisizioni/documenti/*.do" />
+			<forward name="ripristina" path="/acquisizioni/documenti/*.do" />
+			<forward name="sifbid" path="/gestionebibliografica/titolo/interrogazioneTitolo.do?ACQUISIZIONI=/acquisizioni/documenti/esaminaDoc.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/documenti/inserisciDoc"
+			name="inserisciDocForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/documenti/inserisciDoc.jsp"
+			validate="true"
+			type="it.iccu.sbn.web.actions.acquisizioni.documenti.InserisciDocAction">
+			<forward name="indietro" path="/acquisizioni/documenti/documentiRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/documenti/sinteticaDoc"
+			name="sinteticaDocForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/documenti/sinteticaDoc.jsp"
+			parameter="methodSinteticaDoc"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.documenti.SinteticaDocAction">
+			<forward name="esamina" path="/acquisizioni/documenti/esaminaDoc.do" />
+			<forward name="indietro" path="/acquisizioni/documenti/documentiRicercaParziale.do" />
+			<forward name="selTutti" path="/acquisizioni/documenti/*.do" />
+			<forward name="deselTutti" path="/acquisizioni/documenti/*.do" />
+			<forward name="rifiuta" path="/acquisizioni/documenti/*.do" />
+			<forward name="stampa" path="/acquisizioni/documenti/*.do" />
+			<forward name="crea" path="/acquisizioni/documenti/inserisciDoc.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+		</action>
+
+		<action path="/acquisizioni/fornitori/fornitoriRicercaParziale"
+			name="fornitoriRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fornitori/fornitoriRicercaParziale.jsp"
+			parameter="methodFornitoriRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fornitori.FornitoriRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/fornitori/inserisciFornitore.do" redirect="true"/>
+			<forward name="cerca" path="/acquisizioni/fornitori/sinteticaFornitori.do" />
+			<forward name="profiloCerca" path="/acquisizioni/profiliacquisto/profiliRicercaParziale.do" />
+
+		</action>
+
+		<action path="/acquisizioni/fornitori/esaminaFornitore"
+			name="esaminaFornitoreForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fornitori/esaminaFornitore.jsp"
+			parameter="methodEsaminaFornitore"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fornitori.EsaminaFornitoreAction">
+			<forward name="indietro" path="/acquisizioni/fornitori/sinteticaFornitori.do" />
+			<forward name="salva" path="/acquisizioni/fornitori/*.do" />
+			<forward name="ripristina" path="/acquisizioni/fornitori/*.do" />
+			<forward name="cancella" path="/acquisizioni/fornitori/*.do" />
+			<forward name="importaBibl" path="/amministrazionesistema/ricercaBiblioteca.do" />
+			<forward name="profili" path="/acquisizioni/fornitori/profiliAcq.do" />
+			<forward name="profiloCerca" path="/acquisizioni/profiliacquisto/profiliRicercaParziale.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+
+		</action>
+
+		<action path="/acquisizioni/fornitori/inserisciFornitore"
+			name="inserisciFornitoreForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fornitori/inserisciFornitore.jsp"
+			parameter="methodInserisciFornitore"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fornitori.InserisciFornitoreAction">
+			<forward name="indietro" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="salva" path="/acquisizioni/fornitori/*.do" />
+			<forward name="ripristina" path="/acquisizioni/fornitori/*.do" />
+			<forward name="cancella" path="/acquisizioni/fornitori/*.do" />
+			<forward name="importaBibl" path="/amministrazionesistema/ricercaBiblioteca.do" />
+			<forward name="profili" path="/acquisizioni/fornitori/profiliAcq.do" />
+			<forward name="listaForn" path="/acquisizioni/fornitori/listaSuppFornitori.do" />
+			<forward name="profiloCerca" path="/acquisizioni/profiliacquisto/profiliRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/fornitori/profiliAcq"
+			name="profiliAcqForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fornitori/profiliAcq.jsp"
+			parameter="methodProfiliAcq"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fornitori.ProfiliAcqAction">
+			<forward name="ripristina" path="/acquisizioni/fornitori/*.do" />
+			<forward name="indietro" path="/acquisizioni/fornitori/esaminaFornitore.do" />
+			<forward name="indietro9" path="/acquisizioni/fornitori/inserisciFornitore.do" />
+			<forward name="salva" path="/acquisizioni/fornitori/*.do" />
+		</action>
+
+
+		<action path="/acquisizioni/fornitori/sinteticaFornitori"
+			name="sinteticaFornitoriForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fornitori/sinteticaFornitori.jsp"
+			parameter="methodSinteticaFornitori"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fornitori.SinteticaFornitoriAction">
+			<forward name="selTutti" path="/acquisizioni/fornitori/*.do" />
+			<forward name="deselTutti" path="/acquisizioni/fornitori/*.do" />
+			<forward name="esamina" path="/acquisizioni/fornitori/esaminaFornitore.do" />
+			<forward name="indietro" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/fornitori/inserisciFornitore.do" />
+			<forward name="stampaOL" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+			<forward name="sinteticaTitoliCollEditore"	path="/gestionebibliografica/titolo/sinteticaTitoli.do?TITCOLLEDITORI=TRUE" />
+			<forward name="gestioneLegameTitolo" path="/gestionebibliografica/titolo/gestioneLegameTitoloEditore.do?LEGAEDITORETITOLO=TRUE" />
+
+		</action>
+
+		<action path="/acquisizioni/fornitori/listaSuppFornitori"
+			name="listaSuppFornitoriForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/fornitori/listaSuppFornitori.jsp"
+			parameter="methodListaSuppFornitori"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.fornitori.ListaSuppFornitoriAction">
+			<forward name="indietro" path="/acquisizioni/fornitori/inserisciFornitore.do" />
+		</action>
+
+		<action path="/acquisizioni/bilancio/bilancioRicercaParziale"
+			name="bilancioRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/bilancio/bilancioRicercaParziale.jsp"
+			parameter="methodBilancioRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.bilancio.BilancioRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/bilancio/inserisciBilancio.do" />
+			<forward name="cerca" path="/acquisizioni/bilancio/sinteticaBilancio.do" />
+		</action>
+
+		<action path="/acquisizioni/bilancio/esaminaBilancio"
+			name="esaminaBilancioForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/bilancio/esaminaBilancio.jsp"
+			parameter="methodEsaminaBilancio"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.bilancio.EsaminaBilancioAction">
+			<forward name="indietro" path="/acquisizioni/bilancio/sinteticaBilancio.do" />
+			<forward name="salva" path="/acquisizioni/bilancio/*.do" />
+			<forward name="cancella" path="/acquisizioni/bilancio/*.do" />
+
+		</action>
+
+		<action path="/acquisizioni/bilancio/inserisciBilancio"
+			name="inserisciBilancioForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/bilancio/inserisciBilancio.jsp"
+			parameter="methodInserisciBilancio"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.bilancio.InserisciBilancioAction">
+			<forward name="indietro" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/bilancio/sinteticaBilancio"
+			name="sinteticaBilancioForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/bilancio/sinteticaBilancio.jsp"
+			parameter="methodSinteticaBilancio"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.bilancio.SinteticaBilancioAction">
+			<forward name="esamina" path="/acquisizioni/bilancio/esaminaBilancio.do" />
+			<forward name="indietro" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/bilancio/inserisciBilancio.do" />
+
+		</action>
+
+
+		<action path="/acquisizioni/sezioni/sezioniRicercaParziale"
+			name="sezioniRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/sezioniRicercaParziale.jsp"
+			parameter="methodSezioniRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.SezioniRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/sezioni/inserisciSezione.do" redirect="true" />
+			<forward name="cerca" path="/acquisizioni/sezioni/sinteticaSezione.do" />
+		</action>
+
+		<action path="/acquisizioni/sezioni/esaminaSezione"
+			name="esaminaSezioneForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/esaminaSezione.jsp"
+			parameter="methodEsaminaSezione"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.EsaminaSezioneAction">
+			<forward name="indietro" path="/acquisizioni/sezioni/sinteticaSezione.do" />
+			<forward name="salva" path="/acquisizioni/sezioni/*.do" />
+			<forward name="esamSpesa" path="/acquisizioni/sezioni/esaminaSpesa.do" redirect="true" />
+			<forward name="esameStoria" path="/acquisizioni/sezioni/esameStorico.do" redirect="true" />
+			<forward name="cancella" path="/acquisizioni/sezioni/*.do" />
+		</action>
+
+		<action path="/acquisizioni/sezioni/esaminaSpesa"
+			name="esaminaSpesaForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/esaminaSpesa.jsp"
+			parameter="methodEsaminaSpesa"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.EsaminaSpesaAction">
+			<forward name="indietro" path="/acquisizioni/sezioni/esaminaSezione.do" />
+		</action>
+
+		<action path="/acquisizioni/sezioni/esameStorico"
+			name="esameStoricoForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/esameStorico.jsp"
+			parameter="methodEsameStorico"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.EsameStoricoAction">
+			<forward name="indietro" path="/acquisizioni/sezioni/esaminaSezione.do" />
+		</action>
+
+		<action path="/acquisizioni/sezioni/inserisciSezione"
+			name="inserisciSezioneForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/inserisciSezione.jsp"
+			parameter="methodInserisciSezione"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.InserisciSezioneAction">
+			<forward name="indietro" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+		</action>
+
+		<action path="/acquisizioni/sezioni/sinteticaSezione"
+			name="sinteticaSezioneForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/sinteticaSezione.jsp"
+			validate="true"  scope="session"
+			parameter="methodSinteticaSezione"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.SinteticaSezioneAction">
+			<forward name="esamina" path="/acquisizioni/sezioni/esaminaSezione.do" />
+			<forward name="indietro" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/sezioni/inserisciSezione.do" redirect="true" />
+
+		</action>
+
+		<action path="/acquisizioni/sezioni/listaSezioni"
+			name="listaSezioniForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/sezioni/listaSezioni.jsp"
+			parameter="methodListaSezioni"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.sezioni.ListaSezioniAction">
+			<forward name="indietro" path="/acquisizioni/fornitori/esaminaFornitore.do" />
+		</action>
+
+
+		<action path="/acquisizioni/profiliacquisto/profiliRicercaParziale"
+			name="profiliRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/profiliacquisto/profiliRicercaParziale.jsp"
+			parameter="methodProfiliRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.profiliacquisto.ProfiliRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/profiliacquisto/inserisciProfilo.do" />
+			<forward name="cerca" path="/acquisizioni/profiliacquisto/sinteticaProfili.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+
+		</action>
+
+		<action path="/acquisizioni/profiliacquisto/esaminaProfilo"
+			name="esaminaProfiloForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/profiliacquisto/esaminaProfilo.jsp"
+			parameter="methodEsaminaProfilo"
+			validate="true"   scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.profiliacquisto.EsaminaProfiloAction">
+			<forward name="indietro" path="/acquisizioni/profiliacquisto/sinteticaProfili.do" />
+			<forward name="salva" path="/acquisizioni/profiliacquisto/*.do" />
+			<forward name="cancella" path="/acquisizioni/profiliacquisto/*.do" />
+			<forward name="fornitori" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+
+		</action>
+
+		<action path="/acquisizioni/profiliacquisto/inserisciProfilo"
+			name="inserisciProfiloForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/profiliacquisto/inserisciProfilo.jsp"
+			parameter="methodInserisciProfilo"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.profiliacquisto.InserisciProfiloAction">
+			<forward name="indietro" path="/acquisizioni/profiliacquisto/profiliRicercaParziale.do" />
+			<forward name="fornitori" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="sezioneLista" path="/acquisizioni/sezioni/listaSezioni.do" />
+
+		</action>
+
+		<action path="/acquisizioni/profiliacquisto/sinteticaProfili"
+			name="sinteticaProfiliForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/profiliacquisto/sinteticaProfili.jsp"
+			parameter="methodSinteticaProfili"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.profiliacquisto.SinteticaProfiliAction">
+			<forward name="esamina" path="/acquisizioni/profiliacquisto/esaminaProfilo.do" />
+			<forward name="indietro" path="/acquisizioni/profiliacquisto/profiliRicercaParziale.do" />
+			<forward name="crea" path="/acquisizioni/profiliacquisto/inserisciProfilo.do" />
+
+		</action>
+
+		<action path="/acquisizioni/cambi/cambiRicercaParziale"
+			name="cambiRicercaParzialeForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/cambi/cambiRicercaParziale.jsp"
+			parameter="methodCambiRicercaParziale"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.cambi.CambiRicercaParzialeAction">
+			<forward name="crea" path="/acquisizioni/cambi/inserisciCambio.do" />
+			<forward name="cerca" path="/acquisizioni/cambi/sinteticaCambi.do" />
+		</action>
+
+		<action path="/acquisizioni/cambi/esaminaCambio"
+			name="esaminaCambioForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/cambi/esaminaCambio.jsp"
+			parameter="methodEsaminaCambio"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.cambi.EsaminaCambioAction">
+			<forward name="indietro" path="/acquisizioni/cambi/sinteticaCambi.do" />
+			<forward name="salva" path="/acquisizioni/cambi/esaminaCambio.do" />
+			<forward name="cancella" path="/acquisizioni/cambi/esaminaCambio.do" />
+			<forward name="ripristina" path="/acquisizioni/cambi/esaminaCambio.do" />
+			<forward name="scorriAvanti" path="/acquisizioni/cambi/esaminaCambio.do" />
+			<forward name="scorriIndietro" path="/acquisizioni/cambi/esaminaCambio.do" />
+
+		</action>
+
+		<action path="/acquisizioni/cambi/inserisciCambio"
+			name="inserisciCambioForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/cambi/inserisciCambio.jsp"
+			parameter="methodInserisciCambio"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.cambi.InserisciCambioAction">
+			<forward name="indietro" path="/acquisizioni/cambi/cambiRicercaParziale.do" />
+			<forward name="salva" path="/acquisizioni/cambi/inserisciCambio.do" />
+			<forward name="cancella" path="/acquisizioni/cambi/inserisciCambio.do" />
+			<forward name="ripristina" path="/acquisizioni/cambi/inserisciCambio.do" />
+		</action>
+
+		<action path="/acquisizioni/cambi/sinteticaCambi"
+			name="sinteticaCambiForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/cambi/sinteticaCambi.jsp"
+			parameter="methodSinteticaCambi"
+			validate="true"  scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.cambi.SinteticaCambiAction">
+			<forward name="selTutti" path="/acquisizioni/cambi/sinteticaCambi.do" />
+			<forward name="deselTutti" path="/acquisizioni/cambi/sinteticaCambi.do" />
+			<forward name="esamina" path="/acquisizioni/cambi/esaminaCambio.do" />
+			<forward name="indietro" path="/acquisizioni/cambi/cambiRicercaParziale.do" />
+			<forward name="carica" path="/acquisizioni/cambi/sinteticaCambi.do" />
+			<forward name="crea" path="/acquisizioni/cambi/inserisciCambio.do" />
+
+		</action>
+
+		<action path="/acquisizioni/configurazione/configurazioneBO"
+			name="configurazioneBOForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/configurazione/configurazioneBO.jsp"
+			scope="session"
+			parameter="methodConfigurazioneBO"
+			validate="true"
+			type="it.iccu.sbn.web.actions.acquisizioni.configurazione.ConfigurazioneBOAction">
+			<forward name="salva" path="/acquisizioni/configurazione/configurazioneBO.do" />
+			<forward name="indietro" path="/acquisizioni/configurazione/configurazioneBO.do" />
+			<forward name="aggiungiFine" path="/acquisizioni/configurazione/configurazioneBO.do" />
+			<forward name="cancellaFine" path="/acquisizioni/configurazione/configurazioneBO.do" />
+			<forward name="aggiungiInt" path="/acquisizioni/configurazione/configurazioneBO.do" />
+			<forward name="cancellaInt" path="/acquisizioni/configurazione/configurazioneBO.do" />
+			<forward name="ripristina" path="/acquisizioni/configurazione/configurazioneBO.do" />
+
+		</action>
+		<action path="/acquisizioni/configurazione/configurazioneORD"
+			name="configurazioneORDForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/configurazione/configurazioneORD.jsp"
+			scope="session"
+			parameter="methodConfigurazioneORD"
+			validate="true"
+			type="it.iccu.sbn.web.actions.acquisizioni.configurazione.ConfigurazioneORDAction">
+			<forward name="indietro" path="/acquisizioni/configurazione/configurazioneORD.do" />
+			<forward name="sezioneCerca" path="/acquisizioni/sezioni/sezioniRicercaParziale.do" />
+			<forward name="fornitoreCerca" path="/acquisizioni/fornitori/fornitoriRicercaParziale.do" />
+			<forward name="bilancioCerca" path="/acquisizioni/bilancio/bilancioRicercaParziale.do" />
+			<forward name="profiloCerca" path="/acquisizioni/profiliacquisto/profiliRicercaParziale.do" />
+
+		</action>
+
+		<action
+			path="/acquisizioni/statistiche/statisticheTempi"
+			name="statisticheTempiForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/statistiche/statisticheTempi.jsp"
+			parameter="methodStatisticheTempi"
+			validate="true"
+			scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.statistiche.StatisticheTempiAction">
+			<forward
+				name="indietro"
+				path="/WEB-INF/jsp/pages/blank.jsp" />
+			<forward
+				name="conferma"
+				path="/acquisizioni/statistiche/*.do" />
+		</action>
+
+		<action path="/acquisizioni/ordini/spedizioneOrdine"
+			name="spedizioneOrdineForm"
+			input="/WEB-INF/jsp/pages/acquisizioni/ordini/spedizioneOrdine.jsp"
+			parameter="methodSpedisciOrd"
+			validate="false"
+			scope="session"
+			type="it.iccu.sbn.web.actions.acquisizioni.ordini.SpedizioneOrdineAction">
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="acquisizioniLabels"
+		parameter="it.iccu.sbn.web.resources.AcquisizioniLabels"
+		null="false" />
+	<message-resources key="acquisizioniMessages"
+		parameter="it.iccu.sbn.web.resources.AcquisizioniMessages"
+		null="false" />
+
+</struts-config>

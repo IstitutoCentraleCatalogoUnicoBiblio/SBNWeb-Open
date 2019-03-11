@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+	<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_batch_servizi"
+		table="tbf_batch_servizi" lazy="false">
+		<meta attribute="class-description">
+			Tabella per gestire le procedure differite
+			(batch) programmate e non richiamate da utente.
+		</meta>
+		<id name="id_batch_servizi" column="id_batch_servizi" type="integer"
+			unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_attivita" cascade="lock"
+			column="cd_attivita" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_attivita"
+			not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_coda_input" cascade="lock" column="id_coda_input"
+			class="it.iccu.sbn.polo.orm.amministrazione.Tbf_coda_jms" not-null="true"
+			lazy="proxy" access="field">
+		</many-to-one>
+		<property name="nome_coda_output" column="nome_coda_output" type="string"
+			length="255" not-null="true" />
+		<property name="class_name" column="class_name" type="string"
+			length="255" not-null="true" />
+		<property name="visibilita" column="visibilita" type="character"
+			length="1" not-null="true" />
+		<property name="fl_canc" column="fl_canc" type="character" length="1"
+			not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

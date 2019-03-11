@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://servizi.lumsa.it/services/ESSE3WS" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://servizi.lumsa.it/services/ESSE3WS" xmlns:intf="http://servizi.lumsa.it/services/ESSE3WS" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+   <wsdl:message name="fn_retrieve_xml_lxRequest">
+
+      <wsdl:part name="username" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="password" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlIn" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlOut" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_pxResponse">
+
+      <wsdl:part name="fn_retrieve_xml_pxReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlOut" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_lRequest">
+
+      <wsdl:part name="username" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="password" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="retrieve" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="params" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xml" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_pRequest">
+
+      <wsdl:part name="retrieve" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="params" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xml" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_dologoutResponse">
+
+      <wsdl:part name="fn_dologoutReturn" type="xsd:int">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_xRequest">
+
+      <wsdl:part name="sid" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlIn" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlOut" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_lxResponse">
+
+      <wsdl:part name="fn_retrieve_xml_lxReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlOut" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_lResponse">
+
+      <wsdl:part name="fn_retrieve_xml_lReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="xml" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_pxRequest">
+
+      <wsdl:part name="xmlIn" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlOut" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xmlResponse">
+
+      <wsdl:part name="fn_retrieve_xmlReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="xml" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_dologinResponse">
+
+      <wsdl:part name="fn_dologinReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="sid" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xmlRequest">
+
+      <wsdl:part name="sid" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="retrieve" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="params" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="xml" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_dologoutRequest">
+
+      <wsdl:part name="sid" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_xResponse">
+
+      <wsdl:part name="fn_retrieve_xml_xReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="xmlOut" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_dologinRequest">
+
+      <wsdl:part name="username" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="password" type="soapenc:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="sid" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="fn_retrieve_xml_pResponse">
+
+      <wsdl:part name="fn_retrieve_xml_pReturn" type="xsd:int">
+
+      </wsdl:part>
+
+      <wsdl:part name="xml" type="soapenc:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Esse3Ws">
+
+      <wsdl:operation name="fn_dologout" parameterOrder="sid">
+
+         <wsdl:input message="impl:fn_dologoutRequest" name="fn_dologoutRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_dologoutResponse" name="fn_dologoutResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml" parameterOrder="sid retrieve params xml">
+
+         <wsdl:input message="impl:fn_retrieve_xmlRequest" name="fn_retrieve_xmlRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_retrieve_xmlResponse" name="fn_retrieve_xmlResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_p" parameterOrder="retrieve params xml">
+
+         <wsdl:input message="impl:fn_retrieve_xml_pRequest" name="fn_retrieve_xml_pRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_retrieve_xml_pResponse" name="fn_retrieve_xml_pResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_x" parameterOrder="sid xmlIn xmlOut">
+
+         <wsdl:input message="impl:fn_retrieve_xml_xRequest" name="fn_retrieve_xml_xRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_retrieve_xml_xResponse" name="fn_retrieve_xml_xResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_lx" parameterOrder="username password xmlIn xmlOut">
+
+         <wsdl:input message="impl:fn_retrieve_xml_lxRequest" name="fn_retrieve_xml_lxRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_retrieve_xml_lxResponse" name="fn_retrieve_xml_lxResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_l" parameterOrder="username password retrieve params xml">
+
+         <wsdl:input message="impl:fn_retrieve_xml_lRequest" name="fn_retrieve_xml_lRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_retrieve_xml_lResponse" name="fn_retrieve_xml_lResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_px" parameterOrder="xmlIn xmlOut">
+
+         <wsdl:input message="impl:fn_retrieve_xml_pxRequest" name="fn_retrieve_xml_pxRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_retrieve_xml_pxResponse" name="fn_retrieve_xml_pxResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_dologin" parameterOrder="username password sid">
+
+         <wsdl:input message="impl:fn_dologinRequest" name="fn_dologinRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:fn_dologinResponse" name="fn_dologinResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ESSE3WSSoapBinding" type="impl:Esse3Ws">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="fn_dologout">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_dologoutRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_dologoutResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_retrieve_xmlRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_retrieve_xmlResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_p">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_retrieve_xml_pRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_retrieve_xml_pResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_x">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_retrieve_xml_xRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_retrieve_xml_xResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_lx">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_retrieve_xml_lxRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_retrieve_xml_lxResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_l">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_retrieve_xml_lRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_retrieve_xml_lResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_retrieve_xml_px">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_retrieve_xml_pxRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_retrieve_xml_pxResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="fn_dologin">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="fn_dologinRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ws.esse3.frk.kion.it" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="fn_dologinResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://servizi.lumsa.it/services/ESSE3WS" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="Esse3WsService">
+
+      <wsdl:port binding="impl:ESSE3WSSoapBinding" name="ESSE3WS">
+
+         <wsdlsoap:address location="http://servizi.lumsa.it/services/ESSE3WS"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

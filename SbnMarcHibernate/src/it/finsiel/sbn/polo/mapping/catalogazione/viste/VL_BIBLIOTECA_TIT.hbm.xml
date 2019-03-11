@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_biblioteca_tit" polymorphism="explicit" table="VL_BIBLIOTECA_TIT" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="Cod_polo" column="CD_POLO" type="string"/>
+			<key-property name="Cd_biblioteca" column="CD_BIBLIOTECA" type="string"/>
+		</composite-id>
+		<property name="FL_MUTILO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="DS_CONSISTENZA" type="string" length="400" not-null="false" lazy="false"/>
+		<property name="FL_POSSESSO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_GESTIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_DISP_ELETTR" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_SBNMARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_CLA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_SOG" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_LUO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_REP" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="DS_FONDO" type="string" length="55" not-null="false" lazy="false"/>
+		<property name="DS_SEGN" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="DS_ANTICA_SEGN" type="string" length="120" not-null="false" lazy="false"/>
+		<property name="NOTA_TIT_BIB" type="string" length="134" not-null="false" lazy="false"/>
+		<property name="URI_COPIA" type="string" length="1280" not-null="false" lazy="false"/>
+		<property name="TP_DIGITALIZZ" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ky_biblioteca" type="it.finsiel.sbn.util.DataTypeCHAR" length="13" not-null="false" lazy="false"/>
+		<property name="cd_ana_biblioteca" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true" lazy="false"/>
+		<property name="ds_biblioteca" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="ds_citta" type="string" length="30" not-null="false" lazy="false"/>
+		<filter name="VL_BIBLIOTECA_TIT_selectPerPolo"
+				condition="bid = :XXXbid
+				  		   AND cd_polo = :XXXcd_polo "/>
+
+		<filter name="VL_BIBLIOTECA_TIT_selectPerAnagrafe"
+				condition="bid = :XXXbid
+						   AND cd_ana_biblioteca= :XXXcd_ana_biblioteca "/>
+
+		<filter name="VL_BIBLIOTECA_TIT_selectPerAnagrafeLike"
+				condition="bid = :XXXbid
+				  		   AND upper(trim(cd_ana_biblioteca)) like upper(trim(:XXXcd_ana_biblioteca))||'%' "/>
+
+		<filter name="VL_BIBLIOTECA_TIT_selectPerBid"
+				condition="bid = :XXXbid "/>
+
+		<filter name="VL_BIBLIOTECA_TIT_selectPerFiltraLocalizza"
+				condition="bid = :XXXbid "/>
+	</class>
+</hibernate-mapping>

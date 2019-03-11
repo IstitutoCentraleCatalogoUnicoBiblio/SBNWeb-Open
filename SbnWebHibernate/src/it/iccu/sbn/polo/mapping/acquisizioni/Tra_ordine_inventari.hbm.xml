@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tra_ordine_inventari" table="tra_ordine_inventari" >
+		<composite-id>
+			<key-many-to-one name="id_ordine" column="id_ordine" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini">
+			</key-many-to-one>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario">
+				<column name="cd_serie"/>
+				<column name="cd_bib"/>
+				<column name="cd_polo"/>
+				<column name="cd_inven"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="data_uscita" column="data_uscita" type="timestamp" not-null="false" lazy="false"/>
+		<property name="data_rientro" column="data_rientro" type="timestamp" not-null="false" lazy="false"/>
+		<property name="ota_fornitore" column="ota_fornitore" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="false" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="false" lazy="false"/>
+		<property name="data_rientro_presunta" column="data_rientro_presunta" type="timestamp" not-null="false" lazy="false"/>
+		<property name="posizione" column="posizione" type="short" not-null="false" lazy="false"/>
+		<property name="volume" column="volume" type="short" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

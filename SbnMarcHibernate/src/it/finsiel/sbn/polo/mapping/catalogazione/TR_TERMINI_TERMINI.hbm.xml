@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_termini_termini" polymorphism="explicit" table="TR_TERMINI_TERMINI" lazy="false">
+		<composite-id>
+			<key-property name="DID_BASE" column="DID_BASE" type="string"/>
+			<key-property name="DID_COLL" column="DID_COLL" type="string"/>
+		</composite-id>
+		<property name="NOTA_TERMINI_TERMINI" column="NOTA_TERMINI_TERMINI" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<property name="TIPO_COLL" column="TIPO_COLL" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" length="8" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" length="8" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TR_TERMINI_TERMINI_selectPerKey"
+				condition="did_base = :XXXdid_base
+						  AND did_coll = :XXXdid_coll "/>
+
+		<filter name="TR_TERMINI_TERMINI_selectLegamePerDid"
+				condition="1=1 "/>
+
+		<filter name="TR_TERMINI_TERMINI_cercaLegamiPerDid"
+				condition="did_base = :XXXdid_base
+		 				   OR did_coll = :XXXdid_coll "/>
+
+		<filter name="TR_TERMINI_TERMINI_cercaTerminiTermini"
+				condition="( did_base = :XXXdid_base
+		  				  AND did_coll = :XXXdid_coll)
+						  OR ( did_base = :XXXdid_coll
+				  		  AND did_coll = :XXXdid_base) "/>
+
+		<filter name="TR_TERMINI_TERMINI_cercaLegamiTerminiTermini"
+				condition="( did_base = :XXXdid_base
+		  				  OR did_coll = :XXXdid_coll)
+						  OR ( did_base = :XXXdid_coll
+				  		  AND did_coll = :XXXdid_base) "/>
+
+	</class>
+</hibernate-mapping>
+
+
+
+
+
+
+

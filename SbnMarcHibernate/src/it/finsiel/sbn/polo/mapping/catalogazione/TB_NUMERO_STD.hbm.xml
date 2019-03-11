@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_numero_std" polymorphism="explicit" table="TB_NUMERO_STD" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="TB_TITOLO" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			-->
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="TP_NUMERO_STD" column="TP_NUMERO_STD" type="string"/>
+			<key-property name="NUMERO_STD" column="NUMERO_STD" type="string"/>
+		</composite-id>
+		<property name="NUMERO_LASTRA" column="NUMERO_LASTRA" type="big_integer" length="25" not-null="false"/>
+		<property name="CD_PAESE" column="CD_PAESE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="NOTA_NUMERO_STD" column="NOTA_NUMERO_STD" type="string" length="30" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+
+		<filter name="TB_NUMERO_STD_selectPerKey"
+				condition="bid = :XXXbid
+						  AND numero_std = :XXXnumero_std
+						  AND tp_numero_std = :XXXtp_numero_std
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TB_NUMERO_STD_selectEsistenzaID"
+				condition="bid = :XXXbid
+				  		   AND numero_std = :XXXnumero_std
+				  		   AND tp_numero_std = :XXXtp_numero_std "/>
+
+		<filter name="TB_NUMERO_STD_selectPerBid"
+				condition="bid = :XXXbid
+				  		   AND fl_canc != 'S' "/>
+
+		<filter name="TB_NUMERO_STD_selectTuttiPerBid"
+				condition="bid = :XXXbid "/>
+
+
+	</class>
+</hibernate-mapping>

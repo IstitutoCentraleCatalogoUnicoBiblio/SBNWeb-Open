@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/default"/>
+	<classpathentry kind="src" output="classes/vo" path="src/vo"/>
+	<classpathentry kind="src" output="classes/struts" path="src/struts"/>
+	<classpathentry kind="lib" path="lib/struts/struts.jar"/>
+	<classpathentry kind="lib" path="lib/j2ee/j2ee.jar"/>
+	<classpathentry kind="lib" path="lib/log4j/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/log4j/commons-logging-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j/commons-logging-api-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/struts/struts-el.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-beanutils-1.7.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-digester-1.7.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SbnWebHibernate"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/dozer-4.2.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/unimarcmodel.jar" sourcepath="/SBNWeb/lib/common/unimarcmodel.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/hibernate/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/trove-2.1.0.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/sbn-periodico.jar" sourcepath="/SbnPeriodicoXMLSchema/src"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/jasperreports-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/url-detector-0.1.17-jdk5.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/joda-time-2.9.7.jar"/>
+	<classpathentry kind="output" path="classes/default"/>
+</classpath>

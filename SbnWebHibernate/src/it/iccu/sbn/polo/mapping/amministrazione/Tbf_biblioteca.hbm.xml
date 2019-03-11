@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca" table="tbf_biblioteca" >
+		<meta attribute="class-description">
+			ANAGRAFICA BIBLIOTECHE (TPRBIB)
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_biblioteca" column="id_biblioteca" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="cd_ana_biblioteca" column="cd_ana_biblioteca" type="string" length="16" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice della biblioteca nell'anagrafe centrale
+			</meta>
+		</property>
+		<property name="cd_polo" column="cd_polo" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del polo di localizzazione
+			</meta>
+		</property>
+		<property name="cd_bib" column="cd_bib" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca
+			</meta>
+		</property>
+		<property name="nom_biblioteca" column="nom_biblioteca" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione della biblioteca
+			</meta>
+		</property>
+		<property name="unit_org" column="unit_org" type="string" length="50" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				denominazione dell'unita' organizzativa della biblioteca
+			</meta>
+		</property>
+		<property name="indirizzo" column="indirizzo" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indirizzo
+			</meta>
+		</property>
+		<property name="cpostale" column="cpostale" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				casella postale
+			</meta>
+		</property>
+		<property name="cap" column="cap" type="string" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice d'avviamento postale
+			</meta>
+		</property>
+		<property name="telefono" column="telefono" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero telefonico
+			</meta>
+		</property>
+		<property name="fax" column="fax" type="string" length="20" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del fax
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="160" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note relative alla biblioteca
+			</meta>
+		</property>
+		<property name="p_iva" column="p_iva" type="string" length="18" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				partita iva
+			</meta>
+		</property>
+		<property name="cd_fiscale" column="cd_fiscale" type="string" length="18" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice fiscale
+			</meta>
+		</property>
+		<property name="e_mail" column="e_mail" type="string" length="160" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indirizzo elettronico
+			</meta>
+		</property>
+		<property name="tipo_biblioteca" column="tipo_biblioteca" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia di biblioteca
+			</meta>
+		</property>
+		<property name="paese" column="paese" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+		<property name="provincia" column="provincia" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della provincia
+			</meta>
+		</property>
+		<property name="cd_bib_cs" column="cd_bib_cs" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca centro sistema di riferimento (solo per biblioteche sbn)
+			</meta>
+		</property>
+		<property name="cd_bib_ut" column="cd_bib_ut" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				prima parte del codice utente assegnato alla biblioteca in quanto utente
+			</meta>
+		</property>
+		<property name="cd_utente" column="cd_utente" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				seconda parte del codice utente assegnato alla biblioteca in quanto utente
+			</meta>
+		</property>
+		<property name="flag_bib" column="flag_bib" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indica se la biblioteca e' sbn - centro sistema ("c"), sbn - affiliata ("a"), non sbn ("n")
+			</meta>
+		</property>
+		<property name="localita" column="localita" type="string" length="30" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				localita'
+			</meta>
+		</property>
+		<property name="chiave_bib" column="chiave_bib" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave nome biblioteca
+			</meta>
+		</property>
+		<property name="chiave_ente" column="chiave_ente" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave ente di appartenenza
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tbf_biblioteca_in_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_biblioteca" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo"/>
+		</set>
+		<set name="bibliotecheIll" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_biblioteca" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_biblioteca_ill"/>
+		</set>
+	</class>
+</hibernate-mapping>

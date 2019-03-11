@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_attivita_bibliotecario" table="trl_attivita_bibliotecario" >
+		<meta attribute="class-description">
+			Attivit&#224; del bibliotecario
+		</meta>
+		<composite-id>
+			<key-property name="id_bibliotecario_id_utente_professionale" column="id_bibliotecario" type="integer"/>
+			<key-property name="id_iter_servizio_id_iter_servizio" column="id_iter_servizio" type="integer"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_bibliotecario" column="id_bibliotecario" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario" insert="false" update="false">
+		</many-to-one>
+		<many-to-one name="id_iter_servizio" column="id_iter_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_iter_servizio" insert="false" update="false">
+		</many-to-one>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

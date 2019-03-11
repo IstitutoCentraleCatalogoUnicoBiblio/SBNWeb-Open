@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tr_modello_sistemi_classi_biblioteche" table="tr_modello_sistemi_classi_biblioteche" schema="sbnweb" >
+		<meta attribute="class-description">
+			SISTEMA DI CLASSIFICAZIONE IN BIBLIOTECA (TPSSCB))
+		</meta>
+		<composite-id>
+			<key-property name="id_modello" column="id_modello" type="integer"/>
+			<key-property name="cd_sistema" column="cd_sistema" type="string"/>
+			<key-property name="cd_edizione" column="cd_edizione" type="string"/>
+		</composite-id>
+		<property name="nome" column="nome" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="sololocale" column="sololocale" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="flg_att" column="flg_att" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore dell'attuale utilizzo del sistema di classificazione da parte della biblioteca
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

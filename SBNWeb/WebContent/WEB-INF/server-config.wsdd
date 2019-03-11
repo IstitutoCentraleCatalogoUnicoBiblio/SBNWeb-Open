@@ -1,0 +1,77 @@
+<a:deployment xmlns="http://xml.apache.org/axis/wsdd/"
+	xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:a="http://xml.apache.org/axis/wsdd/">
+	<a:globalConfiguration>
+		<a:parameter name="axis.servicesPath" value="/api/ext/"/>
+		<a:parameter name="sendMultiRefs" value="true" />
+		<a:parameter name="disablePrettyXML" value="true" />
+		<a:parameter name="adminPassword" value="sbnweb@admin" />
+		<!-- <a:parameter name="attachments.Directory" value="S:\workspaces\sbnweb\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\sbn\WEB-INF\attachments"/> -->
+		<a:parameter name="dotNetSoapEncFix" value="true" />
+		<a:parameter name="enableNamespacePrefixOptimization"
+			value="false" />
+		<a:parameter name="sendXMLDeclaration" value="true" />
+		<a:parameter name="sendXsiTypes" value="true" />
+		<a:parameter name="attachments.implementation"
+			value="org.apache.axis.attachments.AttachmentsImpl" />
+		<a:requestFlow>
+			<a:handler type="java:org.apache.axis.handlers.JWSHandler">
+				<a:parameter name="scope" value="session" />
+			</a:handler>
+			<a:handler type="java:org.apache.axis.handlers.JWSHandler">
+				<a:parameter name="scope" value="request" />
+				<a:parameter name="extension" value=".jwr" />
+			</a:handler>
+		</a:requestFlow>
+	</a:globalConfiguration>
+	<a:handler name="URLMapper"
+		type="java:org.apache.axis.handlers.http.URLMapper" />
+	<a:handler name="Authenticate"
+		type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" />
+	<a:handler name="LocalResponder"
+		type="java:org.apache.axis.transport.local.LocalResponder" />
+	<a:service name="AdminService" provider="java:MSG">
+		<a:parameter name="allowedMethods" value="AdminService" />
+		<a:parameter name="enableRemoteAdmin" value="false" />
+		<a:parameter name="className" value="org.apache.axis.utils.Admin" />
+		<a:namespace>http://xml.apache.org/axis/wsdd/</a:namespace>
+	</a:service>
+	<a:service name="Version" provider="java:RPC">
+		<a:parameter name="allowedMethods" value="getVersion" />
+		<a:parameter name="className" value="org.apache.axis.Version" />
+	</a:service>
+	<a:service name="TBConnectorWS" provider="java:RPC"
+		style="wrapped" use="literal">
+		<a:parameter name="allowedMethods" value="*" />
+		<a:parameter name="typeMappingVersion" value="1.2" />
+		<a:parameter name="wsdlPortType" value="TBConnectorWS" />
+		<a:parameter name="className"
+			value="it.iccu.sbn.webservices.esse3.sync.TBConnectorWSSoapBindingSkeleton" />
+		<a:parameter name="wsdlServicePort" value="TBConnectorWS" />
+		<a:parameter name="schemaQualified" value="urn:TBConnectorWSService" />
+		<a:parameter name="wsdlTargetNamespace" value="urn:TBConnectorWSService" />
+		<a:parameter name="wsdlServiceElement" value="TBConnectorWSService" />
+	</a:service>
+	<a:transport name="http">
+		<a:requestFlow>
+			<a:handler type="URLMapper" />
+			<a:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</a:requestFlow>
+		<a:parameter name="qs:list"
+			value="org.apache.axis.transport.http.QSListHandler" />
+		<a:parameter name="qs:wsdl"
+			value="org.apache.axis.transport.http.QSWSDLHandler" />
+		<a:parameter name="qs.list"
+			value="org.apache.axis.transport.http.QSListHandler" />
+		<a:parameter name="qs.method"
+			value="org.apache.axis.transport.http.QSMethodHandler" />
+		<a:parameter name="qs:method"
+			value="org.apache.axis.transport.http.QSMethodHandler" />
+		<a:parameter name="qs.wsdl"
+			value="org.apache.axis.transport.http.QSWSDLHandler" />
+	</a:transport>
+	<a:transport name="local">
+		<a:responseFlow>
+			<a:handler type="LocalResponder" />
+		</a:responseFlow>
+	</a:transport>
+</a:deployment>

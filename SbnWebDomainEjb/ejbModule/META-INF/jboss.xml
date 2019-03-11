@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE jboss PUBLIC "-//JBoss//DTD JBOSS 4.0//EN" "http://www.jboss.org/j2ee/dtd/jboss_4_0.dtd">
+
+<jboss>
+
+	<jmx-name>sbn.service:name=SbnWebDomainBusinessBeans</jmx-name>
+
+	<enterprise-beans>
+
+		<session>
+			<ejb-name>AmministrazionePolo</ejb-name>
+			<jndi-name>sbnWeb/AmministrazionePolo</jndi-name>
+
+			<method-attributes></method-attributes>
+			<depends>sbn.db:service=SbnWebHibernateMap</depends>
+		</session>
+
+		<message-driven>
+			<ejb-name>BatchProcessorProxyBean</ejb-name>
+			<destination-jndi-name>queue/sbnBatch_Input</destination-jndi-name>
+			<resource-ref>
+				<res-ref-name>jms/QCF</res-ref-name>
+				<jndi-name>ConnectionFactory</jndi-name>
+			</resource-ref>
+		</message-driven>
+
+		<message-driven>
+			<ejb-name>QueryPaginationExecutorBean</ejb-name>
+			<destination-jndi-name>queue/sbnWebBlocchi</destination-jndi-name>
+			<resource-ref>
+				<res-ref-name>jms/QCF</res-ref-name>
+				<jndi-name>ConnectionFactory</jndi-name>
+			</resource-ref>
+		</message-driven>
+
+		<!--
+			To add beans that you have deployment descriptor info for, add
+			a file to your XDoclet merge directory called jboss-beans.xml that contains
+			the <session></session>, <entity></entity> and <message-driven></message-driven>
+			markup for those beans.
+		-->
+
+		<session>
+			<ejb-name>DocumentoFisicoBMT</ejb-name>
+			<jndi-name>sbnWeb/DocumentoFisicoBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Codici</ejb-name>
+			<jndi-name>sbnWeb/Codici</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AmministrazioneBibliotecario</ejb-name>
+			<jndi-name>sbnWeb/AmministrazioneBibliotecario</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AmministrazioneGestioneDefault</ejb-name>
+			<jndi-name>sbnWeb/AmministrazioneGestioneDefault</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AmministrazioneGestioneCodici</ejb-name>
+			<jndi-name>sbnWeb/AmministrazioneGestioneCodici</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AmministrazioneGestioneCodiciBMT</ejb-name>
+			<jndi-name>sbnWeb/AmministrazioneGestioneCodiciBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AmministrazioneMail</ejb-name>
+			<jndi-name>sbnWeb/AmministrazioneMail</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Interrogazione</ejb-name>
+			<jndi-name>sbnWeb/Interrogazione</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>ServiziBibliografici</ejb-name>
+			<jndi-name>sbnWeb/ServiziBibliografici</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SemanticaBMT</ejb-name>
+			<jndi-name>sbnWeb/SemanticaBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>ServiziAcquisizioni</ejb-name>
+			<jndi-name>sbnWeb/ServiziAcquisizioni</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AmministrazioneBiblioteca</ejb-name>
+			<jndi-name>sbnWeb/AmministrazioneBiblioteca</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Repertorio</ejb-name>
+			<jndi-name>sbnWeb/Repertorio</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Acquisizioni</ejb-name>
+			<jndi-name>sbnWeb/Acquisizioni</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>AcquisizioniBMT</ejb-name>
+			<jndi-name>sbnWeb/AcquisizioniBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>DocumentoFisicoCommon</ejb-name>
+			<jndi-name>sbnWeb/DocumentoFisicoCommon</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Collocazione</ejb-name>
+			<jndi-name>sbnWeb/Collocazione</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>CollocazioneBMT</ejb-name>
+			<jndi-name>sbnWeb/CollocazioneBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Periodici</ejb-name>
+			<jndi-name>sbnWeb/Periodici</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>StatisticheSBN</ejb-name>
+			<jndi-name>sbnWeb/StatisticheSBN</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStatisticheOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStatisticheOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Servizi</ejb-name>
+			<jndi-name>sbnWeb/Servizi</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>ServiziWeb</ejb-name>
+			<jndi-name>sbnWeb/ServiziWeb</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>UtenteLettore</ejb-name>
+			<jndi-name>sbnWeb/UtenteLettore</jndi-name>
+		</session>
+		<session>
+			<ejb-name>ServiziCommon</ejb-name>
+			<jndi-name>sbnWeb/ServiziCommon</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>ServiziBMT</ejb-name>
+			<jndi-name>sbnWeb/ServiziBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Inventario</ejb-name>
+			<jndi-name>sbnWeb/Inventario</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>InventarioBMT</ejb-name>
+			<jndi-name>sbnWeb/InventarioBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Possessori</ejb-name>
+			<jndi-name>sbnWeb/Possessori</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Semantica</ejb-name>
+			<jndi-name>sbnWeb/Semantica</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>PeriodiciSBN</ejb-name>
+			<local-jndi-name>sbnWeb/PeriodiciSBN</local-jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>PeriodiciBMT</ejb-name>
+			<local-jndi-name>sbnWeb/PeriodiciBMT</local-jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>ServiziErogazioneServizi</ejb-name>
+			<jndi-name>sbnWeb/ServiziErogazioneServizi</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>Profiler</ejb-name>
+			<jndi-name>sbnWeb/Profiler</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeUtentiOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeUtentiOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeFornitoriOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeFornitoriOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeBibliotecheOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeBibliotecheOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeBuoniOrdineOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeBuoniOrdineOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeTerminiThesauroOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeTerminiThesauroOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeSemanticaOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeSemanticaOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeSchedeOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeSchedeOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>StampaReportImport</ejb-name>
+			<jndi-name>sbnWeb/StampaReportImport</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeRegistriIngressoOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeRegistriIngressoOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeRegistroTopograficoOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeRegistroTopograficoOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeBollettinoOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeBollettinoOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeBuoniCaricoOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeBuoniCaricoOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeRegistroConservazioneOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeRegistroConservazioneOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeStrumentiPatrimonioOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeStrumentiPatrimonioOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeEtichetteOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeEtichetteOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeSpeseOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeSpeseOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampaStatisticheOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampaStatisticheOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeBollettarioOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeBollettarioOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeFatturaOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeFatturaOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeComunicazioneOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeComunicazioneOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeSuggerimentiLettoreOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeSuggerimentiLettoreOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeSuggerimentiBibliotecarioOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeSuggerimentiBibliotecarioOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeRichiestaOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeRichiestaOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>SBNStampeServiziCorrentiOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeServiziCorrentiOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeListaFascicoliOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeListaFascicoliOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
+			<ejb-name>SBNStampeTitoliEditoreOnLine</ejb-name>
+			<jndi-name>sbnWeb/SBNStampeTitoliEditoreOnLine</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+
+		<session>
+			<ejb-name>Soggetti</ejb-name>
+			<jndi-name>sbnWeb/Soggetti</jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>Classi</ejb-name>
+			<jndi-name>sbnWeb/Classi</jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>Sale</ejb-name>
+			<jndi-name>sbnWeb/Sale</jndi-name>
+		</session>
+
+		<session>
+			<ejb-name>Calendario</ejb-name>
+			<jndi-name>sbnWeb/Calendario</jndi-name>
+		</session>
+
+		<!--
+			write a merge file jboss-webservices.ent for webservice-description
+		-->
+
+	</enterprise-beans>
+
+	<!--
+		To specify your own assembly descriptor info here, add a file to your
+		XDoclet merge directory called jboss-assembly-descriptor.xml that contains
+		the <assembly-descriptor></assembly-descriptor> markup.
+	-->
+	<assembly-descriptor>
+		<!-- message destinations -->
+		<!--
+			To specify additional message-destination elements, add a file in the merge
+			directory called jboss-message-destinations.ent that contains them.
+		-->
+	</assembly-descriptor>
+
+	<resource-managers></resource-managers>
+
+	<!--
+		| for container settings, you can merge in jboss-container.xml
+		| this can contain <invoker-proxy-bindings/> and <container-configurations/>
+	-->
+
+</jboss>

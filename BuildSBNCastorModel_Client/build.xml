@@ -1,0 +1,86 @@
+<!-- =============== Build per la costruzione del modello Castor con Ant 1.5 ========= -->
+<!-- ===================== Autore: Corrado Di Pietro =========================== -->
+<project name="SBNMarc Polo Model" default="buildmodello" basedir=".">
+	<description>
+        Creazione del modello Castor, vengono specificati i jar di Castor nel classpath
+	</description>
+	<!-- ================================================================== -->
+	<!--                            Properties                              -->
+	<!-- ================================================================== -->
+	<property name="CASTOR_HOME" location="lib"/>
+	<property name="XSD_FILE" value="SBNMarc_Polo.xsd"/>
+	<property name="PACKAGE_MODEL_NAME" value="it.iccu.sbn.ejb.model.unimarcmodel"/>
+	<property name="JAR_NAME" value="target/unimarcmodel.jar"/>
+	<property name="src" value="src"/>
+	<property name="classes" value="classes"/>
+	<property name="build.compiler" value="modern"/>
+	<property name="lib" location="lib"/>
+	<property name="doc" location="doc"/>
+	<target name="init" description="Eliminazione del vecchio modello Castor e costruzione del classpath">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Cancellazione file sorgenti e compilati del modello castor -->
+		<delete dir="${classes}" includes="**/*.class" />
+		<delete dir="${src}" includes="**/*.java" />
+		<mkdir dir="${classes}"/>
+		<mkdir dir="${src}"/>
+		<delete>
+			<fileset dir="${basedir}">
+				<include name="${JAR_NAME}"/>
+			</fileset>
+		</delete>
+		<!-- Creazione del classpath con i jar di castor, il suo id "castor.class.path" -->
+		<path id="castor.class.path">
+			<fileset dir="${CASTOR_HOME}">
+				<include name="*.jar"/>
+			</fileset>
+			<pathelement path="${basedir}"/>
+		</path>
+	</target>
+	<!-- Invocazione del tool SourceGenerator per la creazione del modello Castor -->
+	<target name="creamodello" depends="init" description="Crea il modello Castor">
+		<java classpathref="castor.class.path" classname="org.exolab.castor.builder.SourceGenerator" fork="true" dir="${basedir}">
+			<arg line="-i ${XSD_FILE}"/>
+			<arg line="-dest ${src}"/>
+			<arg line="-types j2"/>
+			<arg line="-package ${PACKAGE_MODEL_NAME}"/>
+			<!--<arg line="-nodesc"/>-->
+			<!-- Non generiamo i descrittori -->
+		</java>
+	</target>
+	<!-- Compilazione delle classi del modello -->
+	<target name="compilamodello" depends="creamodello" description="Compila le classi del modello">
+		<javac srcdir="${src}" destdir="${classes}" target="1.5" source="1.5">
+			<classpath refid="castor.class.path"/>
+		</javac>
+	</target>
+	<target name="buildmodello" depends="compilamodello">
+		<jar destfile="${JAR_NAME}" basedir="${classes}" index="true"/>
+	</target>
+	<target name="javadoc" description="Creazione della documentazione javadoc">
+		<fileset id="librerie" dir="${lib}">
+			<include name="**/castor*-xml.jar"/>
+			<include name="**/xerces*.jar"/>
+			<include name="**/modellicastor/*.jar"/>
+		</fileset>
+		<delete dir="${doc}"/>
+		<mkdir dir="${doc}"/>
+		<javadoc sourcepath="${src}" destdir="${doc}" author="true" version="true" use="true" windowtitle="Modello DOM Castor Protocollo SBN-MARC">
+			<classpath>
+				<fileset refid="librerie"/>
+			</classpath>
+			<packageset dir="src" defaultexcludes="yes">
+				<include name="com/**"/>
+			</packageset>
+		</javadoc>
+	</target>
+	<target name="help" description="Visualizza tutti i target">
+		<echo message=""/>
+		<echo message="ANT build per il modello Castor del protocollo SBN-MARC Polo"/>
+		<echo message=""/>
+		<echo message="I seguenti target sono disponibili:"/>
+		<echo message="  help           Elenco dei target"/>
+		<echo message="  buildmodello   Crea e compila il modello Castor"/>
+		<echo message=""/>
+	</target>
+</project>

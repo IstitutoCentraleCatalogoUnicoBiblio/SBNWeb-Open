@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_diritti_utente" table="trl_diritti_utente" >
+		<meta attribute="class-description">
+			Diritti dell'utente
+		</meta>
+		<composite-id>
+			<key-property name="id_utenti_id_utenti" column="id_utenti" type="integer"/>
+			<key-property name="id_servizio_id_servizio" column="id_servizio" type="integer"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_utenti" column="id_utenti" class="it.iccu.sbn.polo.orm.servizi.Tbl_utenti" insert="false" update="false">
+		</many-to-one>
+		<many-to-one name="id_servizio" column="id_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_servizio" insert="false" update="false">
+		</many-to-one>
+		<property name="data_inizio_serv" column="data_inizio_serv" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di inizio validita' del servizio
+			</meta>
+		</property>
+		<property name="data_fine_serv" column="data_fine_serv" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di fine  validita' del servizio
+			</meta>
+		</property>
+		<property name="data_inizio_sosp" column="data_inizio_sosp" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di inizio della sospensione' del servizio
+			</meta>
+		</property>
+		<property name="data_fine_sosp" column="data_fine_sosp" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data fine della sospensione del servizio
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="160" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note relative al diritto dell'utente
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica valori ammessi S/N
+			</meta>
+		</property>
+		<property name="cod_tipo_aut" column="cod_tipo_aut" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice autorizzazione ereditata
+			</meta>
+		</property>
+
+	</class>
+</hibernate-mapping>

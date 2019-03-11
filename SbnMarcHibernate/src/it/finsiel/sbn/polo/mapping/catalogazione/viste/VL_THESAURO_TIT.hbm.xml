@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_thesauro_tit" polymorphism="explicit" table="VL_THESAURO_TIT" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="DID" column="DID" type="string"/>
+		</composite-id>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="CD_THE" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true" lazy="false"/>
+		<!-- property name="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>  -->
+		<property name="DS_TERMINE_THESAURO" type="string" length="240" not-null="true" lazy="false"/>
+		<property name="KY_TERMINE_THESAURO" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="true" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="NOTA_TERMINE_TITOLI_BIBLIOTECA" column="NOTA_TERMINE_TITOLI_BIBLIOTECA" type="it.finsiel.sbn.util.DataTypeCHAR" length="240"  not-null="true"/>
+
+        <filter name="VL_THESAURO_TIT_selectThesauroPerTitolo"
+				condition="bid = :XXXbid
+						   AND fl_canc != 'S' "/>
+
+		<filter name="VL_THESAURO_TIT_countPerTitolo"
+				condition="bid = :XXXbid
+						   AND fl_canc != 'S' "/>
+	</class>
+</hibernate-mapping>

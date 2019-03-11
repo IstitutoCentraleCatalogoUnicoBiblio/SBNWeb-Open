@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_repertorio" table="tb_repertorio" >
+		<meta attribute="class-description">
+			Repertori (marche/autori/titoli)
+		</meta>
+		<id name="id_repertorio" column="id_repertorio" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="cd_sig_repertorio" column="cd_sig_repertorio" type="string" length="30" not-null="true" lazy="false"/>
+		<property name="ds_repertorio" column="ds_repertorio" type="string" length="1200" not-null="true" lazy="false"/>
+		<property name="tp_repertorio" column="tp_repertorio" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tr_rep_tit" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_repertorio" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_rep_tit"/>
+		</set>
+		<set name="Tr_rep_mar" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_repertorio" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_rep_mar"/>
+		</set>
+		<set name="Tr_rep_aut" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_repertorio" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_rep_aut"/>
+		</set>
+	</class>
+</hibernate-mapping>

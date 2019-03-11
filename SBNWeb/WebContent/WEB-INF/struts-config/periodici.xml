@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="periodiciForm" type="it.iccu.sbn.web.actionforms.periodici.PeriodiciForm" />
+		<form-bean name="kardexForm" type="it.iccu.sbn.web.actionforms.periodici.KardexPeriodiciForm" />
+		<form-bean name="gestioneFascicoloForm" type="it.iccu.sbn.web.actionforms.periodici.GestioneFascicoloForm" />
+		<form-bean name="listaOrdiniPeriodiciForm" type="it.iccu.sbn.web.actionforms.periodici.ListaOrdiniPeriodiciForm" />
+		<form-bean name="esameKardexForm" type="it.iccu.sbn.web.actionforms.periodici.EsameKardexForm" />
+		<form-bean name="listaEsemplariForm" type="it.iccu.sbn.web.actionforms.periodici.ListaEsemplariForm" />
+		<form-bean name="previsionaleForm" type="it.iccu.sbn.web.actionforms.periodici.previsionale.PrevisionaleForm" />
+		<form-bean name="ricercaFascicoliForm" type="it.iccu.sbn.web.actionforms.periodici.esame.RicercaFascicoliForm" />
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+		<forward name="periodici" path="/periodici/gestionePeriodici.do" />
+		<forward name="sifKardex" path="/periodici/kardexPeriodici.do" />
+		<forward name="esameKardex" path="/periodici/esameKardex.do" />
+		<forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+	</global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+	 	<action
+			path="/periodici/gestionePeriodici"
+			name="periodiciForm"
+			input="/WEB-INF/jsp/pages/periodici/periodici.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.PeriodiciAction"
+			parameter="methodPeriodici">
+
+			<forward name="kardex" path="/periodici/kardexPeriodici.do" />
+			<forward name="ordini" path="/periodici/listaOrdini.do" />
+			<forward name="collocazioni" path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />
+			<forward name="previsionale" path="/periodici/previsionale.do" />
+		</action>
+
+	 	<action
+			path="/periodici/kardexPeriodici"
+			name="kardexForm"
+			input="/WEB-INF/jsp/pages/periodici/kardex.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.KardexPeriodiciAction"
+			parameter="methodKardex">
+
+			<forward name="fascicolo" path="/periodici/gestioneFascicolo.do" />
+			<forward name="sifCollocazioni" path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />
+			<forward name="sifComunicazioni" path="/acquisizioni/comunicazioni/comunicazioniRicercaParziale.do" />
+			<forward name="sifInsComunicazione" path="/acquisizioni/comunicazioni/inserisciCom.do" />
+		</action>
+
+	 	<action
+			path="/periodici/gestioneFascicolo"
+			name="gestioneFascicoloForm"
+			input="/WEB-INF/jsp/pages/periodici/gestioneFascicolo.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.GestioneFascicoloAction"
+			parameter="methodFascicolo">
+			<forward name="sifListeInventari" path="/documentofisico/datiInventari/listeInventari.do?INVRICERCA=true"  />
+			<forward name="sifCollocazioni" path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioni.do" />
+			<forward name="esemplari" path="/periodici/listaEsemplari.do" />
+		</action>
+
+		<action
+			path="/periodici/listaOrdini"
+			name="listaOrdiniPeriodiciForm"
+			input="/WEB-INF/jsp/pages/periodici/listaOrdini.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.ListaOrdiniPeriodiciAction"
+			parameter="methodOrdine">
+			<forward name="kardex" path="/periodici/kardexPeriodici.do" />
+			<forward name="ordine" path="/acquisizioni/ordini/esaminaOrdineMod.do" />
+		</action>
+
+		<action
+			path="/periodici/esameKardex"
+			name="esameKardexForm"
+			input="/WEB-INF/jsp/pages/periodici/esameKardex.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.EsameKardexAction"
+			parameter="methodEsame">
+
+			<forward name="fascicolo" path="/periodici/gestioneFascicolo.do" />
+			<forward name="esemplari" path="/periodici/listaEsemplari.do" />
+			<forward name="previsionale" path="/periodici/previsionale.do" />
+		</action>
+
+		<action
+			path="/periodici/listaEsemplari"
+			name="listaEsemplariForm"
+			input="/WEB-INF/jsp/pages/periodici/listaEsemplari.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.ListaEsemplariAction"
+			parameter="methodEsempl">
+		</action>
+
+		<action
+			path="/periodici/ricercaFascicoli"
+			name="ricercaFascicoliForm"
+			input="/WEB-INF/jsp/pages/periodici/ricercaFascicoli.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.esame.RicercaFascicoliAction"
+			parameter="methodCerca">
+			<forward name="previsionale" path="/periodici/previsionale.do" />
+		</action>
+
+		<action
+			path="/periodici/previsionale"
+			name="previsionaleForm"
+			input="/WEB-INF/jsp/pages/periodici/previsionale.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.periodici.previsionale.PrevisionaleAction"
+			parameter="methodPrev">
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="periodiciLabels"
+		parameter="it.iccu.sbn.web.resources.PeriodiciLabels"
+		null="false" />
+	<message-resources key="periodiciMessages"
+		parameter="it.iccu.sbn.web.resources.PeriodiciMessages"
+		null="false" />
+
+</struts-config>

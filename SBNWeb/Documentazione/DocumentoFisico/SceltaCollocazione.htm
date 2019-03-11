@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida SBNWEB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-style: italic}
+.style5 {font-weight: bold}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script>
+</head>
+<body>
+<table summary= "summary" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td   valign="top" bgcolor="#dde8f0"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Scelta Collocazione </h1>
+        <p>Questa funzionalit&agrave;  consente al Bibliotecario di assegnare una collocazione ad un inventario precisato. La pagina &egrave; articolata in tre folder; folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab1">Nuova Collocazione</a>, folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab2">Colloc. presenti nel reticolo</a>, folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab3">Nuova colloc. a livelli.</a></p>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="inserimentoCollocazioneTab1" id="inserimentoCollocazioneTab1"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Inserimento Collocazione </span></strong></span> (folder Nuova Collocazione) </h1>
+        <ul>
+          <li><a href="#DescrizioneTab1">Descrizione</a></li>
+          <li><a href="#IngressoTab1">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiTab1">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiTab1">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliTab1">Area canali</a></li>
+              <li><a href="#FiltriTab1">Area filtri</a></li>
+              <li><a href="#MiscellaneaTab1">Area miscellanea </a></li>
+              <li><a href="#DefaultTab1">Valori di default</a></li>
+              <li><a href="#AzioniTab1">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliTab1">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneTab1" id="DescrizioneTab1"></a></span></span>Descrizione</h2>
+        <p>In questo folder vengono raggruppati i dati da inserire per una nuova collocazione<a href="../Interrogazione/AnaliticaConVaiA.htm#Titolo_Da_Documento_Fisico"></a>.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoTab1" id="IngressoTab1"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li><a href="DatiInventari.htm#listaInventariTitolo">Lista Inventari del Titolo</a> &gt; bottone <img src="Immagini/bottoneSceltaModCollocazione.PNG" alt="bottSceltaModColloc" width="200" height="20">,</li>
+          <li><a href="DatiInventari.htm#listaInventariTitolo">Lista Inventari del Titolo</a> &gt; Altro Inv. &gt; bottone <img src="Immagini/bottoneCreaColloca.PNG" alt="bottCreaColloca" width="109" height="20">,</li>
+          <li>Scelta Collocazione &gt; folder <a href="SceltaCollocazione.htm">Nuova colloc. a livelli</a>,</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiTab1" id="PrerequisitiTab1"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiTab1" id="ModuloDatiTab1"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1.PNG" alt="insCollTab1" width="841" height="278"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="insCollTab1Titolo" id="insCollTab1Titolo"></a></span>Nuova collocazione (a livelli) </h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1Titolo.PNG" alt="insCollTab1Tit" width="840" height="232"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="mappaens" id="mappaens"></a></span><em>Tipo collocazione &quot;Eplicita non </em> strutturata&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1EsplNonStrut.PNG" alt="incCollEnS" width="841" height="414"> </p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="mappaes" id="mappaes"></a></span><em>Tipo collocazione &quot;Eplicita </em> strutturata&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1EsplStrut.PNG" alt="insCollES" width="841" height="414"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="mappaaf" id="mappaaf"></a></span><em>Tipo collocazione &quot;A formato </em>&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1MagAFormato.PNG" alt="insCollAF" width="842" height="436"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="mappanaf" id="mappanaf"></a></span><em>Tipo collocazione &quot;Non </em>a formto &quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1MagNonAFormato.PNG" alt="insCollNaF" width="840" height="365"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="mappac" id="mappac"></a></span><em>Tipo collocazione &quot;Classificazione</em>&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1Classi.PNG" alt="insCollClassi" width="840" height="422"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="insConferma" id="insConferma"></a></span><em>Richiesta di conferma </em></h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab1Conferma.PNG" alt="insCollConferma" width="840" height="435"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliTab1" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriTab1" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaTab1" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultTab1" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniTab1" id="AzioniTab1"></a>Azioni utente</span></h3>
+        <ul>
+          <li>link sul folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab2">Colloc. presenti nel reticolo</a> </li>
+          <li>link sul folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab3">Nuova Colloc. a livelli</a> </li>
+          <li>Check sull'option button che consente di assegnare all'inventario la collocazione a) al titolo generale, ovvero ad uno dei titoli presenti nel reticolo e gerarchicamente superiori (impostazione di default), b) al titolo particolare, ovvero alla notizia corrente;</li>
+          <li>campo Sezione, nome della sezione, alfanumerico. max 10, obbligatorio, pu&ograve; essere valorizzato sia inserendo direttamente un dato (&egrave; accettato anche il valore spazio) oppure con il bottone <a href="SezioniCollocazioni.htm#listaSupporto"><img src="Immagini/bottoneSezioni.PNG" alt="bottSezioni" width="64" height="20"></a>, che attiva la lista di supporto delle Sezioni di collocazione della biblioteca. Anche nel caso in cui si inserisce direttamente il valore di sezione nella casella di testo (vale anche per valore a spazio) occorre attivare il pulsante Sezioni e nel caso la sezione indicata sia presente nella base informativa viene esplosa la mappa che presenter&agrave; i campi occorrenti all'assegnazione della collocazione (in base al tipo collocazione afferente la sezione come segue:
+            <ul>
+              <li><a href="SceltaCollocazione.htm#mappaens" id="#descrIns_ens">esplicita non strutturata</a>:
+                <ul>
+                  <li>campo Collocazione, alfanumerico, max 24, obbligatorio, accetta il valore a spazio, </li>
+                </ul>
+              </li>
+              <ul>
+                <li>campo Specificazione, alfanumerico, max 12, obbligatorio, accetta il valore a spazio, </li>
+                <li>option button Chiave titolo, riporta nel campo Specificazione il valore della Clet del titolo, se presente nella Base Informativa, </li>
+                <li>option button Chiave autore, riporta nel campo Specificazione il valore della Cautun dell'autore, se presente nella Base Informativa, </li>
+                <li>option button Altro, non implica modifiche nella scelta della specificazione,</li>
+                <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+              </ul>
+              <li><a href="SceltaCollocazione.htm#mappaes">esplicita strutturata</a>: </li>
+              <ul>
+                <li>campo Collocazione Livello 1, alfanumerico, max 7, accetta il valore a spazio, </li>
+                <li>campo Collocazione Livello 2, alfanumerico, max 7, accetta il valore a spazio, </li>
+                <li>campo Collocazione Livello 3, alfanumerico, max 7, accetta il valore a spazio, </li>
+                <li>campo Specificazione, alfanumerico, max 12, obbligatorio, accetta il valore a spazio, </li>
+                <li>option button Chiave titolo, riporta nel campo Specificazione il valore della Clet del titolo, se presente nella Base Informativa, </li>
+                <li>option button Chiave autore, riporta nel campo Specificazione il valore della Cautun dell'autore, se presente nella Base Informativa, </li>
+                <li>option button Altro, non implica modifiche nella scelta della specificazione,</li>
+                <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+              </ul>
+              <li><a href="SceltaCollocazione.htm#mappaaF">a formato</a>:
+                <ul>
+                  <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                  <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+                  <li>campo Formato, alfanumerico, obbligatorio, selezionabile dalla lista a discesa, riporta la descrizione del formato nel campo successivo,</li>
+                  <li>campo Serie:  numero della serie, numerico,  9 max, </li>
+                  <li>campo Progressivo: progressivo della serie, numerico, 9 max,</li>
+                  <li>campo Consistenza, consistenza della collazione, 255 max;</li>
+                </ul>
+              </li>
+              <li><a href="SceltaCollocazione.htm#mappanaf">non a formato</a>:
+                <ul>
+                  <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                  <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+                  <li>campo Progressivo: progressivo della serie, numerico, 9 max;</li>
+                </ul>
+              </li>
+              <li><a href="SceltaCollocazione.htm#mappac">classificazione</a>:
+                <ul>
+                  <ul>
+                    <li>bottone <img src="Immagini/bottoneClassi.PNG" alt="bottClassi" width="57" height="20">, attiva la visualizzazione della lista delle <a href="../Interrogazione/SinteticaClassificazioni.htm">Classificazioni </a>;</li>
+                    <li>campo Collocazione, alfanumerico, max 24, obbligatorio, accetta il valore a spazio, </li>
+                  </ul>
+                  <ul>
+                    <li>campo Specificazione, alfanumerico, max 12, obbligatorio, accetta il valore a spazio, </li>
+                    <li>option button Chiave titolo, riporta nel campo Specificazione il valore della Clet del titolo, se presente nella Base Informativa, </li>
+                    <li>option button Chiave autore, riporta nel campo Specificazione il valore della Cautun dell'autore, se presente nella Base Informativa, </li>
+                    <li>option button Altro, non implica modifiche nella scelta della specificazione,</li>
+                    <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate alla collocazione indicata;</li>
+                    <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnate alla specificazione indicata; </li>
+                  </ul>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>bottone <img src="Immagini/bottoneSalva.PNG" alt="bottSalva" width="55" height="20">, attiva la funzione di <a href="DatiInventari.htm#modificaInvTab1">Modifica Inventario</a>; in questa fase i dati della collocazione non sono  ancora memorizzati nella Base Informativa ma soltanto riportati nella pagina successiva e salvati nel momento in cui si completa l'inserimento dei dati obbligatori dell'inventario;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa;</li>
+          <li>bottone <img src="Immagini/bottoneSi.PNG" alt="bottSi" width="32" height="20">, procede con il passaggio dei dati <a href="DatiInventari.htm#modificaInvTab1">Modifica Inventario</a> , </li>
+          <li>bottone <img src="Immagini/bottoneNo.PNG" alt="bottNo" width="38" height="20">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliTab1" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Se nei campi Collocazione e Specificazione vengono immessi valori gi&agrave; presenti nella Base Informativa viene emesso un diagnostico con la <a href="SceltaCollocazione.htm#insConferma">richiesta di conferma dell'operazione</a>; </li>
+          <li>Se la lista delle collocazioni presenti sul reticolo &egrave; vuota, il folder Colloc. presenti nel reticolo &egrave; disattivo; </li>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="inserimentoCollocazioneTab2" id="inserimentoCollocazioneTab2"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Inserimento Collocazione </span></strong></span> (folder Colloc. presenti del reticolo) </h1>
+        <ul>
+          <li><a href="#DescrizioneTab2">Descrizione</a></li>
+          <li><a href="#IngressoTab2">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiTab2">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiTab2">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliTab2">Area canali</a></li>
+              <li><a href="#FiltriTab2">Area filtri</a></li>
+              <li><a href="#MiscellaneaTab2">Area miscellanea </a></li>
+              <li><a href="#DefaultTab2">Valori di default</a></li>
+              <li><a href="#AzioniTab2">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliTab2">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneTab2" id="Descrizione"></a></span></span>Descrizione</h2>
+        <p>In questo folder viene presentata la lista dei titoli presenti nel reticolo del documento scelti come titoli   di collocazione per altri inventari. </p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoTab2" id="Ingresso"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Scelta Collocazione &gt; folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab1">Nuova Colloc</a>., </li>
+          <li>Scelta Collocazione &gt; folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab3">Nuova colloc. a livelli</a>. </li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiTab2" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiTab2" id="ModuloDati"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab2.PNG" alt="insCollTab2" width="842" height="256"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliTab2" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriTab2" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaTab2" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultTab2" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniTab2" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+        <ul>
+          <li>link sul folder Nuova Colloc.</li>
+          <li>link sul folder Nuova Colloc. a livelli</li>
+          <li>Check sull'option button corrispondente alla riga della lista (nel caso di una lista con  un'unica riga risulta gi&agrave; impostato);</li>
+          <li>bottone<img src="Immagini/bottoneSceltaCollocazione.PNG" alt="bottSceltaColl" width="139" height="20">, attiva la funzione di <a href="DatiInventari.htm#modificaInvTab1">Modifica Inventario</a> riportando  i gli estremi della collocazione del reticolo selezionata; in questa fase i dati della collocazione  non sono  ancora memorizzati nella Base Informativa ma soltanto riportati nella pagina successiva e salvati nel momento in cui si completa l'inserimento dei dati obbligatori dell'inventario;</li>
+          <li>bottone <img src="Immagini/bottoneEsameEsempl.PNG" alt="bottEsameEsem" width="115" height="20">, attiva la funzione di <a href="SceltaEsemplare.htm#esaminaEsemplare">esamina esemplare</a> legato alla collocazione del reticolo, </li>
+          <li>bottone <img src="Immagini/bottoneInventari.PNG" alt="bottoneInventari" width="70" height="20">, attiva la funzione lista inventari di collocazione, </li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa;</li>
+          <p>Inoltre, per consentire la gestione delle liste in blocchi  a capo e piè di lista saranno prospettati:</p>
+          <li>bottone <img src="Immagini/freccia.PNG" alt="freccia" width="28" height="20"> , carica il numero di blocco indicato nel campo &quot;Carica pagina&quot;,</li>
+          <li>campo Carica Pagina, numerico, 3 max,</li>
+	  	<li>Elementi trovati, numero di totole elementi della lista, </li>
+	  	<li>Pagina n di m, numero di blocchi caricati dei blocchi totali </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliTab2" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+          <li>Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.</li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="inserimentoCollocazioneTab3" id="inserimentoCollocazioneTab3"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Inserimento Collocazione </span></strong></span> (folder Nuova Colloc. a livelli) </h1>
+        <ul>
+          <li><a href="#DescrizioneTab3">Descrizione</a></li>
+          <li><a href="#IngressoTab3">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiTab3">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiTab3">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliTab3">Area canali</a></li>
+              <li><a href="#FiltriTab3">Area filtri</a></li>
+              <li><a href="#MiscellaneaTab3">Area miscellanea </a></li>
+              <li><a href="#DefaultTab3">Valori di default</a></li>
+              <li><a href="#AzioniTab3">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliTab3">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneTab3" id="DescrizioneTab3"></a></span></span>Descrizione</h2>
+        <p>Questo folder presenta la lista che elenca, oltre al titolo del documento   associato all'inventario in collocazione, tutti i titoli di&nbsp; natura M, S o C   presenti nel reticolo e collegati al documento con i seguenti   legami:</p>
+        <ul>
+          <li> fa parte di&nbsp; (W01M, M01M, W01C, M01C, M01S, S01C,   C01C);</li>
+          <li><SPAN lang="EN-GB">supplemento di (M02M, M02S,   S02S);</SPAN></li>
+          <li>continuazione di (M04M, M04S, S04S,   C04C).</li>
+        </ul>
+        <p><a href="../Interrogazione/AnaliticaConVaiA.htm#Titolo_Da_Documento_Fisico"></a>.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoTab3" id="IngressoTab3"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li>Scelta Collocazione &gt; folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab1">Nuova Colloc</a>., </li>
+          <li>Scelta Collocazione &gt; folder <a href="SceltaCollocazione.htm#inserimentoCollocazioneTab2">Colloc. presenti nel reticolo</a>.
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiTab3" id="PrerequisitiTab3"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiTab3" id="ModuloDatiTab3"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/inserimentoCollocazioneTab3.PNG" alt="insCollTab3" width="841" height="271"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliTab3" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriTab3" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaTab3" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultTab3" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniTab3" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h3>
+        <ul>
+          <li>link sul folder Nuova Colloc.</li>
+          <li>link sul folder Colloc. presenti nel reticolo, </li>
+          <li>Check sull'option button corrispondente alla riga della lista (nel caso di una lista con  un'unica riga risulta gi&agrave; impostato);</li>
+          <li>bottone<img src="Immagini/bottoneSceltaTitolo.PNG" alt="bottScelTit" width="89" height="20">, che consente di ritornare sul folder <a href="SceltaCollocazione.htm#insCollTab1Titolo">Nuova colloc.</a> riportando sulla stessa i dati del titolo scelto dalla lista;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa;</li>
+          <p>Inoltre, per consentire la gestione delle liste in blocchi  a capo e piè di lista saranno prospettati:</p>
+          <li>bottone <img src="Immagini/freccia.PNG" alt="freccia" width="28" height="20"> , carica il numero di blocco indicato nel campo &quot;Carica pagina&quot;,</li>
+          <li>campo Carica Pagina, numerico, 3 max,</li>
+	  	<li>Elementi trovati, numero di totole elementi della lista, </li>
+	  	<li>Pagina n di m, numero di blocchi caricati dei blocchi totali </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliTab3" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+          <li>Se la lista presenta un'unica voce, il sistema la seleziona automaticamente.</li>
+        </ul>
+        <hr>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="modificaCollocazione" id="modificaCollocazione"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2">Modifica Collocazione</span></strong></span></h1>
+        <ul>
+          <li><a href="#DescrizioneMod">Descrizione</a></li>
+          <li><a href="#IngressoMod">Punti di ingresso</a></li>
+          <li><a href="#PrerequisitiMod">Prerequisiti</a></li>
+          <li><a href="#ModuloDatiMod">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#CanaliMod">Area canali</a></li>
+              <li><a href="#FiltriMod">Area filtri</a></li>
+              <li><a href="#MiscellaneaMod">Area miscellanea </a></li>
+              <li><a href="#DefaultMod">Valori di default</a></li>
+              <li><a href="#AzioniMod">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#ControlliMod">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="DescrizioneMod" id="DescrizioneMod"></a></span></span>Descrizione</h2>
+        <p>Questa funzionalit&agrave; consente la modifica della collocazione di un inventario<a href="../Interrogazione/AnaliticaConVaiA.htm#Titolo_Da_Documento_Fisico"></a>.</p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="IngressoMod" id="IngressoMod"></a></span></span>Punti di ingresso</h2>
+        <ol>
+          <li><a href="DatiInventari.htm#listaInventariTitolo">Lista Inventari del Titolo</a> &gt; bottone <img src="Immagini/bottoneSceltaModCollocazione.PNG" alt="bottSceltaModColloc" width="200" height="20">,</li>
+          <li>Esame Collocazione  &gt; Lista Collocazioni  &gt; <a href="ListeInventari.htm#listaInvDiCollocazione">Lista Inventari di Collocazione</a> &gt; bottone <img src="Immagini/bottoneModificaColl.PNG" alt="bottModColl" width="100" height="20">,</li>
+        </ol>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="PrerequisitiMod" id="PrerequisitiMod"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico,</li>
+          <li>Esistenza di un inventario collocato. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDatiMod" id="ModuloDatiMod"></a></span>Modulo di presentazione </h2>
+        <p align="left" class="Stile3 style8">Una parte della mappa, ovvero quella contenete i dati propri della collocazione, varia in base al tipo sezione di collocazione della sezione di collocazione.</p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="es" id="es"></a></span><em>Tipo collocazione &quot;Eplicita </em> strutturata&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaCollocazioneEns.PNG" alt="modCollEns" width="840" height="431"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="es" id="es"></a></span><em>Tipo collocazione &quot;Eplicita </em> strutturata&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaCollocazioneEs.PNG" alt="modCollEs" width="842" height="431"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="af" id="af"></a></span><em>Tipo collocazione &quot;A formato </em>&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaCollocazioneAf.PNG" alt="modCollAf" width="841" height="435"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="naf" id="naf"></a></span><em>Tipo collocazione &quot;Non </em>a formto &quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaCollocazioneNaf.PNG" alt="modCollNaf" width="839" height="382"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="c" id="c"></a></span><em>Tipo collocazione &quot;Classificazione</em>&quot;</h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaCollocazioneClassi.PNG" alt="modCollClassi" width="840" height="438"></p>
+        <h4 class="style5 style8 style4 Stile3" align="center"><span class="Stile2"><a name="c" id="c"></a></span><em>Conferma cancellazione inventario </em></h4>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/modificaCollocazioneCancInv.PNG" alt="modCollCancInv" width="842" height="400"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="CanaliMod" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="FiltriMod" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="MiscellaneaMod" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="DefaultMod" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="AzioniMod" id="AzioniMod"></a>Azioni utente</span></h3>
+        <ul>
+          <li>campo Sezione, nome della sezione, alfanumerico. max 10, obbligatorio, pu&ograve; essere valorizzato sia inserendo direttamente un dato (&egrave; accettato anche il valore spazio) oppure con il bottone <a href="SezioniCollocazioni.htm#listaSupporto"><img src="Immagini/bottoneSezioni.PNG" alt="bottSezioni" width="64" height="20"></a>, che attiva la lista di supporto delle Sezioni di collocazione della biblioteca. Anche nel caso in cui si inserisce direttamente il valore di sezione nella casella di testo (vale anche per valore a spazio) occorre attivare il pulsante Sezioni e nel caso la sezione indicata sia presente nella base informativa viene esplosa la mappa che presenter&agrave; i campi occorrenti all'assegnazione della collocazione (in base al tipo collocazione afferente la sezione come segue:
+            <ul>
+              <li><a href="SceltaCollocazione.htm#modificaEns">esplicita non strutturata</a>:
+                <ul>
+                  <li>campo Collocazione, alfanumerico, max 24, obbligatorio, accetta il valore a spazio, </li>
+                </ul>
+              </li>
+              <ul>
+                <li>campo Specificazione, alfanumerico, max 12, obbligatorio, accetta il valore a spazio, </li>
+                <li>option button Chiave titolo, riporta nel campo Specificazione il valore della Clet del titolo, se presente nella Base Informativa, </li>
+                <li>option button Chiave autore, riporta nel campo Specificazione il valore della Cautun dell'autore, se presente nella Base Informativa, </li>
+                <li>option button Altro, non implica modifiche nella scelta della specificazione,</li>
+                <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+              </ul>
+              <li><a href="SceltaCollocazione.htm#modificaEs">esplicita strutturata</a>: </li>
+              <ul>
+                <li>campo Collocazione Livello 1, alfanumerico, max 7, accetta il valore a spazio, </li>
+                <li>campo Collocazione Livello 2, alfanumerico, max 7, accetta il valore a spazio, </li>
+                <li>campo Collocazione Livello 3, alfanumerico, max 7, accetta il valore a spazio, </li>
+                <li>campo Specificazione, alfanumerico, max 12, obbligatorio, accetta il valore a spazio, </li>
+                <li>option button Chiave titolo, riporta nel campo Specificazione il valore della Clet del titolo, se presente nella Base Informativa, </li>
+                <li>option button Chiave autore, riporta nel campo Specificazione il valore della Cautun dell'autore, se presente nella Base Informativa, </li>
+                <li>option button Altro, non implica modifiche nella scelta della specificazione,</li>
+                <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+              </ul>
+              <li><a href="SceltaCollocazione.htm#modificaA">a formato</a>:
+                <ul>
+                  <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                  <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+                  <li>campo Formato, alfanumerico, obbligatorio, selezionabile dalla lista a discesa, riporta la descrizione del formato nel campo successivo,</li>
+                  <li>campo Serie:  numero della serie, numerico,  9 max, </li>
+                  <li>campo Progressivo: progressivo della serie, numerico, 9 max,</li>
+                  <li>campo Consistenza, consistenza della collazione, 255 max;</li>
+                </ul>
+              </li>
+              <li><a href="SceltaCollocazione.htm#modificaNaf">non a formato</a>:
+                <ul>
+                  <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate per la collocazione indicata;</li>
+                  <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnateper la specificazione indicata; </li>
+                  <li>campo Progressivo: progressivo della serie, numerico, 9 max;</li>
+                </ul>
+              </li>
+              <li><a href="SceltaCollocazione.htm#modificaC">classificazione</a>:
+                <ul>
+                  <ul>
+                    <li>bottone <img src="Immagini/bottoneClassi.PNG" alt="bottClassi" width="57" height="20">, attiva la visualizzazione della lista delle <a href="../Interrogazione/SinteticaClassificazioni.htm">Classificazioni </a>;</li>
+                    <li>campo Collocazione, alfanumerico, max 24, obbligatorio, accetta il valore a spazio, </li>
+                  </ul>
+                  <ul>
+                    <li>campo Specificazione, alfanumerico, max 12, obbligatorio, accetta il valore a spazio, </li>
+                    <li>option button Chiave titolo, riporta nel campo Specificazione il valore della Clet del titolo, se presente nella Base Informativa, </li>
+                    <li>option button Chiave autore, riporta nel campo Specificazione il valore della Cautun dell'autore, se presente nella Base Informativa, </li>
+                    <li>option button Altro, non implica modifiche nella scelta della specificazione,</li>
+                    <li>bottone <img src="Immagini/bottoneUltColl.PNG" alt="bottUltColl" width="68" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltColl">ultime collocazioni</a> assegnate alla collocazione indicata;</li>
+                    <li>bottone <img src="Immagini/bottoneUltSpec.PNG" alt="bottUltSpec" width="77" height="20">, attiva la visualizzazione della lista delle <a href="ListeCollocazioni.htm#listaUltSpec">ultime specificazioni </a> assegnate alla specificazione indicata; </li>
+                  </ul>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>bottone <img src="Immagini/bottoneModificaInv.PNG" alt="bottModInv" width="94" height="20">, consente la memorizzazione dei dati della collocazione e l'attivazione della funzione di <a href="DatiInventari.htm#modificaInvTab1">Modifica Inventario</a>; </li>
+          <li>bottone <img src="Immagini/bottoneEsemplare.PNG" alt="bottEsempl" width="86" height="20">, consente l'attivazione della funzionalit&agrave; <a href="SceltaEsemplare.htm">Scelta esemplare</a> (vedi <a href="SceltaCollocazione.htm#ControlliMod">controlli</a>); </li>
+          <li>bottone <img src="Immagini/bottoneScolloca.PNG" alt="bottScolloca" width="73" height="20">, consente la cancellazione logica della collocazione e dei legami che la collocazione ha con inventari ed esemplare;</li>
+          <li>bottone <img src="Immagini/bottoneCancInv.PNG" alt="bottCancInv" width="77" height="20">, consente la cancellazione logica dell'inventario e del legame con la collocazione in gestione previa richiesta di conferma; </li>
+		            <li>bottone <img src="Immagini/bottoneAggiornaDatiPossessoIndice.PNG" alt="bottAggiornaDatiPossessoIndice" width="200" height="20">, attiva la funzione <a href="InvioConsistenzaIndice.htm">Invio Consistenza Indice</a> (esclusivamente  nel caso di notizia <strong><u>non</u></strong> [loc]) dove viene riportata la descrizione della consistenza di collocazione;  il BID  utilizzato per l&rsquo;Aggiornamento dati di possesso in Indice  &egrave; quello di collocazione. Il bottone  &egrave; attivo soltanto se la natura del titolo di collocazione &egrave; W, M o S. </li>
+          <li>bottone <img src="Immagini/bottoneSalva.PNG" alt="bottSalva" width="55" height="20">, consente la memorizzazione dei dati modificati della collocazione e ritorno al <a href="SceltaCollocazione.htm#IngressoMod">chiamante</a>;</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa;</li>
+        </ul>
+        <p>Sulla pagina di conferma dell'operazione: </p>
+        <ul>
+          <li>bottone <img src="Immagini/bottoneSi.PNG" alt="bottSi" width="32" height="20">, procede con l'aggiornamento della Base informativa <a href="DatiInventari.htm#modificaInvTab1"></a> , </li>
+          <li>bottone <img src="Immagini/bottoneNo.PNG" alt="bottNo" width="38" height="20">, per abbandonare la pagina e ritornare al chiamante senza apportare modifiche relative alla collocazione nella Base Informativa. </li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ControlliMod" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+        <ul>
+          <li>Quando viene attivato il bottone Esemplare se la collocazione:
+            <ul>
+              <li>non &egrave;  legata ad un esemplare  viene attivata la funzione di <a href="SceltaEsemplare.htm#ricercaEsemplare">Ricerca Esemplare</a> per poi  procedere all'inserimento di un esemplare di collocazione, </li>
+              <li>&egrave; legata  ad esemplare viene attivata la funzione di <a href="SceltaEsemplare.htm#modificaEsemplare">Modifica Esemplare</a>; </li>
+            </ul>
+          </li>
+          <li>Se nei campi Collocazione e Specificazione vengono immessi valori gi&agrave; presenti nella Base Informativa viene emesso un diagnostico con la <a href="SceltaCollocazione.htm#insConferma">richiesta di conferma dell'operazione</a>; </li>
+          <li>Se la lista delle collocazioni presenti sul reticolo &egrave; vuota, il folder Colloc. presenti nel reticolo &egrave; disattivo; </li>
+          <li>Se nel campo Sezioni  viene inserito un valore e attivato il bottone Salva viene  emesso l'opportuno diagnostico.</li>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+        </ul>
+        <hr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

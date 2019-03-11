@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_mail" table="tbf_mail" >
+		<meta attribute="class-description">
+			Tabella per l'invio e ricezione di mail da parte del polo
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="indirizzo" column="indirizzo" type="string" length="255" not-null="true" lazy="false"/>
+		<property name="descrizione" column="descrizione" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="smtp" column="smtp" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Server di invio mail
+			</meta>
+		</property>
+		<property name="pop3" column="pop3" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Server di ricezione mail
+			</meta>
+		</property>
+		<property name="user_name" column="user_name" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Nome utente registrato con il server di posta
+			</meta>
+		</property>
+		<property name="password" column="password" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				password utente registrato con server di posta
+			</meta>
+		</property>
+		<property name="fl_forzatura" column="fl_forzatura" type="character" length="1" not-null="false" lazy="false" />
+	</class>
+</hibernate-mapping>

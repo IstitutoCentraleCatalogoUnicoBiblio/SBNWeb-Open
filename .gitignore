@@ -1,0 +1,9 @@
+.*/
+bin/
+dist/
+build/
+target/
+classes/
+local-settings.properties
+build.number
+CVS

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tb_codici" table="tb_codici" >
+		<meta attribute="class-description">
+			Codici delle tabelle
+		</meta>
+		<composite-id>
+			<key-property name="tp_tabella" column="tp_tabella" type="string"/>
+			<key-property name="cd_tabella" column="cd_tabella" type="string"/>
+		</composite-id>
+		<property name="ds_tabella" column="ds_tabella" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Decrizione associata al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_unimarc" column="cd_unimarc" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Export Unimarc
+			</meta>
+		</property>
+		<property name="cd_marc_21" column="cd_marc_21" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Export Marc 21
+			</meta>
+		</property>
+		<property name="tp_materiale" column="tp_materiale" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Tipo materiale
+			</meta>
+		</property>
+		<property name="dt_fine_validita" column="dt_fine_validita" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Data in cui codice a cessato di essere utilizzato
+			</meta>
+		</property>
+		<property name="ds_cdsbn_ulteriore" column="ds_cdsbn_ulteriore" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Ulteriore decrizione associata al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg1" column="cd_flg1" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Primo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg2" column="cd_flg2" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Secondo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg3" column="cd_flg3" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Terzo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg4" column="cd_flg4" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Quarto eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg5" column="cd_flg5" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Quinto eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg6" column="cd_flg6" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Sesto eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg7" column="cd_flg7" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Settimo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg8" column="cd_flg8" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Ottavo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg9" column="cd_flg9" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Nono eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg10" column="cd_flg10" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Decimo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+		<property name="cd_flg11" column="cd_flg11" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Undicesimo eventuale attributo associato al codice identificante l'elemento di tabella
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_anagrafe_utenti_professionali" table="tbf_anagrafe_utenti_professionali" >
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_utente_professionale" column="id_utente_professionale" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="nome" column="nome" type="string" length="20" not-null="false" lazy="false"/>
+		<property name="cognome" column="cognome" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Trf_utente_professionale_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utente_professionale" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_utente_professionale_polo"/>
+		</set>
+		<set name="Trf_utente_professionale_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utente_professionale" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_utente_professionale_biblioteca"/>
+		</set>
+		<one-to-one name="Tbf_bibliotecario" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario" cascade="save-update,lock" lazy="proxy" access="field"/>
+		<one-to-one name="Tbf_utenti_professionali_web" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_utenti_professionali_web" cascade="save-update,lock" lazy="proxy" access="field"/>
+<!--
+		<one-to-one name="Tbf_bibliotecario" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario" cascade="save-update,lock" property-ref="id_utente_professionale" lazy="proxy" access="field"/>
+		<one-to-one name="Tbf_utenti_professionali_web" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_utenti_professionali_web" cascade="save-update,lock" property-ref="id_utente_professionale" lazy="proxy" access="field"/>
+-->
+	</class>
+</hibernate-mapping>

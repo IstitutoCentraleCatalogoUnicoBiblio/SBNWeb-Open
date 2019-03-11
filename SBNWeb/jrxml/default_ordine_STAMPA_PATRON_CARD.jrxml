@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="default_ordine_patronCard" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="ordineCarrelloSpedizione.cartName" class="java.lang.String"/>
+	<field name="ordineCarrelloSpedizione.prgSpedizione" class="java.lang.Short"/>
+	<field name="ordineCarrelloSpedizione.dataSpedizione" class="java.util.Date"/>
+	<field name="google" class="java.lang.Boolean"/>
+	<field name="ordineCarrelloSpedizione" class="java.lang.Object"/>
+	<field name="chiaveOrdine" class="java.lang.String"/>
+	<detail>
+		<band height="421" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="421"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineStyle="Double"/>
+					<topPen lineWidth="1.0" lineStyle="Double"/>
+					<leftPen lineWidth="1.0" lineStyle="Double"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					<rightPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement x="0" y="147" width="555" height="126"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="60" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ordineCarrelloSpedizione.cartName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

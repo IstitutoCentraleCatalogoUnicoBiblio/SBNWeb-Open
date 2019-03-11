@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Guida SBNWEB</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script>
+</head>
+<body>
+<table summary= "summary" width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td   valign="top" bgcolor="#dde8f0"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+        <p></p>
+        <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="spostamentoCollocazioni" id="spostamentoCollocazioni"></a></span></span><span class="Stile3 style8"><strong><span class="Stile2"> Spostamento Collocazioni </span></strong></span></h1>
+        <ul>
+          <li><a href="#Descrizione">Descrizione</a></li>
+          <li><a href="#Ingresso">Punti di ingresso</a></li>
+          <li><a href="#Prerequisiti">Prerequisiti</a></li>
+          <li><a href="#ModuloDati">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#Canali">Area canali</a></li>
+              <li><a href="#Filtri">Area filtri</a></li>
+              <li><a href="#Miscellanea">Area miscellanea </a></li>
+              <li><a href="#Default">Valori di default</a></li>
+              <li><a href="#Azioni">Azioni utente</a></li>
+            </ul>
+          </li>
+          <li><a href="#Controlli">Controlli del sistema</a><br>
+          </li>
+        </ul>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+        <p>La funzione consente di prenotare un'elaborazione differita tramite la quale si potranno spostare inventari collocati dalla sezione assegnata ad una sezione temporanea. </p>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span>Punti di ingresso</h2>
+        <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+        <ul>
+          <li>Abilitazione all'attivit&agrave; Documento Fisico.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span>Modulo di presentazione </h2>
+        <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/spostamentoCollocazioni.PNG" alt="spostColl" width="840" height="363"></p>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area canali </h3>
+        <ul>
+          <li>Canale Inventario :
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">serie :</span><span class="Stile3 style8"><em> nome della serie, alfanumerico, 3 max, selezionabile dalla lista a discesa;</em></span></li>
+              <li><span class="style5 style8 style4 Stile3" align="left">numero inventario:</span><span class="Stile3 style8"><em> numero inventario del documento, numerico, 9 max;</em></span></li>
+            </ul>
+          <li>Canale Collocazione :
+            <ul>
+              <li><span class="style5 style8 style4 Stile3" align="left">sezione :</span><span class="Stile3 style8"><em> nome della sezione, alfanumerico, 10 max, o selezionabile dalla lista di supporto sezioni di collocazione;</em></span></li>
+            </ul>
+          </li>
+        </ul>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area filtri</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Miscellanea" id="InterrogazioneTitoloCanali"></a></span>Area miscellanea</h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+        <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="Azioni"></a>Azioni utente</span></h3>
+        <ul>
+          <li>bottone <img src="Immagini/bottoneBiblioteche.PNG" alt="bottBiblio" width="88" height="20">, presente soltanto se la biblioteca operante è un centro sistema, attiva <a href="SezioniCollocazioni.htm#listaSupportoBib">lista di supporto delle biblioteche</a> del polo,</li>
+          <li>campo &quot;Serie&quot; , selezionabile da lista a discesa,</li>
+          <li>campo &quot;Dal numero&quot;, numerico, max 9, </li>
+          <li>campo &quot;Al numero&quot;, numerico, max 9, </li>
+          <li>campo &quot;Dalla sezione&quot;, alfanumerico, max 10, obbligatorio, accetta anche valore spazio, </li>
+          <li>bottone <img src="Immagini/bottoneSezioni.PNG" alt="bottSez" width="64" height="20">, attiva la <a href="SezioniCollocazioni.htm#listaSupporto">lista di supporto delle sezioni</a> della biblioteca, </li>
+          <li>campo &quot;Dalla collocazione&quot; , alfanumerico, 24 max, </li>
+          <li>bottone <img src="Immagini/bottoneCollocazioni.PNG" alt="bottCollocazioni" width="93" height="20">, attiva la <a href="ListeCollocazioni.htm#listaSupportoCollocazioni">lista di supporto delle collocazioni</a> della sezione impostata nel campo &quot;Dalla sezione&quot;,</li>
+          <li>campo &quot;Specificazione&quot;,  alfanumerico, 12 max, </li>
+          <li>bottone <img src="Immagini/bottoneSpecificazione.PNG" alt="bottSpec" width="108" height="20">, attiva la lista di supporto delle specificazioni della collocazione impostata nel campo &quot;Dalla collocazione&quot; , </li>
+          <li>campo &quot;Alla collocazione&quot;  , alfanumerico, 24 max, </li>
+          <li>bottone <img src="Immagini/bottoneCollocazioni.PNG" alt="bottCollocazioni" width="93" height="20">, attiva la lista di supporto delle collocazioni della sezione impotata nel campo &quot;Dalla sezione&quot;,</li>
+          <li>campo &quot;Specificazione&quot;,  alfanumerico, 12 max, </li>
+          <li>bottone <img src="Immagini/bottoneSpecificazione.PNG" alt="bottSpec" width="108" height="20">, attiva la lista di supporto delle specificazioni della collocazione impostata nel campo,</li>
+          <li>campo &quot;Sezione di arrivo &quot;, alfanumerico, max 10, obbligatorio, accetta anche valore spazio, </li>
+          <li>bottone <img src="Immagini/bottoneSezioni.PNG" alt="bottSez" width="64" height="20">, attiva la <a href="SezioniCollocazioni.htm#listaSupporto">lista di supporto delle sezioni</a> della biblioteca, </li>
+          <li>campo &quot;Collocazione provvisoria &quot; , alfanumerico, 24 max, </li>
+          <li>bottone <img src="Immagini/bottoneCollocazioni.PNG" alt="bottCollocazioni" width="93" height="20">, attiva la <a href="ListeCollocazioni.htm#listaSupportoCollocazioni">lista di supporto delle collocazioni</a> della sezione impostata nel campo &quot;Sezione di arrivo &quot;,</li>
+          <li>campo &quot;Specificazione provvisoria &quot;,  alfanumerico, 12 max, </li>
+          <li>bottone <img src="Immagini/bottoneSpecificazione.PNG" alt="bottSpec" width="108" height="20">, attiva la lista di supporto delle specificazioni della collocazione impostata nel campo &quot;Collocazione provvisoria &quot; , </li>
+          <li>ceckbox &quot;Anche inventari in prestito&quot;,</li>
+          <li>ceckbox &quot;Ristampa delle etichette&quot;,</li>
+          <li>bottone <img src="Immagini/bottoneOk.PNG" alt="bottOk" width="38" height="21">, attiva la prenotazione del processo di elaborazione degli spostamenti alla collocazione provvisoria,</li>
+          <li>bottone <img src="Immagini/bottoneIndietro.PNG" alt="bottIndietro" width="64" height="21">, non attiva la prenotazione segnalandolo.</li>
+        </ul>
+        <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+        <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a> </div>
+        <ul>
+          <li>Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+          <li>Se viene valorizzato il canale Inventario con il campo serie e il campo inventario e il canale Collocazione con la  sezione, prevale la ricerca per canale inventario;</li>
+        </ul>
+        <blockquote>
+          <p>Nel canale Collocazione:</p>
+        </blockquote>
+        <ul>
+          <li> dopo avere premuto il tasto &quot;Sezioni&quot; quando si riporta indietro il codice della sezione dalla lista di supporto sezioni viene disabilitato il campo sezione (il tasto Sezioni rimane attivo) e abilitato il campo &quot;Dalla collocazione&quot; e cos&igrave; via per gli altri campi disabilitati,</li>
+          <li>il nome della sezione di parteza non deve coincidere con quello della sezione di arrivo; </li>
+        </ul>
+        <hr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

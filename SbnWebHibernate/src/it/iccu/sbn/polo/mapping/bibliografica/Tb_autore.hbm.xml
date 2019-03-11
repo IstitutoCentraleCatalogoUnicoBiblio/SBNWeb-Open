@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_autore" table="tb_autore" >
+		<meta attribute="class-description">
+			AUTORI
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="vid" column="vid" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="isadn" column="isadn" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="tp_forma_aut" column="tp_forma_aut" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ky_cautun" column="ky_cautun" type="string" length="6" not-null="true" lazy="false"/>
+		<property name="ky_auteur" column="ky_auteur" type="string" length="10" not-null="true" lazy="false"/>
+		<property name="ky_el1_a" column="ky_el1_a" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="ky_el1_b" column="ky_el1_b" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="ky_el2_a" column="ky_el2_a" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="ky_el2_b" column="ky_el2_b" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="tp_nome_aut" column="tp_nome_aut" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ky_el3" column="ky_el3" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="ky_el4" column="ky_el4" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="ky_el5" column="ky_el5" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="ky_cles1_a" column="ky_cles1_a" type="string" length="50" not-null="true" lazy="false"/>
+		<property name="ky_cles2_a" column="ky_cles2_a" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="cd_paese" column="cd_paese" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_lingua" column="cd_lingua" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="aa_nascita" column="aa_nascita" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="aa_morte" column="aa_morte" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="fl_speciale" column="fl_speciale" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ds_nome_aut" column="ds_nome_aut" type="string" length="320" not-null="true" lazy="false"/>
+		<property name="cd_agenzia" column="cd_agenzia" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="cd_norme_cat" column="cd_norme_cat" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="nota_aut" column="nota_aut" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="nota_cat_aut" column="nota_cat_aut" type="string" length="1920" not-null="false" lazy="false"/>
+		<property name="vid_link" column="vid_link" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="ute_forza_ins" column="ute_forza_ins" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ute_forza_var" column="ute_forza_var" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di condivisione gestione del legame con indice
+			</meta>
+			<column name="fl_condiviso" default="S"/>
+		</property>
+		<property name="ute_condiviso" column="ute_condiviso" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di condivisione gestione del legame con indice
+			</meta>
+		</property>
+		<property name="ts_condiviso" column="ts_condiviso" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha attivato la gestione condivisa del legame con indice
+			</meta>
+		</property>
+		<set name="Tr_aut_aut" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid_base" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_aut_aut"/>
+		</set>
+		<set name="Tr_aut_aut1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid_coll" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_aut_aut"/>
+		</set>
+		<set name="Tr_aut_bib" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_aut_bib"/>
+		</set>
+		<set name="Tr_aut_mar" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_aut_mar"/>
+		</set>
+		<set name="Tr_per_int" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_per_int"/>
+		</set>
+		<set name="Tr_rep_aut" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_rep_aut"/>
+		</set>
+		<set name="Tr_tit_aut" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="vid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_aut"/>
+		</set>
+	</class>
+</hibernate-mapping>

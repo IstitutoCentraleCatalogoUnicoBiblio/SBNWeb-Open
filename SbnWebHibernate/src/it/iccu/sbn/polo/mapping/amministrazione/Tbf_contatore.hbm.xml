@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_contatore" table="tbf_contatore" >
+		<meta attribute="class-description">
+			CONTATORI APPLICATIVI (TLFCNT + TPFCNT)
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="cd_cont" column="cd_cont" type="string"/>
+			<key-property name="anno" column="anno" type="integer"/>
+			<key-property name="key1" column="key1" type="string"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</version>
+		<property name="ultimo_prg" column="ultimo_prg" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Ultimo progressivo utilizzato
+			</meta>
+		</property>
+		<property name="lim_max" column="lim_max" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Valore massimo ammesso per il contatore
+			</meta>
+		</property>
+		<property name="attivo" column="attivo" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di utilizzo da parte di altro utente (1=disponibile, 2=in aggiornamento)
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

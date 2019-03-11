@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_autore" polymorphism="explicit" table="TB_AUTORE" lazy="false">
+		<id name="VID" column="VID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="ISADN" column="ISADN" type="it.finsiel.sbn.util.DataTypeCHAR" length="30" not-null="false"/>
+		<property name="TP_FORMA_AUT" column="TP_FORMA_AUT" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="KY_CAUTUN" column="KY_CAUTUN" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="true"/>
+		<property name="KY_AUTEUR" column="KY_AUTEUR" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="true"/>
+		<property name="KY_EL1_A" column="KY_EL1_A" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false"/>
+		<property name="KY_EL1_B" column="KY_EL1_B" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false"/>
+		<property name="KY_EL2_A" column="KY_EL2_A" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false"/>
+		<property name="KY_EL2_B" column="KY_EL2_B" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false"/>
+		<property name="TP_NOME_AUT" column="TP_NOME_AUT" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="KY_EL3" column="KY_EL3" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="KY_EL4" column="KY_EL4" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="KY_EL5" column="KY_EL5" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="KY_CLES1_A" column="KY_CLES1_A" type="it.finsiel.sbn.util.DataTypeCHAR" length="50" not-null="true"/>
+		<property name="KY_CLES2_A" column="KY_CLES2_A" type="it.finsiel.sbn.util.DataTypeCHAR" length="30" not-null="false"/>
+		<property name="CD_PAESE" column="CD_PAESE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_LINGUA" column="CD_LINGUA" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="false"/>
+		<property name="AA_NASCITA" column="AA_NASCITA" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="AA_MORTE" column="AA_MORTE" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="FL_SPECIALE" column="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="DS_NOME_AUT" column="DS_NOME_AUT" type="string" length="320" not-null="true"/>
+		<property name="CD_AGENZIA" column="CD_AGENZIA" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="CD_NORME_CAT" column="CD_NORME_CAT" type="string" length="16" not-null="false"/>
+		<property name="NOTA_AUT" column="NOTA_AUT" type="string" length="320" not-null="false"/>
+		<property name="NOTA_CAT_AUT" column="NOTA_CAT_AUT" type="string" length="1920" not-null="false"/>
+		<property name="VID_LINK" column="VID_LINK" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="UTE_FORZA_INS" column="UTE_FORZA_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false"/>
+		<property name="UTE_FORZA_VAR" column="UTE_FORZA_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+
+
+
+		<!--
+		<set name="TR_AUT_AUT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID_BASE" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_aut_aut"/>
+		</set>
+		<set name="TR_AUT_AUT1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID_COLL" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_aut_aut"/>
+		</set>
+		<set name="TR_AUT_BIB" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_aut_bib"/>
+		</set>
+		<set name="TR_AUT_MAR" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_aut_mar"/>
+		</set>
+		<set name="TR_REP_AUT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_rep_aut"/>
+		</set>
+		<set name="TR_PER_INT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_per_int"/>
+		</set>
+		<set name="TR_TIT_AUT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="VID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_tit_aut"/>
+		</set>
+ -->
+
+		<filter name="TB_AUTORE_selectPerKey" condition="fl_canc !='S' AND vid = :XXXvid "/>
+
+		<filter name="TB_AUTORE_selectEsistenzaId" condition="vid = :XXXvid "/>
+
+		<filter name="TB_AUTORE_selectPerIsadn" condition="fl_canc !='S' AND isadn = :XXXisadn "/>
+
+		<filter name="TB_AUTORE_selectPerNomeLike" condition="fl_canc !='S' "/>
+
+		<filter name="TB_AUTORE_selectPerNome" condition="fl_canc !='S'"/>
+
+		<filter name="TB_AUTORE_selectSimile"
+				condition="fl_canc !='S'
+					AND ky_cautun = :XXXky_cautun
+				  	AND ky_auteur = :XXXky_auteur
+				  	AND tp_nome_aut IN ('A','B','C','D') "/>
+
+		<filter name="TB_AUTORE_selectSimileEnti_1"
+				condition="fl_canc !='S'
+				    AND ky_cautun = :XXXky_cautun
+				    AND tp_nome_aut = :XXXtp_nome_aut
+				    AND ky_auteur = :XXXky_auteur "/>
+
+		<filter name="TB_AUTORE_selectSimileEnti_2"
+				condition="fl_canc !='S' AND
+					tp_nome_aut IN ('E','R','G') "/>
+
+
+
+
+
+		<!--  Inizio modifica almaviva2 - 08.06.2011 nella select si devono verificare anche i cambiamenti dati nella
+		descrizione fra minuscole/Maiuscole quindi vienme eliminato l'UPPER-->
+
+		<!--
+		<filter name="TB_AUTORE_selectSimileConferma"
+				condition="fl_canc !='S'
+				  AND ky_cautun = :XXXky_cautun
+				  AND ky_auteur = :XXXky_auteur
+				  AND TRIM ( UPPER (ds_nome_aut)) = TRIM (UPPER (:XXXds_nome_aut)) "/>
+		-->
+
+		<filter name="TB_AUTORE_selectSimileConferma"
+				condition="fl_canc !='S'
+				  AND ky_cautun = :XXXky_cautun
+				  AND ky_auteur = :XXXky_auteur
+				  AND TRIM (ds_nome_aut) = TRIM (:XXXds_nome_aut) "/>
+		<!--  Fine modifica almaviva2 - 08.06.2011 nella select si devono verificare anche i cambiamenti dati nella
+		descrizione fra minuscole/Maiuscole quindi vienme eliminato l'UPPER-->
+
+
+
+		<filter name="TB_AUTORE_selectPerDatavar"
+				condition="fl_canc !='S'
+					AND to_char(ts_var,'yyyy-mm-dd') &gt; :XXXdata_var_Da
+					AND to_char(ts_var,'yyyy-mm-dd') &lt; :XXXdata_var_A "/>
+<!--  POSTGRESS -->
+		<filter name="TB_AUTORE_selectPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_AUTORE_countPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+<!--  END POSTGRESS -->
+		<filter name="TB_AUTORE_selectPerParoleNome"
+				condition="fl_canc !='S' AND CONTAINS(ds_nome_aut, :XXXparola1 ) &gt; 0 "/>
+
+		<filter name="TB_AUTORE_countPerParoleNome"
+				condition="fl_canc !='S' AND CONTAINS(ds_nome_aut, :XXXparola1 ) &gt; 0 "/>
+
+		<filter name="TB_AUTORE_countPerNomeLike" condition="fl_canc !='S' "/>
+
+		<filter name="TB_AUTORE_countPerNome"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_AUTORE_countSimile"
+				condition="fl_canc !='S'
+				  AND ky_cautun = :XXXky_cautun
+				  AND ky_auteur = :XXXky_auteur "/>
+
+		<filter name="TB_AUTORE_countPerDatavar"
+				condition="fl_canc !='S'
+				  AND to_char(ts_var,'yyyy-mm-dd') &gt; :XXXdata_var_Da
+				  AND to_char(ts_var,'yyyy-mm-dd') &lt;  :XXXdata_var_A "/>
+
+
+
+		<filter name="TB_AUTORE_selectPerCautun" condition="fl_canc !='S' AND ky_cautun = :XXXKy_cautun "/>
+		<filter name="TB_AUTORE_countPerCautun" condition="fl_canc !='S' AND ky_cautun = :XXXKy_cautun "/>
+
+		<filter name="TB_AUTORE_selectPerAuteur" condition="fl_canc !='S' AND ky_auteur = :XXXKy_auteur "/>
+		<filter name="TB_AUTORE_countPerAuteur" condition="fl_canc !='S' AND ky_auteur = :XXXKy_auteur "/>
+
+		<filter name="TB_AUTORE_selectDirettaPerDatavar"
+				condition="fl_canc !='S'
+				  AND to_char(ts_var,'yyyy-mm-dd') &gt; :XXXdata_var_da
+				  AND to_char(ts_var,'yyyy-mm-dd') &lt;  :XXXdata_var_a "/>
+
+
+	</class>
+</hibernate-mapping>

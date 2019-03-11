@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="default_sollecito" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="456"/>
+	<field name="nomeUtente" class="java.lang.String"/>
+	<field name="codUtente" class="java.lang.String"/>
+	<field name="tipoServizio" class="java.lang.String"/>
+	<field name="indirizzo" class="java.lang.String"/>
+	<field name="cap" class="java.lang.String"/>
+	<field name="cittaNazione" class="java.lang.String"/>
+	<field name="segnatura" class="java.lang.String"/>
+	<field name="dataScadenza" class="java.lang.String"/>
+	<field name="numSollecito" class="java.lang.String"/>
+	<field name="titolo" class="java.lang.String"/>
+	<field name="inventario" class="java.lang.String"/>
+	<field name="dataPrestito" class="java.lang.String"/>
+	<field name="tipo" class="it.iccu.sbn.ejb.vo.servizi.batch.ElementoStampaSollecitoVO.TipoUtente"/>
+	<field name="descrizioneNazione" class="java.lang.String"/>
+	<field name="provincia" class="java.lang.String"/>
+	<variable name="oggetto" class="java.lang.String">
+		<variableExpression><![CDATA["[Sollecito n. " + $F{numSollecito} + "]"]]></variableExpression>
+	</variable>
+	<variable name="oggi" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="368" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="378" y="51" width="143" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomeUtente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="378" y="71" width="143" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{indirizzo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="378" y="91" width="143" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cittaNazione}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="126" width="41" height="20"/>
+				<textElement/>
+				<text><![CDATA[Oggetto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="292" y="126" width="29" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="158" width="148" height="20"/>
+				<textElement/>
+				<text><![CDATA[In riferimento al documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="292" y="158" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Collocazione:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="189" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Titolo documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="221" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[prestato in data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="191" y="221" width="206" height="20"/>
+				<textElement/>
+				<text><![CDATA[Che doveva essere riconsegnato in data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="254" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Per il tipo Servizio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="286" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tessera lettore:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="318" width="309" height="33"/>
+				<textElement/>
+				<text><![CDATA[Si prega di restituire il documento al più presto.
+In caso di avvenuta restituzione, ignorare il presente sollecito.]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="60" y="126" width="131" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{oggetto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="361" y="158" width="160" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{segnatura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="112" y="189" width="409" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{titolo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="397" y="221" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dataScadenza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="254" width="266" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoServizio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="286" width="152" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codUtente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="160" y="158" width="128" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{inventario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="112" y="221" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dataPrestito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement positionType="Float" x="321" y="126" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="361" width="100" height="1"/>
+			</break>
+			<textField>
+				<reportElement x="378" y="31" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{tipo} == it.iccu.sbn.ejb.vo.servizi.batch.ElementoStampaSollecitoVO.TipoUtente.ENTE ? "Spett.le" : ($F{tipo} == it.iccu.sbn.ejb.vo.servizi.batch.ElementoStampaSollecitoVO.TipoUtente.MASCHIO ? "Egr. Sig." : "Egr. Sig.ra"))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="12" y="125" width="504" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="12" y="209" width="509" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

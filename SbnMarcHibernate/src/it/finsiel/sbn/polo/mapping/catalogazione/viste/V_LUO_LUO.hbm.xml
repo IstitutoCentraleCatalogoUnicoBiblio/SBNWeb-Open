@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.V_luo_luo" polymorphism="explicit" table="V_LUO_LUO" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="LID_1" column="LID_1" type="string"/>
+			<key-property name="LID_2" column="LID_2" type="string"/>
+		</composite-id>
+		<property name="TP_LEGAME" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

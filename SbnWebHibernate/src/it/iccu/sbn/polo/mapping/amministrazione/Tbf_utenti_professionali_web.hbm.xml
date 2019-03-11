@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_utenti_professionali_web" table="tbf_utenti_professionali_web" >
+		<!-- <cache usage="transactional" /> -->
+		<id column="id_utente_professionale" type="integer">
+			<generator class="foreign">
+				<param name="property">id_utente_professionale</param>
+			</generator>
+		</id>
+		<one-to-one name="id_utente_professionale" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_anagrafe_utenti_professionali" cascade="all" constrained="true"/>
+		<property name="userid" column="userid" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="password" column="password" type="string" length="256" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="change_password" column="change_password" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="last_access" column="last_access" type="timestamp" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_composizione" polymorphism="explicit" table="TB_COMPOSIZIONE" lazy="false">
+		<!--
+		<id column="BID" type="it.finsiel.sbn.util.DataTypeCHAR">
+			<generator class="foreign">
+				<param name="property">TB_TITOLO</param>
+			</generator>
+		</id>
+		<one-to-one name="TB_TITOLO" class="it.finsiel.sbn.polo.orm.Tb_titolo11" cascade="all" constrained="true"/>
+		-->
+		<id name="BID" column="BID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="CD_FORMA_1" column="CD_FORMA_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="CD_FORMA_2" column="CD_FORMA_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="CD_FORMA_3" column="CD_FORMA_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="NUMERO_ORDINE" column="NUMERO_ORDINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="NUMERO_OPERA" column="NUMERO_OPERA" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="NUMERO_CAT_TEM" column="NUMERO_CAT_TEM" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="CD_TONALITA" column="CD_TONALITA" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="DATAZIONE" column="DATAZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="AA_COMP_1" column="AA_COMP_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="AA_COMP_2" column="AA_COMP_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="false"/>
+		<property name="DS_SEZIONI" column="DS_SEZIONI" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="KY_ORD_RIC" column="KY_ORD_RIC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="KY_EST_RIC" column="KY_EST_RIC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="KY_APP_RIC" column="KY_APP_RIC" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="KY_ORD_CLET" column="KY_ORD_CLET" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="KY_EST_CLET" column="KY_EST_CLET" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="KY_APP_CLET" column="KY_APP_CLET" type="it.finsiel.sbn.util.DataTypeCHAR" length="6" not-null="false"/>
+		<property name="KY_ORD_PRE" column="KY_ORD_PRE" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="KY_EST_PRE" column="KY_EST_PRE" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="KY_APP_PRE" column="KY_APP_PRE" type="it.finsiel.sbn.util.DataTypeCHAR" length="20" not-null="false"/>
+		<property name="KY_ORD_DEN" column="KY_ORD_DEN" type="string" length="234" not-null="false"/>
+		<property name="KY_EST_DEN" column="KY_EST_DEN" type="string" length="234" not-null="false"/>
+		<property name="KY_APP_DEN" column="KY_APP_DEN" type="string" length="234" not-null="false"/>
+		<property name="KY_ORD_NOR_PRE" column="KY_ORD_NOR_PRE" type="string" length="240" not-null="false"/>
+		<property name="KY_EST_NOR_PRE" column="KY_EST_NOR_PRE" type="string" length="240" not-null="false"/>
+		<property name="KY_APP_NOR_PRE" column="KY_APP_NOR_PRE" type="string" length="240" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_COMPOSIZIONE_selectPerKey"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+
+		<filter name="TB_COMPOSIZIONE_verificaEsistenza"
+				condition="bid = :XXXbid "/>
+
+		<filter name="TB_COMPOSIZIONE_selectCreazioneIsbd"
+				condition="fl_canc != 'S' "/>
+
+
+	</class>
+</hibernate-mapping>

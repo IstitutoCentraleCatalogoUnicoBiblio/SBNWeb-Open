@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_classe_tit" polymorphism="explicit" table="VL_CLASSE_TIT" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="CD_SISTEMA" column="CD_SISTEMA" type="string"/>
+			<key-property name="CD_EDIZIONE" column="CD_EDIZIONE" type="string"/>
+                        <key-property name="CLASSE" column="CLASSE" type="it.finsiel.sbn.util.DataTypeCHAR"/>
+			<key-property name="BID" column="BID" type="string"/>
+		</composite-id>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="FL_COSTRUITO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="DS_CLASSE" type="string" length="160" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+
+		<property name="NOTA_TIT_CLA" column="NOTA_TIT_CLA" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+
+	    <filter name="VL_CLASSE_TIT_selectClassePerTitolo"
+				condition="bid = :XXXbid "/>
+
+            <filter name="VL_CLASSE_TIT_countClassePerTitolo"
+				condition="bid = :XXXbid "/>
+
+            <filter name="VL_CLASSE_TIT_selectClassePerTitoloSistemaEdizione"
+				condition="bid = :XXXbid AND
+				           cd_sistema = :XXXcd_sistema AND
+                                           cd_edizione = :XXXcd_edizione "/>
+
+	    <filter name="VL_CLASSE_TIT_countClassePerTitoloSistemaEdizione"
+				condition="bid = :XXXbid AND
+				           cd_sistema = :XXXcd_sistema AND
+                                           cd_edizione = :XXXcd_edizione "/>
+
+	</class>
+</hibernate-mapping>

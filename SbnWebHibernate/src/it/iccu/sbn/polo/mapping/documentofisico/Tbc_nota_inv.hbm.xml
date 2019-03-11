@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_nota_inv" table="tbc_nota_inv" schema="sbnweb" >
+		<meta attribute="class-description">
+			SERIE INVENTARIALI
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_polo" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario">
+				<column name="cd_serie"/>
+				<column name="cd_bib"/>
+				<column name="cd_polo"/>
+				<column name="cd_inven"/>
+			</key-many-to-one>
+			<key-property name="cd_nota" column="cd_nota" type="string"/>
+		</composite-id>
+		<property name="ds_nota_libera" column="ds_nota_libera" type="string" length="1920" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				progressivo per l'assegnazione automatica del n. inventario pregresso
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

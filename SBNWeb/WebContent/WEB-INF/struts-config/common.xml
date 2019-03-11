@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<!-- ================================================ Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="loginForm"
+			type="it.iccu.sbn.web.actionforms.common.LoginForm" />
+		<form-bean name="migrazioneForm"
+			type="it.iccu.sbn.web.actionforms.common.MigrazioneForm" />
+		<form-bean name="migrazioneSoggettiForm"
+			type="it.iccu.sbn.web.actionforms.common.MigrazioneForm" />
+		<form-bean name="changePasswordForm"
+			type="it.iccu.sbn.web.actionforms.common.ChangePasswordForm" />
+		<form-bean name="tastieraSbnForm"
+			type="it.iccu.sbn.web.actionforms.common.TastieraSbnForm" />
+		<form-bean name="listaBibliotecheForm"
+			type="it.iccu.sbn.web.actionforms.common.ListaBibliotecheForm" />
+
+		<form-bean name="estrattoreIdDocumentiForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.esporta.EstrattoreIdDocumentiForm" />
+
+		<form-bean name="estrattoreIdAuthorityForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.esporta.EstrattoreIdAuthorityForm" />
+
+	</form-beans>
+	<!-- ========================================= Global Exception Definitions -->
+	<global-exceptions>
+		<exception key="errors.global" type="java.lang.Exception"
+			handler="it.iccu.sbn.web.integration.SbnExceptionHandler" />
+	</global-exceptions>
+	<!-- =========================================== Global Forward Definitions -->
+	<global-forwards>
+		<forward name="blank" path="/blank.do" />
+		<forward name="error" path="/error.do" />
+		<forward name="tastiera" path="/TastieraSbn.do" />
+		<forward name="fileDownloadSbn" path="/fileDownload.do" />
+	</global-forwards>
+	<!-- =========================================== Action Mapping Definitions -->
+	<action-mappings type="it.iccu.sbn.web.integration.SbnActionMapping">
+
+		<action path="/blank" forward="/WEB-INF/jsp/pages/blank.jsp" />
+		<action path="/error" forward="/WEB-INF/jsp/pages/error.jsp" />
+
+		<action path="/TastieraSbn" name="tastieraSbnForm" parameter="methodTastieraSbn"
+			input="/WEB-INF/jsp/pages/tastieraSbn.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.common.TastieraSbnAction">
+		</action>
+
+		<action path="/menu" type="it.iccu.sbn.web2.actions.common.MenuAction">
+		</action>
+		<!-- ACTION UTILIZZATA IN FASE DI LOGIN GESTITA DALLA REQUEST PROCESSOR -->
+		<action path="/login" name="loginForm" input="/WEB-INF/jsp/pages/login/login.jsp"
+			validate="true" type="it.iccu.sbn.web.actions.common.LoginAction"
+			scope="request" parameter="methodLogin">
+			<!-- <forward name="pagina_predefinita" path="/menu.do" redirect="false"/> -->
+			<forward name="pagina_predefinita" path="/index.jsp" />
+			<forward name="password" path="/changePassword.do" />
+		</action>
+		<action path="/logout" type="it.iccu.sbn.web.actions.common.LogoutAction">
+			<forward name="pagina_predefinita" path="/index.jsp" />
+		</action>
+		<action path="/changePassword" name="changePasswordForm"
+			input="/WEB-INF/jsp/pages/login/changePassword.jsp" validate="true"
+			type="it.iccu.sbn.web.actions.common.ChangePasswordAction" scope="request"
+			parameter="methodChange">
+			<!-- <forward name="pagina_predefinita" path="/menu.do" redirect="false"/> -->
+			<forward name="pagina_predefinita" path="/index.jsp" />
+		</action>
+		<!-- Utilizzata per scegliere una biblioteca dalla lista biblioteche del
+			centro sistema -->
+		<action path="/listaBiblioteche" name="listaBibliotecheForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/listaBiblioteche.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.common.ListaBibliotecheAction">
+		</action>
+
+		<action path="/fileDownload" type="it.iccu.sbn.web.actions.common.SbnDownloadAction">
+		</action>
+
+		<action path="/migrazione" name="migrazioneForm"
+			input="/WEB-INF/jsp/pages/common/migrazione.jsp" validate="true"
+			type="it.iccu.sbn.web.actions.common.MigrazioneAction" scope="session"
+			parameter="methodMigrazione">
+		</action>
+
+		<action path="/migrazioneSoggetti" name="migrazioneSoggettiForm"
+			input="/WEB-INF/jsp/pages/common/migrazioneSoggetti.jsp" validate="true"
+			type="it.iccu.sbn.web.actions.common.MigrazioneAction" scope="session"
+			parameter="methodMigrazione">
+		</action>
+
+		<!-- Manutenzione almaviva2 05.07.2011 - BUG MANTIS 4510 (collaudo)
+			inserite le chiamate per le lentine di sezioni. collocazioni e specificazioni
+			perchè mancanti -->
+		<!-- Manutenzione almaviva2 21.09.2011 - inserite le chiamate per la
+			lentina del biblotecario (ute ins e var) -->
+		<action path="/elaborazioniDifferite/esporta/estrattoreIdDocumenti"
+			name="estrattoreIdDocumentiForm"
+			input="/WEB-INF/jsp/pages/elaborazioniDifferite/esporta/estrattoreIdDocumenti.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.elaborazioniDifferite.esporta.EstrattoreIdDocumentiAction"
+			parameter="methodEstrattoreIdDoc">
+
+			<forward name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+			<forward name="SIFbibliotecario"
+				path="/amministrazionesistema/ricercaBibliotecario.do" />
+		</action>
+
+		<!-- almaviva5_20120525 Estrattore id authority -->
+		<action path="/elaborazioniDifferite/esporta/estrattoreIdAuthority"
+			name="estrattoreIdAuthorityForm"
+			input="/WEB-INF/jsp/pages/elaborazioniDifferite/esporta/estrattoreIdAuthority.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.elaborazioniDifferite.esporta.EstrattoreIdAuthorityAction"
+			parameter="methodEstrattoreIdAuth">
+		</action>
+
+	</action-mappings>
+	<!-- ======================================== Message Resources Definitions -->
+	<message-resources parameter="it.iccu.sbn.web.resources.ApplicationResources" />
+	<message-resources key="messages"
+		parameter="it.iccu.sbn.web.resources.ApplicationMessages" null="false" />
+
+	<message-resources key="sbnErrorTypes"
+		parameter="it.iccu.sbn.web.resources.SbnErrorTypes" null="false" />
+	<!-- =============================================== Plug Ins Configuration -->
+	<plug-in className="it.iccu.sbn.web.plugins.SbnWebPreprocessorPlugin" />
+
+	<plug-in className="it.iccu.sbn.web.plugins.Log4jPlugin">
+		<set-property property="config" value="/WEB-INF/log4j-config.xml" />
+	</plug-in>
+
+	<plug-in className="it.iccu.sbn.web.plugins.FactoryEJBPlugin" />
+</struts-config>

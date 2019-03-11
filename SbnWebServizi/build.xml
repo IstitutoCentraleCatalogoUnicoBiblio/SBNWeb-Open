@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="build" name="SBN">
+	<property file="build.properties" />
+
+	<property name="build.dir" value="${deploy.dir}/${module.name}.ear" />
+
+	<path id="common_libs">
+		<fileset dir="${lib.common.dir}" />
+	</path>
+
+	<path id="hibernate_libs">
+		<fileset dir="${lib.hibernate.dir}" />
+	</path>
+
+	<property name="sbnweb.common.struts.location" location="../SbnWebCommon/dist/struts/"/>
+	<path id="sbnweb_common_struts_libs">
+      <fileset dir="${sbnweb.common.struts.location}"/>
+    </path>
+
+	<property name="sbnweb.common.vo.location" location="../SbnWebCommon/dist/vo/"/>
+	<path id="sbnweb_common_vo_libs">
+      <fileset dir="${sbnweb.common.vo.location}"/>
+    </path>
+
+    <pathconvert property="sbnweb.common.vo.classpath" pathsep=" ">
+		<path refid="sbnweb_common_vo_libs" />
+		<map from="${sbnweb.common.vo.location}/" to="lib/" />
+	</pathconvert>
+<!--
+	<pathconvert property="common.classpath" pathsep=" ">
+		<path refid="common_libs" />
+		<map from="${basedir}/${lib.common.dir}/" to="lib/" />
+	</pathconvert>
+
+	<pathconvert property="hibernate.classpath" pathsep=" ">
+		<path refid="hibernate_libs" />
+		<map from="${basedir}/${lib.hibernate.dir}/" to="lib/" />
+	</pathconvert>
+-->
+	<target name="init">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="build" description="Assemblaggio Modulo Web" depends="init">
+		<copy todir="${build.dir}/${war.name}">
+			<fileset dir="WebContent" />
+		</copy>
+		<copy todir="${build.dir}/${war.name}/WEB-INF/lib">
+			<fileset dir="${sbnweb.lib.web.dir}" />
+			<fileset dir="${sbnweb.common.struts.location}" />
+		</copy>
+
+		<copy todir="${build.dir}/${war.name}/WEB-INF/classes">
+			<fileset dir="build/classes">
+				<include name="it/iccu/sbn/web/**" />
+			</fileset>
+			<!--
+			<fileset dir="${config.web.dir}" />
+		</copy>
+		<copy todir="${build.dir}/${module.name}-web.war/WEB-INF/classes">
+			<fileset dir="WebContent/WEB-INF/reportsOnLine" >
+				<include name="*.class" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build.dir}/${module.name}-web.war/Documentazione">
+			<fileset dir="Documentazione" /> 	-->
+		</copy>
+
+
+		<mkdir dir="${build.dir}/${war.name}/META-INF"/>
+		<manifest file="${build.dir}/${war.name}/META-INF/MANIFEST.MF">
+			<attribute name="Class-Path" value="${common.classpath} ${sbnweb.common.vo.classpath}" />
+		</manifest>
+
+	</target>
+
+</project>

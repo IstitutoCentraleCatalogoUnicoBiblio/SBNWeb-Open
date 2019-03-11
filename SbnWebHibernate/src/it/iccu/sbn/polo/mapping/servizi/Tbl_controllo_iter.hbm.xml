@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_controllo_iter" table="tbl_controllo_iter" >
+		<meta attribute="class-description">
+			Fasi di controllo
+		</meta>
+		<id name="id_controllo_iter" column="id_controllo_iter" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_iter_servizio" cascade="lock" column="id_iter_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_iter_servizio" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="progr_fase" column="progr_fase" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo che individua la sequenza di controllo
+			</meta>
+		</property>
+		<property name="fl_bloccante" column="fl_bloccante" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indica se l'esito positivo del controllo, blocca la fase successiva dell'iter di controlli
+			</meta>
+		</property>
+		<property name="messaggio" column="messaggio" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				messaggio presentato all'utente nel caso il controllo abbia dato positivo
+			</meta>
+		</property>
+		<property name="cod_controllo" column="cod_controllo" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice che identifica il controllo
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

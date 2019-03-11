@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_modello_calendario" table="tbl_modello_calendario" >
+		<meta attribute="class-description">
+			Modello del Calendario
+		</meta>
+		<id name="id_modello" column="id_modello" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="biblioteca" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<many-to-one name="sala" column="id_sala" cascade="lock" class="it.iccu.sbn.polo.orm.servizi.Tbl_sale" not-null="false" lazy="proxy" access="field" />
+
+		<property name="cd_tipo" column="cd_tipo" type="character" length="1" not-null="true" lazy="false" />
+		<property name="cd_cat_mediazione" column="cd_cat_mediazione" type="string" length="2" not-null="false" lazy="false" />
+
+		<property name="descrizione" column="descrizione" type="string" length="255" not-null="true" lazy="false" />
+		<property name="dt_inizio" column="dt_inizio" type="date" not-null="true" lazy="false" />
+		<property name="dt_fine" column="dt_fine" type="date" not-null="false" lazy="false" />
+		<property name="json_modello" column="json_modello" type="string" lazy="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<struts-configs-esamina>
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="A"
+		myLabel="Autori collegati" myForwardName="AUTORI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/autore/sinteticaAutori.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="A"
+		myLabel="Marche collegate" myForwardName="MARCHE_COLLEGATE_A_TITOLO"
+		myForwardPath="/gestionebibliografica/marca/sinteticaMarche.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="A"
+		myLabel="Dati semantici" myForwardName="SOGGETTI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="A"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="P"
+		myLabel="Posseduto" myForwardName="ESAMINA_POSSEDUTO"
+		myForwardPath="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="P"
+		myLabel="Ordini" myForwardName="ORDINI"
+		myForwardPath="/acquisizioni/ordini/listaOrdini.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.sinteticaTitoli"
+		myLivelloBaseDati="P"
+		myLabel="Fascicoli" myForwardName="PERIODICI"
+		myForwardPath="/periodici/esameKardex.do"
+		myModeCall="do" />
+
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.autore.sinteticaAutori"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_AUTORE"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.autore.sinteticaAutori"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_AUTORE"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.autore.sinteticaAutori"
+		myLivelloBaseDati="A"
+		myLabel="Marche collegate" myForwardName="MARCHE_COLLEGATE_A_AUTORE"
+		myForwardPath="/gestionebibliografica/marca/sinteticaMarche.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.autore.sinteticaAutori"
+		myLivelloBaseDati="A"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="jsp" />
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.marca.sinteticaMarche"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_MARCA"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.marca.sinteticaMarche"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_MARCA"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.marca.sinteticaMarche"
+		myLivelloBaseDati="A"
+		myLabel="Editori collegati" myForwardName="AUTORI_COLLEGATI_A_MARCA"
+		myForwardPath="/gestionebibliografica/autore/sinteticaAutori.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.marca.sinteticaMarche"
+		myLivelloBaseDati="A"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="jsp" />
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.luogo.sinteticaLuoghi"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_LUOGO"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.luogo.sinteticaLuoghi"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_LUOGO"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitolo"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitolo"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitolo"
+		myLivelloBaseDati="A"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitolo"
+		myLivelloBaseDati="P"
+		myLabel="Posseduto" myForwardName="ESAMINA_POSSEDUTO"
+		myForwardPath="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitolo"
+		myLivelloBaseDati="P"
+		myLabel="Ordini" myForwardName="ORDINI"
+		myForwardPath="/acquisizioni/ordini/listaOrdini.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitolo"
+		myLivelloBaseDati="P"
+		myLabel="Fascicoli" myForwardName="PERIODICI"
+		myForwardPath="/periodici/esameKardex.do"
+		myModeCall="do" />
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaAutore"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_AUTORE"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaAutore"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_AUTORE"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaAutore"
+		myLivelloBaseDati="A"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="jsp" />
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaMarca"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_MARCA"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaMarca"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_MARCA"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaMarca"
+		myLivelloBaseDati="A"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="jsp" />
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaLuogo"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_LUOGO"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaLuogo"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_LUOGO"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaPossessore"
+		myLivelloBaseDati="P"
+		myLabel="Inventari" myForwardName="INVENTARI_POSSESSORE"
+		myForwardPath=""
+		myModeCall="do" />
+
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitoloDaAcquisizioni"
+		myLivelloBaseDati="P"
+		myLabel="Localizzazioni" myForwardName="LOCALIZZAZIONI"
+		myForwardPath="/gestionebibliografica/sinteticaLocalizzazioni.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitoloDaAcquisizioni"
+		myLivelloBaseDati="P"
+		myLabel="Posseduto" myForwardName="ESAMINA_POSSEDUTO"
+		myForwardPath="/documentofisico/esameCollocazioni/esameCollocEsaminaPosseduto.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitoloDaAcquisizioni"
+		myLivelloBaseDati="P"
+		myLabel="Ordini" myForwardName="ORDINI"
+		myForwardPath="/acquisizioni/ordini/listaOrdini.do"
+		myModeCall="do" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaTitoloDaAcquisizioni"
+		myLivelloBaseDati="P"
+		myLabel="Fascicoli NON DISPONIBILE" myForwardName="LOCALIZZAZIONI"
+		myForwardPath=""
+		myModeCall="do" />
+
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaSoggetto"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaSoggetto"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaClasse"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/sinteticaTitoli.do"
+		myModeCall="jsp" />
+	<struts-forward-esamina
+		myAction=".gestionebibliografica.titolo.analiticaClasse"
+		myLivelloBaseDati="A"
+		myLabel="Titoli collegati con filtro" myForwardName="TITOLI_COLLEGATI_A_TITOLO"
+		myForwardPath="/gestionebibliografica/titolo/interrogazioneTitolo.do"
+		myModeCall="do" />
+
+
+
+</struts-configs-esamina>

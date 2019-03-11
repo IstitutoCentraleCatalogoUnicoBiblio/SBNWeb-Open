@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_marca_aut" polymorphism="explicit" table="VL_MARCA_AUT" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="VID" column="VID" type="string"/>
+			<key-property name="MID" column="MID" type="string"/>
+		</composite-id>
+		<property name="NOTA_AUT_MAR" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="DS_MARCA" type="string" length="160" not-null="true" lazy="false"/>
+		<property name="NOTA_MARCA" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="DS_MOTTO" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+
+       	<filter name="VL_MARCA_AUT_selectPerKey"
+				condition="fl_canc != 'S' "/>
+
+       	<filter name="VL_MARCA_AUT_selectPerMid"
+				condition="mid = :XXXmid
+						   AND fl_canc != 'S' "/>
+
+        <filter name="VL_MARCA_AUT_selectPerVid"
+        		condition="vid = :XXXvid
+						   AND fl_canc != 'S' "/>
+
+        <filter name="VL_MARCA_AUT_countAutorePerLegameVid"
+        		condition="vid=:XXXvid
+						   AND fl_canc != 'S' "/>
+	</class>
+</hibernate-mapping>

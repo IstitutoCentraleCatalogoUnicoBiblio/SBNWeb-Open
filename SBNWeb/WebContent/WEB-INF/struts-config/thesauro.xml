@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+
+		<!-- THESAURO form-beans-->
+
+		<form-bean name="RicercaThesauroForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.RicercaThesauroForm" />
+		<form-bean name="CreaThesauroForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.GestioneTermineForm" />
+		<form-bean name="ListaThesauriForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.ListaThesauriForm" />
+		<form-bean name="SinteticaTitoliThesauroForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.SinteticaTitoliThesauroForm" />
+		<form-bean name="SinteticaTerminiForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.SinteticaTerminiForm" />
+		<form-bean name="AnaliticaThesauroForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.AnaliticaThesauroForm" />
+		<form-bean name="GestioneTermineForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.GestioneTermineForm" />
+		<form-bean name="GestioneLegameTerminiForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.GestioneLegameTerminiForm" />
+		<form-bean name="GestioneLegameTitoloTermineForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.catalogazionesemantica.GestioneLegameTitoloTermineForm" />
+		<form-bean name="gestioneLegameTermineClasseForm"
+			type="it.iccu.sbn.web.actionforms.gestionesemantica.thesauro.GestioneLegameTermineClasseForm" />
+
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+		<forward name="delegate_titoliCollegati"
+			path="/gestionebibliografica/titolo/sinteticaTitoli.do?SIFSINTETICA=TRUE" />
+		<forward name="delegate_titoliCollegatiFiltro"
+			path="/gestionebibliografica/titolo/interrogazioneTitolo.do?SIFSINTETICA=TRUE" />
+		<forward name="stampaSintetica" path="/gestionestampe/stampaOnLine/StampaOnLine.do" />
+	</global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings>
+
+		<!-- THESAURO action-mappings -->
+
+		<action path="/gestionesemantica/thesauro/RicercaThesauro"
+			name="RicercaThesauroForm"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/ricercaThesauro.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.RicercaThesauroAction"
+			parameter="methodRicercaThes">
+			<forward name="trovatolista"
+				path="/gestionesemantica/thesauro/ListaThesauri.do" />
+			<forward name="sinteticaTitoliThesauro"
+				path="/gestionesemantica/thesauro/SinteticaTitoliThesauro.do" />
+			<forward name="nontrovato"
+				path="/gestionesemantica/thesauro/GestioneTermine.do" />
+			<forward name="trovatolistaterminithesauro"
+				path="/gestionesemantica/thesauro/SinteticaTermini.do" />
+		</action>
+
+		<action path="/gestionesemantica/thesauro/GestioneTermine"
+			name="GestioneTermineForm"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/gestioneTermine.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.GestioneTermineAction"
+			parameter="methodGestioneThes">
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/thesauro/Stampa.do" />
+			<forward name="inserisciLegameTitoloTermine"
+				path="/gestionesemantica/catalogazionesemantica/GestioneLegameTitoloTermine.do" />
+			<forward name="creaLegameTermini"
+				path="/gestionesemantica/thesauro/GestioneLegameTermini.do" />
+			<forward name="cercaTerminePerFusione"
+				path="/gestionesemantica/thesauro/RicercaThesauro.do" />
+			<forward name="sinteticaTitoliFusione"
+				path="/gestionesemantica/thesauro/SinteticaTitoliThesauro.do" />
+		</action>
+
+		<action path="/gestionesemantica/thesauro/ListaThesauri"
+			name="ListaThesauriForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.ListaThesauriAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/listaThesauri.jsp"
+			scope="session" parameter="methodSinteticaThes">
+			<forward name="creaThesauro"
+				path="/gestionesemantica/thesauro/GestioneTermine.do" />
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/thesauro/Stampa.do" />
+			<forward name="inserisciLegameTitoloTermine"
+				path="/gestionesemantica/catalogazionesemantica/GestioneLegameTitoloTermine.do" />
+			<forward name="creaLegameTermini"
+				path="/gestionesemantica/thesauro/GestioneLegameTermini.do" />
+			<forward name="sinteticaTitoliFusione"
+				path="/gestionesemantica/thesauro/SinteticaTitoliThesauro.do" />
+
+		</action>
+
+		<action path="/gestionesemantica/thesauro/SinteticaTermini"
+			name="SinteticaTerminiForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.SinteticaTerminiAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/sinteticaTermini.jsp"
+			scope="session" parameter="methodSinteticaTermini">
+			<forward name="listaTermini"
+				path="/gestionesemantica/thesauro/ListaThesauri.do" />
+			<forward name="sinteticaterminithesauro"
+				path="/gestionesemantica/thesauro/SinteticaTermini.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/thesauro/Stampa.do" />
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+		</action>
+
+		<action
+			path="/gestionesemantica/thesauro/SinteticaTitoliThesauro"
+			name="SinteticaTitoliThesauroForm"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/sinteticaTitoliThesauro.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.SinteticaTitoliThesauroAction"
+			parameter="methodSintTitThe">
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+		</action>
+
+		<action path="/gestionesemantica/thesauro/AnaliticaThesauro"
+			name="AnaliticaThesauroForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.AnaliticaThesauroAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/analiticaThesauro.jsp"
+			scope="session" parameter="methodAnaThes">
+			<forward name="esaminaThesauro"
+				path="/gestionesemantica/thesauro/GestioneTermine.do" />
+			<forward name="gestioneThesauro"
+				path="/gestionesemantica/thesauro/GestioneTermine.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/thesauro/Stampa.do" />
+			<forward name="inserisciLegameTermini"
+				path="/gestionesemantica/thesauro/RicercaThesauro.do" />
+			<forward name="modificaLegameTermini"
+				path="/gestionesemantica/thesauro/GestioneLegameTermini.do" />
+			<forward name="listaClassi"
+				path="/gestionesemantica/classificazione/listaClassiTermine.do" />
+		</action>
+
+		<action path="/gestionesemantica/thesauro/GestioneLegameTermini"
+			name="GestioneLegameTerminiForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.GestioneLegameTerminiAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/gestioneLegameTerminiThesauro.jsp"
+			scope="session" parameter="methodLegameThes">
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+		</action>
+
+		<action path="/gestionesemantica/catalogazionesemantica/GestioneLegameTitoloTermine"
+			name="GestioneLegameTitoloTermineForm"
+			input="/WEB-INF/jsp/pages/gestionesemantica/catalogazionesemantica/gestioneLegameTitoloTermine.jsp"
+			validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.gestionesemantica.catalogazionesemantica.GestioneLegameTitoloTermineAction"
+			parameter="methodGestLegameTitTermine">
+
+			<forward name="catalogazione"
+				path="/gestionesemantica/catalogazionesemantica/CatalogazioneSemantica.do" />
+
+			<forward name="analiticaThesauro"
+				path="/gestionesemantica/thesauro/AnaliticaThesauro.do" />
+			<forward name="stampa"
+				path="/gestionesemantica/thesauro/Stampa.do" />
+			<forward name="creaLegameThesauroTitolo"
+				path="/gestionesemantica/catalogazionesemantica/CreaLegameThesauroTitolo.do" />
+			<forward name="creaLegameTermini"
+				path="/gestionesemantica/thesauro/GestioneLegameTermini.do" />
+			<forward name="esaminaClasse" path="/gestionesemantica/classificazione/EsaminaClasse.do" />
+		</action>
+
+		<action path="/gestionesemantica/thesauro/gestioneLegameTermineClasse"
+			name="gestioneLegameTermineClasseForm" validate="false"
+			type="it.iccu.sbn.web.actions.gestionesemantica.thesauro.GestioneLegameTermineClasseAction"
+			input="/WEB-INF/jsp/pages/gestionesemantica/thesauro/gestioneLegameTermineClasse.jsp"
+			scope="session" parameter="methodLegameThCl">
+
+			<forward name="listaClassi" path="/gestionesemantica/classificazione/listaClassiTermine.do" />
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="gestioneSemanticaLabels"
+		parameter="it.iccu.sbn.web.resources.GestioneSemanticaLabels"
+		null="false" />
+
+	<message-resources key="gestioneSemanticaMessages"
+		parameter="it.iccu.sbn.web.resources.GestioneSemanticaMessages"
+		null="false" />
+
+</struts-config>

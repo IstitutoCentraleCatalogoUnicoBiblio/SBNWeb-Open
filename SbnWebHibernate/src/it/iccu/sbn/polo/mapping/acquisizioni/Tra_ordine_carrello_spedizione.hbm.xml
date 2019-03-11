@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tra_ordine_carrello_spedizione" table="tra_ordine_carrello_spedizione" >
+
+	   <id name="idOrdine" column="id_ordine" type="integer">
+			<generator class="foreign">
+				<param name="property">ordine</param>
+			</generator>
+		</id>
+
+		<version name="ts_var" column="ts_var" type="timestamp">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</version>
+
+		<one-to-one name="ordine" constrained="true" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" />
+
+		<property name="dt_spedizione" column="dt_spedizione" type="date" not-null="true" />
+		<property name="prg_spedizione" column="prg_spedizione" type="short" not-null="true" />
+		<property name="cart_name" column="cart_name" type="string" length="255" not-null="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="false" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

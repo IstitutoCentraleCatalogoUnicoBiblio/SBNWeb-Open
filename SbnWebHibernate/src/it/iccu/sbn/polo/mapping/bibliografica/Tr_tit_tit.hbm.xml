@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_tit" table="tr_tit_tit" >
+		<meta attribute="class-description">
+			COLLEGAMENTI OGGETTI BIBLIOGRAFICI
+		</meta>
+		<composite-id>
+			<key-many-to-one name="Bid_base" column="bid_base" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo">
+			</key-many-to-one>
+			<key-many-to-one name="Bid_coll" column="bid_coll" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo">
+			</key-many-to-one>
+			<key-property name="tp_legame" column="tp_legame" type="string"/>
+		</composite-id>
+		<property name="tp_legame_musica" column="tp_legame_musica" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_natura_base" column="cd_natura_base" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_natura_coll" column="cd_natura_coll" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="sequenza" column="sequenza" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="nota_tit_tit" column="nota_tit_tit" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="sequenza_musica" column="sequenza_musica" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="sici" column="sici" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di condivisione gestione del legame con indice
+			</meta>
+			<column name="fl_condiviso" default="S"/>
+		</property>
+		<property name="ute_condiviso" column="ute_condiviso" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di condivisione gestione del legame con indice
+			</meta>
+		</property>
+		<property name="ts_condiviso" column="ts_condiviso" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha attivato la gestione condivisa del legame con indice
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

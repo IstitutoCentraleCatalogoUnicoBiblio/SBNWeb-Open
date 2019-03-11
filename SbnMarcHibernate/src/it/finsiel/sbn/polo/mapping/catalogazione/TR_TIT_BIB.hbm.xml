@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_tit_bib" polymorphism="explicit" table="TR_TIT_BIB" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="TB_TITOLO" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			<key-many-to-one name="CD_POLO" class="it.finsiel.sbn.polo.orm.Tbf_biblioteca_in_polo">
+				<column name="CD_POLO"/>
+				<column name="CD_BIBLIOTECA"/>
+			</key-many-to-one>
+			-->
+			<key-property name="CD_POLO" column="CD_POLO" type="string"/>
+			<key-property name="CD_BIBLIOTECA" column="CD_BIBLIOTECA" type="string"/>
+			<!--  TEST PER VEDERE SE FUNZIONA LINK CON LOCALIZZAZIONI -->
+			<key-property name="BID" column="BID" type="string"/>
+			<!--
+			<key-many-to-one name="BID" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo">
+			</key-many-to-one>
+			 -->
+		</composite-id>
+		<property name="FL_MUTILO" column="FL_MUTILO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="DS_CONSISTENZA" column="DS_CONSISTENZA" type="string" length="400" not-null="false"/>
+		<property name="FL_POSSESSO" column="FL_POSSESSO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_GESTIONE" column="FL_GESTIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_DISP_ELETTR" column="FL_DISP_ELETTR" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_ALLINEA" column="FL_ALLINEA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_ALLINEA_SBNMARC" column="FL_ALLINEA_SBNMARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_ALLINEA_CLA" column="FL_ALLINEA_CLA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_ALLINEA_SOG" column="FL_ALLINEA_SOG" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_ALLINEA_LUO" column="FL_ALLINEA_LUO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_ALLINEA_REP" column="FL_ALLINEA_REP" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="DS_FONDO" column="DS_FONDO" type="string" length="55" not-null="false"/>
+		<property name="DS_SEGN" column="DS_SEGN" type="string" length="30" not-null="false"/>
+		<property name="DS_ANTICA_SEGN" column="DS_ANTICA_SEGN" type="string" length="120" not-null="false"/>
+		<property name="NOTA_TIT_BIB" column="NOTA_TIT_BIB" type="string" length="134" not-null="false"/>
+		<property name="URI_COPIA" column="URI_COPIA" type="string" length="1280" not-null="false"/>
+		<property name="TP_DIGITALIZZ" column="TP_DIGITALIZZ" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="TS_INS_PRIMA_COLL" column="TS_INS_PRIMA_COLL" type="timestamp" not-null="false"/>
+
+		<filter name="TR_TIT_BIB_selectPerKey"
+				condition="bid = :XXXbid
+			  			  AND cd_biblioteca = :XXXcd_biblioteca
+			  			  AND cd_polo = :XXXcd_polo
+			  			  AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerPolo"
+				condition="bid = :XXXbid
+			  			  AND cd_polo = :XXXcd_polo
+			  			  AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerPoloDiverso"
+				condition="cd_polo != :XXXcd_polo
+						   AND bid = :XXXbid
+						   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerBid"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerAllineamento"
+				condition="cd_polo != :XXXcd_polo
+				  		   AND bid = :XXXbid
+				  		   AND fl_gestione != 'N'
+				  		   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_verificaLocalizzazioni"
+				condition="bid = :XXXbid
+						   AND cd_polo = :XXXcd_polo
+						   AND fl_canc != 'S'
+						   AND fl_gestione != 'N' "/>
+
+		<filter name="TR_TIT_BIB_countPerBid"
+				condition="bid = :XXXbid
+						   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerPoloUguale"
+				condition="cd_polo = :XXXcd_polo
+						   AND bid = :XXXbid
+						   AND fl_gestione != 'N'
+						   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectCancellato"
+				condition="bid = :XXXbid
+						   AND cd_biblioteca = :XXXcd_biblioteca
+						   AND cd_polo = :XXXcd_polo
+						   AND fl_canc = 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerPoloBibliotecaUguale"
+				condition="cd_polo = :XXXcd_polo
+						   AND cd_biblioteca = :XXXcd_biblioteca
+						   AND bid = :XXXbid
+						   AND fl_gestione != 'N'
+						   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_BIB_selectPerFlagAllinea"
+				condition="fl_canc != 'S'
+						   AND fl_allinea = :XXXfl_allinea
+						   AND bid = :XXXbid "/>
+
+		<filter name="TR_TIT_BIB_verificaLocalizzazioniPerBiblioteca"
+				condition="bid = :XXXbid
+						   AND cd_biblioteca = :XXXcd_biblioteca
+						   AND fl_canc != 'S'
+						   AND fl_possesso = 'S'"/>
+
+	</class>
+</hibernate-mapping>

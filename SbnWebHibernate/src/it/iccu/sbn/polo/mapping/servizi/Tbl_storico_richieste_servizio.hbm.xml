@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_storico_richieste_servizio" table="tbl_storico_richieste_servizio" >
+		<meta attribute="class-description">
+			Storico richieste di servizio
+		</meta>
+		<composite-id>
+			<key-property name="cd_polo" column="cd_polo" type="string"/>
+			<key-property name="cd_bib" column="cd_bib" type="string"/>
+			<key-property name="cod_rich_serv" column="cod_rich_serv" type="big_decimal"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<property name="cod_bib_ut" column="cod_bib_ut" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cod_utente" column="cod_utente" type="big_decimal" precision="10" scale="0" not-null="false" lazy="false"/>
+		<property name="cod_tipo_serv" column="cod_tipo_serv" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="data_richiesta" column="data_richiesta" type="date" not-null="false" lazy="false"/>
+		<property name="num_volume" column="num_volume" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="num_fasc" column="num_fasc" type="string" length="15" not-null="false" lazy="false"/>
+		<property name="num_pezzi" column="num_pezzi" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="note_ut" column="note_ut" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="prezzo_max" column="prezzo_max" type="big_decimal" precision="12" scale="3" not-null="false" lazy="false"/>
+		<property name="costo_servizio" column="costo_servizio" type="big_decimal" precision="12" scale="3" not-null="false" lazy="false"/>
+		<property name="data_massima" column="data_massima" type="date" not-null="false" lazy="false"/>
+		<property name="note_bibl" column="note_bibl" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="data_proroga" column="data_proroga" type="date" not-null="false" lazy="false"/>
+		<property name="data_in_prev" column="data_in_prev" type="date" not-null="false" lazy="false"/>
+		<property name="data_fine_prev" column="data_fine_prev" type="date" not-null="false" lazy="false"/>
+		<property name="flag_svolg" column="flag_svolg" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="copyright" column="copyright" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="descr_erog" column="descr_erog" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descr_stato_ric" column="descr_stato_ric" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descr_supporto" column="descr_supporto" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descr_risp" column="descr_risp" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descr_mod_pag" column="descr_mod_pag" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="flag_pren" column="flag_pren" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tipo_doc_lett" column="tipo_doc_lett" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_doc_lett" column="cod_doc_lett" type="big_decimal" precision="10" scale="0" not-null="false" lazy="false"/>
+		<property name="prg_esemplare" column="prg_esemplare" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="cod_serie" column="cod_serie" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cod_inven" column="cod_inven" type="integer" not-null="false" lazy="false"/>
+		<property name="flag_condiz" column="flag_condiz" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cod_tipo_serv_alt" column="cod_tipo_serv_alt" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="descr_erog_alt" column="descr_erog_alt" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="cod_bib_dest" column="cod_bib_dest" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="titolo" column="titolo" type="string" length="240" not-null="false" lazy="false"/>
+		<property name="autore" column="autore" type="string" length="160" not-null="false" lazy="false"/>
+		<property name="editore" column="editore" type="string" length="50" not-null="false" lazy="false"/>
+		<property name="anno_edizione" column="anno_edizione" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="luogo_edizione" column="luogo_edizione" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="annata" column="annata" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="num_vol_mon" column="num_vol_mon" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="data_in_eff" column="data_in_eff" type="date" not-null="false" lazy="false"/>
+		<property name="data_fine_eff" column="data_fine_eff" type="date" not-null="false" lazy="false"/>
+		<property name="num_rinnovi" column="num_rinnovi" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="note_bibliotecario" column="note_bibliotecario" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descr_stato_mov" column="descr_stato_mov" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="flag_tipo_serv" column="flag_tipo_serv" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="num_solleciti" column="num_solleciti" type="short" length="5" not-null="false" lazy="false"/>
+		<property name="data_ult_soll" column="data_ult_soll" type="date" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="29" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+		<property name="id_prenot_posto" column="id_prenot_posto" type="integer" not-null="false" lazy="false"/>
+		<property name="descr_stato_prenot_posto" column="descr_stato_prenot_posto" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="descr_sala" column="descr_sala" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="ts_prenot_posto_inizio" column="ts_prenot_posto_inizio" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="ts_prenot_posto_fine" column="ts_prenot_posto_fine" type="timestamp" length="8" not-null="false" lazy="false"/>
+
+		<property name="denominazione" column="denominazione" type="string" length="255" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,1437 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="CountClasse">
+		<return-scalar column="DT" type="java.lang.Long" />
+		select count(*) as DT from TB_CLASSE WHERE FL_CANC='N'
+	</sql-query>
+	<sql-query name="CountAutore">
+		<return-scalar column="DT" type="java.lang.Long" />
+		select count(*) as DT from TB_AUTORE WHERE FL_CANC='N'
+	</sql-query>
+	<sql-query name="CountTitolo">
+		<return-scalar column="DT" type="java.lang.Long" />
+		select count(*) as DT from TB_TITOLO WHERE FL_CANC='N'
+	</sql-query>
+	<sql-query name="Count_Vl_classe_tit">
+		<return-scalar column="DT" type="java.lang.Long" />
+		SELECT count(*) as DT FROM TR_Tit_Cla, TB_Classe WHERE
+		TR_TIT_CLA.CD_SISTEMA = TB_CLASSE.CD_SISTEMA AND
+		TR_TIT_CLA.CD_EDIZIONE = TB_CLASSE.CD_EDIZIONE AND
+		TR_TIT_CLA.CLASSE = TB_CLASSE.CLASSE AND TR_TIT_CLA.FL_CANC
+		&lt;&gt; 'S' AND TB_CLASSE.FL_CANC &lt;&gt; 'S'
+	</sql-query>
+
+	<sql-query name="Count_Vl_classe_tit_for_BID">
+		<return-scalar column="DT" type="java.lang.Long" />
+		SELECT count(*) as DT FROM TR_Tit_Cla, TB_Classe WHERE
+		TR_Tit_Cla.BID = :BID AND TR_TIT_CLA.CD_SISTEMA =
+		TB_CLASSE.CD_SISTEMA AND TR_TIT_CLA.CD_EDIZIONE =
+		TB_CLASSE.CD_EDIZIONE AND TR_TIT_CLA.CLASSE = TB_CLASSE.CLASSE
+		AND TR_TIT_CLA.FL_CANC &lt;&gt; 'S' AND TB_CLASSE.FL_CANC
+		&lt;&gt; 'S'
+	</sql-query>
+
+
+
+
+
+	<sql-query name="Vl_autore_titolo">
+		<!--  <return alias="TR_TIT_AUT"	class="it.finsiel.sbn.polo.orm.Tr_tit_aut" /> -->
+ 		<return alias="TB_AUTORE"	class="it.finsiel.sbn.polo.orm.Tb_autore" />
+		SELECT TR_Tit_Aut.BID, TR_Tit_Aut.tp_responsabilita,
+		TR_Tit_Aut.cd_relazione, TR_Tit_Aut.nota_tit_aut,
+		TR_Tit_Aut.fl_incerto, TR_Tit_Aut.fl_superfluo,
+		TR_Tit_Aut.cd_strumento_mus, TB_Autore.VID, TB_Autore.ISADN,
+		TB_Autore.tp_forma_aut, TB_Autore.ky_cautun,
+		TB_Autore.ky_auteur, TB_Autore.ky_el1_a, TB_Autore.ky_el1_b,
+		TB_Autore.ky_el2_a, TB_Autore.ky_el2_b, TB_Autore.tp_nome_aut,
+		TB_Autore.ky_el3, TB_Autore.ky_el4, TB_Autore.ky_el5,
+		TB_Autore.ky_cles1_a, TB_Autore.ky_cles2_a, TB_Autore.cd_paese,
+		TB_Autore.cd_lingua, TB_Autore.aa_nascita, TB_Autore.aa_morte,
+		TB_Autore.cd_livello, TB_Autore.fl_speciale,
+		TB_Autore.ds_nome_aut, TB_Autore.cd_agenzia,
+		TB_Autore.cd_norme_cat, TB_Autore.nota_aut,
+		TB_Autore.nota_cat_aut, TB_Autore.VID_Link, TB_Autore.ute_ins,
+		TB_Autore.ts_ins, TB_Autore.ute_var, TB_Autore.ts_var,
+		TB_Autore.ute_forza_ins, TB_Autore.ute_forza_var,
+		TB_Autore.fl_canc FROM TR_Tit_Aut, TB_Autore WHERE
+		TR_TIT_AUT.VID = TB_AUTORE.VID AND TB_AUTORE.VID = :VID AND
+		TR_TIT_AUT.FL_CANC &lt;&gt; 'S' AND TB_AUTORE.FL_CANC &lt;&gt; 'S'
+	</sql-query>
+
+	<sql-query name="Vl_autore_titolo2">
+		<return alias="TR_TIT_AUT"	class="it.finsiel.sbn.polo.orm.Tr_tit_aut" />
+		<return alias="TB_AUTORE"	class="it.finsiel.sbn.polo.orm.Tb_autore" />
+		SELECT * from VL_AUTORE_TIT WHERE BID= :BID
+	</sql-query>
+
+	<sql-query name="contaTitoliCollegatiSoggettoBib">
+		<query-param name="codPolo" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<query-param name="cid" type="string"/>
+
+		<return-scalar column="numSog"	type="java.lang.Integer" />
+
+		<![CDATA[
+		select count(distinct titsog.bid) as numSog
+			from tr_tit_sog_bib titsog
+			inner join tr_tit_bib titbib on titbib.bid=titsog.bid
+			where titsog.fl_canc<>'S'
+			  and titbib.fl_canc<>'S'
+ 			  and titbib.fl_possesso='S'
+			  and titsog.cid=:cid
+			  and titbib.cd_polo=:codPolo
+			  and titbib.cd_biblioteca=:codBib
+	  	]]>
+	</sql-query>
+
+	<sql-query name="contaTitoliCollegatiClasse">
+		<query-param name="sistema" type="string"/>
+		<query-param name="edizione" type="string"/>
+		<query-param name="simbolo" type="string"/>
+
+		<return-scalar column="numCla" type="java.lang.Integer" />
+
+		<![CDATA[
+		select count(distinct titcla.bid) as numCla
+			from tr_tit_cla titcla
+			where titcla.fl_canc<>'S'
+			  and titcla.CD_SISTEMA=:sistema
+			  and titcla.CD_EDIZIONE=:edizione
+			  and titcla.CLASSE=:simbolo
+	  	]]>
+	</sql-query>
+
+	<sql-query name="contaTitoliCollegatiClasseBib">
+		<query-param name="codPolo" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<query-param name="sistema" type="string"/>
+		<query-param name="edizione" type="string"/>
+		<query-param name="simbolo" type="string"/>
+
+		<return-scalar column="numCla" type="java.lang.Integer" />
+
+		<![CDATA[
+		select count(distinct titcla.bid) as numCla
+			from tr_tit_cla titcla
+			inner join tr_tit_bib titbib on titbib.bid=titcla.bid
+			where titcla.fl_canc<>'S'
+			  and titbib.fl_canc<>'S'
+			  and titbib.fl_possesso='S'
+			  and titbib.cd_polo=:codPolo
+			  and titbib.cd_biblioteca=:codBib
+			  and titcla.CD_SISTEMA=:sistema
+			  and titcla.CD_EDIZIONE=:edizione
+			  and titcla.CLASSE=:simbolo
+	  	]]>
+	</sql-query>
+
+	<sql-query name="cercaMaxLivelloAutLegameSoggettario">
+		<query-param name="bid" type="string"/>
+		<query-param name="sogg" type="string"/>
+
+		<return-scalar column="bid" type="string" />
+		<return-scalar column="cd_sogg" type="string" />
+		<return-scalar column="ute_var" type="string" />
+		<return-scalar column="maxLivAut" type="string" />
+
+		<![CDATA[
+			select tit_sog.bid, sogg.cd_sogg, tit_sog.ute_var, max(param.cd_livello) as maxLivAut
+			from tr_tit_sog_bib  tit_sog
+			inner join tr_soggettari_biblioteche sogg on sogg.cd_sogg = tit_sog.cd_sogg
+			inner join tbf_utenti_professionali_web userweb on userweb.userid=substring(tit_sog.ute_var,7)
+			inner join tbf_bibliotecario userbib on userbib.id_utente_professionale=userweb.id_utente_professionale
+			inner join tbf_par_auth param on param.id_parametro=userbib.id_parametro
+			where tit_sog.fl_canc<>'S'
+  					and sogg.fl_att='1'
+  					and param.cd_par_auth='SO'
+  					and param.fl_leg_auth='S'
+  					and param.fl_abil_legame='S'
+  					and tit_sog.bid=:bid
+  					and sogg.cd_sogg=:sogg
+  			group by 1,2,3
+  			order by 4 desc
+	  	]]>
+	</sql-query>
+
+	<!-- //////////////////////////////////////////// CONFIG //////////////////////////////////////  -->
+<!-- ////////////////////////GESTIONE PERSONALIZZATA PER ORACLE E POSTGRES //////////////////////  -->
+
+	<sql-query name="set_curcfg">
+		<return-scalar column="set_curcfg"	type="java.lang.String" />
+		select set_curcfg('default')
+	</sql-query>
+
+
+<!-- //////////////////////////////////////////// SEQUENCE //////////////////////////////////////  -->
+<!-- ////////////////////////GESTIONE PERSONALIZZATA PER ORACLE E POSTGRES //////////////////////  -->
+
+<!-- ORACLE -->
+	<sql-query name="Tb_Autore_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_autore.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_Autore_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_autore') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_autore_sequenceIsadnNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_isadn_autore.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_autore_sequenceIsadnNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_isadn_autore') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_titolo_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_titolo.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_titolo_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_titolo') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_titolo_sequenceENextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_E_tb_titolo.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_titolo_sequenceENextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_E_tb_titolo') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_titolo_sequenceMUSNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_MUS_tb_titolo.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_titolo_sequenceMUSNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_MUS_tb_titolo') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_titolo_sequenceMSMNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_MSM_tb_titolo.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_titolo_sequenceMSMNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_MSM_tb_titolo') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_titolo_sequenceCMPNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_CMP_tb_titolo.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_titolo_sequenceCMPNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_CMP_tb_titolo') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_titolo_sequenceIsadnNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_isadn_autore.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_titolo_sequenceIsadnNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_isadn_autore') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_luogo_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_luogo.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_luogo_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_luogo') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_marca_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_marca.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_marca_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_marca') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_soggetto_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_soggetto.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_soggetto_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_soggetto') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_parola_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_parola.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_parola_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_parola') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Ts_link_multim_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_ts_link_multim.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Ts_link_multim_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_ts_link_multim') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_tim_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_tim.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_tim_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_tim') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_descrittore_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_descrittore.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_descrittore_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_descrittore') as DT;
+	</sql-query>
+
+<!-- ORACLE -->
+	<sql-query name="Tb_termine_thesauro_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_termine_thesauro.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_termine_thesauro_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_termine_thesauro') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_personaggio_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_personaggio.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_personaggio_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_personaggio') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Tb_script_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_tb_script.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Tb_script_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_tb_script') as DT;
+	</sql-query>
+
+
+<!-- ORACLE -->
+	<sql-query name="Ts_proposta_marc_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT seq_ts_proposta_marc.nextVal as DT FROM dual
+	</sql-query>
+<!-- POSTGRES -->
+	<sql-query name="Postgress_Ts_proposta_marc_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_ts_proposta_marc') as DT;
+	</sql-query>
+
+
+
+<!--
+			TIPI DI ORDINAMENTO PER
+			1=identificativo+stringa+data1,
+			2=stringa+data1,
+			3=datadi variazione+descrizione (solo per authority )
+			4=sequenza,
+			5=data1+stringa  (data1 si applica solo alle liste titoli.
+			I tipi 4 e 5 sono specifici per i titoli,
+			4 e' accettato solo su liste a partire da un titolo individuato
+ -->
+
+
+	<!-- ###############################  ORDINAMENTI TB_AUTORE #################################à -->
+	<sql-query name="TB_AUTORE_order_1">  0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="TB_AUTORE_order_2P"> 0 = 0 ORDER BY this_.KY_AUTEUR,NVL(this_.KY_EL1_A,' '),NVL(this_.KY_EL1_B,' '),NVL(this_.KY_EL2_A,' '),NVL(this_.KY_EL2_B,' '),this_.TP_NOME_AUT,NVL(this_.KY_EL3,' '),NVL(this_.KY_EL4,' '),NVL(this_.KY_EL5,' ') </sql-query>
+	<sql-query name="TB_AUTORE_order_3P"> 0 = 0 ORDER BY this_.TS_VAR, this_.KY_AUTEUR, NVL(this_.KY_EL1_A,' '),NVL(this_.KY_EL1_B,' '),NVL(this_.KY_EL2_A,' '),NVL(this_.KY_EL2_B,' '),this_.TP_NOME_AUT,NVL(this_.KY_EL3,' '),NVL(this_.KY_EL4,' '),NVL(this_.KY_EL5,' ') </sql-query>
+	<sql-query name="TB_AUTORE_order_2">  0 = 0 ORDER BY this_.KY_CLES1_A, NVL(this_.KY_CLES2_A, ' '), this_.TP_NOME_AUT </sql-query>
+	<sql-query name="TB_AUTORE_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.KY_CLES1_A, NVL(this_.KY_CLES2_A, ' '), this_.TP_NOME_AUT </sql-query>
+	<sql-query name="TB_AUTORE_order_4">  0 = 0 ORDER BY this_.KY_CLES1_A,this_.TP_FORMA_AUT,this_.TP_NOME_AUT,this_.VID</sql-query>
+	<sql-query name="TB_AUTORE_order_5">  0 = 0 ORDER BY this_.KY_CLES1_A </sql-query>
+	<sql-query name="TB_AUTORE_order_6">  0 = 0 ORDER BY this_.UTE_FORZA_VAR </sql-query>
+	<sql-query name="TB_AUTORE_order_7">  0 = 0 ORDER BY this_.KY_CLES1_A,this_.TP_FORMA_AUT,this_.TP_NOME_AUT,this_.VID,this_.UTE_VAR,this_.TS_VAR </sql-query>
+	<sql-query name="TB_AUTORE_order_8">  0 = 0 ORDER BY this_.KY_CAUTUN, this_.KY_AUTEUR, this_.DS_NOME_AUT, this_.VID </sql-query>
+	<sql-query name="TB_AUTORE_order_9">  0 = 0 ORDER BY this_.KY_CLES1_A,this_.VID </sql-query>
+	<sql-query name="TB_AUTORE_order_10"> 0 = 0 ORDER BY this_.KY_CLES1_A,this_.KY_CLES1_A,this_.KY_CLES2_A,this_.VID </sql-query>
+	<sql-query name="TB_AUTORE_order_11"> 0 = 0 ORDER BY this_.DS_NOME_AUT,this_.VID </sql-query>
+
+
+	<!-- ###############################  ORDINAMENTI TBF_BIBLIOTECA_IN_POLO #################################à -->
+	<sql-query name="TBF_BIBLIOTECA_IN_POLO_order_1">  0 = 0 ORDER BY this_.DS_BIBLIOTECA </sql-query>
+	<sql-query name="TBF_BIBLIOTECA_IN_POLO_order_2">  0 = 0 ORDER BY this_.CD_BIBLIOTECA </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_CARTOGRAFIA ################################# -->
+	<!-- NON PREVISTI ORDINAMENTI -->
+
+
+	<!-- ###############################  ORDINAMENTI TB_CLASSI      ################################# -->
+	<sql-query name="TB_CLASSE_order_1">  0 = 0 ORDER BY this_.CD_EDIZIONE, this_.CLASSE </sql-query>
+	<sql-query name="TB_CLASSE_order_2">  0 = 0 ORDER BY this_.DS_CLASSE </sql-query>
+	<sql-query name="TB_CLASSE_order_3">  0 = 0 ORDER BY this_.TS_VAR,this_.TS_INS, this_.CD_EDIZIONE, this_.CLASSE </sql-query>
+	<sql-query name="TB_CLASSE_order_4">  0 = 0 ORDER BY this_.UTE_VAR </sql-query>
+	<sql-query name="TB_CLASSE_order_5">  0 = 0 ORDER BY this_.CLASSE </sql-query>
+	<sql-query name="TB_CLASSE_order_6">  0 = 0 ORDER BY this_.UTE_INS </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_COMPOSIZIONE ################################# -->
+	<sql-query name="TB_COMPOSIZIONE_order_bid">  0 = 0 ORDER BY  this_.BID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_DESCRITTORE ################################# -->
+	<sql-query name="TB_DESCRITTORE_order_1">  0 = 0 ORDER BY this_.DID </sql-query>
+	<sql-query name="TB_DESCRITTORE_order_2">  0 = 0 ORDER BY this_.KY_NORM_DESCRITT </sql-query>
+	<sql-query name="TB_DESCRITTORE_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.TS_INS, this_.KY_NORM_DESCRITT </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_TERMINE_THESAURO ################################# -->
+	<sql-query name="TB_TERMINE_THESAURO_order_1">  0 = 0 ORDER BY this_.DID </sql-query>
+	<sql-query name="TB_TERMINE_THESAURO_order_2">  0 = 0 ORDER BY this_.KY_TERMINE_THESAURO </sql-query>
+	<sql-query name="TB_TERMINE_THESAURO_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.TS_INS, this_.KY_TERMINE_THESAURO </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_GRUPPO ################################# -->
+	<sql-query name="TB_GRUPPO_order_1">  0 = 0 ORDER BY this_.CD_POLO </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_LUOGO ################################# -->
+	<sql-query name="TB_LUOGO_order_1">  0 = 0 ORDER BY this_.LID </sql-query>
+	<sql-query name="TB_LUOGO_order_2">  0 = 0 ORDER BY this_.DS_LUOGO </sql-query>
+	<sql-query name="TB_LUOGO_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.TS_INS, this_.DS_LUOGO </sql-query>
+	<sql-query name="TB_LUOGO_order_4">  0 = 0 ORDER BY this_.KY_NORM_LUOGO </sql-query>
+
+
+	<!-- ###############################  ORDINAMENTI TB_MARCA      ################################# -->
+	<sql-query name="TB_MARCA_order_1">  0 = 0 ORDER BY this_.MID </sql-query>
+	<sql-query name="TB_MARCA_order_2">  0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+	<sql-query name="TB_MARCA_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.TS_INS, this_.DS_MARCA </sql-query>
+	<sql-query name="TB_MARCA_order_4">  0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+	<sql-query name="TB_MARCA_order_5">  0 = 0 ORDER BY this_.MID, this_.DS_MARCA </sql-query>
+	<sql-query name="TB_MARCA_order_6">  0 = 0 ORDER BY this_.DS_MARCA, this_.MID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_NUMERO_STD      ################################# -->
+	<sql-query name="TB_NUMERO_STD_order_1">  0 = 0 ORDER BY this_.TP_NUMERO_STD </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_PAROLA      ################################# -->
+	<sql-query name="TB_PAROLA_groupby_1">  0 = 0 GROUP BY this_.MID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_REPERTORIO  ################################# -->
+	<sql-query name="TB_REPERTORIO_order_1">  0 = 0 ORDER BY this_.CD_SIG_REPERTORIO </sql-query>
+	<sql-query name="TB_REPERTORIO_order_2">  0 = 0 ORDER BY this_.DS_REPERTORIO </sql-query>
+	<sql-query name="TB_REPERTORIO_order_3">  0 = 0 ORDER BY this_.ID_REPERTORIO </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_SOGGETTO  ################################# -->
+	<sql-query name="TB_SOGGETTO_order_1">  0 = 0 ORDER BY this_.CID </sql-query>
+	<sql-query name="TB_SOGGETTO_order_2">  0 = 0 ORDER BY this_.KY_CLES1_S, this_.KY_CLES2_S, this_.CID </sql-query>
+	<sql-query name="TB_SOGGETTO_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.TS_INS, this_.DS_SOGGETTO </sql-query>
+	<sql-query name="TB_SOGGETTO_order_4">  0 = 0 ORDER BY this_.UTE_VAR </sql-query>
+	<sql-query name="TB_SOGGETTO_order_5">  0 = 0 ORDER BY this_.UTE_INS </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_SOGGETTO  ################################# -->
+	<sql-query name="TB_TIM_order_1">  0 = 0 ORDER BY this_.TS_INS </sql-query>
+
+
+	<!-- ###############################  ORDINAMENTI TB_TITOLO #################################à -->
+	<sql-query name="TB_TITOLO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="TB_TITOLO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T,this_.KY_CLES2_T,NVL(this_.AA_PUBB_1, ' '),this_.BID </sql-query>
+	<sql-query name="TB_TITOLO_order_3">           </sql-query>
+	<sql-query name="TB_TITOLO_order_4">           </sql-query>
+	<sql-query name="TB_TITOLO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+	<!-- ###############################  ORDINAMENTI TB_TP_ATTIVITA #################################à -->
+	<sql-query name="TB_TP_ATTIVITA_order_1">0 = 0 ORDER BY this_.DS_ATTIVITA </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TB_UTENTE #################################à -->
+	<sql-query name="TB_UTENTE_order_1">0 = 0 ORDER BY this_.DS_UTENTE </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_AUT_AUT #################################à -->
+	<sql-query name="TR_AUT_AUT_order_1">0 = 0 ORDER BY this_.TP_LEGAME </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_AUT_MAR #################################à -->
+	<sql-query name="TR_AUT_MAR_order_1">0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="TR_AUT_MAR_order_2">0 = 0 ORDER BY this_.MID, this_.VID </sql-query>
+	<sql-query name="TR_AUT_MAR_order_3">0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="TR_AUT_MAR_order_4">0 = 0 ORDER BY this_.VID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_REP_AUT #################################à -->
+	<sql-query name="TR_REP_AUT_order_1">0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="TR_REP_AUT_order_2">0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="TR_REP_AUT_order_3">0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="TR_REP_AUT_order_4">0 = 0 ORDER BY this_.VID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_REP_LUO #################################à -->
+	<!-- ####evolutive ottobre 2015 almaviva2 -  Nella gestione dei luoghi possibilità di gestire legame a repertori#####à -->
+	<sql-query name="TR_REP_LUO_order_1">0 = 0 ORDER BY this_.LID </sql-query>
+	<sql-query name="TR_REP_LUO_order_2">0 = 0 ORDER BY this_.LID </sql-query>
+	<sql-query name="TR_REP_LUO_order_3">0 = 0 ORDER BY this_.LID </sql-query>
+	<sql-query name="TR_REP_LUO_order_4">0 = 0 ORDER BY this_.LID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_SOG_DES #################################à -->
+	<sql-query name="TR_SOG_DES_order_1">0 = 0 ORDER BY this_.DID </sql-query>
+	<sql-query name="TR_SOG_DES_order_2">0 = 0 ORDER BY this_.DID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_TIT_AUT #################################à -->
+	<sql-query name="TR_TIT_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="TR_TIT_AUT_order_2">0 = 0 ORDER BY this_.VID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_TIT_BIB #################################à -->
+	<sql-query name="TR_TIT_BIB_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TR_TIT_TIT #################################à -->
+	<sql-query name="TR_TIT_TIT_order_1">0 = 0 ORDER BY this_.CD_NATURA_BASE, this_.TP_LEGAME, this_.CD_NATURA_COLL </sql-query>
+	<sql-query name="TR_TIT_TIT_order_2">0 = 0 ORDER BY this_.BID_COLL, this_.BID_BASE </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TS_NOTE_PROPOSTA #################################à -->
+	<sql-query name="TS_NOTE_PROPOSTA_order_1">0 = 0 ORDER BY this_.TS_INS </sql-query>
+
+	<!-- ###############################  ORDINAMENTI TS_PROPOSTA_MARC #################################à -->
+	<sql-query name="TS_PROPOSTA_MARC_order_1">0 = 0 ORDER BY this_.TS_INS </sql-query>
+
+	<!-- ###############################  ORDINAMENTI V_CARTOGRAFIA #################################à -->
+	<sql-query name="V_CARTOGRAFIA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="V_CARTOGRAFIA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T,this_.KY_CLES2_T,NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="V_CARTOGRAFIA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="V_CARTOGRAFIA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="V_CARTOGRAFIA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+	<sql-query name="V_CARTOGRAFIA_order_6">0 = 0 ORDER BY  this_.KY_CLES1_T </sql-query>
+	<sql-query name="V_CARTOGRAFIA_order_7">0 = 0 ORDER BY this_.UTE_VAR </sql-query>
+	<sql-query name="V_CARTOGRAFIA_group_order_6">0 = 0 GROUP BY this_.CD_PAESE,this_.CD_LINGUA_1 ORDER BY this_.CD_PAESE,this_.CD_LINGUA_1 </sql-query>
+
+	<!-- ###############################  ORDINAMENTI V_COMPOSIZIONE #################################à -->
+	<sql-query name="V_COMPOSIZIONE_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="V_COMPOSIZIONE_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="V_COMPOSIZIONE_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="V_COMPOSIZIONE_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="V_COMPOSIZIONE_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI V_GRAFICA #################################à -->
+    <sql-query name="V_GRAFICA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="V_GRAFICA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="V_GRAFICA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="V_GRAFICA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="V_GRAFICA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI V_MUSICA #################################à -->
+    <sql-query name="V_MUSICA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="V_MUSICA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="V_MUSICA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="V_MUSICA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="V_MUSICA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_AUT_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_AUT_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_AUT_LUO #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_AUT_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_AUT_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_CLA_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_CLA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_CLA_LUO #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_CLA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_CLA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_LUO_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_LUO_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_LUO_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_LUO_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_LUO_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_LUO_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_MAR_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_MAR_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_MAR_LUO #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_MAR_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_MAR_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_SOG_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_SOG_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_THE_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_THE_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_SOG_LUO #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_SOG_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_SOG_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_SOG_LUO #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_THE_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_THE_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_TIT_C_AUT #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VE_CARTOGRAFIA_TIT_C_LUO #################################à -->
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+	<sql-query name="VE_CARTOGRAFIA_TIT_C_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_AUT_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_AUT_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_AUT_LUO #################################à -->
+    <sql-query name="VE_GRAFICA_AUT_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_AUT_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_CLA_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_CLA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_CLA_LUO #################################à -->
+    <sql-query name="VE_GRAFICA_CLA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_CLA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_LUO_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_LUO_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_LUO_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_LUO_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_LUO_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_LUO_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_MAR_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_MAR_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_MAR_LUO #################################à -->
+    <sql-query name="VE_GRAFICA_MAR_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_MAR_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_SOG_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_SOG_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_THE_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_THE_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_THE_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_THE_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_THE_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_THE_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_SOG_LUO #################################à -->
+    <sql-query name="VE_GRAFICA_SOG_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_SOG_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_THE_LUO #################################à -->
+    <sql-query name="VE_GRAFICA_THE_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_THE_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_THE_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_THE_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_THE_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_TIT_C_AUT #################################à -->
+    <sql-query name="VE_GRAFICA_TIT_C_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_GRAFICA_TIT_C_LUO #################################à -->
+    <sql-query name="VE_GRAFICA_TIT_C_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_GRAFICA_TIT_C_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_AUT_AUT #################################à -->
+    <sql-query name="VE_MUSICA_AUT_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_AUT_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_AUT_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_AUT_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_AUT_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_AUT_COM #################################à -->
+    <sql-query name="VE_MUSICA_AUT_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_AUT_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_AUT_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_AUT_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_AUT_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_AUT_LUO #################################à -->
+    <sql-query name="VE_MUSICA_AUT_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_AUT_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_AUT_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_AUT_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_AUT_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_CLA_AUT #################################à -->
+    <sql-query name="VE_MUSICA_CLA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_CLA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_CLA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_CLA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_CLA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_CLA_COM #################################à -->
+    <sql-query name="VE_MUSICA_CLA_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_CLA_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_CLA_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_CLA_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_CLA_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_CLA_LUO #################################à -->
+    <sql-query name="VE_MUSICA_CLA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_CLA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_CLA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_CLA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_CLA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_LUO_AUT #################################à -->
+    <sql-query name="VE_MUSICA_LUO_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_LUO_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_LUO_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_LUO_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_LUO_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_LUO_COM #################################à -->
+    <sql-query name="VE_MUSICA_LUO_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_LUO_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_LUO_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_LUO_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_LUO_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_MAR_AUT #################################à -->
+    <sql-query name="VE_MUSICA_MAR_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_MAR_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_MAR_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_MAR_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_MAR_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_MAR_COM #################################à -->
+    <sql-query name="VE_MUSICA_MAR_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_MAR_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_MAR_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_MAR_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_MAR_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_MAR_LUO #################################à -->
+    <sql-query name="VE_MUSICA_MAR_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_MAR_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_MAR_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_MAR_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_MAR_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_TIT_C_AUT #################################à -->
+    <sql-query name="VE_MUSICA_TIT_C_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_TIT_C_COM #################################à -->
+    <sql-query name="VE_MUSICA_TIT_C_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_MUSICA_TIT_C_LUO #################################à -->
+    <sql-query name="VE_MUSICA_TIT_C_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_MUSICA_TIT_C_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_AUT_AUT #################################à -->
+    <sql-query name="VE_TITOLO_AUT_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_AUT_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_AUT_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_AUT_LUO #################################à -->
+    <sql-query name="VE_TITOLO_AUT_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_AUT_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_AUT_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_AUT_MAR #################################à -->
+    <sql-query name="VE_TITOLO_AUT_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_AUT_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_AUT_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_AUT_NSTD #################################à -->
+    <sql-query name="VE_TITOLO_AUT_NSTD_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_AUT_NSTD_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_NSTD_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_AUT_NSTD_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_AUT_NSTD_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_CLA_AUT #################################à -->
+    <sql-query name="VE_TITOLO_CLA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_CLA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_CLA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_CLA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_CLA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_CLA_LUO #################################à -->
+    <sql-query name="VE_TITOLO_CLA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_CLA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_CLA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_CLA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_CLA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_CLA_MAR #################################à -->
+    <sql-query name="VE_TITOLO_CLA_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_CLA_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_CLA_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_CLA_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_CLA_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_LUO_AUT #################################à -->
+    <sql-query name="VE_TITOLO_LUO_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_LUO_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_LUO_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_LUO_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_LUO_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_LUO_MAR #################################à -->
+    <sql-query name="VE_TITOLO_LUO_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_LUO_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_LUO_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_LUO_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_LUO_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_MAR_AUT #################################à -->
+    <sql-query name="VE_TITOLO_MAR_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_MAR_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_MAR_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_MAR_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_MAR_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_MAR_LUO #################################à -->
+    <sql-query name="VE_TITOLO_MAR_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_MAR_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_MAR_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_MAR_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_MAR_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_SOG_AUT #################################à -->
+    <sql-query name="VE_TITOLO_SOG_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_SOG_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_SOG_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_SOG_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_SOG_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_THE_AUT #################################à -->
+    <sql-query name="VE_TITOLO_THE_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_THE_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_THE_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_THE_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_THE_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_SOG_LUO #################################à -->
+    <sql-query name="VE_TITOLO_SOG_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_SOG_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_SOG_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_SOG_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_SOG_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_THE_LUO #################################à -->
+    <sql-query name="VE_TITOLO_THE_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_THE_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_THE_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_THE_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_THE_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_SOG_MAR #################################à -->
+    <sql-query name="VE_TITOLO_SOG_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_SOG_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_SOG_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_SOG_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_SOG_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_THE_MAR #################################à -->
+    <sql-query name="VE_TITOLO_THE_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_THE_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_THE_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_THE_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_THE_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_TIT_C_AUT #################################à -->
+    <sql-query name="VE_TITOLO_TIT_C_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_TIT_C_LUO #################################à -->
+    <sql-query name="VE_TITOLO_TIT_C_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VE_TITOLO_TIT_C_MAR #################################à -->
+    <sql-query name="VE_TITOLO_TIT_C_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VE_TITOLO_TIT_C_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+    <!-- ###############################  ORDINAMENTI VF_CARTOGRAFIA_AUT #################################à -->
+    <sql-query name="VF_CARTOGRAFIA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_CARTOGRAFIA_LUO #################################à -->
+    <sql-query name="VF_CARTOGRAFIA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_CARTOGRAFIA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_GRAFICA_AUT #################################à -->
+    <sql-query name="VF_GRAFICA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_GRAFICA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_GRAFICA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_GRAFICA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_GRAFICA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_GRAFICA_LUO #################################à -->
+    <sql-query name="VF_GRAFICA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_GRAFICA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_GRAFICA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_GRAFICA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_GRAFICA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_MUSICA_AUT #################################à -->
+    <sql-query name="VF_MUSICA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_MUSICA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_MUSICA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_MUSICA_COM #################################à -->
+    <sql-query name="VF_MUSICA_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_MUSICA_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_MUSICA_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_MUSICA_COMAUT #################################à -->
+    <sql-query name="VF_MUSICA_COMAUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_MUSICA_COMAUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_COMAUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_COMAUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_MUSICA_COMAUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_MUSICA_LUO #################################à -->
+    <sql-query name="VF_MUSICA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_MUSICA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_MUSICA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_MUSICA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+    <!-- ###############################  ORDINAMENTI VF_TITOLO_AUT #################################à -->
+    <sql-query name="VF_TITOLO_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_TITOLO_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_TITOLO_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_TITOLO_COM #################################à -->
+    <sql-query name="VF_TITOLO_COM_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_TITOLO_COM_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_COM_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_COM_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_TITOLO_COM_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_TITOLO_LUO #################################à -->
+    <sql-query name="VF_TITOLO_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_TITOLO_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_TITOLO_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VF_TITOLO_MAR #################################à -->
+    <sql-query name="VF_TITOLO_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VF_TITOLO_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VF_TITOLO_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VF_TITOLO_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+
+    <!-- ###############################  ORDINAMENTI VL_AUTORE_AUT #################################à -->
+	<sql-query name="VL_AUTORE_AUT_order_1">  0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="VL_AUTORE_AUT_order_2">  0 = 0 ORDER BY this_.KY_AUTEUR,NVL(this_.KY_EL1_A,' '),NVL(this_.KY_EL1_B,' '),NVL(this_.KY_EL2_A,' '),NVL(this_.KY_EL2_B,' '),this_.TP_NOME_AUT,NVL(this_.KY_EL3,' '),NVL(this_.KY_EL4,' '),NVL(this_.KY_EL5,' ') </sql-query>
+	<sql-query name="VL_AUTORE_AUT_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.KY_AUTEUR,NVL(this_.KY_EL1_A,' '),NVL(this_.KY_EL1_B,' '),NVL(this_.KY_EL2_A,' '),NVL(this_.KY_EL2_B,' '),this_.TP_NOME_AUT,NVL(this_.KY_EL3,' '),NVL(this_.KY_EL4,' '),NVL(this_.KY_EL5,' ') </sql-query>
+	<sql-query name="VL_AUTORE_AUT_order_4">  0 = 0 ORDER BY this_.KY_CLES1_A,this_.TP_FORMA_AUT,this_.TP_NOME_AUT,this_.VID </sql-query>
+	<sql-query name="VL_AUTORE_AUT_order_5">  0 = 0 ORDER BY this_.VID,this_.VID_1,this_.KY_CLES1_A,this_.KY_CLES2_A </sql-query>
+	<sql-query name="VL_AUTORE_AUT_order_tp_legame">  0 = 0 ORDER BY this_.TP_LEGAME DESC </sql-query>
+
+
+
+
+	<!-- ###############################  ORDINAMENTI VL_AUTORE_MAR #################################à -->
+	<sql-query name="VL_AUTORE_MAR_order_1">  0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="VL_AUTORE_MAR_order_2">  0 = 0 ORDER BY this_.KY_CLES1_A, NVL(this_.KY_CLES2_A, ' '), this_.TP_NOME_AUT </sql-query>
+	<sql-query name="VL_AUTORE_MAR_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.KY_CLES1_A, NVL(this_.KY_CLES2_A, ' '), this_.TP_NOME_AUT </sql-query>
+	<sql-query name="VL_AUTORE_MAR_order_4">  0 = 0 ORDER BY this_.KY_CLES1_A,this_.TP_FORMA_AUT,this_.TP_NOME_AUT,this_.VID</sql-query>
+	<sql-query name="VL_AUTORE_MAR_order_5">  0 = 0 ORDER BY this_.KY_CLES1_A </sql-query>
+
+
+	<!-- ###############################  ORDINAMENTI VL_AUTORE_MAR #################################à -->
+	<!-- ###############################  UTILIZZATA SOLO PER BIS #################################à -->
+
+	<!-- ###############################  ORDINAMENTI VL_AUTORE_TIT #################################à -->
+	<sql-query name="VL_AUTORE_TIT_order_1">  0 = 0 ORDER BY this_.VID </sql-query>
+	<sql-query name="VL_AUTORE_TIT_order_2">  0 = 0 ORDER BY this_.KY_CLES1_A, NVL(this_.KY_CLES2_A, ' '), this_.TP_NOME_AUT </sql-query>
+	<sql-query name="VL_AUTORE_TIT_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.KY_CLES1_A, NVL(this_.KY_CLES2_A, ' '), this_.TP_NOME_AUT </sql-query>
+	<sql-query name="VL_AUTORE_TIT_order_4">  0 = 0 ORDER BY this_.AA_NASCITA </sql-query>
+	<sql-query name="VL_AUTORE_TIT_order_5">  0 = 0 ORDER BY  this_.KY_CLES1_A, this_.KY_CLES2_A </sql-query>
+	<sql-query name="VL_AUTORE_TIT_order_tp_resp">  0 = 0 ORDER BY  this_.TP_RESPONSABILITA </sql-query>
+
+	<!-- ###############################  ORDINAMENTI VL_BIBLIOTECA_TIT #################################à -->
+	<sql-query name="VL_BIBLIOTECA_TIT_order1">  0 = 0 ORDER BY NVL(this_.CD_ANA_BIBLIOTECA, ' ') </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_AUT #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_CLA #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_CLA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_CLA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_CLA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_CLA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_CLA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_LUO #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_MAR #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_SOG #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_SOG_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_SOG_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_SOG_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_SOG_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_SOG_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_THE #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_THE_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_THE_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_THE_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_THE_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_THE_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CARTOGRAFIA_TIT_C #################################à -->
+    <sql-query name="VL_CARTOGRAFIA_TIT_C_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_TIT_C_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_TIT_C_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_TIT_C_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_CARTOGRAFIA_TIT_C_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_CLASSE_TIT #################################à -->
+    <!-- almaviva5_20090416
+     <sql-query name="VL_CLASSE_TIT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    -->
+    <sql-query name="VL_CLASSE_TIT_order_1">0 = 0 ORDER BY this_.CD_SISTEMA, this_.CD_EDIZIONE, this_.CLASSE </sql-query>
+
+    <!-- almaviva5_20111018 evolutive CFI -->
+    <sql-query name="VL_CLASSE_THE_order_1">0 = 0 ORDER BY this_.POSIZIONE, this_.CD_SISTEMA, this_.CD_EDIZIONE, this_.CLASSE </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_COMPOSIZIONE_AUT #################################à -->
+    <sql-query name="VL_COMPOSIZIONE_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_COMPOSIZIONE_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_COMPOSIZIONE_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_COMPOSIZIONE_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_COMPOSIZIONE_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_DESCRITTORE_SOG #################################à -->
+    <sql-query name="VL_DESCRITTORE_SOG_order_1">0 = 0 ORDER BY this_.DID </sql-query>
+    <sql-query name="VL_DESCRITTORE_SOG_order_2">0 = 0 ORDER BY this_.DID  </sql-query>
+    <sql-query name="VL_DESCRITTORE_SOG_KY_NORM_DESCRITT">0 = 0 ORDER BY this_.FL_POSIZIONE, this_.KY_NORM_DESCRITT  </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_AUT #################################à -->
+    <sql-query name="VL_GRAFICA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_CLA #################################à -->
+    <sql-query name="VL_GRAFICA_CLA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_CLA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_CLA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_CLA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_CLA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_LUO #################################à -->
+    <sql-query name="VL_GRAFICA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_MAR #################################à -->
+    <sql-query name="VL_GRAFICA_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_SOG #################################à -->
+    <sql-query name="VL_GRAFICA_SOG_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_SOG_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_SOG_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_SOG_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_SOG_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_THE #################################à -->
+    <sql-query name="VL_GRAFICA_THE_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_THE_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_THE_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_THE_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_THE_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_GRAFICA_TIT_C #################################à -->
+    <sql-query name="VL_GRAFICA_TIT_C_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_GRAFICA_TIT_C_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_TIT_C_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_GRAFICA_TIT_C_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_GRAFICA_TIT_C_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_LUOGO_LUO #################################à -->
+    <sql-query name="VL_LUOGO_LUO_order_by_1">0 = 0 ORDER BY this_.LID </sql-query>
+    <sql-query name="VL_LUOGO_LUO_order_by_2">0 = 0 ORDER BY this_.ky_norm_luogo </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_LUOGO_TIT #################################à -->
+    <sql-query name="VL_LUOGO_TIT_order_1">0 = 0 ORDER BY this_.LID </sql-query>
+    <sql-query name="VL_LUOGO_TIT_order_2">0 = 0 ORDER BY this_.LID </sql-query>
+    <sql-query name="VL_LUOGO_TIT_order_3">0 = 0 ORDER BY this_.LID </sql-query>
+    <sql-query name="VL_LUOGO_TIT_order_4">0 = 0 ORDER BY this_.LID </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MARCA_AUT #################################à -->
+    <sql-query name="VL_MARCA_AUT_order_1">0 = 0 ORDER BY this_.MID </sql-query>
+    <sql-query name="VL_MARCA_AUT_order_2">0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+    <sql-query name="VL_MARCA_AUT_order_3">0 = 0 ORDER BY this_.TS_VAR , this_.DS_MARCA </sql-query>
+    <sql-query name="VL_MARCA_AUT_order_4">0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MARCA_PAR #################################à -->
+    <sql-query name="VL_MARCA_PAR_order_1">0 = 0 ORDER BY this_.MID </sql-query>
+    <sql-query name="VL_MARCA_PAR_order_2">0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+    <sql-query name="VL_MARCA_PAR_order_3">0 = 0 ORDER BY this_.TS_VAR , this_.DS_MARCA </sql-query>
+    <sql-query name="VL_MARCA_PAR_order_4">0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MARCA_TIT #################################à -->
+    <sql-query name="VL_MARCA_TIT_order_1">0 = 0 ORDER BY this_.MID </sql-query>
+    <sql-query name="VL_MARCA_TIT_order_2">0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+    <sql-query name="VL_MARCA_TIT_order_3">0 = 0 ORDER BY this_.TS_VAR , this_.DS_MARCA </sql-query>
+    <sql-query name="VL_MARCA_TIT_order_4">0 = 0 ORDER BY this_.DS_MARCA </sql-query>
+
+
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_AUT #################################à -->
+    <sql-query name="VL_MUSICA_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_BIB #################################à -->
+    <sql-query name="VL_MUSICA_BIB_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_BIB_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_BIB_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_BIB_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_BIB_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_CLA #################################à -->
+    <sql-query name="VL_MUSICA_CLA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_CLA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_CLA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_CLA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_CLA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_IMP #################################à -->
+    <sql-query name="VL_MUSICA_IMP_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_IMP_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_IMP_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_IMP_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_IMP_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_LUO #################################à -->
+    <sql-query name="VL_MUSICA_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_MAR #################################à -->
+    <sql-query name="VL_MUSICA_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_MUSICA_TIT_C #################################à -->
+    <sql-query name="VL_MUSICA_TIT_C_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_MUSICA_TIT_C_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_TIT_C_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_MUSICA_TIT_C_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_MUSICA_TIT_C_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_REPERTORIO_MAR #################################à -->
+    <sql-query name="VL_REPERTORIO_MAR_order_1">0 = 0 ORDER BY this_.CD_SIG_REPERTORIO </sql-query>
+    <sql-query name="VL_REPERTORIO_MAR_order_2">0 = 0 ORDER BY this_.CD_SIG_REPERTORIO </sql-query>
+    <sql-query name="VL_REPERTORIO_MAR_order_3">0 = 0 ORDER BY this_.CD_SIG_REPERTORIO </sql-query>
+    <sql-query name="VL_REPERTORIO_MAR_order_4">0 = 0 ORDER BY this_.CD_SIG_REPERTORIO </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_SOGGETTO_DES #################################à -->
+	<sql-query name="VL_SOGGETTO_DES_order_1">  0 = 0 ORDER BY this_.CID </sql-query>
+	<sql-query name="VL_SOGGETTO_DES_order_2">  0 = 0 ORDER BY this_.KY_CLES1_S ,this_.KY_CLES2_S </sql-query>
+	<sql-query name="VL_SOGGETTO_DES_order_3">  0 = 0 ORDER BY this_.TS_VAR, this_.TS_INS, this_.KY_CLES1_S ,this_.KY_CLES2_S  </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_SOGGETTO_TIT #################################à -->
+    <sql-query name="VL_SOGGETTO_TIT_order_1">0 = 0 ORDER BY this_.POSIZIONE, this_.CD_SOGGETTARIO, this_.CID </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_THESAURO_TIT #################################à -->
+    <sql-query name="VL_THESAURO_TIT_order_1">0 = 0 ORDER BY this_.CD_THE, this_.DID </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_AUT #################################à -->
+    <sql-query name="VL_TITOLO_AUT_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_AUT_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_AUT_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_AUT_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_AUT_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_BIB #################################à -->
+    <sql-query name="VL_TITOLO_BIB_order_1">0 = 0 ORDER BY this_.CD_BIBLIOTECA </sql-query>
+    <sql-query name="VL_TITOLO_BIB_order_2">0 = 0 ORDER BY this_.CD_NATURA, this_.TP_AA_PUBB </sql-query>
+    <sql-query name="VL_TITOLO_BIB_order_3">0 = 0 ORDER BY this_.CD_POLO </sql-query>
+    <sql-query name="VL_TITOLO_BIB_order_4">0 = 0 ORDER BY this_.CD_PAESE, this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_BIB_order_5">0 = 0 ORDER BY this_.CD_LINGUA_1 </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_CLA #################################à -->
+    <sql-query name="VL_TITOLO_CLA_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_CLA_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_CLA_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_CLA_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_CLA_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_IMP #################################à -->
+    <sql-query name="VL_TITOLO_IMP_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_IMP_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_IMP_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_IMP_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_IMP_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_LUO #################################à -->
+    <sql-query name="VL_TITOLO_LUO_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_LUO_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_LUO_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_LUO_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_LUO_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_MAR #################################à -->
+    <sql-query name="VL_TITOLO_MAR_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_MAR_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_MAR_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_MAR_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_MAR_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_NUM_STD #################################à -->
+    <sql-query name="VL_TITOLO_NUM_STD_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_NUM_STD_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_NUM_STD_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_NUM_STD_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_NUM_STD_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_SOG #################################à -->
+    <sql-query name="VL_TITOLO_SOG_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_SOG_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_SOG_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_SOG_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_SOG_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_THE #################################à -->
+    <sql-query name="VL_TITOLO_THE_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_THE_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_THE_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_THE_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_THE_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_TIT_B #################################à -->
+    <sql-query name="VL_TITOLO_TIT_B_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_TIT_B_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_TIT_B_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_TIT_B_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_TIT_B_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+    <sql-query name="VL_TITOLO_TIT_B_order_tp_legame">0 = 0 ORDER BY this_.TP_LEGAME, this_.CD_NATURA_COLL DESC </sql-query>
+
+    <!-- ###############################  ORDINAMENTI VL_TITOLO_TIT_C #################################à -->
+    <sql-query name="VL_TITOLO_TIT_C_order_1">0 = 0 ORDER BY this_.BID </sql-query>
+    <sql-query name="VL_TITOLO_TIT_C_order_2">0 = 0 ORDER BY this_.KY_CLES1_T, this_.KY_CLES2_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_TIT_C_order_3">0 = 0 ORDER BY this_.AUTORE, this_.KY_CLES1_T, NVL(this_.AA_PUBB_1, ' ') </sql-query>
+    <sql-query name="VL_TITOLO_TIT_C_order_4">0 = 0 ORDER BY this_.SEQUENZA </sql-query>
+    <sql-query name="VL_TITOLO_TIT_C_order_5">0 = 0 ORDER BY NVL(this_.AA_PUBB_1, ' '), this_.KY_CLES1_T, this_.KY_CLES2_T </sql-query>
+    <sql-query name="VL_TITOLO_TIT_C_order_tp_legame">0 = 0 ORDER BY this_.TP_LEGAME, this_.CD_NATURA_BASE DESC, this_.SEQUENZA </sql-query>
+
+</hibernate-mapping>

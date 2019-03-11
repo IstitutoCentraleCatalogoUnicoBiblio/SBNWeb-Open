@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.amministrazione.Tbf_amministrazione" table="tbf_amministrazione" lazy="false">
+		<id name="id_amministratore" column="id_amministratore" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="tp_amministratore" column="tp_amministratore" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Puo Assumere 2 valori:
+		Polo
+		Biblioteca
+			</meta>
+		</property>
+		<set name="Cd_polo" table="trf_amministrazione_biblioteca" lazy="true" cascade="save-update,lock">
+			<key column="id_amministratore" not-null="true"/>
+			<many-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_polo"/>
+				<column name="cd_biblioteca"/>
+			</many-to-many>
+		</set>
+		<set name="Trf_amministrazione_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_amministratore" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.amministrazione.Trf_amministrazione_polo"/>
+		</set>
+	</class>
+</hibernate-mapping>

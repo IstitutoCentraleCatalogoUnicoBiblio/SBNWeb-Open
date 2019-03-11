@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_aut_aut" polymorphism="explicit" table="TR_AUT_AUT" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="VID_BASE" column="VID_BASE" class="it.finsiel.sbn.polo.orm.Tb_autore1">
+			</key-many-to-one>
+			<key-many-to-one name="VID_COLL" column="VID_COLL" class="it.finsiel.sbn.polo.orm.Tb_autore1">
+			</key-many-to-one>
+			-->
+			<key-property name="TP_LEGAME" column="TP_LEGAME" type="string"/>
+			<key-property name="VID_BASE" column="VID_BASE" type="string"/>
+			<key-property name="VID_COLL" column="VID_COLL" type="string"/>
+		</composite-id>
+		<property name="NOTA_AUT_AUT" column="NOTA_AUT_AUT" type="string" length="320" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TR_AUT_AUT_selectPerKey"
+				condition="tp_legame = :XXXtp_legame
+						  AND vid_base = :XXXvid_base
+						  AND vid_coll = :XXXvid_coll
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_AUT_AUT_selectPerKeys2"
+				condition="((vid_base = :XXXvid_1 AND vid_coll = :XXXvid_2)
+				  		  OR (vid_coll = :XXXvid_1 AND vid_base = :XXXvid_2) )
+				  		  AND fl_canc != 'S' "/>
+
+		<filter name="TR_AUT_AUT_selectPerAutoreBaseOColl"
+				condition="(vid_base = :XXXvid_base OR
+						  vid_coll = :XXXvid_base)
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_AUT_AUT_selectLegami" condition="fl_canc != 'S' "/>
+
+		<filter name="TR_AUT_AUT_selectEsistenza"
+				condition="vid_base = :XXXvid_base
+						  AND vid_coll = :XXXvid_coll "/>
+
+	</class>
+</hibernate-mapping>

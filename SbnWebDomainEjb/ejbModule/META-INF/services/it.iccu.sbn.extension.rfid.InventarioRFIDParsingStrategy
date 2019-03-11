@@ -1,0 +1,3 @@
+it.iccu.sbn.util.rfid.impl.SbnWebServiziInvParser
+it.iccu.sbn.util.rfid.impl.TO0_RFIDParser
+it.iccu.sbn.util.rfid.impl.LIG_RFIDParser

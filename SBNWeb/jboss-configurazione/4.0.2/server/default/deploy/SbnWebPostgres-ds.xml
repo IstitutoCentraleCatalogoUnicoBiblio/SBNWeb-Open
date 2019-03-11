@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- =====================================================================
+-->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- =====================================================================
+-->
+
+<!-- $Id: SbnWebPostgres-ds.xml,v 1.2 2009/01/09 11:00:14 almaviva5 Exp $ -->
+<!-- ====================================================================
+-->
+<!--  Datasource config for Postgres                                      -->
+<!-- ====================================================================
+-->
+
+
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>jdbc/sbnHibernatePostgresqlDS</jndi-name>
+		<!-- <connection-url>jdbc:postgresql://192.168.104.34:5432/sbnwebHib2</connection-url>-->
+    	<connection-url>jdbc:postgresql://192.168.104.34:5432/sbnwebDb</connection-url>
+
+    	<driver-class>org.postgresql.Driver</driver-class>
+    	<user-name>sbnweb</user-name>
+    	<password>sbnweb</password>
+
+		<metadata>
+			<type-mapping>PostgreSQL 8.1</type-mapping>
+		</metadata>
+
+		<transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+
+	    <!--pooling parameters-->
+    	<min-pool-size>5</min-pool-size>
+    	<max-pool-size>100</max-pool-size>
+    	<blocking-timeout-millis>5000</blocking-timeout-millis>
+    	<idle-timeout-minutes>15</idle-timeout-minutes>
+
+    	<check-valid-connection-sql>select version()</check-valid-connection-sql>
+  	</local-tx-datasource>
+</datasources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario" table="tbf_bibliotecario" >
+		<meta attribute="class-description">
+			BIBLIOTECARI E USERID (TLRBIT + TLFPUT)
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id column="id_utente_professionale" type="integer">
+			<generator class="foreign">
+				<param name="property">id_utente_professionale</param>
+			</generator>
+		</id>
+		<one-to-one name="id_utente_professionale" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_anagrafe_utenti_professionali" cascade="all" constrained="true"/>
+		<many-to-one name="id_parametro" cascade="lock" column="id_parametro" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_parametro" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cd_prof" cascade="lock" column="id_profilo_abilitazione" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_profilo_abilitazione" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="cd_livello_gbantico" column="cd_livello_gbantico" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				massimo livello di autorit&#224; utilizzabile dal bibliotecaro in catalogazione materiale antico
+			</meta>
+		</property>
+		<property name="cd_livello_gbmoderno" column="cd_livello_gbmoderno" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				massimo livello di autorit&#224; utilizzabile dal bibliotecaro in catalogazione materiale moderno
+			</meta>
+		</property>
+		<property name="cd_livello_gssoggetti" column="cd_livello_gssoggetti" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				massimo livello di autorit&#224; utilizzabile dal bibliotecaro in catalogazione soggetti
+			</meta>
+		</property>
+		<property name="cd_livello_gsclassi" column="cd_livello_gsclassi" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				massimo livello di autorit&#224; utilizzabile dal bibliotecaro in gestione indici di classificazione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Trl_attivita_bibliotecario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="tbf_bibliotecarioid_utente_professionale" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_attivita_bibliotecario"/>
+		</set>
+				<set name="Tbf_bibliotecario_default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_utente_professionale" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario_default"/>
+		</set>
+
+	</class>
+</hibernate-mapping>

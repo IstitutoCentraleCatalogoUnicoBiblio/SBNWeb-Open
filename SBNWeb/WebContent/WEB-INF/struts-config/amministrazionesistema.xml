@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+
+		<form-bean name="defaultUtenteForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.gestioneDefault.DefaultUtenteForm" />
+		<form-bean name="defaultBibliotecaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.gestioneDefault.DefaultBibliotecaForm" />
+		<form-bean name="gestioneDefaultForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.gestioneDefault.GestioneDefaultForm" />
+		<form-bean name="profilazionePoloForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.polo.ProfilazioneForm"/>
+		<form-bean name="profilazionePoloAuthoritiesForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.polo.ProfilazioneAuthoritiesForm"/>
+		<form-bean name="profilazionePoloMaterialiForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.polo.ProfilazioneMaterialiForm"/>
+		<form-bean name="profilazionePoloSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.polo.ProfilazioneSemanticaForm"/>
+		<form-bean name="profilazioneBibliotecaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.ProfilazioneForm"/>
+		<form-bean name="profilazioneBibliotecaAuthoritiesForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.ProfilazioneAuthoritiesForm"/>
+		<form-bean name="profilazioneBibliotecaMaterialiForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.ProfilazioneMaterialiForm"/>
+		<form-bean name="profilazioneBibliotecaSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.ProfilazioneSemanticaForm"/>
+		<form-bean name="ricercaBibliotecarioForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.RicercaBibliotecarioForm"/>
+		<form-bean name="sinteticaBibliotecarioForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.SinteticaBibliotecarioForm"/>
+		<form-bean name="profilazioneBibliotecarioForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.ProfilazioneForm"/>
+		<form-bean name="profilazioneBibliotecarioAuthoritiesForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.ProfilazioneAuthoritiesForm"/>
+		<form-bean name="profilazioneBibliotecarioMaterialiForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.ProfilazioneMaterialiForm"/>
+		<form-bean name="profilazioneBibliotecarioSemanticaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.ProfilazioneSemanticaForm"/>
+		<form-bean name="nuovoBibliotecarioForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.bibliotecario.NuovoBibliotecarioForm"/>
+		<form-bean name="centriSistemaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.centrisistema.CentriSistemaForm"/>
+		<form-bean name="sistemiMetropolitaniForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.sistemimetropolitani.SistemiMetropolitaniForm"/>
+		<form-bean name="ricercaBibliotecaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.RicercaBibliotecaForm"/>
+		<form-bean name="sinteticaBibliotecaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.SinteticaBibliotecaForm"/>
+		<form-bean name="nuovaBibliotecaForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.NuovaBibliotecaForm"/>
+		<form-bean name="sinteticaCodiciForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.codici.SinteticaCodiciForm"/>
+		<form-bean name="dettaglioCodiceForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.codici.DettaglioCodiceForm"/>
+		<form-bean name="gestioneCodiceForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.codici.GestioneCodiceForm"/>
+
+		<form-bean name="listaBibliotecheAffiliateForm"
+			type="it.iccu.sbn.web.actionforms.amministrazionesistema.biblioteca.sif.ListaBibliotecheAffiliateForm"/>
+
+	</form-beans>
+
+	<global-forwards>
+		<forward name="sifListaBibliotecheAffiliatePerAttivita" path="/amministrazionesistema/sif/listaBibliotecheAffiliate.do"/>
+		<forward name="ricercaBiblioteca" path="/amministrazionesistema/ricercaBiblioteca.do" />
+	</global-forwards>
+
+	<action-mappings>
+		<action path="/amministrazionesistema"
+			forward="/WEB-INF/jsp/pages/amministrazionesistema/amministrazionesistema.jsp" />
+
+		<action path="/amministrazionesistema/defaultUtente"
+			name="defaultUtenteForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/defaultUtente.jsp"
+			scope="session" validate="true"
+			parameter="methodProfiloUtente"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.DefaultUtenteAction">
+			<forward name="gestioneDefault" path="/amministrazionesistema/gestioneDefault.do" />
+			<forward name="blank" path="/blank.do" />
+		</action>
+
+		<action path="/amministrazionesistema/defaultBiblioteca"
+			name="defaultBibliotecaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/defaultBiblioteca.jsp"
+			scope="session" validate="true"
+			parameter="methodProfiloUtente"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.DefaultBibliotecaAction">
+			<forward name="gestioneDefault" path="/amministrazionesistema/gestioneDefault.do" />
+			<forward name="blank" path="/blank.do" />
+		</action>
+
+		<action path="/amministrazionesistema/gestioneDefault"
+			name="gestioneDefaultForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/gestioneDefault.jsp"
+			scope="session" validate="true"
+			parameter="methodDefault"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.GestioneDefaultAction">
+			<forward name="defaultUtente" path="/amministrazionesistema/defaultUtente.do" />
+			<forward name="defaultBiblioteca" path="/amministrazionesistema/defaultBiblioteca.do" />
+			<forward name="blank" path="/blank.do" />
+		</action>
+
+		<action path="/amministrazionesistema/abilitazionePolo/profilazionePolo" name="profilazionePoloForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazione.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.polo.ProfilazioneAction" scope="session" parameter="methodProfilazione" >
+                <forward name="authorities" path="/amministrazionesistema/abilitazionePolo/profilazionePoloAuthorities.do" />
+                <forward name="materiali" path="/amministrazionesistema/abilitazionePolo/profilazionePoloMateriali.do" />
+                <forward name="profilo" path="/amministrazionesistema/abilitazionePolo/profilazionePolo.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazionePolo/profilazionePoloAuthorities" name="profilazionePoloAuthoritiesForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneAuthorities.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.polo.ProfilazioneAuthoritiesAction" scope="session" parameter="methodProfilazioneParametriAuth" >
+                <forward name="torna" path="/amministrazionesistema/abilitazionePolo/profilazionePolo.do" />
+                <forward name="semantica" path="/amministrazionesistema/abilitazionePolo/profilazionePoloSemantica.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazionePolo/profilazionePoloMateriali" name="profilazionePoloMaterialiForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneMateriali.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.polo.ProfilazioneMaterialiAction" scope="session" parameter="methodProfilazioneParametriMat" >
+                <forward name="torna" path="/amministrazionesistema/abilitazionePolo/profilazionePolo.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazionePolo/profilazionePoloSemantica" name="profilazionePoloSemanticaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneSemantica.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.polo.ProfilazioneSemanticaAction" scope="session" parameter="methodProfilazioneParametriSem" >
+                <forward name="torna" path="/amministrazionesistema/abilitazionePolo/profilazionePoloAuthorities.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBiblioteca" name="profilazioneBibliotecaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBiblioteca.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.ProfilazioneAction" scope="session" parameter="methodProfilazione" >
+                <forward name="authorities" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaAuthorities.do" />
+                <forward name="materiali" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaMateriali.do" />
+                <forward name="profilo" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBiblioteca.do" />
+                <forward name="sintetica" path="/amministrazionesistema/sinteticaBiblioteca.do" />
+                <forward name="modifica" path="/amministrazionesistema/nuovaBiblioteca.do" />
+                <forward name="ricerca" path="/amministrazionesistema/ricercaBiblioteca.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaAuthorities" name="profilazioneBibliotecaAuthoritiesForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecaAuthorities.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.ProfilazioneAuthoritiesAction" scope="session" parameter="methodProfilazioneParametriAuth" >
+                <forward name="torna" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBiblioteca.do" />
+                <forward name="semantica" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaSemantica.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaMateriali" name="profilazioneBibliotecaMaterialiForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecaMateriali.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.ProfilazioneMaterialiAction" scope="session" parameter="methodProfilazioneParametriMat" >
+                <forward name="torna" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBiblioteca.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaSemantica" name="profilazioneBibliotecaSemanticaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecaSemantica.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.ProfilazioneSemanticaAction" scope="session" parameter="methodProfilazioneParametriSem" >
+                <forward name="torna" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBibliotecaAuthorities.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/ricercaBibliotecario" name="ricercaBibliotecarioForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/ricercaBibliotecario.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.RicercaBibliotecarioAction" scope="session" parameter="methodRicBibliotecario" >
+				<forward name="sintetica" path="/amministrazionesistema/sinteticaBibliotecario.do" />
+				<forward name="nuovo" path="/amministrazionesistema/nuovoBibliotecario.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+
+       <!-- Manutenzione almaviva2 21.09.2011 -  inserite le chiamate per la lentina del biblotecario (ute ins e var)	-->
+		<action path="/amministrazionesistema/sinteticaBibliotecario" name="sinteticaBibliotecarioForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/sinteticaBibliotecario.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.SinteticaBibliotecarioAction" scope="session" parameter="methodSinBibliotecario" >
+				<forward name="torna" path="/amministrazionesistema/ricercaBibliotecario.do" />
+				<forward name="profilazione" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecario.do" />
+				<forward name="nuovo" path="/amministrazionesistema/nuovoBibliotecario.do" />
+				<forward name="acquisizioni" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
+				<forward name="stampaEtichette" path="/gestionestampe/etichette/stampaEtichette.do" />
+				<forward name="estrattoreIdDocumenti" path="/common/estrattoreIdDocumenti.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecario" name="profilazioneBibliotecarioForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecario.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.ProfilazioneAction" scope="session" parameter="methodProfilazione" >
+                <forward name="authorities" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioAuthorities.do" />
+                <forward name="materiali" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioMateriali.do" />
+                <forward name="profilo" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecario.do" />
+                <forward name="sintetica" path="/amministrazionesistema/sinteticaBibliotecario.do" />
+                <forward name="modifica" path="/amministrazionesistema/nuovoBibliotecario.do" />
+                <forward name="ricerca" path="/amministrazionesistema/ricercaBibliotecario.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioAuthorities" name="profilazioneBibliotecarioAuthoritiesForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecarioAuthorities.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.ProfilazioneAuthoritiesAction" scope="session" parameter="methodProfilazioneParametriAuth" >
+                <forward name="torna" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecario.do" />
+                <forward name="semantica" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioSemantica.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioMateriali" name="profilazioneBibliotecarioMaterialiForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecarioMateriali.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.ProfilazioneMaterialiAction" scope="session" parameter="methodProfilazioneParametriMat" >
+                <forward name="torna" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecario.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioSemantica" name="profilazioneBibliotecarioSemanticaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/profilazioneBibliotecarioSemantica.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.ProfilazioneSemanticaAction" scope="session" parameter="methodProfilazioneParametriSem" >
+                <forward name="torna" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecarioAuthorities.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/nuovoBibliotecario" name="nuovoBibliotecarioForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/nuovoBibliotecario.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.bibliotecario.NuovoBibliotecarioAction" scope="session" parameter="methodNewBibliotecario" >
+			<forward name="profilo" path="/amministrazionesistema/abilitazioneBibliotecario/profilazioneBibliotecario.do" />
+			<forward name="torna" path="/amministrazionesistema/ricercaBibliotecario.do" />
+			<forward name="sintetica" path="/amministrazionesistema/sinteticaBibliotecario.do" />
+			<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/centriSistema" name="centriSistemaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/centriSistema.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.centrisistema.CentriSistemaAction" scope="session" parameter="methodCentriSistema" >
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/sistemiMetropolitani" name="sistemiMetropolitaniForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/sistemiMetropolitani.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.sistemimetropolitani.SistemiMetropolitaniAction" scope="session" parameter="methodSistemiMetropolitani" >
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/ricercaBiblioteca" name="ricercaBibliotecaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/ricercaBiblioteca.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.RicercaBibliotecaAction" scope="session" parameter="methodRicBiblioteca" >
+				<forward name="sintetica" path="/amministrazionesistema/sinteticaBiblioteca.do" />
+				<forward name="nuovo" path="/amministrazionesistema/nuovaBiblioteca.do" />
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/nuovaBiblioteca" name="nuovaBibliotecaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/nuovaBiblioteca.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.NuovaBibliotecaAction" scope="session" parameter="methodNewBiblioteca" >
+			<forward name="profilo" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBiblioteca.do" />
+			<forward name="torna" path="/amministrazionesistema/ricercaBiblioteca.do" />
+			<forward name="sintetica" path="/amministrazionesistema/sinteticaBiblioteca.do" />
+			<forward name="blank" path="/blank.do" />
+        </action>
+
+		<action path="/amministrazionesistema/sinteticaBiblioteca" name="sinteticaBibliotecaForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/sinteticaBiblioteca.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.SinteticaBibliotecaAction" scope="session" parameter="methodSinBiblioteca" >
+				<forward name="torna" path="/amministrazionesistema/ricercaBiblioteca.do" />
+				<forward name="profilazione" path="/amministrazionesistema/abilitazioneBiblioteca/profilazioneBiblioteca.do" />
+				<forward name="nuovo" path="/amministrazionesistema/nuovaBiblioteca.do" />
+				<forward name="fornitore" path="/acquisizioni/fornitori/inserisciFornitore.do" />
+				<forward name="utente" path="/servizi/utenti/DettaglioUtentiAna.do" />
+				<forward name="esamina" path="/acquisizioni/fornitori/esaminaFornitore.do"/>
+				<forward name="scaricoInventariale" path="/documentofisico/elaborazioniDifferite/scaricoInventariale.do"/>
+				<forward name="modificaInvColl" path="/documentofisico/datiInventari/modificaInvColl.do"/>
+				<forward name="blank" path="/blank.do" />
+        </action>
+
+   		<action path="/amministrazionesistema/sif/listaBibliotecheAffiliate" name="listaBibliotecheAffiliateForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/sif/listaBibliotecheAffiliate.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.biblioteca.sif.ListaBibliotecheAffiliateAction" scope="session" parameter="methodListaBibAff" >
+        </action>
+
+		<action path="/amministrazionesistema/sinteticaCodici" name="sinteticaCodiciForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/sinteticaCodici.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.codici.SinteticaCodiciAction" scope="session" parameter="methodSinCodici" >
+			<forward name="dettaglio" path="/amministrazionesistema/dettaglioCodice.do"/>
+        </action>
+
+		<action path="/amministrazionesistema/dettaglioCodice" name="dettaglioCodiceForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/dettaglioCodice.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.codici.DettaglioCodiceAction" scope="session" parameter="methodCodice" >
+			<forward name="sintetica" path="/amministrazionesistema/sinteticaCodici.do"/>
+			<forward name="gestione" path="/amministrazionesistema/gestioneCodice.do"/>
+        </action>
+
+   		<action path="/amministrazionesistema/gestioneCodice" name="gestioneCodiceForm"
+			input="/WEB-INF/jsp/pages/amministrazionesistema/gestioneCodice.jsp" validate="false"
+			type="it.iccu.sbn.web.actions.amministrazionesistema.codici.GestioneCodiceAction" scope="session" parameter="methodGestCodice" >
+			<forward name="sintetica" path="/amministrazionesistema/sinteticaCodici.do"/>
+        </action>
+
+	</action-mappings>
+	<!-- ======================================== Message Resources Definitions -->
+	<controller nocache="true"></controller>
+
+	<message-resources key="amministrazioneSistemaLabels"
+		parameter="it.iccu.sbn.web.resources.AmministrazioneSistemaLabels"
+		null="false" />
+	<message-resources key="amministrazioneSistemaMessages"
+		parameter="it.iccu.sbn.web.resources.AmministrazioneSistemaMessages"
+		null="false" />
+
+</struts-config>

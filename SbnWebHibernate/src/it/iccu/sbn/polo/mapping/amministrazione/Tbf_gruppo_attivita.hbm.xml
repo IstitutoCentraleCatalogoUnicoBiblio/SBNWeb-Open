@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita" table="tbf_gruppo_attivita" >
+		<id name="id_gruppo_attivita_polo" column="id_gruppo_attivita_polo" type="integer" unsaved-value="0">
+			<generator class="sequence">
+                <param name="sequence">sbnweb.tbf_gruppo_attivita_id_gruppo_attivita_polo_seq</param>
+            </generator>
+		</id>
+		<many-to-one name="cd_polo" cascade="lock" column="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="ds_name" column="ds_name" type="string" length="255" not-null="false" lazy="false"/>
+		<set name="Id_gruppo_attivita_polo_base" table="trf_gruppo_attivita" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_gruppo_attivita_polo_coll" not-null="false"/>
+			<many-to-many column="id_gruppo_attivita_polo_base" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita">
+			</many-to-many>
+		</set>
+		<set name="Id_gruppo_attivita_polo_coll" table="trf_gruppo_attivita" lazy="true" cascade="save-update,lock">
+			<key column="id_gruppo_attivita_polo_base" not-null="true"/>
+			<many-to-many column="id_gruppo_attivita_polo_coll" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppo_attivita">
+			</many-to-many>
+		</set>
+		<set name="Tbf_biblioteca_in_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_gruppo_attivita_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo"/>
+		</set>
+		<set name="Trf_gruppo_attivita_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_gruppo_attivita_polo" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_gruppo_attivita_polo"/>
+		</set>
+		<one-to-one name="Tbf_modello_profilazione_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_modello_profilazione_biblioteca" cascade="save-update,lock" property-ref="id_gruppo_attivita" lazy="proxy" access="field"/>
+		<one-to-one name="Tbf_modello_profilazione_bibliotecario" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_modello_profilazione_bibliotecario" cascade="save-update,lock" property-ref="id_gruppo_attivita" lazy="proxy" access="field"/>
+	</class>
+</hibernate-mapping>

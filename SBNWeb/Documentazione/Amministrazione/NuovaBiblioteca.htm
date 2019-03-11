@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Guida SBNWEB</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+.Stile2 {font-style: italic}
+.Stile3 {font-weight: bold}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#dde8f0">
+<p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Nuova/Modifica Anagrafica Biblioteca</h1>
+<ul>
+<li><a href="#Descrizione">Descrizione</a></li>
+<li><a href="#Ingresso">Punti di ingresso</a></li>
+<li><a href="#Prerequisiti">Prerequisiti</a></li>
+<li><a href="#ModuloDati">Modulo di immissione dati</a>
+  <ul>
+    <li><a href="#Filtri">Filtri</a></li>
+    <li><a href="#Azioni">Azioni utente</a></li>
+    </ul>
+</li>
+<li><a href="#Controlli">Controlli del
+sistema</a><br>
+</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+<p>Il Caso d&#8217;Uso consente sia creare una nuova istanza di biblioteca e facoltativamente di abiltarla al sistema, sia di modificare l'anagrafica di un biblioteca esistente.<br>
+  All'utente viene presentata una lista di campi per cui &egrave; possibile impostare o modificare i dati di anagrafica e di definirne l'appartenenza al polo.<br>
+</p>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span>Punti
+di ingresso </h2>
+<ol>
+<li>Menu-&gt;Amministrazione-&gt;<a href="GestioneBiblioteche.htm">Gestione biblioteche</a>-&gt;Nuova</li>
+<li>Menu-&gt;Amministrazione-&gt;<a href="GestioneBiblioteche.htm">Gestione biblioteche</a>-&gt;<a href="SinteticaBiblioteche.htm">Lista Sintetica Biblioteche</a>-&gt;Modifica Anagrafica Biblioteca</li>
+<li>Menu-&gt;Amministrazione-&gt;<a href="GestioneBiblioteche.htm">Gestione biblioteche</a>-&gt;<a href="SinteticaBiblioteche.htm">Lista Sintetica Biblioteche</a>-&gt;Visualizza Anagrafica Biblioteca</li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="style8 style4 Stile3">Modulo
+di immissione dati</span></h2>
+<p align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;">Nuova Biblioteca</span></p>
+<p class="style5 style8 style4 Stile3" align="center"><img src="immagini/NuovaBiblioteca.jpg" alt="Nuova Biblioteca" width="999" height="881"></p>
+<h4 class="style5 style8 style4 Stile3" align="center"><span class="style5 style8 style4 Stile3" style="font-weight: normal;">Modifica/Visualizza Anagrafica Biblioteca esistente</span></h4>
+<p class="style5 style8 style4 Stile3" align="center"><img src="immagini/ModificaBiblioteca.jpg" alt="Modifica Biblioteca" width="975" height="903"></p>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali2"></a>Area filtri</span></h3>
+<ul>
+  <li>Codice SBN: 2 campi, codice del polo, 3 caratteri alfanumerici, e codice della biblioteca, 2 caratteri alfanumerici; campi obbligatori in caso biblioteca appartenente ad un polo</li>
+  <li>Codice anagrafe centrale: fino a 6 caratteri alfanumerici; campo obbligatorio in caso biblioteca appartenente ad un polo</li>
+  <li>Nome: fino a 80 caratteri alfanumerici; campo obbligatorio</li>
+  <li>Unit&agrave; organizzativa: fino a 50 caratteri alfanumerici; campo obbligatorio</li>
+  <li>Tipologia biblioteca: campo obbligatorio</li>
+  <li>Indirizzo (Dug + Toponomastica): fino a 70 caratteri alfanumerici; campo obbligatorio</li>
+  <li>CAP: 5 caratteri numerici; campo obbligatorio</li>
+  <li>Citt&agrave;: fino a 30 caratteri, campo obbligatorio</li>
+  <li>Provincia: campo obbligatorio</li>
+  <li>Paese: campo obbligatorio</li>
+  <li>Telefono (prefisso + numero): 7 caratteri numerici per il prefisso e 11 caratteri numerici per il numero</li>
+  <li>Fax (prefisso + numero): 7 caratteri numerici per il prefisso e 11 caratteri numerici per il numero</li>
+  <li>E-mail: fino a 50 caratteri alfanumerici</li>
+  <li>Casella postale: fino a 20 caratteri alfanumerici</li>
+  <li>Partita IVA: fino a 18 caratteri alfanumerici</li>
+  <li>Codice fiscale: fino a 18 caratteri alfanumerici</li>
+  <li>Note: fino a 160 caratteri alfanumerici</li>
+  <li>SBN: flag SBN/Non SBN</li>
+  <li>Centro Sistema: indicazione se la biblioteca &egrave; di tipo centro sistema o affiliata ad un'altra biblioteca</li>
+  </ul>
+<br><h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li> Bottone <strong>Salva</strong>: salva le modifiche effettuate, memorizzando l'anagrafica della biblioteca;</li>
+<li>Bottone <strong>Indietro</strong>: ridirige alla mappa precedente di provenienza;</li>
+<li>Bottone <strong>Salva, abilita e modifica abilitazioni</strong>: effettua le operazioni di salvataggio identiche al pulsante salva e, nel caso di biblioteca appartenente al polo corrente, abilita essa al sistema ridirigendo alla mappa di <a href="ProfilazioneBiblioteca.htm">Profilazione Biblioteca</a>.</li>
+</ul>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style4 style8">Controlli
+del sistema</span></h2>
+<ul>
+  <li>Verifica della compilazione dei campi obbligatori</li>
+  <li>Verifica della compilazione dei campi obbligatori in caso di appartenenza ad un polo</li>
+  <li>Verifica che sia impostato il flag SBN a &quot;Non SBN&quot; in caso di appartenenza ad un polo diverso da quello corrente</li>
+  <li>Controllo dei caratteri numerici del campo CAP</li>
+  <li>Controllo dei caratteri numerici dei campi Telefono e Fax qualora essi siano compilati</li>
+  <li>Controllo di correttezza dell'indirizzo E-mail qualora il relativo campo sia compilato</li>
+  <li>Controllo  del non superamento dei 160 caratteri del campo Note</li>
+  <li>In caso si salvi per passare alle abilitazioni, viene controllata l'appartenenza della biblioteca al polo corrente</li>
+  </ul>
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;</p></td>
+</tr>
+<tr>
+  <td bgcolor="#dde8f0">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body></html>

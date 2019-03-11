@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Servizio bibliotecario</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0" width="100%" summary=summary>
+
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><A href="../GuidaSbnweb.htm">SBNWEB Guida 
+      Online</A></STRONG></STRONG></P>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></A></SPAN></SPAN>Acquisizioni - Creazione di una gara di una gara d'acquisto</H1>
+<ul>
+<li><A href="#Descrizione">Descrizione</A></li>
+<li><A href="#Ingresso">Punti di ingresso</A></li>
+<li><A href="#Prerequisiti">Prerequisiti</A></li>
+<li><A href="#ModuloDati">Modulo immissione dati</A></li>
+<ul>
+<li><A href="#Canali">Area canali</A></li>
+<li><A href="#Filtri">Area filtri</A></li><li><A href="#Default">Valori di default</A></li>
+<li><A href="#Azioni">Azioni utente</A></LI></UL>
+<li><A href="#Controlli">Controlli del sistema</A><br></LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></A></SPAN></SPAN>Descrizione</H2>
+La funzione consente all'utente bibliotecario di inserire una gara d'acquisto.
+Esso consente in particolare:
+<ul>
+<li>l'immissione delle informazioni della gara d'acquisto nei campi di input</li> 
+<li>l'attivazione di altri casi d'uso</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></A></SPAN></SPAN><strong>Punti di ingresso </STRONG></H2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Gare
+d'acquisto-&gt;<A href="RicercaGareDacquisto.htm">Ricerca gare 
+        d'acquisto</A>-&gt;Bottone <strong>'Crea'</STRONG>' 
+</li>        
+<li>Barra di navigazione </li>
+<li>Da una lista di supporto delle Gare d'acquisto che non ha prodotto risultati</li>
+<li>Menu-&gt;Interrogazione-&gt;<a href="../Interrogazione/SinteticaTitoli.htm">Sintetica titolo</a> -&gt; <a href="../Interrogazione/AnaliticaOggettiBibliografici.htm">Analitica</a> -&gt; Pressione del Tasto <strong>'Vai a'</strong> - procedura: <strong>'Acquisizioni'</strong> - funzione: <strong>'Gara d'acquisto'</strong>. Solo in caso di gara non trovata.</li> 
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></A></SPAN></SPAN>Prerequisiti</H2>
+<ul>
+	<li>Il bibliotecario deve avere superato con 
+        successo l'autenticazione e l'abilitazione alla funzione </LI></UL>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></A></SPAN></SPAN><span class="Stile3 style8">Modulo immissione dati</SPAN></H2>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/CreaGaraDacquisto.gif"></P>
+<p>Di seguito viene descritto il contenuto della schermata<em>:</EM></P>
+<ul>
+<li>Codice Bibl.</li>        
+<li>Numero.</li>        
+<li>Data. Data della Gara di Acquisto</li>        
+<li>Prezzo. Prezzo di partenza della Gara di Acquisto</li>        
+<li>Nr. Copie. Numero copie che si intende acquistare tramite Gara di Acquisto</li>        
+<li>Stato. Decodifica dello stato della Gara di Acquisto. Non editabile</li>        
+<li>Bid. Numero identificativo e descrizione della notizia per cui è stata aperta una Gara di Acquisto.</li>        
+<li>Note.</li>        
+<li>Num. partecipanti</li>        
+<li>Tabella: riporta la lista delle righe per ogni offerta di fornitore. Tale lista presenta per ciascuna riga le seguenti informazioni:
+   <ul>
+  	<li>Fornitore. Codice e Nome Fornitore che ha effettuato un'offerta</li>      
+	<li>Stato. Stato in cui si trova l'offerta del Fornitore. Valori ammessi: A=attesa; P=perdente; V=vincitore</li>      
+	<li>T.Invio. Tipo invio dell'offerta da parte del fornitore. Valori ammessi: F=FAX; P=POSTA; S=STAMPA</li>      
+	<li>Data Invio. Data dell'invio dell'offerta del fornitore</li>      
+	<li>Note (icona)</li>      
+	<li>Risp. (icona)</li>      
+	<li>Campo radio (per consentire la selezione dell'elemento da cancellare o l'importazione del fornitore nella riga selezionata)</li>
+	</ul>
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li> <strong>'Codice Bibl. (Icona lista)'</strong>.&nbsp; Elenco delle biblioteche affiliate a quella di appartenenza, con possibilità di scelta tramite selezione per consentire di operare per conto della biblioteca selezionata.</li>
+<li> <STRONG>'<A href="../Interrogazione/RicercaTitolo.htm">Bid (Icona lente ricerca)</A>'</STRONG>.&nbsp; Ricerca della notizia bibliografica il cui risultato, se scelto, viene riportato nel campo bid.</li> 
+<li><u>Link su Risp (icona) della riga</u>: apre finestra con  possibilità di inserimento di risposte del Fornitore. Il clic successivo sull'icona provvede alla chiusura della finestra.</li>
+<li><u>Link su Note (icona) della riga</U>: apre finestra con possibilità di inserimento di note verso il Fornitore. Il clic successivo sull'icona provvede alla chiusura della finestra.</li>
+<li>Bottone 'Salva': effettua la validazione delle informazioni immesse, conferma le modifiche effettuate e le registra a sistema</li> 
+<li>Bottone 'Ripristina': consente di annullare tutte le modifiche effettuate sulla pagina prima del "Salva", recuperando le informazioni registrate in base dati. </li> 
+<!--- <li>Bottone 'Ins. riga': inserisce una riga vuota nella tabella dei fornitori in gara</li>	 --->	
+<li>Bottone <strong>'<a href="ListaSupportoFornitori.htm">Ins. Fornitori</a>'</strong>: importa i fornitori selezionati aggiungendoli automaticamente alle righe del profilo</li>		
+<li>Bottone 'Canc. fornitori': cancella la riga selezionata della tabella dei fornitori in gara </li>
+<!--- <li>Bottone 'Canc. riga': cancella la riga selezionata della tabella dei fornitori in gara </li>		
+ --->
+<!--- <li>Bottone <strong>'<a href="RicercaFornitori.htm">Fornitori</a>'</strong>: importa i fornitori selezionati aggiungendoli automaticamente alle righe dei partecipanti alla gara</li>		
+ --->
+<li>Bottone <strong>'<a href="ListaSupportoSuggBibl.htm">Sugg bibl</a>'</strong>: importa dai suggerimenti dei bibliotecari la notizia bibliografica sulla quale indire una gara  </li>		
+<li>Bottone <strong>'<a href="ListaSupportoSuggLett.htm">Sugg. lett.</a>'</strong>: importa dai suggerim. lettore la notizia bibliografica sulla quale indire una gara  </li>		
+<li>Bottone 'Indietro': consente l'abbandono della pagina visualizzata e il ritorno a quella di livello superiore. </li>		
+<li>Bottone '<img src="Immagini/vkb.gif" alt="">'. Consente la gestione dei <!--- <a href="../DocumentoFisico/TastieraVirtuale.htm"></a> --->caratteri speciali tramite tastiera virtuale. </li>
+</ul>
+
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li><u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+<li>La scelta dello stato "V - Vincitore" dichiara vincente il fornitore designato e automaticamente tutti gli altri fornitori risulteranno" perdenti" e la gara "conclusa".</li>
+<li>La valorizzazione dei campi note viene denotata con il simbolo asterisco accanto all'icona rappresentativa.</li>
+<li>A seconda delle abilitazioni attribuite dal sistema al bibliotecario, dinamicamente le azioni si rendono disponibili all'utente.</li>
+<li>È obbligatorio definire un legame con un oggetto bibliografico</li>
+<li>E' obbligatorio definire un legame con un fornitore</li>
+<li>E' possibile associare solo fornitori conosciuti dalla biblioteca operante.</li>
+<li>La cancellazione di un fornitore dall'elenco dei fornitori partecipanti alla gara è possibile se la gara è ancora in stato di attesa</li>
+<li>L'inserimento di un fornitore all'elenco di quelli che parteciperanno alla gara è possibile se la gara è ancora in stato di attesa</li>
+<li>Solo le gare concluse possono diventare ordini nella procedura gestione ordini; in quel caso la gara passa allo stato "conclusa e ordinata"</li>
+<li>Alla conferma del Salva, il sistema attribuisce un progressivo univoco all'oggetto creato e le successive pressioni del pulsante "Salva" attivano la funzione di modifica.</li> 
+<li>In caso di provenienza dalla maschera di ricerca con valori impostati tramite bottone "Crea" o da una lista di supporto priva di risultati, il sistema propone la maschera di inserimento con le informazioni ricercate preimpostate automaticamente nei relativi campi di input.</li>
+fornitore conosciuto dalla biblioteca
+
+</ul>
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY></HTML>

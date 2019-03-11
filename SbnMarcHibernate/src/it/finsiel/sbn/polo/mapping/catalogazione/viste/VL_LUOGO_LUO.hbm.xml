@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_luogo_luo" polymorphism="explicit" table="VL_LUOGO_LUO" lazy="false">
+		<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="LID_1" column="LID_1" type="string"/>
+			<key-property name="LID" column="LID" type="string"/>
+		</composite-id>
+		<property name="TP_LEGAME" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false" lazy="false"/>
+		<property name="TP_FORMA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="DS_LUOGO" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="KY_LUOGO" type="it.finsiel.sbn.util.DataTypeCHAR" length="30" not-null="true" lazy="false"/>
+		<property name="KY_NORM_LUOGO" type="it.finsiel.sbn.util.DataTypeCHAR" length="80" not-null="true" lazy="false"/>
+		<property name="CD_PAESE" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false" lazy="false"/>
+		<property name="NOTA_LUOGO" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_INS" type="timestamp" not-null="true" lazy="false"/>
+		<property name="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<filter name="VL_LUOGO_LUO_selectLuogoPerRinvii"
+				condition="lid_1 = :XXXlid_1 "/>
+
+		<filter name="VL_LUOGO_LUO_selectLuogoPerAltriRinvii"
+				condition="lid_1 = :XXXlid_1
+						   AND lid != :XXXlid "/>
+
+		<filter name="VL_LUOGO_LUO_selectPerLid"
+				condition="fl_canc != 'S'
+						   AND lid_1 = :XXXlid_1 "/>
+	</class>
+</hibernate-mapping>

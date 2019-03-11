@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_soggetto" polymorphism="explicit" table="TB_SOGGETTO" lazy="false">
+		<id name="CID" column="CID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="CD_SOGGETTARIO" column="CD_SOGGETTARIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true"/>
+		<property name="CD_EDIZIONE" column="CD_EDIZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="FL_SPECIALE" column="FL_SPECIALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="4" not-null="true"/>
+		<property name="DS_SOGGETTO" column="DS_SOGGETTO" type="string" length="160" not-null="true"/>
+		<property name="KY_CLES1_S" column="KY_CLES1_S" type="it.finsiel.sbn.util.DataTypeCHAR" length="50" not-null="true"/>
+		<property name="KY_CLES2_S" column="KY_CLES2_S" type="it.finsiel.sbn.util.DataTypeCHAR" length="40" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+		<property name="KY_PRIMO_DESCR" column="KY_PRIMO_DESCR" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="true"/>
+		<property name="CAT_SOGG" column="CAT_SOGG" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="NOTA_SOGGETTO" column="NOTA_SOGGETTO" type="string" length="320" not-null="false"/>
+
+
+		<!--
+		<set name="TR_SOG_DES" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="CID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_sog_des"/>
+		</set>
+		<set name="TR_TIT_SOG" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="CID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_tit_sog"/>
+		</set>
+		 -->
+		<filter name="TB_SOGGETTO_selectPerKey"
+				condition="cid = :XXXcid AND fl_canc != 'S' "/>
+
+		<filter name="TB_SOGGETTO_selectPerNomeLike"
+				condition="fl_canc !='S' AND ky_cles1_s LIKE :XXXstringaLike||'%' "/>
+
+		<filter name="TB_SOGGETTO_countPerNomeLike"
+				condition="fl_canc !='S' AND ky_cles1_s LIKE :XXXstringaLike||'%' "/>
+<!-- POSTGRESS -->
+		<filter name="TB_SOGGETTO_selectPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_SOGGETTO_countPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+<!-- END POSTGRESS -->
+
+		<filter name="TB_SOGGETTO_selectPerParoleNome"
+				condition="fl_canc !='S' AND CONTAINS(ds_soggetto, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_SOGGETTO_countPerParoleNome"
+				condition="fl_canc !='S' AND CONTAINS(ds_soggetto, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_SOGGETTO_selectPerNomeEsatto"
+				condition="fl_canc !='S' AND ky_cles1_s = :XXXstringaEsatta "/>
+
+		<filter name="TB_SOGGETTO_countPerNomeEsatto"
+				condition="fl_canc !='S' AND ky_cles1_s = :XXXstringaEsatta "/>
+
+		<filter name="TB_SOGGETTO_selectEsistenzaId"
+				condition="cid = :XXXcid "/>
+
+		<filter name="TB_SOGGETTO_selectSimili"
+				condition="fl_canc != 'S' AND ky_cles1_s = :XXXky_cles1_s "/>
+
+		<filter name="TB_SOGGETTO_selectSimiliConferma"
+				condition="fl_canc != 'S'
+				  AND ky_cles1_s = :XXXky_cles1_s
+				  AND UPPER( TRIM(ds_soggetto) ) = :XXXds_soggetto "/>
+
+	</class>
+</hibernate-mapping>

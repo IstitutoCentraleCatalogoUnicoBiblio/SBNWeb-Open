@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_personaggio" polymorphism="explicit" table="TB_PERSONAGGIO" lazy="false">
+		<!--
+		<id name="ID_PERSONAGGIO" column="ID_PERSONAGGIO" type="long" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="TB_TITOLO" cascade="lock" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11" not-null="true">
+		</many-to-one>
+		-->
+		<composite-id>
+			<key-property name="ID_PERSONAGGIO" column="ID_PERSONAGGIO" type="long"/>
+			<key-property name="BID" column="BID" type="string"/>
+		</composite-id>
+		<property name="NOME_PERSONAGGIO" column="NOME_PERSONAGGIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="25" not-null="true"/>
+		<property name="CD_TIMBRO_VOCALE" column="CD_TIMBRO_VOCALE" type="it.finsiel.sbn.util.DataTypeCHAR" length="14" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<!--
+		<set name="TR_PER_INT" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="ID_PERSONAGGIO" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_per_int"/>
+		</set>
+		 -->
+		<filter name="TB_PERSONAGGIO_selectPerKey"
+				condition="id_personaggio = :XXXid_personaggio "/>
+
+		<filter name="TB_PERSONAGGIO_selectPerBid"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+
+	</class>
+</hibernate-mapping>

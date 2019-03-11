@@ -1,0 +1,96 @@
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<controlli>
+	<attivita iso="00"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A00_ControlliBase" />
+	<attivita iso="PP"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.PrenotazionePostoSala" />
+	<attivita iso="01"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A01_RichiestaServizio" />
+	<attivita iso="02"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A02_ScaricoDaMagazzino" />
+	<attivita iso="03"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A03_ConsegnaDocumentoLettore" />
+	<attivita iso="04"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A04_RestituzioneDocumento" />
+	<attivita iso="05"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A05_CollocazionePuntoDeposito" />
+	<attivita iso="06"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A06_RicollocazioneMagazzino" />
+	<attivita iso="07"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A07_RicezioneUfficioRiproduzione" />
+	<attivita iso="08"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.A08_ConsegnaCopie" />
+
+	<!-- servizi ILL -->
+
+	<!-- REQUESTER (richiedente) -->
+	<attivita iso="F118"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F118_InoltroAltraBiblioteca" />
+	<attivita iso="F114"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F114_RegistrazioneArrivoDocumento" />
+	<attivita iso="F112A"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F112A_PropostaAnnullamentoRichiesta" />
+	<attivita iso="F113A"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F113A_RifiutoCondizioneSuRichiesta" />
+	<attivita iso="F113B"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F113B_AccettazioneCondizioneSuRichiesta" />
+	<attivita iso="F115"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F115_RichiestaRinnovo" />
+	<attivita iso="F116"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F116_SpedizioneAllaBibliotecaFornitrice" />
+	<attivita iso="F116A"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F116A_MaterialeSmarrito" />
+	<attivita iso="F116B"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.requester.F116B_MaterialeDanneggiato" />
+
+	<!-- RESPONDER (fornitrice) -->
+	<attivita iso="F127"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F127_SpedizioneMateriale" />
+	<attivita iso="F128"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F128_RestituzioneDaBibRichiedente" />
+	<attivita iso="F129"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F129_AccettazioneRinnovo" />
+	<attivita iso="F12A"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F12A_RifiutoRinnovo" />
+	<attivita iso="F1211"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F1211_CondizioneSuRichiesta" />
+	<attivita iso="F1212"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F1212_RifiutaRichiesta" />
+	<attivita iso="F1214"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F1214_AccettazioneRichiesta" />
+	<attivita iso="F1220"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F1220_RifiutoAnnullamentoRichiesta" />
+	<attivita iso="F1221"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F1221_AccettaAnnullamentoRichiesta" />
+	<attivita iso="F12E"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F12E_SollecitoRestituzione" />
+	<attivita iso="F12D"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F12D_RichiestaRestituzione" />
+	<attivita iso="F1218"
+		classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.responder.F1218_TermineScaduto" />
+
+	<!--
+	<attivita iso="F100" classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.AttivitaILLFake" />
+	<attivita iso="F111" classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.AttivitaILLFake" />
+	<attivita iso="F1218" classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.AttivitaILLFake" />
+	 -->
+	<attivita iso="F1213" classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.AttivitaILLFake" />
+	<attivita iso="F1215" classe="it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.attivitaDefault.ill.AttivitaILLFake" />
+
+
+</controlli>

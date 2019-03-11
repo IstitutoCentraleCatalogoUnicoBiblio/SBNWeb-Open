@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice_id_locali" table="tb_report_indice_id_locali" >
+		<meta attribute="class-description">
+			REPORT_INDICE_ID_LOCALI
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+
+		<many-to-one name="id_lista" class="it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice" not-null="false" lazy="proxy" access="field">
+			<column name="id_lista" />
+		</many-to-one>
+
+
+		<property name="id_oggetto_locale" column="id_oggetto_locale" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="risultato_confronto" column="risultato_confronto" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="stato_lavorazione" column="stato_lavorazione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tipo_trattamento_selezionato" column="tipo_trattamento_selezionato" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="id_arrivo_fusione" column="id_arrivo_fusione" type="string" length="10" not-null="false" lazy="false"/>
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+
+		<set name="Tb_report_indice_id_arrivo" lazy="true" cascade="save-update,lock,delete" inverse="true" >
+			<key not-null="false">
+				<column name="id_lista_ogg_loc"/>
+			</key>
+		<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice_id_arrivo" />
+		</set>
+
+	</class>
+</hibernate-mapping>

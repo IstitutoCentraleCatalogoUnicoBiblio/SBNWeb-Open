@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Servizio bibliotecario</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0" width="100%" summary=summary>
+
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><A href="../GuidaSbnweb.htm">SBNWEB Guida 
+      Online</A></STRONG></STRONG></P>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></A></SPAN></SPAN>Acquisizioni - Scheda di dettaglio di 
+      un buono d'ordine</H1>
+<ul>
+<li><A href="#Descrizione">Descrizione</A></li>
+<li><A href="#Ingresso">Punti di ingresso</A></li>
+<li><A href="#Prerequisiti">Prerequisiti</A></li>
+<li><A href="#ModuloDati">Modulo immissione dati</A></li>
+<ul>
+<li><A href="#Canali">Area canali</A></li>
+<li><A href="#Filtri">Area filtri</A></li><li><A href="#Default">Valori di default</A></li>
+<li><A href="#Azioni">Azioni utente</A></LI></UL>
+<li><A href="#Controlli">Controlli del sistema</A><br></LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></A></SPAN></SPAN>Descrizione</H2>
+La funzione consente all'utente bibliotecario la visualizzazione la visualizzazione dei dati di dettaglio (Dettaglio Buono d'Ordine) dell'elemento selezionato dalla <a href="SinteticaGareDacquisto.htm">"Sintetica Buono d'Ordine"</a>
+Esso consente in particolare:
+<ul>
+<li>La prospettazione dei buoni d'ordine su 
+        pagine successive rendendo disponibili le opzioni di scorrimento in 
+        avanti o indietro, se l'utente ha effettuato una selezione multipla. 
+</li>        
+<li>La modifica (al bibliotecario che ha un profilo 
+        utente abilitato alla modifica) delle informazioni 
+        prospettate, rendendo editabili tutti i campi della pagina prospettata, 
+        attivando ulteriori azioni e controlli del sistema per la variazione e 
+        registrazione delle modifiche. </LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></A></SPAN></SPAN><strong>Punti di ingresso </STRONG></H2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Buoni d'ordine-&gt;<A href="RicercaBuoniOrdine.htm">Ricerca buoni d'ordine</A>-&gt;<A href="SinteticaBuoniOrdine.htm">Sintetica buoni d'ordine</A>-&gt;Bottone <strong>'Esamina'</STRONG>' 
+</li>        
+<li>Barra di navigazione </li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></A></SPAN></SPAN>Prerequisiti</H2>
+<ul>
+	<li>Il bibliotecario deve avere superato con 
+        successo l'autenticazione e l'abilitazione alla funzione </LI></UL>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></A></SPAN></SPAN><span class="Stile3 style8">Modulo immissione dati</SPAN></H2>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/DettaglioBuonoOrdine.gif"></P>
+<p>Di seguito viene descritto il contenuto della schermata<em>:</EM></P>
+<ul>
+	<li>Codice bibl.</li>   
+	<li>N. buono.</li>   
+	<li>Data.</li> 
+	<li>Fornitore:   codice e nome del fornitore</li>
+	<li>Bilancio:   indicazione dei dati di Bilancio: Esercizio, Capitolo</li>
+	<li>Importo: dato dinamico che somma gli importi dell'ordine</li> 
+	<li>Stato: stato del buono d'ordine</li>
+	<li>Num. ordini collegati: dato dinamico che riporta il numero degli elementi di tabella</li>
+	<li>Tabella degli ordini: riporta la lista degli ordini di uno stesso fornitore e bilancio. Tale lista presenta per ciascun ordine le seguenti informazioni:</li>
+	   <ul>
+		<li>Tipo: tipo dell'ordine</li>
+		<li>Anno: Anno ordine</li> 
+		<li>Codice: codice ordine</li>
+		<li>Stato: stato dell'ordine</li>
+		<li>Continuativo.</li>
+		<li>Bid</li>
+		<li>Titolo</li> 
+		<li>Prezzo</li> 
+		<li>Campo check (per consentire la selezione dell'elemento da cancellare)</li>
+		</ul>
+	</li>
+</ul>
+
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li> '<a href="ListaSupportoFornitori.htm">Fornitore (Icona lente ricerca)</a>' <strong></strong>.&nbsp; Ricerca del fornitore il cui risultato, se scelto, viene riportato nei campi del fornitore.</li>
+<li>Bottone '&lt;': consente lo scorrimento in indietro delle pagine di dettaglio risultanti dalla selezione multipla effettuata dalla sintetica (assente per selezione singola)</li>
+<li>Bottone '&gt;': consente lo scorrimento in avanti delle pagine di dettaglio risultanti dalla selezione multipla effettuata nella sintetica (assente per selezione singola)</li> 
+<li>Bottone 'Salva': effettua la validazione delle informazioni immesse, conferma le modifiche effettuate e le registra a sistema</li> 
+<li>Bottone 'Ripristina': consente di annullare tutte le modifiche effettuate sulla pagina prima del "Salva", recuperando le informazioni registrate in base dati. </li> 
+<li>Bottone 'Cancella': elimina l'intero buono d'ordine </li>		
+<li>Bottone 'Ins. riga': inserisce una riga vuota nella tabella degli ordini del buono</li>		
+<li>Bottone 'Canc. riga': cancella la riga selezionata della tabella degli ordini del buono</li>		
+<li>Bottone 'Completa riga': agisce sulla riga selezionata con il radio in cui sono presenti tutte le informazioni identificative dell'ordine immesse direttamente dall'utente (tipo, anno, codice) attivando la ricerca puntuale dell'ordine e recuperando  tutte le altre informazioni (in output) della riga previo controllo di congruenza con  i dati del fornitore e del capitolo di bilancio</li>
+<li>Bottone 'Stampa': Produce la stampa delle informazioni del buono d'ordine secondo le indicazioni precisate nel caso d'uso "Modifica parametri Buoni d'Ordine"  della Gestione configurazione - Parametrizzazione Buoni d'ordine.</li>
+<li>Bottone <strong>'<a href="ListaSupportoOrdini.htm">Ordine</a>'</strong>. Attiva il caso d'uso "Lista di Supporto Ordini" passando come parametri di ricerca i dati del fornitore e del bilancio, se precedentemente immessi. La selezione dei risultati della ricerca con il bottone "scegli" aggiungerà le righe degli ordini a quelle del buono  presenti in tabella. </li> 
+<li>Bottone 'Chiudi il buono': modifica dello stato del buono a "Chiuso". La modifica diventa effettiva solo dopo aver confermato con il bottone 'Salva'. L'operazione è consentita solo se tutti gli ordini del buono si trovano nello stato di chiuso, annullato, rinnovato.</li>
+<li>Bottone 'Indietro': consente l'abbandono della pagina visualizzata e il ritorno a quella di livello superiore. </li>		
+</ul>
+
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li><u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+<li>A seconda delle abilitazioni attribuite dal sistema al bibliotecario, dinamicamente le azioni si rendono disponibili all'utente.</li>
+<li>I seguenti campi, sono obbligatori: Fornitore, Bilancio, almeno un ordine</li>
+<li>Viene controllato che gli ordini del buono non siano legati ad altri buoni.</li>
+<li>Viene controllato che gli ordini del buono siano in uno stato "aperto" o "stampato".</li>
+<li>Il sistema controlla la congruenza del fornitore dell'ordine con quello del buono.</li>
+<li>E' possibile associare solo fornitori conosciuti dalla biblioteca operante.</li>
+<li>Il sistema controlla che il fornitore appartenga a quelli conosciuti dalla biblioteca.</li>
+<li>Il sistema controlla la congruenza del bilancio dell'ordine con quello del buono.</li>
+<li>Il sistema calcola dinamicamente la somma degli gli importi degli ordini.</li>
+<li>Il sistema consente la chiusura del buono solo se tutti gli ordini del buono si trovano nello stato di chiuso, annullato, rinnovato.</li>
+<!--- <li>Viene controllato che lo stato del buono non sia stato "stampato", altrimenti il sistema  chiede conferma all'utente prima di consentirgli di operare, su risposta positiva è possibile cancellare o inserire nuove righe di ordine. Alla conferma delle modifiche il sistema provvederà alla ristampa del buono d'ordine.</li>
+<li>La stampa modifica lo stato del buono in "Stampato".</li>
+ --->
+
+</ul>
+
+
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY></HTML>

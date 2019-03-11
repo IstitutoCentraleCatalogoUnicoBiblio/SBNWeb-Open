@@ -1,0 +1,100 @@
+
+table.intervallo { 
+	width: 40%;
+	border: 1px;
+	border-style: dotted;
+}
+
+table.intervallo tr { 
+	vertical-align: text-top;
+}
+
+.buttonAggiungi {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 0px;
+	background-image: url(images/plus-sign.svg);
+	background-size: cover;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	vertical-align : text-top;
+}
+
+.buttonDelete {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 0px;
+	background-image: url(images/trashbin.svg);
+	background-size: cover;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	/* vertical-align : middle; */
+}
+
+.buttonEdit {
+	width: 18px;
+ 	height: 18px;
+ 	margin: 0px;
+ 	padding: 0px;
+ 	border: 0px;
+	background-image: url(images/pencil.svg);
+	background-size: cover;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center; 
+	color: #333333;
+	text-indent: -1000em;
+	cursor: pointer; /* hand-shaped cursor */
+ 	cursor: hand; /* for IE 5.x */
+	/* vertical-align : middle; */
+}
+
+input.digit_short {
+	width: 4em;
+	text-align: right;
+}
+
+div.folders {
+	/* LARA	cambiato width: 99%; in width: 100%; perchè altrimenti il blocchetto celeste sporgeva*/
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto; 
+}
+
+table td.center {
+	text-align: center;
+}
+
+input[type=text].time {
+	max-width: 3em;
+	text-align: center;
+}
+
+input[type=text].date {
+	max-width: 5.5em;
+	text-align: center;
+}
+
+.alt-color:nth-child(odd) {
+	/* LARA	 cambiato background-color: #FFCC99; in  background-color: #dde8f0;*/
+	background-color: #dde8f0;
+}
+
+.alt-color:nth-child(even) {
+	/* LARA	 cambiato background-color: #FFCC99; in  background-color: #FFF;*/
+	background-color: #FFF;
+}

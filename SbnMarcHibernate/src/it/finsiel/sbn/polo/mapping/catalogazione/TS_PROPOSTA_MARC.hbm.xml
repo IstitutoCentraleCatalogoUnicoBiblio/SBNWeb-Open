@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_proposta_marc" polymorphism="explicit" table="TS_PROPOSTA_MARC" lazy="false">
+		<id name="ID_PROPOSTA" column="ID_PROPOSTA" type="long" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="UTE_MITTENTE" column="UTE_MITTENTE" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+
+		<property name="ID_OGGETTO" column="ID_OGGETTO" type="string" length="31" not-null="true"/>
+		<property name="TP_MESSAGGIO" column="TP_MESSAGGIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="DS_PROPOSTA" column="DS_PROPOSTA" type="string" length="400" not-null="true"/>
+		<property name="DT_INOLTRO" column="DT_INOLTRO" type="date" not-null="true"/>
+		<property name="CD_OGGETTO" column="CD_OGGETTO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="CD_STATO" column="CD_STATO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TS_PROPOSTA_MARC_selectPerKey"
+				condition="id_proposta = :XXXid_proposta
+		    			   AND fl_canc != 'S' "/>
+
+		<filter name="TS_PROPOSTA_MARC_selectPropostaPerData"
+				condition="fl_canc != 'S' "/>
+
+		<filter name="TS_PROPOSTA_MARC_selectPropostaPerIdOggetto"
+				condition="fl_canc != 'S'
+						  AND id_oggetto = :XXXid_oggetto" />
+
+		<filter name="TS_PROPOSTA_MARC_selectPropostaPerMittente"
+				condition="fl_canc != 'S'
+						  AND ute_mittente = :XXXute_mittente" />
+
+
+<!--
+<statement nome="aggiornaStatoProposta" tipo="update" id="Jenny_09">
+		<fisso>
+			UPDATE Ts_proposta_marc
+			 SET
+			  cd_stato = XXXcd_stato ,
+			  ute_var = XXXute_var ,
+			  ts_var = SYSTIMESTAMP
+			WHERE
+			  id_proposta = XXXid_proposta
+			AND to_char(ts_var,'yyyymmddhh24miss.FF') = XXXts_var
+		</fisso>
+ -->
+
+
+	</class>
+</hibernate-mapping>

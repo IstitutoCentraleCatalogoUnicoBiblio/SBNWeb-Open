@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_rep_aut" polymorphism="explicit" table="TR_REP_AUT" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="TB_AUTORE" column="VID" class="it.finsiel.sbn.polo.orm.Tb_autore1">
+			</key-many-to-one>
+			<key-many-to-one name="ID_REPERTORIO" column="ID_REPERTORIO" class="it.finsiel.sbn.polo.orm.Tb_repertorio1">
+			</key-many-to-one>
+			-->
+			<key-property name="VID" column="VID" type="string"/>
+			<key-property name="ID_REPERTORIO" column="ID_REPERTORIO" type="long"/>
+		</composite-id>
+		<property name="NOTE_REP_AUT" column="NOTE_REP_AUT" type="string" length="160" not-null="false"/>
+		<property name="FL_TROVATO" column="FL_TROVATO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TR_REP_AUT_selectPerKey"
+				condition="id_repertorio = :XXXid_repertorio
+						  AND vid = :XXXvid
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_REP_AUT_selectPerAutore"
+				condition="vid = :XXXvid
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TR_REP_AUT_selectRepertorioPerAutore"
+				condition="vid = :XXXvid
+		 				  AND fl_canc != 'S' "/>
+
+		<filter name="TR_REP_AUT_countRepertorioPerAutore"
+				condition="vid = :XXXvid
+		 				  AND fl_canc != 'S' "/>
+
+		<filter name="TR_REP_AUT_selectPerKeyCancellato"
+				condition="id_repertorio = :XXXid_repertorio
+						  AND vid = :XXXvid
+						  AND fl_canc = 'S' "/>
+
+		<filter name="TR_REP_AUT_selectEsistenza"
+				condition="id_repertorio = :XXXid_repertorio
+						  AND vid = :XXXvid "/>
+
+	</class>
+</hibernate-mapping>

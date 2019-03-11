@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tra_elementi_buono_ordine" table="tra_elementi_buono_ordine" schema="sbnweb" >
+		<meta attribute="class-description">
+			Elementi del buono d'ordine (ordini del buono)
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_bib" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_bib"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="buono_ord" column="buono_ord" type="string"/>
+			<key-property name="cod_tip_ord" column="cod_tip_ord" type="character"/>
+			<key-property name="anno_ord" column="anno_ord" type="big_decimal"/>
+			<key-property name="cod_ord" column="cod_ord" type="integer"/>
+		</composite-id>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

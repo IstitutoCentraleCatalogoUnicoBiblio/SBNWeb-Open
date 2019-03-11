@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_descrittore" polymorphism="explicit" table="TB_DESCRITTORE" lazy="false">
+		<id name="DID" column="DID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="DS_DESCRITTORE" column="DS_DESCRITTORE" type="string" length="160" not-null="true"/>
+		<property name="KY_NORM_DESCRITT" column="KY_NORM_DESCRITT" type="it.finsiel.sbn.util.DataTypeCHAR" length="80" not-null="true"/>
+		<property name="TP_FORMA_DES" column="TP_FORMA_DES" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="CD_SOGGETTARIO" column="CD_SOGGETTARIO" type="it.finsiel.sbn.util.DataTypeCHAR" length="3" not-null="true"/>
+		<property name="CD_EDIZIONE" column="CD_EDIZIONE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CAT_TERMINE" column="CAT_TERMINE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="NOTA_DESCRITTORE" column="NOTA_DESCRITTORE" type="string" length="160" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+	<!-- ATTUALMENTE NON GESTITO IN DB DOVREBBE ESSERE UN ERRORE VERIFICARE
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="false"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="false"/>  -->
+
+		<!--
+		<set name="TR_DES_DES" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="DID_BASE" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_des_des"/>
+		</set>
+		<set name="TR_DES_DES1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="DID_COLL" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_des_des"/>
+		</set>
+		<set name="TR_SOG_DES" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="DID" not-null="true"/>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_sog_des"/>
+		</set>
+		-->
+		<filter name="TB_DESCRITTORE_selectPerKey"
+				condition="did = :XXXdid AND fl_canc != 'S' "/>
+
+		<filter name="TB_DESCRITTORE_selectPerNomeLike"
+				condition="fl_canc !='S'
+	  					  AND ky_norm_descritt LIKE :XXXstringaLike ||'%' "/>
+
+		<filter name="TB_DESCRITTORE_countPerNomeLike"
+				condition="fl_canc !='S'
+						  AND ky_norm_descritt LIKE :XXXstringaLike ||'%' "/>
+<!-- POSTGRESS -->
+		<filter name="TB_DESCRITTORE_selectPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_DESCRITTORE_countPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+<!-- END POSTGRESS -->
+		<filter name="TB_DESCRITTORE_selectPerParoleNome"
+				condition="fl_canc !='S' AND
+	  				  	  CONTAINS(ds_descrittore, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_DESCRITTORE_countPerParoleNome"
+				condition="fl_canc !='S' AND
+					  	  CONTAINS(ds_descrittore, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_DESCRITTORE_selectPerNomeEsatto"
+				condition="fl_canc !='S'
+	   					   AND ky_norm_descritt = :XXXstringaEsatta "/>
+
+		<filter name="TB_DESCRITTORE_countPerNomeEsatto"
+				condition="fl_canc !='S'
+						   AND ky_norm_descritt = :XXXstringaEsatta "/>
+
+		<filter name="TB_DESCRITTORE_selectPerKyNormDescrittore"
+				condition="ky_norm_descritt = :XXXky_norm_descritt
+						   AND cd_soggettario = :XXXcd_soggettario
+						   AND fl_canc !='S'  "/>
+
+		<filter name="TB_DESCRITTORE_selectPerEsistenza"
+				condition="did = :XXXdid "/>
+
+	</class>
+</hibernate-mapping>

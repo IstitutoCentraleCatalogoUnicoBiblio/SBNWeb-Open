@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Ts_tag_790_1_errati" polymorphism="explicit" table="TS_TAG_790_1_ERRATI" lazy="false">
+		<id name="BID_MARC" column="BID_MARC" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="KCERCA" column="KCERCA" type="string" length="1200" not-null="false"/>
+	</class>
+</hibernate-mapping>

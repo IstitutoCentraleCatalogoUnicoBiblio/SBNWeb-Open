@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_config_default" table="tbf_config_default" >
+		<id name="id_config" column="id_config" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="id_area_sezione" column="id_area_sezione" type="string" length="32" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				eg: 00_GestBib (00_ per definire un'area) e 01_GestBibInterrrogazione (NN_ con nn diveso dad 00 per indicare una sezione. Una sezione ha un parent con codice area)
+			</meta>
+		</property>
+		<property name="parent" column="parent" type="string" length="32" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Id del codice are a cui la sezione appartiene. Eg  la sezioen 01_GestBibInterrogazione appartiene a 00_GestBib (id_area_sezione)
+			</meta>
+		</property>
+		<property name="seq_ordinamento" column="seq_ordinamento" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Ordine di prospettazione
+			</meta>
+		</property>
+		<property name="codice_attivita" column="codice_attivita" type="string" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Codice di attivit&#224; di appartenenenza. Usato da solo o con il parametro per verificare abilitazione per uso del default
+			</meta>
+		</property>
+		<property name="parametro_attivita" column="parametro_attivita" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				parametro da usarsi in congiunzione con in codice attivit&#224; per verificare se abilitati o meno ad usare il default
+			</meta>
+		</property>
+		<property name="codice_modulo" column="codice_modulo" type="short" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Identificativo del modulo funzionale (eg. acquisizioni, servizi, ecc.) per abilitare o meno il default
+			</meta>
+		</property>
+		<set name="Tbf_default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="tbf_config_default__id_config" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_default"/>
+		</set>
+	</class>
+</hibernate-mapping>

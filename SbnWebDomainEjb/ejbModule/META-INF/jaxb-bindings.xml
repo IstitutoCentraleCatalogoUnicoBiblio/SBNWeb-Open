@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+	version="2.1">
+	<globalBindings typesafeEnumMemberName="generateName">
+		<serializable uid="1" />
+		<xjc:superClass name="it.iccu.sbn.ejb.vo.SerializableVO" />
+	</globalBindings>
+
+<!--
+	<bindings schemaLocation="ill-apdu-fixed.xsd">
+		<bindings
+			node="//xs:simpleType[@name='DeliveryType']/xs:restriction/xs:enumeration[@value='01']">
+			<typesafeEnumMember name="MAIL" />
+		</bindings>
+		<bindings
+			node="//xs:simpleType[@name='DeliveryType']/xs:restriction/xs:enumeration[@value='02']">
+			<typesafeEnumMember name="MAIL_PRIORITY" />
+		</bindings>
+		<bindings
+			node="//xs:simpleType[@name='DeliveryType']/xs:restriction/xs:enumeration[@value='03']">
+			<typesafeEnumMember name="MAIL_EXPRESS" />
+		</bindings>
+		<bindings
+			node="//xs:simpleType[@name='DeliveryType']/xs:restriction/xs:enumeration[@value='04']">
+			<typesafeEnumMember name="E-MAIL" />
+		</bindings>
+		<bindings
+			node="//xs:simpleType[@name='DeliveryType']/xs:restriction/xs:enumeration[@value='05']">
+			<typesafeEnumMember name="FAX" />
+		</bindings>
+		<bindings
+			node="//xs:simpleType[@name='DeliveryType']/xs:restriction/xs:enumeration[@value='06']">
+			<typesafeEnumMember name="FTP" />
+		</bindings>
+	</bindings>
+ -->
+</bindings>

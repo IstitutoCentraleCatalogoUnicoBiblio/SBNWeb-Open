@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.gestionesemantica.Tb_soggetto" table="tb_soggetto" >
+		<meta attribute="class-description">
+			SOGGETTI (TPSSOG))
+		</meta>
+		<id name="cid" column="cid" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="cd_soggettario" column="cd_soggettario" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del tipo di soggettario
+			</meta>
+		</property>
+		<property name="cd_edizione" column="cd_edizione" type="character" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				edizione del soggettario SBN
+			</meta>
+		</property>
+		<property name="ds_soggetto" column="ds_soggetto" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione
+			</meta>
+		</property>
+		<property name="fl_speciale" column="fl_speciale" type="character" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di presenza di caratteri speciali nella stringa del soggetto
+			</meta>
+		</property>
+		<property name="ky_cles1_s" column="ky_cles1_s" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave di ricerca
+			</meta>
+		</property>
+		<property name="ky_primo_descr" column="ky_primo_descr" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave di ordinamento del primo elemento di soggetto (descrittore)
+			</meta>
+		</property>
+		<property name="cat_sogg" column="cat_sogg" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice di categoria soggetto
+			</meta>
+		</property>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del livello di autorita'
+			</meta>
+		</property>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Indicatore di gestione condivisa con il sistema indice
+			</meta>
+			<column name="fl_condiviso" default="S"/>
+		</property>
+		<property name="ute_condiviso" column="ute_condiviso" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la condivisione con il sistema Indice
+			</meta>
+		</property>
+		<property name="ts_condiviso" column="ts_condiviso" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di cndivisione con sistema indice
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="ky_cles2_s" column="ky_cles2_s" type="string" length="40" not-null="false" lazy="false"/>
+
+		<set name="Tr_tit_sog_bib" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_tit_sog_bib"/>
+		</set>
+		<set name="Tr_sog_des" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_sog_des"/>
+		</set>
+		<set name="Tr_sogp_sogi" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cid_p" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_sogp_sogi"/>
+		</set>
+	</class>
+</hibernate-mapping>

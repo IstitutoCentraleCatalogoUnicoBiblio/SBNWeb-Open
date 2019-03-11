@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Trl_tariffe_modalita_erogazione" table="trl_tariffe_modalita_erogazione" >
+		<meta attribute="class-description">
+			Tariffe delle modalit&#224; di erogazione
+		</meta>
+		<composite-id>
+			<key-property name="cod_erog" column="cod_erog" type="string"/>
+			<key-property name="id_tipo_servizio_id_tipo_servizio" column="id_tipo_servizio" type="integer"/>
+		</composite-id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_tipo_servizio" column="id_tipo_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_tipo_servizio" insert="false" update="false">
+		</many-to-one>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

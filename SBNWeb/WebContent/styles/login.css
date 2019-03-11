@@ -1,0 +1,99 @@
+
+body {
+	 background-color: #FEF1E2;
+}
+
+div {
+    width: 100%;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 5mm;
+    /* margin-bottom: 5mm; */
+}
+
+#header {
+	height: 83px;
+	max-height: 83px;
+	background-image: url(images/top.jpg);
+	background-position: center top;
+	background-repeat: no-repeat;
+	color: #ff0;
+	margin-top: 5px;
+}
+
+#header div.language{
+	top: 55px;
+	left: 720px;
+	position:absolute;
+}
+
+#header span.title {
+	font-family: "times new roman", sans-serif;
+	font-size: 200%;
+	font-wight: bold;
+	color: #0d0089;
+	margin-left: 8px;
+}
+
+table#polo {
+	width: 100%;
+    margin-top: 0px;
+  	color: black;
+}
+
+td#polo p#polo {
+	font-family: Verdana, sans-serif;
+	font-size: 14px;
+	font-style: bold;
+	color: black;
+	margin-left: 5px;
+	vertical-align: top;
+	padding-right: 5px;
+	text-align: left;
+	width: 780px;
+}
+
+div#data {
+	position: relative;
+    margin-top: 0px;
+}
+
+
+input.submit {
+	font-size: 100%;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 0;
+	margin-right: 6px;
+    border-width: 1px;
+}
+
+table {
+	width: 100%;
+    margin-top: 3cm;
+  	color: black;
+}
+
+td {
+	width: 50%;
+}
+
+.build {
+	font-family: Arial;
+	font-size: 75%;
+	z-index: -1;
+}
+
+div.build {
+	position: fixed;
+	bottom: 5px;	
+}
+
+table.build {
+	width: 143px;
+	float: left;
+}
+
+table.build td {
+	width: auto;
+}

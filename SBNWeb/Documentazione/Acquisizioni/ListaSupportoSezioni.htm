@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+
+<title>SBNWEB Guida online</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+   {
+   window.location.href=loc;
+   }
+</script></head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+    <td bgcolor="#dde8f0" valign="top"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+      <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Acquisizioni - Lista di supporto delle sezioni</h1>
+      <ul>
+        <li><a href="#Descrizione">Descrizione</a></li>
+        <li><a href="#Ingresso">Punti di ingresso</a> </li>
+        <li><a href="#Prerequisiti">Prerequisiti</a></li>
+        <li><a href="#Prospettazione">Prospettazione</a>
+          <ul>
+            <li><a href="#Default">Valori di default</a> </li>
+            <li><a href="#Azioni">Azioni utente</a></li>
+          </ul>
+        </li>
+        <li><a href="#Controlli">Controlli del sistema</a><br>
+        </li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+      <p>
+		Il caso d'uso viene attivato quando l'utente esegue da altri casi d'uso il pulsante Cerca Sezioni (click su simbolo grafico icona lista) posto accanto ad un campo di input che se valorizzato dall'utente verrà utilizzato come selezionatore.
+		Esso consente in particolare:
+		<ul>
+		<li>di visualizzare la lista dei dati sintetici di tutte le sezioni.</li>
+		<li>di selezionare singole informazioni da collocare tramite il bottone 'Scegli' nel punto di accesso da cui si è stato invocato.</li>
+		</ul>
+	  </p>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span>Punti di ingresso </h2>
+	 <ol>
+	 <li>click sul simbolo grafico (icona lista)  in corrispondenza di campi di input relativi ad una sezione (<a href="RicercaOrdini.htm">Ricerca Ordini</a>,  <a href="DettaglioOrdine.htm">Dettaglio Ordine</a>,  <a href="CreaOrdini.htm">Crea Ordine</a> , <a href="RicercaProfili.htm">Ricerca Profili</a>,  <a href="DettaglioProfilo.htm">Dettaglio Profilo</a>,  <a href="CreaProfilo.htm">Crea Profilo</a>, <a href="CreaSuggerimentoBibliotecario.htm">Crea Suggerimento Bibliotecario</a>) </li>
+	 </ol>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+      <ul>
+		<li>Il bibliotecario deve avere superato con successo l'autenticazione e l'abilitazione alla funzione</li>
+		<li>Deve esistere almeno una voce in elenco</li>
+      </ul>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prospettazione" id="Prospettazione"></a></span></span><span class="Stile3 style8"><strong>Prospettazione</strong></span></h2>
+	  <p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/ListaSupportoSezione.gif" alt=""></p>
+      <p class="Stile3 style8" align="center"></p>
+      <p>Per consentire la gestione in blocchi di liste numerose di risultati aggiungendo i blocchi di interesse, a capo e piè di lista saranno prospettate <em>:</em></p>
+      <ul>
+	  	<li>Elementi trovati</li>
+	  	<li>Pagina n di m</li>
+	  	<li>CaricaPagina</li>
+      </ul>
+
+      <p>Sulla lista (in formato griglia) saranno prospettate, per ciascun elemento della lista<em>:</em></p>
+      <ul>
+	  	<li>N. Progressivo</li>
+		<li>Cod. Bib. Codice Biblioteca</li>
+		<li>Cod. Sez. Codice della sezione di acquisto</li> 
+		<li>Nome Sezione. Nome della Sezione di Acquisto</li> 
+		<li>Somma disp. Dato calcolato non editabile che riporta la somma disponibile sulla Sezione di Acquisto ottenuta decrementando dal budget gli ordini imputati nel corso dell'anno di validità.</li>
+		<li>Campo radio (per consentire la selezione singola)</li>
+      </ul>
+      <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori di default </h3>
+      <li><!-- Vedi immagine.-->  
+		I valori di default possono variare in funzione
+      	della configurazione dei default gestiti dall'utente stesso. In caso
+      	l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+      </li>
+      <h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span> </h3>
+      <ul>
+		<li> Bottone <strong>'>'</strong>.&nbsp; Il valore numerico espresso nel campo 'Carica pagina' aggiunge al primo blocco della lista, il numero di blocco identificato dal numero immesso.
+		<li> Bottone <strong>'Indietro'</strong>.&nbsp; Consente l'abbandono della pagina visualizzata e il rientro alla funzione chiamante senza apportare modifiche.</li>
+		<li> Link <strong>'barra di navigazione'</strong>.&nbsp; Consente di riproporre le schermate utilizzate di recente.</li>
+		<li> Bottone <strong>'Scegli'</strong>.&nbsp; pulsante consente di riportare la voce selezionate  nel campo sezione. In assenza di selezione il sistema non apporta modifiche..</li>
+      </ul>
+	  <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+	  <div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+      <ul>
+      	<li>
+      	<u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.
+      	</li>
+	  </ul>      
+      <hr>
+        <p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body></html>

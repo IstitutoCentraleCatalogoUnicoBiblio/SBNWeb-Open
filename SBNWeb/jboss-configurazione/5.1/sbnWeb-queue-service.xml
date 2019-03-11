@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Code definite per il progetto SbnWeb -->
+
+<server>
+<!--
+  <loader-repository>jboss.messaging:loader=ScopedLoaderRepository
+    <loader-repository-config>java2ParentDelegation=false</loader-repository-config>
+  </loader-repository>
+-->
+  <mbean code = "org.jboss.jms.server.destination.QueueService"
+         name = "jboss.messaging.destination:service=Queue,name=sbnStampe"
+         xmbean-dd = "xmdesc/Queue-xmbean.xml">
+      <depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+      <depends>jboss.messaging:service=PostOffice</depends>
+	  <attribute name="MaxDeliveryAttempts">1</attribute>
+  </mbean>
+
+  <mbean code = "org.jboss.jms.server.destination.QueueService"
+         name = "jboss.messaging.destination:service=Queue,name=sbnMarcBlocchi"
+         xmbean-dd = "xmdesc/Queue-xmbean.xml">
+      <depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+      <depends>jboss.messaging:service=PostOffice</depends>
+	  <attribute name="MaxDeliveryAttempts">1</attribute>
+  </mbean>
+
+  <mbean code = "org.jboss.jms.server.destination.QueueService"
+         name = "jboss.messaging.destination:service=Queue,name=sbnWebBlocchi"
+         xmbean-dd = "xmdesc/Queue-xmbean.xml">
+      <depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+      <depends>jboss.messaging:service=PostOffice</depends>
+	  <attribute name="MaxDeliveryAttempts">1</attribute>
+  </mbean>
+
+  <!--  Coda di input per elaborazioni differite -->
+  <mbean code = "org.jboss.jms.server.destination.QueueService"
+         name = "jboss.messaging.destination:service=Queue,name=sbnBatch_Input"
+         xmbean-dd = "xmdesc/Queue-xmbean.xml">
+      <depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+      <depends>jboss.messaging:service=PostOffice</depends>
+	  <attribute name="MaxDeliveryAttempts">1</attribute>
+  </mbean>
+
+  <!--  1a coda di output per elaborazioni differite -->
+  <mbean code = "org.jboss.jms.server.destination.QueueService"
+         name = "jboss.messaging.destination:service=Queue,name=sbnBatch_Output1"
+         xmbean-dd = "xmdesc/Queue-xmbean.xml">
+      <depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+      <depends>jboss.messaging:service=PostOffice</depends>
+	  <attribute name="MaxDeliveryAttempts">1</attribute>
+  </mbean>
+
+
+  <!--  2a coda di output per elaborazioni differite -->
+  <mbean code = "org.jboss.jms.server.destination.QueueService"
+         name = "jboss.messaging.destination:service=Queue,name=sbnBatch_Output2"
+         xmbean-dd = "xmdesc/Queue-xmbean.xml">
+      <depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+      <depends>jboss.messaging:service=PostOffice</depends>
+	  <attribute name="MaxDeliveryAttempts">0</attribute>
+  </mbean>
+
+</server>

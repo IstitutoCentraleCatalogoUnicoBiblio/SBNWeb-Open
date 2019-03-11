@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_fatture" table="tba_fatture" schema="sbnweb" >
+		<meta attribute="class-description">
+			Fatture
+		</meta>
+		<id name="id_fattura" column="id_fattura" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cod_fornitore" cascade="lock" column="cod_fornitore" class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="anno_fattura" column="anno_fattura" type="big_decimal" precision="4" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				anno di registrazione della fattura
+			</meta>
+		</property>
+		<property name="progr_fattura" column="progr_fattura" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo che identifica la fattura nell'ambito dell'anno
+			</meta>
+		</property>
+		<property name="num_fattura" column="num_fattura" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero della fattura emessa dal fornitore
+			</meta>
+		</property>
+		<property name="data_fattura" column="data_fattura" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data della fattura del fornitore
+			</meta>
+		</property>
+		<property name="data_reg" column="data_reg" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data di registrazione della fattura
+			</meta>
+		</property>
+		<property name="importo" column="importo" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				importo totale della fattura
+			</meta>
+		</property>
+		<property name="sconto" column="sconto" type="big_decimal" precision="5" scale="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				sconto
+			</meta>
+		</property>
+		<property name="valuta" column="valuta" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della valuta
+			</meta>
+		</property>
+		<property name="cambio" column="cambio" type="big_decimal" precision="10" scale="6" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				cambio corrente
+			</meta>
+		</property>
+		<property name="stato_fattura" column="stato_fattura" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				stato della fattura
+			</meta>
+		</property>
+		<property name="tipo_fattura" column="tipo_fattura" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della tipologia della fattura
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Tba_righe_fatture" lazy="false" cascade="save-update,lock" inverse="true">
+			<key column="id_fattura" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_righe_fatture"/>
+		</set>
+	</class>
+</hibernate-mapping>

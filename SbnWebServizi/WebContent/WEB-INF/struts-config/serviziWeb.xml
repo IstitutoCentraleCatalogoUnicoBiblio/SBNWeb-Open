@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<form-bean name="loginServiziWebForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.LoginForm" />
+
+		<form-bean name="selezioneBibliotecaForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.SelezioneBibliotecaForm" />
+
+		<form-bean name="menuServiziForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.MenuServiziForm" />
+
+		<form-bean name="datiDocumentoForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.DatiDocumentoForm" />
+
+		<form-bean name="serviziILLForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.ServiziILLForm" />
+
+		<form-bean name="sceltaServiziForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.SceltaServiziForm" />
+
+		<form-bean name="serviziDisponibiliForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.ServiziDisponibiliForm" />
+
+		<form-bean name="consultazioneGeneraleForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.ConsultazioneGeneraleForm" />
+
+		<form-bean name="prestitoGeneraleForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.PrestitoGeneraleForm" />
+
+		<form-bean name="richiestaInseritaForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.RichiestaInseritaForm" />
+
+		<form-bean name="prestitoGeneraleTariffaForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.PrestitoGeneraleTariffaForm" />
+
+		<form-bean name="riproduzioneForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.RiproduzioneForm" />
+
+		<form-bean name="riproduzioneSupportoForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.RiproduzioneSupportoForm" />
+
+		<form-bean name="riproduzioneTariffaForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.RiproduzioneTariffaForm" />
+
+		<form-bean name="sceltaServiziILLForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.SceltaServiziILLForm" />
+
+		<form-bean name="DirittiUtenteForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.DirittiUtenteForm" />
+
+		<form-bean name="dirittiDocumentoForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.DirittiDocumentoForm" />
+
+		<form-bean name="cambioPwdServiziWebForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.CambioPwdForm" />
+
+		<form-bean name="listaBiblioForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.ListaBiblioForm" />
+
+		<form-bean name="InserimentoUtenteWebForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.InserimentoUtenteWebForm" />
+
+		<form-bean name="datiUtenteWebForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.InserimentoUtenteWebForm" />
+
+		<form-bean name="ListaMovimentiOpacForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.ListaMovimentiOpacForm" />
+
+		<form-bean name="RichiestaServizioLocForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.RichiestaServizioLocForm" />
+
+		<form-bean name="EsameRichiesteForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.EsameRichiesteForm" />
+
+		<form-bean name="EsameSugAcqForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.EsameSugAcqForm" />
+
+		<form-bean name="esameStoricoRichiesteForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.EsameStoricoRichiesteForm" />
+
+		<form-bean name="RichiestaProrogaForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.RichiestaProrogaForm" />
+
+		<form-bean name="CatalogoSBNForm" type="it.iccu.sbn.web.actionforms.servizi.serviziweb.CatalogoSBNForm" />
+
+		<form-bean name="gestionePrenotazionePostoForm"
+			type="it.iccu.sbn.web.actionforms.servizi.serviziweb.sale.PrenotazionePostoForm" />
+
+		<form-bean name="listaPrenotazioniPostiForm"
+			type="it.iccu.sbn.web.actionforms.servizi.serviziweb.sale.ListaPrenotazioniPostiForm" />
+	</form-beans>
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards></global-forwards>
+	<!-- =========================================== Action Mapping Definitions -->
+ 	<!-- almaviva -->
+
+	<action-mappings>
+
+		<action path="/logout" type="it.iccu.sbn.web.actions.servizi.serviziweb.LogoutAction">
+			<forward name="pagina_predefinita" path="/index.jsp" />
+		</action>
+
+		<action path="/login"
+			name="loginServiziWebForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/login.jsp" validate="true" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.LoginAction"
+			parameter="paramLogin">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+			<forward name="cambioPwd" path="/serviziweb/cambioPwd.do"></forward>
+			<forward name="listaBiblio" path="/serviziweb/listaBiblio.do"></forward>
+			<forward name="login" path="/login.do"></forward>
+			<forward name="listaMovimentiOpac" path="/serviziweb/listaMovimentiOpac.do"></forward>
+			<forward name="prenotazionePosto" path="/serviziweb/gestionePrenotazionePosto.do" />
+		</action>
+
+		<action path="/serviziweb/cambioPwd"
+			name="cambioPwdServiziWebForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/CambioPwd.jsp" validate="true"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.CambioPwdAction"
+			parameter="paramCambioPwd">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="listaMovimentiOpac" path="/serviziweb/listaMovimentiOpac.do" />
+			<forward name="login" path="/login.do"></forward>
+			<forward name="prenotazionePosto" path="/serviziweb/gestionePrenotazionePosto.do" />
+		</action>
+
+		<action path="/serviziweb/selezionaBib"
+			name="selezioneBibliotecaForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.SelezioneBibliotecaAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/SelezioneBiblioteca.jsp" scope="session" parameter="paramSelBib">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+			<forward name="listaMovimentiOpac" path="/serviziweb/listaMovimentiOpac.do"></forward>
+			<forward name="esameRichieste" path="/serviziweb/esameRichieste.do"></forward>
+		</action>
+
+		<action path="/serviziweb/listaMovimentiOpac"
+			name="ListaMovimentiOpacForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.ListaMovimentiOpacAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/listaMovimentiOpac.jsp"
+			scope="session" parameter="paramSelMovOpac">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="richiestaServizioLoc" path="/serviziweb/richiestaServizioLoc.do"></forward>
+			<forward name="login" path="/login.do"></forward>
+			<forward name="datiDocumento" path="/serviziweb/datiDocumento.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/menuServizi"
+			name="menuServiziForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.MenuServiziAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/MenuServizi.jsp" scope="session" parameter="paramMenuServ">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="datiDocumento" path="/serviziweb/datiDocumento.do"></forward>
+			<forward name="serviziILL" path="/serviziweb/ServiziILL.do"></forward>
+
+		</action>
+
+		<action path="/serviziweb/datiDocumento"
+			name="datiDocumentoForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.DatiDocumentoAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/DatiDocumento.jsp" scope="session"
+			parameter="paramDatiDoc">
+
+			<forward name="sceltaServizi" path="/serviziweb/sceltaServizi.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+			<forward name="listaMovimentiOpac" path="/serviziweb/listaMovimentiOpac.do"></forward>
+			<forward name="esameSugAcq" path="/serviziweb/esameSugAcq.do"></forward>
+		</action>
+
+		<action path="/serviziweb/sceltaServizi"
+			name="sceltaServiziForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.SceltaServiziAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/SceltaServizi.jsp" scope="session" parameter="paramSceltaServ">
+
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+			<forward name="serviziDisponibili" path="/serviziweb/serviziDisponibili.do"></forward>
+			<forward name="dirittiDocumento" path="/serviziweb/dirittiDocumento.do"></forward>
+		</action>
+
+		<action path="/serviziweb/dirittiDocumento"
+			name="dirittiDocumentoForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.DirittiDocumentoAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/DirittiDocumento.jsp" scope="session" parameter="paramDirDoc">
+		</action>
+
+		<action path="/serviziweb/serviziDisponibili"
+			name="serviziDisponibiliForm" validate="false"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/SceltaServizi.jsp" scope="session" parameter="paramSceltaServ"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.ServiziDisponibiliAction">
+
+			<forward name="consultazioneGenerale" path="/serviziweb/consultazioneGenerale.do"></forward>
+			<forward name="prestitoGenerale" path="/serviziweb/prestitoGenerale.do"></forward>
+			<forward name="riproduzione" path="/serviziweb/riproduzione.do"></forward>
+		</action>
+
+		<action path="/serviziweb/consultazioneGenerale"
+			name="consultazioneGeneraleForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.ConsultazioneGeneraleAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/ConsultazioneGenerale.jsp" scope="session" parameter="paramConsultazioneGenerale">
+
+			<forward name="sceltaServizi" path="/serviziweb/sceltaServizi.do"></forward>
+			<forward name="richiestaInserita" path="/serviziweb/richiestaInserita.do"></forward>
+		</action>
+
+		<action path="/serviziweb/prestitoGenerale"
+			name="prestitoGeneraleForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.PrestitoGeneraleAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/PrestitoGenerale.jsp" scope="session" parameter="paramPrestitoGenerale">
+			<forward name="sceltaServizi" path="/serviziweb/sceltaServizi.do"></forward>
+			<forward name="prestitoGeneraleTariffa" path="/serviziweb/prestitoGeneraleTariffa.do"></forward>
+		</action>
+
+		<action path="/serviziweb/prestitoGeneraleTariffa"
+			name="prestitoGeneraleTariffaForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.PrestitoGeneraleTariffaAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/PrestitoGeneraleTariffa.jsp" scope="session" parameter="paramPrestitoGeneraleTariffa">
+
+			<forward name="prestitoGenerale" path="/serviziweb/prestitoGenerale.do"></forward>
+			<forward name="richiestaInserita" path="/serviziweb/richiestaInserita.do"></forward>
+		</action>
+
+		<action path="/serviziweb/riproduzione"
+			name="riproduzioneForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.RiproduzioneAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/Riproduzione.jsp" scope="session" parameter="paramRiproduzione">
+
+			<forward name="sceltaServizi" path="/serviziweb/sceltaServizi.do"></forward>
+			<forward name="riproduzioneSupporto" path="/serviziweb/riproduzioneSupporto.do"></forward>
+			<forward name="sceltaServizi" path="/serviziweb/sceltaServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/riproduzioneSupporto"
+			name="riproduzioneSupportoForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.RiproduzioneSupportoAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/RiproduzioneSupporto.jsp" scope="session" parameter="paramRiproduzioneSupporto">
+
+			<forward name="riproduzione" path="/serviziweb/riproduzione.do"></forward>
+			<forward name="riproduzioneTariffa" path="/serviziweb/riproduzioneTariffa.do"></forward>
+		</action>
+
+		<action path="/serviziweb/riproduzioneTariffa"
+			name="riproduzioneTariffaForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.RiproduzioneTariffaAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/RiproduzioneTariffa.jsp" scope="session" parameter="paramRiproduzioneTariffa">
+			<forward name="riproduzioneSupporto" path="/serviziweb/riproduzioneSupporto.do"></forward>
+			<forward name="richiestaInserita" path="/serviziweb/richiestaInserita.do"></forward>
+		</action>
+
+		<action path="/serviziweb/richiestaInserita"
+			name="richiestaInseritaForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.RichiestaInseritaAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/RichiestaInserita.jsp" scope="session" parameter="paramRicIns">
+
+			<forward name="sceltaServizi" path="/serviziweb/sceltaServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/serviziILL"
+			name="serviziILLForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.ServiziILLAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/ServiziILL.jsp" scope="session" parameter="paramDatiServiziILL">
+
+			<forward name="sceltaServiziILL" path="/serviziweb/sceltaServiziILL.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/sceltaServiziILL"
+			name="sceltaServiziILLForm" validate="true"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.SceltaServiziILLAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/SceltaServiziILL.jsp" scope="session" parameter="paramSceltaServILL">
+
+			<forward name="serviziILL" path="/serviziweb/serviziILL.do"></forward>
+		</action>
+
+		<action path="/serviziweb/DirittiUtente"
+			name="DirittiUtenteForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/DirittiUtente.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.DirittiUtenteAction"
+			parameter="paramDirittiUte">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/listaBiblio"
+			name="listaBiblioForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/listaBiblio.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.ListaBiblioAction"
+			parameter="paramlistaBiblio">
+
+			<forward name="inserimentoUtenteWeb" path="/serviziweb/inserimentoutenteWeb.do"></forward>
+			<forward name="login" path="/login.do"></forward>
+		</action>
+
+		<action path="/serviziweb/inserimentoutenteWeb"
+			name="InserimentoUtenteWebForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/inserimentoutenteWeb.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.InserimentoUtenteWebAction"
+			parameter="paraminserimentoutenteWeb">
+
+			<forward name="listaBiblio" path="/serviziweb/listaBiblio.do"></forward>
+			<forward name="login" path="/login.do"></forward>
+		</action>
+
+		<action path="/serviziweb/datiUtenteWeb"
+			name="datiUtenteWebForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/DatiUtenteWeb.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.InserimentoUtenteWebAction"
+			parameter="paraminserimentoutenteWeb">
+		</action>
+
+		<action path="/serviziweb/richiestaServizioLoc"
+			name="RichiestaServizioLocForm" validate="false"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.RichiestaServizioLocAction"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/richiestaServizioLoc.jsp"
+			scope="session" parameter="paramRichiestaServizio">
+
+			<forward name="listaMovimentiOpac" path="/serviziweb/listaMovimentiOpac.do"></forward>
+			<forward name="prenotaPosto" path="/serviziweb/gestionePrenotazionePosto.do" />
+
+		</action>
+
+		<action path="/serviziweb/esameRichieste"
+			name="EsameRichiesteForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/esameRichieste.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.EsameRichiesteAction"
+			parameter="paramEsameRichieste">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/esameSugAcq"
+			name="EsameSugAcqForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/esameSugAcq.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.EsameSugAcqAction"
+			parameter="paramEsameSugAcq">
+
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+			<forward name="datiDocumento" path="/serviziweb/datiDocumento.do"></forward>
+		</action>
+
+		<action path="/serviziweb/esameStoricoRichieste"
+			name="esameStoricoRichiesteForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/esameStoricoRichieste.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.EsameStoricoRichiesteAction"
+			parameter="paramEsameStorico">
+		</action>
+
+		<action path="/serviziweb/richiestaProroga"
+			name="RichiestaProrogaForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/richiestaProroga.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.RichiestaProrogaAction"
+			parameter="paramRchProroga">
+
+			<forward name="esameRichieste" path="/serviziweb/esameRichieste.do"></forward>
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+		</action>
+
+		<action path="/serviziweb/catalogoSBN"
+			name="CatalogoSBNForm"
+			input="/WEB-INF/jsp/pages/servizi/serviziweb/esameSugAcq.jsp" validate="false" scope="session"
+			type="it.iccu.sbn.web.actions.servizi.serviziweb.CatalogoSBNAction"
+			parameter="paramCatalogoSBN">
+
+			<forward name="login" path="/login.do"></forward>
+			<forward name="selezioneBiblioteca" path="/serviziweb/selezionaBib.do"></forward>
+			<forward name="menuServizi" path="/serviziweb/menuServizi.do"></forward>
+			<forward name="datiDocumento" path="/serviziweb/datiDocumento.do"></forward>
+			<forward name="catalogo" path="/WEB-INF/jsp/pages/redirect.jsp"></forward>
+		</action>
+
+		<action path="/serviziweb/gestionePrenotazionePosto"
+			name     ="gestionePrenotazionePostoForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.serviziweb.sale.PrenotazionePostoAction"
+			input    ="/WEB-INF/jsp/pages/servizi/serviziweb/sale/prenotazionePosto.jsp"
+			scope    ="session"
+			parameter="methodGestPrenPosto">
+
+			<forward name="login" path="/login.do" />
+			<forward name="prenotazioni" path="/serviziweb/listaPrenotazioniPosti.do" />
+
+		</action>
+
+		<action path="/serviziweb/listaPrenotazioniPosti"
+			name     ="listaPrenotazioniPostiForm"
+			validate ="false"
+			type     ="it.iccu.sbn.web.actions.servizi.serviziweb.sale.ListaPrenotazioniPostiAction"
+			input    ="/WEB-INF/jsp/pages/servizi/serviziweb/sale/listaPrenotazioniPosti.jsp"
+			scope    ="session"
+			parameter="methodListaPrenPosto">
+
+			<forward name="prenotazione" path="/serviziweb/gestionePrenotazionePosto.do" />
+
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="serviziWebLabels"
+		parameter="it.iccu.sbn.web.resources.ServiziWebLabels" null="false" />
+	<message-resources key="serviziWebMessages"
+		parameter="it.iccu.sbn.web.resources.ServiziWebMessages" null="false" />
+
+	<message-resources key="serviziLabels"
+		parameter="it.iccu.sbn.web.resources.ServiziLabels" null="false" />
+	<message-resources key="serviziMessages"
+		parameter="it.iccu.sbn.web.resources.ServiziMessages" null="false" />
+
+	<message-resources key="documentoFisicoLabels"
+		parameter="it.iccu.sbn.web.resources.DocumentoFisicoLabels" null="false" />
+
+	<message-resources key="gestioneBibliograficaLabels"
+		parameter="it.iccu.sbn.web.resources.GestioneBibliograficaLabels"
+		null="false" />
+
+</struts-config>

@@ -1,0 +1,3 @@
+it.iccu.sbn.servizi.utenti.auth.impl.UserIdAuthStrategyImpl
+it.iccu.sbn.servizi.utenti.auth.impl.CodFiscaleAuthStrategyImpl
+it.iccu.sbn.servizi.utenti.auth.impl.esse3.Esse3AuthStrategyImpl

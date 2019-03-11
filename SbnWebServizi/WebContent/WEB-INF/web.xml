@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>
+		SbnWebServizi
+	</display-name>
+
+	<filter>
+		<filter-name>XForwardedFilter</filter-name>
+		<filter-class>fr.xebia.servlet.filter.XForwardedFilter</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>UTF8CharsetEncodingFilter</filter-name>
+		<filter-class>
+			it.iccu.sbn.web.integration.filters.UTF8CharsetEncodingFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>XForwardedFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>UTF8CharsetEncodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			org.apache.struts.action.ActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/struts-config/common.xml,
+				/WEB-INF/struts-config/serviziWeb.xml,
+
+				<!--  ATTENZIONE!! l'xml di navigazione va SEMPRE per ultimo -->
+				/WEB-INF/struts-config/navigation.xml
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+
+   <!-- ==================== Default Session Configuration ================= -->
+   <!-- You can set the default session timeout (in minutes) for all newly   -->
+   <!-- created sessions by modifying the value below.                       -->
+
+   <session-config>
+      <session-timeout>5</session-timeout>
+   </session-config>
+
+
+</web-app>

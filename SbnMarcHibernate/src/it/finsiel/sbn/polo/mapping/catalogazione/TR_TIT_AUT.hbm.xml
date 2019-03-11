@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_tit_aut" polymorphism="explicit" table="TR_TIT_AUT" lazy="false" >
+		<composite-id>
+			<!--
+			<key-many-to-one name="TB_TITOLO" column="BID" class="it.finsiel.sbn.polo.orm.Tb_titolo11">
+			</key-many-to-one>
+			<key-many-to-one  name="TB_AUTORE" column="VID" class="it.finsiel.sbn.polo.orm.Tb_autore11">
+			</key-many-to-one>
+			-->
+			<key-property name="BID" column="BID" type="string"/>
+			<key-property name="VID" column="VID" type="string"/>
+			<key-property name="TP_RESPONSABILITA" column="TP_RESPONSABILITA" type="string"/>
+			<key-property name="CD_RELAZIONE" column="CD_RELAZIONE" type="string"/>
+		</composite-id>
+
+		<property name="NOTA_TIT_AUT" column="NOTA_TIT_AUT" type="string" length="80" not-null="false"/>
+		<property name="FL_INCERTO" column="FL_INCERTO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="FL_SUPERFLUO" column="FL_SUPERFLUO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="CD_STRUMENTO_MUS" column="CD_STRUMENTO_MUS" type="it.finsiel.sbn.util.DataTypeCHAR" length="14" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+
+
+
+		<filter name="TR_TIT_AUT_selectPerKey"
+				condition="bid = :XXXbid
+						   AND cd_relazione = :XXXcd_relazione
+						   AND tp_responsabilita = :XXXtp_responsabilita
+						   AND vid = :XXXvid
+						   AND fl_canc != 'S' "/>
+
+<!--   ###################################################################### -->
+<!-- 	INIZIO Evolutiva Novembre 2015 - almaviva2 cambio Materiale da antico/moderno e viceversa:
+		Evolutiva riguardante le funzionalità di modifica e allineamento titoli così da consentire di fatto
+		il cambio materiale (M verso E oppure E verso >M) (modifiche riportate da software di Indice) -->
+		<filter name="TR_TIT_AUT_selectPerRespRelazione"
+				condition="bid = :XXXbid
+							AND cd_relazione in ('650', '750')
+   						   	AND tp_responsabilita = '4'
+						   	AND fl_canc != 'S' "/>
+
+<!--   ###################################################################### -->
+
+
+		<filter name="TR_TIT_AUT_selectPerAutore"
+				condition="vid = :XXXvid
+		  				   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_AUT_countPerAutore"
+				condition="vid = :XXXvid
+		  				   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_AUT_selectPerTitolo"
+				condition="bid = :XXXbid
+		  				   AND fl_canc != 'S' "/>
+
+		<filter name="TR_TIT_AUT_selectPerBideVid"
+				condition="bid = :XXXbid
+						   AND vid = :XXXvid
+						   AND fl_canc != 'S' "/>
+
+
+<!--   ###################################################################### -->
+<!-- Inizio manutenzione riportata da Indice Su SbnWEB BUG 2982 -->
+		<filter name="TR_TIT_AUT_selectPerKeyResp"
+				condition="bid = :XXXbid
+						   AND vid = :XXXvid
+   						   AND tp_responsabilita = :XXXtp_responsabilita
+						   AND fl_canc != 'S' "/>
+<!-- Fine manutenzione riportata da Indice Su SbnWEB BUG 2982 -->
+<!--   ###################################################################### -->
+
+
+
+		<filter name="TR_TIT_AUT_selectEsistenzaPerBideVid"
+				condition="bid = :XXXbid
+						   AND vid = :XXXvid "/>
+
+		<filter name="TR_TIT_AUT_selectPerKeyCancellato"
+				condition="bid = :XXXbid
+						   AND cd_relazione = :XXXcd_relazione
+						   AND tp_responsabilita = :XXXtp_responsabilita
+						   AND vid = :XXXvid
+						   AND fl_canc = 'S' "/>
+
+	</class>
+</hibernate-mapping>

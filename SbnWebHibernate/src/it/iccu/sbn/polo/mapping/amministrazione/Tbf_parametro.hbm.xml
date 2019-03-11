@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_parametro" table="tbf_parametro" >
+		<id name="id_parametro" column="id_parametro" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="tp_ret_doc" column="tp_ret_doc" type="string" length="3" not-null="true" lazy="false"/>
+		<property name="tp_all_pref" column="tp_all_pref" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="cd_liv_ade" column="cd_liv_ade" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_spogli" column="fl_spogli" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_aut_superflui" column="fl_aut_superflui" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="sololocale" column="sololocale" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Tbf_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_parametro" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo"/>
+		</set>
+		<set name="Tbf_par_auth" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_parametro" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_par_auth"/>
+		</set>
+		<set name="Tbf_par_mat" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_parametro" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_par_mat"/>
+		</set>
+		<set name="Tbf_par_sem" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_parametro" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_par_sem"/>
+		</set>
+		<set name="Tbf_biblioteca_in_polo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_parametro" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo"/>
+		</set>
+		<set name="Tbf_bibliotecario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_parametro" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario"/>
+		</set>
+		<one-to-one name="Tbf_modello_profilazione_bibliotecario" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_modello_profilazione_bibliotecario" cascade="save-update,lock" property-ref="id_parametro" lazy="proxy" access="field"/>
+		<one-to-one name="Tbf_modello_profilazione_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_modello_profilazione_biblioteca" cascade="save-update,lock" property-ref="id_parametro" lazy="proxy" access="field"/>
+	</class>
+</hibernate-mapping>

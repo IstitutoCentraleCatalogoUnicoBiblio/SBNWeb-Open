@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori" table="tbr_fornitori" schema="sbnweb" >
+		<meta attribute="class-description">
+			Fornitori
+		</meta>
+		<id name="cod_fornitore" column="cod_fornitore" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="nom_fornitore" column="nom_fornitore" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione del fornitore
+			</meta>
+		</property>
+		<property name="unit_org" column="unit_org" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				unita' organizzativa del fornitore
+			</meta>
+		</property>
+		<property name="indirizzo" column="indirizzo" type="string" length="70" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indirizzo
+			</meta>
+		</property>
+		<property name="cpostale" column="cpostale" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				casella postale
+			</meta>
+		</property>
+		<property name="citta" column="citta" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				citta'
+			</meta>
+		</property>
+		<property name="cap" column="cap" type="string" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice d'avviamento postale
+			</meta>
+		</property>
+		<property name="telefono" column="telefono" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero telefonico
+			</meta>
+		</property>
+		<property name="fax" column="fax" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero del fax
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note riferite al fornitore
+			</meta>
+		</property>
+		<property name="p_iva" column="p_iva" type="string" length="18" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				partita iva
+			</meta>
+		</property>
+		<property name="cod_fiscale" column="cod_fiscale" type="string" length="18" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice fiscale
+			</meta>
+		</property>
+		<property name="e_mail" column="e_mail" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indirizzo elettronico
+			</meta>
+		</property>
+		<property name="paese" column="paese" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+		<property name="tipo_partner" column="tipo_partner" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia di partner
+			</meta>
+		</property>
+		<property name="provincia" column="provincia" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della provincia
+			</meta>
+		</property>
+		<property name="cod_bib" column="cod_bib" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				per il fornitore-biblioteca, codice  identificativo della biblioteca corrispondente
+			</meta>
+		</property>
+		<property name="chiave_for" column="chiave_for" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave nome fornitore
+			</meta>
+		</property>
+		<property name="cod_polo_bib" column="cod_polo_bib" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				per il fornitore-biblioteca, codice identificativo del polo della biblioteca corrispondente
+			</meta>
+		</property>
+		<property name="regione" column="regione" type="string" length="2" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della regione
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice biblioteca che effettua inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice biblioteca che effettua aggiornamento
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+		<set name="Tbr_fornitori_biblioteche" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cod_fornitore" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori_biblioteche"/>
+		</set>
+		<set name="Tba_offerte_fornitore" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cod_fornitore" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_offerte_fornitore"/>
+		</set>
+		<set name="Tba_buono_ordine" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cod_fornitore" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_buono_ordine"/>
+		</set>
+		<set name="Tba_fatture" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cod_fornitore" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_fatture"/>
+		</set>
+		<set name="Tba_ordini" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cod_fornitore" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini"/>
+		</set>
+	</class>
+</hibernate-mapping>

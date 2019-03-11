@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" table="tba_ordini" schema="sbnweb" >
+		<meta attribute="class-description">
+			Ordini
+		</meta>
+		<id name="id_ordine" column="id_ordine" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="cod_tip_ord" column="cod_tip_ord" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia dell'ordine
+			</meta>
+		</property>
+		<property name="anno_ord" column="anno_ord" type="big_decimal" precision="4" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				anno di acquisizione dell'ordine
+			</meta>
+		</property>
+		<property name="cod_ord" column="cod_ord" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'ordine
+			</meta>
+		</property>
+		<many-to-one name="cod_fornitore" cascade="lock" column="cod_fornitore" class="it.iccu.sbn.polo.orm.acquisizioni.Tbr_fornitori" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_sez_acquis_bibliografiche" cascade="lock" column="id_sez_acquis_bibliografiche" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_sez_acquis_bibliografiche" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="id_valuta" cascade="lock" column="id_valuta" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_cambi_ufficiali" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="tbb_bilancicod_mat" cascade="lock" class="it.iccu.sbn.polo.orm.acquisizioni.Tbb_bilanci" not-null="false" lazy="proxy" access="field">
+			<column name="tbb_bilancicod_mat"/>
+			<column name="id_capitoli_bilanci"/>
+		</many-to-one>
+
+		<one-to-one name="Tra_ordine_carrello_spedizione" class="it.iccu.sbn.polo.orm.acquisizioni.Tra_ordine_carrello_spedizione" cascade="save-update" />
+
+		<property name="data_ins" column="data_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="data_agg" column="data_agg" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="data_ord" column="data_ord" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data dell'ordine
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				osservazioni relative all'ordine
+			</meta>
+		</property>
+		<property name="num_copie" column="num_copie" type="integer" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero di copie ordinate
+			</meta>
+		</property>
+		<property name="continuativo" column="continuativo" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				flag indicante se l'ordine e' continuativo
+			</meta>
+		</property>
+		<property name="stato_ordine" column="stato_ordine" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dello stato dell'ordine
+			</meta>
+		</property>
+		<property name="tipo_doc_lett" column="tipo_doc_lett" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia del documento lettore ("s" = suggerimento)
+			</meta>
+		</property>
+		<property name="cod_doc_lett" column="cod_doc_lett" type="long" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del documento suggerito dal lettore
+			</meta>
+		</property>
+		<property name="tipo_urgenza" column="tipo_urgenza" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia di urgenza
+			</meta>
+		</property>
+		<property name="cod_rich_off" column="cod_rich_off" type="long" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della richiesta di offerta
+			</meta>
+		</property>
+		<property name="bid_p" column="bid_p" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'offerta del fornitore
+			</meta>
+		</property>
+		<property name="note_forn" column="note_forn" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note per il fornitore in riferimento all'ordine
+			</meta>
+		</property>
+		<property name="tipo_invio" column="tipo_invio" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del tipo invio
+			</meta>
+		</property>
+		<property name="anno_1ord" column="anno_1ord" type="big_decimal" precision="4" scale="0" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno di acquisizione del primo ordine
+			</meta>
+		</property>
+		<property name="cod_1ord" column="cod_1ord" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del primo ordine
+			</meta>
+		</property>
+		<property name="prezzo" column="prezzo" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				prezzo in valuta
+			</meta>
+		</property>
+		<property name="paese" column="paese" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+		<property name="cod_bib_sugg" column="cod_bib_sugg" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della biblioteca dove e' stato effettuato il suggerimento dal bibliotecario
+			</meta>
+		</property>
+		<property name="cod_sugg_bibl" column="cod_sugg_bibl" type="big_decimal" precision="10" scale="0" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del suggerimento del bibliotecario
+			</meta>
+		</property>
+		<property name="bid" column="bid" type="string" length="10" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'oggetto bibliografico
+			</meta>
+		</property>
+		<property name="stato_abb" column="stato_abb" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dello stato dell'abbonamento
+			</meta>
+		</property>
+		<property name="cod_per_abb" column="cod_per_abb" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				codice del periodo di validita' dell'abbonamento
+			</meta>
+		</property>
+		<property name="prezzo_lire" column="prezzo_lire" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				prezzo in valuta
+			</meta>
+		</property>
+		<property name="reg_trib" column="reg_trib" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero della registrazione del tribunale per deposito legale, data di registrazione e citta' dove si e' effettuata la registrazione
+			</meta>
+		</property>
+		<property name="anno_abb" column="anno_abb" type="big_decimal" precision="4" scale="0" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				anno dell'abbonamento
+			</meta>
+		</property>
+		<property name="num_fasc" column="num_fasc" type="string" length="15" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero del fascicolo (primo fascicolo se l'abbonamento e' da aprire, ultimo fascicolo se l'abbonamento e' da chiudere)
+			</meta>
+		</property>
+		<property name="data_fasc" column="data_fasc" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di pubblicazione del fascicolo (primo fascicolo se l'abbonamento e' da aprire, ultimo fascicolo se l'abbonamento e' da chiudere)
+			</meta>
+		</property>
+		<property name="annata" column="annata" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				anno descrittivo dell'abbonamento
+			</meta>
+		</property>
+		<property name="num_vol_abb" column="num_vol_abb" type="short" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero del volume relativo all'abbonamento
+			</meta>
+		</property>
+		<property name="natura" column="natura" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della natura bibliografica
+			</meta>
+		</property>
+		<property name="data_fine" column="data_fine" type="date" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				data di chiusura abbonamento
+			</meta>
+		</property>
+		<property name="stampato" type="boolean" not-null="true" lazy="false">
+			<column name="stampato" default="false"/>
+		</property>
+		<property name="rinnovato" type="boolean" not-null="true" lazy="false">
+			<column name="rinnovato" default="false"/>
+		</property>
+		<property name="data_chiusura_ord" column="data_chiusura_ord" type="timestamp" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_tipo_lav" column="cd_tipo_lav" type="character" length="1" not-null="false" lazy="false"/>
+		<set name="Tba_righe_fatture" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_ordine" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tba_righe_fatture"/>
+		</set>
+		<set name="Tra_ordine_inventari" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_ordine" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.acquisizioni.Tra_ordine_inventari"/>
+		</set>
+
+		<set name="Tbp_esemplare_fascicolo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key not-null="false" column="id_ordine" />
+			<one-to-many class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo"/>
+		</set>
+
+		<set name="Trp_messaggio_fascicolo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_ordine" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.periodici.Trp_messaggio_fascicolo"/>
+		</set>
+	</class>
+</hibernate-mapping>

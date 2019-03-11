@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_solleciti" table="tbl_solleciti" >
+		<meta attribute="class-description">
+			Solleciti
+		</meta>
+		<composite-id>
+			<key-property name="progr_sollecito" column="progr_sollecito" type="short" />
+			<key-many-to-one name="cod_rich_serv" column="cod_rich_serv" class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio" />
+		</composite-id>
+
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<property name="data_invio" column="data_invio" type="date" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data di invio di una lettera di sollecito
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note relative al sollecito
+			</meta>
+		</property>
+		<property name="tipo_invio" column="tipo_invio" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="esito" column="esito" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

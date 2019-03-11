@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.viste.V_catalogo_editoria" table="V_catalogo_editoria" polymorphism="explicit" >
+		<meta attribute="class-description">
+			CATALOGO EDITORI
+		</meta>
+		<cache usage="read-only"/>
+		<composite-id>
+		    <key-property name="cod_fornitore" column="cod_fornitore" type="integer" />
+			<key-property name="bid" column="bid" type="string"/>
+			<key-property name="isbn" column="isbn" type="string" />
+		</composite-id>
+		<property name="isbd" column="isbd" type="string" length="1200" not-null="true" lazy="false"/>
+		<property name="indice_isbd" column="indice_isbd" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="tp_aa_pubb" column="tp_aa_pubb" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="aa_pubb_1" column="aa_pubb_1" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="aa_pubb_2" column="aa_pubb_2" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="cd_lingua_1" column="cd_lingua_1" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cd_lingua_2" column="cd_lingua_2" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cd_lingua_3" column="cd_lingua_3" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cd_natura" column="cd_natura" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="tp_record_uni" column="tp_record_uni" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ky_cles1_t" column="ky_cles1_t" type="string" length="6" not-null="true" lazy="false"/>
+		<property name="ky_cles2_t" column="ky_cles2_t" type="string" length="44" not-null="true" lazy="false"/>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di condivisione gestione del legame con indice
+			</meta>
+			<column name="fl_condiviso" default="S"/>
+		</property>
+
+	<!-- 	<set name="Tbc_inventario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario"/>
+		</set>	 -->
+
+		<property name="nom_fornitore" column="nom_fornitore" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione del fornitore
+			</meta>
+		</property>
+		<property name="paese" column="paese" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+
+		<property name="cod_regione" column="cod_regione" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="ds_regione" column="ds_regione" type="string" length="50" not-null="false" lazy="false"/>
+
+		<property name="provincia" column="provincia" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della provincia
+			</meta>
+		</property>
+		<property name="ds_provincia" column="ds_provincia" type="string" length="50" not-null="false" lazy="false"/>
+		<property name="cap" column="cap" type="string" length="50" not-null="false" lazy="false"/>
+		<property name="citta" column="citta" type="string" length="50" not-null="false" lazy="false"/>
+
+		<property name="chiave_for" column="chiave_for" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave nome fornitore
+			</meta>
+		</property>
+
+		<property name="isbn_editore" column="isbn_editore" type="string" length="30" not-null="false" lazy="false"/>
+
+		<property name="nota_legame" column="nota_legame" type="string" length="50" not-null="false" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

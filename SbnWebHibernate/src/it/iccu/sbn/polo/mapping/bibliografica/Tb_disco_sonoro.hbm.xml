@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_disco_sonoro" table="tb_disco_sonoro" >
+		<meta attribute="class-description">
+			DISCO SONORO
+		</meta>
+		<id column="bid" type="string">
+			<generator class="foreign">
+				<param name="property">b</param>
+			</generator>
+		</id>
+		<one-to-one name="b" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="all" constrained="true"/>
+		<property name="cd_forma" column="cd_forma" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_velocita" column="cd_velocita" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_suono" column="tp_suono" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_pista" column="cd_pista" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_dimensione" column="cd_dimensione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_larg_nastro" column="cd_larg_nastro" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_configurazione" column="cd_configurazione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_mater_accomp" column="cd_mater_accomp" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_regis" column="cd_tecnica_regis" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_riproduzione" column="cd_riproduzione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_disco" column="tp_disco" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="tp_taglio" column="tp_taglio" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

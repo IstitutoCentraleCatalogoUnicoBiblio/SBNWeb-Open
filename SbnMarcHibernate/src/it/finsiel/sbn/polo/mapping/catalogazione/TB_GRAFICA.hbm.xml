@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_grafica" polymorphism="explicit" table="TB_GRAFICA" lazy="false">
+		<!--
+		<id column="BID" type="it.finsiel.sbn.util.DataTypeCHAR">
+			<generator class="foreign">
+				<param name="property">TB_TITOLO</param>
+			</generator>
+		</id>
+		<one-to-one name="TB_TITOLO" class="it.finsiel.sbn.polo.orm.Tb_titolo11" cascade="all" constrained="true"/>
+		-->
+		<id name="BID" column="BID" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true"/>
+		<property name="TP_MATERIALE_GRA" column="TP_MATERIALE_GRA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_SUPPORTO" column="CD_SUPPORTO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_COLORE" column="CD_COLORE" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
+		<property name="CD_TECNICA_DIS_1" column="CD_TECNICA_DIS_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_TECNICA_DIS_2" column="CD_TECNICA_DIS_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_TECNICA_DIS_3" column="CD_TECNICA_DIS_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_TECNICA_STA_1" column="CD_TECNICA_STA_1" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_TECNICA_STA_2" column="CD_TECNICA_STA_2" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_TECNICA_STA_3" column="CD_TECNICA_STA_3" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="CD_DESIGN_FUNZ" column="CD_DESIGN_FUNZ" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="false"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TB_GRAFICA_selectPerKey"
+				condition="bid = :XXXbid AND fl_canc != 'S' "/>
+
+	</class>
+</hibernate-mapping>

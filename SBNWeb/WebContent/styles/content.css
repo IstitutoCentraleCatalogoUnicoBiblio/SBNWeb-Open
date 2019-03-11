@@ -1,0 +1,45 @@
+div#nav-path span, div#nav-path a, div#content span, div#content a, div#content input, div#footer input, div#content2 input, div#footer2 input {
+	font-size: 88%;
+}*/
+
+#container2 * {
+	font-size: x-small;
+}
+
+#container2 td {
+	vertical-align: middle;
+}
+
+#footer {
+	text-align: center;
+	vertical-align: middle;
+}
+
+#footer input {
+	background-color: #E8EFF4;
+	font-weight: bold;
+	border: 1px solid #39739D;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+#footer2 input {
+	background-color: #E8EFF4;
+	font-weight: bold;
+	border: 1px solid #39739D;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.etichetta {
+	font-family: Arial Narrow, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #333333;
+}
+.testoNormale {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #333333;
+}

@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="calcolaFidFascicolo">
+		<return-scalar column="fid" type="java.lang.Long" />
+			select nextval('seq_fid_fascicolo') as fid;
+	</sql-query>
+
+	<query cache-mode="ignore" name="listaFascicoliPerEsemplareCollocazione">
+		<![CDATA[
+			select e,c,i,ef from
+				Tbc_esemplare_titolo e
+				join e.Tbc_collocazione c
+				join c.Tbc_inventario i
+				join i.Tbp_esemplare_fascicolo ef
+				where i.cd_serie.cd_polo=:bib
+				and ef.fascicolo.titolo.id=:bid
+				order by i.ts_ins_prima_coll desc
+		]]>
+	</query>
+
+	<sql-query cache-mode="ignore" name="ordinePiuRecentePerEsemplare">
+		<return alias="o" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" />
+	 	<![CDATA[
+	 		select o.*
+			from tba_ordini o
+			inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+					and i.cd_tip_ord=o.cod_tip_ord
+					and i.anno_ord=o.anno_ord
+					and i.cd_ord=o.cod_ord
+					and i.fl_canc<>'S'
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+			inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+					and et.cd_biblioteca=c.cd_biblioteca_doc
+					and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+					and et.fl_canc<>'S'
+			where o.continuativo='1'
+			and o.fl_canc<>'S'
+			and et.cd_polo=:codPolo
+			and et.cd_biblioteca=:codBib
+			and et.bid=:bid
+			and et.cd_doc=:cod_doc
+	 		order by i.ts_ins_prima_coll desc
+	 	]]>
+	</sql-query>
+
+
+	<sql-query cache-mode="ignore" name="ordinePiuRecentePerCollocazione">
+		<return alias="o" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" />
+	 	<![CDATA[
+	 		select o.*
+			from tba_ordini o
+			inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+					and i.cd_tip_ord=o.cod_tip_ord
+					and i.anno_ord=o.anno_ord
+					and i.cd_ord=o.cod_ord
+					and i.fl_canc<>'S'
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+			where o.continuativo='1'
+			and o.fl_canc<>'S'
+			and c.key_loc=:key_loc
+	 		order by i.ts_ins_prima_coll desc
+	 	]]>
+	</sql-query>
+
+
+	<!-- QUERY SENZA FASCICOLI -->
+
+	<sql-query cache-mode="ignore" name="listaEsemplareCollocazioneSenzaFascicoli">
+		<return alias="et" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_esemplare_titolo" />
+		<return alias="c" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione" />
+		<return alias="i" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" />
+		<![CDATA[
+			select et.*,c.*,i.*
+			from tbc_esemplare_titolo et
+			inner join tbc_collocazione c on et.cd_polo=c.cd_polo_doc
+					and et.cd_biblioteca=c.cd_biblioteca_doc
+					and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+					and c.fl_canc<>'S'
+			inner join tbc_inventario i on c.key_loc=i.key_loc
+					and i.fl_canc<>'S'
+			where et.fl_canc<>'S'
+			and et.cd_polo=:codPolo
+			and et.cd_biblioteca=:codBib
+			and et.bid=:bid
+			and not exists (
+				select ef.fid
+				from tbp_esemplare_fascicolo ef
+				where ef.fl_canc<>'S'
+				and ef.cd_polo_inv=i.cd_polo
+				and ef.cd_bib_inv=i.cd_bib
+				and ef.cd_serie=i.cd_serie
+				and ef.cd_inven=i.cd_inven
+			)
+	 		order by i.ts_ins_prima_coll desc
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaCollocazioniSenzaFascicoli">
+		<return alias="c" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione" />
+		<return alias="i" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" />
+		<![CDATA[
+			select c.*,i.*
+			from tbc_collocazione c
+			inner join tbc_inventario i on c.key_loc=i.key_loc
+					and i.fl_canc<>'S'
+			where c.fl_canc<>'S'
+			and c.cd_polo_sezione=:codPolo
+			and c.cd_biblioteca_sezione=:codBib
+			and c.bid=:bid
+			and c.cd_doc is null
+			and not exists (
+				select ef.fid
+				from tbp_esemplare_fascicolo ef
+				where ef.fl_canc<>'S'
+				and ef.cd_polo_inv=i.cd_polo
+				and ef.cd_bib_inv=i.cd_bib
+				and ef.cd_serie=i.cd_serie
+				and ef.cd_inven=i.cd_inven
+			)
+	 		order by i.ts_ins_prima_coll desc
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaOrdiniSenzaFascicoli">
+		<return alias="o" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" />
+	 	<![CDATA[
+	 		select o.*
+			from tba_ordini o
+			where o.continuativo='1'
+			and o.fl_canc<>'S'
+			and o.cd_polo=:codPolo
+			and o.cd_bib=:codBib
+			and o.bid=:bid
+			and not exists (
+				select ef.fid
+				from tbp_esemplare_fascicolo ef
+				where ef.fl_canc<>'S'
+				and ef.id_ordine=o.id_ordine
+			)
+	 		order by o.anno_abb,
+	 		o.anno_ord,
+	 		o.cod_tip_ord,
+	 		o.cod_ord
+	 	]]>
+	</sql-query>
+
+
+	<!-- ALTRE -->
+
+	<sql-query cache-mode="ignore" name="catenaRinnoviOrdine">
+	 	<![CDATA[
+	 		select (to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000')||'-'||to_char(o.id_ordine,'000000000')) as kord,
+			CASE o.rinnovato
+				WHEN TRUE THEN
+					CASE coalesce(o.anno_1ord,0)
+			        	WHEN 0 THEN
+			            	o.anno_ord
+			            ELSE
+			            	o.anno_1ord
+			        END
+				ELSE
+			    	o.anno_1ord
+			END,
+			CASE o.rinnovato
+				WHEN TRUE THEN
+					CASE coalesce(o.anno_1ord,0)
+						WHEN 0 THEN
+			            	o.cod_ord
+						ELSE o.cod_1ord
+					END
+				ELSE
+					o.cod_1ord
+			END
+			from tba_ordini o
+			where o.cd_polo=:codPolo
+			and o.cd_bib=:codBib
+			and o.bid=:bid
+			and o.fl_canc<>'S'
+			and o.continuativo='1'
+	 		order by kord desc, o.ts_ins desc
+	 	]]>
+	</sql-query>
+
+
+	<sql-query cache-mode="ignore" name="union_esamePeriodico">
+		<return-scalar column="idord" type="integer"/>
+		<return-scalar column="kord" type="string"/>
+		<return-scalar column="anno_abb_ord" type="java.math.BigDecimal"/>
+		<return-scalar column="kprimo_ord" type="string"/>
+		<return-scalar column="key_loc" type="integer"/>
+		<return-scalar column="consis" type="string"/>
+		<return-scalar column="esemplare" type="string"/>
+		<return-scalar column="cons_doc" type="string"/>
+		<return-scalar column="cd_sit" type="character"/>
+		<return-scalar column="seq_coll" type="string"/>
+		<return-scalar column="anno_abb_inv" type="integer"/>
+		<return-scalar column="ts_ins_prima_coll" type="timestamp"/>
+		<return-scalar column="cd_serie" type="string"/>
+		<return-scalar column="cd_inven" type="integer"/>
+	 	<![CDATA[
+(select o.id_ordine as idord,
+    to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000') as kord, o.anno_abb as anno_abb_ord,
+ 	case coalesce(o.anno_1ord,0) when 0 then
+  		to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000')
+ 	else
+  		to_char(o.anno_1ord,'0000')||to_char(o.cod_1ord,'000000000')
+ 	end as kprimo_ord,
+ c.key_loc, c.consis,
+ et.bid||'-'||et.cd_doc as esemplare, et.cons_doc ,
+ i.cd_sit, i.seq_coll, i.anno_abb as anno_abb_inv,
+ i.ts_ins_prima_coll, i.cd_serie, i.cd_inven
+from tba_ordini o
+    inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+                  and i.cd_tip_ord=o.cod_tip_ord
+                  and i.anno_ord=o.anno_ord
+                  and i.cd_ord=o.cod_ord
+                  and i.fl_canc<>'S'
+    inner join tbc_collocazione c on c.key_loc=i.key_loc
+                  and c.fl_canc<>'S'
+    inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+                  and et.cd_biblioteca=c.cd_biblioteca_doc
+                  and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+                  and et.fl_canc<>'S'
+          where o.continuativo='1'
+          and o.fl_canc<>'S'
+          and o.cd_polo=:codPolo
+          and o.cd_bib=:codBib
+          and o.bid=:bid
+ UNION
+ select o.id_ordine,
+    to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000'), o.anno_abb,
+ case coalesce(o.anno_1ord,0) when 0 then
+ 	to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000')
+ else
+ 	to_char(o.anno_1ord,'0000')||to_char(o.cod_1ord,'000000000')
+  end,
+  c.key_loc, c.consis,
+  '', '',
+  i.cd_sit,i.seq_coll, i.anno_abb,
+  i.ts_ins_prima_coll, i.cd_serie, i.cd_inven
+          from tba_ordini o
+          inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+                  and i.cd_tip_ord=o.cod_tip_ord
+                  and i.anno_ord=o.anno_ord
+                  and i.cd_ord=o.cod_ord
+                  and i.fl_canc<>'S'
+          inner join tbc_collocazione c on c.key_loc=i.key_loc
+                  and c.fl_canc<>'S'
+                  and (c.cd_doc=0 or c.cd_doc isnull)
+          where o.continuativo='1'
+          and o.fl_canc<>'S'
+          and o.cd_polo=:codPolo
+          and o.cd_bib=:codBib
+          and o.bid=:bid
+UNION
+select o.id_ordine,
+ to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000'), o.anno_abb,
+ case coalesce(o.anno_1ord,0) when 0 then
+  to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000')
+ else
+  to_char(o.anno_1ord,'0000')||to_char(o.cod_1ord,'000000000')
+ end,
+ 0, '',
+ '','',
+ i.cd_sit, i.precis_inv, i.anno_abb,
+ to_date('00010101','YYYYMMDD'), i.cd_serie, i.cd_inven
+ from tba_ordini o
+inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+                  and i.cd_tip_ord=o.cod_tip_ord
+                  and i.anno_ord=o.anno_ord
+                  and i.cd_ord=o.cod_ord
+                  and i.fl_canc<>'S'
+                  and (i.key_loc=0 or i.key_loc isnull)
+where o.continuativo='1'
+          and o.fl_canc<>'S'
+          and o.cd_polo=:codPolo
+          and o.cd_bib=:codBib
+          and o.bid=:bid
+UNION
+ select 0,'',0, '',
+  c.key_loc, c.consis,
+  et.bid||'-'||et.cd_doc, et.cons_doc,
+  i.cd_sit,i.seq_coll, i.anno_abb,
+  i.ts_ins_prima_coll, i.cd_serie, i.cd_inven
+from tbc_esemplare_titolo et
+inner join tbc_collocazione c on et.cd_polo=c.cd_polo_doc
+					and et.cd_biblioteca=c.cd_biblioteca_doc
+					and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+					and c.fl_canc<>'S'
+inner join tbc_inventario i on c.key_loc=i.key_loc
+					and i.fl_canc<>'S'
+where et.fl_canc<>'S'
+          and et.cd_polo=:codPolo
+          and et.cd_biblioteca=:codBib
+          and et.bid=:bid
+          and not exists
+              (select o.id_ordine from tba_ordini o
+                where i.cd_bib_ord=o.cd_bib
+                  and i.cd_tip_ord=o.cod_tip_ord
+                  and i.anno_ord=o.anno_ord
+                  and i.cd_ord=o.cod_ord
+                  and i.fl_canc<>'S')
+UNION
+select 0, '', 0, '',
+ c.key_loc, c.consis,
+ '', '',
+ i.cd_sit,i.seq_coll, i.anno_abb,
+ i.ts_ins_prima_coll, i.cd_serie, i.cd_inven
+         from tbc_collocazione c
+		  inner join tbc_inventario i on c.key_loc=i.key_loc
+					and i.fl_canc<>'S'
+          where c.fl_canc<>'S'
+          and c.cd_polo_sezione=:codPolo
+          and c.cd_biblioteca_sezione=:codBib
+          and c.bid=:bid
+          and (c.cd_doc isnull or c.cd_doc=0)
+          and not exists
+            (select o.id_ordine from tba_ordini o
+              where i.cd_bib_ord=o.cd_bib
+                and i.cd_tip_ord=o.cod_tip_ord
+                and i.anno_ord=o.anno_ord
+                and i.cd_ord=o.cod_ord
+                and i.fl_canc<>'S')
+ UNION
+ select o.id_ordine,
+ to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000'), o.anno_abb,
+ case coalesce(o.anno_1ord,0) when 0 then
+ 	to_char(o.anno_ord,'0000')||to_char(o.cod_ord,'000000000')
+ else
+ 	to_char(o.anno_1ord,'0000')||to_char(o.cod_1ord,'000000000')
+  end,
+  0, '',
+  '', '',
+  '0', '', '0',
+  o.data_ord,  '', 0
+ from tba_ordini o
+where not EXISTS (select 1 from  tbc_inventario i
+                   where i.cd_bib_ord=o.cd_bib
+                  and i.cd_tip_ord=o.cod_tip_ord
+                  and i.anno_ord=o.anno_ord
+                  and i.cd_ord=o.cod_ord
+                  and i.fl_canc<>'S')
+
+          and o.continuativo='1'
+          and o.fl_canc<>'S'
+          and o.cd_polo=:codPolo
+          and o.cd_bib=:codBib
+          and o.bid=:bid
+    )
+
+order by esemplare desc, ts_ins_prima_coll desc, anno_abb_inv desc, seq_coll desc
+
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaFascicoliPerCollocazione">
+		<return alias="f" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" />
+		<return alias="ef" class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" />
+		<![CDATA[
+			select distinct {f.*},{ef.*}
+			from tbp_fascicolo f
+			left join vl_fascicolo_key_loc ef on ef.bid=f.bid and ef.fid=f.fid and ef.key_loc=:coll
+			where f.fl_canc<>'S'
+			and f.bid in (:bid)
+			and (:tipo=1 or (:tipo=2 and f.anno_pub in (:rangeAnnoPubb)))
+			and (f.data_conv_pub between coalesce(:from,to_date('00010101','YYYYMMDD')) and coalesce(:to,to_date('23991231','YYYYMMDD')))
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaFascicoliPerEsemplare">
+		<return alias="f" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" />
+		<return alias="ef" class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" />
+		<![CDATA[
+			select distinct {f.*},{ef.*}
+			from tbp_fascicolo f
+			left join vl_fascicolo_cod_doc ef on ef.bid=f.bid and ef.fid=f.fid
+							and ef.cd_polo=:codPolo
+							and ef.cd_biblioteca=:codBib
+							and ef.bid_doc=:bid_doc
+							and ef.cd_doc=:cod_doc
+			where f.fl_canc<>'S'
+			and f.bid in (:bid)
+			and (:tipo=1 or (:tipo=2 and f.anno_pub in (:rangeAnnoPubb)))
+			and (f.data_conv_pub between coalesce(:from,to_date('00010101','YYYYMMDD')) and coalesce(:to,to_date('23991231','YYYYMMDD')))
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaOrdiniPeriodicoEsemplare">
+		<return alias="o" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" />
+	 	<![CDATA[
+	 		select distinct o.*
+			from tba_ordini o
+			inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+					and i.cd_tip_ord=o.cod_tip_ord
+					and i.anno_ord=o.anno_ord
+					and i.cd_ord=o.cod_ord
+					and i.fl_canc<>'S'
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+			inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+               		and et.cd_biblioteca=c.cd_biblioteca_doc
+                  	and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+                  	and et.fl_canc<>'S'
+			where o.fl_canc<>'S'
+					and o.continuativo='1'
+					and et.cd_polo=:codPolo
+					and et.cd_biblioteca=:codBib
+					and et.bid=:bid
+					and et.cd_doc=:cod_doc
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaOrdiniPeriodicoCollocazione">
+		<return alias="o" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" />
+	 	<![CDATA[
+	 		select distinct o.*
+			from tba_ordini o
+			inner join tbc_inventario i on i.cd_bib_ord=o.cd_bib
+					and i.cd_tip_ord=o.cod_tip_ord
+					and i.anno_ord=o.anno_ord
+					and i.cd_ord=o.cod_ord
+					and i.fl_canc<>'S'
+			where o.fl_canc<>'S'
+					and o.continuativo='1'
+					and i.key_loc=:key_loc
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeAnnoAbbonamentoCollocazione">
+		<return-scalar column="dtMin" type="integer"/>
+		<return-scalar column="dtMax" type="integer"/>
+	 	<![CDATA[
+	 		select min(i.anno_abb) as dtMin, max(i.anno_abb) as dtMax
+			from tbc_inventario i
+			where i.fl_canc<>'S'
+			and i.key_loc=:coll
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeAnnoAbbonamentoEsemplare">
+		<return-scalar column="dtMin" type="integer"/>
+		<return-scalar column="dtMax" type="integer"/>
+	 	<![CDATA[
+	 		select min(i.anno_abb) as dtMin, max(i.anno_abb) as dtMax
+	 		from tbc_inventario i
+	 		inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+	 		inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+               		and et.cd_biblioteca=c.cd_biblioteca_doc
+                  	and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+                  	and et.fl_canc<>'S'
+			where i.fl_canc<>'S'
+					and et.cd_polo=:codPolo
+					and et.cd_biblioteca=:codBib
+					and et.bid=:bid
+					and et.cd_doc=:cod_doc
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeAnnoPubbFascicoliCollocazione">
+		<return-scalar column="annoInv" type="integer"/>
+	 	<![CDATA[
+	 		select f.anno_pub as annoInv
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.fid=f.fid
+					and ef.bid=f.bid
+			inner join tbc_inventario i on ef.cd_polo_inv=i.cd_polo
+					and ef.cd_bib_inv=i.cd_bib
+					and ef.cd_serie=i.cd_serie
+					and ef.cd_inven=i.cd_inven
+			where f.fl_canc<>'S'
+					and ef.fl_canc<>'S'
+					and i.key_loc=:coll
+			union
+			select f.anno_pub as annoInv
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.fid= f.fid
+					and ef.bid=f.bid
+			inner join tba_ordini o on ef.id_ordine=o.id_ordine
+			inner join tbc_inventario i on i.cd_tip_ord=o.cod_tip_ord
+					and i.anno_ord=o.anno_ord
+					and i.cd_ord=o.cod_ord
+			where o.fl_canc<>'S'
+					and f.fl_canc<>'S'
+					and ef.fl_canc<>'S'
+					and i.fl_canc<>'S'
+					and i.key_loc=:coll
+			union
+			select i.anno_abb as annoInv
+			from tbc_inventario i
+			where i.fl_canc<>'S'
+					and i.anno_abb>0
+					and i.key_loc=:coll
+			order by 1;
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeAnnoPubbFascicoliEsemplare">
+		<return-scalar column="annoInv" type="integer"/>
+	 	<![CDATA[
+	 		select f.anno_pub as annoInv
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.fid=f.fid
+					and ef.bid=f.bid
+			inner join tbc_inventario i on ef.cd_polo_inv=i.cd_polo
+					and ef.cd_bib_inv=i.cd_bib
+					and ef.cd_serie=i.cd_serie
+					and ef.cd_inven=i.cd_inven
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+	 		inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+               		and et.cd_biblioteca=c.cd_biblioteca_doc
+                  	and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+                  	and et.fl_canc<>'S'
+			where f.fl_canc<>'S'
+					and ef.fl_canc<>'S'
+					and i.fl_canc<>'S'
+					and et.cd_polo=:codPolo
+					and et.cd_biblioteca=:codBib
+					and et.bid=:bid
+					and et.cd_doc=:cod_doc
+			union
+			select f.anno_pub as annoInv
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.fid= f.fid
+					and ef.bid=f.bid
+			inner join tba_ordini o on ef.id_ordine=o.id_ordine
+			inner join tbc_inventario i on i.cd_tip_ord=o.cod_tip_ord
+					and i.anno_ord=o.anno_ord
+					and i.cd_ord=o.cod_ord
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+	 		inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+               		and et.cd_biblioteca=c.cd_biblioteca_doc
+                  	and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+                  	and et.fl_canc<>'S'
+			where o.fl_canc<>'S'
+					and f.fl_canc<>'S'
+					and ef.fl_canc<>'S'
+					and i.fl_canc<>'S'
+					and et.cd_polo=:codPolo
+					and et.cd_biblioteca=:codBib
+					and et.bid=:bid
+					and et.cd_doc=:cod_doc
+			union
+			select i.anno_abb as annoInv
+			from tbc_inventario i
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+					and c.fl_canc<>'S'
+	 		inner join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc
+               		and et.cd_biblioteca=c.cd_biblioteca_doc
+                  	and et.bid=c.bid_doc and et.cd_doc=c.cd_doc
+                  	and et.fl_canc<>'S'
+			where i.fl_canc<>'S'
+					and i.anno_abb>0
+					and et.cd_polo=:codPolo
+					and et.cd_biblioteca=:codBib
+					and et.bid=:bid
+					and et.cd_doc=:cod_doc
+			order by 1;
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="bibliotecheEsemplareFascicolo">
+		<return-scalar column="bib" type="string"/>
+		<return-scalar column="cnt" type="integer"/>
+	 	<![CDATA[
+	 		select bib, count(ese) as cnt from (
+				select o.cd_bib as bib, ef.id_ese_fascicolo as ese
+				from tba_ordini o
+				inner join tbp_esemplare_fascicolo ef on ef.id_ordine=o.id_ordine
+				where ef.fl_canc<>'S'
+					and ef.bid=:bid
+					and ef.fid=:fid
+            		and (ef.cd_inven isnull)
+
+				union
+				select ef.cd_bib_inv as bib, ef.id_ese_fascicolo as ese
+				from tbp_esemplare_fascicolo ef
+				where ef.fl_canc<>'S'
+					and (not ef.cd_inven isnull)
+					and ef.bid=:bid
+					and ef.fid=:fid
+			) as cnt_ese
+			group by 1
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeDataPubbFascicoliOrdine">
+		<return-scalar column="dtMin" type="date" />
+		<return-scalar column="dtMax" type="date" />
+	 	<![CDATA[
+	 		select min(f.data_conv_pub) as dtMin,
+	 			   max(f.data_conv_pub) as dtMax
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.fid=f.fid
+					and ef.bid=f.bid
+			where f.fl_canc<>'S'
+					and ef.fl_canc<>'S'
+					and ef.id_ordine=:ordine
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeAnnoPubbFascicoliPerEsame">
+		<return-scalar column="annoPub" type="short" />
+	 	<![CDATA[
+	 		select distinct f.anno_pub as annoPub
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.fid=f.fid and ef.bid=f.bid
+			where f.fl_canc<>'S'
+					and ef.fl_canc<>'S'
+					and f.bid=:bid
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="rangeAnnoPubbFascicoliPerTitolo">
+		<return-scalar column="annoPub" type="short" />
+	 	<![CDATA[
+	 		select distinct f.anno_pub as annoPub
+			from tbp_fascicolo f
+			where f.fl_canc<>'S'
+					and f.bid=:bid
+			order by f.anno_pub
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaEsemplariPerFidBiblio">
+		<return alias="f" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" />
+		<return alias="ef" class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" />
+	 	<![CDATA[
+			select distinct {f.*},{ef.*}
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.bid=f.bid
+						and ef.fid=f.fid
+						and (
+							exists (
+								select 1 from tbc_inventario i
+								where i.fl_canc<>'S'
+								and i.cd_polo=:codPolo
+								and i.cd_bib=:codBib
+								and ef.cd_polo_inv=i.cd_polo
+								and ef.cd_bib_inv=i.cd_bib
+								and ef.cd_serie=i.cd_serie
+								and ef.cd_inven=i.cd_inven
+							) or exists (
+								select 1 from tba_ordini o
+                                where o.fl_canc<>'S'
+                                and o.id_ordine=ef.id_ordine
+                                and o.cd_polo=:codPolo
+								and o.cd_bib=:codBib
+                            )
+						)
+			where f.fl_canc<>'S'
+			and ef.fl_canc<>'S'
+			and f.bid=:bid
+            and f.fid=:fid
+    	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaEsemplariPerFidPolo">
+		<return alias="f" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" />
+		<return alias="ef" class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" />
+	 	<![CDATA[
+			select distinct {f.*},{ef.*}
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.bid=f.bid
+						and ef.fid=f.fid
+						and (
+							exists (
+								select 1 from tbc_inventario i
+								where i.fl_canc<>'S'
+								and ef.cd_polo_inv=i.cd_polo
+								and ef.cd_bib_inv=i.cd_bib
+								and ef.cd_serie=i.cd_serie
+								and ef.cd_inven=i.cd_inven
+							) or exists (
+								select 1 from tba_ordini o
+                                where o.fl_canc<>'S'
+                                and o.id_ordine=ef.id_ordine
+                            )
+						)
+			where f.fl_canc<>'S'
+			and ef.fl_canc<>'S'
+			and f.bid=:bid
+            and f.fid=:fid
+    	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaFascicoliRicevutiPerBiblioteca">
+		<return alias="f" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" />
+		<return alias="ef" class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" />
+	 	<![CDATA[
+			select distinct {f.*},{ef.*}
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.bid=f.bid
+						and ef.fid=f.fid
+						and (
+							exists (
+								select 1 from tbc_inventario i
+								where i.fl_canc<>'S'
+								and i.cd_polo=:codPolo
+								and i.cd_bib=:codBib
+								and ef.cd_polo_inv=i.cd_polo
+								and ef.cd_bib_inv=i.cd_bib
+								and ef.cd_serie=i.cd_serie
+								and ef.cd_inven=i.cd_inven
+							) or exists (
+								select 1 from tba_ordini o
+                                where o.fl_canc<>'S'
+                                and o.id_ordine=ef.id_ordine
+                                and o.cd_polo=:codPolo
+								and o.cd_bib=:codBib
+                            )
+						)
+			where f.fl_canc<>'S'
+			and ef.fl_canc<>'S'
+			and f.bid=:bid
+			and (f.data_conv_pub between coalesce(:from,to_date('00010101','YYYYMMDD')) and coalesce(:to,to_date('23991231','YYYYMMDD')))
+    	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="countFascicoliPerInventariCollocazione">
+		<return-scalar column="cd_serie" type="string" />
+		<return-scalar column="cd_inven" type="long" />
+		<return-scalar column="anno_abb" type="integer" />
+		<return-scalar column="precis_inv" type="string" />
+		<return-scalar column="cnt" type="integer" />
+		<return-scalar column="id_accesso_remoto" type="string" />
+	 	<![CDATA[
+			select i.cd_serie, i.cd_inven, i.anno_abb, i.precis_inv,
+			count(ef) as cnt, i.id_accesso_remoto
+			from tbc_inventario i
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+			left join tbp_esemplare_fascicolo ef on
+				ef.cd_bib_inv=i.cd_bib
+			    and ef.cd_serie=i.cd_serie
+    			and ef.cd_inven=i.cd_inven
+    			and ef.fl_canc<>'S'
+			where true
+			and i.bid=:bid
+			and i.fl_canc<>'S'
+			and i.cd_sit='2'
+			and c.cd_polo_sezione=:codPolo
+			and c.cd_biblioteca_sezione=:codBib
+			and c.cd_sez=:codSez
+			and c.ord_loc=:ordLoc
+			and c.ord_spec=:ordSpec
+			group by 1,2,3,4,6
+			order by 1,2
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="countFascicoliPerInventariTitolo">
+		<return-scalar column="cd_serie" type="string" />
+		<return-scalar column="cd_inven" type="long" />
+		<return-scalar column="anno_abb" type="integer" />
+		<return-scalar column="precis_inv" type="string" />
+		<return-scalar column="cnt" type="integer" />
+		<return-scalar column="id_accesso_remoto" type="string" />
+	 	<![CDATA[
+			select i.cd_serie, i.cd_inven, i.anno_abb, i.precis_inv,
+			count(ef) as cnt, i.id_accesso_remoto
+			from tbc_inventario i
+			left join tbp_esemplare_fascicolo ef on
+				ef.cd_bib_inv=i.cd_bib
+			    and ef.cd_serie=i.cd_serie
+    			and ef.cd_inven=i.cd_inven
+    			and ef.fl_canc<>'S'
+			where true
+			and i.bid=:bid
+			and i.fl_canc<>'S'
+			and i.cd_sit='2'
+			and i.cd_polo=:codPolo
+			and i.cd_bib=:codBib
+			group by 1,2,3,4,6
+			order by 1,2
+	 	]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaFascicoliRicevutiPerInventario">
+		<return alias="f" class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo" />
+		<return alias="ef" class="it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo" />
+	 	<![CDATA[
+			select distinct {f.*},{ef.*}
+			from tbp_fascicolo f
+			inner join tbp_esemplare_fascicolo ef on ef.bid=f.bid
+						and ef.fid=f.fid
+						and (
+							exists (
+								select 1 from tbc_inventario i
+								where i.fl_canc<>'S'
+								and i.cd_polo=:codPolo
+								and i.cd_bib=:codBib
+								and ef.cd_polo_inv=i.cd_polo
+								and ef.cd_bib_inv=i.cd_bib
+								and ef.cd_serie=:codSerie
+								and ef.cd_inven=:codInv
+							)
+						)
+			where f.fl_canc<>'S'
+			and ef.fl_canc<>'S'
+			and f.bid=:bid
+			and (f.data_conv_pub between coalesce(:from,to_date('00010101','YYYYMMDD')) and coalesce(:to,to_date('23991231','YYYYMMDD')))
+    	]]>
+	</sql-query>
+
+	<!-- almaviva5_20170721 #5612 -->
+	<sql-query cache-mode="ignore" name="countEsemplariBiblioteche">
+		<return-scalar column="bib" type="string"/>
+		<return-scalar column="cnt" type="integer"/>
+	 	<![CDATA[
+	 		select bib, count(ese) as cnt from (
+				select o.cd_bib as bib, ef.id_ese_fascicolo as ese
+				from tba_ordini o
+				inner join tbp_esemplare_fascicolo ef on ef.id_ordine=o.id_ordine
+				where ef.fl_canc<>'S'
+					and ef.bid=:bid
+            		and (ef.cd_inven isnull)
+
+				union
+				select ef.cd_bib_inv as bib, ef.id_ese_fascicolo as ese
+				from tbp_esemplare_fascicolo ef
+				where ef.fl_canc<>'S'
+					and (not ef.cd_inven isnull)
+					and ef.bid=:bid
+			) as cnt_ese
+			group by 1
+	 	]]>
+	</sql-query>
+
+
+</hibernate-mapping>

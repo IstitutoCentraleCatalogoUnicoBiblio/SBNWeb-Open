@@ -1,0 +1,2354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<Errori xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="errori.xsd">
+	<referente_default>
+		<nome_ref_def>Referente di default</nome_ref_def>
+		<mail_ref_def>default@sbnweb.iccu.it</mail_ref_def>
+	</referente_default>
+	<Errore id="-1">
+		<descrizione>
+			Errore privo di descrizione
+		</descrizione>
+	</Errore>
+	<Errore id="20">
+		<descrizione>L'esecuzione necessita il rollback</descrizione>
+	</Errore>
+	<Errore id="54">
+		<descrizione>errore nel salvataggio della sessione</descrizione>
+	</Errore>
+	<Errore id="55">
+		<descrizione>LOADING PARSER ERROR: Dynamic lookup failed - </descrizione>
+	</Errore>
+	<Errore id="56">
+		<descrizione>Errore interno all'applicazione</descrizione>
+	</Errore>
+	<Errore id="70">
+		<descrizione>Non è stato possibile schedulare correttamente la richiesta</descrizione>
+	</Errore>
+	<Errore id="100">
+		<descrizione>Errore durante il trattamento di input XML</descrizione>
+	</Errore>
+	<Errore id="101">
+		<descrizione>Errore di marshalling XML</descrizione>
+	</Errore>
+	<Errore id="102">
+		<descrizione>File XML inesistente</descrizione>
+	</Errore>
+	<Errore id="103">
+		<descrizione>Errore: character encoding della richiesta non UTF-8</descrizione>
+	</Errore>
+	<Errore id="200">
+		<descrizione>Errore: oggetto tavola_response null</descrizione>
+	</Errore>
+	<Errore id="201">
+		<descrizione>Errore: tipologia di ricerca errata</descrizione>
+	</Errore>
+	<Errore id="202">
+		<nota>Errore temporaneo</nota>
+		<descrizione>Errore occorso durante l'accesso al DB</descrizione>
+	</Errore>
+	<Errore id="210">
+		<descrizione>Server LDAP non funzionante, contattare l'amministratore del CED ICCU.</descrizione>
+	</Errore>
+	<Errore id="300">
+		<nota>Eccezione in CreaAttivita.executeFactoring()</nota>
+		<descrizione>Un' attività con questa descrizione esiste già</descrizione>
+	</Errore>
+	<Errore id="301">
+		<nota>Eccezione in CreaGruppo.executeFactoring()</nota>
+		<descrizione>Un gruppo con questa descrizione esiste già</descrizione>
+	</Errore>
+	<Errore id="302">
+		<nota>Eccezione in DisabilitaUtente.executeFactoring()</nota>
+		<descrizione>Errore invocazione DisabilitaUtente: manca un parametro </descrizione>
+	</Errore>
+	<Errore id="303">
+		<nota>Eccezione in RicercaUtente.getResult()</nota>
+		<descrizione>Parametro utente mancante</descrizione>
+	</Errore>
+	<Errore id="400">
+		<descrizione>Attivita non esistente</descrizione>
+	</Errore>
+	<Errore id="401">
+		<descrizione>Gruppo non esistente</descrizione>
+	</Errore>
+	<Errore id="402">
+		<descrizione>Attivita o utente non esistente</descrizione>
+	</Errore>
+	<Errore id="403">
+		<descrizione>Il gruppo padre non esiste in memoria</descrizione>
+	</Errore>
+	<Errore id="404">
+		<descrizione>L'attivita non esiste in memoria</descrizione>
+	</Errore>
+	<Errore id="405">
+		<descrizione>L'attivita o l'utente non esistono in memoria</descrizione>
+	</Errore>
+	<Errore id="406">
+		<descrizione>Il gruppo figlio non esiste in memoria</descrizione>
+	</Errore>
+	<Errore id="407">
+		<descrizione>L'inserimento della relazione introdurrebbe un ciclo nella gerarchia dei gruppi</descrizione>
+	</Errore>
+	<Errore id="408">
+		<descrizione>Confronto fra gruppi nulli</descrizione>
+	</Errore>
+	<Errore id="409">
+		<descrizione>Gruppo o utente non esistono in memoria</descrizione>
+	</Errore>
+	<Errore id="410">
+		<descrizione>L' utente non esiste in memoria</descrizione>
+	</Errore>
+	<Errore id="411">
+		<descrizione>Formato data non previsto</descrizione>
+	</Errore>
+	<Errore id="412"> <!-- almaviva7 05/05/2014  -->
+		<descrizione>Data Da e Data A con carattere jolly non coincidono</descrizione>
+	</Errore>
+	<Errore id="500">
+		<descrizione>Operazione eseguita: è possibile scaricare i file</descrizione>
+	</Errore>
+	<Errore id="501">
+		<descrizione>Funzionalità non implementata</descrizione>
+	</Errore>
+	<!--Errori legati ad operazioni sul database -->
+	<Errore id="1001">
+		<descrizione>
+			Errore generico occorso durante l'accesso al DB
+		</descrizione>
+	</Errore>
+	<Errore id="1002">
+		<descrizione>ERRORE SQL CONNESSIONE DB</descrizione>
+	</Errore>
+	<Errore id="1003">
+		<descrizione>ERRORE PROGRAM CONNESSIONE DB</descrizione>
+	</Errore>
+	<Errore id="1004">
+		<descrizione>ERRORE SQL TEST CONNESSIONE DB</descrizione>
+	</Errore>
+	<Errore id="1005">
+		<descrizione>ERRORE PROGRAM TEST CONNESSIONE DB</descrizione>
+	</Errore>
+	<Errore id="1001">
+		<descrizione>ERRORE SQL COMMIT VERSO IL DBASE</descrizione>
+	</Errore>
+	<Errore id="1006">
+		<descrizione>ERRORE SQL CLOSE CONNESSIONE DB</descrizione>
+	</Errore>
+	<Errore id="1007">
+		<descrizione>ERRORE SQL ROLLBACK VERSO IL DBASE</descrizione>
+	</Errore>
+	<Errore id="1051">
+		<descrizione>ERRORE CREAZIONE STATEMENT SQL </descrizione>
+	</Errore>
+	<Errore id="1050">
+		<descrizione>Si è verificato un errore nell'accesso al database</descrizione>
+	</Errore>
+	<Errore id="1103">
+		<descrizione>(DSRICHINFO) ERRORE OPERAZIONE SQL</descrizione>
+	</Errore>
+	<Errore id="1151">
+		<descrizione>(SELECT CHIAVE PRIMARIA) ERRORE OPERAZIONE SQL</descrizione>
+	</Errore>
+	<Errore id="1200">
+		<descrizione>Dummy Error</descrizione>
+	</Errore>
+	<!--Errori legati ad EccezioneDB -->
+	<Errore id="1202">
+		<descrizione>Errore occorso durante l'accesso al DB: elemento già presente nella tavola</descrizione>
+	</Errore>
+	<Errore id="1203">
+		<descrizione>Errore nella lettura da Database.</descrizione>
+	</Errore>
+	<Errore id="1204">
+		<descrizione>Errore nella sequence del database</descrizione>
+	</Errore>
+	<Errore id="1210">
+		<descrizione>	Campo non trovato nel result set.</descrizione>
+	</Errore>
+	<Errore id="1220">
+		<descrizione>
+			La commit non può essere eseguita.
+		</descrizione>
+	</Errore>
+	<Errore id="1230">
+		<descrizione>Errore nella creazione dello statement SQL</descrizione>
+	</Errore>
+	<Errore id="1231">
+		<descrizione>Errore nella creazione dell'ordinamento SQL</descrizione>
+	</Errore>
+	<!-- Fine errori legati ad EccezioneDB -->
+	<Errore id="2003">
+		<descrizione>Errore di analisi</descrizione>
+	</Errore>
+	<Errore id="2004">
+		<descrizione>Errore di lettura Uri</descrizione>
+	</Errore>
+	<Errore id="2001">
+		<descrizione>Errore di castor validator</descrizione>
+	</Errore>
+	<Errore id="2002">
+		<descrizione>Errore di marshalling</descrizione>
+	</Errore>
+	<Errore id="894">
+		<descrizione>unmarshal PARSER ERROR: In root object</descrizione>
+	</Errore>
+	<!-- Errori diagnostici legati alle eccezioni EccezioneSbnDiagnostico -->
+	<Errore id="0">
+		<descrizione>
+			Operazione eseguita correttamente
+		</descrizione>
+	</Errore>
+	<Errore id="3001">
+		<descrizione>
+			Nessun elemento trovato
+		</descrizione>
+	</Errore>
+	<Errore id="3002">
+		<descrizione>
+			Elaborazione registrata in coda
+		</descrizione>
+	</Errore>
+	<Errore id="3003">
+		<descrizione>
+			La ricerca seleziona troppi elementi: restringere le condizioni
+		</descrizione>
+	</Errore>
+	<Errore id="3004">
+		<descrizione>
+			Esistono elementi simili
+		</descrizione>
+	</Errore>
+	<Errore id="3005">
+		<descrizione>
+			Errore: Utente non abilitato all'uso dell'attività
+		</descrizione>
+	</Errore>
+	<Errore id="3006">
+		<descrizione>
+			Errore: Livello di autorità non autorizzato all'Utente
+		</descrizione>
+	</Errore>
+	<Errore id="3007">
+		<descrizione>
+			Errore: Livello di autorità dell'utente non consente l'operazione
+		</descrizione>
+	</Errore>
+	<Errore id="3008">
+		<descrizione>
+			Errore: Utente non abilitato a forzare la correzione
+		</descrizione>
+	</Errore>
+	<Errore id="3009">
+		<descrizione>
+			Errore: Utente non abilitato alla gestione del tipo Authority
+		</descrizione>
+	</Errore>
+	<Errore id="3010">
+		<descrizione>
+			Errore: il livello di autorità sulla base dati è superiore a quello comunicato
+		</descrizione>
+	</Errore>
+	<Errore id="3011">
+		<descrizione>
+			Errore: Tipo di controllo simili inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3012">
+		<descrizione>
+			Errore: Identificativo già esistente in base dati
+		</descrizione>
+	</Errore>
+	<Errore id="3013">
+		<descrizione>
+			Errore: L'identificativo non esiste in base dati
+		</descrizione>
+	</Errore>
+	<Errore id="3014">
+		<descrizione>
+			Errore: la data di ultima variazione non coincide con quella registrata in base dati
+		</descrizione>
+	</Errore>
+	<Errore id="3015">
+		<descrizione>
+			Errore: dato codificato inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3016">
+		<descrizione>
+			Errore: almeno una citazione è obbligatoria per la marca
+		</descrizione>
+	</Errore>
+	<Errore id="3017">
+		<descrizione>
+			Errore: manca l'informazione di versione T005
+		</descrizione>
+	</Errore>
+	<Errore id="3018">
+		<descrizione>
+			Errore: troppi parametri valorizzati
+		</descrizione>
+	</Errore>
+	<Errore id="3019">
+		<descrizione>
+			Errore: almeno una parola chiave è obbligatoria per la marca
+		</descrizione>
+	</Errore>
+	<Errore id="3020">
+		<descrizione>
+			Errore: almeno un legame a repertorio è obbligatorio per la marca
+		</descrizione>
+	</Errore>
+	<Errore id="3021">
+		<descrizione>
+			Errore: si accettano al massimo 5 parole per la marca
+		</descrizione>
+	</Errore>
+	<Errore id="3022">
+		<descrizione>
+			Errore: autore da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3023">
+		<descrizione>
+			Errore: repertorio da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3024">
+		<descrizione>
+			Errore: marca da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3025">
+		<descrizione>
+			Errore: luogo da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3026">
+		<descrizione>
+			Errore: soggetto da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3027">
+		<descrizione>
+			Errore: classe da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3028">
+		<descrizione>
+			Errore: titolo da collegare inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3029">
+		<descrizione>
+			Errore: legame inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3030">
+		<descrizione>
+			Errore: legame già esistente
+		</descrizione>
+	</Errore>
+	<Errore id="3031">
+		<descrizione>
+			Errore: tipo legame non valido
+		</descrizione>
+	</Errore>
+	<Errore id="3032">
+		<descrizione>
+			Errore: tipo forma mancante
+		</descrizione>
+	</Errore>
+	<Errore id="3033">
+		<descrizione>
+			Errore: forma del nome e tipo legame incompatibili
+		</descrizione>
+	</Errore>
+	<Errore id="3034">
+		<descrizione>
+			Errore: legami non validati
+		</descrizione>
+	</Errore>
+	<Errore id="3035">
+		<descrizione>
+			Errore: tipo operazione non valido
+		</descrizione>
+	</Errore>
+	<Errore id="3036">
+		<descrizione>
+			Errore: il tipo forma è errato per uno scambio di forma
+		</descrizione>
+	</Errore>
+	<Errore id="3037">
+		<descrizione>
+			Errore: manca legame alla forma accettata
+		</descrizione>
+	</Errore>
+	<Errore id="3038">
+		<descrizione>
+			Errore: legami tra autori non validi
+		</descrizione>
+	</Errore>
+	<Errore id="3039">
+		<descrizione>
+			Errore: Comunicare almeno un canale di ricerca, e non più di uno
+		</descrizione>
+	</Errore>
+	<Errore id="3336">
+		<descrizione>
+			Errore: Comunicare un canale di ricerca
+		</descrizione>
+	</Errore>
+
+	<Errore id="3040">
+		<descrizione>
+			Errore: comunicare la stringa di ricerca
+		</descrizione>
+	</Errore>
+	<Errore id="3041">
+		<descrizione>
+			Errore: parametri di ricerca incompleti
+		</descrizione>
+	</Errore>
+	<Errore id="3042">
+		<descrizione>
+			Errore: date di lunghezza diversa
+		</descrizione>
+	</Errore>
+	<Errore id="3043">
+		<descrizione>
+			Errore: descrizione autore non valida
+		</descrizione>
+	</Errore>
+	<Errore id="3044">
+		<descrizione>
+			Errore: tipo di output non valido
+		</descrizione>
+	</Errore>
+	<Errore id="3045">
+		<descrizione>
+			Errore: tipo di legame con autore non valido
+		</descrizione>
+	</Errore>
+	<Errore id="3046">
+		<descrizione>
+			Errore: esiste già legame repertorio con stessa citazione ad altra marca
+		</descrizione>
+	</Errore>
+	<Errore id="3047">
+		<descrizione>
+			Errore: il titolo non è localizzato per possesso
+		</descrizione>
+	</Errore>
+	<Errore id="3048">
+		<descrizione>
+			Errore: ISADN già esistente in base dati
+		</descrizione>
+	</Errore>
+	<Errore id="3049">
+		<descrizione>
+			Errore: Dati incongruenti
+		</descrizione>
+	</Errore>
+	<Errore id="3050">
+		<descrizione>
+			Errore: il titolo non è localizzato per gestione
+		</descrizione>
+	</Errore>
+	<Errore id="3051">
+		<descrizione>
+			Errore: mancano informazioni sulle date
+		</descrizione>
+	</Errore>
+	<Errore id="3052">
+		<descrizione>
+			Errore: manca codice per identificare biblioteca
+		</descrizione>
+	</Errore>
+	<Errore id="3053">
+		<descrizione>
+			Errore: codice biblioteca errato
+		</descrizione>
+	</Errore>
+	<Errore id="3054">
+		<descrizione>
+			Errore: Almeno un asterisco è obbligatorio per un autore di tipo ente
+		</descrizione>
+	</Errore>
+	<Errore id="3055">
+		<descrizione>
+			Errore: Al massimo 4 asterischi nel gruppo principale degli autori collettivi
+			<!--Errore: Al massimo 4 asterischi nel nome di un autore di tipo ente-->
+		</descrizione>
+	</Errore>
+	<Errore id="3056">
+		<descrizione>
+			Errore: tipo di autore non congruente
+		</descrizione>
+	</Errore>
+	<Errore id="3057">
+		<descrizione>
+			Errore: autore legato a marche
+		</descrizione>
+	</Errore>
+	<Errore id="3058">
+		<descrizione>
+			Errore: Anno maggiore di 1830
+		</descrizione>
+	</Errore>
+	<Errore id="3059">
+		<descrizione>
+			Almeno un asterisco obbligatorio
+		</descrizione>
+	</Errore>
+	<Errore id="3060">
+		<descrizione>
+			Errore: Guida non definita
+		</descrizione>
+	</Errore>
+	<Errore id="3061">
+		<descrizione>
+			Errore: Impossibile stabilire la natura del titolo
+		</descrizione>
+	</Errore>
+	<Errore id="3062">
+		<descrizione>
+			Errore: parametri di creazione errati
+		</descrizione>
+	</Errore>
+	<Errore id="3063">
+		<descrizione>
+			Errore: numero ISBN formalmente errato
+		</descrizione>
+	</Errore>
+	<Errore id="3064">
+		<nota>Errore nella gestione del documento</nota>
+		<descrizione>
+			Errore: Tipo numero standard non ammesso per la natura del documento
+		</descrizione>
+	</Errore>
+	<Errore id="3065">
+		<descrizione>
+			Errore: Al massimo un asterisco nella prima parte del nome
+		</descrizione>
+	</Errore>
+	<Errore id="3066">
+		<descrizione>
+			Errore: Tipo del titolo non valido
+		</descrizione>
+	</Errore>
+	<Errore id="3067">
+		<descrizione>
+			Manca la localizzazione
+		</descrizione>
+	</Errore>
+	<Errore id="3068">
+		<descrizione>
+			Per la localizzazione valorizzare o il fondo o la segnatura
+		</descrizione>
+	</Errore>
+	<Errore id="3069">
+		<descrizione>
+			Natura del titolo non corretta
+		</descrizione>
+	</Errore>
+	<Errore id="3070">
+		<descrizione>
+			Errore: Impronta formalmente errata
+		</descrizione>
+	</Errore>
+	<Errore id="3071">
+		<descrizione>
+			Errore: i primi 3 caratteri della classe dewey devono essere numerici
+		</descrizione>
+	</Errore>
+	<Errore id="3072">
+		<descrizione>
+			Errore: sistema di classificazione inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3073">
+		<descrizione>
+			Errore: Almeno una biblioteca è obbligatoria
+		</descrizione>
+	</Errore>
+	<Errore id="3074">
+		<descrizione>
+			Errore: Tipo di ricerca non consentita
+		</descrizione>
+	</Errore>
+	<Errore id="3075">
+		<descrizione>
+			Errore: tipo forma errato
+		</descrizione>
+	</Errore>
+	<Errore id="3076">
+		<descrizione>
+			Errore: Codice tonalità inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="3077">
+		<descrizione>
+			Errore: identificativo della classificazione errato
+		</descrizione>
+	</Errore>
+	<Errore id="3078">
+		<descrizione>
+			Errore: Asterisco mancante nel titolo proprio
+		</descrizione>
+	</Errore>
+	<Errore id="3079">
+		<descrizione>
+			Errore: Legame non ammesso
+		</descrizione>
+	</Errore>
+	<Errore id="3080">
+		<descrizione>
+			Errore: L'asterisco non deve essere presente nel titolo di natura W
+		</descrizione>
+	</Errore>
+	<Errore id="3081">
+		<descrizione>
+			Errore: Legame al titolo superiore obbligatorio
+		</descrizione>
+	</Errore>
+	<Errore id="3082">
+		<descrizione>
+			Errore: Legame al titolo superiore gia' esistente
+		</descrizione>
+	</Errore>
+	<Errore id="3083">
+		<descrizione>
+			Errore: Tipo di authority non corretto
+		</descrizione>
+	</Errore>
+	<Errore id="3084">
+		<descrizione>Errore: il sistema di classificazione deve essere valorizzato</descrizione>
+	</Errore>
+	<Errore id="3085">
+		<descrizione>Errore: Data inizio obbligatoria con allineamento di tipo DATA</descrizione>
+	</Errore>
+	<Errore id="3086">
+		<descrizione>Errore: Data fine obbligatoria con allineamento di tipo DATA</descrizione>
+	</Errore>
+	<Errore id="3087">
+		<descrizione>Errore: Range troppo grande tra Data inizio e Data fine</descrizione>
+	</Errore>
+	<Errore id="3088">
+		<descrizione>Errore: codice soggettario errato</descrizione>
+	</Errore>
+	<Errore id="3089">
+		<descrizione>La richiesta viene schedulata in differita; verrà inviata una e-mail a fine elaborazione</descrizione>
+	</Errore>
+	<Errore id="3090">
+		<descrizione>Errore: nessuna modifica richiesta</descrizione>
+	</Errore>
+	<Errore id="3091">
+		<descrizione>Errore: Esistono legami a titoli: cancellazione impossibile</descrizione>
+	</Errore>
+	<Errore id="3092">
+		<descrizione>Errore: elemento localizzato in altri poli, aggiornamento non consentito</descrizione>
+	</Errore>
+	<Errore id="3093">
+		<descrizione>
+			Errore: Legame al titolo d'accesso non esistente
+		</descrizione>
+	</Errore>
+	<Errore id="3094">
+		<descrizione>
+			Errore: Partire dalla forma accettata per scambiare la forma
+		</descrizione>
+	</Errore>
+	<Errore id="3095">
+		<descrizione>
+			Errore: Il documento ha titoli collegati
+		</descrizione>
+	</Errore>
+	<Errore id="3096">
+		<descrizione>
+			Errore: per cancellare un titolo uniforme utilizzare il servizio apposito
+		</descrizione>
+	</Errore>
+	<Errore id="3097">
+		<descrizione>
+			Errore: Il bid non identifica un titolo uniforme
+		</descrizione>
+	</Errore>
+	<Errore id="3098">
+		<descrizione>
+			Errore: Il bid non identifica un titolo uniforme musicale
+		</descrizione>
+	</Errore>
+	<Errore id="3099">
+		<descrizione>
+			Errore: Carattere non valido
+		</descrizione>
+	</Errore>
+	<Errore id="3100">
+		<descrizione>Errore: voce errata nella descrizione dell'ente:</descrizione>
+	</Errore>
+	<Errore id="3101">
+		<descrizione>Errore: è consentito un solo legame</descrizione>
+	</Errore>
+	<Errore id="3102">
+		<descrizione>Errore: Tipo operazione sul legame non specificata</descrizione>
+	</Errore>
+	<Errore id="3103">
+		<descrizione>Errore: Dati non consistenti</descrizione>
+	</Errore>
+	<Errore id="3104">
+		<descrizione>Errore: T200 è un'informazione obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3105">
+		<descrizione>Errore: Tipo materiale errato</descrizione>
+	</Errore>
+	<Errore id="3106">
+		<descrizione>Errore: Tipo record obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3107">
+		<descrizione>Errore: Tipo record errato</descrizione>
+	</Errore>
+	<Errore id="3108">
+		<descrizione>Errore: Tipo record non richiesto</descrizione>
+	</Errore>
+	<Errore id="3109">
+		<descrizione>Errore: Livello bibliografico mancante</descrizione>
+	</Errore>
+	<Errore id="3110">
+		<descrizione>Errore: Area dell'edizione non prevista </descrizione>
+	</Errore>
+	<Errore id="3111">
+		<descrizione>Errore: Area della numerazione non prevista</descrizione>
+	</Errore>
+	<Errore id="3112">
+		<descrizione>Errore: Area della pubblicazione non prevista</descrizione>
+	</Errore>
+	<Errore id="3113">
+		<descrizione>Errore: Area della descrizione fisica non prevista</descrizione>
+	</Errore>
+	<Errore id="3114">
+		<descrizione>Errore: Area della pubblicazione obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3115">
+		<descrizione>Elemento non localizzato nella biblioteca, aggiornamento non consentito</descrizione>
+	</Errore>
+	<Errore id="3116">
+		<descrizione>Titolo portato a livello max da altro utente, aggiornamento non consentito</descrizione>
+	</Errore>
+	<Errore id="3117">
+		<descrizione>Titolo già legato a soggetto</descrizione>
+	</Errore>
+	<Errore id="3118">
+		<descrizione>Titolo gia' legato a classe</descrizione>
+	</Errore>
+	<Errore id="3119">
+		<descrizione>Errore: Area della descrizione fisica obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3120">
+		<descrizione>Errore: Mancano elementi specializzati per il tipo materiale</descrizione>
+	</Errore>
+	<Errore id="3121">
+		<descrizione>Errore: Tipo testo letterario obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3122">
+		<descrizione>Errore: B_928 organico sintetico obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3123">
+		<descrizione>Errore: G_929 titolo di ordinamento obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3124">
+		<descrizione>Errore: codice organico inesistente</descrizione>
+	</Errore>
+	<Errore id="3125">
+		<descrizione>Errore: manca legame alla forma accettata dell'autore</descrizione>
+	</Errore>
+	<Errore id="3126">
+		<descrizione>
+			Errore: Identificativo già esistente e cancellato
+		</descrizione>
+	</Errore>
+	<Errore id="3127">
+		<descrizione>Eccezione titolo-soggetto</descrizione>
+	</Errore>
+	<Errore id="3128">
+		<descrizione>Cambio tipo materiale non consentito</descrizione>
+	</Errore>
+	<Errore id="3129">
+		<descrizione>
+			Errore: numero ISMN formalmente errato
+		</descrizione>
+	</Errore>
+	<Errore id="3130">
+		<descrizione>Errore: esistono legami a soggetti</descrizione>
+	</Errore>
+	<Errore id="3131">
+		<descrizione>Errore: esistono legami ad autori</descrizione>
+	</Errore>
+	<Errore id="3132">
+		<descrizione>Errore: SICI non ammesso per il legame</descrizione>
+	</Errore>
+	<Errore id="3133">
+		<descrizione>Errore: Sequenza non ammessa per il legame</descrizione>
+	</Errore>
+	<Errore id="3134">
+		<descrizione>Errore: Sequenza musicale non ammessa per il legame</descrizione>
+	</Errore>
+	<Errore id="3135">
+		<descrizione>Errore: Campo non numerico</descrizione>
+	</Errore>
+	<Errore id="3136">
+		<descrizione>Errore: Voce/strumento errato</descrizione>
+	</Errore>
+	<Errore id="3137">
+		<descrizione>Errore: Stringa alterazioni lunga al massimo 8 caratteri</descrizione>
+	</Errore>
+	<Errore id="3138">
+		<descrizione>Errore: Mancano elementi specifici per il tipo grafico</descrizione>
+	</Errore>
+	<Errore id="3139">
+		<descrizione>Comunicare almeno 3 caratteri nella stringa di ricerca</descrizione>
+	</Errore>
+	<Errore id="3140">
+		<descrizione>Errore: Troppi identificativi comunicati, spezzare la richiesta in parti</descrizione>
+	</Errore>
+	<Errore id="3141">
+		<descrizione>Errore: Troppi legami a titoli, utilizzare lo spostamento legami prima di fondere</descrizione>
+	</Errore>
+	<Errore id="3142">
+		<descrizione>Errore: I titoli devono avere la stessa carta d'identità</descrizione>
+	</Errore>
+	<Errore id="3143">
+		<descrizione>Stessa forma di rinvio già presente</descrizione>
+	</Errore>
+	<Errore id="3144">
+		<descrizione>Fusione non consentita: i due titoli devono avere stesso padre</descrizione>
+	</Errore>
+	<Errore id="3145">
+		<descrizione>Fusione non consentita: il titolo da fondere non deve avere figli</descrizione>
+	</Errore>
+	<Errore id="3149">
+		<descrizione>Errore: Codice forma mancante</descrizione>
+	</Errore>
+	<Errore id="3150">
+		<descrizione>Errore: I bid indicati non sono congruenti</descrizione>
+	</Errore>
+	<Errore id="3151">
+		<descrizione>Errore: Codice presentazione obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3152">
+		<descrizione>Errore: Codice presentazione errato</descrizione>
+	</Errore>
+	<Errore id="3153">
+		<descrizione>Errore: Tipo testo letterario errato</descrizione>
+	</Errore>
+	<Errore id="3154">
+		<descrizione>Errore: Codice stesura mancante</descrizione>
+	</Errore>
+	<Errore id="3155">
+		<descrizione>Errore: Codice stesura errato</descrizione>
+	</Errore>
+	<Errore id="3156">
+		<descrizione>Errore: Datazione mancante</descrizione>
+	</Errore>
+	<Errore id="3157">
+		<descrizione>Errore: Codice materia errato</descrizione>
+	</Errore>
+	<Errore id="3158">
+		<descrizione>Errore: Tipo indicatore errato</descrizione>
+	</Errore>
+	<Errore id="3159">
+		<descrizione>Errore: Codice forma composizione errato</descrizione>
+	</Errore>
+	<Errore id="3160">
+		<descrizione>Errore: Codice tonalità errato</descrizione>
+	</Errore>
+	<Errore id="3161">
+		<descrizione>Errore: Codice timbro vocale errato</descrizione>
+	</Errore>
+	<Errore id="3162">
+		<descrizione>Errore: Tipo materiale grafico errato</descrizione>
+	</Errore>
+	<Errore id="3163">
+		<descrizione>Errore: Codice tecnica disegno errato</descrizione>
+	</Errore>
+	<Errore id="3164">
+		<descrizione>Errore: Codice tecnica stampe errato</descrizione>
+	</Errore>
+	<Errore id="3165">
+		<descrizione>Errore: Codice designazione di funzione errato</descrizione>
+	</Errore>
+	<Errore id="3166">
+		<descrizione>Errore: Tipo pubblicazione governativa errato</descrizione>
+	</Errore>
+	<Errore id="3167">
+		<descrizione>Errore: Campo t120 obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3168">
+		<descrizione>Errore: Codice colore errato</descrizione>
+	</Errore>
+	<Errore id="3169">
+		<descrizione>Errore: Codice meridiano errato</descrizione>
+	</Errore>
+	<Errore id="3170">
+		<descrizione>Errore: Campo c121 obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3171">
+		<descrizione>Errore: Supporto fisico errato</descrizione>
+	</Errore>
+	<Errore id="3172">
+		<descrizione>Errore: Supporto fisico obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3173">
+		<descrizione>Errore: Codice forma ripr. errato</descrizione>
+	</Errore>
+	<Errore id="3174">
+		<descrizione>Errore: Codice forma pubb errato</descrizione>
+	</Errore>
+	<Errore id="3175">
+		<descrizione>Errore: Codice altitudine errato</descrizione>
+	</Errore>
+	<Errore id="3176">
+		<descrizione>Errore: Campo t123 obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3177">
+		<descrizione>Errore: Codice tipo scala errato</descrizione>
+	</Errore>
+	<Errore id="3178">
+		<descrizione>Errore: Tipo scala errato</descrizione>
+	</Errore>
+	<Errore id="3179">
+		<descrizione>Errore: Scala orizzontale obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3180">
+		<descrizione>Errore: Scala verticale obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3181">
+		<descrizione>Errore: Coordinate mancanti</descrizione>
+	</Errore>
+	<Errore id="3182">
+		<descrizione>Errore: Campo t124 obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3183">
+		<descrizione>Errore: Tipo immagine errato</descrizione>
+	</Errore>
+	<Errore id="3184">
+		<descrizione>Errore: Codice forma cartografica errato</descrizione>
+	</Errore>
+	<Errore id="3185">
+		<descrizione>Errore: Tipo piattaforma obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3186">
+		<descrizione>Errore: Tipo piattaforma errato</descrizione>
+	</Errore>
+	<Errore id="3187">
+		<descrizione>Errore: Codice categoria satellite errato</descrizione>
+	</Errore>
+	<Errore id="3188">
+		<descrizione>Errore: Codice tecnica errato</descrizione>
+	</Errore>
+	<Errore id="3189">
+		<descrizione>Errore: Codice genere errato</descrizione>
+	</Errore>
+	<Errore id="3190">
+		<descrizione>Errore: Codice tipo scala obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3191">
+		<descrizione>Errore: Tipo data non prevista per questa natura</descrizione>
+	</Errore>
+	<Errore id="3192">
+		<descrizione>
+			Errore: Livello bibliografico non definito
+		</descrizione>
+	</Errore>
+	<Errore id="3193">
+		<descrizione>
+			Errore: Tag 200 non definito
+		</descrizione>
+	</Errore>
+	<Errore id="3194">
+		<descrizione>
+			Errore: Tag 110 non definito
+		</descrizione>
+	</Errore>
+	<Errore id="3195">
+		<descrizione>
+			Errore: Codice Lingua mancante
+		</descrizione>
+	</Errore>
+	<Errore id="3196">
+		<descrizione>
+			Errore: Codice Lingua non prevista
+		</descrizione>
+	</Errore>
+	<Errore id="3197">
+		<descrizione>
+			Errore: Codice Paese mancante
+		</descrizione>
+	</Errore>
+	<Errore id="3198">
+		<descrizione>
+			Errore: Codice Paese non previsto
+		</descrizione>
+	</Errore>
+	<Errore id="3199">
+		<descrizione>
+			Errore: Forma contenuto non prevista
+		</descrizione>
+	</Errore>
+	<Errore id="3200">
+		<descrizione>Errore: manca uno dei seguenti campi obbligatori: tipoOggetto, idOggetto, testoProposta</descrizione>
+	</Errore>
+	<Errore id="3201">
+		<descrizione>Errore: manca uno dei seguenti campi: idProposta, dataVarProposta</descrizione>
+	</Errore>
+	<Errore id="3202">
+		<descrizione>Errore: SbnUser deve essere il mittente o uno dei destinatari</descrizione>
+	</Errore>
+	<Errore id="3203">
+		<descrizione>Errore: testoProposta modificabile solo dal mittente della proposta</descrizione>
+	</Errore>
+	<Errore id="3204">
+		<descrizione>
+			Errore: Codice Lingua errato
+		</descrizione>
+	</Errore>
+	<Errore id="3205">
+		<descrizione>
+			Errore: Codice Paese errato
+		</descrizione>
+	</Errore>
+	<Errore id="3206">
+		<descrizione>Errore: Codice tiposcala obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3207">
+		<descrizione>Errore: tipo materiale non previsto per nature C</descrizione>
+	</Errore>
+	<Errore id="3208">
+		<descrizione>Errore: cambio natura non consentito</descrizione>
+	</Errore>
+	<Errore id="3209">
+		<descrizione>Incongruenza responsabilità autore</descrizione>
+	</Errore>
+	<Errore id="3210">
+		<descrizione>Errore: Marca non localizzata nel Polo</descrizione>
+	</Errore>
+	<Errore id="3211">
+		<descrizione>Errore: soggettario non abilitato per la biblioteca</descrizione>
+	</Errore>
+	<Errore id="3212">
+		<descrizione>Errore: descrittore esistente</descrizione>
+	</Errore>
+	<Errore id="3213">
+		<descrizione>Errore: elemento legato al descrittore ineesistente</descrizione>
+	</Errore>
+	<Errore id="3214">
+		<descrizione>Errore: Tipo legame non corretto</descrizione>
+	</Errore>
+	<Errore id="3215">
+		<descrizione>Errore: Relator code non corretto</descrizione>
+	</Errore>
+	<Errore id="3216">
+		<descrizione>Errore: Manca l'organico analitico</descrizione>
+	</Errore>
+	<Errore id="3217">
+		<descrizione>Errore: Relazione ammessa solo con autori di tipo E</descrizione>
+	</Errore>
+	<Errore id="3218">
+		<descrizione>Errore: Relator code obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3219">
+		<descrizione>Errore: Lunghezza eccessiva.</descrizione>
+	</Errore>
+	<Errore id="3220">
+		<descrizione>Errore: descrittore non modificabile, trovato un legame con un soggetto</descrizione>
+	</Errore>
+	<Errore id="3221">
+		<descrizione>Errore: Manca il campo T230</descrizione>
+	</Errore>
+	<Errore id="3222">
+		<descrizione>Errore: Data non prevista</descrizione>
+	</Errore>
+	<Errore id="3223">
+		<descrizione>Errore: Il documento non ?i tipo materiale antico</descrizione>
+	</Errore>
+	<Errore id="3224">
+		<descrizione>Errore: Manca il tipo seriale</descrizione>
+	</Errore>
+	<Errore id="3225">
+		<descrizione>Errore: Tipo elaborazione errato</descrizione>
+	</Errore>
+	<Errore id="3226">
+		<descrizione>Errore: Organico sintetico mancante</descrizione>
+	</Errore>
+	<Errore id="3227">
+		<descrizione>Errore: Codice presentazione obbligatorio per i manoscritti musicali</descrizione>
+	</Errore>
+	<Errore id="3228">
+		<descrizione>Errore: Presenti elementi specifici di manoscritti musicali</descrizione>
+	</Errore>
+	<Errore id="3229">
+		<descrizione>Errore: Tipo genere errato</descrizione>
+	</Errore>
+	<Errore id="3230">
+		<descrizione>Errore: Forma musicale errata</descrizione>
+	</Errore>
+	<Errore id="3231">
+		<descrizione>Errore: Personaggio obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3232">
+		<descrizione>Errore: Autore non presente in base dati</descrizione>
+	</Errore>
+	<Errore id="3233">
+		<descrizione>Errore: Titolo non presente in base dati</descrizione>
+	</Errore>
+	<Errore id="3234">
+		<descrizione>Errore:Legame a marca non consentito per il documento</descrizione>
+	</Errore>
+	<Errore id="3235">
+		<descrizione>Errore: punteggiatura errata</descrizione>
+	</Errore>
+	<Errore id="3236">
+		<descrizione>La ricerca ha individuato più di un elemento, esame analitico non ammesso</descrizione>
+	</Errore>
+	<Errore id="3237">
+		<descrizione>Per le collane ammessa solo responsabilità 3</descrizione>
+	</Errore>
+	<Errore id="3238">
+		<descrizione>Spazi non ammessi nell'organico</descrizione>
+	</Errore>
+	<Errore id="3239">
+		<descrizione>Il titolo ha già un legame 01</descrizione>
+	</Errore>
+	<Errore id="3240">
+		<descrizione>Legame con elemento di authority errato</descrizione>
+	</Errore>
+	<Errore id="3241">
+		<descrizione>Sottotipolegame non previsto</descrizione>
+	</Errore>
+	<Errore id="3242">
+		<descrizione>Tipo di ordinamento errato</descrizione>
+	</Errore>
+	<Errore id="3243">
+		<descrizione>Titolo già localizzato nella biblioteca</descrizione>
+	</Errore>
+	<Errore id="3244">
+		<descrizione>Utente non abilitato alla gestione del titolo di natura N</descrizione>
+	</Errore>
+	<Errore id="3245">
+		<descrizione>Utente non abilitato a trattare il materiale</descrizione>
+	</Errore>
+	<Errore id="3246">
+		<descrizione>Utente non abilitato alla gestione del legame</descrizione>
+	</Errore>
+	<Errore id="3247">
+		<descrizione>In totale le marche contengono piu' di tre citazioni</descrizione>
+	</Errore>
+	<Errore id="3248">
+		<descrizione>Il tipo data non è ammesso per la natura</descrizione>
+	</Errore>
+	<Errore id="3249">
+		<descrizione>La data non risulta formata correttamente</descrizione>
+	</Errore>
+	<Errore id="3250">
+		<descrizione>Tipo nota non valido</descrizione>
+	</Errore>
+	<Errore id="3251">
+		<descrizione>La ricerca è stata schedulata in differita; verrà inviata una e-mail a fine elaborazione.</descrizione>
+	</Errore>
+	<Errore id="3252">
+		<descrizione>Unicum, non è possibile aggiungere localizzazioni</descrizione>
+	</Errore>
+	<Errore id="3253">
+		<descrizione>La richiesta è stata inoltrata, è possibile schedularla in differita attivandola con l'apposita form; verrà inviata una e-mail a fine elaborazione</descrizione>
+	</Errore>
+	<Errore id="3254">
+		<descrizione>Errore: Autore non localizzato nel Polo</descrizione>
+	</Errore>
+	<Errore id="3255">
+		<descrizione>Errore: Sistema o Edizione non abilitate per la biblioteca</descrizione>
+	</Errore>
+	<Errore id="3259">
+		<descrizione>Almeno un asterisco nel primo sottoente</descrizione>
+	</Errore>
+	<Errore id="3260">
+		<descrizione>Al massimo due asterischi nel primo sottoente</descrizione>
+	</Errore>
+	<Errore id="3261">
+		<descrizione>Non è possibile cambiare la forma di un autore</descrizione>
+	</Errore>
+	<Errore id="3262">
+		<descrizione>
+			Errore: tipo di autore non congruente con il nome
+		</descrizione>
+	</Errore>
+	<Errore id="3263">
+		<descrizione>
+			Errore: Luogo di pubblicazione obbligatorio nell'area della pubblicazione
+		</descrizione>
+	</Errore>
+	<Errore id="3264">
+		<descrizione>Ammessi al massimo 3 numeri issn</descrizione>
+	</Errore>
+	<Errore id="3265">
+		<descrizione>Non sono ammessi asterischi nel secondo sottoente</descrizione>
+	</Errore>
+	<Errore id="3266">
+		<descrizione>Max 10 caratteri per parola</descrizione>
+	</Errore>
+	<Errore id="3267">
+		<descrizione>Descrittore già presente in base dati</descrizione>
+	</Errore>
+
+	<Errore id="3269">
+		<descrizione>Errore: cambio data antico/moderno o moderno/antico non consentito</descrizione>
+	</Errore>
+
+	<Errore id="3270">
+		<descrizione>
+			Errore: Anno minore di 1830
+		</descrizione>
+	</Errore>
+	<Errore id="3271">
+		<descrizione>Tipo record non compatibile con tipo materiale</descrizione>
+	</Errore>
+	<Errore id="3272">
+		<descrizione>Tipo record non compatibile con genere</descrizione>
+	</Errore>
+	<Errore id="3273">
+		<descrizione>Nota al cast non compatibile con tipo record</descrizione>
+	</Errore>
+	<Errore id="3275">
+		<descrizione>
+			Natura non ammessa per il tipo materiale
+		</descrizione>
+	</Errore>
+	<Errore id="3276">
+		<descrizione>Tipo data non valido</descrizione>
+	</Errore>
+	<Errore id="3277">
+		<descrizione>Legame errato, titolo superiore non è un manoscritto</descrizione>
+	</Errore>
+	<Errore id="3278">
+		<descrizione>Errore: Codice tipo proiezione errato</descrizione>
+	</Errore>
+	<Errore id="3280">
+		<descrizione>Fusione non consentita per incongruenza tra le date dei due titoli</descrizione>
+	</Errore>
+	<Errore id="3281">
+		<descrizione>Fusione non consentita tra queste due nature</descrizione>
+	</Errore>
+	<Errore id="3283">
+		<descrizione>Titolo inserito da altro utente e non localizzato, aggiornamento non consentito</descrizione>
+	</Errore>
+	<Errore id="3285">
+		<descrizione>Comunicare identificativo e il tipo oggetto</descrizione>
+	</Errore>
+	<Errore id="3286">
+		<descrizione>Il testo della proposta può essere modificato solo dal mittente</descrizione>
+	</Errore>
+	<Errore id="3287">
+		<descrizione>Il mittente non corrisponde alla proposta</descrizione>
+	</Errore>
+	<Errore id="3288">
+		<descrizione>Errore: Lunghezza isbd eccessiva</descrizione>
+	</Errore>
+	<Errore id="3290">
+		<descrizione>Nome dell'autore errato</descrizione>
+	</Errore>
+	<Errore id="3291">
+		<descrizione>L'autore legato non è una forma accettata</descrizione>
+	</Errore>
+	<Errore id="3292">
+		<descrizione>L'autore legato deve essere di tipo ente</descrizione>
+	</Errore>
+	<Errore id="3293">
+		<descrizione>Ammessi al massimo 4 numeri isbn</descrizione>
+	</Errore>
+	<Errore id="3295">
+		<descrizione>E' possibile richiedere l'allineamento solo per il proprio polo</descrizione>
+	</Errore>
+	<Errore id="3296">
+		<descrizione>Ammessi al massimo 5 numeri standard</descrizione>
+	</Errore>
+	<Errore id="3297">
+		<descrizione>Intervallo di date obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3298">
+		<descrizione>Tipo formato non consentito per authority</descrizione>
+	</Errore>
+	<Errore id="3299">
+		<descrizione>Classificazione Dewey deve essere creata con il tag 676</descrizione>
+	</Errore>
+	<Errore id="3300">
+		<descrizione>La composizione non esiste</descrizione>
+	</Errore>
+	<Errore id="3305">
+		<descrizione>Modifica del tipo materiale non consentita</descrizione>
+	</Errore>
+	<Errore id="3306">
+		<descrizione>Indicare il codice di responsabilità</descrizione>
+	</Errore>
+	<Errore id="3307">
+		<descrizione>Indicare il codice di relazione</descrizione>
+	</Errore>
+	<Errore id="3310">
+		<descrizione>L'autore deve essere allineato per scambio forma, correzioni inibite</descrizione>
+	</Errore>
+	<Errore id="3311">
+		<descrizione>Il titolo deve essere allineato per cambio natura, correzioni inibite</descrizione>
+	</Errore>
+	<Errore id="3312">
+		<descrizione>L'autore deve essere allineato, scambio forma inibito</descrizione>
+	</Errore>
+	<Errore id="3313">
+		<descrizione>Occorre allinearsi sulla notizia prima di correggerla</descrizione>
+	</Errore>
+	<Errore id="3314">
+		<descrizione>Occorre allinearsi sulla notizia prima di correggerla</descrizione>
+	</Errore>
+	<Errore id="3320">
+		<descrizione>La data deve essere composta da 4 caratteri numerici</descrizione>
+	</Errore>
+	<Errore id="3321">
+		<descrizione>Manca la data 1</descrizione>
+	</Errore>
+	<Errore id="3322">
+		<descrizione>Data 2 non prevista</descrizione>
+	</Errore>
+	<Errore id="3323">
+		<descrizione>La data 1 deve essere minore della data 2</descrizione>
+	</Errore>
+	<Errore id="3325">
+		<descrizione>La data 2 deve essere minore della data 1</descrizione>
+	</Errore>
+
+	<Errore id="3326"><descrizione>La data 2 e' obbligatoria per tipo data F</descrizione></Errore>
+
+	<Errore id="3328">
+		<descrizione>Il numero standard non può essere più lungo di 13 caratteri</descrizione>
+	</Errore>
+	<Errore id="3329">
+		<descrizione>Il numero standard non può essere più lungo di 10 caratteri</descrizione>
+	</Errore>
+	<Errore id="3330">
+		<descrizione>Esiste un numero standard duplicato</descrizione>
+	</Errore>
+	<Errore id="3331">
+		<descrizione>Errore: Coordinate non corrette</descrizione>
+	</Errore>
+	<Errore id="3332">
+		<descrizione>Area della musica non ammessa</descrizione>
+	</Errore>
+	<Errore id="3333">
+		<descrizione>La ricerca seleziona troppi elementi: conferma l'elaborazione differita</descrizione>
+	</Errore>
+	<Errore id="3334">
+		<descrizione>Modifica variante consentita solo per titoli antichi</descrizione>
+	</Errore>
+	<Errore id="3335">
+		<descrizione>Area dell'edizione incompleta</descrizione>
+	</Errore>
+	<Errore id="3336">
+		<descrizione>La richiesta di creazione della forma di rinvio ha ripristinato gli elementi già presenti su db\nper eventuali modifiche fare una nuova richiesta</descrizione>
+	</Errore>
+	<Errore id="3337">
+		<descrizione>Operazione non consentita: I Vid di partenza e di arrivo sono uguali</descrizione>
+	</Errore>
+	<Errore id="3338">
+		<descrizione>Polo non soggettatore</descrizione>
+	</Errore>
+	<Errore id="3339">
+		<descrizione>Titolo già soggettato da utente con autorità superiore</descrizione>
+	</Errore>
+	<Errore id="3340">
+		<descrizione>Titolo già soggettato a livello MAX da altra biblioteca del polo</descrizione>
+	</Errore>
+	<Errore id="3341">
+		<descrizione>ID Partenza e ID Arrivo coincidenti. Impossibile spostare i legami</descrizione>
+	</Errore>
+	<Errore id="3342">
+		<descrizione>L'edizione del soggetto e del descrittore non coincidono. Impossibile creare il legame</descrizione>
+	</Errore>
+	<Errore id="3343">
+		<descrizione>Il descrittore '{0}' è già presente in base dati in forma di rinvio. Impossibile completare l'operazione.</descrizione>
+	</Errore>
+	<Errore id="3344">
+		<descrizione>Esiste un soggetto simile con edizione diversa.</descrizione>
+	</Errore>
+	<Errore id="3345">
+		<descrizione>Il descrittore '{0}' possiede legami storici ad altri descrittori. Impossibile completare l'operazione.</descrizione>
+	</Errore>
+	<Errore id="3346">
+		<descrizione>Il descrittore '{0}' è già presente in base dati in forma accettata. Impossibile completare l'operazione.</descrizione>
+	</Errore>
+	<Errore id="3347">
+		<descrizione>Il descrittore è legato a un soggetto '{0}' di altra edizione. Impossibile completare l'operazione.</descrizione>
+	</Errore>
+	<Errore id="3348">
+		<descrizione>Impossibile creare un legame di tipo storico tra i descrittori '{0}' e '{1}'.</descrizione>
+	</Errore>
+	<Errore id="3349">
+		<descrizione>Valorizzare disponibilità in formato elettronico</descrizione>
+	</Errore>
+	<Errore id="3350">
+		<descrizione>Valorizzare disponibilità in formato elettronico e tipo digitalizzazione</descrizione>
+	</Errore>
+	<Errore id="3351">
+		<descrizione>Luogo con livello di autorità 97, aggiornamento non consentito</descrizione>
+	</Errore>
+	<Errore id="3352">
+		<descrizione>Utente non è destinatario, aggiornamento non consentito</descrizione>
+	</Errore>
+	<Errore id="3353">
+		<descrizione>Soggetto portato a questo livello da altro utente, aggiornamento non consentito</descrizione>
+	</Errore>
+		<!-- 03/02/2014 A/P Aggiunta di messaggi generici -->
+	<Errore id="3354"><descrizione>Manca la data</descrizione></Errore>
+	<Errore id="3355"><descrizione>Formato data non valido</descrizione></Errore>
+	<Errore id="3356"><descrizione>Data non prevista</descrizione></Errore>
+	<Errore id="3357"><descrizione>Data non valida</descrizione></Errore>
+	<Errore id="3358"><descrizione>Forma del contenuto obbligatoria</descrizione></Errore>
+	<Errore id="3359"><descrizione>Tipo di mediazione obbligatoria</descrizione></Errore>
+	<Errore id="3360">
+		<descrizione>Errore: Campo tipo di video obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3361">
+		<descrizione>Errore: Campo forma di pubblicazione obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3362">
+		<descrizione>Errore: Campo tipo di risorsa elettronica obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3363">
+		<descrizione>Errore: Campo indicazione specifica obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3364">
+		<descrizione>Errore: Tipo testo letterario ammesso solo per tipo record 'a' e 'b'</descrizione>
+	</Errore>
+	<Errore id="3365">
+		<descrizione>Errore: Indicatore testo letterario ammesso solo per tipo record 'i'</descrizione>
+	</Errore>
+	<Errore id="3366">
+		<descrizione>Errore: Valore forma contenuto non ammesso</descrizione>
+	</Errore>
+	<Errore id="3367">
+		<descrizione>Errore: Specificazione tipo contenuto non applicabile</descrizione>
+	</Errore>
+	<Errore id="3368">
+		<descrizione>Errore: Specificazione movimento non applicabile</descrizione>
+	</Errore>
+	<Errore id="3369">
+		<descrizione>Errore: Specificazione dimensione non applicabile</descrizione>
+	</Errore>
+	<Errore id="3370">
+		<descrizione>Errore: Specificazione sensoriale obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3371">
+		<descrizione>Errore: Valore specificazione sensoriale non ammesso</descrizione>
+	</Errore>
+	<Errore id="3372">
+		<descrizione>Errore: Valore tipo mediazione non ammesso</descrizione>
+	</Errore>
+	<Errore id="3373">
+		<descrizione>Errore: Valore specificazione tipo contenuto non ammesso</descrizione>
+	</Errore>
+	<Errore id="3374">
+		<descrizione>Errore: Valore specificazione movimento non ammesso</descrizione>
+	</Errore>
+	<Errore id="3375">
+		<descrizione>Errore: Valore specificazione dimensione non ammesso</descrizione>
+	</Errore>
+	<Errore id="3376">
+		<descrizione>Errore: Specificazione tipo contenuto obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3377">
+		<descrizione>Errore: Specificazione movimento obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3378">
+		<descrizione>Errore: Specificazione dimensione obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3379">
+		<descrizione>Errore: istanza obbligatoria mancante (area0 associata al tipo record)</descrizione>
+	</Errore>
+	<Errore id="3380">
+		<descrizione>Errore: istanza area zero invalida</descrizione>
+	</Errore>
+	<Errore id="3381">
+		<descrizione>Errore: Campo colore obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3382">
+		<descrizione>Errore: Campo suono obbligatorio</descrizione>
+	</Errore>
+	<!-- almaviva Elettronico -->
+	<Errore id="3383">
+		<descrizione>Errore: Campo tipo di risorsa elettronica obbligatorio</descrizione>
+	</Errore>
+		<Errore id="3384">
+		<descrizione>Errore: Tipo record non ammesso per il tipo materiale Elettronico. Tipo record ammesso L</descrizione>
+	</Errore>
+	<!-- END almaviva Elettronico -->
+	<Errore id="3387">
+		<descrizione>
+			Errore: Dati audiovisivi incongruenti
+		</descrizione>
+	</Errore>
+	<Errore id="3388">
+		<descrizione>Il numero standard non può essere più lungo di 8 caratteri</descrizione>
+	</Errore>
+	<Errore id="3389">
+		<descrizione>Codice errato in area0</descrizione>
+	</Errore>
+	<Errore id="3390">
+		<descrizione>Autore con numero ISNI non può essere cancellato</descrizione>
+	</Errore>
+	<Errore id="3391">
+		<descrizione>Autore con numero ISNI solo per livello autorità 96 e 97</descrizione>
+	</Errore>
+	<Errore id="3392">
+		<descrizione>Numero ISNI esistente</descrizione>
+	</Errore>
+	<Errore id="3393">
+		<descrizione>Errore: Marca già presente in base dati</descrizione>
+	</Errore>
+	<Errore id="3394">
+		<descrizione>Operazione cambio data non consentita, presenza di impronte</descrizione>
+	</Errore>
+	<Errore id="3395">
+		<descrizione>Operazione cambio data non consentita, presenza di legame a marca</descrizione>
+	</Errore>
+	<Errore id="3396">
+		<descrizione>Operazione cambio data non consentita, presenza di legame a tipografo o editore</descrizione>
+	</Errore>
+	<Errore id="3397">
+		<descrizione>Operazione cambio data non consentita, presenza di numeri standard non congruenti</descrizione>
+	</Errore>
+	<Errore id="3398">
+		<descrizione>Base dati di riferimento obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3399">
+		<descrizione>Repertorio di riferimento obbligatorio</descrizione>
+	</Errore>
+	<Errore id="3400">
+		<descrizione>URI obbligatoria</descrizione>
+	</Errore>
+	<Errore id="3401">
+		<descrizione>Link Esterni: Basedati Id e URL obbligatori</descrizione>
+	</Errore>
+	<Errore id="3402">
+		<descrizione>URI: La Uri Inserita non è corretta</descrizione>
+	</Errore>
+	<Errore id="3403">
+		<descrizione>Codice Basedati non valido.</descrizione>
+	</Errore>
+	<Errore id="3404">
+		<descrizione>URL Basedati non trovato.</descrizione>
+	</Errore>
+	<Errore id="3405">
+		<descrizione>I campi ID Record non possono contenere spazi.</descrizione>
+	</Errore>
+		<!-- Errori legati a Export -->
+	<Errore id="3500">
+		<descrizione>Errore durante esporta</descrizione>
+	</Errore>
+	<!-- Errori legati a Import Unimarc -->
+	<Errore id="3901">
+		<descrizione>Bid esistente.</descrizione>
+	</Errore>
+	<Errore id="3902">
+		<descrizione>Id non corretto.</descrizione>
+	</Errore>
+	<Errore id="3903">
+		<descrizione>Titolo non corretto: il tipo materiale non e coerente con i tag in import.</descrizione>
+	</Errore>
+	<Errore id="3904">
+		<descrizione>Non trovato</descrizione>
+	</Errore>
+	<Errore id="3905">
+		<descrizione>Trovato uguale</descrizione>
+	</Errore>
+	<Errore id="3906">
+		<descrizione>Polo non abilitato.</descrizione>
+	</Errore>
+	<Errore id="3907">
+		<descrizione>Errore nella esecuzione dell'Import.</descrizione>
+	</Errore>
+	<Errore id="3908">
+		<descrizione>Errore nella generazione del documento.</descrizione>
+	</Errore>
+	<Errore id="3909">
+		<descrizione>Errore nella gestione delle connessione per le operazioni di Import.</descrizione>
+	</Errore>
+	<Errore id="3910">
+		<descrizione>Errore nella esecuzione delle operazioni di Import.</descrizione>
+	</Errore>
+	<Errore id="3911">
+		<descrizione>Titolo incompleto.</descrizione>
+	</Errore>
+	<Errore id="3912">
+		<descrizione>Fallimento nella esecuzione del Report Statistico.</descrizione>
+	</Errore>
+	<Errore id="3913">
+		<!-- Errore nel calcolo delle chiavi -->
+		<descrizione>Errore:</descrizione>
+	</Errore>
+	<Errore id="3914">
+		<descrizione>Carattere non valido.</descrizione>
+	</Errore>
+	<Errore id="3915">
+		<descrizione>In caso di elaborazione ESECUTIVA, e obbligatoria almeno una localizzazione. (Vedi tag 899).</descrizione>
+	</Errore>
+	<Errore id="3916">
+		<descrizione>Errore di Marshalling.</descrizione>
+	</Errore>
+	<Errore id="3917">
+		<descrizione>Il processo di Import CREA SOLO DOCUMENTI. Una Authority risulta NUOVA, e quindi  non presente in indice.</descrizione>
+	</Errore>
+	<Errore id="3918">
+		<descrizione>Errore di Validazione.</descrizione>
+	</Errore>
+	<Errore id="3919">
+		<descrizione>Creazione del documento in indice fallita.</descrizione>
+	</Errore>
+	<Errore id="3920">
+		<descrizione>Creazione Authoriry in indice fallita.</descrizione>
+	</Errore>
+	<Errore id="3921">
+		<descrizione>Il processo di Import CREA SOLO DOCUMENTI. Il titolo Legatorisulta NUOVO, e quindi  non presente in indice.</descrizione>
+	</Errore>
+	<Errore id="3922">
+		<descrizione>Creazione di un Titolo Legato fallita.</descrizione>
+	</Errore>
+	<Errore id="3923">
+		<descrizione>Titolo non corretto: errore nella generazione del documento XML.</descrizione>
+	</Errore>
+	<Errore id="3924">
+		<descrizione>Titolo non corretto: errore nella creazione del documento XML.</descrizione>
+	</Errore>
+	<Errore id="3925">
+		<descrizione>La operazione di Import e stata correttamente schedulata.</descrizione>
+	</Errore>
+	<Errore id="3926">
+		<descrizione>Si e verificato un errore durante la operazione di Import.</descrizione>
+	</Errore>
+	<Errore id="3927">
+		<descrizione>
+			Il file utilizzato come fonte per la operazione di Importa non e disponibile. Verifica che sia stato correttamente caricato.
+	</descrizione>
+	</Errore>
+	<Errore id="3928">
+		<descrizione>
+			Problemi nella lettura del file utilizzato come fonte per la operazione di Import. Verifica la sua correttezza.
+	</descrizione>
+	</Errore>
+
+	<Errore id="3929">
+		<descrizione>Errore: Marca non presente in base dati</descrizione>
+	</Errore>
+
+	<Errore id="3940">
+		<descrizione>Il titolo non risulta corretto.</descrizione>
+	</Errore>
+	<Errore id="3999">
+		<descrizione>Parametri errati per la creazione del progressivo.</descrizione>
+	</Errore>
+	<!-- Errori legati a EccezioneAbilitazioni -->
+	<Errore id="4000">
+		<descrizione>Utente non autorizzato</descrizione>
+	</Errore>
+	<Errore id="4001">
+		<descrizione>Errore: lettura cache info tb_tp_attivita</descrizione>
+	</Errore>
+	<Errore id="4002">
+		<descrizione>Errore: lettura cache info tr_att_att</descrizione>
+	</Errore>
+	<Errore id="4003">
+		<descrizione>Errore: lettura cache info tb_utente</descrizione>
+	</Errore>
+	<Errore id="4004">
+		<descrizione>Errore: lettura cache info tb_par_mat</descrizione>
+	</Errore>
+	<Errore id="4005">
+		<descrizione>Errore: lettura cache info tb_par_auth</descrizione>
+	</Errore>
+	<Errore id="4006">
+		<descrizione>Errore: lettura cache info tb_par_sem</descrizione>
+	</Errore>
+	<Errore id="4007">
+		<descrizione>Errore: lettura cache info tr_gru_gru</descrizione>
+	</Errore>
+	<Errore id="4008">
+		<descrizione>Errore: lettura cache info tr_gru_ute</descrizione>
+	</Errore>
+	<Errore id="4009">
+		<descrizione>Errore: lettura cache info tb_gruppo</descrizione>
+	</Errore>
+	<Errore id="4010">
+		<descrizione>Errore: lettura cache info tr_att_ute</descrizione>
+	</Errore>
+	<Errore id="4011">
+		<descrizione>Errore: lettura cache info tb_tp_attivita</descrizione>
+	</Errore>
+	<Errore id="4012">
+		<descrizione>Errore: lettura cache info tr_att_gru</descrizione>
+	</Errore>
+	<Errore id="4013">
+		<descrizione>Errore: lettura cache info tb_parametro</descrizione>
+	</Errore>
+	<Errore id="4014">
+		<descrizione>Errore: Durante lettura CACHE</descrizione>
+	</Errore>
+	<Errore id="4015">
+		<descrizione>Errore: Durante chiusura connection HANDLER database</descrizione>
+	</Errore>
+	<Errore id="4016">
+		<descrizione>Errore: Durante cancellazione from CACHE</descrizione>
+	</Errore>
+	<Errore id="4017">
+		<descrizione>Errore: In Interrogazione Cache	</descrizione>
+	</Errore>
+	<Errore id="4018">
+		<descrizione>Errore: Durante rollback database </descrizione>
+	</Errore>
+	<Errore id="4019">
+		<descrizione>Errore: Durante chiusura connection (con COMMIT) </descrizione>
+	</Errore>
+	<Errore id="4020">
+		<descrizione>Errore: lettura cache info tb_tp_problema </descrizione>
+	</Errore>
+	<Errore id="4021">
+		<descrizione>Errore: lettura cache info tb_biblioteca</descrizione>
+	</Errore>
+	<Errore id="4022">
+		<descrizione>Il codice biblioteca non identifica una biblioteca esistente nel polo</descrizione>
+	</Errore>
+	<!-- Errori legati a EccezioneBis -->
+	<Errore id="5000">
+		<descrizione>Errore: Eseguito metodo vuoto da classe abstract</descrizione>
+	</Errore>
+	<Errore id="5001">
+		<descrizione>Errore: Esecuzione Report</descrizione>
+	</Errore>
+	<Errore id="5002">
+		<descrizione>Errore: Durante costruzione formato</descrizione>
+	</Errore>
+	<Errore id="5003">
+		<descrizione>Errore: Durante l'azione di format XML XLS</descrizione>
+	</Errore>
+	<Errore id="5004">
+		<descrizione>Errore: Durante l'azione di format PDF</descrizione>
+	</Errore>
+	<Errore id="5005">
+		<descrizione>Errore: Durante merge XML base per XML XLS or PDF</descrizione>
+	</Errore>
+	<Errore id="5006">
+		<descrizione>Errore: Lettura selectAutoriNoRaffinamento</descrizione>
+	</Errore>
+	<Errore id="5007">
+		<descrizione>Errore: Lettura AutoriTipoCD</descrizione>
+	</Errore>
+	<Errore id="5008">
+		<descrizione>Errore: Cattura progressivo da sequence</descrizione>
+	</Errore>
+	<Errore id="5009">
+		<descrizione>Errore: Il progressivo ha raggiunto il valore massimo consentito</descrizione>
+	</Errore>
+	<Errore id="5010">
+		<descrizione>Errore: Update timestamp di inizio attivita in differita</descrizione>
+	</Errore>
+	<Errore id="5011">
+		<descrizione>Errore: completamento record (esito) attivita in differita</descrizione>
+	</Errore>
+	<Errore id="5012">
+		<descrizione>Errore: Sono stati richiesti troppi record</descrizione>
+	</Errore>
+	<Errore id="5013">
+		<descrizione>Errore: DURANTE LETTURA TEMPLATE XML DI RIFERIMENTO</descrizione>
+	</Errore>
+	<Errore id="5014">
+		<descrizione>Errore: Lettura selectTitoliArticoloInChiave</descrizione>
+	</Errore>
+	<Errore id="5015">
+		<descrizione>Errore: Lettura selectDistribuzioneTitoliPaeseLingua</descrizione>
+	</Errore>
+	<Errore id="5016">
+		<descrizione>Errore: Lettura selectPaeseSiNatura/selectPaeseNoNatura</descrizione>
+	</Errore>
+	<Errore id="5017">
+		<descrizione>Errore: Lettura da SelectNaturaLingua</descrizione>
+	</Errore>
+	<Errore id="5018">
+		<descrizione>Errore: Lettura selectCartaIdentitaIncoerente</descrizione>
+	</Errore>
+	<Errore id="5019">
+		<descrizione>Errore: Lettura Date Libro Antico</descrizione>
+	</Errore>
+	<Errore id="5020">
+		<descrizione>Errore: Lettura Generico</descrizione>
+	</Errore>
+	<Errore id="5021">
+		<descrizione>Errore: Lettura titoli con legami ad autore diversi da 1,2,3</descrizione>
+	</Errore>
+	<Errore id="5022">
+		<descrizione>Errore: Formato richiesto in output per BIS non previsto</descrizione>
+	</Errore>
+	<Errore id="5023">
+		<descrizione>Errore: Lettura titoli legati a più autori con responsabilita 1</descrizione>
+	</Errore>
+	<Errore id="5024">
+		<descrizione>Errore: Lettura titoli legati a più autori con responsabilita 2 not 1</descrizione>
+	</Errore>
+	<Errore id="5025">
+		<descrizione>Errore: Lettura titoli legati a più autori con responsabilita 2</descrizione>
+	</Errore>
+	<Errore id="5026">
+		<descrizione>Errore: Lettura titoli natura e responsabilita</descrizione>
+	</Errore>
+	<Errore id="5027">
+		<descrizione>Errore: Lettura titoli più di tre livelli gerarchici</descrizione>
+	</Errore>
+	<Errore id="5028">
+		<descrizione>Errore: Lettura ISBN or ISSN da Tb_numero_std</descrizione>
+	</Errore>
+	<Errore id="5029">
+		<descrizione>Errore: Informazioni in input parziali o assenti</descrizione>
+	</Errore>
+	<Errore id="5034">
+		<descrizione>Errore: Lettura titoli ennesimo livelli gerarchici</descrizione>
+	</Errore>
+	<Errore id="5035">
+		<descrizione>Errore: Lettura con chiavi diverse da quelle delle monografia che li contengono</descrizione>
+	</Errore>
+	<Errore id="5036">
+		<descrizione>Errore: Lettura titoli chiavi diverse</descrizione>
+	</Errore>
+	<Errore id="5037">
+		<descrizione>Errore: Lettura titoli natura</descrizione>
+	</Errore>
+	<Errore id="5039">
+		<descrizione>Errore: Lettura titoli natura ? non legati a titoli di base</descrizione>
+	</Errore>
+	<Errore id="5040">
+		<descrizione>Errore: lettura select generica</descrizione>
+	</Errore>
+	<Errore id="5041">
+		<descrizione>Errore: lettura titoli doppi</descrizione>
+	</Errore>
+	<Errore id="5042">
+		<descrizione>Errore: id non numerico</descrizione>
+	</Errore>
+	<Errore id="5043">
+		<descrizione>Errore: Lettura titoli</descrizione>
+	</Errore>
+	<Errore id="5044">
+		<descrizione>Nessun dato selezionato per i parametri richiesti</descrizione>
+	</Errore>
+	<Errore id="5045">
+		<descrizione>Errore: Lettura autori in forma accettata</descrizione>
+	</Errore>
+	<Errore id="5046">
+		<descrizione>Errore: Lettura titoli di Natura S legati ad autore personale con responsabilità 1</descrizione>
+	</Errore>
+	<Errore id="5047">
+		<descrizione>Errore: Lettura titoli con legame non ammesso in relazione alle varie nature</descrizione>
+	</Errore>
+	<Errore id="5048">
+		<descrizione>Errore: Lettura titoli M e W contenuti in più di una monografia</descrizione>
+	</Errore>
+	<Errore id="5049">
+		<descrizione>Errore: Lettura titoli M con lo stesso padre aventi chiavi titolo identiche tra di loro</descrizione>
+	</Errore>
+	<Errore id="5050">
+		<descrizione>Errore: lettura relazioni titoli</descrizione>
+	</Errore>
+	<Errore id="5051">
+		<descrizione>Errore: lettura titoli natura W</descrizione>
+	</Errore>
+	<Errore id="5051">
+		<descrizione>Errore: lettura autori per forma, nome_aut, filtro alfabetico</descrizione>
+	</Errore>
+	<Errore id="5052">
+		<descrizione>Errore: lettura autori doppi</descrizione>
+	</Errore>
+	<Errore id="5053">
+		<descrizione>Errore: lettura generica dalla vista Vl_titolo_num_std</descrizione>
+	</Errore>
+	<Errore id="5054">
+		<descrizione>Errore: lettura generica dalla vista Tb_titolo</descrizione>
+	</Errore>
+	<Errore id="5055">
+		<descrizione>Errore: lettura selectDoppiISBN</descrizione>
+	</Errore>
+	<Errore id="5056">
+		<descrizione>Errore: lettura vl_titolo_num_std_result selectPerKey</descrizione>
+	</Errore>
+	<Errore id="5057">
+		<descrizione>Errore: lettura vl_titolo_tit_b per collane</descrizione>
+	</Errore>
+	<Errore id="5058">
+		<descrizione>Errore: Durante lettura tipo selectAllAttivita</descrizione>
+	</Errore>
+	<Errore id="5059">
+		<descrizione>Errore: Durante lettura data da Tb_tim_sto</descrizione>
+	</Errore>
+	<Errore id="5060">
+		<descrizione>Errore: Lettura generica dalla tavola Tb_tim_sto</descrizione>
+	</Errore>
+	<Errore id="5061">
+		<descrizione>Errore: Lettura Frequenza Natura</descrizione>
+	</Errore>
+	<Errore id="5062">
+		<descrizione>Errore: Lettura Frequenza Monografia Data Pubblicazione</descrizione>
+	</Errore>
+	<Errore id="5063">
+		<descrizione>Errore: lettura selectPerCd_PoloTutteBiblioteche della Tabella Tb_biblioteca</descrizione>
+	</Errore>
+	<Errore id="5064">
+		<descrizione>Errore: lettura selectPolo della Tabella TB_TIM_STO</descrizione>
+	</Errore>
+	<Errore id="5065">
+		<descrizione>Errore: lettura selectAnno della Tabella TB_TIM_STO</descrizione>
+	</Errore>
+	<Errore id="5066">
+		<descrizione>Errore: lettura selectAll della Tabella TB_TIM_STO</descrizione>
+	</Errore>
+	<Errore id="5067">
+		<descrizione>Errore: Lettura Frequenza Monografia</descrizione>
+	</Errore>
+	<Errore id="5068">
+		<descrizione>Errore: Lettura Frequenza Monografia per Luogo e Data Pubblicazione</descrizione>
+	</Errore>
+	<Errore id="5069">
+		<descrizione>Errore: Durante la lettura della SelectBidCreatiPerPolo della tabella Tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5070">
+		<descrizione>Errore: Durante la lettura della SelectVidCreatiPerPolo della tabella Tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5071">
+		<descrizione>Errore: Durante la lettura della SelectBidLocalizzatiPerPolo della tabella Tr_tit_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5072">
+		<descrizione>Errore: Durante la lettura della SelectVidLocalizzatiPerPolo della tabella Tr_aut_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5073">
+		<descrizione>Errore: Errore lettura CountFrequenze della Tabella TB_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5074">
+		<descrizione>Errore: Durante lettura selectTipoForma da TB_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5075">
+		<descrizione>Errore: lettura selectAutori da Vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5076">
+		<descrizione>Errore: lettura selectAutoriPerTipoNomePerResponsabilita da Vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5077">
+		<descrizione>Errore: lettura selectAutoriPerTipoNome=E da Vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5078">
+		<descrizione>Errore: countAutorePerLegameVid da vl_autore_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5079">
+		<descrizione>Errore :lettura countAutorePerLegameVid da vl_marca_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5080">
+		<descrizione>Errore: Lettura Frequenza Monografia per Secolo Pubblicazione</descrizione>
+	</Errore>
+	<Errore id="5081">
+		<descrizione>Errore: lettura Tb_titolo per selectPerMdiBase</descrizione>
+	</Errore>
+	<Errore id="5082">
+		<descrizione>Errore: lettura Vl_autore_tit tramite Bid</descrizione>
+	</Errore>
+	<Errore id="5083">
+		<descrizione>Errore: Durante lettura selectFrequenzePoloNaturaWMS della Tabella Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5084">
+		<descrizione>Errore: Durante lettura selectFrequenzePoloNaturaWM della Tabella Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5085">
+		<descrizione>Errore: Durante lettura selectFrequenzePoloNaturaS della Tabella Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5086">
+		<descrizione>Errore: Durante lettura selectCdNatura  da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5087">
+		<descrizione>Durante lettura selectBiblo  da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5088">
+		<descrizione>Durante lettura selectFrequenzePoloBiblio  da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5089">
+		<descrizione>Durante lettura selectFrequenzePoloBiblioConCosistenza  da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5090">
+		<descrizione>Durante lettura selectFrequenzeTitoliBasePoloBiblio  da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5091">
+		<descrizione>Durante lettura  countLegameBid da vl_titolo_tit_c.xml</descrizione>
+	</Errore>
+	<Errore id="5092">
+		<descrizione>Durante lettura  countFrequenzeTitoliPoloNatura da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5093">
+		<descrizione>Durante lettura  selectFrequenzePerPoloPaese da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5094">
+		<descrizione>Durante lettura  selectFrequenzePerPoloPaeseData da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5095">
+		<descrizione>Durante lettura  selectFrequenzePerPaeseData da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5096">
+		<descrizione>Errore: lettura Vl_titolo_imp</descrizione>
+	</Errore>
+	<Errore id="5097">
+		<descrizione>Errore: lettura Vl_titolo_mar</descrizione>
+	</Errore>
+	<Errore id="5098">
+		<descrizione>Errore Durante lettura  selectFrequenzeLegamiPeriodiciNaturaC da Vf_titolo_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5099">
+		<descrizione>Errore Durante lettura  selectFrequenzeLegamiPeriodici da Vf_titolo_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5100">
+		<descrizione>Errore: lettura Vl_titolo_tit_c per verifica M di Base</descrizione>
+	</Errore>
+	<Errore id="5101">
+		<descrizione>Errore: Durante lettura selectFrequenzeAutoriResponsabilitaPaese della Tabella Vf_titolo_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5102">
+		<descrizione>Errore: Durante lettura selectEstrazioneElencoLuoghi della Tabella tb_luogo.xml</descrizione>
+	</Errore>
+	<Errore id="5103">
+		<descrizione>Errore: Durante lettura selectPerLid da vl_luogo_luo.xml</descrizione>
+	</Errore>
+	<Errore id="5104">
+		<descrizione>Errore: Durante lettura selectLegameTitoloTitolo della Tabella TR_TIT_TIT.xml</descrizione>
+	</Errore>
+	<Errore id="5105">
+		<descrizione>Errore: Durante lettura selectLegameTitoloAutore della Tabella vf_titolo_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5106">
+		<descrizione>Errore: Durante lettura selectLegameAutoreAutore della Tabella tr_aut_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5107">
+		<descrizione>Errore: Durante lettura selectTipoNumeroStandard della Tabella tb_numero_std.xml</descrizione>
+	</Errore>
+	<Errore id="5108">
+		<descrizione>Errore: Durante lettura selectLegameAutoreAutoreTipoNome della Tabella vl_autore_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5109">
+		<descrizione>Errore: Durante lettura selectPerVid della Tabella Tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5110">
+		<descrizione>Errore: Durante lettura selectLegameTitolo della vl_titolo_imp.xml</descrizione>
+	</Errore>
+	<Errore id="5111">
+		<descrizione>Errore: Durante lettura selectLegameTitoloImpronta della tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5112">
+		<descrizione>Errore: Durante lettura selectLegameTitoloTipografo della vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5113">
+		<descrizione>Errore: Durante lettura selectLegameTitoloTipografo della VL_TITOLO_AUT.xml</descrizione>
+	</Errore>
+	<Errore id="5114">
+		<descrizione>Errore: Durante lettura selectSenzaParolaChianeInTb_parola della Tabella tb_marca.xml</descrizione>
+	</Errore>
+	<Errore id="5115">
+		<descrizione>Errore: Durante lettura selectMarcheConParolaMotto della Tabella tb_marca.xml</descrizione>
+	</Errore>
+	<Errore id="5116">
+		<descrizione>Errore: Durante lettura selectTitoliNumeroLastraL della  abella vl_titolo_num_std.xml</descrizione>
+	</Errore>
+	<Errore id="5117">
+		<descrizione>Errore: Durante lettura selectAutorePerTitoloResp4 della Tabella vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5118">
+		<descrizione>Errore: Durante lettura selectElencoAutori della Tabella tb_autorea.xml</descrizione>
+	</Errore>
+	<Errore id="5119">
+		<descrizione>Errore: Durante lettura selectTitoliEditoriale della Tabella vl_titolo_num_std.xml</descrizione>
+	</Errore>
+	<Errore id="5120">
+		<descrizione>Errore: lettura Vl_titolo_imp selectNotizieNomeRelazione</descrizione>
+	</Errore>
+	<Errore id="5121">
+		<descrizione>Errore: Durante lettura selectElencoAutoriVid della Tabella Tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5122">
+		<descrizione>Errore: Durante lettura selectDistribuzioneSoggettiPerCid della Tabella Tb_soggetto.xml</descrizione>
+	</Errore>
+	<Errore id="5123">
+		<descrizione>Errore: Durante lettura selectDistribuzioneNotizieSoggettate della Tabella vl_titolo_sog.xml</descrizione>
+	</Errore>
+	<Errore id="5124">
+		<descrizione>Errore: Durante lettura selectLegameTitoloMarca della VL_TITOLO_mar.xml</descrizione>
+	</Errore>
+	<Errore id="5125">
+		<descrizione>Errore: Durante lettura countDistribuzioneClassi della Tabella tb_classe.xml</descrizione>
+	</Errore>
+	<Errore id="5126">
+		<descrizione>Errore: Durante lettura selectDistribuzioneNotizieClassificate della Tabella vl_titolo_cla.xml</descrizione>
+	</Errore>
+	<Errore id="5127">
+		<descrizione>Errore: lettura Vl_titolo_bib per Localizzazione Manoscritti </descrizione>
+	</Errore>
+	<Errore id="5128">
+		<descrizione>Errore: Durante lettura selectUte_var da Tb_classe.xml</descrizione>
+	</Errore>
+	<Errore id="5129">
+		<descrizione>Errore: Durante lettura selectElecoClassi della Tabella tb_classe.xml</descrizione>
+	</Errore>
+	<Errore id="5130">
+		<descrizione>Errore: Durante lettura selectElencoClassiItestazioniVuote della Tabella tb_classe.xml</descrizione>
+	</Errore>
+	<Errore id="5131">
+		<descrizione>Errore lettura Tb_titolo per selectFrequenzaTitoliConLinkLogico</descrizione>
+	</Errore>
+	<Errore id="5132">
+		<descrizione>Errore: Durante lettura selectElencoAutoriConLinkLogico della Tabella Tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5133">
+		<descrizione>Errore: Durante lettura selectElencoSoggetti della Tabella Tb_soggetto.xml</descrizione>
+	</Errore>
+	<Errore id="5134">
+		<descrizione>Errore: Durante lettura countForzaturaTitoli della Tabella tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5135">
+		<descrizione>Errore: Durante lettura selectUte_forza_var da Tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5136">
+		<descrizione>Errore: Durante lettura selectUte_forza_var da Tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5137">
+		<descrizione>Errore: Durante lettura countForzaturaAutori della Tabella tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5138">
+		<descrizione>Errore: Durante lettura selectElencoTitoli della Tabella vf_musica_com.xml</descrizione>
+	</Errore>
+	<Errore id="5139">
+		<descrizione>Errore: Durante lettura selectPerBid della Tabella Tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5140">
+		<descrizione>Errore: Durante lettura selectPerBid della Tabella vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5141">
+		<descrizione>Errore lettura Tb_titolo per selectFrequenzaTitoliNatura</descrizione>
+	</Errore>
+	<Errore id="5142">
+		<descrizione>Errore: Durante lettura selectElencoTitoli della Tabella vf_titolo_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5143">
+		<descrizione>Errore: Durante lettura selectPerBid della Tabella vf_musica_com.xml</descrizione>
+	</Errore>
+	<Errore id="5144">
+		<descrizione>Errore: Durante lettura selectElencoTitoli della Tabella V_grafica.xml</descrizione>
+	</Errore>
+	<Errore id="5145">
+		<descrizione>Errore: Durante lettura selectElencoTitoli della Tabella V_cartografia.xml</descrizione>
+	</Errore>
+	<Errore id="5146">
+		<descrizione>Errore: Durante lettura selectCd_polo da Tb_gruppo.xml</descrizione>
+	</Errore>
+	<Errore id="5147">
+		<descrizione>Errore: Durante lettura countFrequenzaCreazioni della Tabella Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5148">
+		<descrizione>Errore: Durante lettura countFrequenzaPerBid della Tabella tr_tit_sog.xml</descrizione>
+	</Errore>
+	<Errore id="5149">
+		<descrizione>Errore: Durante lettura countFrequenzaPerBid della Tabella tr_tit_cla.xml</descrizione>
+	</Errore>
+	<Errore id="5150">
+		<descrizione>Errore: Durante lettura selectPerNaturaMW della Tabella Tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5151">
+		<descrizione>Errore: Durante lettura countPerBid_coll della Tabella tr_tit_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5152">
+		<descrizione>Errore: Durante lettura countPerBid_base della Tabella tr_tit_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5153">
+		<descrizione>Errore: Durante lettura selectAutoriPersonaleCollettivo della Tabella Tb_autore.xml</descrizione>
+	</Errore>
+	<Errore id="5154">
+		<descrizione>Errore: lettura Vl_autore_aut AutoriPersonaliCollettivi</descrizione>
+	</Errore>
+	<Errore id="5155">
+		<descrizione>Errore: lettura Vl_titolo_aut selectTitoliPerVid1</descrizione>
+	</Errore>
+	<Errore id="5156">
+		<descrizione>Errore: lettura Tb_autore AutoriPersonaliCollettivi</descrizione>
+	</Errore>
+	<Errore id="5157">
+		<descrizione>Errore: Durante lettura selectElencoBase della Tabella Tb_titolo.xml</descrizione>
+	</Errore>
+	<Errore id="5158">
+		<descrizione>Errore: Durante lettura selectLegameConAutore della Tabella Vl_autore_tit.xml</descrizione>
+	</Errore>
+	<Errore id="5159">
+		<descrizione>Errore: Durante lettura selectParola da Ts_stop_list.xml</descrizione>
+	</Errore>
+	<Errore id="5160">
+		<descrizione>Errore: problemi nella connessione all'opportuno datasource</descrizione>
+	</Errore>
+	<Errore id="5161">
+		<descrizione>"Errore: Durante apertura file dati tipo VectorFile"</descrizione>
+	</Errore>
+	<Errore id="5162">
+		<descrizione>Errore: Durante scrittura file dati tipo VectorFile</descrizione>
+	</Errore>
+	<Errore id="5163">
+		<descrizione>Errore: Durante chiusura file dati tipo VectorFile</descrizione>
+	</Errore>
+	<Errore id="5164">
+		<descrizione>Errore: Durante ricerca file dati tipo VectorFile</descrizione>
+	</Errore>
+	<Errore id="5165">
+		<descrizione>Errore: Durante lettura file dati tipo VectorFile</descrizione>
+	</Errore>
+
+	<Errore id="5600">
+		<descrizione>Errore Durante lettura  selectTipoResponsabilita da Vf_titolo_aut.xml</descrizione>
+	</Errore>
+	<Errore id="5601">
+		<descrizione>Errore Durante lettura  selectDistribuzioneLocazioniPossesso da Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5602">
+		<descrizione>Errore Durante lettura selectDistribuzioneLocazioniGestione della Tabella Vl_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5603">
+		<descrizione>Errore: Durante lettura selectDistribuzioneLocazioniLegami51 della Tabella Vl_titolo_tit_b.xml</descrizione>
+	</Errore>
+	<Errore id="5604">
+		<descrizione>Errore: Durante lettura selectPoloPerBid da vf_titolo_bib.xml</descrizione>
+	</Errore>
+	<Errore id="5605">
+		<descrizione>Errore: Durante lettura selectPerCdSigRepertorio in tb_repertorio.xml</descrizione>
+	</Errore>
+	<Errore id="5606">
+		<descrizione>Errore: Durante lettura selectElencoAutoriCollegatiCodiceRepertorio della Tabella Vl_autore_rep.xml</descrizione>
+	</Errore>
+	<Errore id="5607">
+		<descrizione>Errore lettura Vf_titolo_aut per selectTitoliConPoloCollegatoAutore</descrizione>
+	</Errore>
+
+
+	<!-- Errori legati ad EccezioneMonitoraggio -->
+	<Errore id="7000">
+		<descrizione>Errore: Eseguito metodo vuoto da classe abstract</descrizione>
+	</Errore>
+	<Errore id="7001">
+		<descrizione>Errore: Update su Tb_tim per MONITORAGGIO</descrizione>
+	</Errore>
+	<Errore id="7002">
+		<descrizione>Errore: Inserimento su Tb_tim per MONITORAGGIO</descrizione>
+	</Errore>
+	<Errore id="7003">
+		<descrizione>Errore: lettura selectPerKey su Tb_tim per MONITORAGGIO</descrizione>
+	</Errore>
+	<Errore id="7004">
+		<descrizione>Errore: Connessione database per MONITORAGGIO FALLITA</descrizione>
+	</Errore>
+	<Errore id="7005">
+		<descrizione>Errore:Attivazione Job scrittura in Tb_tim</descrizione>
+	</Errore>
+	<Errore id="7006">
+		<descrizione>Errore: verificaOperazioniConsecutive (Monitoraggio)</descrizione>
+	</Errore>
+	<Errore id="7007">
+		<descrizione>Errore: Durante lettura Codice Problema da Tb_tp_problema</descrizione>
+	</Errore>
+	<Errore id="7008">
+		<descrizione>Errore Durante selezione intera tavola parametri semantica</descrizione>
+	</Errore>
+	<Errore id="7009">
+		<descrizione>Errore Durante selezione intera tavola relazione attivita gruppi</descrizione>
+	</Errore>
+	<Errore id="7010">
+		<descrizione>Errore Durante selezione intera tavola relazione attivita utenti</descrizione>
+	</Errore>
+	<Errore id="7011">
+		<descrizione>Errore Durante selezione intera tavola legame tra gruppi</descrizione>
+	</Errore>
+	<Errore id="7012">
+		<descrizione>Errore Durante selezione intera tavola legame tra utente e gruppi</descrizione>
+	</Errore>
+	<Errore id="7013">
+		<descrizione>Errore: Durante selezione intera tavola legame tra le attivita</descrizione>
+	</Errore>
+	<Errore id="7014">
+		<descrizione>Errore: Durante lettura intera tavola tb_biblioteca</descrizione>
+	</Errore>
+	<Errore id="7015">
+		<descrizione>Errore: Durante lettura intera tavola tb_tp_problema</descrizione>
+	</Errore>
+	<Errore id="7016">
+		<descrizione>Errore: Legame non valido. Esiste già lo stesso legame con campo relazione non impostato. Modificare quello esistente</descrizione>
+	</Errore>
+	<!-- MANTIS 2261 warning per errata chiamata di funzionalità -->
+	<Errore id="7017">
+		<descrizione>Attenzione: utilizzare la funzionalità "Correggi" per modificare gli attributi del possesso</descrizione>
+	</Errore>
+	<!-- MANTIS 2308  warning per errata selezione elementi per fusione -->
+	<Errore id="7018">
+		<descrizione>Attenzione: impossibile fondere una notizia di natura W sulla propria notizia superiore di natura M.</descrizione>
+	</Errore>
+	<!-- MANTIS 2308  warning per errata selezione elementi per fusione -->
+	<Errore id="7019">
+		<descrizione>Attenzione: impossibile fondere una notizia di natura M sulla propria notizia superiore di natura M.</descrizione>
+	</Errore>
+	<!--MANTIS 2402 CODICE PAESE NON VALIDO-->
+	<Errore id="7020">
+		<descrizione>
+			Errore: Il Codice Paese utilizzato non è più valido
+		</descrizione>
+	</Errore>
+	<Errore id="7021">
+		<descrizione>
+			Errore: Tipo Numero Standard inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="7022">
+		<descrizione>
+			Errore: Edizione dewey inesistente
+		</descrizione>
+	</Errore>
+	<Errore id="7023">
+		<descrizione>
+			Errore: Il Codice Paese è obbligatorio
+		</descrizione>
+	</Errore>
+	<Errore id="7024">
+		<descrizione>Errore: Legame non valido. Esiste già lo stesso legame con campo relazione impostato. Modificare quello esistente</descrizione>
+	</Errore>
+
+	<!-- ERRORI POLO -->
+	<Errore id="9127">
+		<descrizione>Errore: Esistono legami a termini di thesauro: cancellazione impossibile</descrizione>
+	</Errore>
+	<Errore id="9128">
+		<descrizione>Errore: Esistono legami a classi: cancellazione impossibile</descrizione>
+	</Errore>
+	<Errore id="9349">
+		<descrizione>Nessuna parola tra quelle indicate è ritenuta significativa ai fini della ricerca.</descrizione>
+	</Errore>
+	<Errore id="9876">
+		<descrizione>Server non disponibile</descrizione>
+	</Errore>
+</Errori>

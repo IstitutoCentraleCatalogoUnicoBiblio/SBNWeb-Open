@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_modelli_stampe" table="tbf_modelli_stampe" >
+		<meta attribute="class-description">
+			Persistenza dei modelli di stampa dinamica e statica
+		</meta>
+		<id name="id_modello" column="id_modello" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="cd_bib" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="false" lazy="false" access="field">
+			<column name="cd_bib"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="modello" column="modello" type="string" length="30" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Nome del modello (univoco per bibolioteca)
+			</meta>
+		</property>
+		<property name="tipo_modello" column="tipo_modello" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				C = comma separated values
+		J = Jrxml
+			</meta>
+		</property>
+		<property name="campi_valori_del_form" column="campi_valori_del_form" type="text" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				CSV dei campi. Eg "nomvecampo:valore| " dove il pipe &#232; il separatore di campo ed i : &#232; il separatore del valore
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="descr" column="descr" type="string" length="50" not-null="false" lazy="false"/>
+		<set name="Tbc_default_inven_schede" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_modello" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_default_inven_schede"/>
+		</set>
+
+		<property name="cd_attivita" column="cd_attivita" type="string" length="5" not-null="false" lazy="false" />
+		<property name="subreport" column="subreport" type="text" not-null="false" lazy="false" />
+
+		<property name="descr_bib" column="descr_bib" type="string" length="80" not-null="false" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

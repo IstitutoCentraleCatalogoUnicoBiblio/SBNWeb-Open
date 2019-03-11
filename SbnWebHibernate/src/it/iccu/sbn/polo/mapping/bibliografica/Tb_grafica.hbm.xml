@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_grafica" table="tb_grafica" >
+		<meta attribute="class-description">
+			MATERIALE GRAFICO
+		</meta>
+		<id column="bid" type="string">
+			<generator class="foreign">
+				<param name="property">b</param>
+			</generator>
+		</id>
+		<one-to-one name="b" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="all" constrained="true"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="tp_materiale_gra" column="tp_materiale_gra" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_supporto" column="cd_supporto" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_colore" column="cd_colore" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_dis_1" column="cd_tecnica_dis_1" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_dis_2" column="cd_tecnica_dis_2" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_dis_3" column="cd_tecnica_dis_3" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_sta_1" column="cd_tecnica_sta_1" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_sta_2" column="cd_tecnica_sta_2" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_tecnica_sta_3" column="cd_tecnica_sta_3" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_design_funz" column="cd_design_funz" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

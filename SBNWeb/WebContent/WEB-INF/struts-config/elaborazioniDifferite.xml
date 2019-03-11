@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ================================================ Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="statoElaborazioniDifferiteForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.StatoElaborazioniDifferiteForm" >
+			<form-property name="listaProcedure" 					type="java.util.ArrayList"></form-property>
+			<form-property name="listaDataEsecuzioneProgrammata" 	type="java.util.ArrayList"></form-property>
+			<form-property name="listaRichiedente" 					type="java.util.ArrayList"></form-property>
+			<form-property name="listaStato" 						type="java.util.ArrayList"></form-property>
+			<form-property name="listaTipiOrdinamento" 				type="java.util.ArrayList"></form-property>
+		</form-bean>
+
+		<form-bean name="sinteticaElaborazioniDifferiteForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.SinteticaElaborazioniDifferiteForm" />
+
+		<form-bean name="dettaglioElaborazioniDifferiteForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.DettaglioElaborazioniDifferiteForm" />
+
+		<form-bean name="invioElaborazioniDifferiteForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.InvioElaborazioniDifferiteForm" />
+
+		<form-bean name="esportaForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.esporta.EsportaForm" />
+
+		<form-bean name="importaForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.importa.ImportaForm" />
+
+		<form-bean name="testElaborazioniDifferiteForm"
+			type="it.iccu.sbn.web.actionforms.elaborazioniDifferite.TestElaborazioniDifferiteForm" />
+
+	</form-beans>
+
+
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions></global-exceptions>
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards></global-forwards>
+
+
+	<!-- =========================================== Action Mapping Definitions -->
+	<action-mappings>
+
+		<action path="/elaborazioniDifferite/statoElaborazioniDifferite"
+			name		= "statoElaborazioniDifferiteForm"
+			input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/statoElaborazioniDifferite.jsp"
+			parameter	= "methodMap_statoElaborazioniDifferite"
+			type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.StatoElaborazioniDifferiteAction"
+			validate	= "true"
+			scope		= "session" >
+			<forward 	name="sinteticaElaborazioniDifferite"
+						path="/elaborazioniDifferite/sinteticaElaborazioniDifferite.do" />
+		</action>
+
+		<action path="/elaborazioniDifferite/sinteticaElaborazioniDifferite"
+			name		= "sinteticaElaborazioniDifferiteForm"
+			input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/sinteticaElaborazioniDifferite.jsp"
+			parameter	= "methodMap_sinteticaElaborazioniDifferite"
+			type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.SinteticaElaborazioniDifferiteAction"
+			validate	= "true"
+			scope		= "session"
+			>
+			<forward name="indietro"	path="/elaborazioniDifferite/statoElaborazioniDifferite.do" />
+			<forward name="esamina"		path="/elaborazioniDifferite/dettaglioElaborazioniDifferite.do" />
+		</action>
+
+		<action path="/elaborazioniDifferite/dettaglioElaborazioniDifferite"
+			name		= "dettaglioElaborazioniDifferiteForm"
+			input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/dettaglioElaborazioniDifferite.jsp"
+			parameter	= "methodMap_dettaglioElaborazioniDifferite"
+			type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.DettaglioElaborazioniDifferiteAction"
+			validate	= "true"
+			scope		= "session"
+			>
+			<forward name="sinteticaDaDettaglio"	path="/elaborazioniDifferite/sinteticaElaborazioniDifferite.do" />
+			<forward name="elimina"	path="/elaborazioniDifferite/dettaglioElaborazioniDifferite.do" />
+		</action>
+
+		<action path="/elaborazioniDifferite/invioElaborazioniDifferite"
+			name		= "invioElaborazioniDifferiteForm"
+			input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/invioElaborazioniDifferite.jsp"
+			parameter	= "invioElabDiffParam"
+			type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.InvioElaborazioniDifferiteAction"
+			validate	= "true"
+			scope		= "session"	>
+			<forward name="self" path="/elaborazioniDifferite/invioElaborazioniDifferite.do" />
+		</action>
+
+		<action path="/elaborazioniDifferite/esporta/esporta"
+				name		= "esportaForm"
+				input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/esporta/esporta.jsp"
+				parameter	= "methodMap_esporta"
+				type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.esporta.EsportaAction"
+				validate	= "true"
+				scope		= "session">
+			<forward name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+		</action>
+
+		<action path="/elaborazioniDifferite/importa/importa"
+				name		= "importaForm"
+				input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/importa/importa.jsp"
+				parameter	= "methodMap_importa"
+				type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.importa.ImportaAction"
+				validate	= "true"
+				scope		= "session">
+			<forward name="lenteSez"
+				path="/documentofisico/sezioniCollocazioni/sezioniCollocazioniLista.do" />
+			<forward name="lenteColloc"
+				path="/documentofisico/esameCollocazioni/esameCollocListaCollocazioniSupporto.do" />
+			<forward name="lenteSpecif"
+				path="/documentofisico/esameCollocazioni/esameCollocListaSpecificazioniSupporto.do" />
+		</action>
+
+		<action path="/elaborazioniDifferite/testElaborazioniDifferite"
+			name		= "testElaborazioniDifferiteForm"
+			input		= "/WEB-INF/jsp/pages/elaborazioniDifferite/testElaborazioniDifferite.jsp"
+			parameter	= "methodMap_testElaborazioniDifferite"
+			type		= "it.iccu.sbn.web.actions.elaborazioniDifferite.TestElaborazioniDifferiteAction"
+			validate	= "true"
+			scope		= "session"
+			>
+			<forward name="indietro" path="/elaborazioniDifferite/statoElaborazioniDifferite.do" />
+		</action>
+
+	</action-mappings>
+
+	<controller nocache="true"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources key="elaborazioniDifferiteLabels"
+		parameter="it.iccu.sbn.web.resources.ElaborazioniDifferiteLabels"
+		null="false" />
+	<message-resources key="elaborazioniDifferiteMessages"
+		parameter="it.iccu.sbn.web.resources.ElaborazioniDifferiteMessages"
+		null="false" />
+
+</struts-config>

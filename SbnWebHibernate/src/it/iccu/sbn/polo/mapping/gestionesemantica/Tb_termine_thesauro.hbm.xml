@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.gestionesemantica.Tb_termine_thesauro" table="tb_termine_thesauro" >
+		<meta attribute="class-description">
+			TERMINI DESCRITTORI DI THESAURO (TPSDTH))
+		</meta>
+		<id name="did" column="did" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="cd_the" column="cd_the" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice thesauro
+			</meta>
+		</property>
+		<property name="ds_termine_thesauro" column="ds_termine_thesauro" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione del termine di thesauro
+			</meta>
+		</property>
+		<property name="nota_termine_thesauro" column="nota_termine_thesauro" type="string" length="240" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				note al termine di thesauro
+			</meta>
+		</property>
+		<property name="ky_termine_thesauro" column="ky_termine_thesauro" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave di ricerca del termine di thesauro
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tr_termini_termini" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="did_base" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_termini_termini"/>
+		</set>
+		<set name="Tr_termini_termini1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="did_coll" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_termini_termini"/>
+		</set>
+		<set name="Trs_termini_titoli_biblioteche" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="did" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Trs_termini_titoli_biblioteche"/>
+		</set>
+	</class>
+</hibernate-mapping>

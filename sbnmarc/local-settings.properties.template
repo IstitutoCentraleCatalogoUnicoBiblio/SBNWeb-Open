@@ -1,0 +1,11 @@
+jboss.deploy.dir = /usr/local/jboss/4.2.3.GA/server/default/deploy
+module.name=sbnMarc
+
+module.ejb = SbnMarcEJB
+module.hibernate = SbnMarcHibernate
+module.web = SbnMarcWeb
+
+sbnmarc.dir = ${sbnMarcEar.root.dir}
+sbnmarc.lib.dir = ${sbnmarc.dir}/lib
+sbnmarc.earContent.dir = ${sbnmarc.dir}/EarContent
+sbnmarc.dist.dir = ${sbnmarc.dir}/target

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_iter_servizio" table="tbl_iter_servizio" >
+		<meta attribute="class-description">
+			Passi dell'iter del servizio
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_iter_servizio" column="id_iter_servizio" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<property name="progr_iter" column="progr_iter" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				progressivo della sequenza dell'attivita'
+			</meta>
+		</property>
+		<many-to-one name="id_tipo_servizio" cascade="lock" column="id_tipo_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_tipo_servizio" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="cod_attivita" column="cod_attivita" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo delle attivita' possibili nell'iter di un servizio
+			</meta>
+		</property>
+		<property name="flag_stampa" column="flag_stampa" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di effettuazione di stampa assume i valori s, n
+			</meta>
+		</property>
+		<property name="num_pag" column="num_pag" type="short" length="5" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero delle copie da stampare
+			</meta>
+		</property>
+		<property name="testo" column="testo" type="string" length="240" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				testo a disposizione della biblioteca nella stampa
+			</meta>
+		</property>
+		<property name="flg_abil" column="flg_abil" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				flag indicante che l'attivita' prevista nel passo puo' essere svolta da tutti i bibliotecari o da alcuni in particolare. assume i valori t=tutti, n=solo quelli incaricati
+			</meta>
+		</property>
+		<property name="flg_rinn" column="flg_rinn" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore di possibilita', per questa attivita', di rinnovare il servizio cioe' posticipare la data fine prevista del servizio. assume i valori s, n
+			</meta>
+		</property>
+		<property name="stato_iter" column="stato_iter" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dello stato dell'iter del servizio
+			</meta>
+		</property>
+		<property name="obbl" column="obbl" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore dell'obbligatorieta' della attivita'
+			</meta>
+		</property>
+		<property name="cod_stato_rich" column="cod_stato_rich" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice dello stato della richiesta
+			</meta>
+		</property>
+		<property name="stato_mov" column="stato_mov" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice dello stato del movimento
+			</meta>
+		</property>
+		<property name="cod_stat_cir" column="cod_stat_cir" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice dello stato di circolazione del materiale oggetto del servizio interbibliotecario
+			</meta>
+		</property>
+		<property name="cod_stato_ric_ill" column="cod_stato_ric_ill" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice dello stato della richiesta di servizio interbibliotecario
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<set name="Tbl_controllo_iter" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_iter_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_controllo_iter"/>
+		</set>
+		<set name="Trl_attivita_bibliotecario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_iter_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_attivita_bibliotecario"/>
+		</set>
+		<set name="Tbl_richiesta_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_iter_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: antoniospatera@libero.it
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tr_luo_luo" polymorphism="explicit" table="TR_LUO_LUO" lazy="false">
+		<composite-id>
+			<!--
+			<key-many-to-one name="LID_BASE" column="LID_BASE" class="it.finsiel.sbn.polo.orm.Tb_luogo1">
+			</key-many-to-one>
+			<key-many-to-one name="LID_COLL" column="LID_COLL" class="it.finsiel.sbn.polo.orm.Tb_luogo1">
+			</key-many-to-one>
+			-->
+			<key-property name="LID_BASE" column="LID_BASE" type="string"/>
+			<key-property name="LID_COLL" column="LID_COLL" type="string"/>
+		</composite-id>
+		<property name="TP_LEGAME" column="TP_LEGAME" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_INS" column="TS_INS" type="timestamp" not-null="true"/>
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_VAR" column="TS_VAR" type="timestamp" not-null="true"/>
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+
+		<filter name="TR_LUO_LUO_selectPerKey"
+				condition="lid_base = :XXXlid_base
+						  AND lid_coll = :XXXlid_coll "/>
+
+		<filter name="TR_LUO_LUO_verifica"
+				condition="lid_base = :XXXlid_base
+						  AND lid_coll = :XXXlid_coll "/>
+
+		<filter name="TR_LUO_LUO_selectPerLidBase"
+				condition="lid_base = :XXXlid_base "/>
+
+		<filter name="TR_LUO_LUO_selectPerLidColl"
+				condition="lid_coll = :XXXlid_coll "/>
+
+		<filter name="TR_LUO_LUO_selectLegami"
+				condition="fl_canc != 'S' "/>
+
+		<filter name="TR_LUO_LUO_cercaLegamiPerLid"
+				condition="fl_canc != 'S'
+				AND (lid_base = :XXXlid_base
+				OR lid_coll = :XXXlid_coll) "/>
+
+
+	</class>
+</hibernate-mapping>

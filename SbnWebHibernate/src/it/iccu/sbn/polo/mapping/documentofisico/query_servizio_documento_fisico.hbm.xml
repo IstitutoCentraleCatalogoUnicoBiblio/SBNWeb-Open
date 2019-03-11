@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="Progressivo_possessori_sequenceNextVal">
+		<return-scalar column="DT"	type="java.lang.Integer" />
+		SELECT nextval('seq_msm_tb_possessore') as DT;
+	</sql-query>
+	<sql-query name="Ricerca_possessori" >
+		<return class="it.iccu.sbn.polo.orm.documentofisico.Tbc_possessore_provenienza" />
+		SELECT * from tbc_possessore_provenienza  where pid=:pid or pid is not null ;
+	</sql-query>
+
+	<query name="contaBibliotecheBidInv">
+		<query-param name="bid" type="string"/>
+		<![CDATA[
+
+		select distinct bib from Tbf_biblioteca bib
+			join bib.Tbf_biblioteca_in_polo polo
+			join polo.Tbc_serie_inventariale serie
+			join serie.Tbc_inventario inv
+			where   bib.fl_canc<>'S'
+				and polo.fl_canc<>'S'
+				and inv.fl_canc<>'S'
+				and inv.b.id=:bid
+	]]>
+	</query>
+
+	<query name="contaBibliotecheBidColl">
+		<query-param name="bid" type="string"/>
+		<![CDATA[
+
+		select distinct bib from Tbf_biblioteca bib
+			join bib.Tbf_biblioteca_in_polo polo
+			join polo.Tbc_sezione_collocazione sezione
+			join sezione.Tbc_collocazione coll
+			where   bib.fl_canc<>'S'
+				and polo.fl_canc<>'S'
+				and coll.fl_canc<>'S'
+				and coll.b.id=:bid
+	]]>
+	</query>
+
+	<query name="contaBibliotecheBidEsempl">
+		<query-param name="bid" type="string"/>
+		<![CDATA[
+
+		select distinct bib from Tbf_biblioteca bib
+			join bib.Tbf_biblioteca_in_polo polo
+			join polo.Tbc_esemplare_titolo esempl
+			where   bib.fl_canc<>'S'
+				and polo.fl_canc<>'S'
+				and esempl.fl_canc<>'S'
+				and esempl.tb_titolo.id=:bid
+	]]>
+	</query>
+
+	<query name="contaBibliotecheBidBibInv">
+		<query-param name="bid" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<![CDATA[
+
+		select distinct bib from Tbf_biblioteca bib
+			join bib.Tbf_biblioteca_in_polo polo
+			join polo.Tbc_serie_inventariale serie
+			join serie.Tbc_inventario inv
+			where   bib.fl_canc<>'S'
+				and polo.fl_canc<>'S'
+				and inv.fl_canc<>'S'
+				and inv.b.id=:bid
+				and bib.cd_bib<>:codBib
+	]]>
+	</query>
+
+	<query name="contaBibliotecheBidBibColl">
+		<query-param name="bid" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<![CDATA[
+
+		select distinct bib from Tbf_biblioteca bib
+			join bib.Tbf_biblioteca_in_polo polo
+			join polo.Tbc_sezione_collocazione sezione
+			join sezione.Tbc_collocazione coll
+			where   bib.fl_canc<>'S'
+				and polo.fl_canc<>'S'
+				and coll.fl_canc<>'S'
+				and coll.b.id=:bid
+				and bib.cd_bib<>:codBib
+	]]>
+	</query>
+
+	<query name="contaBibliotecheBidBibEsempl">
+		<query-param name="bid" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<![CDATA[
+
+		select distinct bib from Tbf_biblioteca bib
+			join bib.Tbf_biblioteca_in_polo polo
+			join polo.Tbc_esemplare_titolo esempl
+			where   bib.fl_canc<>'S'
+				and polo.fl_canc<>'S'
+				and esempl.fl_canc<>'S'
+				and esempl.tb_titolo.id=:bid
+				and bib.cd_bib<>:codBib
+	]]>
+	</query>
+
+	<sql-query name="listaInventariNuoviTitoliBollettinoAsc">
+		<query-param name="codPolo" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<query-param name="dataDa" type="timestamp"/>
+		<query-param name="dataA" type="timestamp"/>
+
+		<return-scalar column="cd_bib"	type="string" />
+		<return-scalar column="cd_serie"	type="string" />
+		<return-scalar column="cd_inven"	type="java.lang.Integer" />
+		<return-scalar column="bid"	type="string" />
+		<return-scalar column="cd_natura"	type="char" />
+		<return-scalar column="isbd"	type="string" />
+		<return-scalar column="ts_ins_prima_coll"	type="timestamp" />
+		<return-scalar column="cd_frui"	type="string" />
+
+		<![CDATA[
+		select inv1.cd_bib, inv1.cd_serie, inv1.cd_inven, inv1.bid, tit.cd_natura, tit.isbd, inv1.ts_ins_prima_coll, inv1.cd_frui
+		  from tbc_inventario inv1
+		  left outer join  tbc_inventario inv2 on inv1.cd_bib = inv2.cd_bib
+        							              and not inv1.cd_inven = inv2.cd_inven
+                                                and inv1.bid = inv2.bid
+                                                and inv2.cd_sit = '2'
+                                                and inv2.ts_ins_prima_coll < :dataDa
+        inner join tb_titolo tit on tit.bid=inv1.bid
+        where inv1.cd_polo=:codPolo
+        	and inv1.cd_bib=:codBib
+        	and inv1.ts_ins_prima_coll BETWEEN  :dataDa and :dataA
+			and inv1.cd_sit='2'
+			and inv2.cd_bib is null
+		group by 1,2,3,4,5,6,7,8
+		order by 7 asc,1 asc,2 asc,3 asc
+	]]>
+	</sql-query>
+
+	<sql-query name="listaInventariNuoviTitoliBollettinoDesc">
+		<query-param name="codPolo" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<query-param name="dataDa" type="timestamp"/>
+		<query-param name="dataA" type="timestamp"/>
+
+		<return-scalar column="cd_bib"	type="string" />
+		<return-scalar column="cd_serie"	type="string" />
+		<return-scalar column="cd_inven"	type="java.lang.Integer" />
+		<return-scalar column="bid"	type="string" />
+		<return-scalar column="cd_natura"	type="char" />
+		<return-scalar column="isbd"	type="string" />
+		<return-scalar column="ts_ins_prima_coll"	type="timestamp" />
+		<return-scalar column="cd_frui"	type="string" />
+
+		<![CDATA[
+		select inv1.cd_bib, inv1.cd_serie, inv1.cd_inven, inv1.bid, tit.cd_natura, tit.isbd, inv1.ts_ins_prima_coll, inv1.cd_frui
+		  from tbc_inventario inv1
+		  left outer join  tbc_inventario inv2 on inv1.cd_bib = inv2.cd_bib
+        							              and not inv1.cd_inven = inv2.cd_inven
+                                                and inv1.bid = inv2.bid
+                                                and inv2.cd_sit = '2'
+                                                and inv2.ts_ins_prima_coll < :dataDa
+        inner join tb_titolo tit on tit.bid=inv1.bid
+        where inv1.cd_polo=:codPolo
+        	and inv1.cd_bib=:codBib
+        	and inv1.ts_ins_prima_coll BETWEEN  :dataDa and :dataA
+			and inv1.cd_sit='2'
+			and inv2.cd_bib is null
+		group by 1,2,3,4,5,6,7,8
+		order by 7 desc,1 desc,2 desc,3 desc
+	]]>
+	</sql-query>
+
+	<sql-query name="listaInventariNuoviTitoliBollettinoTitoloAsc">
+		<query-param name="codPolo" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<query-param name="dataDa" type="timestamp"/>
+		<query-param name="dataA" type="timestamp"/>
+
+		<return-scalar column="cd_bib"	type="string" />
+		<return-scalar column="cd_serie"	type="string" />
+		<return-scalar column="cd_inven"	type="java.lang.Integer" />
+		<return-scalar column="bid"	type="string" />
+		<return-scalar column="cd_natura"	type="char" />
+		<return-scalar column="isbd"	type="string" />
+		<return-scalar column="ts_ins_prima_coll"	type="timestamp" />
+		<return-scalar column="cd_frui"	type="string" />
+
+		<![CDATA[
+		select inv1.cd_bib, inv1.cd_serie, inv1.cd_inven,
+			   inv1.bid, tit.cd_natura, tit.isbd, inv1.ts_ins_prima_coll, inv1.cd_frui,
+			   tit.ky_cles1_t, tit.ky_cles2_t, tit.aa_pubb_1, tit.bid
+		  from tbc_inventario inv1
+		  left outer join  tbc_inventario inv2 on inv1.cd_bib = inv2.cd_bib
+        							              and not inv1.cd_inven = inv2.cd_inven
+                                                and inv1.bid = inv2.bid
+                                                and inv2.cd_sit = '2'
+                                                and inv2.ts_ins_prima_coll < :dataDa
+
+inner join tbc_collocazione colloc on inv1.key_loc=colloc.key_loc
+inner join tb_titolo tit on colloc.bid=tit.bid
+
+
+        where inv1.cd_polo=:codPolo
+        	and inv1.cd_bib=:codBib
+        	and inv1.ts_ins_prima_coll BETWEEN  :dataDa and :dataA
+			and inv1.cd_sit='2'
+			and inv2.cd_bib is null
+		group by 1,2,3,4,5,6,7,8,9,10,11,12
+		order by 9 asc,10 asc,11 asc,12 asc
+	]]>
+	</sql-query>
+
+	<sql-query name="listaInventariNuoviTitoliBollettinoTitoloDesc">
+		<query-param name="codPolo" type="string"/>
+		<query-param name="codBib" type="string"/>
+		<query-param name="dataDa" type="timestamp"/>
+		<query-param name="dataA" type="timestamp"/>
+
+		<return-scalar column="cd_bib"	type="string" />
+		<return-scalar column="cd_serie"	type="string" />
+		<return-scalar column="cd_inven"	type="java.lang.Integer" />
+		<return-scalar column="bid"	type="string" />
+		<return-scalar column="cd_natura"	type="char" />
+		<return-scalar column="isbd"	type="string" />
+		<return-scalar column="ts_ins_prima_coll"	type="timestamp" />
+		<return-scalar column="cd_frui"	type="string" />
+
+		<![CDATA[
+		select inv1.cd_bib, inv1.cd_serie, inv1.cd_inven,
+			   inv1.bid, tit.cd_natura, tit.isbd, inv1.ts_ins_prima_coll, inv1.cd_frui,
+			   tit.ky_cles1_t, tit.ky_cles2_t, tit.aa_pubb_1, tit.bid
+		  from tbc_inventario inv1
+		  left outer join  tbc_inventario inv2 on inv1.cd_bib = inv2.cd_bib
+        							              and not inv1.cd_inven = inv2.cd_inven
+                                                and inv1.bid = inv2.bid
+                                                and inv2.cd_sit = '2'
+                                                and inv2.ts_ins_prima_coll < :dataDa
+
+		inner join tbc_collocazione colloc on inv1.key_loc=colloc.key_loc
+		inner join tb_titolo tit on colloc.bid=tit.bid
+
+
+        where inv1.cd_polo=:codPolo
+        	and inv1.cd_bib=:codBib
+        	and inv1.ts_ins_prima_coll BETWEEN  :dataDa and :dataA
+			and inv1.cd_sit='2'
+			and inv2.cd_bib is null
+		group by 1,2,3,4,5,6,7,8,9,10,11,12
+		order by 9 desc,10 desc,11 desc,12 desc
+	]]>
+	</sql-query>
+
+	<!-- almaviva5_20150115 -->
+	<sql-query name="titTitDF">
+		<query-param name="bid" type="string"/>
+
+		<return-scalar column="bid"	type="string" />
+		<return-scalar column="isbd" type="string" />
+
+		<![CDATA[
+			select t.bid, t.isbd
+			from tb_titolo t
+			inner join tr_tit_tit tt on tt.bid_coll=t.bid
+			where tt.bid_base=:bid
+			and tt.tp_legame='01'
+			and tt.cd_natura_coll='M'
+			and tt.fl_canc<>'S' limit 1
+		]]>
+	</sql-query>
+
+	<sql-query name="webservice_posseduto">
+		<query-param name="polo" type="string"/>
+		<query-param name="bib" type="string"/>
+		<query-param name="bid" type="string"/>
+
+		<return-scalar column="cd_serie" type="string" />
+		<return-scalar column="cd_inven" type="integer" />
+		<return-scalar column="cd_sez" type="string" />
+		<return-scalar column="cd_loc" type="string" />
+		<return-scalar column="spec_loc" type="string" />
+		<return-scalar column="bid_coll" type="string" />
+		<return-scalar column="consis" type="string" />
+		<return-scalar column="key_loc" type="integer" />
+		<return-scalar column="segnatura" type="string" />
+		<return-scalar column="stato_con" type="string" />
+		<return-scalar column="num_possessori" type="integer" />
+		<return-scalar column="precis_inv" type="string" />
+		<return-scalar column="seq_coll" type="string" />
+		<return-scalar column="cd_bib" type="string" />
+		<return-scalar column="id_accesso_remoto" type="string" />
+		<return-scalar column="bid_inv" type="string" />
+		<return-scalar column="cd_frui" type="string" />
+		<return-scalar column="isbd_inv" type="string" />
+		<return-scalar column="cd_natura_inv" type="character" />
+		<return-scalar column="anno_abb" type="integer" />
+
+		<![CDATA[
+			select distinct i.cd_serie, i.cd_inven, i.seq_coll, c.cd_sez, c.cd_loc,
+				c.spec_loc, c.bid as bid_coll, c.consis, c.key_loc,
+				c.bid||c.cd_sez||c.ord_loc||c.ord_spec as segnatura, i.stato_con,
+				i.precis_inv,
+				(select count(ppi.pid)
+					from trc_poss_prov_inventari ppi
+					where ppi.fl_canc<>'S'
+					and ppi.cd_polo=:polo
+					and ppi.cd_biblioteca=:bib
+					and ppi.cd_inven=i.cd_inven
+					and ppi.cd_serie=i.cd_serie) as num_possessori,
+				i.cd_bib, i.id_accesso_remoto,
+				i.bid as bid_inv,
+				i.cd_frui,
+				null as isbd_inv,
+				null as cd_natura_inv,
+				coalesce(i.anno_abb, 9999) as anno_abb
+			from tbc_collocazione c
+			inner join tbc_inventario i on i.key_loc=c.key_loc
+			inner join tb_titolo ti on ti.bid=i.bid
+			where true
+				and i.fl_canc<>'S'
+				and i.cd_polo=:polo
+				and i.cd_bib=:bib
+				and i.bid=:bid
+
+			union
+			select distinct i.cd_serie, i.cd_inven, i.seq_coll, c.cd_sez, c.cd_loc,
+				c.spec_loc, c.bid as bid_coll, c.consis, c.key_loc,
+				c.bid||c.cd_sez||c.ord_loc||c.ord_spec as segnatura, i.stato_con,
+				i.precis_inv,
+				(select count(ppi.pid)
+					from trc_poss_prov_inventari ppi
+					where ppi.fl_canc<>'S'
+						and ppi.cd_polo=:polo
+						and ppi.cd_biblioteca=:bib
+						and ppi.cd_inven=i.cd_inven
+						and ppi.cd_serie=i.cd_serie) as num_possessori,
+				i.cd_bib, i.id_accesso_remoto,
+				i.bid as bid_inv,
+				i.cd_frui,
+				estrai_area_da_isbd(ti.isbd, ti.indice_isbd, '200') as isbd_inv,
+				ti.cd_natura as cd_natura_inv,
+				coalesce(i.anno_abb, 9999) as anno_abb
+			from tbc_collocazione c
+			inner join tbc_inventario i on i.key_loc=c.key_loc
+			inner join tb_titolo ti on ti.bid=i.bid
+			where true
+				and i.fl_canc<>'S'
+				and c.cd_polo_sezione=:polo
+				and c.cd_biblioteca_sezione=:bib
+				and c.bid=:bid
+				and c.bid<>i.bid
+
+			union
+			select i.cd_serie, i.cd_inven, null, null, null,
+				null, i.bid as bid_coll, null, 0,
+				'[[:NO-COLL:]]' as segnatura, i.stato_con,
+				i.precis_inv,
+				(select count(ppi.pid)
+					from trc_poss_prov_inventari ppi
+					where ppi.fl_canc<>'S'
+					and ppi.cd_polo=:polo
+					and ppi.cd_biblioteca=:bib
+					and ppi.cd_inven=i.cd_inven
+					and ppi.cd_serie=i.cd_serie) as num_possessori,
+				i.cd_bib, i.id_accesso_remoto,
+				i.bid as bid_inv,
+				i.cd_frui,
+				estrai_area_da_isbd(ti.isbd, ti.indice_isbd, '200') as isbd_inv,
+				ti.cd_natura as cd_natura_inv,
+				coalesce(i.anno_abb, 9999) as anno_abb
+			from tbc_inventario i
+			inner join tb_titolo ti on ti.bid=i.bid
+			where true
+				and i.fl_canc<>'S'
+				and i.cd_sit='1'
+				and i.cd_polo=:polo
+				and i.cd_bib=:bib
+				and i.bid=:bid
+			order by segnatura, seq_coll, anno_abb, cd_serie, cd_inven
+		]]>
+	</sql-query>
+
+	<sql-query cache-mode="ignore" name="listaInventariBidStampaPatrimonio">
+		<query-param name="polo" type="string"/>
+		<query-param name="bib" type="string"/>
+		<query-param name="bid" type="string"/>
+		<return alias="i" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" />
+	 	<![CDATA[
+	 		select i.*
+			from tbc_inventario i
+			where true
+				and i.fl_canc<>'S'
+				and i.cd_polo=:polo
+				and i.cd_bib=:bib
+				and i.bid=:bid
+			union
+			select i.*
+			from tbc_inventario i
+			inner join tbc_collocazione c on c.key_loc=i.key_loc
+			where true
+				and c.fl_canc<>'S'
+				and c.cd_polo_sezione=:polo
+				and c.cd_biblioteca_sezione=:bib
+				and c.bid=:bid
+	 	]]>
+	</sql-query>
+
+</hibernate-mapping>

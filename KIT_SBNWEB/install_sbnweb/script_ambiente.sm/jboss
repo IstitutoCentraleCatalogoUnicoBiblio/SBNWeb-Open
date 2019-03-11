@@ -1,0 +1,139 @@
+#!/bin/sh
+#
+# JBoss Control Script
+#
+# chkconfig: 35 94 13
+# description: JBoss EJB Container
+# 
+# To use this script
+# run it as root - it will switch to the specified user
+# It loses all console output - use the log.
+#
+# Here is a little (and extremely primitive) 
+# startup/shutdown script for RedHat systems. It assumes 
+# that JBoss lives in /usr/local/jboss, it's run by user 
+# 'jboss' and JDK binaries are in /usr/local/jdk/bin. All 
+# this can be changed in the script itself. 
+# Bojan 
+#
+# Either amend this script for your requirements
+# or just ensure that the following variables are set correctly 
+# before calling the script
+#set -x
+# [ #420297 ] JBoss startup/shutdown for RedHat
+
+#define where jboss is - this is the directory containing directories log, bin, conf etc
+#JBOSS_HOME=${JBOSS_HOME:-"/usr/local/jboss"}
+### inizio auro
+JBOSS_HOME=${JBOSS_HOME:-"/usr/local/jboss-4.2.3.GA"}
+### fine   auro
+
+#make java is on your path
+JAVAPTH=${JAVAPTH:-"/usr/local/jdk/bin"}
+
+#define the classpath for the shutdown class
+JBOSSCP=${JBOSSCP:-"$JBOSS_HOME/bin/shutdown.jar:$JBOSS_HOME/client/jnet.jar"}
+
+#define the script to use to start jboss
+#JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh -c all"}
+### inizio auro
+# cosi' non funziona (lo stop)
+#JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh -c all"}
+#JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh --host=192.168.104.33"}
+#JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh --host=localhost"}
+#JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh --host=sbn-app"}
+# cosi' funziona
+JBOSSSH=${JBOSSSH:-"$JBOSS_HOME/bin/run.sh"}
+### fine   auro
+
+### inizio auro
+#JBOSS_CONSOLE=$JBOSS_HOME/consolelog/log-da-initd
+### fine   auro
+
+if [ -n "$JBOSS_CONSOLE" -a ! -d "$JBOSS_CONSOLE" ]; then
+  # ensure the file exists
+  touch $JBOSS_CONSOLE
+  ### inizio auro
+  chmod 666 $JBOSS_CONSOLE
+  ### fine   auro
+fi
+
+if [ -n "$JBOSS_CONSOLE" -a ! -f "$JBOSS_CONSOLE" ]; then
+  echo "WARNING: location for saving console log invalid: $JBOSS_CONSOLE"
+  echo "WARNING: ignoring it and using /dev/null"
+  JBOSS_CONSOLE="/dev/null"
+fi
+
+#define what will be done with the console log
+JBOSS_CONSOLE=${JBOSS_CONSOLE:-"/dev/null"}
+
+#define the user under which jboss will run, or use RUNASIS to run as the current user
+JBOSSUS=${JBOSSUS:-"jboss"}
+
+CMD_START="cd $JBOSS_HOME/bin; $JBOSSSH" 
+CMD_STOP="${JAVAPTH}/java -classpath $JBOSSCP org.jboss.Shutdown --shutdown"
+
+if [ "$JBOSSUS" = "RUNASIS" ]; then
+  SUBIT=""
+else
+  SUBIT="su - $JBOSSUS -c "
+fi
+
+if [ -z "`echo $PATH | grep $JAVAPTH`" ]; then
+  #export PATH=$PATH:$JAVAPTH
+  ### inizio auro
+  export PATH=$JAVAPTH:$PATH
+  ### fine   auro
+fi
+
+if [ ! -d "$JBOSS_HOME" ]; then
+  echo JBOSS_HOME does not exist as a valid directory : $JBOSS_HOME
+  exit 1
+fi
+
+
+### inizio auro
+#echo CMD_START = $CMD_START
+### fine   auro
+
+
+case "$1" in
+start)
+    rm -fr /usr/local/jboss-4.2.3.GA/server/default/tmp
+    rm -fr /usr/local/jboss-4.2.3.GA/server/default/work
+    ### inizio auro
+    #echo PATH=$PATH
+    ### fine   auro
+    cd $JBOSS_HOME/bin
+    if [ -z "$SUBIT" ]; then
+        eval $CMD_START >${JBOSS_CONSOLE} 2>&1 &
+    else
+        ### inizio auro
+        #echo "Esecuzione di: $SUBIT $CMD_START >${JBOSS_CONSOLE} 2>&1 &"
+        ### fine   auro
+        $SUBIT "$CMD_START >${JBOSS_CONSOLE} 2>&1 &" 
+    fi
+    ;;
+stop)
+    if [ -z "$SUBIT" ]; then
+        ### inizio auro
+        #echo "Esecuzione di: $CMD_STOP >${JBOSS_CONSOLE} 2>&1"
+        $CMD_STOP >${JBOSS_CONSOLE} 2>&1
+        ### fine   auro
+        #$CMD_STOP
+    else
+        ### inizio auro
+        #echo "Esecuzione di: $SUBIT $CMD_STOP >${JBOSS_CONSOLE} 2>&1"
+        $SUBIT "$CMD_STOP >${JBOSS_CONSOLE} 2>&1"
+        ### fine   auro
+        #$SUBIT "$CMD_STOP"
+    fi 
+    ;;
+restart)
+    $0 stop
+    $0 start
+    ;;
+*)
+    echo "usage: $0 (start|stop|restart|help)"
+esac
+

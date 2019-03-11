@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="default_buoni_ordine_sub1" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="jasperDir" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["."]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["\\."]]></defaultValueExpression>
+	</parameter>
+	<field name="annataAbbOrdine" class="java.lang.String"/>
+	<field name="numOrdine" class="java.lang.String"/>
+	<field name="dataPubblDa" class="java.lang.String"/>
+	<field name="dataPubbA" class="java.lang.String"/>
+	<field name="etichetta_ISBN" class="java.lang.String"/>
+	<field name="etichetta_ISMN" class="java.lang.String"/>
+	<field name="etichetta_ISSN" class="java.lang.String"/>
+	<field name="etichetta_NUMEROEDITORIALE" class="java.lang.String"/>
+	<field name="etichetta_NUMERODILASTRA" class="java.lang.String"/>
+	<field name="etichetta_NPUBBLICAZIONEGOVERNATIVA" class="java.lang.String"/>
+	<field name="titolo" class="java.lang.String"/>
+	<field name="prezzo" class="java.lang.String"/>
+	<field name="note" class="java.lang.String"/>
+	<field name="rinnovoOrigine" class="java.lang.String"/>
+	<field name="righeInventariRilegatura" class="java.util.ArrayList"/>
+	<detail>
+		<band height="278" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-1" mode="Opaque" x="0" y="63" width="535" height="21">
+					<printWhenExpression><![CDATA[new Boolean($F{righeInventariRilegatura}.size()>0)]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{righeInventariRilegatura})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{jasperDir}+"default_buoni_ordine_sub2.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="0" y="109" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{etichetta_ISBN}!=null && !$F{etichetta_ISBN}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{etichetta_ISBN}==null || $F{etichetta_ISBN}.trim().equals("")?"":
+"<style isBold=\"true\" pdfFontName=\"Helvetica-Bold\">ISBN:</style> "
++$F{etichetta_ISBN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-3" positionType="Float" isPrintRepeatedValues="false" x="0" y="130" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{etichetta_ISSN}!=null && !$F{etichetta_ISSN}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{etichetta_ISSN}==null || $F{etichetta_ISSN}.trim().equals("")?"":
+"<style isBold=\"true\" pdfFontName=\"Helvetica-Bold\">ISSN:</style> "
++$F{etichetta_ISSN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-5" positionType="Float" x="0" y="151" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{etichetta_ISMN}!=null && !$F{etichetta_ISMN}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{etichetta_ISMN}==null || $F{etichetta_ISMN}.trim().equals("")?"":
+"<style isBold=\"true\" pdfFontName=\"Helvetica-Bold\">ISMN:</style> "
++$F{etichetta_ISMN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-7" positionType="Float" mode="Transparent" x="0" y="172" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{etichetta_NUMEROEDITORIALE}!=null && !$F{etichetta_NUMEROEDITORIALE}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{etichetta_NUMEROEDITORIALE}==null || $F{etichetta_NUMEROEDITORIALE}.trim().equals("")?"":
+"<style isBold=\"true\" pdfFontName=\"Helvetica-Bold\">NUMERO EDITORIALE:</style> "
++$F{etichetta_NUMEROEDITORIALE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-9" positionType="Float" x="0" y="193" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{etichetta_NUMERODILASTRA}!=null && !$F{etichetta_NUMERODILASTRA}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{etichetta_NUMERODILASTRA}==null || $F{etichetta_NUMERODILASTRA}.trim().equals("")?"":
+"<style isBold=\"true\" pdfFontName=\"Helvetica-Bold\">NUMERO DI LASTRA:</style> "
++$F{etichetta_NUMERODILASTRA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-11" positionType="Float" x="0" y="214" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{etichetta_NPUBBLICAZIONEGOVERNATIVA}!=null && !$F{etichetta_NPUBBLICAZIONEGOVERNATIVA}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA[$F{etichetta_NPUBBLICAZIONEGOVERNATIVA}==null || $F{etichetta_NPUBBLICAZIONEGOVERNATIVA}.trim().equals("")?"":
+"<style isBold=\"true\" pdfFontName=\"Helvetica-Bold\">N. PUBBL. GOVERNATIVA:</style> "
++$F{etichetta_NPUBBLICAZIONEGOVERNATIVA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-12" positionType="Float" x="0" y="88" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{titolo}!=null && !$F{titolo}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{titolo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-13" positionType="Float" x="410" y="235" width="124" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{prezzo}!=null && !$F{prezzo}.trim().equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prezzo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="textField-14" positionType="Float" x="0" y="235" width="410" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{prezzo}!=null && !$F{prezzo}.trim().equals(""))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Prezzo €]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-15" positionType="Float" x="0" y="256" width="534" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{note}!=null && !$F{note}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{note}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="textField-18" positionType="Float" x="0" y="0" width="106" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{numOrdine}!=null && !$F{numOrdine}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Ordine n.:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-19" positionType="Float" x="106" y="0" width="199" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{numOrdine}!=null && !$F{numOrdine}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numOrdine}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="textField-20" positionType="Float" x="0" y="21" width="106" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{annataAbbOrdine}!=null && !$F{annataAbbOrdine}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Abbonamento:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-21" positionType="Float" x="106" y="21" width="199" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{annataAbbOrdine}!=null && !$F{annataAbbOrdine}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{annataAbbOrdine}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="textField-22" positionType="Float" x="305" y="0" width="105" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{rinnovoOrigine}!=null && !$F{rinnovoOrigine}.trim().equals(""))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Rinnovo n.:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-23" positionType="Float" x="410" y="0" width="125" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{rinnovoOrigine}!=null && !$F{rinnovoOrigine}.trim().equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rinnovoOrigine}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="textField-24" positionType="Float" x="305" y="21" width="105" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{dataPubblDa}!=null && !$F{dataPubblDa}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Decorrenza Da:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-25" positionType="Float" x="410" y="21" width="125" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{dataPubblDa}!=null && !$F{dataPubblDa}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataPubblDa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="textField-26" positionType="Float" x="305" y="42" width="105" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{dataPubbA}!=null && !$F{dataPubbA}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[A:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-27" positionType="Float" x="410" y="42" width="125" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($F{dataPubbA}!=null && !$F{dataPubbA}.equals(""))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataPubbA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

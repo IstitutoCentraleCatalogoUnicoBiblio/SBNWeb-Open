@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+
+<title>Guida SBNWEB</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+.style6 {color: #FF0000}
+.style61 {	font-style: italic;
+	font-weight: bold;
+}
+.style8 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+   {
+   window.location.href=loc;
+   }
+</script></head>
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" summary="summary">
+
+  <tbody><tr>
+    <td width="100%" valign="top" bgcolor="#dde8f0"><p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+      <h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Interrogazione Soggetto </h1>
+      <ul>
+        <li><a href="#Descrizione">Descrizione</a></li>
+        <li><a href="#Ingresso">Punti di ingresso</a> </li>
+        <li><a href="#Prerequisiti">Prerequisiti</a></li>
+        <li><a href="#ModuloDati">Modulo immissione dati</a>
+            <ul>
+              <li><a href="#Canali">Area canali</a></li>
+              <li><a href="#Filtri">Area filtri</a></li>
+              <li><a href="#Miscellanea">Area miscellanea </a></li>
+              <li><a href="#Default">Valori di default</a> </li>
+              <li><a href="#Azioni">Azioni utente</a></li>
+            </ul>
+        </li>
+        <li><a href="#Controlli">Controlli del sistema</a><br>
+        </li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+      <p>la funzione permete la ricerca nel catalogo del'authority soggetto e descrittore.<br>
+      Volendo richiedere direttamente la lista dei soggetti sar&agrave;  disponibile, sia in polo che in Indice, la ricerca:<br>
+        per parte iniziale del testo o per testo &ldquo;<em>intero</em>&rdquo;, possibilit&agrave; quest&rsquo;ultima non  prevista dall&rsquo;attuale applicativo neppure in polo;<br>
+        per CID;<br>
+        solo in polo la ricerca: <br>
+        per testo <em>intero</em> del descrittore, con possibilit&agrave; di indicare la posizione di interesse nella  stringa soggetto: qualunque posizione, prima posizione (attuale gerarchico), non  in prima posizione (di nuova introduzione rispetto all&rsquo;attuale applicativo);<br>
+        per 2 o pi&ugrave; descrittori, fino a un massimo di 4;  per ciascun descrittore, ricercato per testo <em>intero</em>, la funzione conta i &nbsp;soggetti e i descrittori collegati e i soggetti  che li contengono tutti; come nell&rsquo;attuale applicativo, i soggetti collegati  vengono conteggiati indipendentemente dalla posizione del descrittore nel testo  e dall&rsquo;utilizzo del soggetto da parte della biblioteca.<br>
+        Solo in Indice la ricerca: <br>
+        per parole del soggetto, fino ad un massimo di 4  parole in AND tra loro, indipendentemente dalla loro posizione nella stringa  soggetto; poich&eacute; in Indice, non &egrave; prevista per i soggetti la ricerca per  descrittore, nel caso in cui l&rsquo;utente, effettuata una ricerca per descrittori  nel catalogo di polo, richieda di eseguirla anche in Indice, l&rsquo;applicazione  propone come analoga, anche se pi&ugrave; &ldquo;rumorosa&rdquo;, la ricerca per parole in AND: il  sistema ri-emette la pagina automaticamente convertita alla nuova modalit&agrave; di  ricerca, dando all&rsquo;utente la possibilit&agrave; di modificare l&rsquo;impostazione proposta  prima di premere il tasto che avvia l&rsquo;interrogazione in Indice. <br>
+        In tutti i casi di ricerca in polo &egrave; possibile limitare la  ricerca ai soli soggetti utilizzati, vale a dire legati ad almeno un titolo.<br>
+        Sia in polo che in Indice &egrave; prevista inoltre la  possibilit&agrave; di interrogare ed esaminare l&rsquo;archivio dei descrittori e previa  selezione del descrittore di interesse esaminare i soggetti collegati. Le  possibilit&agrave; offerte per la ricerca dei descrittori sono le stesse in polo ed  Indice:<br>
+        per parte iniziale del testo o per testo &ldquo;<em>intero</em>&rdquo;;<br>
+        per DID;<br>
+        per una o pi&ugrave; parole, fino ad un massimo di 4,  contenute nel descrittore; se &egrave; stata indicata pi&ugrave; di una parola la ricerca  viene eseguita con procedura diversa a seconda del catalogo scelto. Nel catalogo  di polo la ricerca per pi&ugrave; parole viene effettuata sia  in <em>and</em> che in <em>or</em> e per ciascuna ricerca propone in risposta il numero di  descrittori lasciando all&rsquo;utente la possibilit&agrave; di scegliere, tra quelle non  vuote, la lista da visionare.<br>
+        Nel catalogo di Indice, invece, la ricerca viene  eseguita in and su tutte le parole (solo i descrittori che contengono tutte le  parole) e propone in output direttamente la lista dei descrittori individuati. </p>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span><strong>Punti di ingresso </strong></h2>
+      <ol>
+        <li>Menu-&gt;Interrogazione-&gt;Soggetti.</li>
+        <li>Attivazione della funzionalit&agrave; Trascina dalla maschera <a href="GestioneSoggetto.htm">Gestione Soggetto</a> e <a href="AnaliticaSoggetto.htm">Analitica Soggetto</a>.</li>
+        <li>Attivazione della funzionalit&agrave; Crea Legame sulla maschera <a href="Soggettazione.htm#Soggetti">Soggettazione</a>.</li>
+        <li>Barra di navigazione.</li>
+      </ol>
+      <p>&nbsp;</p>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+      <p>Abilitazione alla funzione di interrogazione elemento di authority Soggetto e Descrittore.</p>
+      <h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span></span><span class="Stile3 style8">Modulo immissione dati</span></h2>
+      <p align="center" class="style5 style8 style4 Stile3"><img src="immagini/ricercaSoggettoPolo.png" alt="maschera ricerca in Polo" width="852" height="483"></p>
+      <p align="center" class="Stile3 style8 style5">Maschera di ricerca impostata per la base dati di Polo</p>
+      <p align="center" class="style5 style8 style4 Stile3"><img src="immagini/ricercaSoggettoIndice.png" width="849" height="480"></p>
+      <p align="center" class="Stile3 style8 style5">Maschera di ricerca impostata per la base dati di Indice</p>
+      <h2 class="style5 style8 style4 Stile3" align="left"><a name="Canali"></a>Area
+        canali </h2>
+      <h3 class="style5 style8 style4 Stile3" align="left">Soggetti:</h3>
+      <h4 class="style5 style8 style4 Stile3" align="left">in polo:</h4>
+      <ul><li><span class="Stile3 style8">Testo: </span><span class="Stile3 ">(inizio o intero) &ndash;  80 caratteri  alfanumerici - max 4 parole (per parole).</span></li>
+        <li><em>CID</em>: 10 caratteri alfanumerici</li>
+        <li><em>Parole</em>: max 4 gruppi di parole consecutive - 80 caratteri alfanumerici.</li>
+        </ul>
+      <h4>in indice:</h4>
+      <ul>
+        <li><span class="Stile3 style8">Testo: </span><span class="Stile3 ">(inizio o intero) &ndash;  80 caratteri  alfanumerici - max 4 parole (per parole).</span></li>
+        <li><em>CID</em>: 10 caratteri alfanumerici</li>
+        <li><em>Parole</em>: max 4 gruppi di parole consecutive - 80 caratteri alfanumerici.</li>
+      </ul>
+      <h3>Descrittori:</h3>
+      <ul>
+        <li><span class="Stile3 style8">Testo: </span><span class="Stile3 ">(inizio o intero) &ndash;  80 caratteri  alfanumerici.</span></li>
+        <li><em>DID</em>: 10 caratteri alfanumerici</li>
+        <li><em>Parole</em>: max 4 parole - 80 caratteri alfanumerici.</li>
+      </ul>
+      <h2 class="style61"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+        filtri</h2>
+      <ul>
+        <li><em>Codice Soggettario</em>: Filtra i risultati per il soggettario impostato. Obbligatorio se si specificano due o pi&ugrave; descrittori nella ricerca in polo di Soggetti per Descrittori collegati.</li>
+        <li><em>Livello autorit&agrave;</em>: Range del livello autorit&agrave; riconosciuto dal Sistema Centrale.</li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Miscellanea" id="InterrogazioneTitoloCanali"></a></span>Area
+        miscellanea </span></h2>
+      <ul>
+        <li><em><u>Numero elementi per blocco</u></em>:
+          permette l&#8217;indicazione del numero di elementi da richiedere al
+          protocollo per l&#8217;implementazione &#8220;a blocchi&#8221; della lista. Se non viene
+          indicato nulla in questo campo il sistema applicher&agrave; il valore di
+          default associato all&#8217;utente attivo. </li>
+        <li><em><u>Parametri di Ordinamento</u> : </em><br>
+          - Identificativo,<br>
+          - Testo<br>
+          - Data var./ins. + Titolo.</li>
+        <li><u>Livello di ricerca:</u><br>
+          - Locale: la ricerca viene effettuata sulla base dati di Polo.<br>
+          - Indice: la ricerca viene effettuata sulla base dati di Indice</li>
+        <li></li>
+      </ul>
+      <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+        di default </h2>
+      <ul>
+        <li>Vedi immagine. I valori di default possono variare in funzione
+          della configurazione dei default gestiti dall'utente stesso. In caso
+          l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; </li>
+      </ul>
+      <h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span></h2>
+      <ul>
+        <li>Pulsante '<img src="immagini/PulsanteTastiera.gif" alt="">'. Per la gestione dei <a href="TastieraVirtuale.htm">caratteri speciali</a> tramite tastiera virtuale. </li>
+        <li>Bottone <strong>'Cerca'</strong> .
+          Esegue i controlli e attiva la selezione in base dati dei soggetti o descrittori che rispondono ai parametri indicati a condizione che siano
+          stati superati i controlli. Gli elementi trovati verranno esposti, in
+          forma sintetica, in modalit&agrave; differente, dipendentemente dai canali di ricerca impostati.</li>
+        </ul>
+      <table width="885" align="center" cellpadding="2" cellspacing="2" style="text-align: left;" bborder="1">
+        <tbody>
+          <tr>
+            <td width="274" style="font-weight: bold; text-align: center; background-color: rgb(255, 204, 102);">Canale impostato</td>
+            <td width="161" style="font-weight: bold; text-align: center; background-color: rgb(255, 204, 102);">Livello di ricerca</td>
+            <td width="428" style="font-weight: bold; text-align: center; background-color: rgb(255, 204, 102);">Mappa attivata</td>
+          </tr>
+          <tr>
+            <td>Testo del soggetto</td>
+            <td>Polo/Indice</td>
+            <td><a href="SinteticaSoggetti.htm">Sintetica Soggetti</a></td>
+          </tr>
+          <tr>
+            <td>CID</td>
+            <td>Polo/Indice</td>
+            <td><a href="SinteticaSoggetti.htm">Sintetica Soggetti</a></td>
+          </tr>
+          <tr>
+            <td>Descrittore Collegato (1 descrittore)</td>
+            <td>Polo</td>
+            <td><a href="SinteticaSoggetti.htm">Sintetica Soggetti</a></td>
+          </tr>
+          <tr>
+            <td>Descrittore Collegato (2 o pi&ugrave; descrittori)</td>
+            <td>Polo</td>
+            <td><a href="Descrittori.htm">Descrittori</a></td>
+          </tr>
+          <tr>
+            <td>Parole di soggetto</td>
+            <td>Indice</td>
+            <td><a href="SinteticaSoggetti.htm">Sintetica Soggetti</a></td>
+          </tr>
+          <tr>
+            <td>Testo del descrittore</td>
+            <td>Polo/Indice</td>
+            <td><p><a href="SinteticaDescrittore.htm">Sintetica Descrittori</a></p>              </td>
+          </tr>
+          <tr>
+            <td>DID</td>
+            <td>Polo/Indice</td>
+            <td><a href="SinteticaDescrittore.htm">Sintetica Descrittori</a></td>
+          </tr>
+          <tr>
+            <td>Parole di Descrittore</td>
+            <td>Polo</td>
+            <td><a href="Parole.htm">Parole</a></td>
+          </tr>
+          <tr>
+            <td>Parole di Descrittore</td>
+            <td>Indice</td>
+            <td><a href="SinteticaDescrittore">Sintetica Descrittori</a></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>&nbsp;</p>
+      <ul>
+        <li>Bottone <strong>'Crea'</strong>.
+          Disponibile solo a fronte di ricerca conclusasi con esito negativo. Attiva la mappa di <a href="CreaSoggetto.htm">Crea Soggetto</a> che consente la creazione di un nuovo soggetto sulla base dati di Polo.</li>
+      </ul>
+      <h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span></span><span class="Stile3 style8"><strong>Controlli del sistema</strong></span></h2>
+      <ul>
+        <li><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></li>
+        <li>BID, numero standard con tipo e  impronta sono alternativi fra di loro e non consentono l&rsquo;immissione di altri  canali primari n&eacute; filtri</li>
+        <li>Titolo (Troncato o intero) consente l&rsquo;immissione di  filtri ma non di altri canali primari</li>
+        <li>Per ricerche a partire da identificativo lista non  possono essere indicati ulteriori filtri n&eacute; mutato l&rsquo;ordinamento </li>
+        <li>Per il numero standard deve sempre essere indicato il  tipo</li>
+        <li>Responsabilit&agrave; e Relazione possono essere dati solo se  viene fornito un Nome collegato o un VID</li>
+        <li>Date: se si indica la sola data da si intende la  data esatta, altrimenti occorre fornire i due estremi dell&rsquo;intervallo (in  questo caso la data &ldquo;a&rdquo; deve essere superiore rispetto alla data &ldquo;da&rdquo;).  Analogamente per tutti i canali o filtri per cui &egrave; prevista una ricerca per  intervallo </li>
+        <li>Sotto tipo legame:  disponibile solo se Natura = &ldquo;D&rdquo;</li>
+        <li>Per tutti  i campi associati a tabella sono ammessi solo i valori previsti o nessuno</li>
+      </ul>
+      <p align="center" class="style5 style8 style4 Stile3">&nbsp;</p>
+      <ul></ul>      
+      <hr>
+        <p class="style5 style8 style4 Stile3" align="left">&nbsp;</p>      </td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body></html>

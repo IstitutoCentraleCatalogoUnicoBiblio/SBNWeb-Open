@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_luogo" table="tb_luogo" >
+		<meta attribute="class-description">
+			LUOGHI DI PUBBLICAZIONE
+		</meta>
+		<id name="lid" column="lid" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="tp_forma" column="tp_forma" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="ds_luogo" column="ds_luogo" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="ky_luogo" column="ky_luogo" type="string" length="30" not-null="true" lazy="false"/>
+		<property name="ky_norm_luogo" column="ky_norm_luogo" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="cd_paese" column="cd_paese" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="nota_luogo" column="nota_luogo" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tr_luo_luo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="lid_base" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_luo_luo"/>
+		</set>
+		<set name="Tr_luo_luo1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="lid_coll" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_luo_luo"/>
+		</set>
+		<set name="Tr_tit_luo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="lid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_luo"/>
+		</set>
+	</class>
+</hibernate-mapping>

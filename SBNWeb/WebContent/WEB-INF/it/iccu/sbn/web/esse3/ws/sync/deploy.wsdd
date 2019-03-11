@@ -1,0 +1,26 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TBConnectorWSService WSDL service -->
+
+  <service name="TBConnectorWS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="urn:TBConnectorWSService"/>
+      <parameter name="wsdlServiceElement" value="TBConnectorWSService"/>
+      <parameter name="schemaQualified" value="urn:TBConnectorWSService"/>
+      <parameter name="wsdlServicePort" value="TBConnectorWS"/>
+      <parameter name="className" value="it.iccu.sbn.webservices.esse3.sync.TBConnectorWSSoapBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="TBConnectorWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+  </service>
+</deployment>

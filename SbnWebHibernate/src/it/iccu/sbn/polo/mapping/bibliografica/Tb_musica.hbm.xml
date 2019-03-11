@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_musica" table="tb_musica" >
+		<meta attribute="class-description">
+			MUSICA
+		</meta>
+		<id column="bid" type="string">
+			<generator class="foreign">
+				<param name="property">b</param>
+			</generator>
+		</id>
+		<one-to-one name="b" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" cascade="all" constrained="true"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="ds_org_sint" column="ds_org_sint" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="ds_org_anal" column="ds_org_anal" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="tp_elaborazione" column="tp_elaborazione" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_stesura" column="cd_stesura" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="fl_composito" column="fl_composito" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_palinsesto" column="fl_palinsesto" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="datazione" column="datazione" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="cd_presentazione" column="cd_presentazione" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_materia" column="cd_materia" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ds_illustrazioni" column="ds_illustrazioni" type="string" length="120" not-null="false" lazy="false"/>
+		<property name="notazione_musicale" column="notazione_musicale" type="string" length="120" not-null="false" lazy="false"/>
+		<property name="ds_legatura" column="ds_legatura" type="string" length="60" not-null="false" lazy="false"/>
+		<property name="ds_conservazione" column="ds_conservazione" type="string" length="100" not-null="false" lazy="false"/>
+		<property name="tp_testo_letter" column="tp_testo_letter" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_profilo_abilitazione" table="tbf_profilo_abilitazione" >
+		<meta attribute="class-description">
+			PROFILI D ABILITAZIONE DEI BIBLIOTECARI (TLFPRF)
+		</meta>
+		<id name="id_profilo_abilitazione" column="id_profilo_abilitazione" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="cd_prof" column="cd_prof" type="string" length="3" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Codice identificativo del profilo
+			</meta>
+		</property>
+		<many-to-one name="cd_polo" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_biblioteca"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="dsc_profilo" column="dsc_profilo" type="string" length="80" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Descrizione del profilo
+			</meta>
+		</property>
+		<property name="nota_profilo" column="nota_profilo" type="string" length="80" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Nota al profilo
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Cd_prof_base" table="trf_profilo_profilo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_profilo_abilitazione_coll" not-null="true"/>
+			<many-to-many column="id_profilo_abilitazione_base" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_profilo_abilitazione">
+			</many-to-many>
+		</set>
+		<set name="Cd_prof_coll" table="trf_profilo_profilo" lazy="true" cascade="save-update,lock">
+			<key column="id_profilo_abilitazione_base" not-null="true"/>
+			<many-to-many column="id_profilo_abilitazione_coll" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_profilo_abilitazione">
+			</many-to-many>
+		</set>
+		<set name="Tbf_bibliotecario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_profilo_abilitazione" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_bibliotecario"/>
+		</set>
+		<set name="Trf_profilo_biblioteca" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_profilo_abilitazione" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Trf_profilo_biblioteca"/>
+		</set>
+	</class>
+</hibernate-mapping>

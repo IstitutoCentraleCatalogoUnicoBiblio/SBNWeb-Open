@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.documentofisico.Tbc_possessore_provenienza" table="tbc_possessore_provenienza" >
+		<meta attribute="class-description">
+			POSSESSORI E PROVENIENZE DI INVENTARIO
+		</meta>
+		<id name="pid" column="pid" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="tp_forma_pp" column="tp_forma_pp" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo della tipologia del nome
+			</meta>
+		</property>
+		<property name="ky_cautun" column="ky_cautun" type="string" length="6" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave cautun
+			</meta>
+		</property>
+		<property name="ky_auteur" column="ky_auteur" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				chiave auteur
+			</meta>
+		</property>
+		<property name="ky_el1" column="ky_el1" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				primo elemento di ordinamento
+			</meta>
+		</property>
+		<property name="ky_el2" column="ky_el2" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				secondo elemento di ordinamento
+			</meta>
+		</property>
+		<property name="tp_nome_pp" column="tp_nome_pp" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice forma. indica se il nome del possessore e' in forma accettata o variante. ammette i valori: a=forma accettata, r=forma variante
+			</meta>
+		</property>
+		<property name="ky_el3" column="ky_el3" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				terzo elemento di ordinamento
+			</meta>
+		</property>
+		<property name="ky_el4" column="ky_el4" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				quarto elemento di ordinamento
+			</meta>
+		</property>
+		<property name="ky_el5" column="ky_el5" type="string" length="6" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				quinto elemento di ordinamento
+			</meta>
+		</property>
+		<property name="ky_cles1_a" column="ky_cles1_a" index="xmk1_possessore_provenienza" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note al possessore
+			</meta>
+		</property>
+		<property name="ky_cles2_a" column="ky_cles2_a" index="xmk1_possessore_provenienza" type="string" length="30" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				prima parte della chiave di ricerca possessori ottenuta dalla trasformazione in caratteri di ordinamento della descrizione
+			</meta>
+		</property>
+		<property name="note" column="note" type="string" length="320" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				seconda parte della chiave di ricerca possessori ottenuta dalla trasformazione in caratteri di ordinamento della descrizione
+			</meta>
+		</property>
+		<property name="tot_inv" column="tot_inv" type="integer" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				numero totale degli inventari della base dati locale
+			</meta>
+		</property>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del livello di autorita'
+			</meta>
+		</property>
+		<property name="fl_speciale" column="fl_speciale" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				indicatore della presenza di caratteri speciali
+			</meta>
+		</property>
+		<property name="ds_nome_aut" column="ds_nome_aut" type="string" length="320" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione del possessore
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Trc_poss_prov_inventari" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="pid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Trc_poss_prov_inventari"/>
+		</set>
+		<set name="Trc_possessori_possessori" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="pid_base" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Trc_possessori_possessori"/>
+		</set>
+		<set name="Trc_possessori_possessori1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="pid_coll" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Trc_possessori_possessori"/>
+		</set>
+	</class>
+</hibernate-mapping>

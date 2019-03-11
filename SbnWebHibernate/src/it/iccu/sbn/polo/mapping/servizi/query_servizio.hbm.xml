@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="calcolaCodUtente">
+		<return-scalar column="codice_utente" type="java.lang.Long" />
+		<!-- select (select cast (max (substring(cod_utente from 3 for 10)) AS bigint) from tbl_utenti
+			where cd_polo=:cd_polo and cd_bib=:cd_bib) as codice_utente;  -->
+			select nextval('seq_cod_utente_lettore') as codice_utente;
+	</sql-query>
+
+	<sql-query name="calcolaNextCodSegnatura">
+		<return-scalar column="codice_segn" type="java.lang.Long" />
+		select max(cod_segn) as codice_segn from tbl_disponibilita_precatalogati
+			where cd_polo=:cd_polo and cd_bib=:cd_bib
+	</sql-query>
+
+	<query name="modalitaErogazioneAssociateAlServizio">
+		<query-param name="tipoServ" type="string"/>
+		<query-param name="bib" type="Tbf_biblioteca_in_polo"/>
+		<![CDATA[
+
+		select me, tme from Tbl_modalita_erogazione me, Trl_tariffe_modalita_erogazione tme
+			where tme.id_tipo_servizio.cod_tipo_serv=:tipoServ
+			and tme.id_tipo_servizio.cd_bib=:bib
+			and tme.fl_canc<>'S'
+			and me.cd_bib=:bib
+			and me.cod_erog=tme.cod_erog
+			and me.fl_canc<>'S'
+			order by me.cod_erog asc
+		]]>
+
+	</query>
+
+	<query name="modalitaErogazioneAssociateATuttiIServizi">
+		<query-param name="bib" type="Tbf_biblioteca_in_polo"/>
+		<![CDATA[
+
+		select distinct me, tme from Tbl_modalita_erogazione me, Trl_tariffe_modalita_erogazione tme
+			where tme.id_tipo_servizio.cd_bib=:bib
+			and tme.fl_canc<>'S'
+			and me.cd_bib=:bib
+			and me.cod_erog=tme.cod_erog
+			and me.fl_canc<>'S'
+			order by me.cod_erog asc
+		]]>
+
+	</query>
+
+	<query name="modalitaErogazioneAssociateAlSupporto">
+		<query-param name="codSupporto" type="string"/>
+		<query-param name="bib" type="Tbf_biblioteca_in_polo"/>
+		<![CDATA[
+
+		select me, tme from Tbl_modalita_erogazione me, Trl_supporti_modalita_erogazione tme
+			where tme.id_supporti_biblioteca.cod_supporto=:codSupporto
+			and tme.id_supporti_biblioteca.cd_bib=:bib
+			and tme.fl_canc<>'S'
+			and me.cd_bib=:bib
+			and me.cod_erog=tme.cod_erog
+			and me.fl_canc<>'S'
+			order by me.cod_erog asc
+		]]>
+
+	</query>
+
+	<query name="modalitaErogazioneAssociateASupporti">
+		<query-param name="bib" type="Tbf_biblioteca_in_polo"/>
+		<![CDATA[
+
+		select distinct me, tme from Tbl_modalita_erogazione me, Trl_supporti_modalita_erogazione tme
+			where tme.id_supporti_biblioteca.cd_bib=:bib
+			and tme.fl_canc<>'S'
+			and me.cd_bib=:bib
+			and me.cod_erog=tme.cod_erog
+			and me.fl_canc<>'S'
+			order by me.cod_erog asc
+		]]>
+
+	</query>
+
+	<query name="flagCondivisioneTitolo">
+		<query-param name="bid" type="string"/>
+
+		<![CDATA[
+		select t.fl_condiviso from Tb_titolo t
+			where t.fl_canc<>'S'
+			and t.id=:bid
+		]]>
+
+	</query>
+
+	<query name="tipoNomeAutore">
+		<query-param name="vid" type="string"/>
+
+		<![CDATA[
+		select tp_nome_aut from Tb_autore
+			where vid=:vid
+			and fl_canc<>'S'
+		]]>
+
+	</query>
+
+</hibernate-mapping>

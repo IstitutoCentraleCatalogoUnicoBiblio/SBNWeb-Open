@@ -1,0 +1,78 @@
+#nav-bar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#nav-bar ul.aree li {
+	width: 153px;
+	margin: 3px;
+	vertical-align: middle;
+	text-indent: 12px;
+	background-color: #DDE8F0;
+	background-image: url(images/spigolo_menu.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	border-left-style: solid;
+	border-left-color: #4C91DF;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #4C91DF;
+	border-bottom-width: 1px;
+}
+
+#nav-bar ul.aree a, #nav-bar ul.aree span {
+	display: block;
+	width: 143px;
+	padding: 5px;
+	padding-right: 0px;
+	margin: 0;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 0.9em; /*67% 11px;*/
+	font-weight: bold;
+}
+
+#nav-bar ul.aree a {
+	background-image: url(images/freccia_chiusa.jpg);
+}
+
+#nav-bar ul.aree span {
+	background-image: url(images/freccia_aperta.jpg);
+}
+
+#nav-bar ul.sottoaree, #nav-bar ul.sottoaree li, #nav-bar ul.sottoaree a {
+	background-color: #FEF1E2;
+}
+
+#nav-bar ul.sottoaree {
+	width: 152px;
+	vertical-align: middle;
+	border-right-style: solid;
+	border-right-color: #4C91DF;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-color: #4C91DF;
+	border-top-width: 1px;
+}
+
+#nav-bar ul.sottoaree li {
+	width: 152px;
+	margin: 0;
+	vertical-align: middle;
+	background-image: none;
+	border-style: none;
+	border-width: 0;
+}
+
+#nav-bar ul.sottoaree a {
+	border-style: none;
+	border-width: 0;
+	background-image: url(images/puntoelenco.jpg);
+	background-position: 8px center;
+	text-indent: 16px;
+}

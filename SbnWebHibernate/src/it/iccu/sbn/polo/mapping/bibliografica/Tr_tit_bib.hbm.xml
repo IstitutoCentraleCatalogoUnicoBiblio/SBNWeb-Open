@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_bib" table="tr_tit_bib" >
+		<meta attribute="class-description">
+			OGGETTO BIBLIOGRAFICO IN BIBLIOTECA
+		</meta>
+		<composite-id>
+			<key-many-to-one name="B" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo">
+			</key-many-to-one>
+			<key-many-to-one name="Cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="fl_gestione" column="fl_gestione" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_disp_elettr" column="fl_disp_elettr" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_allinea" column="fl_allinea" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_allinea_sbnmarc" column="fl_allinea_sbnmarc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_allinea_cla" column="fl_allinea_cla" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_allinea_sog" column="fl_allinea_sog" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_allinea_luo" column="fl_allinea_luo" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_allinea_rep" column="fl_allinea_rep" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="fl_mutilo" column="fl_mutilo" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ds_consistenza" column="ds_consistenza" type="string" length="400" not-null="false" lazy="false"/>
+		<property name="fl_possesso" column="fl_possesso" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="ds_fondo" column="ds_fondo" type="string" length="55" not-null="false" lazy="false"/>
+		<property name="ds_segn" column="ds_segn" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="ds_antica_segn" column="ds_antica_segn" type="string" length="120" not-null="false" lazy="false"/>
+		<property name="nota_tit_bib" column="nota_tit_bib" type="string" length="134" not-null="false" lazy="false"/>
+		<property name="uri_copia" column="uri_copia" type="string" length="1280" not-null="false" lazy="false"/>
+		<property name="tp_digitalizz" column="tp_digitalizz" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ts_ins_prima_coll" column="ts_ins_prima_coll" type="timestamp" length="8" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Guida SBNWEB</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>
+<table summary="summary" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><a href="../GuidaSbnweb.htm">SBNWEB Guida Online</a></strong></strong></p>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></a></span></span>Stampe - Statistiche sui tempi&nbsp; </h1>
+<ul>
+<li><a href="#Descrizione">Descrizione</a></li>
+<li><a href="#Ingresso">Punti di ingresso</a>
+</li>
+<li><a href="#Prerequisiti">Prerequisiti</a></li>
+<li><a href="#ModuloDati">Modulo immissione
+dati</a>
+<ul>
+<li><a href="#Canali">Area canali</a></li>
+<li><a href="#Filtri">Area filtri</a></li>
+<li><a href="#Miscellanea">Area
+miscellanea </a></li>
+<li><a href="#Default">Valori di default</a>
+</li>
+<li><a href="#Azioni">Azioni utente</a></li>
+</ul>
+</li>
+<li><a href="#Controlli">Controlli del
+sistema</a><br>
+</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></a></span></span>Descrizione</h2>
+La funzione consente all'utente bibliotecario di selezionare, tramite filtri, gli ordini di acquisizione effettuati dalle Biblioteche per ottenere la stampa di un prospetto in modalità batch che calcola le percentuali e la media ripartite per tipologia d'ordine e per fasce temporali (meno di 7 giorni, fra 7 e 14 gg, oltre 14 giorni) sui tempi occorsi dall'ordine all'accessionamento. Se la biblioteca operante è Centro sistema si possono prendere in considerazione quelli delle biblioteche ad essa affiliate. 
+Esso consente in particolare:
+<ul>
+<li>l'indicazione degli estremi di ricerca nella base informativa</li>
+<li>la selezione del formato di stampa</li>
+</ul>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></a></span></span>Punti
+di ingresso </h2>
+<ol>
+<li>Menu-&gt;Stampe-&gt;Statistiche Tempi</li>
+<li>Barra di navigazione</li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></a></span></span>Prerequisiti</h2>
+<ul>
+<li>Il bibliotecario deve avere superato con successo l'autenticazione e l'abilitazione alla funzione</li>
+</ul>
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></a></span>Modulo
+immissione dati</h2>
+<p class="style5 style8 style4 Stile3" align="center"><img src="Immagini/stampaStatistiche.gif" alt=""></p>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<ul>
+<li><u>Biblioteca</u>: 3 caratteri alfanumerici.</li>
+<li><u>Anno ordine.</u>:valore numerico(4 cifre).</li>
+<li><u>Data ordine (Da, A)</u>:formato data (gg/mm/aaaa). Intervallo di date degli ordini(in formato gg/mm/aaaa) entro cui effettuare la ricerca. </li>
+<li><u>Tipo ordine.</u>: selezione da elenco su valori predefiniti: "A - Acquisto","V - Visione trattenuta", "R - Rilegatura".</li>
+</ul> 
+<br>
+<p>Le ricerche verranno effettuate ponendo tutti i
+parametri in AND; nei casi in cui sarà possibile indicare più valori
+per un medesimo parametro (es.: stato) tali valori verranno
+considerati tra di loro in OR.</p>
+
+<h3><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Miscellanea" id="InterrogazioneTitoloCanali"></a></span>Area
+miscellanea </span></h3>
+<ul>
+<!--- <li><em><u>Elem. Blocco</u></em>:
+permette l&#8217;indicazione del numero di elementi da richiedere al
+sistema per la suddivisione in blocchi della lista. Se non viene
+indicato nulla in questo campo il sistema applicherà il valore di
+default associato all&#8217;utente attivo. 
+</li> --->
+<li><em><u>Parametri di Ordinamento</u></em>:<br>
+- Data ascendente, <br>
+- Data discendente <br>
+</li>
+<li><em><u>Formato di stampa</u></em>:<br>
+- Acrobat (PDF) <br>
+- Rich Text Format (RTF) <br>
+- HTML <br>
+- Excel (XLS) <br>
+- CSV <br>
+</li>
+
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default/configurazione</h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li> <strong>'Codice Bibl. (Icona lista)'</strong>.&nbsp; Elenco delle biblioteche affiliate a quella di appartenenza, con possibilità di scelta tramite selezione per consentire di operare per conto della biblioteca selezionata.</li>
+<li> Bottone <strong>'Conferma'</strong>.&nbsp; Il sistema provvede ad accodare la richiesta di stampa in modalità differita ed attribuisce un codice di prenotazione tramite il quale sarà possibile effettuare una interrogazione sullo stato dell'elaborazione dal menu "Elaborazioni Differite - Stato delle richieste" .</li>
+<li> Bottone <strong>'Indietro'</strong>.&nbsp; Consente l'abbandono della pagina visualizzata e il rientro alla funzione chiamante.</li>
+</ul>
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli
+del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li>
+<u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.
+</li>
+<li>
+Nei range di date deve sempre essere indicato l'estremo anteriore (da), se non viene indicato l'estremo recente (a) la ricerca verrà eseguita per data esatta
+</li>
+<li>
+Nei range di date o valori verrà verificato che il "Da" sia <= all'"A"
+</li>
+<li>
+Vengono esclusi dalla stampa gli ordini annullati o chiusi.
+</li>
+<li>
+L'esito della stampa può essere privo di risultati se i criteri di ricerca non individuano alcun ordine oppure sono stati individuati solo ordini ordini annullati o chiusi.
+</li>
+
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body></html>

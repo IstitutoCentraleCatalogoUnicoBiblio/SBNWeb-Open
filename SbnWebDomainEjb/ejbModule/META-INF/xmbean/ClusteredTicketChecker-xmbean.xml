@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
+  
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published
+  by the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+  
+  You should have received a copy of the GNU Affero General Public License
+  along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE mbean PUBLIC "-//JBoss//DTD JBOSS XMBEAN 1.1//EN"
+   "http://www.jboss.org/j2ee/dtd/jboss_xmbean_1_1.dtd" [
+	<!ATTLIST interceptor
+	proxyName CDATA #IMPLIED
+>
+]>
+
+<mbean>
+	<description>
+	Il servizio sbn:ClusteredTicketChecker si occupa della generazione, del mantenimento e del controllo dei ticket d&apos;accesso associati a ogni utente che effettua l&apos;accesso a un sistema SbnWeb. Il ticket generato è garantito come univoco per tutto il tempo che il server JBoss è in esecuzione.
+   </description>
+	<class>it.iccu.sbn.servizi.ticket.clustered.ClusteredTicketChecker</class>
+
+   <!-- &defaultAttributes;  -->
+	<attribute access="read-write" getMethod="getSessionTimeout" setMethod="setSessionTimeout">
+		<description>Timeout di sessione utente.</description>
+		<name>SessionTimeout</name>
+		<type>int</type>
+	</attribute>
+	<!-- Operations -->
+	<operation>
+		<description>Aggiunge alla cache del servizio un nuovo ticket. Il ticket é dichiarato come abilitato all&apos;accesso.</description>
+		<name>addTicket</name>
+		<parameter>
+			<description>La stringa che rappresenta il ticket da aggiungere</description>
+			<name>ticket</name>
+			<type>java.lang.String</type>
+		</parameter>
+		<parameter>
+			<description>L'indirizzo registrato come origine del ticket</description>
+			<name>addr</name>
+			<type>java.net.InetAddress</type>
+		</parameter>
+		<return-type>void</return-type>
+	</operation>
+
+   <!-- &defaultOperations;  -->
+
+</mbean>

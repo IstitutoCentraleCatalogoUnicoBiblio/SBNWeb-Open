@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_servizio" table="tbl_servizio" >
+		<meta attribute="class-description">
+			SERVIZI EROGATI DALLA BIBLIOTECA
+		</meta>
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_servizio" column="id_servizio" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="id_tipo_servizio" cascade="lock" column="id_tipo_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_tipo_servizio" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="cod_servizio" column="cod_servizio" type="string" length="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice del servizio ad es. : p3= prestito max 3 libri
+			</meta>
+		</property>
+		<property name="descr" column="descr" type="string" length="255" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione del servizio
+			</meta>
+		</property>
+		<property name="num_max_rich" column="num_max_rich" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di richieste possibili
+			</meta>
+		</property>
+		<property name="num_max_mov" column="num_max_mov" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di movimenti attivi previsti contemporaneamente
+			</meta>
+		</property>
+		<property name="dur_mov" column="dur_mov" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				durata massima del servizio espressa in giorni
+			</meta>
+		</property>
+		<property name="dur_max_rinn1" column="dur_max_rinn1" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				durata massima del servizio espressa in giorni in caso di primo rinnovo
+			</meta>
+		</property>
+		<property name="dur_max_rinn2" column="dur_max_rinn2" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				durata massima del servizio espressa in giorni in caso di secondo rinnovo
+			</meta>
+		</property>
+		<property name="dur_max_rinn3" column="dur_max_rinn3" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				durata massima del servizio espressa in giorni in caso di terzo rinnovo
+			</meta>
+		</property>
+		<property name="num_max_riprod" column="num_max_riprod" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di riproduzioni che una biblioteca puo' effettuare giornalmente (per tipo servizio = fotoriproduzione, digitalizzazione, ...)
+			</meta>
+		</property>
+		<property name="n_max_pren_posto" column="n_max_pren_posto" type="short" length="4" not-null="false" lazy="false" />
+		<property name="n_gg_prep_supp" column="n_gg_prep_supp" type="short" length="4" not-null="false" lazy="false" />
+		<property name="ts_orario_limite_pren" column="ts_orario_limite_pren" type="string" length="5" not-null="false" lazy="false" />
+		<property name="max_gg_ant" column="max_gg_ant" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di giorni di anticipo con cui si puo' effettuare  una richiesta (ad es.: tipo servizio = prelazione)
+			</meta>
+		</property>
+		<property name="max_gg_dep" column="max_gg_dep" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di giorni di durata del deposito per lettura
+			</meta>
+		</property>
+		<property name="max_gg_cons" column="max_gg_cons" type="short" length="4" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di giorni di ritardo nella consegna di materiale (ad es.: per quello fuori sede)
+			</meta>
+		</property>
+		<property name="n_max_pren" column="n_max_pren" type="big_decimal" precision="3" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di prenotazioni
+			</meta>
+		</property>
+		<property name="n_max_ggval_pren" column="n_max_ggval_pren" type="big_decimal" precision="3" scale="0" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				numero massimo di giorni di validita' della prenotazione
+			</meta>
+		</property>
+		<property name="n_gg_rest_ill" column="n_gg_rest_ill" type="short" length="4" not-null="false" lazy="false" />
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<one-to-one name="Tbl_penalita_servizio" class="it.iccu.sbn.polo.orm.servizi.Tbl_penalita_servizio" cascade="save-update,lock" lazy="proxy" access="field"/>
+		<set name="Tbl_richiesta_servizio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio"/>
+		</set>
+		<set name="Trl_autorizzazioni_servizi" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_autorizzazioni_servizi"/>
+		</set>
+		<set name="Trl_diritti_utente" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_servizio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.servizi.Trl_diritti_utente"/>
+		</set>
+	</class>
+</hibernate-mapping>

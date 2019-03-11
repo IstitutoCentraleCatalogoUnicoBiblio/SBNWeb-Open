@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.servizi.Tbl_specificita_titoli_studio" table="tbl_specificita_titoli_studio" >
+		<meta attribute="class-description">
+			Specificazioni titoli studio
+		</meta>
+		<id name="id_specificita_titoli_studio" column="id_specificita_titoli_studio" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<version name="ts_var" column="ts_var" type="timestamp"/>
+		<many-to-one name="cd_biblioteca" cascade="lock" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo" not-null="true" lazy="proxy" access="field">
+			<column name="cd_biblioteca"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+		<property name="tit_studio" column="tit_studio" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del titolo di studio
+			</meta>
+		</property>
+		<property name="specif_tit" column="specif_tit" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice della specificazione del titolo di studio
+			</meta>
+		</property>
+		<property name="descr" column="descr" type="string" length="250" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				descrizione del titolo di studio
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="29" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<one-to-one name="Trl_utenti_biblioteca" class="it.iccu.sbn.polo.orm.servizi.Trl_utenti_biblioteca" cascade="save-update,lock"  lazy="proxy" access="field"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Code definite per il progetto SbnWeb -->
+
+<server>
+
+	<!--  CODE PER LA MEMORIZZAZIONE DEI BLOCCHI DI SINTETICHE -->
+
+	<!--  NON MODIFICARE -->
+	<mbean code="org.jboss.mq.server.jmx.Queue"
+		name="jboss.mq.destination:service=Queue,name=sbnMarcBlocchi">
+		<depends optional-attribute-name="DestinationManager">
+			jboss.mq:service=DestinationManager
+		</depends>
+		<attribute name="RedeliveryLimit">0</attribute>
+	</mbean>
+
+	<!--  NON MODIFICARE -->
+	<mbean code="org.jboss.mq.server.jmx.Queue"
+		name="jboss.mq.destination:service=Queue,name=sbnWebBlocchi">
+		<depends optional-attribute-name="DestinationManager">
+			jboss.mq:service=DestinationManager
+		</depends>
+		<attribute name="RedeliveryLimit">0</attribute>
+	</mbean>
+
+
+	<!--  CODE PER GESTIONE ELABORAZIONI DIFFERITE -->
+
+	<!--  Coda di input per elaborazioni differite -->
+	<!--  NON MODIFICARE -->
+	<mbean code="org.jboss.mq.server.jmx.Queue"
+		name="jboss.mq.destination:service=Queue,name=sbnBatch_Input">
+		<depends optional-attribute-name="DestinationManager">
+			jboss.mq:service=DestinationManager
+		</depends>
+		<attribute name="RedeliveryLimit">0</attribute>
+	</mbean>
+
+	<!--  1a coda di output per elaborazioni differite -->
+	<mbean code="org.jboss.mq.server.jmx.Queue"
+		name="jboss.mq.destination:service=Queue,name=sbnBatch_Output1">
+		<depends optional-attribute-name="DestinationManager">
+			jboss.mq:service=DestinationManager
+		</depends>
+		<attribute name="RedeliveryLimit">0</attribute>
+	</mbean>
+
+	<!--  2a coda di output per elaborazioni differite -->
+	<mbean code="org.jboss.mq.server.jmx.Queue"
+		name="jboss.mq.destination:service=Queue,name=sbnBatch_Output2">
+		<depends optional-attribute-name="DestinationManager">
+			jboss.mq:service=DestinationManager
+		</depends>
+		<attribute name="RedeliveryLimit">0</attribute>
+	</mbean>
+
+</server>

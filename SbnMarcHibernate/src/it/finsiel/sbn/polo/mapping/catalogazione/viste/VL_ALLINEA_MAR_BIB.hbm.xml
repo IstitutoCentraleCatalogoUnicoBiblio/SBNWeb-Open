@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.viste.Vl_allinea_mar_bib" polymorphism="explicit" table="VL_ALLINEA_MAR_BIB" lazy="false">
+	<cache usage="read-only"/>
+		<composite-id>
+			<key-property name="MID" column="MID" type="string"/>
+			<key-property name="CD_POLO" column="CD_POLO" type="string"/>
+			<key-property name="CD_BIBLIOTECA" column="CD_BIBLIOTECA" type="string"/>
+		</composite-id>
+		<property name="DS_MARCA" type="string" length="160" not-null="true" lazy="false"/>
+		<property name="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR" length="2" not-null="true" lazy="false"/>
+		<property name="TS_VAR" type="timestamp" not-null="true" lazy="false"/>
+		<property name="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA_SBNMARC" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+		<property name="FL_ALLINEA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

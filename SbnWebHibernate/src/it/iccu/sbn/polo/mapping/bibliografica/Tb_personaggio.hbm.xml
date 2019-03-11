@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_personaggio" table="tb_personaggio" >
+		<meta attribute="class-description">
+			PERSONAGGIO
+		</meta>
+		<id name="id_personaggio" column="id_personaggio" type="integer" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="b" cascade="lock" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" not-null="true">
+		</many-to-one>
+		<property name="nome_personaggio" column="nome_personaggio" type="string" length="25" not-null="true" lazy="false"/>
+		<property name="cd_timbro_vocale" column="cd_timbro_vocale" type="string" length="14" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<set name="Tr_per_int" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="id_personaggio" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_per_int"/>
+		</set>
+	</class>
+</hibernate-mapping>

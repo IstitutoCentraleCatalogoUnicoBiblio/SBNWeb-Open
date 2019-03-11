@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+	Licensee: antoniospatera@libero.it
+	License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.finsiel.sbn.polo.orm.Tb_classe" polymorphism="explicit" table="TB_CLASSE"
+		lazy="false">
+		<composite-id>
+			<key-property name="CD_SISTEMA" column="CD_SISTEMA"	type="string">	</key-property>
+			<key-property name="CD_EDIZIONE" column="CD_EDIZIONE" type="string" />
+			<key-property name="CLASSE" column="CLASSE" type="it.finsiel.sbn.util.DataTypeCHAR" />
+
+<!-- 			<key-property name="CLASSE" type="it.finsiel.sbn.util.DataTypeCHAR">
+ 			<column name="CLASSE" sql-type="char" length="31" />
+			</key-property>
+-->
+
+		</composite-id>
+		<property name="CD_LIVELLO" column="CD_LIVELLO" type="it.finsiel.sbn.util.DataTypeCHAR"
+			length="2" not-null="true" />
+		<property name="FL_COSTRUITO" column="FL_COSTRUITO"
+			type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" />
+		<property name="FL_SPECIALE" column="FL_SPECIALE"
+			type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true" />
+		<property name="DS_CLASSE" column="DS_CLASSE" type="string"
+			length="160" not-null="false" />
+		<property name="UTE_INS" column="UTE_INS" type="it.finsiel.sbn.util.DataTypeCHAR"
+			length="12" not-null="true" />
+		<property name="TS_INS" column="TS_INS" type="timestamp"
+			not-null="true" />
+		<property name="UTE_VAR" column="UTE_VAR" type="it.finsiel.sbn.util.DataTypeCHAR"
+			length="12" not-null="true" />
+		<property name="TS_VAR" column="TS_VAR" type="timestamp"
+			not-null="true" />
+		<property name="FL_CANC" column="FL_CANC" type="it.finsiel.sbn.util.DataTypeCHAR"
+			length="1" not-null="true" />
+		<!--  NUOVI CAMPI CLASSE -->
+		<property name="KY_CLASSE_ORD" column="KY_CLASSE_ORD" type="it.finsiel.sbn.util.DataTypeCHAR" length="34" not-null="false"/>
+		<property name="SUFFISSO" column="SUFFISSO" type="it.finsiel.sbn.util.DataTypeCHAR" length="10" not-null="false"/>
+		<property name="ULT_TERM" column="ULT_TERM" type="it.finsiel.sbn.util.DataTypeCHAR" length="240" not-null="false"/>
+		<property name="FL_CONDIVISO" column="FL_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="true"/>
+		<property name="UTE_CONDIVISO" column="UTE_CONDIVISO" type="it.finsiel.sbn.util.DataTypeCHAR" length="12" not-null="true"/>
+		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
+
+		<!--
+		<set name="TR_TIT_CLA" lazy="true" cascade="save-update,lock"
+			inverse="true">
+			<key not-null="true">
+				<column name="CD_SISTEMA" index="SYS_C0014349"/>
+				<column name="CD_EDIZIONE" index="SYS_C0014349"/>
+				<column name="CLASSE" index="SYS_C0014349"/>
+			</key>
+			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_tit_cla" />
+		</set>
+		-->
+		<filter name="TB_CLASSI_selectPerKey"
+				condition="cd_edizione = :XXXcd_edizione
+						  AND cd_sistema = :XXXcd_sistema
+						  AND classe = :XXXclasse
+						  AND fl_canc != 'S' "/>
+
+		<filter name="TB_CLASSI_selectEsistenzaId"
+				condition="cd_edizione = :XXXcd_edizione
+						  AND cd_sistema = :XXXcd_sistema
+						  AND classe = :XXXclasse "/>
+
+		<filter name="TB_CLASSI_selectPerNomeLike"
+				condition="fl_canc !='S'
+						  AND classe LIKE :XXXstringaLike||'%' "/>
+
+		<filter name="TB_CLASSI_countPerNomeLike"
+				condition="fl_canc !='S'
+						  AND classe LIKE :XXXstringaLike||'%' "/>
+<!-- POSTGRESS -->
+		<filter name="TB_CLASSI_selectPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+		<filter name="TB_CLASSI_countPerParoleNome_postgress"
+				condition="fl_canc !='S' "/>
+
+<!-- END POSTGRESS -->
+		<filter name="TB_CLASSI_selectPerParoleNome"
+				condition="fl_canc !='S' AND
+				  	CONTAINS(ds_classe, :XXXparola1 ) > 0 "/>
+
+		<filter name="TB_CLASSI_countPerParoleNome"
+				condition="fl_canc !='S' AND
+				  	CONTAINS(ds_classe, :XXXparola1 ) > 0 "/>
+	</class>
+</hibernate-mapping>

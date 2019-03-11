@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo_default" table="tbf_polo_default" >
+		<composite-id>
+			<key-many-to-one name="id_default" column="id_default" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_default">
+			</key-many-to-one>
+			<key-many-to-one name="cd_polo" column="cd_polo" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_polo">
+			</key-many-to-one>
+		</composite-id>
+		<property name="value" column="value" type="string" length="255" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

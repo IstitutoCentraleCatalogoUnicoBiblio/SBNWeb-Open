@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="it.iccu.sbn.polo.orm.bibliografica.Tb_loc_indice" table="tb_loc_indice" schema="sbnweb" >
+		<!-- <cache usage="transactional" /> -->
+		<id name="id_loc" column="id_loc" type="integer" unsaved-value="0">
+			<generator class="identity" />
+		</id>
+
+		<version name="ts_var" column="ts_var" type="timestamp">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</version>
+
+		<many-to-one name="titolo" column="bid" class="it.iccu.sbn.polo.orm.bibliografica.Tb_titolo" lazy="proxy" access="field" />
+
+		<many-to-one name="biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+			<column name="cd_biblioteca"/>
+			<column name="cd_polo"/>
+		</many-to-one>
+
+		<property name="fl_stato" column="fl_stato" type="character" length="1" not-null="true" />
+		<property name="tp_loc" column="tp_loc" type="short" length="1" not-null="true" />
+		<property name="sbnmarc_xml" column="sbnmarc_xml" type="string" not-null="false" />
+
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+
+	</class>
+</hibernate-mapping>

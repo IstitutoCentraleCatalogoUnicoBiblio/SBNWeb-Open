@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_parametri_ordine" table="tba_parametri_ordine" schema="sbnweb" >
+		<meta attribute="class-description">
+			Parametri per ordine
+		</meta>
+		<composite-id>
+			<key-many-to-one name="cd_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_bib"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+		</composite-id>
+		<property name="gest_bil" column="gest_bil" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore della gestione del bilancio da parte della biblioteca  (Y=si N=no)
+			</meta>
+		</property>
+		<property name="gest_sez" column="gest_sez" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore della gestione della sezione da parte della biblioteca  (Y=si N=no)
+			</meta>
+		</property>
+		<property name="gest_prof" column="gest_prof" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				indicatore della gestione del profilo da parte della biblioteca  (Y=si N=no)
+			</meta>
+		</property>
+		<property name="cod_prac" column="cod_prac" type="big_decimal"  not-null="false" lazy="false"/>
+		<property name="cod_sezione" column="cod_sezione" type="string" length="7" not-null="false" lazy="false"/>
+		<property name="esercizio" column="esercizio" type="big_decimal"  not-null="false" lazy="false"/>
+		<property name="capitolo" column="capitolo" type="big_decimal"  not-null="false" lazy="false"/>
+		<property name="cod_mat" column="cod_mat" type="string" length="1" not-null="false" lazy="false"/>
+		<property name="cod_fornitore_a" column="cod_fornitore_a" type="integer"  not-null="false" lazy="false"/>
+		<property name="cod_fornitore_l" column="cod_fornitore_l" type="integer"  not-null="false" lazy="false"/>
+		<property name="cod_fornitore_d" column="cod_fornitore_d" type="integer"  not-null="false" lazy="false"/>
+		<property name="cod_fornitore_v" column="cod_fornitore_v" type="integer"  not-null="false" lazy="false"/>
+		<property name="cod_fornitore_c" column="cod_fornitore_c" type="integer"  not-null="false" lazy="false"/>
+		<property name="cod_fornitore_r" column="cod_fornitore_r" type="integer"  not-null="false" lazy="false"/>
+		<property name="ordini_aperti" column="ordini_aperti" type="string" length="1" not-null="true" lazy="false"/>
+		<property name="ordini_chiusi" column="ordini_chiusi" type="string" length="1" not-null="true" lazy="false"/>
+		<property name="ordini_annullati" column="ordini_annullati" type="string" length="1" not-null="true" lazy="false"/>
+		<property name="allineamento_prezzo" column="allineamento_prezzo" type="string" length="1" not-null="true" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+
+		<property name="cd_bib_google" column="cd_bib_google" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="cd_forn_google" column="cd_forn_google" type="integer" not-null="false" lazy="false"/>
+
+	</class>
+</hibernate-mapping>

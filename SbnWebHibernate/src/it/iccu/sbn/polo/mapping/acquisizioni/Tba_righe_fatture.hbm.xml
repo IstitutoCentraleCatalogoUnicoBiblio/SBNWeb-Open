@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.acquisizioni.Tba_righe_fatture" table="tba_righe_fatture" schema="sbnweb" >
+		<meta attribute="class-description">
+			Righe delle fatture
+		</meta>
+		<composite-id>
+			<key-many-to-one name="id_fattura" column="id_fattura" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_fatture">
+			</key-many-to-one>
+			<key-many-to-one name="cd_biblioteca" class="it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo">
+				<column name="cd_biblioteca"/>
+				<column name="cd_polo"/>
+			</key-many-to-one>
+			<key-property name="riga_fattura" column="riga_fattura" type="short"/>
+		</composite-id>
+		<many-to-one name="id_ordine" cascade="lock"  column="id_ordine" class="it.iccu.sbn.polo.orm.acquisizioni.Tba_ordini" not-null="false" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cod_mat" cascade="lock" class="it.iccu.sbn.polo.orm.acquisizioni.Tbb_bilanci" not-null="false" lazy="proxy" access="field">
+			<column name="cod_mat"/>
+			<column name="id_capitoli_bilanci"/>
+		</many-to-one>
+		<property name="note" column="note" type="string" length="160" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				note relative al materiale acquistato
+			</meta>
+		</property>
+		<property name="importo_riga" column="importo_riga" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				imponibile
+			</meta>
+		</property>
+		<property name="sconto_1" column="sconto_1" type="big_decimal" precision="5" scale="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				primo sconto effettuato
+			</meta>
+		</property>
+		<property name="sconto_2" column="sconto_2" type="big_decimal" precision="5" scale="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				secondo sconto effettuato
+			</meta>
+		</property>
+		<property name="cod_iva" column="cod_iva" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo dell'iva
+			</meta>
+		</property>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora d'inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false"/>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				data e ora dell'ultimo aggiornamento
+			</meta>
+		</property>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="id_fattura_in_credito" column="id_fattura_in_credito" type="integer" not-null="true"  lazy="false" />
+		<property name="riga_fattura_in_credito" column="riga_fattura_in_credito" type="integer" not-null="true" lazy="false"/>
+		<property name="importo_tot_riga" column="importo_tot_riga" type="big_decimal" precision="15" scale="3" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

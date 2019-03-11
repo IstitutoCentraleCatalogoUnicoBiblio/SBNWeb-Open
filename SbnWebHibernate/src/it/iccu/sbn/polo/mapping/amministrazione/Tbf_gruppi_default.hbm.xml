@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.amministrazione.Tbf_gruppi_default" table="tbf_gruppi_default" >
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<property name="etichetta" column="etichetta" type="string" length="255" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Etichetta da prospettare
+			</meta>
+		</property>
+		<property name="bundle" column="bundle" type="string" length="255" not-null="true" lazy="false"/>
+		<set name="Tbf_default" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="tbf_gruppi_defaultid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.amministrazione.Tbf_default"/>
+		</set>
+	</class>
+</hibernate-mapping>

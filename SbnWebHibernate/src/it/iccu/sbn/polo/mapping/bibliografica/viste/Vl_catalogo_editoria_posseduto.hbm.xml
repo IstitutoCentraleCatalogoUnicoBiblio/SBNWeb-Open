@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: almaviva
+License Type: Purchased
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="it.iccu.sbn.polo.orm.bibliografica.viste.V_catalogo_editoria" table="V_catalogo_editoria" polymorphism="explicit" >
+		<meta attribute="class-description">
+			CATALOGO EDITORI
+		</meta>
+		<cache usage="read-only"/>
+		<id name="bid" column="bid" type="string">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="isadn" column="isadn" type="string" length="30" not-null="false" lazy="false"/>
+		<property name="tp_materiale" column="tp_materiale" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="tp_record_uni" column="tp_record_uni" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_natura" column="cd_natura" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="cd_paese" column="cd_paese" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_lingua_1" column="cd_lingua_1" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cd_lingua_2" column="cd_lingua_2" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="cd_lingua_3" column="cd_lingua_3" type="string" length="3" not-null="false" lazy="false"/>
+		<property name="aa_pubb_1" column="aa_pubb_1" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="aa_pubb_2" column="aa_pubb_2" type="string" length="4" not-null="false" lazy="false"/>
+		<property name="tp_aa_pubb" column="tp_aa_pubb" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="cd_genere_1" column="cd_genere_1" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_genere_2" column="cd_genere_2" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_genere_3" column="cd_genere_3" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="cd_genere_4" column="cd_genere_4" type="string" length="2" not-null="false" lazy="false"/>
+		<property name="ky_cles1_t" column="ky_cles1_t" type="string" length="6" not-null="true" lazy="false"/>
+		<property name="ky_cles2_t" column="ky_cles2_t" type="string" length="44" not-null="true" lazy="false"/>
+		<property name="ky_clet1_t" column="ky_clet1_t" type="string" length="3" not-null="true" lazy="false"/>
+		<property name="ky_clet2_t" column="ky_clet2_t" type="string" length="3" not-null="true" lazy="false"/>
+		<property name="ky_cles1_ct" column="ky_cles1_ct" type="string" length="6" not-null="true" lazy="false"/>
+		<property name="ky_cles2_ct" column="ky_cles2_ct" type="string" length="44" not-null="true" lazy="false"/>
+		<property name="ky_clet1_ct" column="ky_clet1_ct" type="string" length="3" not-null="true" lazy="false"/>
+		<property name="ky_clet2_ct" column="ky_clet2_ct" type="string" length="3" not-null="true" lazy="false"/>
+		<property name="cd_livello" column="cd_livello" type="string" length="2" not-null="true" lazy="false"/>
+		<property name="fl_speciale" column="fl_speciale" type="character" length="1" not-null="true" lazy="false"/>
+		<property name="isbd" column="isbd" type="string" length="1200" not-null="true" lazy="false"/>
+		<property name="indice_isbd" column="indice_isbd" type="string" length="80" not-null="true" lazy="false"/>
+		<property name="ky_editore" column="ky_editore" type="string" length="80" not-null="false" lazy="false"/>
+		<property name="cd_agenzia" column="cd_agenzia" type="string" length="6" not-null="false" lazy="false"/>
+		<property name="cd_norme_cat" column="cd_norme_cat" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="nota_inf_tit" column="nota_inf_tit" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="nota_cat_tit" column="nota_cat_tit" type="string" length="320" not-null="false" lazy="false"/>
+		<property name="bid_link" column="bid_link" type="string" length="10" not-null="false" lazy="false"/>
+		<property name="tp_link" column="tp_link" type="character" length="1" not-null="false" lazy="false"/>
+		<property name="ute_ins" column="ute_ins" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato l'inserimento
+			</meta>
+		</property>
+		<property name="ts_ins" column="ts_ins" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di inserimento
+			</meta>
+		</property>
+		<property name="ute_var" column="ute_var" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha effettuato la variazione
+			</meta>
+		</property>
+		<property name="ts_var" column="ts_var" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di variazione
+			</meta>
+		</property>
+		<property name="ute_forza_ins" column="ute_forza_ins" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="ute_forza_var" column="ute_forza_var" type="string" length="12" not-null="false" lazy="false"/>
+		<property name="fl_canc" column="fl_canc" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di cancellazione logica
+			</meta>
+		</property>
+		<property name="cd_periodicita" column="cd_periodicita" type="character" length="1" not-null="false" lazy="false">
+			<meta attribute="field-description">
+				Codice di periodicit&#224;' (solo per nature S)
+			</meta>
+		</property>
+		<property name="fl_condiviso" type="character" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Flag di condivisione gestione del legame con indice
+			</meta>
+			<column name="fl_condiviso" default="S"/>
+		</property>
+		<property name="ute_condiviso" column="ute_condiviso" type="string" length="12" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Timestamp di condivisione gestione del legame con indice
+			</meta>
+		</property>
+		<property name="ts_condiviso" column="ts_condiviso" type="timestamp" length="8" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Utente che ha attivato la gestione condivisa del legame con indice
+			</meta>
+		</property>
+		<set name="Tbc_collocazione" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione"/>
+		</set>
+		<set name="Tbc_esemplare_titolo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_esemplare_titolo"/>
+		</set>
+		<set name="Tbc_inventario" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario"/>
+		</set>
+		<set name="Tbp_fascicolo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.periodici.Tbp_fascicolo"/>
+		</set>
+<!-- 	<one-to-one name="Tbc_inventario" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario" cascade="save-update,lock" property-ref="b"/> -->
+		<set name="Tb_abstract" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tb_abstract"/>
+		</set>
+		<set name="Tr_tit_cla" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_tit_cla"/>
+		</set>
+		<set name="Tr_tit_sog_bib" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Tr_tit_sog_bib"/>
+		</set>
+		<set name="Trs_termini_titoli_biblioteche" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.gestionesemantica.Trs_termini_titoli_biblioteche"/>
+		</set>
+		<set name="Tb_arte_tridimens" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_arte_tridimens"/>
+		</set>
+		<set name="Tb_audiovideo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_audiovideo"/>
+		</set>
+		<set name="Tb_cartografia" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_cartografia"/>
+		</set>
+		<set name="Tb_composizione" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_composizione"/>
+		</set>
+		<set name="Tb_disco_sonoro" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_disco_sonoro"/>
+		</set>
+		<set name="Tb_grafica" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_grafica"/>
+		</set>
+		<set name="Tb_impronta" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_impronta"/>
+		</set>
+		<set name="Tb_incipit" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_incipit"/>
+		</set>
+		<set name="Tb_microforma" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_microforma"/>
+		</set>
+		<set name="Tb_musica" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_musica"/>
+		</set>
+		<set name="Tb_nota" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_nota"/>
+		</set>
+		<set name="Tb_numero_std" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_numero_std"/>
+		</set>
+		<set name="Tb_personaggio" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_personaggio"/>
+		</set>
+		<set name="Tb_rappresent" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_rappresent"/>
+		</set>
+		<set name="Tb_risorsa_elettr" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tb_risorsa_elettr"/>
+		</set>
+		<set name="Tr_rep_tit" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_rep_tit"/>
+		</set>
+		<set name="Tr_tit_aut" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_aut"/>
+		</set>
+		<set name="Tr_tit_bib" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_bib"/>
+		</set>
+		<set name="Tr_tit_luo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_luo"/>
+		</set>
+		<set name="Tr_tit_mar" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid" not-null="false"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_mar"/>
+		</set>
+		<set name="Tr_tit_tit" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid_base" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_tit"/>
+		</set>
+		<set name="Tr_tit_tit1" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="bid_coll" not-null="true"/>
+			<one-to-many class="it.iccu.sbn.polo.orm.bibliografica.Tr_tit_tit"/>
+		</set>
+
+		<property name="cod_fornitore" column="cod_fornitore" type="integer" not-null="true" lazy="false">
+		</property>
+
+		<property name="nom_fornitore" column="nom_fornitore" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				denominazione del fornitore
+			</meta>
+		</property>
+
+		<property name="isbn" column="isbn"  type="string" length="13" not-null="true" lazy="false" >
+		</property>
+
+	<property name="paese" column="paese" type="string" length="2" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				codice identificativo del paese
+			</meta>
+		</property>
+
+	<property name="cod_regione" column="cod_regione" type="string" length="2" not-null="false" lazy="false">
+		</property>
+
+	<property name="provincia" column="provincia" type="string" length="2" not-null="true" lazy="false">
+		<meta attribute="field-description">
+			codice identificativo della provincia
+		</meta>
+	</property>
+
+	<property name="chiave_for" column="chiave_for" type="string" length="50" not-null="true" lazy="false">
+		<meta attribute="field-description">
+			chiave nome fornitore
+		</meta>
+	</property>
+
+	<property name="isbn_editore" column="isbn_editore" type="string" length="30" not-null="false" lazy="false">
+		</property>
+
+	<property name="nota_legame" column="nota_legame" type="string" length="50" not-null="false" lazy="false">
+		</property>
+
+		<property name="cd_bib" column="cd_bib" type="string" length="3" not-null="true" lazy="false">
+		</property>
+
+		<property name="cd_mat_inv" column="cd_mat_inv" type="string" length="2" not-null="true" lazy="false">
+		</property>
+		<property name="ultima_data_ingresso" column="ultima_data_ingresso" type="date" not-null="false" lazy="false">
+		</property>
+		<property name="tot_inv" column="tot_inv" type="integer" not-null="true" lazy="false">
+		</property>
+		<property name="tp_acquisizione" column="tp_acquisizione" type="character" length="1" not-null="false" lazy="false">
+		</property>
+		<property name="classe" column="classe" type="string" length="31" not-null="true" lazy="false">
+		</property>
+	</class>
+
+</hibernate-mapping>

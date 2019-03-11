@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Servizio bibliotecario</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../stile.css" type="text/css">
+<style type="text/css">
+<!--
+.style3 {font-size: large}
+.style4 {font-weight: bold}
+.style5 {font-style: italic}
+-->
+</style>
+<script type="text/javascript">
+function goThere(loc)
+{
+window.location.href=loc;
+}
+</script></head>
+<body>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0" width="100%" summary=summary>
+
+<tr>
+<td bgcolor="#dde8f0" valign="top">
+<p class="style3 Stile3 style8" align="center"><strong><strong><A href="../GuidaSbnweb.htm">SBNWEB Guida 
+      Online</A></STRONG></STRONG></P>
+<h1><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Inizio" id="Inizio"></A></SPAN></SPAN>Acquisizioni - Scheda di dettaglio della associazione degli inventari ad un ordine di rilegatura </H1>
+<ul>
+<li><A href="#Descrizione">Descrizione</A></li>
+<li><A href="#Ingresso">Punti di ingresso</A></li>
+<li><A href="#Prerequisiti">Prerequisiti</A></li>
+<li><A href="#ModuloDati">Modulo immissione dati</A></li>
+<ul>
+<li><A href="#Canali">Area canali</A></li>
+<li><A href="#Filtri">Area filtri</A></li><li><A href="#Default">Valori di default</A></li>
+<li><A href="#Azioni">Azioni utente</A></LI></UL>
+<li><A href="#Controlli">Controlli del sistema</A><br></LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Descrizione" id="Descrizione"></A></SPAN></SPAN>Descrizione</H2>
+La funzione consente all'utente bibliotecario di associare gli inventari dei materiali sottoposti alla rilegatura ed attributi ad un ordine di rilegatura.
+Esso consente in particolare:
+<ul>
+<li>la prospettazione degli inventari oggetto dell'ordine di rilegatura, se precedentemente associati  
+</li>        
+<li>la modifica (al bibliotecario che ha un profilo 
+        utente abilitato alla modifica ) delle informazioni 
+        prospettate, rendendo editabili tutti i campi della pagina prospettata, 
+        attivando ulteriori azioni e controlli del sistema per la variazione e 
+        registrazione delle modifiche. </LI></UL>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Ingresso" id="Ingresso"></A></SPAN></SPAN><strong>Punti di ingresso </STRONG></H2>
+<ol>
+<li>Menu-&gt;Acquisizioni-&gt;Ordini-&gt;<A href="RicercaOrdini.htm">Ricerca Ordini</A>-&gt;<A href="SinteticaOrdini.htm">Sintetica ordini</A>- &gt;<A href="DettaglioOrdine.htm">Bottone <strong>'Esamina' </strong> (su ordine di tipo=R)</A>- &gt;Bottone <strong>'Associa inventari'</STRONG>' 
+</li>        
+<li>Menu-&gt;Acquisizioni-&gt;Ordini-&gt;<A href="RicercaOrdini.htm">Ricerca Ordini</A>-&gt;<A href="SinteticaOrdini.htm">Sintetica ordini</A>- &gt;<A href="CreaOrdini.htm">Bottone <strong>'Crea'</strong> (ordine di tipo=R)</A>- &gt;Bottone <strong>'Associa inventari'</STRONG>' 
+</li>        
+<li>Barra di navigazione </li>
+</ol>
+<h2><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="Prerequisiti" id="Prerequisiti"></A></SPAN></SPAN>Prerequisiti</H2>
+<ul>
+	<li>Il bibliotecario deve avere superato con 
+        successo l'autenticazione e l'abilitazione alla funzione </LI></UL>
+<h2 align="left"><span class="style5 style8 style4 Stile3"><span class="Stile2"><a name="ModuloDati" id="ModuloDati"></A></SPAN></SPAN><span class="Stile3 style8">Modulo immissione dati</SPAN></H2>
+<p class="style5 style8 style4 Stile3" align="center"><IMG alt="" src="Immagini/DettaglioOrdineRAssInv.gif"></P>
+<p>Di seguito viene descritto il contenuto della schermata:</EM></P>
+	<ul>
+	<li>Inv. associati: dato dinamico che riporta il numero degli elementi di tabella</li>
+	<li>Tabella degli ordini: riporta la lista degli inventari. Tale lista presenta per ciascun riga le seguenti informazioni:</li>
+	   <ul>
+		<li>Serie</li>
+		<li>Num. inv.</li> 
+		<li>Titolo di inv.</li>
+		<li>Data uscita (gg/mm/aaaa)</li>
+		<li>Data rientro presunta (gg/mm/aaaa)</li>
+		<li>Data rientro (gg/mm/aaaa)</li>
+		<li>Note Riga (icona). Apertura della finestra di note associate allo specifico inventario</li></li> 
+		<li>Campo check (per consentire la selezione dell'elemento da cancellare)</li>
+		</ul>
+	</li>
+	</ul> 
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Canali" id="InterrogazioneTitoloCanali"></a></span>Area
+canali </h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Filtri" id="InterrogazioneTitoloCanali"></a></span>Area
+filtri</h3>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Default" id="InterrogazioneTitoloCanali"></a></span>Valori
+di default </h3>
+<ul>
+<li><!-- Vedi immagine.--> I valori di default possono variare in funzione
+della configurazione dei default gestiti dall'utente stesso. In caso
+l'utente non <a href="../Amministrazione/DefaultUtente.htm">modifichi i default</a> verranno presentati quelli di sistema.&nbsp; 
+</li>
+</ul>
+<h3 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Azioni" id="InterrogazioneTitoloCanali"></a>Azioni utente</span>
+</h3>
+<ul>
+<li><u>Link su Note Riga (icona) della riga</U>: apre finestra con possibilità di inserimento di note relativamente alla riga selezionata. Il clic successivo sull'icona provvede alla chiusura della finestra.</li>
+<li>Bottone 'Salva': effettua la validazione delle informazioni immesse, conferma le modifiche effettuate e le registra a sistema. <!--- associa <u>temporaneamente</u> all'ordine. Solo al rientro sull'ordine di rilegatura e la selezione del bottone "Salva" effettuerà la registrazione dei dati. ---></li> 
+<li>Bottone 'Ripristina': consente di annullare tutte le modifiche effettuate sulla pagina prima del "Salva", recuperando le informazioni registrate in base dati. </li> 
+<li>Bottone 'Ins. riga': (non attivo per ordini di rilegatura già stampati) inserisce una riga vuota nella tabella degli inventari oggetto di rilegatura </li>		
+<li>Bottone 'Canc. riga': (non attivo per ordini di rilegatura già stampati)  cancella la riga selezionata della tabella degli inventari oggetto di rilegatura</li>		
+<li>Bottone 'Completa riga': (non attivo per ordini di rilegatura già stampati)  agisce sulla riga selezionata con il check ed in presenza di tutte le informazioni identificative dell'inventario immesso direttamente dall'utente (serie, num. inv.) attiva la ricerca puntuale dell'inventario recuperando tutte le altre informazioni (in output) della riga previo controllo di congruenza.</li>
+<li>Bottone 'Indietro': consente l'abbandono della pagina visualizzata e il ritorno all'ordine di rilegatura a cui sono associati gli inventari. </li>		
+<li>Bottone 'Assegna data Uscita': attribuisce a tutti gli inventari la medesima data uscita precisata per il primo di essi. </li>		
+
+<!--- Bibl. Affil.: propone di selezionare  le biblioteche affiliate su cui estendere l'ordine se la biblioteca è Centro Servizi.
+ --->
+<!--- Buoni d'ordine: attiva  il caso d'uso "Interroga Buono d'ordine". L'attivazione del pulsante "Buono d'ordine" dalla pagina di dettaglio dell'ordine deve effettuare un controllo sull'esistenza di un buono d'ordine associato all'ordine preso in considerazione, in tal caso il sistema emette un messaggio all'utente del tipo "Ordine già legato ad un buono". Nel caso sia inesistente il sistema deve presentare all'utente, in possesso delle abilitazioni necessarie, un campo di input per l'immissione del numero del buono (che può essere automatico o manuale a seconda della configurazione adottata) e deve effettuare i necessari controlli di congruenza fornitore-bilancio, ed inserire l'ordine nel buono in maniera automatica.
+ --->
+</ul>
+<h2 class="style5 style8 style4 Stile3" align="left"><span class="Stile2"><a name="Controlli" id="InterrogazioneTitoloCanali"></a></span>Controlli del sistema</h2>
+<div style="margin-left: 40px;"><a href="../Varie/Controlli.html">Informazioni sulle tipologie di controlli e messaggistica</a></div>
+<ul>
+<li><u>Invio diagnostico</u>. Nel caso in cui, nel corso dell'esecuzione di qualunque passo, il sistema rilevi errori e/o incongruenze nei valori indicati dall'utente, o la ricerca non abbia esito positivo o il numero di elementi trovato sia troppo elevato per consentirne l'immediata visualizzazione, il sistema emetterà un opportuno diagnostico consentendo la correzione dei valori e la continuazione delle operazioni.</li>
+<li>A seconda delle abilitazioni attribuite dal sistema al bibliotecario, dinamicamente le azioni si rendono disponibili all'utente.</li>
+<li>Lo stesso inventario non può essere oggetto di un secondo ordine di rilegatura, a meno che non sia rientrato dal primo rilegatore.</li>
+<li>Su un ordine di rilegatura già stampato il sistema non consente l'associazione di ulteriori inventari, ma consente la immissione delle date di rientro effettivo. Tutti gli altri campi non sono editabili e restano inibiti i bottoni Inserisci riga e Cancella riga</li>
+<li>L'attribuzione della data di rientro presunta su un inventario comporta la modifica dello stato di diponibilità dell'opera che passa in "restauro" fino alla data indicata.</li>
+<li>L'attribuzione della data di rientro di un inventario, rende l'opera di nuovo disponibile.</li>
+</ul>
+<hr>
+<p class="style5 style8 style4 Stile3" align="left">&nbsp;<br></p>      
+		</td>
+  </tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</BODY></HTML>
