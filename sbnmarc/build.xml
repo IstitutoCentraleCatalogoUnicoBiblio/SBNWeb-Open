@@ -36,7 +36,7 @@
 			<property file="../${module.hibernate}/build.properties" />
 		</ant>
 		
-		<ant antfile="../${module.ejb}/build.xml" dir="../${module.ejb}">
+		<ant antfile="../${module.ejb}/build.xml" dir="../${module.ejb}" target="build-debug">
 			<property file="../${module.ejb}/build.properties" />
 		</ant>
 

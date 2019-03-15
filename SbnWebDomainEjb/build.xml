@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
-<project name="Build EJB Sbn Domain" default="build" basedir="." >
-    <property file="./build.properties"/>
+<project name="Build EJB Sbn Domain" default="build" basedir=".">
+	<property file="./build.properties" />
 	<property name="lib.dir" value="${basedir}/lib" />
 
 	<property name="sbnweb.domain.classes.dir" value="${basedir}/build/classes" />
 	<property name="sbnweb.domain.src.dir" value="${basedir}/ejbModule" />
 
 	<target name="prepare">
-        <mkdir dir="${ejb.dist.dir}"/>
-    	<mkdir dir="${sbnweb.domain.classes.dir}"/>
-    </target>
-	
+		<mkdir dir="${ejb.dist.dir}" />
+		<mkdir dir="${sbnweb.domain.classes.dir}" />
+	</target>
+
 	<target name="clean">
-        <delete dir="${ejb.dist.dir}"/>
-    	<delete dir="${basedir}/build"/>
-    </target>
+		<delete dir="${ejb.dist.dir}" />
+		<delete dir="${basedir}/build" />
+	</target>
 
 	<path id="cp">
 		<fileset dir="${lib.dir}">
@@ -28,7 +28,6 @@
 		</fileset>
 	</path>
 
-
 	<macrodef name="compile">
 		<attribute name="srcdir" />
 		<attribute name="destdir" />
@@ -37,13 +36,14 @@
 		<attribute name="excludes" default="" />
 		<attribute name="source" default="1.5" />
 		<attribute name="target" default="1.5" />
+		<attribute name="debug" default="false" />
 		<sequential>
-			<javac encoding="UTF-8" includeantruntime="false" srcdir="@{srcdir}" destdir="@{destdir}" classpath="@{classpath}" classpathref="@{classpathref}" debug="off" source="@{source}" target="@{target}">
+			<javac encoding="UTF-8" includeantruntime="false" srcdir="@{srcdir}" destdir="@{destdir}" classpath="@{classpath}" classpathref="@{classpathref}" debug="@{debug}" source="@{source}" target="@{target}">
 				<classpath>
-					<pathelement path="../SBNWeb/bin"/>
-					<pathelement path="../SbnWebHibernate/build/classes"/>
-					<pathelement path="../SbnWebCommon/classes/struts"/>
-					<pathelement path="../SbnWebCommon/classes/vo"/>
+					<pathelement path="../SBNWeb/bin" />
+					<pathelement path="../SbnWebHibernate/build/classes" />
+					<pathelement path="../SbnWebCommon/classes/struts" />
+					<pathelement path="../SbnWebCommon/classes/vo" />
 				</classpath>
 			</javac>
 		</sequential>
@@ -53,63 +53,59 @@
 		<ant antfile="build-ejb.xml" target="ejbdoclet" />
 	</target>
 
-    <!-- Build SAR and JAR archives -->
-    <target name="build" depends="prepare">
-        <echo>+---------------------------------------------------+</echo>
-        <echo>|                                                   |</echo>
-        <echo>| B U I L D   S O L U Z I O N E   E J B             |</echo>
-        <echo>|                                                   |</echo>
-        <echo>+---------------------------------------------------+</echo>
+	<!-- Build SAR and JAR archives -->
+	<target name="build" depends="prepare">
+		<echo>+---------------------------------------------------+</echo>
+		<echo>|                                                   |</echo>
+		<echo>| B U I L D   S O L U Z I O N E   E J B             |</echo>
+		<echo>|                                                   |</echo>
+		<echo>+---------------------------------------------------+</echo>
+		<echo>Debug: ${debug.compile}</echo>
+		<compile srcdir="${sbnweb.domain.src.dir}" destdir="${sbnweb.domain.classes.dir}" debug="${debug.compile}" />
 
-    	<compile srcdir="${sbnweb.domain.src.dir}" destdir="${sbnweb.domain.classes.dir}"/>
+		<copy todir="${ejb.bin.dir}/META-INF">
+			<fileset dir="./ejbModule/META-INF" />
+		</copy>
+		<!-- JAR -->
+		<jar destfile="${ejb.dist.dir}/${module.domain.name}.jar" filesonly="true">
 
-    	<copy todir="${ejb.bin.dir}/META-INF">
-    		<fileset dir="./ejbModule/META-INF">
-    			<!--<include name="*.xml" />-->
-    		</fileset>
-    	 </copy>
-      <!-- JAR -->
-      <jar destfile="${ejb.dist.dir}/${module.domain.name}.jar" filesonly="true">
+			<fileset dir="${ejb.bin.dir}">
+				<exclude name="it/iccu/sbn/servizi/*" />
+				<exclude name="META-INF/jboss-service.xml" />
+				<exclude name="META-INF/xmbean/*/**" />
+			</fileset>
+			<fileset dir="${sbnweb.domain.src.dir}">
+				<include name="**/*.properties" />
+				<include name="jobs.xml" />
+			</fileset>
+			<manifest>
+				<attribute name="Class-Path" value="lib/unimarcmodel.jar SbnWebHibernate.jar lib/SbnWebCommonVO.jar" />
+			</manifest>
+		</jar>
 
-         <fileset dir="${ejb.bin.dir}" >
-          	<exclude  name="it/iccu/sbn/servizi/*"/>
-          	<exclude  name="META-INF/jboss-service.xml"/>
-         	<exclude  name="META-INF/xmbean/*/**"/>
-         </fileset>
-		 <fileset dir="${sbnweb.domain.src.dir}">
-		 	<include name="**/*.properties"/>
-			<include name="jobs.xml"/>
-		 </fileset>
-		<manifest>
-			<attribute name="Class-Path" value="lib/unimarcmodel.jar SbnWebHibernate.jar lib/SbnWebCommonVO.jar" />
-		</manifest>
-      </jar>
+		<!-- SAR -->
+		<jar destfile="${ejb.dist.dir}/${module.service.name}.sar">
+			<fileset dir="${ejb.bin.dir}">
+				<include name="it/iccu/sbn/servizi/*/**" />
+			</fileset>
+			<fileset dir="${ejb.bin.dir}">
+				<include name="META-INF/jboss-service.xml" />
+				<include name="META-INF/xmbean/**" />
+			</fileset>
+			<manifest>
+				<attribute name="Class-Path" value="lib/unimarcmodel.jar SbnWebHibernate.jar" />
+			</manifest>
+		</jar>
 
-      <!-- SAR -->
-      <jar destfile="${ejb.dist.dir}/${module.service.name}.sar">
-         <fileset dir="${ejb.bin.dir}">
-             <include name="it/iccu/sbn/servizi/*/**" />
-         </fileset>
-         <fileset dir="${ejb.bin.dir}">
-            <include name="META-INF/jboss-service.xml" />
-         	<include name="META-INF/xmbean/**" />
-         </fileset>
-		<manifest>
-			<attribute name="Class-Path" value="lib/unimarcmodel.jar SbnWebHibernate.jar" />
-		</manifest>
-      </jar>
-
-    	<delete dir="${ejb.dist.dir}/lib"/>
+		<delete dir="${ejb.dist.dir}/lib" />
 	</target>
 
-
-
 	<target name="build-domain" depends="build">
-  	  <copy todir="${ejb.dist.dir}/lib" >
-  			<fileset dir="./lib">
-  				<include name="unimarcmodel.jar" />
-  			</fileset>
-  	  </copy>
+		<copy todir="${ejb.dist.dir}/lib">
+			<fileset dir="./lib">
+				<include name="unimarcmodel.jar" />
+			</fileset>
+		</copy>
 	</target>
 
 </project>

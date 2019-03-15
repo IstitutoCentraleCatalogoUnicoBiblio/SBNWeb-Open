@@ -4,6 +4,8 @@
 	<property file="local-settings.properties" />
 
 	<property name="build.dir" value="${deploy.dir}/${module.name}.ear" />
+	
+	<property name="debug.compile" value="true" />
 
 	<available property="sbnDomainDir" file="../SbnWebDomainEjb" type="dir" />
 	<available property="sbnHibernateDir" file="../SbnWebHibernate" type="dir" />
@@ -93,7 +95,6 @@
 		<manifest file="${build.dir}/${module.name}-web.war/META-INF/MANIFEST.MF">
 			<attribute name="Class-Path" value="${common.classpath} ${sbnweb.common.vo.classpath}" />
 		</manifest>
-
 	</target>
 
 	<target name="make-web-servizi" description="Assemblaggio Modulo Servizi Web" if="sbnWebServiziDir">
@@ -156,7 +157,6 @@
 			<fileset dir="../SbnWebHibernate/target">
 			</fileset>
 		</copy>
-
 	</target>
 
 	<target name="reloadApplication" depends="build">

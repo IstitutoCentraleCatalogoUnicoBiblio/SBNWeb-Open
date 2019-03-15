@@ -16,6 +16,8 @@
 
 	<property name="int_jar" value="${build.dir}/integration.jar" />
 
+	<property name="debug.compile" value="false" />
+
 	<path id="common_libs">
 		<fileset dir="${lib.common.dir}" />
 		<fileset dir="${lib.resteasy}" />
@@ -81,21 +83,21 @@
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${build.dir}/classes" />
 	</target>
-	
+
 	<target name="clean">
 		<delete dir="${build.dir}" />
 		<delete dir="${basedir}/target" />
 		<delete dir="${basedir}/../SbnWebServizi/build" />
-		
-		<ant antfile="../SbnWebHibernate/build.xml" target="clean" dir="../SbnWebHibernate" inheritall="false">
+
+		<ant antfile="../SbnWebHibernate/build.xml" target="clean" dir="../SbnWebHibernate">
 			<property file="../SbnWebHibernate/build.properties" />
 		</ant>
-		
-		<ant antfile="../SbnWebCommon/build.xml" target="clean" dir="../SbnWebCommon" inheritall="false">
+
+		<ant antfile="../SbnWebCommon/build.xml" target="clean" dir="../SbnWebCommon">
 			<property file="../SbnWebCommon/build.properties" />
 		</ant>
-		
-		<ant antfile="../SbnWebDomainEjb/build.xml" dir="../SbnWebDomainEjb" target="clean" inheritall="false">
+
+		<ant antfile="../SbnWebDomainEjb/build.xml" dir="../SbnWebDomainEjb" target="clean">
 			<property file="../SbnWebDomainEjb/build.properties" />
 		</ant>
 	</target>
@@ -108,12 +110,14 @@
 
 	<target name="make-common" description="Assemblaggio Modulo Common" depends="make-hibernate">
 		<ant antfile="../SbnWebCommon/build.xml" target="build" dir="../SbnWebCommon" inheritall="false">
+			<property name="debug.compile" value="false" />
 			<property file="../SbnWebCommon/build.properties" />
 		</ant>
 	</target>
 
 	<target name="make-ejb-domain" description="Assemblaggio Modulo Ejb Domain">
 		<ant antfile="../SbnWebDomainEjb/build.xml" dir="../SbnWebDomainEjb" target="build" inheritall="false">
+			<property name="debug.compile" value="false" />
 			<property file="../SbnWebDomainEjb/build.properties" />
 		</ant>
 	</target>
@@ -141,7 +145,7 @@
 		<mkdir dir="${lib.extension.web.dir}" />
 		<jar destfile="${build.dir}/${module.name}-web.war">
 			<zipfileset dir="WebContent" />
-			<!--zipfileset dir="${build.dir}/${module.name}-web" prefix="WEB-INF/classes" /-->
+
 			<zipfileset dir="${config.web.dir}" prefix="WEB-INF/classes" />
 			<zipfileset dir="${build.dir}/classes" prefix="WEB-INF/classes">
 				<include name="it/iccu/sbn/web/**" />
@@ -161,7 +165,6 @@
 	</target>
 
 	<target name="make-web-servizi" description="Assemblaggio Modulo Servizi Web" depends="compile, make-int">
-
 		<jar destfile="${build.dir}/${servizi.war.name}">
 			<zipfileset dir="${srv.web.content.dir}" />
 			<zipfileset dir="${srv.classes.common.dir}" prefix="WEB-INF/classes">
@@ -170,6 +173,8 @@
 			<zipfileset file="${int_jar}" prefix="WEB-INF/lib" />
 			<zipfileset dir="${lib.web.dir}" prefix="WEB-INF/lib" />
 			<zipfileset dir="${sbnweb.common.struts.location}" prefix="WEB-INF/lib" />
+
+			<zipfileset dir="${srv.src.common.dir}" prefix="WEB-INF/classes" includes="**/*.properties" />
 
 			<manifest>
 				<attribute name="Class-Path" value="${common.classpath} ${sbnweb.common.vo.classpath}" />
@@ -213,7 +218,6 @@
 			<zipfileset dir="../SbnWebHibernate/target" />
 
 			<zipfileset dir="${build.dir}/jrxml" prefix="jrxml" />
-
 		</jar>
 	</target>
 

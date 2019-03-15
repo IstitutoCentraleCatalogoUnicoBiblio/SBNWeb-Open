@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project name="BUILD SBN WEB COMMON" default="build" basedir=".">
-	<property file="build.properties"/>
+	<property file="build.properties" />
 
 	<target name="prepare">
-		<mkdir dir="${sbnweb.common.dist}"/>
-		<mkdir dir="${sbnweb.common.class}"/>
-		<mkdir dir="${sbnweb.common.struts.dist}"/>
-		<mkdir dir="${sbnweb.common.vo.dist}"/>
-		<mkdir dir="${sbnweb.common.vo.class}"/>
-		<mkdir dir="${sbnweb.common.struts.class}"/>
+		<mkdir dir="${sbnweb.common.dist}" />
+		<mkdir dir="${sbnweb.common.class}" />
+		<mkdir dir="${sbnweb.common.struts.dist}" />
+		<mkdir dir="${sbnweb.common.vo.dist}" />
+		<mkdir dir="${sbnweb.common.vo.class}" />
+		<mkdir dir="${sbnweb.common.struts.class}" />
 
 		<copy todir="${sbnweb.common.vo.class}">
 			<fileset dir="${sbnweb.common.vo.src}">
-			<exclude name="**/*.java"/>
+				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
 	</target>
@@ -40,13 +40,14 @@
 	</path>
 
 	<target name="compile" description="Compilazione classi java" depends="prepare">
-		<javac encoding="UTF-8" includeantruntime="false" destdir="${sbnweb.common.vo.class}" source="1.5" target="1.5">
+		<echo>Debug: ${debug.compile}</echo>
+		<javac encoding="UTF-8" includeantruntime="false" destdir="${sbnweb.common.vo.class}" source="1.5" target="1.5" debug="${debug.compile}">
 			<src path="${sbnweb.common.vo.src}" />
 			<classpath>
 				<path refid="sbnweb.common.class.path" />
 			</classpath>
 		</javac>
-		<javac encoding="UTF-8" includeantruntime="false" destdir="${sbnweb.common.struts.class}" source="1.5" target="1.5">
+		<javac encoding="UTF-8" includeantruntime="false" destdir="${sbnweb.common.struts.class}" source="1.5" target="1.5" debug="${debug.compile}">
 			<src path="${sbnweb.common.vo.src}" />
 			<src path="${sbnweb.common.struts.src}" />
 			<classpath>
@@ -55,10 +56,7 @@
 		</javac>
 	</target>
 
-
-
 	<target name="build" depends="prepare, compile">
-
 		<echo>+---------------------------------------------------------+</echo>
 		<echo>|                                                         |</echo>
 		<echo>| B U I L D   S O L U Z I O N E  S B N W E B  C O M M O N |</echo>
@@ -86,8 +84,8 @@
 	<!-- Clean                                                               -->
 	<!-- =================================================================== -->
 	<target name="clean">
-		<delete dir="${sbnweb.common.dist}"/>
-		<delete dir="${sbnweb.common.class}"/>
+		<delete dir="${sbnweb.common.dist}" />
+		<delete dir="${sbnweb.common.class}" />
 	</target>
 
 </project>

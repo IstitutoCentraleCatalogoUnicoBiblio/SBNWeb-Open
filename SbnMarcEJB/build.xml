@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <project name="Build EJB" default="build" basedir=".">
-    <property file="{basedir}/build.properties"/>
+	<property file="{basedir}/build.properties" />
 
 	<target name="prepare">
-        <mkdir dir="${ejb.dist.dir}"/>
-		<mkdir dir="${ejb.bin.dir}"/>
-    </target>
-	
+		<property name="ejb.debug">false</property>
+		<mkdir dir="${ejb.dist.dir}" />
+		<mkdir dir="${ejb.bin.dir}" />
+	</target>
+
 	<target name="clean">
-        <delete dir="${ejb.dist.dir}"/>
-		<delete dir="${basedir}/build"/>
-    </target>
-	
+		<delete dir="${ejb.dist.dir}" />
+		<delete dir="${basedir}/build" />
+	</target>
+
 	<path id="sbnmarc.class.path">
 		<fileset dir="${basedir}/lib">
 			<include name="*.jar" />
@@ -31,27 +32,32 @@
 		<ant antfile="build-ejb.xml" target="ejbdoclet" />
 	</target>
 
+	<target name="build-debug">
+		<property name="ejb.debug">true</property>
+		<mkdir dir="${ejb.dist.dir}" />
+		<mkdir dir="${ejb.bin.dir}" />
+		<antcall target="build" />
+	</target>
+
 	<target name="build" depends="prepare">
-        <echo>+---------------------------------------------------+</echo>
-        <echo>|                                                   |</echo>
-        <echo>| B U I L D   S O L U Z I O N E   E J B             |</echo>
-        <echo>|                                                   |</echo>
-        <echo>+---------------------------------------------------+</echo>
-		
-		<javac encoding="UTF-8" includeantruntime="false" destdir="${ejb.bin.dir}" source="1.5" target="1.5">
+		<echo>+---------------------------------------------------+</echo>
+		<echo>|                                                   |</echo>
+		<echo>| B U I L D   S O L U Z I O N E   E J B             |</echo>
+		<echo>|                                                   |</echo>
+		<echo>+---------------------------------------------------+</echo>
+		<echo>Debug: ${ejb.debug}</echo>
+		<javac encoding="UTF-8" includeantruntime="false" destdir="${ejb.bin.dir}" source="1.5" target="1.5" debug="${ejb.debug}">
 			<src path="${ejb.module.src}" />
 			<src path="${basedir}/castor-sbnweb" />
 			<classpath>
 				<path refid="sbnmarc.class.path" />
 			</classpath>
 		</javac>
-		
-    	<jar destfile="${ejb.dist.dir}/${module.ejb.name}.jar">
+
+		<jar destfile="${ejb.dist.dir}/${module.ejb.name}.jar">
 			<zipfileset dir="${ejb.bin.dir}" />
 			<zipfileset file="${ejb.module.src}/iidsettings.properties" />
 			<zipfileset dir="${ejb.module.src}" includes="**/*.xml, **/*.xsd" />
 		</jar>
-
-
 	</target>
 </project>

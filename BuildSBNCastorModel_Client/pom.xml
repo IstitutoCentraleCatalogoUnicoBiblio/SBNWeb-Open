@@ -3,46 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.iccu.sbn</groupId>
-	<artifactId>sbnmarc</artifactId>
-	<version>1.0.0</version>
+	<artifactId>unimarcmodel</artifactId>
+	<version>2.0.3</version>
 	<packaging>pom</packaging>
-	<name>sbnmarc</name>
+	<name>unimarcmodel</name>
 	<description>sbnweb LMS</description>
-	<properties>
-		<maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
-	</properties>
-	<profiles>
-		<profile>
-			<id>docker</id>
-			<properties>
-				<!-- in ambiente docker i dati del repository git non sono disponibili -->
-				<maven.gitcommitid.skip>true</maven.gitcommitid.skip>
-				<git.commit.id.abbrev>docker</git.commit.id.abbrev>
-				<git.commit.time>${build.timestamp}</git.commit.time>
-			</properties>
-		</profile>
-	</profiles>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>2.2.6</version>
-				<executions>
-					<execution>
-						<id>git-info</id>
-						<phase>install</phase>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<skip>${skip.git}</skip>
-					<skipPoms>false</skipPoms>
-					<dateFormat>${maven.build.timestamp.format}</dateFormat>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -65,9 +32,8 @@
 						</goals>
 						<configuration>
 							<target>
-								<property name="version" value="${project.version} (${git.commit.time}-${git.commit.id.abbrev})" />
 								<ant antfile="${basedir}/build.xml">
-									<target name="earContent" />
+									<target name="buildmodello" />
 								</ant>
 							</target>
 						</configuration>
