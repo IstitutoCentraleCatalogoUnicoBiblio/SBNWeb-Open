@@ -260,7 +260,7 @@
 
 		<br/>
 		<div style="float:left; width:35%">
-			<bean:message key="servizi.configurazione.parametriBiblioteca.catMediazione.inv.digit" bundle="serviziLabels" />
+			<bean:message key="servizi.bottone.sale.categorieMediazione" bundle="serviziLabels" />&nbsp;&#x2076;
 		</div>
 		<div style="float:none;">
 			<html:select property="parametriBib.catMediazioneDigit">
@@ -279,7 +279,9 @@
 		<%-- <div class="msgOK1"><bean:message key="servizi.configurazione.parametriBiblioteca.messaggio.catFrui" bundle="serviziLabels" /> --%>
 		<div class="msgOK1"><bean:message key="servizi.configurazione.parametriBiblioteca.messaggio.catFruizione" bundle="serviziLabels" />
 		</div>
-
+		<br/>
+		<div class="msgOK1n">&#x2076;&nbsp;</div>
+		<div class="msgOK1"><bean:message key="servizi.configurazione.parametriBiblioteca.messaggio.catMediazione" bundle="serviziLabels" />
 		<%--
 		<br/>
 		<div class="msgOK1n">&#x2076;&nbsp;</div>

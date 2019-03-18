@@ -3121,7 +3121,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					areaDatiPass.addListaSegnalazioni(testoLog);
 				}
 
-				if (ValidazioneDati.in(tracciatoRecord.getTag(), "790", "791")) {
+				if (in(tracciatoRecord.getTag(), "790", "791")) {
 					testoLog = setTestoLog("ATTENZIONE: trovato tag " + tracciatoRecord.getTag() +" attualmente non gestito"
 						+ " per chiave: n.richiesta=" + areaDatiPass.getNrRichiesta()
 						+ " id unimarc Input=" + notEmptyOrOther(tracciatoRecord.getIdInput(), tracciatoRecord.getDati())
@@ -3130,7 +3130,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					continue;
 				}
 
-				if (ValidazioneDati.in(tracciatoRecord.getTag(), "451", "452", "453")) {
+				if (in(tracciatoRecord.getTag(), "451", "452", "453")) {
 					testoLog = setTestoLog("ATTENZIONE: trovato tag " + tracciatoRecord.getTag() +" attualmente non gestito"
 						+ " per chiave: n.richiesta=" + areaDatiPass.getNrRichiesta()
 						+ " id unimarc Input=" + notEmptyOrOther(tracciatoRecord.getIdInput(), tracciatoRecord.getDati())
@@ -3412,7 +3412,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							SbnLivello livello = SbnLivello.valueOf(titRadice.getCd_livello());
 
 							String natura = Character.toString(titRadice.getCd_natura());
-							if (ValidazioneDati.in(natura, "M", "S", "C", "W", "N", "R") ) {
+							if (in(natura, "M", "S", "C", "W", "N", "R") ) {
 								//documento
 								DatiDocType datiDocType = new DatiDocType();
 								datiDocType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
@@ -4167,10 +4167,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// in questa fase devono essere trattati solo i titoli i cui legami non sono gerarchici che verranno trattati in separata
 				// sede (questi infatti compariranno anche com 001 e lì verranno caricati)
-				if (ValidazioneDati.in(tracciatoRecord.getTag(), "461", "462", "463")) {
+				if (in(tracciatoRecord.getTag(), "461", "462", "463")) {
 					continue;
 				} else
-					if (ValidazioneDati.in(tracciatoRecord.getTag(), "419")) {
+					if (in(tracciatoRecord.getTag(), "419")) {
 						testoLog = setTestoLog("ATTENZIONE: E' stato individuato tag " + tracciatoRecord.getTag()
 								+ " ammesso da UNIMARC ma non gestito da import per chiave: n.richiesta=" + areaDatiPass.getNrRichiesta()
 								+ " id unimarc=" + notEmptyOrOther(tracciatoRecord.getIdLink(), tracciatoRecord.getDati()));
@@ -7005,7 +7005,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 		//dummy c100
 		final C100 dummy = new C100();
-		if (ValidazioneDati.in(natura, "S", "C")) {
+		if (in(natura, "S", "C")) {
 			dummy.setA_100_8("a"); // Tipo data
 			dummy.setA_100_9("19..");
 			dummy.setA_100_13(null);
@@ -7895,48 +7895,44 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 	private C181 imposta181Area0Default (String tipoRecord) {
 
 		C181 c181 = new C181();
-		if (tipoRecord.equals("a") || tipoRecord.equals("b")) {
+		if (in(tipoRecord, "a", "b")) {
 			c181.setA_181_0("i");
-		} else if (tipoRecord.equals("c") || tipoRecord.equals("d") || tipoRecord.equals("j")) {
+		} else if (in(tipoRecord, "c", "d", "j")) {
 			c181.setA_181_0("d");
-		} else if (tipoRecord.equals("e") || tipoRecord.equals("f") || tipoRecord.equals("g") || tipoRecord.equals("k")) {
+		} else if (in(tipoRecord, "e", "f", "g", "k")) {
 			c181.setA_181_0("b");
-		} else if (tipoRecord.equals("i")) {
+		} else if (in(tipoRecord, "i")) {
 			c181.setA_181_0("h");
-		} else if (tipoRecord.equals("l") || tipoRecord.equals("m")) {
+		} else if (in(tipoRecord, "l", "m")) {
 			c181.setA_181_0("m");
-		} else if (tipoRecord.equals("r")) {
+		} else if (in(tipoRecord, "r")) {
 			c181.setA_181_0("e");
 		}
 
-		if (tipoRecord.equals("c") || tipoRecord.equals("d")) {
+		if (in(tipoRecord, "c", "d")) {
 			c181.setB_181_0("a");
-		} else if (tipoRecord.equals("e") || tipoRecord.equals("f")) {
+		} else if (in(tipoRecord, "e", "f")) {
 			c181.setB_181_0("c");
 		} else if (tipoRecord.equals("j")) {
 			c181.setB_181_0("b");
 		}
 
-		if (tipoRecord.equals("e") || tipoRecord.equals("f")
-				 || tipoRecord.equals("k")) {
+		if (in(tipoRecord, "e", "f", "k")) {
 			c181.setB_181_1("b");
-		} else if (tipoRecord.equals("g")) {
+		} else if (in(tipoRecord, "g")) {
 			c181.setB_181_1("a");
 		}
 
-		if (tipoRecord.equals("e") || tipoRecord.equals("f")
-				 || tipoRecord.equals("g") || tipoRecord.equals("k")) {
+		if (in(tipoRecord, "e", "f", "g", "k")) {
 			c181.setB_181_2("2");
-		} else if (tipoRecord.equals("r")) {
+		} else if (in(tipoRecord, "r")) {
 			// Agosto 2015: telefonico con Scognamiglio: per tipo record "r" il campo c181.setB_181_2 rimane vuoto
 			// c181.setB_181_2("3");
 		}
 
-		if (tipoRecord.equals("a") || tipoRecord.equals("b") || tipoRecord.equals("c") || tipoRecord.equals("d")
-				|| tipoRecord.equals("e") || tipoRecord.equals("f")	|| tipoRecord.equals("g") || tipoRecord.equals("k")
-				|| tipoRecord.equals("l") || tipoRecord.equals("m")	|| tipoRecord.equals("r")) {
+		if (in(tipoRecord, "a", "b", "c", "d", "e", "f", "g", "k", "l", "m", "r")) {
 			c181.setB_181_3("e");
-		} else if (tipoRecord.equals("i") || tipoRecord.equals("j")) {
+		} else if (in(tipoRecord, "i", "j")) {
 			c181.setB_181_3("a");
 		}
 		return c181;
@@ -7945,20 +7941,18 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 	private C182 imposta182Area0Default (String tipoRecord) {
 		// Modifica del 19.05.2015 almaviva2 (adeguamento all'Indice) per accettare il valore n del tipoMediazione
 		C182 c182 = new C182();
-		if (tipoRecord.equals("a")	|| tipoRecord.equals("b")  || tipoRecord.equals("c")  || tipoRecord.equals("d")
-				|| tipoRecord.equals("e")	|| tipoRecord.equals("f")	|| tipoRecord.equals("k")	|| tipoRecord.equals("r")) {
+		if (in(tipoRecord, "a", "b", "c", "d", "e", "f", "k", "r")) {
 			//c182.setA_182_0("y");
 			c182.setA_182_0("n");
-		} else if (tipoRecord.equals("g")) {
+		} else if (in(tipoRecord, "g")) {
 			c182.setA_182_0("g");
-		}  else if (tipoRecord.equals("i")
-				|| tipoRecord.equals("j")) {
+		}  else if (in(tipoRecord, "i", "j")) {
 			c182.setA_182_0("a");
-		} else if (tipoRecord.equals("l")) {
+		} else if (in(tipoRecord, "l")) {
 			// MODIFICA almaviva2 SETTEMBRE tiporec=l forma contenuto=m tipo mediazione=m
 			// c182.setA_182_0("b");
 			c182.setA_182_0("m");
-		} else if (tipoRecord.equals("m")) {
+		} else if (in(tipoRecord, "m")) {
 			c182.setA_182_0("m");
 		}
 		return c182;
@@ -7968,11 +7962,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 	private C183 imposta183Area0Default (String tipoMediazione) {
 		// Modifica del 19.05.2015 almaviva2 (adeguamento all'Indice) per accettare il valore n del tipoMediazione
 		C183 c183 = new C183();
-		if (tipoMediazione.equals("a")) {
+		if (in(tipoMediazione, "a")) {
 			c183.setA_183_0("sz");
-		} else if (tipoMediazione.equals("g")) {
+		} else if (in(tipoMediazione, "g")) {
 			c183.setA_183_0("vz");
-		}  else if (tipoMediazione.equals("m") || tipoMediazione.equals("n")) {
+		}  else if (in(tipoMediazione, "m", "n")) {
 			c183.setA_183_0("nz");
 		}
 		return c183;
@@ -8393,10 +8387,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				numLastra[0] = new NumStdType();
 				numLastra[0].setNumeroSTD(areaAppoggio1);
 				//almaviva5_20141124
-				if (ValidazioneDati.in(tipoRecord, "i", "j"))
+				if (in(tipoRecord, "i", "j"))
 					numLastra[0].setTipoSTD("A");
 				else
-					if (ValidazioneDati.in(tipoRecord, "g"))
+					if (in(tipoRecord, "g"))
 						numLastra[0].setTipoSTD("H");
 					else
 						numLastra[0].setTipoSTD("E");
