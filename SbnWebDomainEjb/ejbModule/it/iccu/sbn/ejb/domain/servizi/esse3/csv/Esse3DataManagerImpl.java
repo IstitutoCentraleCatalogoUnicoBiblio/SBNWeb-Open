@@ -34,9 +34,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.UserTransaction;
+
 import org.apache.log4j.Logger;
 
 public class Esse3DataManagerImpl implements Esse3DataManager {
+	
 	private Logger log = Logger.getLogger(Esse3DataManager.class);
 
 	private Esse3OperationType operationToDo;
@@ -46,6 +49,8 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 	private List<String> utentiAggiornati = new ArrayList<String>();
 	private List<String> errors = new ArrayList<String>();
 	private List<String> utentiScartati = new ArrayList<String>();
+
+	private UserTransaction tx;
 
 	public Esse3DataManagerImpl(Esse3OperationType op, String ticket) {
 		this.operationToDo = op;
@@ -81,7 +86,7 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 		Esse3DataCsvReaderImpl bcl = new Esse3DataCsvReaderImpl(cd_polo, cd_biblioteca, path_csv);
 		List<UtenteBibliotecaVO> utentiBibliotecaVO = bcl.getUtentiBibliotecaVO();
 		if (utentiBibliotecaVO.isEmpty()) {
-			errors.add("Nulla � stato importato trovato");
+			errors.add("Nulla è stato importato");
 		}
 		// Ottengo gli errori della conversione csv esse3
 		errors = bcl.getErrors();
@@ -101,6 +106,8 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 	// inserice il bean del DB
 	private boolean insertDB(Servizi servizi, UtenteBibliotecaVO utenteToIns, String cd_polo, String cd_biblioteca) {
 		try {
+			DaoManager.begin(tx);
+			
 			Timestamp now = DaoManager.now();
 			String firmaUtenteIns = DaoManager.getFirmaUtente(this.ticket);
 			utenteToIns.setUteIns(firmaUtenteIns);
@@ -126,6 +133,7 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 				utentiInseriti.add(utenteToIns.getCodiceUtente());
 
 			return true;
+			
 		} catch (Exception e) {
 			log.error("Errore " + utenteToIns.getCodiceUtente() + " inserimento: ");
 			log.error(utenteToIns, e);
@@ -134,6 +142,7 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 			errorMessage += (e.getMessage() + "\n -----------------");
 			errors.add(errorMessage);
 			utentiScartati.add("Inserimento id: " + utenteToIns.getCodiceUtente() + " cod_fiscale: " + utenteToIns.getAnagrafe().getCodFiscale());
+			DaoManager.rollback(tx);
 			return false;
 		}
 	}
@@ -157,10 +166,12 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 	}
 	private boolean updateDB(Servizi servizi, UtenteBibliotecaVO utenteToUpdate, String cd_polo, String cd_biblioteca) {
 		try {
-			//Verifico se il codice utente � presente nella base dati.
+			DaoManager.begin(tx);
+			
+			//Verifico se il codice utente è presente nella base dati.
 			UtenteBaseVO utenteVO = servizi.getUtente(ticket, utenteToUpdate.getCodiceUtente());
 			UtenteBibliotecaVO utente = null;
-			if(utenteVO == null) {
+			if (utenteVO == null) {
 				//non trovato, lancio eccezione per inserirlo
 				throw new ResourceNotFoundException("utente: " + utenteToUpdate.getCodiceUtente() + " non trovato");
 
@@ -175,9 +186,8 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 				
 				 utente = servizi.getDettaglioUtente(ticket, ricerca, null, null);
 				 if(utente == null) {
-					 //Errore da inserire
-						throw new ResourceNotFoundException("utente: " + utenteToUpdate.getCodiceUtente() + " non trovato");
-
+					//Errore da inserire
+					throw new ResourceNotFoundException("utente: " + utenteToUpdate.getCodiceUtente() + " non trovato");
 				 }
 			}
 
@@ -204,9 +214,12 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 
 			}
 			return true;
+			
 		} catch (ResourceNotFoundException e) {
-			 insertDB(servizi, utenteToUpdate, cd_polo, cd_biblioteca);
+			DaoManager.rollback(tx);
+			insertDB(servizi, utenteToUpdate, cd_polo, cd_biblioteca);
 			return false;
+			
 		}catch (Exception e) {
 			log.error("Errore aggiornamento: " + utenteToUpdate.getCodiceUtente() + ": ");
 			log.error(utenteToUpdate, e);
@@ -215,6 +228,7 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 			errorMessage += (e.getMessage() + "\n -----------------");
 			errors.add(errorMessage);
 			utentiScartati.add("Aggiornamennto id: " + utenteToUpdate.getCodiceUtente() + " cod_fiscale: " + utenteToUpdate.getAnagrafe().getCodFiscale());
+			DaoManager.rollback(tx);
 			return false;
 		}
 	}
@@ -273,11 +287,17 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 		}
 		List<UtenteBibliotecaVO> utentiBibliotecaVO = readCSV(cd_polo, cd_biblioteca, path_csv);
 		//errors = bcl.getErrors();
-		for(UtenteBibliotecaVO utente: utentiBibliotecaVO) {
-
-			boolean isUpdated = updateDB(servizi, utente, cd_polo, cd_biblioteca);
-			if(isUpdated) {
-				utentiAggiornati.add(utente.getCodiceUtente());
+		for (UtenteBibliotecaVO utente: utentiBibliotecaVO) {
+			try {
+				DaoManager.begin(tx);				
+				boolean isUpdated = updateDB(servizi, utente, cd_polo, cd_biblioteca);
+				if(isUpdated) {
+					utentiAggiornati.add(utente.getCodiceUtente());
+				}
+				DaoManager.commit(tx);
+				
+			} catch (Exception e) {
+				DaoManager.rollback(tx);
 			}
 		}
 
@@ -302,7 +322,7 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 	}
 	/**
 	 * Manager di import dati da Esse3 ad SbnWeb<br>
-	 * In base al Esse3OperationType con cui � stato dichiarato esegue determinate
+	 * In base al Esse3OperationType con cui è stato dichiarato esegue determinate
 	 * istruzioni
 	 *
 	 * @param String
@@ -313,10 +333,15 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 	 *            data (ci aspettiamo il path del CSV)
 	 * @return
 	 * @version 1.0
+	 * @param tx 
 	 * @since 18/07/2018
 	 */
-	public boolean manage(String cd_polo, String cd_biblioteca, Object data) {
+	public boolean manage(String cd_polo, String cd_biblioteca, Object data, UserTransaction tx, Logger _log) {
 		log.debug( operationToDo + " data per " + cd_polo + cd_biblioteca);
+		this.tx = tx;
+		if (_log != null)
+			this.log = _log;
+		
 		switch (operationToDo) {
 		case INSERT_FROM_CSV:
 			return importData(cd_polo, cd_biblioteca, (String) data);

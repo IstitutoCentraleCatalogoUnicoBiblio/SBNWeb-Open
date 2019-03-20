@@ -20,7 +20,7 @@ import it.iccu.sbn.ejb.domain.servizi.esse3.ws.response.Esse3Response;
 
 /**
  * Interfaccia di chiamata del WebService di login su ESSE3
- * @author Luca Ferraro Visardi
+ * @author almaviva3
  * @version 1.0
  * @since 12/07/2018
  */

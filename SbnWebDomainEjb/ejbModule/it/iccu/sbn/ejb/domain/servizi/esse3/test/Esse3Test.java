@@ -22,7 +22,7 @@ import it.iccu.sbn.ejb.domain.servizi.esse3.ws.response.Esse3ResponseType;
 
 /**
  * Classe Test del WebService su ESSE3<br>
- * @author Luca Ferraro Visardi
+ * @author almaviva3
  * @version 1.0
  * @since 12/07/2018
  */

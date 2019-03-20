@@ -33,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -43,7 +44,7 @@ import com.annimon.stream.function.Predicate;
 /**
  * Classe di conversione da CSV dei dati ESSE3 (x LUMSA)
  *
- * @author Luca Ferraro Visardi
+ * @author almaviva3
  * @version 1.0
  * @since 17/07/2018
  */
@@ -77,14 +78,17 @@ public class Esse3DataCsvReaderImpl implements Esse3DataCsvReader {
 			utente.setCod_utente(datas[1]);
 			utente.setNome(datas[5]);
 			utente.setCognome(datas[4]);
-			utente.setLuogo_nascita(datas[16]);
-			utente.setData_nascita(DateUtil.toDateISO(datas[7]));
+			
+			//Almaviva3 04/04/2019 MANU campo not-null
+			utente.setLuogo_nascita(ValidazioneDati.trimOrEmpty(datas[16]));
+			Date data_nascita = DateUtil.toDateISO(datas[7]);
+			utente.setData_nascita(data_nascita != null ? data_nascita : DaoManager.now());
 
 			if(ValidazioneDati.isFilled(datas[6]))
 				utente.setSesso(datas[6].charAt(0));
 
 
-			//resisdenza
+			//residenza
 			if(ValidazioneDati.isFilled(datas[29]))
 				utente.setCap_res(datas[29].trim());
 

@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 /**
  * Chiamata del WebService su ESSE3 (Utilizza apache Axis 1.x)<br>
  * Classe di connessione al WS di ESSE3 x bib LUMSA (IEILU)
- * @author Luca Ferraro Visardi
+ * @author almaviva3
  * @version 1.0
  * @since 12/07/2018
  */
@@ -78,10 +78,10 @@ public class Esse3ServicesImpl implements Esse3 {
 			response = new Esse3Response(response_code, sid.value);
 
 		} catch (RemoteException e) {
-			log.error("Errore login Esse3", e);
+			log.error("Errore login esse3: ", e);
 			response = new Esse3Response(Esse3ResponseType.ERRORE_LDAP, "");
 		}
-		log.info("login esse3 response " + response.getResponseKey());
+		log.debug("login esse3 response: " + response.getResponseKey());
 		return response;
 	}
 
@@ -107,7 +107,7 @@ public class Esse3ServicesImpl implements Esse3 {
 			response = new Esse3Response(Esse3ResponseType.ERRORE_LDAP, "");
 
 		}
-		log.info("Logout esse3 response  " + response.getResponseKey());
+		log.info("Logout esse3 response: " + response.getResponseKey());
 
 		return response;
 

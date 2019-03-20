@@ -118,7 +118,7 @@ public class ServiziBMTBean extends TicketChecker implements ServiziBMT {
 
 	private static final long serialVersionUID = -6862576144461262964L;
 
-	private static Logger log = Logger.getLogger(ServiziBMTBean.class);
+	private static Logger log = Logger.getLogger(ServiziBMT.class);
 	private SessionContext ctx;
 
 	public void ejbCreate() {
@@ -1739,7 +1739,7 @@ public class ServiziBMTBean extends TicketChecker implements ServiziBMT {
 		return batch.allinea();
 	}
 
-	public ElaborazioniDifferiteOutputVo importaUtentiESSE3(ParametriBatchImportaUtentiVO pbiuVO, BatchLogWriter log)
+	public ElaborazioniDifferiteOutputVo importaUtentiESSE3(ParametriBatchImportaUtentiVO pbiuVO, BatchLogWriter blw)
 			throws SbnBaseException {
 
 		ElaborazioniDifferiteOutputVo output = new ElaborazioniDifferiteOutputVo(pbiuVO);
@@ -1751,25 +1751,28 @@ public class ServiziBMTBean extends TicketChecker implements ServiziBMT {
 
 			String fileName = pbiuVO.getImportFileName();
 			String path = BatchImportaUtenti.getImportaUtentiHome() + File.separator;
-			log.logWriteLine("Utenti di esse3");
+			blw.logWriteLine("Utenti di esse3");
 			Esse3DataManagerImpl esse3 = (Esse3DataManagerImpl) new Esse3DataManagerBuilder()
 					.setOperationToDo(Esse3OperationType.UPDATE_FROM_CSV).setTicket(pbiuVO.getTicket()).build();
-			esse3.manage(pbiuVO.getCodPolo(), pbiuVO.getCodBib(), path + File.separator + fileName);
+			esse3.manage(pbiuVO.getCodPolo(), pbiuVO.getCodBib(), path + File.separator + fileName, tx, blw.getLogger());
 			List<String> errors = esse3.getErrors();
 			List<String> utentiAggiornati = esse3.getUtentiAggiornati();
 			List<String> utentiInseriti = esse3.getUtentiInseriti();
 
-			writeLog("---- Statistiche dati WS Esse3");
+			blw.logWriteLine("---- Statistiche dati WS Esse3");
 
-				writeLog("Utenti Aggiornati: ", utentiAggiornati);
-				writeLog("Utenti Inseriti: ", utentiInseriti);
-				writeLog("Errori: ", errors);
+			blw.logWriteLine("Utenti Aggiornati: " + utentiAggiornati);
+			blw.logWriteLine("Utenti Inseriti: " + utentiInseriti);
+			blw.logWriteLine("Errori: ");
+			for (String error : errors)
+				blw.logWriteLine(error);
 
-			writeLog("----");
-			output.setStato((errors.size() > 0 && (utentiInseriti.size() == 0 || utentiAggiornati.size() == 0)) ? ConstantsJMS.STATO_ERROR : ConstantsJMS.STATO_OK);
+			blw.logWriteLine("----");
+			//output.setStato((errors.size() > 0 && (utentiInseriti.size() == 0 || utentiAggiornati.size() == 0)) ? ConstantsJMS.STATO_ERROR : ConstantsJMS.STATO_OK);
+			output.setStato(ConstantsJMS.STATO_OK);
 
 		} catch (Exception e) {
-			log.getLogger().error("", e);
+			blw.getLogger().error("", e);
 			DaoManager.rollback(tx);
 		} finally {
 			DaoManager.endTransaction(tx, true);
@@ -1803,7 +1806,7 @@ public class ServiziBMTBean extends TicketChecker implements ServiziBMT {
 
 			Esse3DataManagerImpl manager = new Esse3DataManagerImpl(Esse3OperationType.UPDATE_FROM_MODEL, ticket);
 
-			hasImported = manager.manage(codPolo, codBib, persone);
+			hasImported = manager.manage(codPolo, codBib, persone, tx, null);
 
 			List<String> errors = manager.getErrors();
 			List<String> utentiAggiornati = manager.getUtentiAggiornati();

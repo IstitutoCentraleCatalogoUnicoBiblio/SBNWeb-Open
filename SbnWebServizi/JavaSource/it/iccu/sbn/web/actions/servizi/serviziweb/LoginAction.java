@@ -36,7 +36,6 @@ import it.iccu.sbn.exception.UtenteNotFoundException;
 import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.util.Constants.Servizi;
-import it.iccu.sbn.util.cipher.PasswordEncrypter;
 import it.iccu.sbn.util.mail.MailBodyBuilder;
 import it.iccu.sbn.util.rfid.InventarioRFIDParser;
 import it.iccu.sbn.util.servizi.ServiziUtil;

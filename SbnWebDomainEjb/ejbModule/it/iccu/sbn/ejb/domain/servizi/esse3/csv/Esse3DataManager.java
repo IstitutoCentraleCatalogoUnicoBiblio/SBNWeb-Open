@@ -18,6 +18,10 @@ package it.iccu.sbn.ejb.domain.servizi.esse3.csv;
 
 import java.util.List;
 
+import javax.transaction.UserTransaction;
+
+import org.apache.log4j.Logger;
+
 /**
  * Manager di import dati da Esse3 ad SbnWeb
  * @version 1.0
@@ -29,7 +33,7 @@ public interface Esse3DataManager {
 		INSERT_FROM_CSV, UPDATE_FROM_CSV, UPDATE_FROM_MODEL ;
 	}
 	//manager
-	 boolean manage(String cd_polo, String cd_biblioteca, Object data);
+	 boolean manage(String cd_polo, String cd_biblioteca, Object data, UserTransaction tx, Logger log);
 	//Lista di errori
 	 List<String> getErrors();
 	 //ritorna la lista di id inseriti

@@ -25,7 +25,7 @@ public class Esse3CsvReaderTest {
 
 	public static void main(String[] args) {
 		Esse3DataManagerImpl esse3 = new Esse3DataManagerImpl(Esse3OperationType.INSERT_FROM_CSV, new String());
-		esse3.manage("IEI", "LU", path);
+		esse3.manage("IEI", "LU", path, null, null);
 	}
 
 }

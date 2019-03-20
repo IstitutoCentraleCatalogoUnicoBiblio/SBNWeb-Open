@@ -21,6 +21,7 @@ import it.iccu.sbn.ejb.domain.servizi.esse3.ws.Esse3ServicesImpl;
 import it.iccu.sbn.ejb.domain.servizi.esse3.ws.response.Esse3Response;
 import it.iccu.sbn.ejb.domain.servizi.esse3.ws.response.Esse3ResponseType;
 import it.iccu.sbn.ejb.exception.ApplicationException;
+import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.servizi.utenti.UtenteBaseVO;
 import it.iccu.sbn.extension.auth.utente.LoginRequest;
 import it.iccu.sbn.extension.auth.utente.LoginResponse;
@@ -31,13 +32,14 @@ import it.iccu.sbn.extension.auth.utente.UtenteAuthenticationStrategy;
 import it.iccu.sbn.servizi.utenti.auth.impl.LoginResponseImpl;
 import it.iccu.sbn.servizi.utenti.auth.impl.PlainPasswordAuthData;
 import it.iccu.sbn.util.config.CommonConfiguration;
+import it.iccu.sbn.util.config.Configuration;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
 
 import org.apache.log4j.Logger;
 /**
  * Classe UtenteAuthenticationStrategy chiamata WebService su ESSE3<br>
  * Manca da fare il logout e TODO: gestione UtenteBaseVO
- * @author Luca Ferraro Visardi
+ * @author LFV
  * @version 1.0
  * @since 13/07/2018
  */
@@ -62,6 +64,9 @@ public class Esse3AuthStrategyImpl implements UtenteAuthenticationStrategy {
 		UtenteBaseVO utente = new UtenteBaseVO();
 		try {
 			utente = DomainEJBFactory.getInstance().getServizi().getUtente(ticket, codUtente);
+			if (utente == null)
+				response.setResponseCode(Esse3ResponseType.ERRORE_RECUPERO_DATI);
+			
 		} catch (Exception e) {
 			log.error(e);
 			response.setResponseCode(Esse3ResponseType.ERRORE_RECUPERO_DATI);
@@ -80,10 +85,16 @@ public class Esse3AuthStrategyImpl implements UtenteAuthenticationStrategy {
 		Esse3Response login = new Esse3Response(1500);
 		String cdPolo = "";
 		try {
+			//almaviva5_20190320 check conf. esse3
+			String esse3Bib = CommonConfiguration.getProperty(Configuration.ESSE3_COD_BIB);
+			if (!ValidazioneDati.isFilled(esse3Bib) )
+				return new LoginResponseImpl(LoginResult.NOT_FOUND, null, null);
+
 			log.info("Tentativo di login ESSE3");
 			cdPolo = DomainEJBFactory.getInstance().getPolo().getInfoPolo().getCd_polo();
 			PlainPasswordAuthData authenticationData = (PlainPasswordAuthData) loginRequest.getAuthenticationData();
 			login = esse3.login(loginRequest.getUserId(), authenticationData.getPassword());
+
 		} catch (Exception e) {
 			throw new UtenteAuthException(new ApplicationException(SbnErrorTypes.DB_FALUIRE));
 		}

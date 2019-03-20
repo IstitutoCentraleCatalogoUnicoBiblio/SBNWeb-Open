@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * Interfaccia di conversione da CSV dei dati ESSE3 (x LUMSA)
- * @author Luca Ferraro Visardi
+ * @author almaviva3
  * @version 1.0
  * @since 17/07/2018
  */

@@ -1,14 +1,13 @@
-
 body {
-	 background-color: #FEF1E2;
+	background-color: #FEF1E2;
 }
 
 div {
-    width: 100%;
-    text-align: center;
-    vertical-align: top;
-    margin-top: 5mm;
-    /* margin-bottom: 5mm; */
+	width: 100%;
+	text-align: center;
+	vertical-align: top;
+	margin-top: 5mm;
+	/* margin-bottom: 5mm; */
 }
 
 #header {
@@ -21,10 +20,10 @@ div {
 	margin-top: 5px;
 }
 
-#header div.language{
+#header div.language {
 	top: 55px;
 	left: 720px;
-	position:absolute;
+	position: absolute;
 }
 
 #header span.title {
@@ -37,8 +36,8 @@ div {
 
 table#polo {
 	width: 100%;
-    margin-top: 0px;
-  	color: black;
+	margin-top: 0px;
+	color: black;
 }
 
 td#polo p#polo {
@@ -55,23 +54,22 @@ td#polo p#polo {
 
 div#data {
 	position: relative;
-    margin-top: 0px;
+	margin-top: 0px;
 }
-
 
 input.submit {
 	font-size: 100%;
-    background-color: #f0f0f0;
-    color: black;
-    padding: 0;
+	background-color: #f0f0f0;
+	color: black;
+	padding: 0;
 	margin-right: 6px;
-    border-width: 1px;
+	border-width: 1px;
 }
 
 table {
 	width: 100%;
-    margin-top: 3cm;
-  	color: black;
+	margin-top: 3cm;
+	color: black;
 }
 
 td {
@@ -86,14 +84,15 @@ td {
 
 div.build {
 	position: fixed;
-	bottom: 5px;	
+	bottom: 5px;
 }
 
 table.build {
-	width: 143px;
+	width: auto;
 	float: left;
 }
 
 table.build td {
-	width: auto;
+	width: 1px;
+	white-space: nowrap;
 }
