@@ -56,7 +56,7 @@ demandata alla fase di predisposizione del server.
 - l’ambiente operativo per l’export UNIMARC posizionato in **/export**
 - l’ambiente di backup posizionato in **/backup**
 
-## 2. Sistema Linux. Ambiente e configuraione di base 
+## 2. Sistema Linux. Ambiente e configurazione di base 
 
 L’applicativo SBNWEB prevede che il server sia equipaggiato con il **Sistema Operativo Linux
 RedHat 5.X Enterprise Edition**. La licenza di registrazione, pur non essendo di per sé
