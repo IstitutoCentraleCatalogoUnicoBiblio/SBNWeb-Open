@@ -1,0 +1,60 @@
+publiccodeYmlVersion: '0.2'
+name: SBNWeb-Open
+releaseDate: '2019-03-11'
+softwareVersion: v1.0.0-open
+url: 'https://github.com/IstitutoCentraleCatalogoUnicoBiblio/SBNWeb-Open'
+developmentStatus: stable
+softwareType: standalone/web
+platforms:
+  - web
+categories:
+  - learning-management-system
+  - collaboration
+  - communications
+maintenance:
+  type: contract
+  contractors:
+    - name: '???'
+      until: '2020-01-01'
+legal:
+  license: AGPL-3.0-or-later
+  mainCopyrightOwner: 'Istituto Centrale per il Catalogo Unico '
+  repoOwner: 'Istituto Centrale per il Catalogo Unico '
+intendedAudience:
+  scope:
+    - education
+  countries:
+    - it
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+it:
+  countryExtensionVersion: '0.2'
+  riuso:
+    codiceIPA: m_bac
+description:
+  it:
+    genericName: Learning Management System
+    shortDescription: >-
+      Applicativo LMS integrato, sviluppato da ICCU, realizzato in architettura
+      J2EE e che utilizza esclusivamente software free ed open-source
+    longDescription: >
+      Applicativo LMS integrato, sviluppato da ICCU, realizzato in  architettura
+      J2EE e che utilizza esclusivamente software free ed  open-source (SO
+      Linux, Application Server JBoss, RDBMS PostgreSQL). L’accesso è web-based,
+      l'utente può accedere alle funzioni applicative  per mezzo di una intranet
+      o attraverso la Rete Internet, utilizzando  come terminale normali web
+      browser (es. Firefox, Chrome, Opera, Edge). SBNWeb gestisce un unico
+      livello di base dati, relativo ad un  raggruppamento di Biblioteche
+      (Polo), nella quale i dati privati sono  localizzati dalla Biblioteca e/o
+      all’utente proprietari e la loro  visibilità è controllata
+      applicativamente, consentendo a ciascuno di  accedere soltanto ai propri
+      dati e a quelli condivisi.
+    apiDocumentation: >-
+      https://github.com/IstitutoCentraleCatalogoUnicoBiblio/SBNWeb-Open/blob/master/KIT_SBNWEB/INSTALL.md
+    features:
+      - Gestione base di dati
+      - Gestione Poli Bibliotecari
+usedBy:
+  - Istituto Centrale Catalogo Unico Biblio
