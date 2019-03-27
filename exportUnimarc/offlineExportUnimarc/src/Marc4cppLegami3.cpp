@@ -185,6 +185,7 @@ void Marc4cppLegami::creaTag410_TitoliCollane(
 
 	tree<std::string>::sibling_iterator ch = reticolo.begin().begin(); // Primo figlio di root
 
+
 	int sottoLivelliTitolo410;
 	int occorrenze;
 	char bidColl[10 + 1];
@@ -232,6 +233,14 @@ void Marc4cppLegami::creaTag410_TitoliCollane(
 		} // End if ':'
 		++ch;
 	} // end while
+
+
+	//print_tree(reticolo, reticolo.begin(), reticolo.end());
+
+	if (DATABASE_ID != DATABASE_INDICE)
+		remove_225_410(reticolo);
+
+
 } // End creaTag410_TitoliCollane
 
 
@@ -2171,7 +2180,7 @@ DataField * Marc4cppLegami::creaTag560_RaccoltaFattizia(char *bid_base) {
 							// prendiamo la keyloc
 							CString key_loc = tb950Inv->getField(tb950Inv->tbinv_key_loc);
 							key_loc.leftPadding('0', 9);
-							printf("\nkey_loc=%s", key_loc.data());
+//printf("\nkey_loc=%s", key_loc.data());
 
 
 							// Con la key_loc cerchiamo la collocazione

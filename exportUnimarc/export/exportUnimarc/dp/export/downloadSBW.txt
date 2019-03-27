@@ -3,7 +3,7 @@
 # Elenco dei file da usare per esportare DB per creare unimarc offline
 #	downloadSBW.txt
 #========================================================================================
-downloadDir=/export/exportUnimarc/db_export/
+downloadDir=../../db_export/
 
 jdbcDriver=org.postgresql.Driver
 connectionUrl=jdbc:postgresql://192.168.20.42:5432/sbnwebCollaudo2

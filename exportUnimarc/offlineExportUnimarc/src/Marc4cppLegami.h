@@ -230,6 +230,8 @@ class Marc4cppLegami {
     void init();
     void initLicr();
     void print_tree(const tree<std::string>& tr, tree<std::string>::pre_order_iterator it, tree<std::string>::pre_order_iterator end);
+    void dump_reticolo(const tree<std::string>& tr, tree<std::string>::pre_order_iterator it, tree<std::string>::pre_order_iterator end);
+
     void stop();
 
     void creaTag225_AreaCollezione(int sottoLivelli, const tree<std::string> &reticolo, CKeyValueVector *legamiTitTit410KV, CKeyValueVector *sequenzeTitTit410KV);
@@ -297,6 +299,8 @@ class Marc4cppLegami {
     bool creaTag961_Ordine();
 
     void creaField7xxVoceStrumento(DataField *df, CString *cdStrumentoMusicale); // 26/01/2015
+
+    void remove_225_410(const tree<std::string>& tr);
 
 public:
 	Marc4cppLegami(MarcRecord *marcRecord, Marc4cppDocumento *marc4cppDocumento,

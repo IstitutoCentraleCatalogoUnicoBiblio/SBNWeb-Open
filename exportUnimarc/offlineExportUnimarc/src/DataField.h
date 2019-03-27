@@ -60,6 +60,7 @@ public:
 	ATTValVector<Subfield*> * getSubfields();
 	ATTValVector <Subfield *> * getSubfields(char code);
 	Subfield *getSubfield(char code);
+	Subfield *getNthSubfield(char code, int nth);
 
 	int getId();
 //    void setId(long  id);

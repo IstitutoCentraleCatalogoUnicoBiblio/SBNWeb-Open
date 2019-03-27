@@ -130,6 +130,9 @@ class CKeyValueVector
 	bool SortDescendingByValue();
 	bool existsKey(const char* aKey);
 
+	void dump();
+
+
 	};
 
 

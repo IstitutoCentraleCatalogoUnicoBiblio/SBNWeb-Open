@@ -30,6 +30,7 @@ extern void SignalAWarning(const OrsChar *Module, OrsInt Line,	const OrsChar * M
 
 
 TbReticolo::TbReticolo(char *record) {
+	fieldsVector=0;
 	init(record);
 }
 
@@ -71,26 +72,9 @@ void TbReticolo::dumpRecord()
 }
 
 void TbReticolo::assign(char *record) {
-//	CTokenizer Tokenizer(",");
-//	OrsChar *tokenPtr;
 
-//	char * separator = ",";
-//	CTokenizer Tokenizer(separator);
-//	long tokenLength;
-//	OrsChar *tokenPtr;
-//	CString *s;
-//
-//	Tokenizer = record;
-//
-//	int i = 0;
-//	while (Tokenizer.hasToken() && i < fieldsVector->Length()) {
-//		s = (CString*)fieldsVector->Entry(i);
-//		tokenPtr = Tokenizer.GetToken (IS_NOT_QUOTED_TOKEN, separator, &tokenLength);
-//		s->assign(tokenPtr, tokenLength); // Mettendo le due chiamate come argomento mi esegue per prima la seconda quando la lunghezza non [ ancora valorizzata
-//
-//		i++;
-//	}
-
+	if (!tbFields)
+		return init (record); // 12/11/2018
 
 	CTokenizer Tokenizer(record, ",");
 	long tokenLength;
@@ -115,7 +99,8 @@ void TbReticolo::init(char *record) {
 //	CTokenizer Tokenizer(",");
 //	OrsChar *Token;
 
-	fieldsVector = new ATTValVector<CString*> ();
+	if (!fieldsVector)
+		fieldsVector = new ATTValVector<CString*> ();
 
 	CTokenizer Tokenizer(record, ",");
 	long tokenLength;

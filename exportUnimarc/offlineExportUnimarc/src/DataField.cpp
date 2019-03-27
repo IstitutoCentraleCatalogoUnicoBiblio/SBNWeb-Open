@@ -262,6 +262,24 @@ Subfield *DataField::getSubfield(char code) {
     return 0;
 }
 
+Subfield *DataField::getNthSubfield(char code, int nth) { // start at 1
+
+	int ctr=0;
+	for (int i=0; i < subfieldsVector->Length(); i++)
+    {
+		Subfield *sf = subfieldsVector->Entry(i);
+		if (sf->getCode() == code)
+		{
+			ctr++;
+			if (ctr == nth)
+				return sf;
+		}
+    }
+    return 0;
+}
+
+
+
 
 int DataField::getId()
 {

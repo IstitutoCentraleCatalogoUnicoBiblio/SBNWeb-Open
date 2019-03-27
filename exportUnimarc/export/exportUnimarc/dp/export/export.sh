@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ora="date +%Y-%m-%d-%H:%M:%S"
-echo `${ora}` "Inizio processo di export.sh" > export.proc    
+echo `${ora}` "Inizio processo di export.sh" > export.proc
 
 #java -jar sqlworkbench.jar -script=export.sql -profile='localhost'
 

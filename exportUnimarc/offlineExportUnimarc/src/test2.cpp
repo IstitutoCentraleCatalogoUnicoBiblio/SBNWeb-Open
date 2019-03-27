@@ -2745,8 +2745,10 @@ void printHeader()
 //					printf ("\n\nVersione 7.2.3 25/02/2016");	// Gestione $v sequenza in creaTag464_AnaliticaSpoglio per INDICE e POLO
 
 //					printf ("\n\nVersione 7.3.1 02/03/2016");	// Modificato costruttore CSTRING SkipWhiteSpacesFlag = OrsFALSE;	// 01/03/2016 Bug IEI RT1V020699
+
 //					printf ("\n\nVersione 7.3.2 10/03/2016"); 	// fix 462 che erano 461 (PARE021885) isRiferimentoLegame01MW_2(bidReticoloPtr->data(), bid)
 																// Le 46x andrebbero rifatte!! sono un papocchio
+
 //					printf ("\n\nVersione 7.3.3 30/03/2016");	// Gestione 922 e 927 anche per tipo materiale M(odenro) ed E(antico)
 //					printf ("\n\nVersione 7.3.4 31/03/2016");	// Gestione TbTitset2.h e TbTitset2.cpp per la 231 (titolo dell'opera)
 //					printf ("\n\nVersione 7.4.1.20/04/2016");	// Export 321 da tb_nota invece che da ts_link_web
@@ -2842,14 +2844,16 @@ void printHeader()
 //					printf ("\n\nVersione 9.7.1 05/07/2018");	// fix void addBibliotecheInKVV(CFile *cFileIn, CKeyValueVector *kvv) per biblioteche separate da virgola
 //					printf ("\n\nVersione 9.9.1 17/09/2018");	// 10/09/2018 JIRA 17/43 gestione tag 120 $a pos 7 e 8. Tp_proiezione
 //																// 17/09/2018 Fix 951 cod_ord. Mantis 6680
-					printf ("\n\nVersione 9.9.2 25/09/2018");	// Fix pos 7-8 della 120
-//					printf ("\n\nVersione 9.. //2018");
-//					printf ("\n\nVersione 9.. //2018");
-//					printf ("\n\nVersione 9.. //2018");
-//					printf ("\n\nVersione 9.. //2018");
-//					printf ("\n\nVersione 9.. //2018");
-//					printf ("\n\nVersione 9.. //2018");
-//					printf ("\n\nVersione 9.. //2018");
+//					printf ("\n\nVersione 9.9.2 25/09/2018");	// Fix pos 7-8 della 120
+//					printf ("\n\nVersione 9.9.3 27/09/2018");	// Fix 225/410 per Polo ed Indice in base a mail di Giangregorio del 24/08/2018
+//					printf ("\n\nVersione 9.11.1 05/11/2018");	// Fix check899 per pbe
+//					printf ("\n\nVersione 9.11.2 22/11/2018");	// Fix null pointer 410 // 12/11/2018
+//					printf ("\n\nVersione 10.3.1 12/03/2019");	// Bug mantis 0006904 problema 462. Fatta batteria di test completa!! Approvato da Rossana e Scognamilio
+																// fix elabora46y // 12/03/2019 messa parentesi (bug insidioso individuato durante preparazione OS per git)
+//					printf ("\n\nVersione 10.3.2 14/03/2019");	// Gestione 462 discendente (SET -> SUBSET) al posto della 463
+					printf ("\n\nVersione 10.3.3 25/03/2019");	// BUG fix if (!entryReticolo || !livelloValido)	// 25/03/2019 BUG RAV0078503 (ambiene di new_sbw)	SEG FAULT
+																// creaTag410_InCascata_Polo e creaTag225_AreaCollezione
+//					printf ("\n\nVersione 10.. //2019");
 
 
 //	mail Patrizia. Per quando aggiorniamo esercizio

@@ -863,4 +863,18 @@ int	CKeyValueVector::GetFirstIndexFromSortedKey(char* aKey)
 	return -1; // Nothing Found
 }
 
+void CKeyValueVector::dump()
+{
+	if (KeyType == tKVSTRING && ValType == tKVSTRING)
+	{
+		for (int i=0; i < (VectorEntries); i++)
+			printf ("\nKey = '%s' : value - '%s'", Vector[i]->Key.p, Vector[i]->Val.p);
+	}
+	else if (KeyType == tKVSTRING && ValType == tKVINT)
+	{
+		for (int i=0; i < (VectorEntries); i++)
+			printf ("\nKey = '%s' : value - '%d'", Vector[i]->Key.p, Vector[i]->Val.i);
+	}
+
+}
 

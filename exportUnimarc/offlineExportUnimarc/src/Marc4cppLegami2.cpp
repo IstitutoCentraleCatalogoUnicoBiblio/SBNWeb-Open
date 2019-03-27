@@ -51,20 +51,31 @@
 #
 # Gestione livelli gerarchici
 # ------------------
+
 # 461 legame gerarchico ad una monografia superiore di livello massimo (SET).
-#   Il legame pu� provenire dal SUBSET o PIECE.
+#   Il legame puo' provenire dal SUBSET o PIECE.
+
 # 462 Legame gerarchico ad una monografia intermedia (SUBSET).
-#   Il legame pu� provenire dal SET o PIECE.
-# 463 Legame gerarchico ad una monografia inferiore (PIECE (volume fisico) e SPOGLIO).
-#   Legame al PIECE se proveniente da SET o SUBSET,
-#   Legame allo SPOGLIO se proveniente dal PIECE
-# 464 Legame gerarchico ad una monografia inferiore (PIECE).
-#   Legame al PIECE se proveniente dallo SPOGLIO (natura N),
+#   Il legame puo' provenire dal SET o PIECE.
+
+# 463 Legame gerarchico ad una monografia inferiore (PIECE (volume fisico)
+#   Legame al PIECE se proveniente da SET o SUBSET,
+#   Legame al PIECE se proveniente dallo SPOGLIO
+
+# 464 Legame allo SPOGLIO (natura N) se proveniente dal PIECE
+
+# SET = Titolo di monografia di livello superiore
+# SUBSET = Titolo di monografia di livello intermedio
+# PIECE = Titolo di monografia di livello inferiore (pezzo fisico)
+# SPOGLIO = Titolo analitico
+
 # Codice notizia da mettere nel leader
 #   0 non gerarchica  (no relazioni a 46x)
 #   1 notizia top
-#   2 notizia intermedia o base (verso intermedia o top)
-#
+#   2 notizia intermedia(subset) o base (piece) (verso intermedia o top)
+
+
+
 # SET = Opera di livello superiore
 # SUBSET = Opera di livello intermedio
 # PIECE = Opera di livello inferiore
@@ -84,6 +95,49 @@
 #             |     +------------+     |
 #             +------------------------+
 #
+	<!-----------------------------------
+	Riformulato: 05/03/2018 (per verifiche con bug mantis 0006904)
+
+		  462
+	SET	 ------> SUBSET
+          463
+	SET ----------------------> PIECE
+					     463
+	             SUBSET ------> PIECE
+							            464
+								PIECE ------> SPOGLIO
+	      461
+	SET <------- SUBSET
+	      461
+					     462
+	             SUBSET <------ PIECE
+	SET <---------------------- PIECE
+	             	 	 	 	 	    463
+	             	 	 	 	PIECE <------ SPOGLIO
+
+	NMB: per capire se 462 ascendente (fa parte di) o discenente (comprende)	// 19/03/2019 A voce con Roveri
+		 ci si avvale dell'informazione del livello gerarchico nel leader.
+		 Se posto ad 1 = notizia madre (quindi comprende)
+		 Se posto a 2 = notizia figlia (quindi fa parte di)
+
+
+
+	TEST  su basedati di firenze
+	====
+	URB0894220 462, 463			SET -> SUBSET, SET -> PIECE
+	MIL0007627 462, 463			SET -> SUBSET, SET -> PIECE
+	USM1922189 461, 463			SUBSET -> SET, SUBSET->PIECE
+	MIL0043815 461, 463			SUBSET -> SET, SUBSET -> PIECE
+	VEA0056343 461 				SUBSET -> SET
+	BVE0115076 463 				SET -> PIECE
+	VEA0012315 463 				SET -> PIECE
+	CFI0135415 464 				PIECE -> SPOGLIO
+	CFI0135432 463 				SPOGLIO -> PIECE
+	URB0554925 462 natura M 	PIECE -> SUBSET
+	SBL0247771 462 natura W 	PIECE -> SUBSET
+	----------------------------------->
+
+
 
 SBL0456271  # Storia di Firenze / Robert Davidsohn
 
@@ -797,7 +851,8 @@ void Marc4cppLegami::elabora46y(char *bid, TbReticoloTit *tbReticoloTit)
 	{
 
 		//if (naturaColl == 'S')  // Legame a titolo superiore e non itermedio Mantis 0004555
-		if (naturaColl == 'S' || (naturaBase == 'W' && naturaColl == 'M')) // 10/03/2016
+//		if (naturaColl == 'S' || (naturaBase == 'W' && naturaColl == 'M')) // 10/03/2016
+		if (naturaColl == 'S')  // 05/02/2019 Mantis 0006904
 		{
 			if (IS_TAG_TO_GENERATE(461))
 //				df = creaTag461_FaParteDi_NotiziaSuperiore(tbReticoloTit->getFieldString(tbReticoloTit->sequenza));
@@ -816,8 +871,10 @@ void Marc4cppLegami::elabora46y(char *bid, TbReticoloTit *tbReticoloTit)
 		if (naturaColl == 'S')  // Mail Roveri  lunedì 18 febbraio 2013 16.55 // Legame a titolo superiore
 		{
 			if (IS_TAG_TO_GENERATE(461))
+			{ // 12/03/2019 messa parentesi
 				df = creaTag461_FaParteDi_NotiziaSuperiore(tbReticoloTit->getFieldString(tbReticoloTit->sequenza));
-					marcRecord->addDataField(df);
+				marcRecord->addDataField(df);
+			}
 		}
 
 	}
@@ -4036,14 +4093,20 @@ void Marc4cppLegami::elabora46x(char *bid, bool bidHaPadre) // , char *sequenza
 				else
 				{
 // Arge 27/01/2011 IEI0307468
-					if (isRiferimentoLegame01MW(bid))
+//					if (isRiferimentoLegame01MW(bid))
+
+// 14/03/2019
+					if (naturaColl != 'S')
 					{
-						if (naturaColl != 'S') // Mantis 0004555 08/07/2011
+						if (isRiferimentoLegame01MW(TokenBid.Data()))
+							{
+							if (IS_TAG_TO_GENERATE(462))
+								df = creaTag462_LegameALivelloIntermedio(&TokenBid, &TokenSequenza); // Legame ad intermedia
+							}
+						else
 						{
 							if (IS_TAG_TO_GENERATE(463))
-							{
 								df = creaTag463_PezzoFisico(&TokenBid, &TokenSequenza); // Legame verso il pezzo fisico dal SET o SUBSET
-							}
 						}
 // Contraddice mantis 4555 (scaricherebbe troppa roba per un record unimarc)
 //						else if (naturaColl == 'S') // Mail Roveri lunedì 18 febbraio 2013 16.55
@@ -4074,8 +4137,30 @@ void Marc4cppLegami::elabora46x(char *bid, bool bidHaPadre) // , char *sequenza
 			 		}
 			 		else
 			 		{
-			 			if (IS_TAG_TO_GENERATE(463))
+//			 			if (IS_TAG_TO_GENERATE(463))
+//			 				df = creaTag463_PezzoFisico(&TokenBid, &TokenSequenza); // Legame verso il pezzo fisico dal SET o SUBSET
+
+// 14/03/2019
+			 			if (IS_TAG_TO_GENERATE(463) && bidHaPadre && naturaColl != 'S')
+			 			{ // sono un intermedio verso il basso
 			 				df = creaTag463_PezzoFisico(&TokenBid, &TokenSequenza); // Legame verso il pezzo fisico dal SET o SUBSET
+			 			}
+			 			else
+			 			{
+				 			if (naturaColl != 'S')
+				 			{
+				 				if (isRiferimentoLegame01MW(TokenBid.Data()))
+									{
+									if (IS_TAG_TO_GENERATE(462))
+										df = creaTag462_LegameALivelloIntermedio(&TokenBid, &TokenSequenza); // Legame ad intermedia
+									}
+								else
+								{
+									if (IS_TAG_TO_GENERATE(463))
+										df = creaTag463_PezzoFisico(&TokenBid, &TokenSequenza); // Legame verso il pezzo fisico dal SET o SUBSET
+								}
+				 			}
+			 			}
 			 		}
 				}
 			}
@@ -4320,6 +4405,7 @@ DataField * Marc4cppLegami::creaTag689_Tesauro() {
  * Trova se riferimento di legame 01 con natura M o W
  */
 bool Marc4cppLegami::isRiferimentoLegame01MW(char *bid) {
+//char * Marc4cppLegami::isRiferimentoLegame01MW(char *bid) {
 	bool retb;
 	long position;
 //	long offset;
@@ -4342,7 +4428,8 @@ bool Marc4cppLegami::isRiferimentoLegame01MW(char *bid) {
 
 
 	if (!retb) {
-		return false; // NON E' ARRIVO DI LEGAMI
+//		return false; // NON E' ARRIVO DI LEGAMI
+		return 0; // NON E' ARRIVO DI LEGAMI
 	}
 	// TITOLO ARRIVO DI LEGAMI.
 	// Gestiamo solo quelli di tipo 01
@@ -4393,12 +4480,14 @@ bool Marc4cppLegami::isRiferimentoLegame01MW(char *bid) {
 		if (DATABASE_ID == DATABASE_INDICE) // 09/08/2010   Gestione di tutte le nature C, M, N, S, W
 		{
 			delete sPtr;
-			return true;
+			// return true;
+			return TokenBid.Data();
 		}
 		if ((naturaBase == 'M' || naturaBase == 'W')
 			&& (naturaColl == 'M' || naturaColl == 'W')) {
 			delete sPtr;
 			return true;
+//			return TokenBid.Data();
 		}
 
 	} // End while
@@ -4406,6 +4495,7 @@ bool Marc4cppLegami::isRiferimentoLegame01MW(char *bid) {
 	// Nessun riferimento di tipo 01 M o W al bid in questione
 	delete sPtr;
 	return false;
+//	return 0;
 } // End isRiferimentoLegame01MW
 
 

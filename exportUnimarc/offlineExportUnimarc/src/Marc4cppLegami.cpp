@@ -813,11 +813,28 @@ void Marc4cppLegami::contaSottoLivelliTitolo(const tree<std::string> &reticolo,
 	char bid[10 + 1];
 	bid[10] = 0;
 	//	DataField *df;
+	char legame[3]; legame[2]=0;
+
+
 
 	// Cicliamo sul figli di root per cercare i titoli
 	tree<std::string>::pre_order_iterator it = reticolo.begin();
 
 	str = *it;
+
+	// 25/09/2017
+	pos = str.find(',');
+	const char *ptr = str.data()+pos;
+	legame[0] = *++ptr;
+	legame[1] = *++ptr;
+
+	if (strcmp(legame, "01"))
+	{
+		(*sottolivello)--;
+		return;
+	}
+
+
 	int bidStart = str.find_last_of(':');
 
 	char *BufTailPtr, *aString;
@@ -834,9 +851,11 @@ void Marc4cppLegami::contaSottoLivelliTitolo(const tree<std::string> &reticolo,
 
 		if ((pos = str.find(':')) != string::npos) {
 			if (str.find("TIT:", pos + 1) != string::npos) {
+
+
 				(*sottolivello)++;
 				contaSottoLivelliTitolo(ch, sottolivello);
-				return; // Ci fermiamo al primo nodo incontrato
+//26/09/2018				return; // Ci fermiamo al primo nodo incontrato
 			}
 		}
 		++ch;
@@ -845,64 +864,6 @@ void Marc4cppLegami::contaSottoLivelliTitolo(const tree<std::string> &reticolo,
 
 }
 
-
-char* Marc4cppLegami::getSottoLivelloTitolo410(
-		const tree<std::string> &reticolo, int curSottolivello,
-		int sottoLivello) {
-	string str;
-	unsigned int pos;
-	//	char bid[10 + 1];
-	//	bid[10] = 0;
-	//	DataField *df;
-
-	// Cicliamo sul figli di root per cercare i titoli
-	tree<std::string>::pre_order_iterator it = reticolo.begin();
-
-	str = *it;
-	//	int bidStart = str.find_last_of(':');
-	//	memcpy(bid, (char *) str.data() + bidStart + 1, 10);
-
-	//	std::cout << "SOG children of :" << *it << std::endl;
-	tree<std::string>::sibling_iterator ch = reticolo.begin().begin(); //h1
-	if (sottoLivello == curSottolivello) {
-		ch = reticolo.begin();
-		str = *ch;
-		return (char*) str.data(); // e' stato richiesta root
-	}
-	while (ch != reticolo.end().end()) { // h1
-		str = *ch;
-		if ((pos = str.find(':')) != string::npos) {
-			if (str.find("TIT:", pos + 1) != string::npos) {
-				curSottolivello++;
-				if (sottoLivello == curSottolivello)
-					return (char*)str.data();
-				return getSottoLivelloTitolo410(ch, curSottolivello,
-						sottoLivello);
-			}
-		}
-		++ch;
-	}
-	//	std::cout << std::endl;
-	return 0;
-} // end getSottoLivelloTitolo410
-
-
-
-void Marc4cppLegami::print_tree(const tree<std::string>& tr,
-		tree<std::string>::pre_order_iterator it,
-		tree<std::string>::pre_order_iterator end) {
-	if (!tr.is_valid(it))
-		return;
-	int rootdepth = tr.depth(it);
-	std::cout << "-----" << std::endl;
-	while (it != end) {
-		for (int i = 0; i < tr.depth(it) - rootdepth; ++i)
-			std::cout << "  ";
-		std::cout << (*it) << std::endl << std::flush;
-		++it;
-	}
-	std::cout << "-----" << std::endl;
-}
 
 
 
@@ -1305,7 +1266,7 @@ bool Marc4cppLegami::elaboraDatiLegamiAlDocumento(
 	tree<std::string>::pre_order_iterator it = reticolo.begin();
 
 //tbTitolo->dumpRecord();
-
+//dump_reticolo(reticolo, reticolo.begin(), reticolo.end());
 
 
 	rootBid[10] = 0;
@@ -2535,7 +2496,13 @@ void Marc4cppLegami::creaLegamiTitoloTitolo() {
 
 	if (sottoLivelliTitolo410) {
 		if (IS_TAG_TO_GENERATE(410))
+		{
+
+//sottolivelliTitTit410KV->dump();
+
 			creaTag410_TitoliCollane(sottolivelliTitTit410KV, legamiTitTit410KV, sequenzeTitTit410KV);
+
+		}
 	}
 
 
@@ -2573,6 +2540,7 @@ void Marc4cppLegami::creaLegamiTitoloTitolo() {
 // TODO Da RIFARE avendo spostato la gestione per il polo altrove
 void Marc4cppLegami::creaTag410_InCascata_Indice(int sottoLivelli, const tree<std::string> &reticolo,CKeyValueVector *legamiTitTit410KV, CKeyValueVector *sequenzeTitTit410KV) {
 
+
 	DataField *df; // , *dfSubtag
 	Subfield *sf;
 	ATTValVector<CString *> vectPtr;
@@ -2582,29 +2550,44 @@ void Marc4cppLegami::creaTag410_InCascata_Indice(int sottoLivelli, const tree<st
 	char bidLivelloPadre[10 + 1];
 	bidLivelloPadre[10] = 0;
 	int livelloValido = sottoLivelli;
-	CString subString;
+	CString subString,s ;
 
-	while (livelloValido) {
-		// Partiamo dal nodo + basso (che abbia un legame di tipo 01)
-		entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
-		ptr = strchr(entryReticolo, ':');
-		if (!tbReticoloTit)
-			tbReticoloTit = new TbReticoloTit(ptr + 5);
-		else
-			tbReticoloTit->assign(ptr + 5);
+// dump_reticolo(reticolo, reticolo.begin(), reticolo.end());
 
-		// Gestiamo solo legami di tipo 01
-		char *tpLegame = tbReticoloTit->getField(tbReticoloTit->tp_legame);
-		if (strcmp("01", tpLegame)) {
-			livelloValido--;
-			continue;
-		}
-		// Trovato il primo legame di tipo 01
-		break;
-	} // end while
 
+//	while (livelloValido) {
+//		// Partiamo dal nodo + basso (che abbia un legame di tipo 01)
+//		entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
+//		ptr = strchr(entryReticolo, ':');
+//		if (!tbReticoloTit)
+//			tbReticoloTit = new TbReticoloTit(ptr + 5);
+//		else
+//			tbReticoloTit->assign(ptr + 5);
+//
+//		// Gestiamo solo legami di tipo 01
+//		char *tpLegame = tbReticoloTit->getField(tbReticoloTit->tp_legame);
+//		if (strcmp("01", tpLegame)) {
+//			livelloValido--;
+//			continue;
+//		}
+//		// Trovato il primo legame di tipo 01
+//		break;
+//	} // end while
 	if (!livelloValido)
 		return; // Legami non 01
+
+//	entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
+//	if(*entryReticolo) // 12/11/2018
+//		{
+//		ptr = strchr(entryReticolo, ':');
+//		s.assign(ptr+5);
+//		}
+//	tbReticoloTit = new TbReticoloTit(s.data());
+	tbReticoloTit = new TbReticoloTit("");
+
+
+//	if (!livelloValido)
+//		return; // Legami non 01
 
 	// Prendiamo il titolo
 
@@ -2636,7 +2619,7 @@ void Marc4cppLegami::creaTag410_InCascata_Indice(int sottoLivelli, const tree<st
 
 	//	s = " 001";
 	//s = "001"; // 15/01/2010 10.47
-	CString s((char *)"001", 3);
+	s.assign("001"); // , 3
 
 	if (TIPO_SCARICO == TIPO_SCARICO_UNIMARC)
 		s.AppendString(bidLivelloPadre, 10);
@@ -2679,8 +2662,18 @@ void Marc4cppLegami::creaTag410_InCascata_Indice(int sottoLivelli, const tree<st
 	for (int i = (livelloValido - 1); i; i--) {
 		// Troviamo il bid
 		entryReticolo = getSottoLivelloTitolo410(reticolo, 1, i);
+
+		if (!entryReticolo) // 12/11/2018
+			continue;
+
+
 		char *ptr = strchr(entryReticolo, ':');
+
+//printf ("entryReticolo='%s', ptr='%s'", entryReticolo, ptr);
+
+
 		tbReticoloTit->assign(ptr + 5);
+
 		char *bidSottolivello = tbReticoloTit->getField(tbReticoloTit->bid);
 		//		 printf ("\nentry=%s, bid=%s", entryReticolo, bid);
 		// Carichiamo il record
@@ -2788,10 +2781,10 @@ void Marc4cppLegami::creaTag410_InCascata_Indice(int sottoLivelli, const tree<st
 			df->addSubfield(sf);
 			delete dfLegame;
 		}
+
 	}
 
 	marcRecord->addDataField(df);
-
 	// Rirpristina la tbTitolo otiginale
 	//	tbTitolo = saveTbTitolo;
 
@@ -3067,24 +3060,39 @@ void Marc4cppLegami::creaTag410_InCascata_Polo(int sottoLivelli, const tree<std:
 
 		int livelloValido = sottoLivelli;
 
-		while (livelloValido) {
-			// Partiamo dal nodo + basso (che abbia un legame di tipo 01)
-			entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
-			ptr = strchr(entryReticolo, ':');
-			if (!tbReticoloTit)
-				tbReticoloTit = new TbReticoloTit(ptr + 5);
-			else
-				tbReticoloTit->assign(ptr + 5);
+// 25/09/18 Trattiamo solo livelli 01 in cascata a monte
+//		while (livelloValido) {
+//			// Partiamo dal nodo + basso (che abbia un legame di tipo 01)
+//			entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
+//			ptr = strchr(entryReticolo, ':');
+//			if (!tbReticoloTit)
+//				tbReticoloTit = new TbReticoloTit(ptr + 5);
+//			else
+//				tbReticoloTit->assign(ptr + 5);
+//
+////			// Gestiamo solo legami di tipo 01
+////			char *tpLegame = tbReticoloTit->getField(tbReticoloTit->tp_legame);
+////			if (strcmp("01", tpLegame)) {
+////				livelloValido--;
+////				continue;
+////			}
+//			// Trovato il primo legame di tipo 01
+//			break;
+//		} // end while
 
-			// Gestiamo solo legami di tipo 01
-			char *tpLegame = tbReticoloTit->getField(tbReticoloTit->tp_legame);
-			if (strcmp("01", tpLegame)) {
-				livelloValido--;
-				continue;
-			}
-			// Trovato il primo legame di tipo 01
-			break;
-		} // end while
+entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
+if (!entryReticolo || !livelloValido)	// 25/03/2019 BUG RAV0078503 (ambiene di new_sbw)	SEG FAULT
+	return;
+
+ptr = strchr(entryReticolo, ':');
+//tbReticoloTit = new TbReticoloTit(ptr + 5);
+s.assign(ptr+5);
+tbReticoloTit = new TbReticoloTit(s.data());
+//tbReticoloTit->dumpRecord();
+
+
+
+
 
 		// Prendiamo il titolo
 
@@ -3344,27 +3352,39 @@ void Marc4cppLegami::creaTag225_AreaCollezione(int sottoLivelli,
 
 	int livelloValido = sottoLivelli;
 
-	while (livelloValido) {
-		// Partiamo dal nodo + basso (che abbia un legame di tipo 01)
-		entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
-		ptr = strchr(entryReticolo, ':');
-		if (!tbReticoloTit)
-			tbReticoloTit = new TbReticoloTit(ptr + 5);
-		else
-			tbReticoloTit->assign(ptr + 5);
+//	while (livelloValido) {
+//		// Partiamo dal nodo + basso (che abbia un legame di tipo 01)
+//		entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
+//		ptr = strchr(entryReticolo, ':');
+//		if (!tbReticoloTit)
+//			tbReticoloTit = new TbReticoloTit(ptr + 5);
+//		else
+//			tbReticoloTit->assign(ptr + 5);
+//
+//		// Gestiamo solo legami di tipo 01
+//		char *tpLegame = tbReticoloTit->getField(tbReticoloTit->tp_legame);
+//		if (strcmp("01", tpLegame)) {
+//			livelloValido--;
+//			continue;
+//		}
+//		// Trovato il primo legame di tipo 01
+//		break;
+//	} // end while
+//
 
-		// Gestiamo solo legami di tipo 01
-		char *tpLegame = tbReticoloTit->getField(tbReticoloTit->tp_legame);
-		if (strcmp("01", tpLegame)) {
-			livelloValido--;
-			continue;
-		}
-		// Trovato il primo legame di tipo 01
-		break;
-	} // end while
+	entryReticolo = getSottoLivelloTitolo410(reticolo, 1, livelloValido);
+	if (!entryReticolo || !livelloValido )	// 25/03/2019 elaborando bid: RAV0078503 ambiente new_sbw
+		return;
+
+
+	ptr = strchr(entryReticolo, ':');
+	s.assign(ptr + 5);
+	tbReticoloTit = new TbReticoloTit(s.data());
+	s.Clear();
 
 	if (!livelloValido)
 		return; // Legami non 01
+
 
 
 	//	print_tree(reticolo, reticolo.begin(), reticolo.end());
@@ -3502,6 +3522,15 @@ s.Clear(); // Mantis 4365
 //		else
 //			printf ("\nNON TROVO LA QUADRA [ %s per bid %s", s->data(), bid);
 	}
+
+
+	// 27/06/2018
+	if (TIPO_SCARICO == TIPO_SCARICO_UNIMARC)
+		{
+		sf = new Subfield('z', bid);	// usato per identificare 225 da eliminare assieme alla 410
+		df->addSubfield(sf);
+		}
+
 
 	marcRecord->addDataField(df);
 
@@ -4339,3 +4368,275 @@ DataField * Marc4cppLegami::creaSoggettoCNP1(CKeyValueVector *scomposizioniKVV, 
 
 
 }
+
+
+
+//char* Marc4cppLegami::getSottoLivelloTitolo410(
+//		const tree<std::string> &reticolo, int curSottolivello,
+//		int sottoLivello) {
+//	string str;
+//	unsigned int pos;
+//	char legame[3]; legame[2]=0;
+//	//	char bid[10 + 1];
+//	//	bid[10] = 0;
+//	//	DataField *df;
+//
+//
+//print_tree(reticolo, reticolo.begin(), reticolo.end());
+//
+//	// Cicliamo sul figli di root per cercare i titoli
+//	tree<std::string>::pre_order_iterator it = reticolo.begin();
+//
+//	str = *it;
+//	//	int bidStart = str.find_last_of(':');
+//	//	memcpy(bid, (char *) str.data() + bidStart + 1, 10);
+//
+//	//	std::cout << "SOG children of :" << *it << std::endl;
+//	tree<std::string>::sibling_iterator ch = reticolo.begin().begin(); //h1
+//
+//
+//	if (sottoLivello == curSottolivello) {
+//		ch = reticolo.begin();
+//		str = *ch;
+//		return (char*) str.data(); // e' stato richiesta root
+//	}
+//	while (ch != reticolo.end().end()) { // h1
+//
+//
+//print_tree(ch, ch.begin(), ch.end());
+//
+//		str = *ch;
+//		if ((pos = str.find(':')) != string::npos) {
+//			if (str.find("TIT:", pos + 1) != string::npos) {
+//				if (sottoLivello != curSottolivello)
+//					curSottolivello++;
+//				if (sottoLivello == curSottolivello)
+//				{
+//
+//
+//					pos = str.find(',');
+//					const char *ptr = str.data()+pos;
+//					legame[0] = *++ptr;
+//					legame[1] = *++ptr;
+//					if (!strcmp(legame, "01"))	// il legame 01, se esiste, puo' essere un sibling qualsiasi
+//						return (char*)str.data();
+//					else
+//						return 0;
+//				}
+//
+//
+////				return getSottoLivelloTitolo410(ch, curSottolivello, sottoLivello);
+//				char * ret = getSottoLivelloTitolo410(ch, curSottolivello, sottoLivello);
+//				if (ret)
+//					return ret;
+//			}
+//		}
+//		++ch;
+//	}
+//	//	std::cout << std::endl;
+//	return 0;
+//
+//} // end getSottoLivelloTitolo410
+
+// 26/09/2018 fix mail giliberto
+char* Marc4cppLegami::getSottoLivelloTitolo410(
+		const tree<std::string> &reticolo, int curSottolivello,
+		int sottoLivello)
+{
+	string str;
+//	unsigned int pos;
+	int pos;
+	char legame[3]; legame[2]=0;
+
+
+	tree<std::string>::pre_order_iterator it = reticolo.begin();
+	tree<std::string>::pre_order_iterator end = reticolo.end();
+
+	int rootdepth = reticolo.depth(it);
+	int depth;
+//	std::cout << "[-----" << std::endl;
+	sottoLivello--;
+	while (it != end) {
+		depth = reticolo.depth(it) - rootdepth;
+
+//		for (int i = 0; i < reticolo.depth(it) - rootdepth; ++i)
+//			std::cout << "  ";
+//		std::cout << (*it) << std::endl << std::flush;
+
+		if (depth == sottoLivello)
+		{
+			str = *it;
+			pos = str.find(',');
+			if (pos == -1) // 12/11/2018
+				return 0;
+			const char *ptr = str.data()+pos;
+			legame[0] = *++ptr;
+			legame[1] = *++ptr;
+			if (!strcmp(legame, "01"))	// il legame 01, se esiste, puo' essere un sibling qualsiasi
+				return (char*)str.data();
+		}
+		++it;
+	}
+//	std::cout << "-----]" << std::endl;
+	return 0; // trovato nulla
+}
+
+void Marc4cppLegami::print_tree(const tree<std::string>& tr,
+		tree<std::string>::pre_order_iterator it,
+		tree<std::string>::pre_order_iterator end) {
+	if (!tr.is_valid(it))
+		return;
+	int rootdepth = tr.depth(it);
+	std::cout << "[-----" << std::endl;
+	while (it != end) {
+		for (int i = 0; i < tr.depth(it) - rootdepth; ++i)
+			std::cout << "  ";
+		std::cout << (*it) << std::endl << std::flush;
+		++it;
+	}
+	std::cout << "-----]" << std::endl;
+}
+
+
+void Marc4cppLegami::remove_225_410(const tree<std::string>& tr)
+{
+	CKeyValueVector *bidPrimoLivelloKV = new CKeyValueVector(tKVSTRING, tKVSTRING);
+	CKeyValueVector *bidRimossiKV = new CKeyValueVector(tKVSTRING, tKVSTRING);
+	DataField *df;
+	Subfield *sf;
+	ATTValVector<DataField*> dataFieldsVector225;
+	ATTValVector<DataField*> dataFieldsVector410;
+
+	//	char bid[10 + 1];
+//	bid[10] = 0;
+	string bid;
+
+
+	tree<std::string>::pre_order_iterator it = tr.begin();
+	tree<std::string>::pre_order_iterator end = tr.end();
+
+//print_tree(tr, it, end);
+
+	if (!tr.is_valid(it))
+		return;
+	int rootdepth = tr.depth(it);
+//	std::cout << "[-----" << std::endl;
+	while (it != end) {
+//		for (int i = 0; i < tr.depth(it) - rootdepth; ++i)
+//			std::cout << "  ";
+
+		string str = *it;
+		if (str.find("TIT:") != string::npos) {
+			if (tr.depth(it) == 1)
+			{
+//				std::cout << (*it) << std::endl << std::flush;
+				bid = str.substr(8,10);
+				bidPrimoLivelloKV->Add(bid.data(), "dummy");
+			}
+		}
+		++it;
+	}
+
+//	std::cout << "-----]" << std::endl;
+
+//	bidPrimoLivelloKV->dump();
+
+
+	ATTValVector<DataField*> *dataFieldsVector = marcRecord->getDataFieldsVector();
+	// Prendiamo le 225 ed equivalenti 410
+	for (int i=0; i < dataFieldsVector->Length() ; i++)
+		{
+		df = dataFieldsVector->Entry(i);
+		if (df)
+			{
+			CString * tag = df->getTagString();
+			if (!tag->Compare("225"))
+				dataFieldsVector225.Add(df);
+			else if (!tag->Compare("410"))
+				dataFieldsVector410.Add(df);
+			}
+		}
+
+
+
+	// Cerchiampo bid nei livelli secondari che siano nel primo livello
+	it = tr.begin();
+	while (it != end) {
+		string str = *it;
+		int pos = str.find("TIT:");
+			if (tr.depth(it) > 1)
+			{
+//std::cout << (*it) << std::endl << std::flush;
+
+				if (pos != string::npos) {
+				bid = str.substr(pos+4,10);
+//				printf ("bid %s", bid.data());
+
+				if (bidPrimoLivelloKV->existsKey(bid.data()) // Se da rimuovere
+					&& 	!bidRimossiKV->existsKey(bid.data())) // e non gia' rimosso
+				{
+//printf ("Elimina primo livello per bid %s\n", bid.data());
+
+
+					// Identifichiamo le 410 da rimuovere tramite bid
+					for (int i = 0; i < dataFieldsVector410.Length(); i++)
+					{
+						df = dataFieldsVector410.Entry(i);
+						sf = df->getSubfield('1'); // il bid
+						if (!strcmp((sf->getData()+3), bid.data()))
+						{
+							marcRecord->removeDataField(df);
+							dataFieldsVector410.RemoveByEntry(i);
+//printf ("rimossa 410");
+							break;
+						}
+					}
+					// Identifichiamo le 225 da rimuovere tramite bid
+					for (int i = 0; i < dataFieldsVector225.Length(); i++)
+					{
+						df = dataFieldsVector225.Entry(i);
+						sf = df->getSubfield('z'); // il bid
+						if (!strcmp(sf->getData(), bid.data()))
+						{
+							marcRecord->removeDataField(df);
+							dataFieldsVector225.RemoveByEntry(i);
+//printf ("rimossa 225");
+							break;
+						}
+					}
+
+					bidRimossiKV->Add(bid.data(), "rimosso");
+				}
+			}
+		}
+		++it;
+	}
+
+	// Rimuoviamo le $z delle 225 rimanenti
+	for (int i = 0; i < dataFieldsVector225.Length(); i++)
+	{
+		df = dataFieldsVector225.Entry(i);
+		df->removeSubfield('z');
+	}
+
+
+	delete bidPrimoLivelloKV;
+	delete bidRimossiKV;
+}
+
+
+
+void Marc4cppLegami::dump_reticolo(const tree<std::string>& tr, tree<std::string>::pre_order_iterator it, tree<std::string>::pre_order_iterator end)
+   {
+   if(!tr.is_valid(it)) return;
+   int rootdepth=tr.depth(it);
+   std::cout << "-----" << std::endl;
+   while(it!=end) {
+      for(int i=0; i<tr.depth(it)-rootdepth; ++i)
+         std::cout << "  ";
+      std::cout << (*it) << std::endl << std::flush;
+      ++it;
+      }
+   std::cout << "-----" << std::endl;
+   }
+

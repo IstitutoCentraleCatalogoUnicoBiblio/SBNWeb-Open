@@ -24,6 +24,4 @@
 #
 ./offlineExportUnimarc offlineExportUnimarc.linux.cfg $*
 
-# per ovviare problem si sola lettura del gruppo
-#chmod 664 unimarc/sbw.mrc
 

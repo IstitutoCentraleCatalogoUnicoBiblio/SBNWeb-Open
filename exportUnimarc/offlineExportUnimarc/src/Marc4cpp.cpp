@@ -1143,8 +1143,6 @@ bool Marc4cpp::writeRecordUnimarcXml()
 
 	char * recordXml = marcRecord->toXml();
 	this->marcOutXml->Write(recordXml, marcRecord->toXmlLength());
-
-
 	return true;
 }
 
@@ -2352,6 +2350,7 @@ bool Marc4cpp::creaRecordBibliografico(MarcRecord *marcRecord, const tree<std::s
 		if (!df_899)
 		{
 			printf ("Non esiste una localizzazione (899) per il bid %s", bid);
+			return false; // 05/11/2018
 		}
 	}
 
