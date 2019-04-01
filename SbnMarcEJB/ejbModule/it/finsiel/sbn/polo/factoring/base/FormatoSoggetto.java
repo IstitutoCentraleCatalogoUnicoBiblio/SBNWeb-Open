@@ -174,7 +174,8 @@ public class FormatoSoggetto {
 
 		A250 a250 = new A250();
 		A_250 a_250 = new A_250();
-		a_250.setContent(descrittori.get(0));
+		String primoDescrittore = ValidazioneDati.isFilled(descrittori) ? descrittori.get(0) : "";
+		a_250.setContent(primoDescrittore);
 		if (filled)
 			a_250.setCat_termine(dd.get(0).getCAT_TERMINE());
 		a250.setA_250(a_250);

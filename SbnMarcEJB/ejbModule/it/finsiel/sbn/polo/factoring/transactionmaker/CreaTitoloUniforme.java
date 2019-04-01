@@ -160,7 +160,7 @@ public class CreaTitoloUniforme extends CreaElementoAutFactoring {
         //tipoForma=null;
         //controllo la validità del luogo
         TitoloUniformeValida validaTitolo = new TitoloUniformeValida(factoring_object);
-        boolean ignoraID = datiEl.getT001().equals("0000000000");
+        boolean ignoraID = datiEl.getT001().equals(SBNMARC_DEFAULT_ID);
         TimestampHash timeHash = new TimestampHash();
         if (validaTitolo.validaPerCrea(getCdUtente(),ignoraID, timeHash,_cattura)) {
             if (tipoControllo.getType() == SbnSimile.SIMILEIMPORT_TYPE)

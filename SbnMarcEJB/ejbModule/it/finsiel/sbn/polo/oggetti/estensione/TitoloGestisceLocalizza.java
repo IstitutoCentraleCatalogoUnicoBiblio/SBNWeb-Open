@@ -21,6 +21,7 @@ import it.finsiel.sbn.polo.dao.entity.viste.Vl_biblioteca_titResult;
 import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
+import it.finsiel.sbn.polo.factoring.transactionmaker.Factoring;
 import it.finsiel.sbn.polo.factoring.transactionmaker.LocalizzaFactoring;
 import it.finsiel.sbn.polo.oggetti.AutoreAutore;
 import it.finsiel.sbn.polo.oggetti.Biblioteca;
@@ -881,7 +882,7 @@ public class TitoloGestisceLocalizza extends TitoloBiblioteca {
                 SbnAzioneLocalizza tipoOperazione = null;
                 C899[] t899 = null;
                 sbnIdLoc = TableDaoLocalizza[i].getSbnIDLoc();
-                if (sbnIdLoc == null || sbnIdLoc.equals("0000000000"))
+                if (sbnIdLoc == null || sbnIdLoc.equals(Factoring.SBNMARC_DEFAULT_ID))
                     sbnIdLoc = id;
                 t899 = TableDaoLocalizza[i].getT899();
                 tipoOperazione = TableDaoLocalizza[i].getTipoOperazione();

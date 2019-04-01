@@ -28,6 +28,7 @@ import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.AnnoDateTitolo;
 import it.finsiel.sbn.polo.factoring.base.ChiaviTitolo;
 import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
+import it.finsiel.sbn.polo.factoring.transactionmaker.Factoring;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.SbnData;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
@@ -2140,7 +2141,7 @@ String audiovisivi_126_permutations [] = {
 				        			 }
 			        			 }
 			        		 }
-			        		 if(datiDoc.getT001().equals("0000000000")){
+			        		 if(datiDoc.getT001().equals(Factoring.SBNMARC_DEFAULT_ID)){
 			        			 // SIAMO IN CREAZIONE
 			        			 if((s_Tipo_mediazione != null) && (s_Tipo_supporto.equals(""))){
 			        				 throw new EccezioneSbnDiagnostico(3380, "Campo: Tipo di Supporto obbligatorio ");

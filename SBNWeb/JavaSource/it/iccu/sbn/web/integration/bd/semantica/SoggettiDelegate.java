@@ -588,7 +588,7 @@ public class SoggettiDelegate {
 			if (analitica.isEsitoOk() || analitica.isEsitoNonTrovato() )
 				return analitica;
 
-			consumeMessages(soggetti.get().consumeMessages());
+			consumeMessages(soggetti.get().consumeMessages(utente.getTicket()));
 
 			return null;
 
@@ -799,7 +799,7 @@ public class SoggettiDelegate {
 	public boolean attivaCondivisioneSoggetto(DettaglioSoggettoVO soggettoPolo, String idIndice, OrigineSoggetto origineSoggetto) throws Exception {
 		try {
 			boolean ok = soggetti.get().attivaCondivisioneSoggetto(utente.getTicket(), soggettoPolo, idIndice, origineSoggetto );
-			consumeMessages(soggetti.get().consumeMessages());
+			consumeMessages(soggetti.get().consumeMessages(utente.getTicket()));
 			return ok;
 
 		} catch (Exception e) {
@@ -814,7 +814,7 @@ public class SoggettiDelegate {
 	public AnaliticaSoggettoVO inviaSoggettoInIndice(DettaglioSoggettoVO soggetto) {
 		try {
 			AnaliticaSoggettoVO soggInviato = soggetti.get().inviaSoggettoInIndice(utente.getTicket(), soggetto);
-			consumeMessages(soggetti.get().consumeMessages());
+			consumeMessages(soggetti.get().consumeMessages(utente.getTicket()));
 			return soggInviato;
 
 		} catch (Exception e) {
@@ -828,7 +828,7 @@ public class SoggettiDelegate {
 	public AnaliticaSoggettoVO importaSoggettoDaIndice(DettaglioSoggettoVO soggetto) {
 		try {
 			AnaliticaSoggettoVO analiticaSoggetto = soggetti.get().importaSoggettoDaIndice(utente.getTicket(), soggetto);
-			consumeMessages(soggetti.get().consumeMessages());
+			consumeMessages(soggetti.get().consumeMessages(utente.getTicket()));
 			return analiticaSoggetto;
 
 		} catch (Exception e) {
@@ -950,7 +950,7 @@ public class SoggettiDelegate {
 		try {
 			DatiLegameTitoloSoggettoVO legamiTitoloSoggetto = soggetti.get()
 					.invioInIndiceLegamiTitoloSoggetto(utente.getTicket(), reticoloIndice, soggettiDaInviare);
-			consumeMessages(soggetti.get().consumeMessages());
+			consumeMessages(soggetti.get().consumeMessages(utente.getTicket()));
 			return legamiTitoloSoggetto;
 
 		} catch (Exception e) {
@@ -1044,7 +1044,7 @@ public class SoggettiDelegate {
 	public CreaVariaSoggettoVO variaSoggetto(CreaVariaSoggettoVO soggetto) {
 		try {
 			CreaVariaSoggettoVO soggVariato = soggetti.get().modificaSoggetto(utente.getTicket(), soggetto);
-			consumeMessages(soggetti.get().consumeMessages());
+			consumeMessages(soggetti.get().consumeMessages(utente.getTicket()));
 			return soggVariato;
 
 		} catch (Exception e) {

@@ -26,6 +26,7 @@ import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.ChiaviSoggetto;
 import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
+import it.finsiel.sbn.polo.factoring.transactionmaker.Factoring;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.Progressivi;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
@@ -122,7 +123,7 @@ public class SoggettoValida extends Soggetto {
 
 	public boolean validaPerCrea(String id, String user,boolean _cattura) throws IllegalArgumentException, InvocationTargetException, Exception {
 		Tb_soggetto tb_soggetto;
-        if (!id.equals("0000000000")) {
+        if (!id.equals(Factoring.SBNMARC_DEFAULT_ID)) {
 
     		tb_soggetto = verificaEsistenzaID(id);
    	    	if (tb_soggetto != null && !ValidazioneDati.in(tb_soggetto.getFL_CANC(), "S", "s") )

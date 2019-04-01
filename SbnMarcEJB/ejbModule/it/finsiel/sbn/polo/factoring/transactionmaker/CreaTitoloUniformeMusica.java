@@ -155,7 +155,7 @@ public class CreaTitoloUniformeMusica extends CreaElementoAutFactoring {
         //tipoForma=null;
         //controllo la validità del luogo
         TitoloUniformeMusicaValida validaTitolo = new TitoloUniformeMusicaValida(factoring_object);
-        boolean ignoraID = datiEl.getT001().equals("0000000000");
+        boolean ignoraID = datiEl.getT001().equals(SBNMARC_DEFAULT_ID);
         TimestampHash timeHash = new TimestampHash();
         Tb_titolo tb_titolo = new Tb_titolo();
         if (validaTitolo.validaPerCrea(getCdUtente(), tb_titolo, ignoraID, timeHash,_cattura)) {

@@ -27,7 +27,7 @@ import javax.ejb.EJBObject;
 
 public interface Classi extends EJBObject {
 
-	public List<UserMessage> consumeMessages() throws RemoteException;
+	public List<UserMessage> consumeMessages(String ticket) throws RemoteException;
 
 	public CreaVariaClasseVO importaClasseDaIndice(CreaVariaClasseVO richiesta,	String ticket) throws DAOException, RemoteException;
 }

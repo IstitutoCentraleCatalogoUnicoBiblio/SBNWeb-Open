@@ -26,6 +26,7 @@ import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ricerca.RicercaDescrittoreV
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ricerca.RicercaSoggettoDescrittoriVO;
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ricerca.RicercaSoggettoListaVO;
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ricerca.RicercaSoggettoPerDescrittoriVO;
+import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
 import it.iccu.sbn.web.actionforms.gestionesemantica.soggetto.SinteticaDescrittoriSoggettoForm;
 import it.iccu.sbn.web.constant.NavigazioneSemantica;
 import it.iccu.sbn.web.integration.bd.FactoryEJBDelegate;
@@ -368,7 +369,7 @@ public class SinteticaDescrittoriSoggettoAction extends LookupDispatchAction {
 				ActionMessage msg2 = new ActionMessage(
 						"sintetica.contasoggetto", descrittori.getCountDid());
 				messages.add("button.descrittori0", msg2);
-				if (currentForm.getPrimoDid().equals("0000000000")) {
+				if (currentForm.getPrimoDid().equals(SBNMarcUtil.SBNMARC_DEFAULT_ID)) {
 					currentForm.setNoTutti(true);
 				}
 
@@ -380,7 +381,7 @@ public class SinteticaDescrittoriSoggettoAction extends LookupDispatchAction {
 					currentForm.setDescrittoriSogg1(descrittori
 							.getDesDidAccettato());
 					currentForm.setSecondoDid(descrittori.getDidAccettato());
-					if (currentForm.getSecondoDid().equals("0000000000")) {
+					if (currentForm.getSecondoDid().equals(SBNMarcUtil.SBNMARC_DEFAULT_ID)) {
 						currentForm.setNoTutti(true);
 					}
 					ActionMessage msg1 = new ActionMessage(
@@ -412,7 +413,7 @@ public class SinteticaDescrittoriSoggettoAction extends LookupDispatchAction {
 					currentForm.setDescrittoriSogg2(descrittori
 							.getDesDidAccettato());
 					currentForm.setTerzoDid(descrittori.getDidAccettato());
-					if (currentForm.getTerzoDid().equals("0000000000")) {
+					if (currentForm.getTerzoDid().equals(SBNMarcUtil.SBNMARC_DEFAULT_ID)) {
 						currentForm.setNoTutti(true);
 					}
 					ActionMessage msg1 = new ActionMessage(
@@ -444,7 +445,7 @@ public class SinteticaDescrittoriSoggettoAction extends LookupDispatchAction {
 					currentForm.setDescrittoriSogg3(descrittori
 							.getDesDidAccettato());
 					currentForm.setQuartoDid(descrittori.getDidAccettato());
-					if (currentForm.getQuartoDid().equals("0000000000")) {
+					if (currentForm.getQuartoDid().equals(SBNMarcUtil.SBNMARC_DEFAULT_ID)) {
 						currentForm.setNoTutti(true);
 					}
 					ActionMessage msg1 = new ActionMessage(

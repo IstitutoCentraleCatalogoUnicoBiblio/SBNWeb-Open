@@ -282,7 +282,7 @@ public class CercaSoggetto extends CercaElementoAutFactoring {
         for (i = 0; i < v.size(); i++){
         	paroleSoggettoPerDescrittori[i] = v.get(i);
 			if (s[i][1] != null) {
-        		if(ValidazioneDati.equals(s[i][1], "0000000000")){
+        		if(ValidazioneDati.equals(s[i][1], SBNMARC_DEFAULT_ID)){
         			// non setto nulla in quanto non esiste il descrittore
         		}else{
 	        		conta = soggetto.contaSoggettoPerDescrittore(s[i][4], _sog_edizione);
@@ -290,7 +290,7 @@ public class CercaSoggetto extends CercaElementoAutFactoring {
         		}
         	}
 			else {
-				if (ValidazioneDati.equals(s[i][1], "0000000000")) {
+				if (ValidazioneDati.equals(s[i][1], SBNMARC_DEFAULT_ID)) {
         			// non setto nulla in quanto non esiste il descrittore
         		}else{
             		conta = soggetto.contaSoggettoPerDescrittore(s[i][4], _sog_edizione);
@@ -754,7 +754,7 @@ public class CercaSoggetto extends CercaElementoAutFactoring {
 					result[i][0] = vettoreDescrittori[i];
 					result[i][1] = "";
 					result[i][3] = "0";
-					result[i][4] = "0000000000";
+					result[i][4] = SBNMARC_DEFAULT_ID;
 					result[i][5] = "";
 
 				} else {

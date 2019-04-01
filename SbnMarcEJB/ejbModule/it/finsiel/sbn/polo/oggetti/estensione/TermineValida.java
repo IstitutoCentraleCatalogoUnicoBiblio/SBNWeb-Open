@@ -26,6 +26,7 @@ import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.NormalizzaNomi;
 import it.finsiel.sbn.polo.factoring.base.TimestampHash;
 import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
+import it.finsiel.sbn.polo.factoring.transactionmaker.Factoring;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
 import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
@@ -196,7 +197,7 @@ public class TermineValida extends TermineThesauro {
 	    String c2_935 = null;
 		String a_935;
 		Tb_termine_thesauro termineTrovato = null;
-		if (!idTermine.equals("0000000000")){
+		if (!idTermine.equals(Factoring.SBNMARC_DEFAULT_ID)){
 
 			termineTrovato = verificaEsistenza(idTermine);
 			if (termineTrovato != null)

@@ -3770,7 +3770,7 @@ CREATE TABLE sbnweb.tbl_utenti (
     prov_res char(2),
     cod_polo_bib char(3) NOT NULL,
     allinea char(1),
-    chiave_ute char(130),
+    chiave_ute varchar(130),
     ute_ins char(12) NOT NULL,
     ts_ins timestamp(6) without time zone NOT NULL,
     ute_var char(12) NOT NULL,

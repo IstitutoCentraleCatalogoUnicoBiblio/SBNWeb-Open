@@ -175,7 +175,7 @@ public class CreaDescrittore extends CreaElementoAutFactoring {
 			throw new EccezioneSbnDiagnostico(3049); //dati incompleti
 
         DescrittoreValida dv = new DescrittoreValida();
-        if (_t001.equals("0000000000")){
+        if (_t001.equals(SBNMARC_DEFAULT_ID)){
         	Progressivi prog = new Progressivi();
         	_t001 = prog.getNextIdDescrittore();
         }

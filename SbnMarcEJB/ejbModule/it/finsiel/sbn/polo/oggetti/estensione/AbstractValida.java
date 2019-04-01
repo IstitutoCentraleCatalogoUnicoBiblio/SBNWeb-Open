@@ -20,6 +20,7 @@ import it.finsiel.sbn.polo.dao.entity.tavole.Tr_sog_desResult;
 import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.TimestampHash;
 import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
+import it.finsiel.sbn.polo.factoring.transactionmaker.Factoring;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
 import it.finsiel.sbn.polo.oggetti.Abstract;
 import it.finsiel.sbn.polo.orm.Tb_abstract;
@@ -141,7 +142,7 @@ public class AbstractValida extends Abstract{
 
 		Tb_abstract abstractTrovato = null;
 
-		if (bid.equals("0000000000")){
+		if (bid.equals(Factoring.SBNMARC_DEFAULT_ID)){
 			throw new EccezioneSbnDiagnostico(6666,"bid di associazione non valido");
 		}
 		abstractTrovato = verificaEsistenza(bid);

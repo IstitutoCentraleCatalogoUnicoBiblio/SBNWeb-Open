@@ -172,7 +172,7 @@ public class CreaDocumento extends CreaFactoring {
         //tipoForma=null;
         //controllo la validità del luogo
         TitoloValidaCreazione validaTitolo = new TitoloValidaCreazione(factoring_object, scheduled);
-        boolean ignoraID = datiDoc.getT001().equals("0000000000");
+        boolean ignoraID = datiDoc.getT001().equals(SBNMARC_DEFAULT_ID);
         TimestampHash timeHash = new TimestampHash();
         if (validaTitolo.validaPerCrea(getCdUtente(), ignoraID, timeHash, _cattura)) {
             if (SbnSimile.SIMILEIMPORT.getType() == tipoControllo.getType())

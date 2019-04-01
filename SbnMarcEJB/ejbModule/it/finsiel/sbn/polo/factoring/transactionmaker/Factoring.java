@@ -95,6 +95,8 @@ public abstract class Factoring implements FactoringAPI {
 	protected String idLista = null;
     protected int maxResponseRecord;
 
+	public static final String SBNMARC_DEFAULT_ID = ResourceLoader.getPropertyString("SBNMARC_DEFAULT_ID");
+
     {
     	/** numero massimo di record che è possibile mettere in uscita */
         this.maxResponseRecord = ResourceLoader.getPropertyInteger("NRO_MAX_RIGHE_RICHIESTA");

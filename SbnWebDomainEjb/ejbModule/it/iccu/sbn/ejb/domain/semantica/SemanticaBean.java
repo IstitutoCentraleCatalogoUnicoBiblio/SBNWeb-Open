@@ -4835,9 +4835,11 @@ public abstract class SemanticaBean extends TicketChecker implements Semantica {
 
 			SemanticaDAO dao = new SemanticaDAO();
 
-			dao.aggiornaDatiCondivisioneSoggetto(datiCondivisione);
-			dao.attivaCondivisioneSoggetto(ValidazioneDati.first(datiCondivisione).getCidPolo(),
-					SemanticaDAO.getFirmaUtente(ticket));
+			if (ValidazioneDati.isFilled(datiCondivisione)) {
+				dao.aggiornaDatiCondivisioneSoggetto(datiCondivisione);
+				dao.attivaCondivisioneSoggetto(ValidazioneDati.first(datiCondivisione).getCidPolo(),
+						SemanticaDAO.getFirmaUtente(ticket));
+			}
 		} catch (DaoManagerException e) {
 			log.error("", e);
 			throw new DAOException(e);
@@ -5062,8 +5064,10 @@ public abstract class SemanticaBean extends TicketChecker implements Semantica {
 		List<DatiCondivisioneSoggettoVO> dcs = (List<DatiCondivisioneSoggettoVO>) command.getParams()[0];
 		SemanticaDAO dao = new SemanticaDAO();
 
-		dao.aggiornaDatiCondivisioneSoggetto(dcs);
-		dao.attivaCondivisioneSoggetto(ValidazioneDati.first(dcs).getCidPolo(), SemanticaDAO.getFirmaUtente(ticket));
+		if (ValidazioneDati.isFilled(dcs) ) {
+			dao.aggiornaDatiCondivisioneSoggetto(dcs);
+			dao.attivaCondivisioneSoggetto(ValidazioneDati.first(dcs).getCidPolo(), SemanticaDAO.getFirmaUtente(ticket));
+		}
 
 		return CommandResultVO.build(command, true, null);
 	}

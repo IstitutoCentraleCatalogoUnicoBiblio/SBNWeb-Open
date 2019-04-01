@@ -151,7 +151,7 @@ public class CreaSoggetto extends CreaElementoAutFactoring{
 		sv.controllaVettoreParametriSemantici(_t250.getC2_250(), this.cd_utente);
 		//almaviva5_20101015 errore migrazione ART: il protocollo ricopre i CID esistenti se la
 		//sequence sul DB (seq_tb_soggetto) non é correttamente inizializzata
-		if (_t001.equals("0000000000")) {
+		if (_t001.equals(SBNMARC_DEFAULT_ID)) {
 			Progressivi prog = new Progressivi();
 			_t001 = prog.getNextIdSoggetto();
 		}

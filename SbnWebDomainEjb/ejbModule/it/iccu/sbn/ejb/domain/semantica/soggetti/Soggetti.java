@@ -33,7 +33,7 @@ import javax.ejb.EJBObject;
 
 public interface Soggetti extends EJBObject {
 
-	public List<UserMessage> consumeMessages() throws RemoteException;
+	public List<UserMessage> consumeMessages(String ticket) throws RemoteException;
 
 	public AnaliticaSoggettoVO importaSoggettoDaIndice(String ticket, DettaglioSoggettoVO soggetto) throws SbnBaseException, RemoteException;
 

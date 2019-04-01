@@ -27,31 +27,42 @@ import it.iccu.sbn.vo.custom.semantica.UserMessage;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.ejb.EJBException;
 import javax.ejb.SessionContext;
 
 import org.apache.log4j.Logger;
 
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
+
 public class ClassiBean extends TicketChecker implements Classi {
 
-
-
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 673171448272738782L;
-
 
 	static Logger log = Logger.getLogger(Classi.class);
 
+	static class UserMessages {
+		private static Map<String, List<UserMessage>> userMessages = new ConcurrentHashMap<String, List<UserMessage>>();
+		
+		static List<UserMessage> get(String ticket) {
+			if (!isFilled(ticket))
+				return new ArrayList<UserMessage>();
 
-	static final ThreadLocal<List<UserMessage>> userMessages = new ThreadLocal<List<UserMessage>>() {
-		@Override
-		protected List<UserMessage> initialValue() {
-			return new ArrayList<UserMessage>();
+			List<UserMessage> messages = userMessages.get(ticket);
+			if (messages == null) {
+				messages = new ArrayList<UserMessage>();
+				userMessages.put(ticket, messages);
+			}
+			return messages;
 		}
-	};
+		
+		static void remove(String ticket) {
+			if (isFilled(ticket))
+				userMessages.remove(ticket);
+		}
+	}
 
 	static Reference<Semantica> semantica = new Reference<Semantica>() {
 		@Override
@@ -65,9 +76,9 @@ public class ClassiBean extends TicketChecker implements Classi {
 		this.ctx = ctx;
 	}
 
-	public List<UserMessage> consumeMessages() {
-		List<UserMessage> cached = userMessages.get();
-		userMessages.remove();
+	public List<UserMessage> consumeMessages(String ticket) {
+		List<UserMessage> cached = UserMessages.get(ticket);
+		UserMessages.remove(ticket);
 		return cached;
 	}
 

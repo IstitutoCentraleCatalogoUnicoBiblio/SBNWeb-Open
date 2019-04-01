@@ -200,7 +200,7 @@ public class CreaMarca extends CreaElementoAutFactoring {
 	    String tipoLegame, idArrivo,ds_luogo;
 		biblioteca=_sbnmarcObj.getSbnUser().getBiblioteca();
 		codiceUtente = getCdUtente();
-		boolean ignoraID = _t001.equals("0000000000");
+		boolean ignoraID = _t001.equals(SBNMARC_DEFAULT_ID);
 
 
 		MarcaValida marcaValida = new MarcaValida();
@@ -261,7 +261,7 @@ public class CreaMarca extends CreaElementoAutFactoring {
 				SbnAzioneLocalizza tipoOperazione = null;
 				C899[] t899 = null;
 				sbnIdLoc = TableDaoLocalizza[i].getSbnIDLoc();
-				if (sbnIdLoc.equals("0000000000"))
+				if (sbnIdLoc.equals(SBNMARC_DEFAULT_ID))
 					sbnIdLoc = _t001;
 				t899 = TableDaoLocalizza[i].getT899();
 				tipoOperazione = TableDaoLocalizza[i].getTipoOperazione();

@@ -208,7 +208,7 @@ public class CreaLuogo extends CreaElementoAutFactoring {
 			if (_TableDao_response.size() == 0)
 				throw new EccezioneSbnDiagnostico(3001,"nessun elemento trovato");
 		}else{
-			ignoraID = _t001.equals("0000000000");
+			ignoraID = _t001.equals(SBNMARC_DEFAULT_ID);
 			_TableDao_response = validaLuogo.validaPerCrea(getCdUtente(),ignoraID,_cattura);
 		}
 		//controllo che non ci siano luoghi simili (se tipocontrollo<>conferma) e che non esiste ID

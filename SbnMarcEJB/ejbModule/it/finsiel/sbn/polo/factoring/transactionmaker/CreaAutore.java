@@ -213,7 +213,7 @@ public class CreaAutore extends CreaElementoAutFactoring {
         //tipoForma=null;
         //controllo la validità del luogo
         AutoreValida validaAutore = new AutoreValida(factoring_object);
-        boolean ignoraID = datiElementoAut.getT001().equals("0000000000");
+        boolean ignoraID = datiElementoAut.getT001().equals(SBNMARC_DEFAULT_ID);
 		TipiAutore ca = new TipiAutore();
 
 		Tb_autore tb_autore = ca.costruisciAutore(datiElementoAut,null);

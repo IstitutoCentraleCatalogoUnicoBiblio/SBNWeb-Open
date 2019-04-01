@@ -146,7 +146,7 @@ public class CreaTitoloAccesso extends CreaFactoring {
         //tipoForma=null;
         //controllo la validità del luogo
         TitoloAccessoValida validaTitolo = new TitoloAccessoValida(factoring_object);
-        boolean ignoraID = titAcc.getT001().equals("0000000000");
+        boolean ignoraID = titAcc.getT001().equals(SBNMARC_DEFAULT_ID);
         TimestampHash timeHash = new TimestampHash();
         Tb_titolo tb_titolo = new Tb_titolo();
         String user = getCdUtente();

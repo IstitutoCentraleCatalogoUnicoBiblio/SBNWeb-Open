@@ -70,6 +70,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.ejb.EJBException;
 import javax.ejb.SessionContext;
@@ -88,13 +89,27 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 	private static final long serialVersionUID = -1757544682915157733L;
 
 	static Logger log = Logger.getLogger(Soggetti.class);
+	
+	static class UserMessages {
+		private static Map<String, List<UserMessage>> userMessages = new ConcurrentHashMap<String, List<UserMessage>>();
+		
+		static List<UserMessage> get(String ticket) {
+			if (!isFilled(ticket))
+				return new ArrayList<UserMessage>();
 
-	static final ThreadLocal<List<UserMessage>> userMessages = new ThreadLocal<List<UserMessage>>() {
-		@Override
-		protected List<UserMessage> initialValue() {
-			return new ArrayList<UserMessage>();
+			List<UserMessage> messages = userMessages.get(ticket);
+			if (messages == null) {
+				messages = new ArrayList<UserMessage>();
+				userMessages.put(ticket, messages);
+			}
+			return messages;
 		}
-	};
+		
+		static void remove(String ticket) {
+			if (isFilled(ticket))
+				userMessages.remove(ticket);
+		}
+	}
 
 	static Reference<Semantica> semantica = new Reference<Semantica>() {
 		@Override
@@ -128,15 +143,16 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 		this.ctx = ctx;
 	}
 
-	public List<UserMessage> consumeMessages() {
-		List<UserMessage> cached = userMessages.get();
-		userMessages.remove();
-		return cached;
+	public List<UserMessage> consumeMessages(String ticket) {
+		List<UserMessage> messages = UserMessages.get(ticket);
+		//rimozione messaggi consumati
+		UserMessages.remove(ticket);
+		return messages;
 	}
 
 	public AnaliticaSoggettoVO importaSoggettoDaIndice(String ticket, DettaglioSoggettoVO soggettoIndice) throws SbnBaseException {
 		checkTicket(ticket);
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		try {
 			AnaliticaSoggettoVO reticoloSoggettoIndice = caricaReticoloSoggetto(ticket, false, soggettoIndice.getCid());
 			if (reticoloSoggettoIndice == null)
@@ -342,7 +358,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 	public AnaliticaSoggettoVO caricaReticoloSoggetto(String ticket, boolean livelloPolo, String cid)
 			throws SbnBaseException, RemoteException {
 		checkTicket(ticket);
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		try {
 			AnaliticaSoggettoVO analitica = semantica.get().creaAnaliticaSoggettoPerCid(livelloPolo, cid, ticket, true);
 
@@ -416,7 +432,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 			if (!ValidazioneDati.equals(cidPolo, cidIndice) ) {
 				log.debug(String.format("attivata condivisione tra cid di polo '%s' e quello di indice '%s'", cidPolo, cidIndice));
 				//messaggio all'utente in caso di cid non uguali
-				List<UserMessage> messages = userMessages.get();
+				List<UserMessage> messages = UserMessages.get(ticket);
 				messages.add(new UserMessage("errors.gestioneSemantica.soggetto.condivisione.attiva", cidPolo, cidIndice));
 			}
 
@@ -449,7 +465,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 	public CreaVariaSoggettoVO modificaSoggetto(String ticket, CreaVariaSoggettoVO soggetto) throws SbnBaseException {
 		checkTicket(ticket);
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		try {
 			CreaVariaSoggettoVO soggVariato = semantica.get().variaSoggetto((CreaVariaSoggettoVO) soggetto.copy(), ticket);
 
@@ -618,7 +634,11 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 	private void disattivaCondivisioneSoggetto(String ticket, List<DatiCondivisioneSoggettoVO> datiCondivisione)
 			throws RemoteException, ApplicationException, Exception {
-		List<UserMessage> messages = userMessages.get();
+
+		if (!isFilled(datiCondivisione))
+			return;
+
+		List<UserMessage> messages = UserMessages.get(ticket);
 		for (DatiCondivisioneSoggettoVO dcs2 : datiCondivisione) {
 			dcs2.setUteVar(DaoManager.getFirmaUtente(ticket));
 			dcs2.setFlCanc("S");
@@ -636,7 +656,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 	}
 
 	String verificaCidPerCreazioneIndice(String ticket, String cidIndice) {
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		//almaviva5_20141008 #5650
 		CommandInvokeVO command = new CommandInvokeVO(ticket,
 				CommandType.SEM_VERIFICA_CID_CREAZIONE_INDICE, cidIndice);
@@ -661,7 +681,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 	private AnaliticaSoggettoVO eseguiCreazioneSoggettoIndice(String ticket, DettaglioSoggettoVO soggettoPolo, String cidIndice) {
 
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		CreaVariaSoggettoVO richiesta = new CreaVariaSoggettoVO(soggettoPolo);
 		CreaVariaSoggettoVO soggettoCreato = null;
 
@@ -835,7 +855,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 	private boolean creaSoggettoPerFusione(String ticket, CreaVariaSoggettoVO soggettoEliminato, CreaVariaSoggettoVO soggettoAccorpante)
 			throws DAOException, RemoteException {
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 
 		log.debug(String.format("fusione del soggetto '%s' su '%s'...", soggettoEliminato.getCid(), soggettoAccorpante.getCid()));
 		soggettoAccorpante.setCattura(true);	//disattivazione controlli di duplicazione
@@ -861,7 +881,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 	}
 
 	private String getNuovoIdSoggetto(String ticket) {
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		try {
 			AreaDatiPassaggioGetIdSbnVO areaDatiPass = new AreaDatiPassaggioGetIdSbnVO();
 			areaDatiPass.setTipoAut("SO");
@@ -902,10 +922,10 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 	public AnaliticaSoggettoVO inviaSoggettoInIndice(String ticket, DettaglioSoggettoVO soggetto) throws SbnBaseException {
 		checkTicket(ticket);
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 		try {
 			// controllo che il soggetto da inviare sia compatibili con i vincoli dell'indice
-			if (!checkSoggettoPerIndice(soggetto.getTesto())) {
+			if (!checkSoggettoPerIndice(ticket, soggetto.getTesto())) {
 				return null;
 			}
 
@@ -994,8 +1014,8 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 	}
 
-	private boolean checkSoggettoPerIndice(String testoSoggetto) {
-		List<UserMessage> messages = userMessages.get();
+	private boolean checkSoggettoPerIndice(String ticket, String testoSoggetto) {
+		List<UserMessage> messages = UserMessages.get(ticket);
 		// controllo lunghezza per invio in indice
 		if (!SoggettiUtil.checkSoggettoPerIndice(testoSoggetto)) {
 			messages.add(new UserMessage("errors.gestioneSemantica.soggetto.indiceMaxLen", SoggettiUtil.MAX_LEN_SOGGETTO_INDICE));
@@ -1009,7 +1029,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 			TreeElementViewTitoli reticoloIndice, List<ElementoSinteticaSoggettoVO> soggettiDaInviare)
 			throws SbnBaseException {
 		checkTicket(ticket);
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 
 		DatiLegameTitoloSoggettoVO risposta = null;
 
@@ -1030,7 +1050,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 		// controllo che i soggetti da inviare siano compatibili con i vincoli dell'indice
 		for (ElementoSinteticaSoggettoVO soggetto : soggettiDaInviare)
-			if (!checkSoggettoPerIndice(soggetto.getTesto() ))
+			if (!checkSoggettoPerIndice(ticket, soggetto.getTesto() ))
 				return null;
 
 		List<ElementoSinteticaSoggettoVO> listaSoggettiLegatiDaReinviare = new ArrayList<ElementoSinteticaSoggettoVO>();
@@ -1188,7 +1208,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 	public boolean attivaCondivisioneTitoloSoggetto(String ticket, String cidPolo, String bid)
 			throws SbnBaseException, RemoteException {
 		checkTicket(ticket);
-		List<UserMessage> messages = userMessages.get();
+		List<UserMessage> messages = UserMessages.get(ticket);
 
 		AnaliticaSoggettoVO analitica = caricaReticoloSoggetto(ticket, true, cidPolo);
 		if (!analitica.isEsitoOk()) {

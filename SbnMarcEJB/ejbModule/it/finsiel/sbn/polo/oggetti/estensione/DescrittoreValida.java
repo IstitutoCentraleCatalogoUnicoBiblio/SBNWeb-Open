@@ -21,6 +21,7 @@ import it.finsiel.sbn.polo.dao.entity.tavole.Tr_sog_desResult;
 import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.TimestampHash;
 import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
+import it.finsiel.sbn.polo.factoring.transactionmaker.Factoring;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
 import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
@@ -136,7 +137,7 @@ public class DescrittoreValida extends Descrittore {
 	    String c2_931 = null;
 		String a_931;
 		Tb_descrittore descrittoreTrovato = null;
-		if (!idDescrittore.equals("0000000000")){
+		if (!idDescrittore.equals(Factoring.SBNMARC_DEFAULT_ID)){
 
 			descrittoreTrovato = verificaEsistenza(idDescrittore);
 			if (descrittoreTrovato != null)

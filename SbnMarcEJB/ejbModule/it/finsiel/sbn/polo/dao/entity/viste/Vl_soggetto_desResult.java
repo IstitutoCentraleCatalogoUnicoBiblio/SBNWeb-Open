@@ -165,7 +165,7 @@ public class Vl_soggetto_desResult extends Vl_soggetto_desCommonDao{
     		String tipoOrd) throws InfrastructureException {
         // TODO Auto-generated method stub
     	String ordinamento= "";
-    	if((tipoOrd != null) && (tipoOrd.equals("order_1") ))
+    	if(ValidazioneDati.equals(tipoOrd, "order_1") )
     		ordinamento = "ORDER BY CID";
     	else
     		ordinamento = "ORDER BY KY_CLES1_S, KY_CLES2_S, CID";
