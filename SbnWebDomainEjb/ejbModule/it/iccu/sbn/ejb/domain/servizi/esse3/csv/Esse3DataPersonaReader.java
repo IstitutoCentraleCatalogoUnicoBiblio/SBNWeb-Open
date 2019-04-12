@@ -29,6 +29,8 @@ import it.iccu.sbn.vo.xml.binding.esse3.PERSONA;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 	private List<PERSONA> persone_data_ws;
 
@@ -44,14 +46,21 @@ public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 		utente.setCod_utente(p.getUSERID());
 		utente.setNome(p.getNOME());
 		utente.setCognome(p.getCOGNOME());
-		utente.setLuogo_nascita(p.getCOMNASCDES());
-		utente.setData_nascita(DateUtil.toDateISO(p.getDATANASCITA().toString()));
+		
+		//Almaviva3 04/04/2019 MANU campo not-null
+		utente.setLuogo_nascita(ValidazioneDati.trimOrEmpty(p.getCOMNASCDES()));
 
+		XMLGregorianCalendar data_nascita = p.getDATANASCITA();
+		if(data_nascita != null)
+			utente.setData_nascita(DateUtil.toDateISO(data_nascita.toString()));
+		else //Se vuoto campo not-null imposto a oggi
+			utente.setData_nascita(DaoManager.now());
+		
 		if(ValidazioneDati.isFilled(p.getSESSO()))
 			utente.setSesso(p.getSESSO().charAt(0));
 
 
-		//resisdenza
+		//residenza
 		if(ValidazioneDati.isFilled(p.getCAPRES()))
 			utente.setCap_res(String.valueOf(p.getCAPRES()));
 

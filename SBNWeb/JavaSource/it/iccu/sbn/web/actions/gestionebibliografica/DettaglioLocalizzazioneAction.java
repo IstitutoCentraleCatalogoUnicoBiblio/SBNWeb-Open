@@ -40,8 +40,7 @@ import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -51,8 +50,7 @@ import org.apache.struts.actions.LookupDispatchAction;
 
 public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 
-	private static Log log = LogFactory
-			.getLog(DettaglioLocalizzazioneAction.class);
+	private static Logger log = Logger.getLogger(DettaglioLocalizzazioneAction.class);
 
 	@Override
 	protected Map<String, String> getKeyMethodMap() {
@@ -79,7 +77,7 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 
 		// Viene settato il token per le transazioni successive
 		this.saveToken(request);
-		dettaglioLocalizzazioneForm.setEleSinteticaLocalizzazioniView(
+		dettaglioLocalizzazioneForm.setLocalizzazione(
 				(SinteticaLocalizzazioniView) request.getAttribute("elementoLocalizzazione"));
 		dettaglioLocalizzazioneForm.setTipoProspettazione((String) request.getAttribute("tipoProspettazione"));
 		dettaglioLocalizzazioneForm.setIdOggColl((String) request.getAttribute("idOggColl"));
@@ -148,9 +146,9 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 		//     reca il valore 'S';
 		// --> il secondo (Tipo digitalizzazione) può essere riempito solo se il primo reca il valore 'S'
 
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione() != null
-				&& !dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione().trim().equals("")) {
-			if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getFormatoElettronico().equals("N")) {
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione() != null
+				&& !dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione().trim().equals("")) {
+			if (dettaglioLocalizzazioneForm.getLocalizzazione().getFormatoElettronico().equals("N")) {
 				ActionMessages errors = new ActionMessages();
 				errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.noTipoDigitsenzaFormElet"));
 				this.saveErrors(request, errors);
@@ -160,9 +158,9 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 		}
 
 
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getUriCopiaElettr() != null
-				&& !dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getUriCopiaElettr().trim().equals("")){
-			if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione().equals("")) {
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getUriCopiaElettr() != null
+				&& !dettaglioLocalizzazioneForm.getLocalizzazione().getUriCopiaElettr().trim().equals("")){
+			if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione().equals("")) {
 				ActionMessages errors = new ActionMessages();
 				errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.noURIsenzaTipoDigit"));
 				this.saveErrors(request, errors);
@@ -213,34 +211,34 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 		}
 
 		//areaLocalizza.setTipoLoc(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoLoc());
-		areaLocalizza.setConsistenza(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getConsistenza());
-		areaLocalizza.setIndicatoreMutilo(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getValoreM());
+		areaLocalizza.setConsistenza(dettaglioLocalizzazioneForm.getLocalizzazione().getConsistenza());
+		areaLocalizza.setIndicatoreMutilo(dettaglioLocalizzazioneForm.getLocalizzazione().getValoreM());
 
-		areaLocalizza.setCodiceAnagrafeBiblioteca(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getIDAnagrafe());
-		areaLocalizza.setCodiceSbn(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getIDSbn());
-		areaLocalizza.setDispoFormatoElettr(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getFormatoElettronico());
-		areaLocalizza.setFondo(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getFondo());
+		areaLocalizza.setCodiceAnagrafeBiblioteca(dettaglioLocalizzazioneForm.getLocalizzazione().getIDAnagrafe());
+		areaLocalizza.setCodiceSbn(dettaglioLocalizzazioneForm.getLocalizzazione().getIDSbn());
+		areaLocalizza.setDispoFormatoElettr(dettaglioLocalizzazioneForm.getLocalizzazione().getFormatoElettronico());
+		areaLocalizza.setFondo(dettaglioLocalizzazioneForm.getLocalizzazione().getFondo());
 		areaLocalizza.setIdLoc(dettaglioLocalizzazioneForm.getIdOggColl());
-		areaLocalizza.setNote(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getNote());
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoLoc().equals("Possesso/Gestione")) {
+		areaLocalizza.setNote(dettaglioLocalizzazioneForm.getLocalizzazione().getNote());
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoLoc().equals("Possesso/Gestione")) {
 			areaLocalizza.setSbnTipoLoc(SbnTipoLocalizza.TUTTI);
-		} else if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoLoc().equals("Possesso")) {
+		} else if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoLoc().equals("Possesso")) {
 			areaLocalizza.setSbnTipoLoc(SbnTipoLocalizza.POSSESSO);
-		}  else if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoLoc().equals("Gestione")) {
+		}  else if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoLoc().equals("Gestione")) {
 			areaLocalizza.setSbnTipoLoc(SbnTipoLocalizza.GESTIONE);
 		}
 
 //		areaLocalizza.setSbnTipoLoc(SbnTipoLocalizza.GESTIONE);
-		areaLocalizza.setSegnatura(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getSegnatura());
-		areaLocalizza.setSegnaturaAntica(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getSegnaturaAntica());
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione().equals("")) {
+		areaLocalizza.setSegnatura(dettaglioLocalizzazioneForm.getLocalizzazione().getSegnatura());
+		areaLocalizza.setSegnaturaAntica(dettaglioLocalizzazioneForm.getLocalizzazione().getSegnaturaAntica());
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione().equals("")) {
 			areaLocalizza.setTipoDigitalizzazione("");
 		} else {
-			areaLocalizza.setTipoDigitalizzazione(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione());
+			areaLocalizza.setTipoDigitalizzazione(dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione());
 		}
 
-		areaLocalizza.setTipoLoc(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoLoc());
-		areaLocalizza.setUriAccesso(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getUriCopiaElettr());
+		areaLocalizza.setTipoLoc(dettaglioLocalizzazioneForm.getLocalizzazione().getTipoLoc());
+		areaLocalizza.setUriAccesso(dettaglioLocalizzazioneForm.getLocalizzazione().getUriCopiaElettr());
 
 		boolean isDocFisico = dettaglioLocalizzazioneForm.getTipoProspettazione().equals("GESTCONS")
 				|| dettaglioLocalizzazioneForm.getTipoProspettazione().equals("listaInventariTitolo")
@@ -272,12 +270,12 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 		}
 
 		Navigation navi = Navigation.getInstance(request);
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getIDSbn() == null
-				|| dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getIDSbn().equals("")) {
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getIDSbn() == null
+				|| dettaglioLocalizzazioneForm.getLocalizzazione().getIDSbn().equals("")) {
 			areaLocalizza.setCodiceSbn(navi.getUtente().getCodPolo()
 					+ navi.getUtente().getCodBib());
 		} else {
-			areaLocalizza.setCodiceSbn(dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getIDSbn());
+			areaLocalizza.setCodiceSbn(dettaglioLocalizzazioneForm.getLocalizzazione().getIDSbn());
 		}
 //				areaLocalizza.setCodiceSbn(Navigation.getInstance(request).getUtente().getCodPolo()
 //						+ Navigation.getInstance(request).getUtente().getCodBib());
@@ -368,8 +366,6 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		DettaglioLocalizzazioneForm dettaglioLocalizzazioneForm = (DettaglioLocalizzazioneForm) form;
-
 		return mapping.getInputForward();
 
 	}
@@ -390,29 +386,29 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 
 		// Inizio modifica almaviva2 07.07.2010 su richiesta di Documento Fisico (Revisione Consistenza in indice) 07.07.2010
 		// si copia solo i valori che non hanno una precedente impostazione
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getConsistenza().trim().equals("")) {
-			dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().setConsistenza(dettaglioLocalizzazioneForm.getConsistenzaPolo());
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getConsistenza().trim().equals("")) {
+			dettaglioLocalizzazioneForm.getLocalizzazione().setConsistenza(dettaglioLocalizzazioneForm.getConsistenzaPolo());
 		}
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getSegnatura().trim().equals("")) {
-			dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().setSegnatura(dettaglioLocalizzazioneForm.getSegnaturaPolo());
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getSegnatura().trim().equals("")) {
+			dettaglioLocalizzazioneForm.getLocalizzazione().setSegnatura(dettaglioLocalizzazioneForm.getSegnaturaPolo());
 		}
 
 		// Intervento almaviva2 28.06.2011 -BUG MANTIS 4526 (collaudo) e BUG MANTIS 4532 (esercizio)
 		// il tasto copia nell'invio consistenza in Indice mandava in errore l'applicazione; inseriti i controlli sul valore
 		// null di dettaglioLocalizzazioneForm.getUriPolo() e dettaglioLocalizzazioneForm.getCodTipoDigitPolo()
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getUriCopiaElettr().trim().equals("")) {
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getUriCopiaElettr().trim().equals("")) {
 			if (dettaglioLocalizzazioneForm.getUriPolo() != null && !dettaglioLocalizzazioneForm.getUriPolo().equals("")) {
-				dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().setUriCopiaElettr(dettaglioLocalizzazioneForm.getUriPolo());
+				dettaglioLocalizzazioneForm.getLocalizzazione().setUriCopiaElettr(dettaglioLocalizzazioneForm.getUriPolo());
 			}
-			if (!dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getUriCopiaElettr().trim().equals("")) {
+			if (!dettaglioLocalizzazioneForm.getLocalizzazione().getUriCopiaElettr().trim().equals("")) {
 				modUri = true;
 			}
 		}
-		if (dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione().trim().equals("")) {
+		if (dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione().trim().equals("")) {
 			if (dettaglioLocalizzazioneForm.getCodTipoDigitPolo() != null && !dettaglioLocalizzazioneForm.getCodTipoDigitPolo().equals("")) {
-				dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().setTipoDigitalizzazione(dettaglioLocalizzazioneForm.getCodTipoDigitPolo());
+				dettaglioLocalizzazioneForm.getLocalizzazione().setTipoDigitalizzazione(dettaglioLocalizzazioneForm.getCodTipoDigitPolo());
 			}
-			if (!dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().getTipoDigitalizzazione().trim().equals("")) {
+			if (!dettaglioLocalizzazioneForm.getLocalizzazione().getTipoDigitalizzazione().trim().equals("")) {
 				modTipDig = true;
 			}
 		}
@@ -420,7 +416,7 @@ public class DettaglioLocalizzazioneAction extends LookupDispatchAction {
 		// Fine modifica almaviva2 07.07.2010 su richiesta di Documento Fisico (Revisione Consistenza in indice) 07.07.2010
 
 		if (modUri && modTipDig) {
-			dettaglioLocalizzazioneForm.getEleSinteticaLocalizzazioniView().setFormatoElettronico("S");
+			dettaglioLocalizzazioneForm.getLocalizzazione().setFormatoElettronico("S");
 		}
 
 		return mapping.getInputForward();

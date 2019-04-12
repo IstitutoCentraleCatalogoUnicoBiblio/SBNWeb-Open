@@ -31,19 +31,27 @@ public class TBConnectorWSSoapBindingImpl implements it.iccu.sbn.webservices.ess
 	static Logger log = Logger.getLogger(TBConnectorWS.class);
 	static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm_");
 
-	private void saveParameters(String pass, String entity, String op, String sourceId, String csvData) {
+	private void saveParameters(String pass, String entity, String op, String sourceId, String xmlData) {
 		try {
 			String dateFileName = simpleDateFormat.format(DaoManager.now());
 
 			StringBuilder dataBuilder = new StringBuilder();
-			dataBuilder.append("Dati Ricevuti da Esse3 ws: ").append("\n").append("- entity:	 ").append(entity)
-					.append("\n").append("- op:      ").append(op).append("\n").append("- sourceId:").append(sourceId)
-					.append("\n").append("- csvData: ").append(csvData);
+			dataBuilder.append(dateFileName).append(" - ").append("Dati Ricevuti da Esse3 ws: ").append("\n")
+					.append("- entity:	 ").append(entity).append("\n").append("- op:      ").append(op).append("\n")
+					.append("- sourceId:").append(sourceId).append("\n").append("- csvData: ").append(xmlData);
 
 			String fileName = dateFileName + IdGenerator.getId() + "-esse3_call.log";
 			String userHome = FileUtil.getUserHomeDir();
-
-			FileUtil.writeStringToFile(userHome + File.separator + fileName, dataBuilder.toString());
+			// almaviva3 04/04/2019
+			// Raggruppati i log di Esse3 WS in una cartella specifica, se non esiste la creo
+			// Testato in locale, funziona. Da testare a runtime
+			String logDir = userHome + File.separator + "esse3WS_logs";
+			File file = new File(logDir);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			String pathLogFile = logDir + File.separator + fileName;
+			FileUtil.writeStringToFile(pathLogFile, dataBuilder.toString());
 
 		} catch (Exception e) {
 			log.error(e);
