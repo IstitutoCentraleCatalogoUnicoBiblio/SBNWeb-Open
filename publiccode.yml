@@ -8,7 +8,7 @@ softwareType: standalone/web
 platforms:
   - web
 categories:
-  - learning-management-system
+  - library-management-system
   - collaboration
   - communications
 maintenance:
@@ -22,7 +22,7 @@ legal:
   repoOwner: 'Istituto Centrale per il Catalogo Unico delle biblioteche italiane e per le informazioni bibliografiche'
 intendedAudience:
   scope:
-    - education
+    - library management
   countries:
     - it
 localisation:
