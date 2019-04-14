@@ -56,7 +56,38 @@ description:
     features:
       - Gestione base di dati
       - Gestione Poli Bibliotecari
+      - Catalogazione bibliografica
+      - Gestione del documento fisico
+      - Gestione delle acquisizioni
+      - Erogazione dei servizi all'utenza
+      - Stampe e statistiche
+      - Elaborazioni differite
+      - Amministrazione di sistema
+      - Import ed export basi dati
 usedBy:
-  - Polo SBN CAM (Regione Campania)
-  - Polo NAP (Biblioteca Nazionale di Napoli)
-  - ... 
+- AQ1 Polo Aquilano SBN
+- BA1 Polo Terra di Bari
+- BAT Polo SBN della Provincia di Barletta Andria Trani
+- BMT Polo MiBACT Torino
+- BVE Polo Biblioteca nazionale centrale di Roma
+- CAM Polo della Regione Campania
+- CAT Polo Biblioteche della provincia di Catania
+- CFI Polo biblioteca nazionale centrale di Firenze
+- CSA Polo di Cosenza
+- DDS Polo Istituto Centrale per i Beni Sonori ed Audiovisivi
+- IEI Polo degli Istituti culturali di Roma
+- LIG Polo Regione Liguria
+- LO1 Polo regionale Lombardia
+- MIL Polo MiBACT Lombardia – BEIC
+- MO1 Polo della Provincia di Campobasso
+- NAP Polo MiBACT Napoli
+- PA1 Polo del Comune di Palermo
+- PAL Polo regionale di Sicilia
+- PCM Polo Città di Milano
+- PIS Polo MiBACT Pisa
+- RMC Polo Università cattolica del Sacro Cuore A. Gemelli
+- RML Polo delle biblioteche pubbliche statali di Roma
+- RMR Polo Comune di Roma
+- SNT Polo Ministero della Salute - Roma
+- TO0 Polo regionale Piemonte - Torino
+- UPG Polo Università per stranieri di Perugia
