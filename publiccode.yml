@@ -14,12 +14,12 @@ categories:
 maintenance:
   type: contract
   contractors:
-    - name: '???'
-      until: '2020-01-01'
+    - name: 'Almaviva'
+      until: '2021-05-31'
 legal:
   license: AGPL-3.0-or-later
-  mainCopyrightOwner: 'Istituto Centrale per il Catalogo Unico '
-  repoOwner: 'Istituto Centrale per il Catalogo Unico '
+  mainCopyrightOwner: 'Istituto Centrale per il Catalogo Unico delle biblioteche italiane e per le informazioni bibliografiche'
+  repoOwner: 'Istituto Centrale per il Catalogo Unico delle biblioteche italiane e per le informazioni bibliografiche'
 intendedAudience:
   scope:
     - education
@@ -35,7 +35,7 @@ it:
     codiceIPA: m_bac
 description:
   it:
-    genericName: Learning Management System
+    genericName: Library Management System
     shortDescription: >-
       Applicativo LMS integrato, sviluppato da ICCU, realizzato in architettura
       J2EE e che utilizza esclusivamente software free ed open-source
@@ -57,4 +57,6 @@ description:
       - Gestione base di dati
       - Gestione Poli Bibliotecari
 usedBy:
-  - Istituto Centrale Catalogo Unico Biblio
+  - Polo SBN CAM (Regione Campania)
+  - Polo NAP (Biblioteca Nazionale di Napoli)
+  - ... 
