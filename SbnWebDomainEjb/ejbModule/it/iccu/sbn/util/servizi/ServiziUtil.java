@@ -17,6 +17,7 @@
 package it.iccu.sbn.util.servizi;
 
 import static it.iccu.sbn.web.constant.ServiziConstant.NUM_PAGINE_ERROR;
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.in;
 
 import it.iccu.sbn.ejb.exception.ApplicationException;
 import it.iccu.sbn.ejb.exception.ValidationException;
@@ -563,6 +564,14 @@ public class ServiziUtil {
 					+ (mov.getNumPezziShort() * tariffa.getCostoUnitarioDouble()) + tariffa.getTarBaseDouble();
 		}
 		mov.setCostoServizio(costoServizio);
+	}
+
+	public static boolean movimentoCancellato(MovimentoVO mov) {
+		return mov != null && in(mov.getCodStatoMov(), "E") && in(mov.getCodStatoRic(), "D");
+	}
+
+	public static boolean movimentoRifiutato(MovimentoVO mov) {
+		return mov != null && in(mov.getCodStatoMov(), "C") && in(mov.getCodStatoRic(), "B");
 	}
 
 	public static void main(String[] args) throws ValidationException {

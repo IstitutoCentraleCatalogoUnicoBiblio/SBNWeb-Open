@@ -1900,6 +1900,9 @@ public class ListaMovimentiAction extends ErogazioneAction {
 				blocco1 = delegate.caricaListeTematiche(movRicerca, movRicerca.isAttivitaAttuale(), movRicerca.getElemPerBlocchi());
 
 			break;
+
+		default:
+			break;
 		}
 
 		if (DescrittoreBloccoVO.isFilled(blocco1) ) {
@@ -2096,6 +2099,8 @@ public class ListaMovimentiAction extends ErogazioneAction {
 				}
 			}
 
+		default:
+			break;
 		}
 
 		/*
@@ -2373,6 +2378,8 @@ public class ListaMovimentiAction extends ErogazioneAction {
 				return (servizioILL == null);	//serv locale o ill NON configurato
 			}
 
+			default:
+				break;
 			}
 			return true;
 

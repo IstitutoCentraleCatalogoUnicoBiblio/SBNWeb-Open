@@ -5400,6 +5400,9 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 
 		try {
 			checkTicket(ticket);
+			if (!ValidazioneDati.isFilled(codUtente))
+				return null;
+
 			Tbl_utenti utente = dao.getUtente(codUtente);
 			if (utente == null) {
 				// almaviva5_20160527 utente non trovato per userId, secondo tentativo per cod.fiscale
@@ -8013,14 +8016,22 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 		if (parBib == null)
 			throw new ApplicationException(SbnErrorTypes.SRV_PARAMETRI_BIBLIOTECA_ASSENTI);
 
-		boolean prioritaPrenot = parBib.isPrioritaPrenotazioni();
-
 		// metodo da eseguire solo alla restituzione del doc. (attivita == 04)
-		if (StatoIterRichiesta.of(mov.getCodAttivita()) != StatoIterRichiesta.RESTITUZIONE_DOCUMENTO)
-			// oppure, se la biblioteca gestisce la priorità sulle prenotazioni, si inoltra
-			// la prenotazione alla cancellazione/rifiuto della richiesta in corso
-			if (!(prioritaPrenot && ValidazioneDati.in(mov.getCodStatoMov(), "E", "C")))
+		// oppure, se la biblioteca gestisce la priorità sulle prenotazioni, si inoltra
+		// la prenotazione alla cancellazione/rifiuto della richiesta in corso
+		// almaviva5_20190419 #6944 revisione controlli 
+		boolean restituito = StatoIterRichiesta.of(mov.getCodAttivita()) == StatoIterRichiesta.RESTITUZIONE_DOCUMENTO;
+		boolean prioritaPrenot = parBib.isPrioritaPrenotazioni();
+		boolean cancellato = ServiziUtil.movimentoCancellato(mov);
+		boolean rifiutato = ServiziUtil.movimentoRifiutato(mov);
+
+		if (!restituito) {
+			if (!prioritaPrenot)
 				return CommandResultVO.build(command);
+
+			if (!rifiutato && !cancellato)
+				return CommandResultVO.build(command);
+		}
 
 		// prenotazioni pendenti, ordinate per data richiesta
 		List<MovimentoListaVO> prenotazioni = getPrenotazioni(ticket, mov, codBib, Locale.getDefault(),

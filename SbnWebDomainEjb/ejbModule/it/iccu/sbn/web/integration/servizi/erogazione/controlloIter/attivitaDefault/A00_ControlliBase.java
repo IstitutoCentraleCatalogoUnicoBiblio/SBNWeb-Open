@@ -121,7 +121,7 @@ public class A00_ControlliBase extends AbstractAttivitaCheckerBase {
 			return ControlloAttivitaServizioResult.ERRORE_AUTORIZZAZIONE_SCADUTA;
 
 
-		// 5. verifico la disponibilitÃ  del documento e recupero la Categoria di Fruizione del documento
+		// 5. verifico la disponibilità del documento e recupero la Categoria di Fruizione del documento
 		if (movimento.isRichiestaSuInventario()) {
 			InventarioVO inventario = delegate.getInventario().getInventario(codPolo,
 					movimento.getCodBibInv(), movimento.getCodSerieInv(),
@@ -168,7 +168,7 @@ public class A00_ControlliBase extends AbstractAttivitaCheckerBase {
 			return ControlloAttivitaServizioResult.ERRORE_DOCUMENTO_NON_DISPONIBILE_AL_TIPO_SERVIZIO;
 
 		// 7. controllo movimenti e richieste pendenti sul documento
-		//almaviva5_20110920 #3668 il controllo della disponibilitÃ  va eseguito al netto di eventuali prelazioni;
+		//almaviva5_20110920 #3668 il controllo della disponibilità va eseguito al netto di eventuali prelazioni;
 		//a tal scopo si riporta (temporaneamente) la data inizio prev. alla data reale della richiesta
 		MovimentoVO movNoPrel = movimento.copy();
 		movNoPrel.setDataInizioPrev(movNoPrel.getDataRichiesta());
@@ -178,16 +178,16 @@ public class A00_ControlliBase extends AbstractAttivitaCheckerBase {
 		check = disponibilita.getResult();
 		dati.setCheckData(disponibilita);
 
-		//Ã© davvero un errore?
+		//è davvero un errore?
 		if (!ControlloAttivitaServizioResult.isOK(check) &&
 			!ControlloAttivitaServizioResult.isIterPrenotazione(check))
 			return check;
 
-		// 2. controllo movimento giÃ  presente per il doc. richiesto
+		// 2. controllo movimento già presente per il doc. richiesto
 		if (servizi.esisteRichiestaPerUtente(ticket, movimento) ) {
 
-			//sulle richieste per periodico Ã© lasciata facoltÃ  ai bibliotecari di
-			//forzare l'inserimento anche in presenza di movimenti giÃ  attivi
+			//sulle richieste per periodico è lasciata facoltà ai bibliotecari di
+			//forzare l'inserimento anche in presenza di movimenti attivi
 			if (movimento.isPeriodico() && dati.getOperatore() == OperatoreType.BIBLIOTECARIO)
 				return ControlloAttivitaServizioResult.RICHIESTA_FORZATURA_RICHIESTA_PRESENTE_STESSO_LETTORE;
 			else
@@ -196,8 +196,8 @@ public class A00_ControlliBase extends AbstractAttivitaCheckerBase {
 
 		if (servizi.esistePrenotazionePerUtente(ticket, movimento) ) {
 
-			//sulle richieste per periodico Ã© lasciata facoltÃ  ai bibliotecari di
-			//forzare l'inserimento anche in presenza di prenotazioni giÃ  attive
+			//sulle richieste per periodico è lasciata facoltà ai bibliotecari di
+			//forzare l'inserimento anche in presenza di prenotazioni attive
 			if (movimento.isPeriodico() && dati.getOperatore() == OperatoreType.BIBLIOTECARIO)
 				return ControlloAttivitaServizioResult.RICHIESTA_FORZATURA_PRENOT_PRESENTE_STESSO_LETTORE;
 			else

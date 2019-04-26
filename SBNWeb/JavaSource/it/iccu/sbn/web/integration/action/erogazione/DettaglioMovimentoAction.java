@@ -1241,7 +1241,8 @@ public class DettaglioMovimentoAction extends ErogazioneAction {
 			Navigation navi = Navigation.getInstance(request);
 			ServiziDelegate delegate = ServiziDelegate.getInstance(request);
 
-			switch (currentForm.getRichiesta() ) {
+			RichiestaDettaglioMovimentoType richiesta = currentForm.getRichiesta();
+			switch (richiesta) {
 			case OK:
 				eseguiSalvataggioMovimento(request, currentForm, true);
 				break;
@@ -1439,6 +1440,10 @@ public class DettaglioMovimentoAction extends ErogazioneAction {
 				break;
 			}
 
+			default:
+				LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.richiestaOperazioneInvalida"));
+				log.error("operazione non valida: " + richiesta);
+				return mapping.getInputForward();
 			}
 
 			ActionForward forward = null;
@@ -1593,6 +1598,11 @@ public class DettaglioMovimentoAction extends ErogazioneAction {
 				if (currentForm.isStampaModulo())
 					return preparaStampaModuloAvanza(mapping, request, currentForm);
 				break;
+
+			default:
+				LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.richiestaOperazioneInvalida"));
+				log.error("operazione non valida: " + richiesta);
+				return mapping.getInputForward();
 			}
 
 			return mapping.getInputForward();
@@ -2959,6 +2969,9 @@ public class DettaglioMovimentoAction extends ErogazioneAction {
 				return !nuovo && mov.isRichiedenteRichiestaILL() && ILLConfiguration2.getInstance().isRichiestaAnnullabile(datiILL)
 						&& datiILL.getTransactionId() > 0;
 			}
+
+			default:
+				break;
 
 			}
 
