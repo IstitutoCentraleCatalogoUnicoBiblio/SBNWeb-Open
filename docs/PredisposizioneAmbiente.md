@@ -4,7 +4,7 @@
 ### INDICE
 1. [Premessa](#1-Premessa)
 
-2. [Sistema Linux. Ambiente e configuraione di base](#2-Sistema-Linux-Ambiente-e-configuraione-di-base)
+2. [Sistema Linux. Ambiente e configurazione di base](#2-Sistema-Linux-Ambiente-e-configurazione-di-base)
  
    - 2.1 [Configurazione del Sistema Operativo](#21-Configurazione-del-Sistema-Operativo)
 
