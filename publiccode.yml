@@ -8,7 +8,7 @@ softwareType: standalone/web
 platforms:
   - web
 categories:
-  - library-management-system
+  - resource-management
   - collaboration
   - communications
 maintenance:
