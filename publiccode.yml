@@ -22,7 +22,8 @@ legal:
   repoOwner: 'Istituto Centrale per il Catalogo Unico delle biblioteche italiane e per le informazioni bibliografiche'
 intendedAudience:
   scope:
-    - library management
+    - culture
+    - research
   countries:
     - it
 localisation:
