@@ -26,12 +26,14 @@ import it.iccu.sbn.web.vo.UserVO;
 import it.iccu.sbn.web2.navigation.NavigationForward.DirectionType;
 import it.iccu.sbn.web2.tags.NavigationErrorsTag;
 import it.iccu.sbn.web2.util.Constants;
+import it.iccu.sbn.web2.util.LinkableTagUtils;
 
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -513,8 +515,10 @@ public class Navigation extends SerializableVO {
 
 	public void setTesto(String testo) {
 		NavigationElement element = this.cache.getCurrentElement();
-		if (element != null)
-			element.setTesto(testo);
+		if (element != null) {
+			String msg = LinkableTagUtils.findMessage(currentRequest, Locale.getDefault(), testo);
+			element.setTesto(msg != null ? msg : testo);
+		}
 	}
 
 	public void purgeThis() {

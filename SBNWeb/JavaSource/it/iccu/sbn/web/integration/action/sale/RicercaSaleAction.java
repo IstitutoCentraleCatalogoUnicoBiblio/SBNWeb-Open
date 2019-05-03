@@ -313,6 +313,7 @@ public class RicercaSaleAction extends ServiziBaseAction implements SbnAttivitaC
 		RicercaSaleForm currentForm = (RicercaSaleForm) form;
 		currentForm.setCurrentFolder(FOLDER_RICERCA);
 		currentForm.setPulsanti(BOTTONIERA_RICERCA);
+		Navigation.getInstance(request).setTesto("servizi.bottone.sale");
 		return mapping.getInputForward();
 	}
 
@@ -335,6 +336,8 @@ public class RicercaSaleAction extends ServiziBaseAction implements SbnAttivitaC
 		ricerca.setCodBib(bib.getCod_bib());
 
 		try {
+			Navigation navi = Navigation.getInstance(request);
+			navi.setTesto("servizi.bottone.sale.prenotazioni");
 			List<Mediazione> lista = SaleDelegate.getInstance(request)
 					.getListaCategorieMediazione(bib.getCod_polo(), bib.getCod_bib(), true, ThreeState.FALSE, 0).getLista();
 			currentForm.setListaCatMediazione(ValidazioneDati.coalesce(lista, ValidazioneDati.emptyList(Mediazione.class)) );
@@ -348,7 +351,7 @@ public class RicercaSaleAction extends ServiziBaseAction implements SbnAttivitaC
 				return mapping.getInputForward();
 			}
 
-			Navigation.getInstance(request).getCache().getCurrentElement().setInfoBlocchi(null);
+			navi.getCache().getCurrentElement().setInfoBlocchi(null);
 			if (blocco1.getTotRighe() == 1) {
 				PrenotazionePostoVO pp = (PrenotazionePostoVO) ValidazioneDati.first(blocco1.getLista());
 				currentForm.setSelectedPren(pp.getId_prenotazione());
@@ -381,6 +384,9 @@ public class RicercaSaleAction extends ServiziBaseAction implements SbnAttivitaC
 		BibliotecaVO bib = (BibliotecaVO) currentForm.getParametri().get(ParamType.BIBLIOTECA);
 
 		try {
+			Navigation navi = Navigation.getInstance(request);
+			navi.setTesto("servizi.bottone.sale.categorieMediazione");
+
 			DescrittoreBloccoVO blocco1 = SaleDelegate.getInstance(request).getListaCategorieMediazione(bib.getCod_polo(),
 					bib.getCod_bib(), false, ThreeState.UNSET, currentForm.getRicerca().getElementiPerBlocco());
 			currentForm.setBlocco(blocco1);
@@ -389,7 +395,7 @@ public class RicercaSaleAction extends ServiziBaseAction implements SbnAttivitaC
 				return mapping.getInputForward();
 			}
 
-			Navigation.getInstance(request).getCache().getCurrentElement().setInfoBlocchi(null);
+			navi.getCache().getCurrentElement().setInfoBlocchi(null);
 			if (blocco1.getTotRighe() == 1) {
 				Mediazione med = (Mediazione) ValidazioneDati.first(blocco1.getLista());
 				currentForm.setSelectedCat(med.getRepeatableId());
