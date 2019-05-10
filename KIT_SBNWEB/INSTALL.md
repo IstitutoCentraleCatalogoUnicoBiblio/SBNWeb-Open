@@ -558,7 +558,7 @@ Questa shell provvede ad effettuare in maniera automatica l'aggiornamento dei mo
 - assicurarsi che i proprietari delle shell siano rispettivamente _root:jboss_ e _jboss:_jboss e i permessi di entrambe settati su 755;
 - nella crontab di root aggiungere la seguente riga (togliendo il carattere di commento quando lo si ritiene opportuno):
 
-        #00 7 * * 2-6 /export/Trasf/upd\_sw.sh /dev/null 2&1
+      0 7 * * 1-5 /export/Trasf/upd_sw.sh /dev/null 2>&1
 
 ### 4.3. Gli script di startup
 
