@@ -3,13 +3,13 @@
  */
 package it.iccu.sbn.periodici.ejb;
 
-public interface PeriodiciHome
+public interface PicosHome
    extends javax.ejb.EJBHome
 {
    public static final String COMP_NAME="java:comp/env/ejb/Periodici";
    public static final String JNDI_NAME="sbnWeb/Periodici";
 
-   public Periodici create()
+   public Picos create()
       throws javax.ejb.CreateException,java.rmi.RemoteException;
 
 }

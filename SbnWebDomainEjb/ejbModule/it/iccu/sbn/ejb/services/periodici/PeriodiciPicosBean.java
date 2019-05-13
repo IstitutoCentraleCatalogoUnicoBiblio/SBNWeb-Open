@@ -9,6 +9,7 @@ import it.iccu.sbn.ejb.exception.ValidationException;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.acquisizioni.FornitoreVO;
 import it.iccu.sbn.ejb.vo.acquisizioni.ListaSuppFornitoreVO;
+import it.iccu.sbn.periodici.ejb.Picos;
 import it.iccu.sbn.periodici.exception.PicosException;
 import it.iccu.sbn.periodici.vo.PicosAskFrnOperazione;
 import it.iccu.sbn.periodici.vo.SchedaFornitoreVO;
@@ -24,16 +25,15 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJBException;
-import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
 import org.apache.log4j.Logger;
 
-public class PeriodiciBean extends TicketChecker implements SessionBean {
+public class PeriodiciPicosBean extends TicketChecker implements Picos {
 
 	private static final long serialVersionUID = 2536677557241309029L;
 
-	private static Logger log = Logger.getLogger(PeriodiciBean.class);
+	private static Logger log = Logger.getLogger(Picos.class);
 	private Acquisizioni acquisizioni;
 
 	public List<SchedaPeriodicoVO> xinv(String kbibl, String kinv,

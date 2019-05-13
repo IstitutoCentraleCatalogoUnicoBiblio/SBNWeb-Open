@@ -378,15 +378,15 @@
          <transaction-type>Bean</transaction-type>
       </session>
 
-      <session id="Session_Periodici">
-         <description><![CDATA[A session bean named Periodici]]></description>
-         <display-name>Periodici</display-name>
+      <session id="Session_Picos">
+         <description><![CDATA[A session bean named Picos]]></description>
+         <display-name>Picos</display-name>
 
-         <ejb-name>Periodici</ejb-name>
+         <ejb-name>Picos</ejb-name>
 
-         <home>it.iccu.sbn.periodici.ejb.PeriodiciHome</home>
-         <remote>it.iccu.sbn.periodici.ejb.Periodici</remote>
-         <ejb-class>it.iccu.sbn.ejb.services.periodici.PeriodiciBean</ejb-class>
+         <home>it.iccu.sbn.periodici.ejb.PicosHome</home>
+         <remote>it.iccu.sbn.periodici.ejb.Picos</remote>
+         <ejb-class>it.iccu.sbn.ejb.services.periodici.PeriodiciPicosBean</ejb-class>
          <session-type>Stateless</session-type>
          <transaction-type>Container</transaction-type>
       </session>
@@ -987,7 +987,7 @@
       <container-transaction>
          <!-- Can specify many methods at once here -->
          <method>
-            <ejb-name>Periodici</ejb-name>
+            <ejb-name>Picos</ejb-name>
             <method-name>*</method-name>
          </method>
          <!-- NotSupported|Supports|Required|RequiresNew|Mandatory|Never -->

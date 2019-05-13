@@ -165,7 +165,7 @@
 			<method-attributes></method-attributes>
 		</session>
 		<session>
-			<ejb-name>Periodici</ejb-name>
+			<ejb-name>Picos</ejb-name>
 			<jndi-name>sbnWeb/Periodici</jndi-name>
 
 			<method-attributes></method-attributes>

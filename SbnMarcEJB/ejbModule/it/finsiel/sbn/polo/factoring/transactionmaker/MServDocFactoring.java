@@ -26,8 +26,8 @@ import it.finsiel.sbn.util.CodiciAttivita;
 import it.iccu.sbn.ejb.model.unimarcmodel.Inventario;
 import it.iccu.sbn.ejb.model.unimarcmodel.MServDoc;
 import it.iccu.sbn.ejb.model.unimarcmodel.SBNMarc;
-import it.iccu.sbn.periodici.ejb.Periodici;
-import it.iccu.sbn.periodici.ejb.PeriodiciHome;
+import it.iccu.sbn.periodici.ejb.Picos;
+import it.iccu.sbn.periodici.ejb.PicosHome;
 import it.iccu.sbn.periodici.vo.SchedaInventarioVO;
 
 import java.lang.reflect.InvocationTargetException;
@@ -165,9 +165,9 @@ public class MServDocFactoring extends Factoring {
 				return inventario;
 			}
 
-	protected Periodici getPeriodici() throws NamingException, RemoteException, CreateException {
+	protected Picos getPeriodici() throws NamingException, RemoteException, CreateException {
 		InitialContext ctx = new InitialContext();
-		PeriodiciHome home = (PeriodiciHome) ctx.lookup(PeriodiciHome.JNDI_NAME);
+		PicosHome home = (PicosHome) ctx.lookup(PicosHome.JNDI_NAME);
 		return home.create();
 	}
 

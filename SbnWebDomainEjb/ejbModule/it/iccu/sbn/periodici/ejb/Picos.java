@@ -15,7 +15,7 @@ import java.util.List;
 
 import javax.ejb.EJBObject;
 
-public interface Periodici extends EJBObject {
+public interface Picos extends EJBObject {
 
 	public List<SchedaPeriodicoVO> xinv(String kbibl, String kinv, String kserie)
 			throws PicosException, RemoteException;
