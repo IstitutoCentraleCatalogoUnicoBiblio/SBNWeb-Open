@@ -1,0 +1,96 @@
+publiccodeYmlVersion: '0.2'
+name: SBNWeb-Open
+releaseDate: '2019-03-11'
+softwareVersion: v1.0.0-open
+url: 'https://github.com/IstitutoCentraleCatalogoUnicoBiblio/SBNWeb-Open'
+developmentStatus: stable
+softwareType: standalone/web
+platforms:
+  - web
+categories:
+  - resource-management
+  - collaboration
+  - communications
+maintenance:
+  type: contract
+  contractors:
+    - name: 'Almaviva'
+      until: '2021-05-31'
+legal:
+  license: AGPL-3.0-or-later
+  mainCopyrightOwner: 'Istituto Centrale per il Catalogo Unico delle biblioteche italiane e per le informazioni bibliografiche'
+  repoOwner: 'Istituto Centrale per il Catalogo Unico delle biblioteche italiane e per le informazioni bibliografiche'
+intendedAudience:
+  scope:
+    - culture
+    - research
+  countries:
+    - it
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+it:
+  countryExtensionVersion: '0.2'
+  riuso:
+    codiceIPA: m_bac
+description:
+  it:
+    genericName: Library Management System
+    shortDescription: >-
+      Applicativo LMS integrato, sviluppato da ICCU, realizzato in architettura
+      J2EE e che utilizza esclusivamente software free ed open-source
+    longDescription: >
+      Applicativo LMS integrato, sviluppato da ICCU, realizzato in  architettura
+      J2EE e che utilizza esclusivamente software free ed  open-source (SO
+      Linux, Application Server JBoss, RDBMS PostgreSQL). L’accesso è web-based,
+      l'utente può accedere alle funzioni applicative  per mezzo di una intranet
+      o attraverso la Rete Internet, utilizzando  come terminale normali web
+      browser (es. Firefox, Chrome, Opera, Edge). SBNWeb gestisce un unico
+      livello di base dati, relativo ad un  raggruppamento di Biblioteche
+      (Polo), nella quale i dati privati sono  localizzati dalla Biblioteca e/o
+      all’utente proprietari e la loro  visibilità è controllata
+      applicativamente, consentendo a ciascuno di  accedere soltanto ai propri
+      dati e a quelli condivisi.
+    apiDocumentation: >-
+      https://github.com/IstitutoCentraleCatalogoUnicoBiblio/SBNWeb-Open/blob/master/KIT_SBNWEB/INSTALL.md
+    features:
+      - Gestione base di dati
+      - Gestione Poli Bibliotecari
+      - Catalogazione bibliografica
+      - Gestione del documento fisico
+      - Gestione delle acquisizioni
+      - Erogazione dei servizi all'utenza
+      - Stampe e statistiche
+      - Elaborazioni differite
+      - Amministrazione di sistema
+      - Import ed export basi dati
+    screenshots:
+      - screenshots/sbn_web.png
+usedBy:
+  - AQ1 Polo Aquilano SBN
+  - BA1 Polo Terra di Bari
+  - BAT Polo SBN della Provincia di Barletta Andria Trani
+  - BMT Polo MiBACT Torino
+  - BVE Polo Biblioteca nazionale centrale di Roma
+  - CAM Polo della Regione Campania
+  - CAT Polo Biblioteche della provincia di Catania
+  - CFI Polo biblioteca nazionale centrale di Firenze
+  - CSA Polo di Cosenza
+  - DDS Polo Istituto Centrale per i Beni Sonori ed Audiovisivi
+  - IEI Polo degli Istituti culturali di Roma
+  - LIG Polo Regione Liguria
+  - LO1 Polo regionale Lombardia
+  - MIL Polo MiBACT Lombardia – BEIC
+  - MO1 Polo della Provincia di Campobasso
+  - NAP Polo MiBACT Napoli
+  - PA1 Polo del Comune di Palermo
+  - PAL Polo regionale di Sicilia
+  - PCM Polo Città di Milano
+  - PIS Polo MiBACT Pisa
+  - RMC Polo Università cattolica del Sacro Cuore A. Gemelli
+  - RML Polo delle biblioteche pubbliche statali di Roma
+  - RMR Polo Comune di Roma
+  - SNT Polo Ministero della Salute - Roma
+  - TO0 Polo regionale Piemonte - Torino
+  - UPG Polo Università per stranieri di Perugia
