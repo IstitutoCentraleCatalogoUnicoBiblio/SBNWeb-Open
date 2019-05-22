@@ -113,7 +113,7 @@ public class FormatoClasse {
 		ClasseType datiAut = creaClassePerListaSintetica(classe, num_tit, num_tit_bib);
 		if (enableRanking) {
 			int rank = ((Vl_classe_the)classe).getPOSIZIONE();
-			datiAut.setRank(rank);
+			datiAut.setRank(Math.max(1, rank));
 		}
 		elemento.setDatiElementoAut(datiAut);
 		return elemento;
@@ -128,7 +128,7 @@ public class FormatoClasse {
 		elemento.setDatiElementoAut(datiAut);
 		if (enableRanking) {
 			int rank = ((Vl_classe_the)classe).getPOSIZIONE();
-			datiAut.setRank(rank);
+			datiAut.setRank(Math.max(1, rank));
 		}
 		return elemento;
 	}

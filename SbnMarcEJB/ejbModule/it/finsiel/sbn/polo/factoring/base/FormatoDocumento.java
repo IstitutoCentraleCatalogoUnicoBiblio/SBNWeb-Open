@@ -543,7 +543,7 @@ public abstract class FormatoDocumento extends FormatoTitolo {
         //almaviva5_20090302
         legameAut.setNoteLegame(legame.getNOTA_TIT_SOG_BIB());
         //almaviva5_20121003 evolutive CFI
-        legameAut.setRank(legame.getPOSIZIONE());
+        legameAut.setRank(Math.max(1, legame.getPOSIZIONE()) );
 
         return arrLegame;
     }

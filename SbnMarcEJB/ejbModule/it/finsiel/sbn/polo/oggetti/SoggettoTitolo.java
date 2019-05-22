@@ -318,7 +318,7 @@ public class SoggettoTitolo extends Tr_tit_sog_bib {
 
 		Tr_tit_sog_bib legame = ValidazioneDati.first(legami);
 
-		return legame != null ? legame.getPOSIZIONE() : 0;
+		return legame != null ? legame.getPOSIZIONE() : 1;
 	}
 
 

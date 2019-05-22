@@ -283,7 +283,7 @@ public class FormatoSoggetto {
         desc = cercaDescrittore.cercaDescrittorePerId(ds.getDID());
         DescrittoreType descrittoreType = fd.creaDescrittorePerEsameAnalitico(desc);
         //almaviva5_20120516 evolutive CFI
-        descrittoreType.setRank(ds.getFL_POSIZIONE());
+        descrittoreType.setRank(Math.max(1, ds.getFL_POSIZIONE()) );
 
 		el.setDatiElementoAut(descrittoreType);
         LegamiType legamiType = fd.completaLegami(desc, rinvii);
