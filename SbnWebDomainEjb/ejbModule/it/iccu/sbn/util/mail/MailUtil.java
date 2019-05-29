@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -50,6 +51,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 public class MailUtil {
 
@@ -174,7 +176,8 @@ public class MailUtil {
 
 		//livello logging
 		String level = CommonConfiguration.getProperty(Configuration.LOG_LEVEL_SBNWEB).toUpperCase();
-		props.put("mail.debug", ValidazioneDati.in(level, "ALL", "TRACE", "DEBUG") ? "true" : "false");
+		Boolean debug = ValidazioneDati.in(level, "ALL", "TRACE", "DEBUG");
+		props.put("mail.debug", debug.toString());
 
 		//almaviva5_20110211 host + port non standard
 		String host = ValidazioneDati.trimOrEmpty(mp.getSmtp());
@@ -200,6 +203,11 @@ public class MailUtil {
 			session = Session.getInstance(props);
 
 		log.debug("creata mail session " + session.getProperties());
+
+		if (debug) {
+			//almaviva5_20190529 redirect mail debug log
+			session.setDebugOut(new PrintStream(new LoggingOutputStream(log, Priority.DEBUG), true));
+		}
 
 		return session;
 
