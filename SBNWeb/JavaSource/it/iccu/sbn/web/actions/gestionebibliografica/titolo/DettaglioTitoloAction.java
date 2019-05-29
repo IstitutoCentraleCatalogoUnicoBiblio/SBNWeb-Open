@@ -5146,6 +5146,10 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 
 	public String controllaISSN (String codice) {
 
+		// Inizio Intervento interno Maggio 2019 ALMAVIVA2 - eliminato carattere trattino dalla stringa del codice ISSN
+		codice = codice.replace("-", "");
+		// Fine Intervento interno Maggio 2019
+		
 		// Verifica lunghezza
 		if (codice.length() != 8) {
 			return "(errato)";
@@ -5166,11 +5170,24 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 		ris2 = (ris1 % 11);
 		intControllo = (11 - ris2);
 
-		charControllo = String.valueOf(intControllo);
-
-		if (!codice.substring(7).equals(charControllo)) {
+		// Inizio Intervento interno Maggio 2019 ALMAVIVA2 - tradotto il valore di intControllo da 10 a X
+		// charControllo = String.valueOf(intControllo);
+		if (intControllo == 10) {
+			charControllo = "X";
+		} else {
+			charControllo = String.valueOf(intControllo);
+		}
+		// Fine Intervento interno Maggio 2019
+		
+		// Inizio Intervento interno Maggio 2019 ALMAVIVA2 - la X del codice di controllo ISBN a 10 caratteri viene accettata anche
+		// se scritta in minuscolo; sara maiuscolizzata in fase di inserimento in Base Dati
+//		if (!codice.substring(7).equals(charControllo)) {
+//			return "(errato)";
+//		}
+		if (!codice.substring(7).toUpperCase().equals(charControllo)) {
 			return "(errato)";
 		}
+		// Fine Intervento interno Maggio 2019
 
 		return "";
 	}
