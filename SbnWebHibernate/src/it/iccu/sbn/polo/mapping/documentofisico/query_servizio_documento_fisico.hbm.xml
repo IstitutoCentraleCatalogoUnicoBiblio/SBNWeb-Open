@@ -308,6 +308,7 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 		<return-scalar column="id_accesso_remoto" type="string" />
 		<return-scalar column="bid_inv" type="string" />
 		<return-scalar column="cd_frui" type="string" />
+		<return-scalar column="cd_no_disp" type="string" />
 		<return-scalar column="isbd_inv" type="string" />
 		<return-scalar column="cd_natura_inv" type="character" />
 		<return-scalar column="anno_abb" type="integer" />
@@ -326,7 +327,7 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 					and ppi.cd_serie=i.cd_serie) as num_possessori,
 				i.cd_bib, i.id_accesso_remoto,
 				i.bid as bid_inv,
-				i.cd_frui,
+				i.cd_frui, i.cd_no_disp,
 				null as isbd_inv,
 				null as cd_natura_inv,
 				coalesce(i.anno_abb, 9999) as anno_abb
@@ -353,7 +354,7 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 						and ppi.cd_serie=i.cd_serie) as num_possessori,
 				i.cd_bib, i.id_accesso_remoto,
 				i.bid as bid_inv,
-				i.cd_frui,
+				i.cd_frui, i.cd_no_disp,
 				estrai_area_da_isbd(ti.isbd, ti.indice_isbd, '200') as isbd_inv,
 				ti.cd_natura as cd_natura_inv,
 				coalesce(i.anno_abb, 9999) as anno_abb
@@ -381,7 +382,7 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 					and ppi.cd_serie=i.cd_serie) as num_possessori,
 				i.cd_bib, i.id_accesso_remoto,
 				i.bid as bid_inv,
-				i.cd_frui,
+				i.cd_frui, i.cd_no_disp,
 				estrai_area_da_isbd(ti.isbd, ti.indice_isbd, '200') as isbd_inv,
 				ti.cd_natura as cd_natura_inv,
 				coalesce(i.anno_abb, 9999) as anno_abb

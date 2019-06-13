@@ -63,4 +63,5 @@ public interface ProfilerManagerMBean extends ServiceMBean {
 	//almaviva5_20140910
 	public void setConfigurationProperty(String key, String value) throws Exception;
 
+	public String printMailConfiguration() throws Exception;
 }

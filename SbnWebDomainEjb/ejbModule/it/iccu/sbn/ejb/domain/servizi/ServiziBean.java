@@ -7208,15 +7208,24 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			if (ValidazioneDati.isFilled(noDisp)) {
 				inPrestito = false;
 				disp.setDisponibile(false);
+				Timestamp dataRientro = null;
 				// controllo su ordini di rilegatura
 				Tba_ordiniDao odao = new Tba_ordiniDao();
 				Tra_ordine_inventari oi = odao.getInventarioRilegatura(i);
 				if (oi != null) {
-					Timestamp dataRientro = ValidazioneDati.coalesce(oi.getData_rientro(),
+					dataRientro = ValidazioneDati.coalesce(oi.getData_rientro(),
 							oi.getData_rientro_presunta());
-					disp.setDataPrenotazione(dataRientro);
+				}
+
+				if (dataRientro == null) {
+					//almaviva5_20190523
+					Date data_redisp_prev = i.getData_redisp_prev();
+					if (data_redisp_prev != null) {
+						dataRientro = new Timestamp(data_redisp_prev.getTime());
+					}
 				}
 				// disponibilità intrinseca
+				disp.setDataPrenotazione(dataRientro);
 				disp.setMotivo(CodiciProvider.getDescrizioneCodiceSBN(CodiciType.CODICE_NON_DISPONIBILITA, noDisp));
 			}
 		}

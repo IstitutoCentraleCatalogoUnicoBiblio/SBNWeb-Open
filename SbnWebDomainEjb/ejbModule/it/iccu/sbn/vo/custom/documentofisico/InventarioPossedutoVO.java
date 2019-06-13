@@ -51,6 +51,8 @@ public class InventarioPossedutoVO extends SerializableVO {
 
 	private Integer anno_abb;
 
+	private String cd_no_disp;
+
 	public String getCd_serie() {
 		return cd_serie;
 	}
@@ -217,6 +219,14 @@ public class InventarioPossedutoVO extends SerializableVO {
 
 	public void setAnno_abb(Integer anno_abb) {
 		this.anno_abb = anno_abb;
+	}
+
+	public String getCd_no_disp() {
+		return cd_no_disp;
+	}
+
+	public void setCd_no_disp(String cd_no_disp) {
+		this.cd_no_disp = cd_no_disp;
 	}
 
 }

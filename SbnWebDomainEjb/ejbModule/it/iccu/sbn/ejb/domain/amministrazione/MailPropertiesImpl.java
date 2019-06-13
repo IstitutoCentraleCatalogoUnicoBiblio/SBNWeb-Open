@@ -16,9 +16,12 @@
  ******************************************************************************/
 package it.iccu.sbn.ejb.domain.amministrazione;
 
+import it.iccu.sbn.ejb.vo.SerializableVO;
 import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 
-class MailPropertiesImpl implements MailProperties {
+class MailPropertiesImpl extends SerializableVO implements MailProperties {
+
+	private static final long serialVersionUID = 1L;
 
 	String smtp;
 	String pop;

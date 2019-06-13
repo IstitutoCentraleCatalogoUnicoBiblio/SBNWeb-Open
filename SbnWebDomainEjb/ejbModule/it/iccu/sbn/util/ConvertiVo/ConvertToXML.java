@@ -333,6 +333,10 @@ public final class ConvertToXML extends ConvertFromXML {
 		if (isFilled(anno_abb))
 			ip.setAnno(anno_abb);
 
+		String cd_no_disp = inv.getCd_no_disp();
+		if (isFilled(cd_no_disp))
+			ip.setCodNoDisp(cd_no_disp.trim());
+
 		return ip;
 	}
 

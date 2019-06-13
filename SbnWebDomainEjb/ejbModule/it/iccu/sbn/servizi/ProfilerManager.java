@@ -40,6 +40,7 @@ import it.iccu.sbn.util.profiler.SbnWebProfileCache;
 import it.iccu.sbn.util.sms.SMSUtil;
 import it.iccu.sbn.util.validation.JsScriptExecutor;
 import it.iccu.sbn.vo.custom.Credentials;
+import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 import it.iccu.sbn.web2.util.Constants;
 
 import java.io.IOException;
@@ -459,6 +460,14 @@ public class ProfilerManager extends ServiceMBeanSupport implements ProfilerMana
 			throws Exception {
 		if (ValidazioneDati.isFilled(key) && ValidazioneDati.notEmpty(key))
 			CommonConfiguration.setProperty(key, value);
+	}
+
+	public String printMailConfiguration() throws Exception {
+		MailProperties mp = getAmministrazioneMail().getPoloMailProperties();
+		if (mp == null)
+			return "";
+		
+		return mp.toString();
 	}
 
 }
