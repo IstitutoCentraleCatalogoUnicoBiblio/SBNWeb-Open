@@ -97,7 +97,7 @@ public abstract class AcquisizioniBaseAction extends SinteticaLookupDispatchActi
 					this.saveErrors(request, errors);
 			}else{
 				ActionMessages errors = new ActionMessages();
-				errors.add("generico", new ActionMessage("errors.acquisizioni.trovatoPiùDiUnRecordConNomeFornitoreIndicato"));
+				errors.add("generico", new ActionMessage("errors.acquisizioni.trovatoPiuDiUnRecordConNomeFornitoreIndicato"));
 				this.saveErrors(request, errors);
 			}
 		}catch (Exception e) { // altri tipi di errore

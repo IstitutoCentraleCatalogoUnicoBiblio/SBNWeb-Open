@@ -131,7 +131,7 @@ public class LegameInventarioPossessoreAction extends LookupDispatchAction {
 		}
 		if (possLegame.getNotaAlLegame().trim().length() > 320) {
 			ActionMessages errors = new ActionMessages();
-			errors.add("generico", new ActionMessage("errors.documentofisico.ilTestoDellaNotaNonPuòSuperare320Caratteri"));
+			errors.add("generico", new ActionMessage("errors.documentofisico.ilTestoDellaNotaNonPuoSuperare320Caratteri"));
 			this.saveErrors(request, errors);
 			return mapping.getInputForward();
 		}

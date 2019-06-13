@@ -887,7 +887,7 @@ public class BuoniRicercaParzialeAction extends LookupDispatchAction implements 
 			}
 		} catch (DataException ve) {
 
-			LinkableTagUtils.addError(request, new ActionMessage("errors.acquisizioni.trovatoPiùDiUnRecordConNomeFornitoreIndicato"));
+			LinkableTagUtils.addError(request, new ActionMessage("errors.acquisizioni.trovatoPiuDiUnRecordConNomeFornitoreIndicato"));
 
 		}catch (Exception e) { // altri tipi di errore
 			return mapping.getInputForward();

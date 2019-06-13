@@ -21,7 +21,6 @@
 package it.iccu.sbn.web.actions.documentofisico.possessori;
 
 
-import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.TreeElementViewTitoli;
 import it.iccu.sbn.web.actionforms.documentofisico.possessori.PossessoriLegameForm;
 import it.iccu.sbn.web.integration.bd.FactoryEJBDelegate;
 import it.iccu.sbn.web.keygenerator.GeneraChiave;
@@ -34,8 +33,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -45,14 +43,11 @@ import org.apache.struts.actions.LookupDispatchAction;
 
 public class PossessoriLegameAction extends LookupDispatchAction {
 
-	private static Log log = LogFactory.getLog(PossessoriLegameAction.class);
-
-    //private InterrogazioneAutoreForm ricAut;
-    //private CaricamentoCombo carCombo = new CaricamentoCombo();
+	static Logger log = Logger.getLogger(PossessoriLegameAction.class);
 
 	@Override
 	protected Map<String,String> getKeyMethodMap() {
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String,String> map = new HashMap<String, String>();
 		map.put("dettaglio.button.salva", "salvaLegame");
 		map.put("dettaglio.button.annulla", "annullaLegame");
 		return map;
@@ -71,11 +66,10 @@ public class PossessoriLegameAction extends LookupDispatchAction {
 
 
 		//INSERIMENTI_RINVIO
-		String provenienza = (String)request.getAttribute("PROVENIENZA");
+
 		String pid_provenienza = (String)request.getAttribute("bid");
 		String desc_provenienza = (String)request.getAttribute("desc");
 
-		TreeElementViewTitoli elementoTree = (TreeElementViewTitoli)request.getAttribute("reticolo");
 
 		possLegame.setDescIniziale(desc_provenienza);
 		possLegame.getPossDettVO().setPid(pid_provenienza);
@@ -117,7 +111,7 @@ public class PossessoriLegameAction extends LookupDispatchAction {
 		//livello autorità obbligatorio
 		if (possDett.getPossDettVO().getNota().trim().length() > 320) {
 			ActionMessages errors = new ActionMessages();
-			errors.add("generico", new ActionMessage("errors.documentofisico.ilTestoDellaNotaNonPuòSuperare320Caratteri"));
+			errors.add("generico", new ActionMessage("errors.documentofisico.ilTestoDellaNotaNonPuoSuperare320Caratteri"));
 			this.saveErrors(request, errors);
 			return mapping.getInputForward();
 		}

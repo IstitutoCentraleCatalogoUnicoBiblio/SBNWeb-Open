@@ -1455,7 +1455,7 @@ public class ModificaInvCollAction extends SinteticaLookupDispatchAction {
 						nota.setUteIns(navi.getUtente().getFirmaUtente());
 						nota.setUteAgg(navi.getUtente().getFirmaUtente());
 						if (noteDupl.contains(nota.getCodNota())){
-							throw new ValidationException("nonEpossibileInserirePiùNoteAventiLoStessoCodice", ValidationException.errore);
+							throw new ValidationException("nonEpossibileInserirePiuNoteAventiLoStessoCodice", ValidationException.errore);
 						}else{
 							noteDupl.add(nota.getCodNota());
 						}
