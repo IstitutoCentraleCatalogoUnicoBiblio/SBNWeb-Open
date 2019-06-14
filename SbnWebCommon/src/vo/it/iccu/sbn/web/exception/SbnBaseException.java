@@ -17,7 +17,6 @@
 package it.iccu.sbn.web.exception;
 
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
-import it.iccu.sbn.util.IdGenerator;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 
 	private static final long serialVersionUID = 6534598661536984760L;
 
-	private final int errorId = IdGenerator.getId();
+	private final String errorId = RandomIdGenerator.getId();
 	private SbnErrorTypes errorCode;
 
 	protected String[] labels;
@@ -80,8 +79,8 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 		this.errorCode = errorCode;
 	}
 
-    public SbnBaseException(SbnErrorTypes errorCode, String... labels) {
-    	super(labels[0]);
+	public SbnBaseException(SbnErrorTypes errorCode, String... labels) {
+		super(labels[0]);
 		this.errorCode = errorCode;
 		this.labels = labels;
 	}
@@ -94,15 +93,18 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 
 		String lsep = System.getProperty("line.separator");
 		StringBuilder buf = new StringBuilder();
+		int idx = 0;
 		for (SbnBaseException sbe : exceptions) {
 			buf.append(getClass().getName());
 			buf.append(String.format("[%04d/%s]", sbe.getErrorCode().getIntCode(), sbe.getErrorCode().name()));
+			if (++idx == 1)
+				buf.append(" (errorId: ").append(errorId).append(" )");
 
-	        String message = sbe.getLocalizedMessage();
-	        if (message != null)
-	        	buf.append(": ").append(message);
+			String message = sbe.getLocalizedMessage();
+			if (message != null)
+				buf.append(": ").append(message);
 
-	        buf.append(lsep);
+			buf.append(lsep);
 		}
 
 		buf.append(trace);
@@ -114,7 +116,7 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 		return labels;
 	}
 
-	public int getErrorId() {
+	public String getErrorId() {
 		return errorId;
 	}
 

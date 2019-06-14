@@ -37,6 +37,7 @@ import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.orm.Tb_autore;
 import it.finsiel.sbn.polo.orm.Tb_titolo;
 import it.finsiel.sbn.util.MarshallingUtil;
+import it.finsiel.sbn.util.RandomIdGenerator;
 import it.iccu.sbn.ejb.model.unimarcmodel.DatiElementoType;
 import it.iccu.sbn.ejb.model.unimarcmodel.SBNMarc;
 import it.iccu.sbn.ejb.model.unimarcmodel.SbnUserType;
@@ -47,7 +48,6 @@ import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -65,8 +65,6 @@ import org.exolab.castor.xml.ValidationException;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class SbnMarcLocalGatewayBean implements SbnMarcLocalGateway {
-
-    private static final AtomicInteger errorTraceId = new AtomicInteger(0);
 
 	private static Logger log = Logger.getLogger("sbnmarcPolo");
 
@@ -131,15 +129,15 @@ public class SbnMarcLocalGatewayBean implements SbnMarcLocalGateway {
 
 		} catch (ValidationException e) {
 			ctx.setRollbackOnly();
-			int errorId = errorTraceId.incrementAndGet();
-			log.error(String.format("Errore validation [errorId: %d]: ", errorId), e);
+			String errorId = RandomIdGenerator.getId();
+			log.error(String.format("Errore validation [errorId: %s]: ", errorId), e);
 			result = FormatoErrore.buildMessaggioErrore(101, user, errorId);
 
 		} catch (Exception e) {
 			ctx.setRollbackOnly();
 			log.info("Eccezione durante azione di Factoring: " +  main_factoring.getClass());
-			int errorId = errorTraceId.incrementAndGet();
-			log.error(String.format("Errore transaction [errorId: %d]: ", errorId), e);
+			String errorId = RandomIdGenerator.getId();
+			log.error(String.format("Errore transaction [errorId: %s]: ", errorId), e);
 			// Errore interno durante l'elaborazione del Factoring.
 			result = FormatoErrore.buildMessaggioErrore(56, user, errorId );
 		}

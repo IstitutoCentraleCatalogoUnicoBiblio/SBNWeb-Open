@@ -41,6 +41,7 @@ import it.iccu.sbn.ejb.vo.servizi.erogazione.ill.DatiRichiestaILLVO;
 import it.iccu.sbn.ejb.vo.servizi.utenti.UtenteBaseVO;
 import it.iccu.sbn.util.IdGenerator;
 import it.iccu.sbn.web.constant.NavigazioneServizi;
+import it.iccu.sbn.web.exception.RandomIdGenerator;
 import it.iccu.sbn.web.exception.SbnBaseException;
 import it.iccu.sbn.web.integration.bd.gestioneservizi.ServiziDelegate;
 import it.iccu.sbn.web.integration.servizi.erogazione.ControlloAttivitaServizio;
@@ -729,10 +730,10 @@ public abstract class ServiziBaseAction extends SinteticaLookupDispatchAction {
 			LinkableTagUtils.addError(request, (SbnBaseException)t);
 		else {
 			//almaviva5_20111118
-			int errorId = IdGenerator.getId();
+			String errorId = RandomIdGenerator.getId();
 			log.error("servizi erroreGenerico [errorId: " + errorId + ']');
 			LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.generico"));
-			LinkableTagUtils.addError(request, new ActionMessage("ERROR_ID_TEMPLATE", String.valueOf(errorId) ));
+			LinkableTagUtils.addError(request, new ActionMessage("ERROR_ID_TEMPLATE", errorId ));
 		}
 	}
 
