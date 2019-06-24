@@ -72,6 +72,7 @@ import it.iccu.sbn.vo.domain.sip2.MessaggioSip2ScStatusResponse;
 import it.iccu.sbn.web.constant.RicercaRichiesteType;
 import it.iccu.sbn.web.constant.ServiziConstant;
 import it.iccu.sbn.web.integration.servizi.erogazione.ControlloAttivitaServizioResult;
+import it.iccu.sbn.web.integration.servizi.erogazione.StatoIterRichiesta;
 import it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.DatiControlloVO;
 import it.iccu.sbn.web.integration.servizi.erogazione.controlloIter.DatiControlloVO.OperatoreType;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
@@ -587,11 +588,11 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 
 							String outputLine = response.toString();
 							// Invio della risposta
-							out.print(outputLine + "\r");
+							out.print(outputLine + MessaggioSip2.SIP2_LINE_TERMINATOR);
 
 							out.flush(); // invia subito
 
-							clog.debug("[Response sent] ---> "+outputLine);
+							clog.debug("[Response sent] ---> " + outputLine);
 
 							//ultimo messaggio scambiato (se diverso da resend)
 							if (response.getCodiceMessaggio() != Sip2MessageType.SIP2_SC_ACS_RESEND_REQUEST)
@@ -1175,7 +1176,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 
 				ServizioBibliotecaVO servizioVO = getServizi().getServizioBiblioteca(ticket, codPolo, codBiblio, codTipoServizio, codServizio);
 				datiControllo.setServizio(servizioVO);
-				datiControllo.getMovimento().setCodAttivita("04"); //restituzione documento
+				datiControllo.getMovimento().setCodAttivita(StatoIterRichiesta.RESTITUZIONE_DOCUMENTO.getISOCode() ); //restituzione documento
 				datiControllo.getMovimento().setDataFineEff(DaoManager.now()); //restituzione documento
 
 				getServizi().aggiornaIterRichiestaSIP2(datiControllo);
@@ -1196,11 +1197,15 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 
 				resp.setOk('1');
 				resp.setResensitize('Y');
+				//almaviva5_20190620 #6999
+				resp.setAlert('N');
 
 			} catch (Exception ve) {
 				// Messaggio di errore
 				resp.addScreenMessage(ve.getMessage());
+				resp.setOk('0');
 				resp.setResensitize('N');
+				resp.setAlert('Y');
 				resp.setTitleIdentifier("Untitled");
 				clog.error(ve.getMessage(), ve);
 			}
@@ -1276,7 +1281,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				List<MovimentoListaVO> listaRichieste = (List<MovimentoListaVO>)listaMovimentiVO.get(ServiziConstant.RICHIESTE);
 
 				datiControllo.setMovimento(listaRichieste.get(0));
-				datiControllo.getMovimento().setCodAttivita("03"); //consegna documento al lettore
+				datiControllo.getMovimento().setCodAttivita(StatoIterRichiesta.CONSEGNA_DOCUMENTO_AL_LETTORE.getISOCode() ); //consegna documento al lettore
 				datiControllo.getMovimento().setDataInizioEff(DaoManager.now());
 				getServizi().aggiornaIterRichiestaSIP2(datiControllo);
 

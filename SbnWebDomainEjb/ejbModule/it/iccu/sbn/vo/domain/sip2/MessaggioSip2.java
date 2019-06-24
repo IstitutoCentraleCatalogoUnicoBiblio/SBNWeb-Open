@@ -181,19 +181,19 @@ public abstract class MessaggioSip2 implements Serializable  {
 
 	// FV = Field Values
 
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_OTHER 			= 1;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_ON_ORDER 		= 2;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_AVAILABLE 		= 3;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_CHARGED 		= 4;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_CHARGED_RECALL_DATE = 5;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_IN_PROCESS 	= 6;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_RECALLED 		= 7;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_WAIT_ON_HOLD_SHELF = 8;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_WAIT_TO_BE_RESHELVED = 9;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_IN_TRANSIT 	= 10;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_CLAIMED_RETURNED = 11;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_LOST 			= 12;
-	public final static int	  SIP2FV_CIRCULATIION_STATUS_MISSING 		= 13;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_OTHER 			= 1;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_ON_ORDER 		= 2;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_AVAILABLE 		= 3;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_CHARGED 		= 4;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_CHARGED_RECALL_DATE = 5;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_IN_PROCESS 	= 6;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_RECALLED 		= 7;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_WAIT_ON_HOLD_SHELF = 8;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_WAIT_TO_BE_RESHELVED = 9;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_IN_TRANSIT 	= 10;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_CLAIMED_RETURNED = 11;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_LOST 			= 12;
+	public final static int	  SIP2FV_CIRCULATION_STATUS_MISSING 		= 13;
 
 	public final static int	  SIP2FV_FEE_TYPE_OTHER_UNKNOWN 	= 1;
 	public final static int	  SIP2FV_FEE_TYPE_ADMINISTRATIVE = 2;
@@ -309,6 +309,7 @@ public abstract class MessaggioSip2 implements Serializable  {
 	public final static int SIP2FV_SUPPORTED_MESSAGES_RENEW                  = 14;
 	public final static int SIP2FV_SUPPORTED_MESSAGES_RENEW_ALL              = 15;
 
+	public static final char SIP2_LINE_TERMINATOR = '\r';
 
 
 
