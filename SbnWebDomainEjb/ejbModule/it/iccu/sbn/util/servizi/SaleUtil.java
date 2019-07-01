@@ -55,6 +55,7 @@ public class SaleUtil {
 			GruppoPostiVO gp = new GruppoPostiVO(gruppo, first(posti).getNum_posto(), last(posti).getNum_posto(), categorie);
 			output.add(gp);
 		}
+		Collections.sort(output);
 
 		return output;
 	}

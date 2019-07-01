@@ -87,4 +87,8 @@ public class GruppoPostiVO extends UniqueIdentifiableVO {
 		short num_posto = posto.getNum_posto();
 		return this.getPosto_da() <= num_posto && num_posto <= this.getPosto_a();
 	}
+
+	public int compareTo(GruppoPostiVO gp) {
+		return this.gruppo - gp.gruppo;
+	}
 }
