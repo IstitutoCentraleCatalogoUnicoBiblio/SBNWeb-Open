@@ -350,6 +350,10 @@ public class ErogazioneRicercaILLAction extends ErogazioneAction {
 			return mapping.getInputForward();
 
 		currentForm.setBloccoSelezionato(1);
+		// almaviva5_20190702 #6997 fix caricamento blocchi
+		currentForm.getBlocchiCaricati().clear();
+		currentForm.getBlocchiCaricati().add(1);
+		Navigation.getInstance(request).getCache().getCurrentElement().setInfoBlocchi(null);
 		richieste.addAll(decorate(blocco1.getLista()));
 		if (richieste.size() == 1)
 			currentForm.setSelected(new Integer[] { richieste.get(0).getRepeatableId() });

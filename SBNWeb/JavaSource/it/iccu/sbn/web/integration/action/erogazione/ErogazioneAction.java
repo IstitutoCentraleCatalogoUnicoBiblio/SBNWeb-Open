@@ -358,10 +358,8 @@ public abstract class ErogazioneAction extends ServiziBaseAction implements SbnA
 						}
 					}
 
-					log.debug("preparaMovimento(): tipoServizio: "
-							+ ts.getCd_tabellaTrim()
-							+ ", flg_ult_supp: " + flg_ult_supp
-							+ ", flg_ult_mod: " + flg_ult_mod);
+					log.debug(String.format("preparaMovimento(): tipoServizio: %s, ill: %s, flg_ult_supp: %s, flg_ult_mod: %s", 
+						ts.getCd_tabellaTrim(), ill, flg_ult_supp, flg_ult_mod));
 
 					// inizializzo INS_RICHIESTA_LISTA_SUPPORTI e INS_RICHIESTA_LISTA_MOD_EROGAZIONE
 					request.setAttribute(NavigazioneServizi.INS_RICHIESTA_LISTA_SUPPORTI, new ArrayList<SupportoBibliotecaVO>());
