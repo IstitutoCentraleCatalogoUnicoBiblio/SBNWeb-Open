@@ -990,11 +990,12 @@ public class SbnSoggettiDAO {
 
 	public SBNMarc creaSoggetto(String soggettario, String testoSoggetto,
 			String livello, String tipo, String note, boolean livelloPolo,
-			String cidInPolo, boolean forzaCreazione) {
+			String cidInPolo, boolean forzaCreazione, SbnEdizioneSoggettario edizione) {
 
 		CreaVariaSoggettoVO cvs = new CreaVariaSoggettoVO();
 		cvs.setCodiceSoggettario(soggettario);
-		cvs.setEdizioneSoggettario(SemanticaUtil.getEdizioneSoggettarioIndice(soggettario));
+		//almaviva5_20190619 fix edizione soggetto
+		cvs.setEdizioneSoggettario(edizione != null ? edizione.toString() : SemanticaUtil.getEdizioneSoggettarioIndice(soggettario));
 		cvs.setTesto(testoSoggetto);
 		cvs.setLivello(livello);
 		cvs.setTipoSoggetto(tipo);
@@ -1684,6 +1685,9 @@ public class SbnSoggettiDAO {
 				break;
 			case CANCELLA:
 				legami.setTipoOperazione(SbnTipoOperazione.CANCELLA);
+				break;
+			default:
+				return SBNMarcUtil.buildMessaggioErrore(new SbnMarcDiagnosticoException(3102, "non gestito"), user);
 			}
 
 			legami.setIdPartenza(input.getBid());

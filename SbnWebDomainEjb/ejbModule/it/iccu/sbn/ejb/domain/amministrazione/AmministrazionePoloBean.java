@@ -1733,6 +1733,14 @@ public abstract class AmministrazionePoloBean extends AmministrazioneBaseBean im
 
 	}
 
+	public void forceBatchStop(String idBatch) throws ValidationException, ApplicationException {
+		try {
+			BatchManager.getBatchManagerInstance().removeRunningJob(idBatch);
+		} catch (Exception e) {
+			throw new ApplicationException(SbnErrorTypes.UNRECOVERABLE, e);
+		}
+	}
+
 	public Tbf_batch_servizi selectBatchByCodAttivita(String cod_attivita) throws ValidationException, ApplicationException {
 		try {
 			Tbf_batch_serviziDAO dao = new Tbf_batch_serviziDAO();

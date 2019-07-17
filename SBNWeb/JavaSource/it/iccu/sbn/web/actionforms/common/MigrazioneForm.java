@@ -45,6 +45,7 @@ public class MigrazioneForm extends ActionForm {
 
 	private String email;
 	private String idBatch;
+	private String idBatchStop;
 
 	private String idBatchAllinea;
 
@@ -184,5 +185,13 @@ public class MigrazioneForm extends ActionForm {
 
 	public void setIll_xml(String ill_xml) {
 		this.ill_xml = ill_xml;
+	}
+
+	public String getIdBatchStop() {
+		return idBatchStop;
+	}
+
+	public void setIdBatchStop(String idBatchStop) {
+		this.idBatchStop = idBatchStop;
 	}
 }

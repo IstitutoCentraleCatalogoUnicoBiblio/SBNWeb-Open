@@ -377,10 +377,13 @@ public class LocalizzazioneMassiva {
 		DaoManager.begin(tx);
 
 		List<Number> locPendenti = dao.getLocalizzazioniPendentiIDs();
+		log.debug("localizzazioni pendenti trovate: " + ValidazioneDati.size(locPendenti));
 		for (Number locId : locPendenti)
 			try {
-				if ( (++read % 100) == 0)
+				if ( (++read % 100) == 0) {
 					BatchManager.getBatchManagerInstance().checkForInterruption(idBatch);
+					log.debug("localizzazioni trattate: " + read);
+				}
 
 				DaoManager.begin(tx);
 				Tb_loc_indice loc = dao.getLocalizzazionePendenteById(locId.intValue());
@@ -498,6 +501,8 @@ public class LocalizzazioneMassiva {
 
 		w.append("<td>").append(esito ? "OK" : "ERROR").append("</td>");
 		w.append("<td>").append(coalesce(msg, HTML_NBSP)).append("</td>");
+
+		w.flush();
 	}
 
 	protected void writeReportFooter(Writer w, int read, int updated, int errors) throws IOException {

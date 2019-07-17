@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
@@ -90,6 +90,8 @@ import org.hibernate.CacheMode;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 
 public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 
@@ -202,441 +204,427 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 			output.addDownload(filename, richiesta.getDownloadPath() + File.separator + filename);
 			writeReportHeader(streamOut);
 
-		if (ImportaVO._STATO_CARICA_RECORD == richiesta.getStatoImport()) {
-			status_ok.set( (new File(getImportHome() + File.separator + richiesta.getImportFileName())).exists() );
+			switch(richiesta.getStatoImport()) {
+			case ImportaVO._STATO_CARICA_RECORD: {
+				status_ok.set( (new File(getImportHome() + File.separator + richiesta.getImportFileName())).exists() );
 
-			// 1. caricamento record unimarc su db
-			// Modifica almaviva2 05.07.2012
-			// Richiesta Contardi per accodare più file sulla tabella import1 con lo stesso numero richiesta
-			if (richiesta.getNumRichiestaCaricamento().equals("")) {
-				richiesta.setNumRichiestaCaricamento(richiesta.getIdBatch());
+				// 1. caricamento record unimarc su db
+				// Modifica almaviva2 05.07.2012
+				// Richiesta Contardi per accodare più file sulla tabella import1 con lo stesso numero richiesta
+				if (richiesta.getNumRichiestaCaricamento().equals("")) {
+					richiesta.setNumRichiestaCaricamento(richiesta.getIdBatch());
+				}
+				_log.debug(String.format("Lettura record da file Unimarc con idBatch=%s e inserimento Nr richiesta=%s",
+						richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()));
+				writeReportRow(streamOut, String.format("Lettura record da file Unimarc con idBatch=%s e inserimento Nr richiesta=%s",
+						richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()) );
+
+				if (status_ok.get()) {
+					status_ok.set( exec_caricaRecord(richiesta.getImportFileName(), richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()) == 0 );
+				}
+
+				// 2. identificazione autori-collane-soggetti-classi-marche-(...) uguali
+				if (status_ok.get()) {
+					status_ok.set( exec_checkStatoDati(richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()) == 0 );
+				}
+				break;
 			}
-			_log.debug(String.format("Lettura record da file Unimarc con idBatch=%s e inserimento Nr richiesta=%s",
-					richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()));
-			writeReportRow(streamOut, String.format("Lettura record da file Unimarc con idBatch=%s e inserimento Nr richiesta=%s",
-					richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()) );
 
-			if (status_ok.get()) {
-				status_ok.set( exec_caricaRecord(richiesta.getImportFileName(), richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()) == 0 );
+			case ImportaVO._STATO_UNI_950: {
+
+				_log.debug(String.format("Trattamento dati posseduto per nr. richiesta: %s", richiesta.getNumRichiesta()));
+				writeReportRow(streamOut, String.format("Trattamento dati posseduto per nr. richiesta: %s", richiesta.getNumRichiesta()));
+
+				// 1. dati documento fisico uni.950
+				ListaDati950VO dati;
+				//dati = exec_datiDocFisico(richiesta.getIdBatch());
+				dati = exec_datiDocFisico950(richiesta.getNumRichiesta(), richiesta.getIdBatch());
+				status_ok.set(dati != null);
+				break;
 			}
 
-			// 2. identificazione autori-collane-soggetti-classi-marche-(...) uguali
-			if (status_ok.get()) {
-				status_ok.set( exec_checkStatoDati(richiesta.getIdBatch(), richiesta.getNumRichiestaCaricamento()) == 0 );
+			// Inizio Modifica almaviva2 27.09.2011 - Classe per il trattamento dei dati bibliografici/semantici della tabella import1
+			case ImportaVO._STATO_UNI_700: {
+
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+
+				_log.debug("Trattamento dati autore per nr. richiesta: " + String.valueOf(richiesta.getNumRichiesta()) );
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Autori - etichetta 7xx</TD></TR>");
+
+				AreaDatiImportSuPoloVO areaDatiImportSuPoloVO = execFase2ter_estraiIdAutori(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+
+					// almaviva2 Maggio 2015: Evolutiva richiesta da  per dividere il trattamento dell'estrazione Autori in due passi:
+					// passo1: estrazione della lista dei soli id per tag '700', '701', '702', '710', '711', '712'
+					// passo2: estrazione del record intero per ogni elemento della lista precedentemente creata
+					// L'intervento serve perchè l'Import di DISCOTECA DI STATO ha circa 5.000.000 e si va in "out of memory"
+					int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
+					String idDaElab="";
+					int totRecords = 0;
+					for (int i_001 = 0; i_001 < lista001Size; i_001++) {
+						if ((++totRecords % 50) == 0)
+							BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
+						if ((totRecords % 1000) == 0)
+							_log.debug("Record elaborati: " + totRecords);
+
+						idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
+						areaDatiImportSuPoloVO = execFase2ter_estraiDatiAutori(areaDatiImportSuPoloVO, idDaElab, log);
+
+						if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray())) {
+							areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
+							areaDatiImportSuPoloVO = getInterrogazione().trattamentoAutore(areaDatiImportSuPoloVO, ticket);
+							for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
+								streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
+							}
+							areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
+						} else {
+							streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Autori collegati</TD></TR>");
+						}
+					}
+
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+
+				}
+				break;
 			}
-		}
 
-		if (ImportaVO._STATO_UNI_950 == richiesta.getStatoImport()) {
+			case ImportaVO._STATO_UNI_410: {
 
-			_log.debug(String.format("Trattamento dati posseduto per nr. richiesta: %s", richiesta.getNumRichiesta()));
-			writeReportRow(streamOut, String.format("Trattamento dati posseduto per nr. richiesta: %s", richiesta.getNumRichiesta()));
+				_log.debug("Estrazione Titoli collegati diversi dai gerarchici - etichetta 4xx per nr. richiesta: " + richiesta.getNumRichiesta());
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Titoli collegati diversi dai gerarchici- etichetta 4xx</TD></TR>");
 
-			// 1. dati documento fisico uni.950
-			ListaDati950VO dati;
-			//dati = exec_datiDocFisico(richiesta.getIdBatch());
-			dati = exec_datiDocFisico(richiesta.getNumRichiesta(), richiesta.getIdBatch());
-			status_ok.set(dati != null);
-		}
+				AreaDatiImportSuPoloVO areaDatiImportSuPoloVO;
+				areaDatiImportSuPoloVO = execFase2ter_estraiTitoliCollegati4xx(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
 
-		// Inizio Modifica almaviva2 27.09.2011 - Classe per il trattamento dei dati bibliografici/semantici della tabella import1
-		if (ImportaVO._STATO_UNI_700 == richiesta.getStatoImport()) {
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti Totale:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstrattiOriginali()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Estratti con Raggruppamento dei duplicati:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstrattiNoDuplicati()) + "</TD></TR>"));
+	//				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
 
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-
-			_log.debug("Trattamento dati autore per nr. richiesta: " + String.valueOf(richiesta.getNumRichiesta()) );
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Autori - etichetta 7xx</TD></TR>");
-
-			AreaDatiImportSuPoloVO areaDatiImportSuPoloVO = execFase2ter_estraiIdAutori(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-
-				// almaviva2 Maggio 2015: Evolutiva richiesta da  per dividere il trattamento dell'estrazione Autori in due passi:
-				// passo1: estrazione della lista dei soli id per tag '700', '701', '702', '710', '711', '712'
-				// passo2: estrazione del record intero per ogni elemento della lista precedentemente creata
-				// L'intervento serve perchè l'Import di DISCOTECA DI STATO ha circa 5.000.000 e si va in "out of memory"
-				int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
-				String idDaElab="";
-				int totRecords = 0;
-				for (int i_001 = 0; i_001 < lista001Size; i_001++) {
-					if ((++totRecords % 50) == 0)
-						BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
-					if ((totRecords % 1000) == 0)
-						_log.debug("Record elaborati: " + totRecords);
-
-					idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
-					areaDatiImportSuPoloVO = execFase2ter_estraiDatiAutori(areaDatiImportSuPoloVO, idDaElab, log);
-
-					if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-							&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray())) {
 						areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-						areaDatiImportSuPoloVO = getInterrogazione().trattamentoAutore(areaDatiImportSuPoloVO, ticket);
+						areaDatiImportSuPoloVO = getInterrogazione().trattamentoTitCollegati4xx(areaDatiImportSuPoloVO, ticket);
 						for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
 							streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
 						}
-						areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
 					} else {
-						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Autori collegati</TD></TR>");
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli collegati</TD></TR>");
 					}
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+
 				}
-
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
-
+				break;
 			}
-		} else if (ImportaVO._STATO_UNI_410 == richiesta.getStatoImport()) {
 
-			_log.debug("Estrazione Titoli collegati diversi dai gerarchici - etichetta 4xx per nr. richiesta: " + richiesta.getNumRichiesta());
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Titoli collegati diversi dai gerarchici- etichetta 4xx</TD></TR>");
+			case ImportaVO._STATO_UNI_500: {
 
-			AreaDatiImportSuPoloVO areaDatiImportSuPoloVO;
-			areaDatiImportSuPoloVO = execFase2ter_estraiTitoliCollegati4xx(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+				_log.debug("Estrazione Titoli collegati diversi dai gerarchici- etichetta 5xx");
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Titoli collegati diversi dai gerarchici- etichetta 5xx</TD></TR>");
 
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti Totale:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstrattiOriginali()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Estratti con Raggruppamento dei duplicati:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstrattiNoDuplicati()) + "</TD></TR>"));
-//				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+				// MODIFICA SETTEMBRE 2015 almaviva2; il trattamento delle 5xx deve essesre spezzato
+				// a. trattamento delle 500 con le 928 e 929 per i titoli uniformi Musicali (COMPOSIZIONE)
+				// b. gli altri 500
 
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-						&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
-					areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-					areaDatiImportSuPoloVO = getInterrogazione().trattamentoTitCollegati4xx(areaDatiImportSuPoloVO, ticket);
-					for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
-						streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
-					}
+				// INZIO TRATTAMENTO con le 928 e 929 per i titoli uniformi Musicali (COMPOSIZIONE)
+				AreaDatiImportSuPoloVO areaDatiImportSuPoloVO = execFase2ter_estraiTitoliCollegatiSolo500(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+
 				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli collegati</TD></TR>");
-				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
-
-			}
-		} else if (ImportaVO._STATO_UNI_500 == richiesta.getStatoImport()) {
-
-			_log.debug("Estrazione Titoli collegati diversi dai gerarchici- etichetta 5xx");
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Titoli collegati diversi dai gerarchici- etichetta 5xx</TD></TR>");
-
-			// MODIFICA SETTEMBRE 2015 almaviva2; il trattamento delle 5xx deve essesre spezzato
-			// a. trattamento delle 500 con le 928 e 929 per i titoli uniformi Musicali (COMPOSIZIONE)
-			// b. gli altri 500
-
-			// INZIO TRATTAMENTO con le 928 e 929 per i titoli uniformi Musicali (COMPOSIZIONE)
-			AreaDatiImportSuPoloVO areaDatiImportSuPoloVO = execFase2ter_estraiTitoliCollegatiSolo500(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-						&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
-					areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-					areaDatiImportSuPoloVO = getInterrogazione().trattamentoTitCollegati5xx(areaDatiImportSuPoloVO, ticket);
-					for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
-						streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
-					}
-				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli collegati</TD></TR>");
-				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
-
-				// Intervento settembre 2015 - si inserisce un contatore per i record non trattati su richiesta di 
-				streamOut.println(("<TR><TD>Oggetti ammesso da UNIMARC ma non gestito da import:  " + String.valueOf(areaDatiImportSuPoloVO.getContAmmessiUnimarcNonGestiti()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti con tag inaspettato:  " + String.valueOf(areaDatiImportSuPoloVO.getContNonAmmessiUnimarc()) + "</TD></TR>"));
-			}
-			// FINE TRATTAMENTO con le 928 e 929 per i titoli uniformi Musicali (COMPOSIZIONE)
-
-			// INZIO TRATTAMENTO gli altri 500
-			areaDatiImportSuPoloVO = execFase2ter_estraiTitoliCollegatiAltri5xx(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-						&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
-					areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-					areaDatiImportSuPoloVO = getInterrogazione().trattamentoTitCollegati5xx(areaDatiImportSuPoloVO, ticket);
-					for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
-						streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
-					}
-				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli collegati</TD></TR>");
-				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
-
-				// Intervento settembre 2015 - si inserisce un contatore per i record non trattati su richiesta di 
-				streamOut.println(("<TR><TD>Oggetti ammesso da UNIMARC ma non gestito da import:  " + String.valueOf(areaDatiImportSuPoloVO.getContAmmessiUnimarcNonGestiti()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti con tag inaspettato:  " + String.valueOf(areaDatiImportSuPoloVO.getContNonAmmessiUnimarc()) + "</TD></TR>"));
-			}
-			// FINE TRATTAMENTO gli altri 500
-
-		} else if (ImportaVO._STATO_UNI_600 == richiesta.getStatoImport()) {
-
-			_log.debug("Estrazione Soggetti/Classi collegati - etichetta 6xx");
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Soggetti/Classi collegati - etichetta 6xx</TD></TR>");
-
-			AreaDatiImportSuPoloVO areaDatiImportSuPoloVO;
-			areaDatiImportSuPoloVO = execFase2ter_estraiSogClaCollegati6xx(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-						&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
-					areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-
-					areaDatiImportSuPoloVO = getInterrogazione().trattamentoSogClaCollegati6xx(areaDatiImportSuPoloVO, ticket);
-					for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
-						streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
-					}
-				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Soggetti/Classi collegati</TD></TR>");
-				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
-
-			}
-
-		} else if (ImportaVO._STATO_UNI_200 == richiesta.getStatoImport()) {
-			// Modifica del 30.05.2012 I documenti vengono trattati separatamente dei loro legami e non
-			// sequenzialmente nella 1000 prima dei loro legami
-
-			_log.debug("Estrazione Elenco identificativi da trattare - etichetta 200");
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Elenco identificativi da trattare - etichetta 200</TD></TR>");
-
-			AreaDatiImportSuPoloVO areaDatiImportSuPoloVO = execFase2ter_estraiEtich001Ordinate(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaEtichette001() != null && areaDatiImportSuPoloVO.getListaEtichette001().size() > 0) {
-					String idDaElab="";
-					int sizeIdDaElab = 0;
-					int totRecords = 0;
-					int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
-					for (int i_001 = 0; i_001 < lista001Size; i_001++) {
-						if ((++totRecords % 50) == 0)
-							BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
-						if ((totRecords % 1000) == 0)
-							_log.debug("Record elaborati: " + totRecords);
-
-						idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
-						sizeIdDaElab = idDaElab.length();
-//						streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
-
-						areaDatiImportSuPoloVO = execFase2ter_estraiTitoloPerIdUnimarc(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
-						if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-							streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-						} else {
-							status_ok.set( areaDatiImportSuPoloVO != null );
-							if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-									&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
-								areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-								areaDatiImportSuPoloVO = getInterrogazione().trattamentoDocumento(areaDatiImportSuPoloVO, ticket);
-								for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
-									streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
-								}
-								areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
-								if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-									continue;
-								}
-							}
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray())) {
+						areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
+						areaDatiImportSuPoloVO = getInterrogazione().trattamentoTitCollegati5xx(areaDatiImportSuPoloVO, ticket);
+						for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
+							streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
 						}
+					} else {
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli collegati</TD></TR>");
 					}
-				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Documenti e Legami</TD></TR>");
-				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
 
+					// Intervento settembre 2015 - si inserisce un contatore per i record non trattati su richiesta di
+					streamOut.println(("<TR><TD>Oggetti ammesso da UNIMARC ma non gestito da import:  " + String.valueOf(areaDatiImportSuPoloVO.getContAmmessiUnimarcNonGestiti()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti con tag inaspettato:  " + String.valueOf(areaDatiImportSuPoloVO.getContNonAmmessiUnimarc()) + "</TD></TR>"));
+				}
+				// FINE TRATTAMENTO con le 928 e 929 per i titoli uniformi Musicali (COMPOSIZIONE)
+
+				// INZIO TRATTAMENTO gli altri 500
+				areaDatiImportSuPoloVO = execFase2ter_estraiTitoliCollegatiAltri5xx(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray())) {
+						areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
+						areaDatiImportSuPoloVO = getInterrogazione().trattamentoTitCollegati5xx(areaDatiImportSuPoloVO, ticket);
+						for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
+							streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
+						}
+					} else {
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli collegati</TD></TR>");
+					}
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+
+					// Intervento settembre 2015 - si inserisce un contatore per i record non trattati su richiesta di
+					streamOut.println(("<TR><TD>Oggetti ammesso da UNIMARC ma non gestito da import:  " + String.valueOf(areaDatiImportSuPoloVO.getContAmmessiUnimarcNonGestiti()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti con tag inaspettato:  " + String.valueOf(areaDatiImportSuPoloVO.getContNonAmmessiUnimarc()) + "</TD></TR>"));
+				}
+				// FINE TRATTAMENTO gli altri 500
+				break;
 			}
 
-			// Inizio modifica almaviva2 04.12.2012:
-			// Questa gestione arriva dal trattamento 1000 da dove è stata asteriscata
+			case ImportaVO._STATO_UNI_600: {
 
+				_log.debug("Estrazione Soggetti/Classi collegati - etichetta 6xx");
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Soggetti/Classi collegati - etichetta 6xx</TD></TR>");
 
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Elenco identificativi Documenti Senza Titolo (W) da trattare - etichetta 001</TD></TR>");
+				AreaDatiImportSuPoloVO areaDatiImportSuPoloVO;
+				areaDatiImportSuPoloVO = execFase2ter_estraiSogClaCollegati6xx(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
 
-			areaDatiImportSuPoloVO = execFase2ter_estraiEtich001Inferiori(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray())) {
+						areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
 
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaEtichette001() != null && areaDatiImportSuPoloVO.getListaEtichette001().size() > 0) {
-					String idDaElab="";
-					int sizeIdDaElab=0;
-					int totRecords = 0;
-					int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
-					for (int i_001 = 0; i_001 < lista001Size; i_001++) {
-						if ((++totRecords % 50) == 0)
-							BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
-						if ((totRecords % 1000) == 0)
-							_log.debug("Record elaborati: " + totRecords);
+						areaDatiImportSuPoloVO = getInterrogazione().trattamentoSogClaCollegati6xx(areaDatiImportSuPoloVO, ticket);
+						for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
+							streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
+						}
+					} else {
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Soggetti/Classi collegati</TD></TR>");
+					}
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
 
-						idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
-						sizeIdDaElab = idDaElab.length();
-//						streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
+				}
+				break;
+			}
 
-						areaDatiImportSuPoloVO = execFase2ter_estraiTitoloPerIdUnimarc(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
-						if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-							streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-						} else {
-							status_ok.set( areaDatiImportSuPoloVO != null );
-							if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null && areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
-								areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-								areaDatiImportSuPoloVO = getInterrogazione().trattamentoDocumentoInferiore(areaDatiImportSuPoloVO, ticket);
-								for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
-									streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
-								}
-								areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
-								if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-									continue;
-								}
-							}
-//							streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative ai legami 461 462 463 relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
-							areaDatiImportSuPoloVO = execFase2ter_estraiLegameSuperiore(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
+			case ImportaVO._STATO_UNI_200: {
+				// Modifica del 30.05.2012 I documenti vengono trattati separatamente dei loro legami e non
+				// sequenzialmente nella 1000 prima dei loro legami
+
+				_log.debug("Estrazione Elenco identificativi da trattare - etichetta 200");
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Elenco identificativi da trattare - etichetta 200</TD></TR>");
+
+				AreaDatiImportSuPoloVO areaDatiImportSuPoloVO = execFase2ter_estraiEtich001Ordinate(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaEtichette001()) ) {
+						String idDaElab="";
+						int sizeIdDaElab = 0;
+						int totRecords = 0;
+						int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
+						for (int i_001 = 0; i_001 < lista001Size; i_001++) {
+							if ((++totRecords % 50) == 0)
+								BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
+							if ((totRecords % 1000) == 0)
+								_log.debug("Record elaborati: " + totRecords);
+
+							idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
+							sizeIdDaElab = idDaElab.length();
+	//						streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
+
+							areaDatiImportSuPoloVO = execFase2ter_estraiTitoloPerIdUnimarc(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
 							if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
 								streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
 							} else {
 								status_ok.set( areaDatiImportSuPoloVO != null );
-								if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-										&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
+								if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray())) {
 									areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-									areaDatiImportSuPoloVO = getInterrogazione().trattamentoLegamiDocumento(areaDatiImportSuPoloVO, idDaElab.substring(0,1), ticket);
+									areaDatiImportSuPoloVO = getInterrogazione().trattamentoDocumento(areaDatiImportSuPoloVO, ticket);
 									for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
 										streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
 									}
 									areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
-								} else {
-									streamOut.println(("<TR><TD>ATTENZIONE: non esiste legame a superiore per l'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
+									if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+										continue;
+									}
 								}
 							}
 						}
+					} else {
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Documenti e Legami</TD></TR>");
 					}
-				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli natura W</TD></TR>");
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+
 				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
 
-			}
-			// Fine modifica almaviva2 04.12.2012:
+				// Inizio modifica almaviva2 04.12.2012:
+				// Questa gestione arriva dal trattamento 1000 da dove è stata asteriscata
 
 
-		} else if (ImportaVO._STATO_UNI_1000 == richiesta.getStatoImport()) {
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Elenco identificativi Documenti Senza Titolo (W) da trattare - etichetta 001</TD></TR>");
 
-			// Inizio modifica almaviva2 04.12.2012:
-			// Questa gestione viene spostata nel trattamento della richiesta 200 cosi da avere in sequenza l'inserimento di tutti i documenti
-			//    .... gestione creazione inferiori e legame a superiore contestuale
-			// Fine modifica almaviva2 04.12.2012:
+				areaDatiImportSuPoloVO = execFase2ter_estraiEtich001Inferiori(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
 
-			_log.debug("Estrazione Elenco identificativi Documenti da trattare - Ricostruzione reticoli");
-			// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
-			streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiesta())
-					+ "</TD></TR>"));
-			streamOut.println("<TR><TD>Estrazione Elenco identificativi Documenti da trattare - etichetta 001</TD></TR>");
-			AreaDatiImportSuPoloVO areaDatiImportSuPoloVO;
-			areaDatiImportSuPoloVO = execFase2ter_estraiEtich001OrdinateTutte(richiesta.getNumRichiesta(), log);
-			if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-				streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaEtichette001()) ) {
+						String idDaElab="";
+						int sizeIdDaElab=0;
+						int totRecords = 0;
+						int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
+						for (int i_001 = 0; i_001 < lista001Size; i_001++) {
+							if ((++totRecords % 50) == 0)
+								BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
+							if ((totRecords % 1000) == 0)
+								_log.debug("Record elaborati: " + totRecords);
 
-			} else {
-				streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
-				status_ok.set( areaDatiImportSuPoloVO != null );
-				if (areaDatiImportSuPoloVO.getListaEtichette001() != null && areaDatiImportSuPoloVO.getListaEtichette001().size() > 0) {
-					String idDaElab = "";
-					int sizeIdDaElab = 0;
-					int totRecords = 0;
-					int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
-					_log.debug("Record 001 estratti: " + lista001Size);
-					for (int i_001 = 0; i_001 < lista001Size; i_001++) {
-						if ((++totRecords % 50) == 0)
-							BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
-						if ((totRecords % 1000) == 0)
-							_log.debug("Record 001 elaborati: " + totRecords);
+							idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
+							sizeIdDaElab = idDaElab.length();
+	//						streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
 
-						idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
-						sizeIdDaElab = idDaElab.length();
-
-//						areaDatiImportSuPoloVO = execFase2ter_estraiTitoloPerIdUnimarc(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
-//						if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-//							// dopo che le select execFase2ter_estraiEtich001OrdinateTutte è stata modificata inserendo tutti gli oggetti
-//							// ANCHE QUELLI P (trattati nella costruzione dei legami semantici) è possibile che questo errore si
-//							// verifichi ma non sia da segnalare perchè è dovuto al fatto che la creazione dei legami bibliografici
-//							// sia invece ristretta ai soli I
-//							// streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
-//						} else {
-//							// si elimina in trattamento del documento in quanto le i Doc superiori sono stati inseriti nel trattamento
-//							// delle 200 e gli inferiori sono stati inseriti nel ciclo sopra; rimangono solo i legami diversi dai
-//							// gerarchici e i semantici
-//							streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative ai legami 400 500 e 700 relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
-							areaDatiImportSuPoloVO = execFase2ter_estraiLegamiTitoli(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
+							areaDatiImportSuPoloVO = execFase2ter_estraiTitoloPerIdUnimarc(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
 							if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
 								streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
 							} else {
 								status_ok.set( areaDatiImportSuPoloVO != null );
-								if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-										&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
+								if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray()) ) {
 									areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
-									areaDatiImportSuPoloVO = getInterrogazione().trattamentoLegamiDocumento(areaDatiImportSuPoloVO, idDaElab.substring(0,1), ticket);
+									areaDatiImportSuPoloVO = getInterrogazione().trattamentoDocumentoInferiore(areaDatiImportSuPoloVO, ticket);
 									for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
 										streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
 									}
 									areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
+									if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+										continue;
+									}
 								}
-							}
-							// almaviva2 - Gennaio 2015: in caso di creazione dei legami (trattamento import 001) se l'oggetto di arrivo del legame
-							// non è presente sulla import-id-link non si continua tentando di inserire il lemame successivo ma si
-							// interrompe il trattamento cos' da non impostare con il valore "T" il rocord in oggetto; in questo modo
-							// dopo aver risolto i problema si potrà richiedere nuovamente il trattamento 001 si record ancora vivi!!!
-							if (!areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-								areaDatiImportSuPoloVO = execFase2ter_estraiLegamiTitoliSemantici(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
+	//							streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative ai legami 461 462 463 relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
+								areaDatiImportSuPoloVO = execFase2ter_estraiLegameSuperiore(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
 								if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
 									streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
 								} else {
 									status_ok.set( areaDatiImportSuPoloVO != null );
-									if (areaDatiImportSuPoloVO.getListaTracciatoRecordArray() != null
-											&& areaDatiImportSuPoloVO.getListaTracciatoRecordArray().size() > 0) {
+									if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray()) ) {
+										areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
+										areaDatiImportSuPoloVO = getInterrogazione().trattamentoLegamiDocumento(areaDatiImportSuPoloVO, idDaElab.substring(0,1), ticket);
+										for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
+											streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
+										}
+										areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
+									} else {
+										streamOut.println(("<TR><TD>ATTENZIONE: non esiste legame a superiore per l'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
+									}
+								}
+							}
+						}
+					} else {
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Titoli natura W</TD></TR>");
+					}
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+
+				}
+				// Fine modifica almaviva2 04.12.2012:
+				break;
+			}
+
+			case ImportaVO._STATO_UNI_1000: {
+
+				// Inizio modifica almaviva2 04.12.2012:
+				// Questa gestione viene spostata nel trattamento della richiesta 200 cosi da avere in sequenza l'inserimento di tutti i documenti
+				//    .... gestione creazione inferiori e legame a superiore contestuale
+				// Fine modifica almaviva2 04.12.2012:
+
+				_log.debug("Estrazione Elenco identificativi Documenti da trattare - Ricostruzione reticoli");
+				// Modificati i messaggi di inizio elaborazione come da Mail almaviva1 del mercoledì 27 giugno 2012 18.17 (inserito n. richiesta)
+				streamOut.println(("<TR><TD>Trattamento dati bibliografici/semantici per nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiesta())
+						+ "</TD></TR>"));
+				streamOut.println("<TR><TD>Estrazione Elenco identificativi Documenti da trattare - etichetta 001</TD></TR>");
+				AreaDatiImportSuPoloVO areaDatiImportSuPoloVO;
+				areaDatiImportSuPoloVO = execFase2ter_estraiEtich001OrdinateTutte(richiesta.getNumRichiesta(), log);
+				if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+					streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+
+				} else {
+					streamOut.println(("<TR><TD>Oggetti Estratti:  " + String.valueOf(areaDatiImportSuPoloVO.getContEstratti()) + "</TD></TR>"));
+					status_ok.set( areaDatiImportSuPoloVO != null );
+					if (isFilled(areaDatiImportSuPoloVO.getListaEtichette001()) ) {
+						String idDaElab = "";
+						int sizeIdDaElab = 0;
+						int totRecords = 0;
+						int lista001Size = areaDatiImportSuPoloVO.getListaEtichette001().size();
+						_log.debug("Record 001 estratti: " + lista001Size);
+						for (int i_001 = 0; i_001 < lista001Size; i_001++) {
+							if ((++totRecords % 50) == 0)
+								BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
+							if ((totRecords % 1000) == 0)
+								_log.debug("Record 001 elaborati: " + totRecords);
+
+							idDaElab = areaDatiImportSuPoloVO.getListaEtichette001().get(i_001);
+							sizeIdDaElab = idDaElab.length();
+
+	//						areaDatiImportSuPoloVO = execFase2ter_estraiTitoloPerIdUnimarc(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
+	//						if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+	//							// dopo che le select execFase2ter_estraiEtich001OrdinateTutte è stata modificata inserendo tutti gli oggetti
+	//							// ANCHE QUELLI P (trattati nella costruzione dei legami semantici) è possibile che questo errore si
+	//							// verifichi ma non sia da segnalare perchè è dovuto al fatto che la creazione dei legami bibliografici
+	//							// sia invece ristretta ai soli I
+	//							// streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+	//						} else {
+	//							// si elimina in trattamento del documento in quanto le i Doc superiori sono stati inseriti nel trattamento
+	//							// delle 200 e gli inferiori sono stati inseriti nel ciclo sopra; rimangono solo i legami diversi dai
+	//							// gerarchici e i semantici
+	//							streamOut.println(("<TR><TD>Estrazione etichette Unimarc relative ai legami 400 500 e 700 relative all'oggetto " + idDaElab.substring(1,sizeIdDaElab) + "</TD></TR>"));
+								areaDatiImportSuPoloVO = execFase2ter_estraiLegamiTitoli(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
+								if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+									streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+								} else {
+									status_ok.set( areaDatiImportSuPoloVO != null );
+									if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray()) ) {
 										areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
 										areaDatiImportSuPoloVO = getInterrogazione().trattamentoLegamiDocumento(areaDatiImportSuPoloVO, idDaElab.substring(0,1), ticket);
 										for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
@@ -645,89 +633,110 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 										areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
 									}
 								}
-							}
+								// almaviva2 - Gennaio 2015: in caso di creazione dei legami (trattamento import 001) se l'oggetto di arrivo del legame
+								// non è presente sulla import-id-link non si continua tentando di inserire il lemame successivo ma si
+								// interrompe il trattamento cos' da non impostare con il valore "T" il rocord in oggetto; in questo modo
+								// dopo aver risolto i problema si potrà richiedere nuovamente il trattamento 001 si record ancora vivi!!!
+								if (!areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+									areaDatiImportSuPoloVO = execFase2ter_estraiLegamiTitoliSemantici(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(), idDaElab.substring(1,sizeIdDaElab));
+									if (areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+										streamOut.println(("<TR><TD>ATTENZIONE: errore nella select: " + areaDatiImportSuPoloVO.getTestoErrore() + "</TD></TR>"));
+									} else {
+										status_ok.set( areaDatiImportSuPoloVO != null );
+										if (isFilled(areaDatiImportSuPoloVO.getListaTracciatoRecordArray()) ) {
+											areaDatiImportSuPoloVO.setNrRichiesta(richiesta.getNumRichiesta());
+											areaDatiImportSuPoloVO = getInterrogazione().trattamentoLegamiDocumento(areaDatiImportSuPoloVO, idDaElab.substring(0,1), ticket);
+											for (int i = 0; i < areaDatiImportSuPoloVO.getListaSegnalazioni().size(); i++) {
+												streamOut.println(areaDatiImportSuPoloVO.getListaSegnalazioni().get(i));
+											}
+											areaDatiImportSuPoloVO.getListaSegnalazioni().clear();
+										}
+									}
+								}
 
-							// Inizio Intervento interno 07.04.2014 - Richiesta  almaviva
-							// alla fine della creazione dei legami si aggiorna il flag stato_id_input con il valore 'T' TRATTATO
-							// per indicare che il trattamento bibliografico è stato conpletato così che in una eventuale ripartenza
-							// del trattamento i record 200 già esaminati non vengano ripresi in considerazione
-							if (!areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
-								areaDatiImportSuPoloVO = execFase2ter_update200Trattate(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(),
-										idDaElab.substring(1,sizeIdDaElab), log);
-							}
-							// Fine Intervento interno 07.04.2014 - Richiesta  almaviva
-//						}
+								// Inizio Intervento interno 07.04.2014 - Richiesta  almaviva
+								// alla fine della creazione dei legami si aggiorna il flag stato_id_input con il valore 'T' TRATTATO
+								// per indicare che il trattamento bibliografico è stato conpletato così che in una eventuale ripartenza
+								// del trattamento i record 200 già esaminati non vengano ripresi in considerazione
+								if (!areaDatiImportSuPoloVO.getCodErr().equals("9999")) {
+									areaDatiImportSuPoloVO = execFase2ter_update200Trattate(areaDatiImportSuPoloVO, richiesta.getNumRichiesta(),
+											idDaElab.substring(1,sizeIdDaElab), log);
+								}
+								// Fine Intervento interno 07.04.2014 - Richiesta  almaviva
+	//						}
+						}
+					} else {
+						streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Documenti e Legami</TD></TR>");
 					}
-				} else {
-					streamOut.println("<TR><TD>ATTENZIONE: non ci sono etichette Unimarc che rispondono alla richiesta di Documenti e Legami</TD></TR>");
+					streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
+					streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
+
 				}
-				streamOut.println(("<TR><TD>Oggetti Inseriti sulla Base Dati:  " + String.valueOf(areaDatiImportSuPoloVO.getContInseritiOK()) + "</TD></TR>"));
-				streamOut.println(("<TR><TD>Oggetti Presenti sulla Base Dati da precedenti elaborazioni:  " + String.valueOf(areaDatiImportSuPoloVO.getContOldInsert()) + "</TD></TR>"));
-
+				break;
+				// Fine modifica almaviva2 19.06.2012:
 			}
 
-
-
-			// Fine modifica almaviva2 19.06.2012:
-		}
-
-		// Fine Modifica almaviva2 27.09.2011 - Classe per il trattamento dei dati bibliografici/semantici della tabella import1
-
-		if (ImportaVO._STATO_VERIFICA_BID == richiesta.getStatoImport()) {
-			// 1. caricamento record unimarc su db
-			List<String> listaBid = new ArrayList<String>();
-			status_ok.set( exec_verificaBid(richiesta.isRicercaInPolo(), richiesta.getNumRichiestaVerificaBid(), listaBid) == 0 );
-			if (status_ok.get()) {
-				// file con lista bid da catturare (da indice)
-				File fileListaBid = new File(
-						richiesta.getDownloadPath() + File.separator +
-						"__BidCatturaIndice" + richiesta.getIdBatch() + ".txt");
-				FileOutputStream bidOut = new FileOutputStream(fileListaBid.getParentFile()+File.separator+fileListaBid.getName());
-				for (int i = 0; i < listaBid.size(); i++) {
-					bidOut.write((listaBid.get(i) + "\r\n").getBytes());
+			// Fine Modifica almaviva2 27.09.2011 - Classe per il trattamento dei dati bibliografici/semantici della tabella import1
+			case ImportaVO._STATO_VERIFICA_BID: {
+				// 1. caricamento record unimarc su db
+				List<String> listaBid = new ArrayList<String>();
+				status_ok.set( exec_verificaBid(richiesta.isRicercaInPolo(), richiesta.getNumRichiestaVerificaBid(), listaBid) == 0 );
+				if (status_ok.get()) {
+					// file con lista bid da catturare (da indice)
+					File fileListaBid = new File(
+							richiesta.getDownloadPath() + File.separator +
+							"__BidCatturaIndice" + richiesta.getIdBatch() + ".txt");
+					FileOutputStream bidOut = new FileOutputStream(fileListaBid.getParentFile()+File.separator+fileListaBid.getName());
+					for (int i = 0; i < listaBid.size(); i++) {
+						bidOut.write((listaBid.get(i) + "\r\n").getBytes());
+					}
+					FileUtil.close(bidOut);
+					output.addDownload(fileListaBid.getName(), richiesta.getDownloadPath() + File.separator + fileListaBid.getName());
 				}
-				FileUtil.close(bidOut);
-				output.addDownload(fileListaBid.getName(), richiesta.getDownloadPath() + File.separator + fileListaBid.getName());
+				break;
 			}
+
+			// Modifica almaviva2 09.07.2012 - Inserimento nuovo valore per richiesta cancellazione tabelle lavoro per nr_richiesta
+			case ImportaVO._STATO_PER_CANCELLAZIONE: {
+				String esito="";
+
+
+				streamOut.println(("<TR><TD>Inizio procedura di cancellazione record relativi a nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiestaCancellazione()) + "</TD></TR>"));
+
+				esito = deleteRecordImportIdLink(richiesta.getNumRichiestaCancellazione(), log);
+				streamOut.println(("<TR><TD> " + esito + "</TD></TR>"));
+				if (esito.contains("ERROR:")) {
+					output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
+					return output;
+				}
+
+				esito = deleteRecordImport950(richiesta.getNumRichiestaCancellazione(), log);
+				streamOut.println(("<TR><TD> " + esito + "</TD></TR>"));
+				if (esito.contains("ERROR:")) {
+					output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
+					return output;
+				}
+
+				esito = deleteRecordImport1(richiesta.getNumRichiestaCancellazione(), log);
+				streamOut.println(("<TR><TD> " + esito + "</TD></TR>"));
+				if (esito.contains("ERROR:")) {
+					output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
+					return output;
+				}
+				streamOut.println(("<TR><TD>Fine procedura di cancellazione record relativi a nr. richiesta: "
+						+ String.valueOf(richiesta.getNumRichiestaCancellazione()) + "</TD></TR>"));
+
+				status_ok = new AtomicBoolean(true);
+				break;
+			}
+
+			default:
+				//errore non gestito
+				status_ok.set(false);
+				break;
 		}
-
-
-		// Modifica almaviva2 09.07.2012 - Inserimento nuovo valore per richiesta cancellazione tabelle lavoro per nr_richiesta
-		if (ImportaVO._STATO_PER_CANCELLAZIONE == richiesta.getStatoImport()) {
-			String esito="";
-
-
-			streamOut.println(("<TR><TD>Inizio procedura di cancellazione record relativi a nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiestaCancellazione()) + "</TD></TR>"));
-
-			esito = deleteRecordImportIdLink(richiesta.getNumRichiestaCancellazione(), log);
-			streamOut.println(("<TR><TD> " + esito + "</TD></TR>"));
-			if (esito.contains("ERROR:")) {
-				output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
-				return output;
-			}
-
-			esito = deleteRecordImport950(richiesta.getNumRichiestaCancellazione(), log);
-			streamOut.println(("<TR><TD> " + esito + "</TD></TR>"));
-			if (esito.contains("ERROR:")) {
-				output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
-				return output;
-			}
-
-			esito = deleteRecordImport1(richiesta.getNumRichiestaCancellazione(), log);
-			streamOut.println(("<TR><TD> " + esito + "</TD></TR>"));
-			if (esito.contains("ERROR:")) {
-				output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
-				return output;
-			}
-			streamOut.println(("<TR><TD>Fine procedura di cancellazione record relativi a nr. richiesta: "
-					+ String.valueOf(richiesta.getNumRichiestaCancellazione()) + "</TD></TR>"));
-
-			status_ok = new AtomicBoolean(true);
-
-		}
-
-
+	
 		output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
 		return output;
 
@@ -834,7 +843,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 						continue;
 					}
 
-					if (ValidazioneDati.isFilled(marcFile.getMsgError())) {
+					if (isFilled(marcFile.getMsgError())) {
 						_log.warn(nr + " msg: " + marcFile.getMsgError());
 					}
 
@@ -853,7 +862,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 						}
 						for (int j = 0; j < tagsCount; j++) {
 							String data = record.getData(currentTag, j, true);
-							if (ValidazioneDati.isFilled(data)) {
+							if (isFilled(data)) {
 								//almaviva5_20130724 sostituzione caratteri fine record con spazio
 								data = data.replace('\u001E', '\u0020');
 								char last = data.charAt(data.length() - 1);
@@ -1453,7 +1462,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 		return 0;
 	}
 
-	public ListaDati950VO exec_datiDocFisico(String numRichiestaImport, String numRichiestaCorrente) throws IOException {
+	public ListaDati950VO exec_datiDocFisico950(String numRichiestaImport, String numRichiestaCorrente) throws IOException {
 		ListaDati950VO datiVO = new ListaDati950VO();
 
 		long numSerieInvInsOK = 0;
@@ -1763,7 +1772,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 												inventarioVO, "N",
 												1, //nInv 1: inserisce inventario
 												Locale.getDefault(), ticket);
-										if (!ValidazioneDati.isFilled(invCreati) )  {
+										if (!isFilled(invCreati) )  {
 											throw new Exception();
 										}
 
@@ -1777,6 +1786,13 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 												inventarioVO.getCodSerie(),
 												inventarioVO.getCodInvent(),
 												Locale.getDefault(), ticket);
+										
+										boolean inventarioDaCollocare = _950.isCollocato(currColl, currInv);
+
+										if (!inventarioDaCollocare) {
+											//inventario precisato, si continua con il prossimo
+											continue;
+										}
 
 										if (primoInv) {
 											// dopo il trattamento del primo inventario gestisce eventuali dati di collocazione
@@ -1877,17 +1893,14 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 										inventarioVO.setValore("0.001");
 										//almaviva5_20190928 recupero cod. mat. da sotto-campo $e, se non presente si usa il liv. bibliografico
 										String codMatInv = _950.getCodMatInv(currColl, currInv);
-										if (ValidazioneDati.isFilled(codMatInv)) {
+										if (isFilled(codMatInv)) {
 											inventarioVO.setCodMatInv(codMatInv);
 										} else {
 											String natura = leader.substring(7,8).toUpperCase();
-											if (natura.equals("S"))
-												inventarioVO.setCodMatInv("VP");
-											else
-												inventarioVO.setCodMatInv("VM");
+											inventarioVO.setCodMatInv(natura.equals("S") ? "VP" : "VM");
 										}
 										inventarioVO.setTipoAcquisizione("A");
-//										inventarioVO.setCodFrui("B");
+
 										inventarioVO.setCodFrui(_950.getCodFruizione(currColl, currInv));
 										inventarioVO.setDataCarico("");
 										// bypasso il trattamento della fattura (InventarioBMT.java)
@@ -1977,10 +1990,10 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 						// gestione della consistenza dell'esemplare legata ai dati di collocazione e inventario
 						// consistenza di esemplare
 						// controllo di esistenza e inserimento
-						if (ValidazioneDati.isFilled(listaKeyLoc) ) {
+						if (isFilled(listaKeyLoc) ) {
 							// inserimento
 
-							if (esemplareVO != null && ValidazioneDati.isFilled(_950.getConsistenzaDocumento(currColl))) {
+							if (esemplareVO != null && isFilled(_950.getConsistenzaDocumento(currColl))) {
 
 								// campi obbligatori
 								esemplareVO = new EsemplareDettaglioVO();
@@ -2042,7 +2055,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 						} else if (statoInventario==Stato950.PARZIALE) {
 							stato950 = Stato950.PARZIALE;
 						} else if (statoInventario==Stato950.DUPLICATO) {
-							if (currColl== 0) stato950 = Stato950.DUPLICATO;
+							if (currColl == 0) stato950 = Stato950.DUPLICATO;
 						} else if (statoInventario==Stato950.OK) {
 							if (stato950==Stato950.ERRORE || stato950==Stato950.PARZIALE /*|| stato950==_950_duplicata*/) {
 								stato950 = Stato950.PARZIALE;
@@ -2230,11 +2243,11 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 
 	public int exec_verificaBid(boolean ricercaPolo, String numRichiesta, List<String> listaBid) {
 		try {
-			String id;
-			String idNew;
+			String id_input;
+			String id_sbn;
 			String sql;
-			char stato;
-			char statoId;
+			char stato_new;
+			char stato_old;
 			List<?> list;
 			Object[] record;
 			int nrAgg = 0;
@@ -2250,23 +2263,23 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 			// lista bid dei documenti inseriti
 			strBuild.append("select distinct i1.id_input, i1.stato_id_input, i2.id_inserito from import1 i1 ");
 			strBuild.append("inner join import_id_link i2 on i1.nr_richiesta=i2.nr_richiesta and i1.id_input=i2.id_input ");
-			strBuild.append("where i1.stato_id_input!='P' and i1.nr_richiesta="+numRichiesta+" and i1.tag='001'");
+			strBuild.append("where i1.stato_id_input<>'P' and i1.nr_richiesta=").append(numRichiesta).append(" and i1.tag='001'");
 			list = getRecords(strBuild);
 			for (int i = 0; i < list.size(); i++) {
 				record = (Object[]) list.get(i);
-				id = (String)record[0];
-				statoId = getCharValue(record[1]);
-				idNew = (String)record[2];
+				id_input = (String) record[0];
+				stato_old = getCharValue(record[1]);
+				id_sbn = (String) record[2];
 
 				// aggiorna lo stato e l'eventuale nuovo bid dei documenti inseriti
-				sql = "update import1 SET id_input='" + escapeSql(idNew) + "', stato_id_input='P' ";
-				sql += "where id_input='" + escapeSql(id) + "' and nr_richiesta=" + numRichiesta;
+				sql = "update import1 SET id_input='" + escapeSql(id_sbn) + "', stato_id_input='P' ";
+				sql += "where id_input='" + escapeSql(id_input) + "' and nr_richiesta=" + numRichiesta;
 				executeInsertUpdate(ImportQueryData.asList(sql, null));
 
-				if (id.equals(idNew))
-					_log.debug(id + ": aggiornato da " + statoId + " a P");
+				if (id_input.equals(id_sbn))
+					_log.debug(id_input + ": aggiornato da " + stato_old + " a P");
 				else {
-					_log.debug(id + ": aggiornato da " + statoId + " a P (nuovo BID assegnato: "+idNew+")");
+					_log.debug(id_input + ": aggiornato da " + stato_old + " a P (nuovo BID assegnato: "+id_sbn+")");
 					nrAggNewBid++;
 				}
 				nrAgg++;
@@ -2277,7 +2290,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 			if (ricercaPolo) {
 				// cerca in polo documenti mappati come NON PRESENTI (I, C, N)
 				_log.debug("--> in POLO");
-				sql = "select distinct id_input, stato_id_input from import1 where stato_id_input!='P' and nr_richiesta=" + numRichiesta;
+				sql = "select distinct id_input, stato_id_input from import1 where stato_id_input<>'P' and nr_richiesta=" + numRichiesta;
 			} else {
 				// cerca in indice documenti mappati come DA INSERIRE
 				_log.debug("--> in INDICE");
@@ -2292,27 +2305,27 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 				// cerca in polo
 				for (int i = 0; i < list.size(); i++) {
 					record = (Object[]) list.get(i);
-					id = (String)record[0];
-					statoId = getCharValue(record[1]);
+					id_input = (String)record[0];
+					stato_old = getCharValue(record[1]);
 					try {
 						// restituisce P o I
-						stato = cercaTitoloPolo(null, id, false).getStato();
+						stato_new = cercaTitoloPolo(null, id_input, false).getStato();
 					} catch (Exception e) {
-						stato = statoId;
-						_log.error("[Errore] Impossibile aggiornare lo stato del documento " + id + ". Errore durante la ricerca in Polo: ", e);
+						stato_new = stato_old;
+						_log.error("[Errore] Impossibile aggiornare lo stato del documento " + id_input + ". Errore durante la ricerca in Polo: ", e);
 					}
 					// aggiorna stato
-					sql = "update import1 SET stato_id_input='"+stato+"' ";
-					sql += "where id_input='" + escapeSql(id) + "' and nr_richiesta=" + numRichiesta;
+					sql = "update import1 SET stato_id_input='" + stato_new + "' ";
+					sql += "where id_input='" + escapeSql(id_input) + "' and nr_richiesta=" + numRichiesta;
 					executeInsertUpdate(ImportQueryData.asList(sql, null));
-					if (stato == statoId ||									// nuovo stato != vecchio stato
-						StatoRecord.of(stato) != StatoRecord.PRESENTE &&	// nuovo stato != P
-						StatoRecord.of(statoId) != StatoRecord.DA_INSERIRE	// vecchio stato != I
-						) {
-						_log.debug(id + ": invariato " + StatoRecord.of(statoId));
+					if (stato_new == stato_old ||									// nuovo stato != vecchio stato
+						StatoRecord.of(stato_new) != StatoRecord.PRESENTE &&	// nuovo stato != P
+						StatoRecord.of(stato_old) != StatoRecord.DA_INSERIRE	// vecchio stato != I
+					) {
+						_log.debug(id_input + ": invariato " + StatoRecord.of(stato_old));
 						nrInv++;
 					} else {
-						_log.debug(id + ": aggiornato da " + StatoRecord.of(statoId) + " a " + StatoRecord.of(stato));
+						_log.debug(id_input + ": aggiornato da " + StatoRecord.of(stato_old) + " a " + StatoRecord.of(stato_new));
 						nrAgg++;
 					}
 				}
@@ -2320,7 +2333,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 				// cerca in indice
 				InterrogazioneTitoloGeneraleVO interrTitGen = new InterrogazioneTitoloGeneraleVO();
 				AreaDatiPassaggioInterrogazioneTitoloVO areaDatiPassInterrTitVO = new AreaDatiPassaggioInterrogazioneTitoloVO();
-				AreaDatiPassaggioInterrogazioneTitoloReturnVO areaDatiPassReturn = null;
+
 				// default stringhe vuote
 				interrTitGen.setTitolo("");
 				interrTitGen.setTipoMateriale("*");
@@ -2359,29 +2372,29 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 
 				for (int i = 0; i < list.size(); i++) {
 					record = (Object[]) list.get(i);
-					id = (String)record[0];
-					statoId = getCharValue(record[1]);
-					interrTitGen.setBid(id);
+					id_input = (String)record[0];
+					stato_old = getCharValue(record[1]);
+					interrTitGen.setBid(id_input);
 					areaDatiPassInterrTitVO.setInterTitGen(interrTitGen);
 					try {
-						stato = cercaTitoloIndice(areaDatiPassInterrTitVO, areaDatiPassReturn).getStato();
-						if (StatoRecord.of(stato) == StatoRecord.DA_CATTURARE) {
+						stato_new = cercaTitoloIndice(areaDatiPassInterrTitVO, null).getStato();
+						if (StatoRecord.of(stato_new) == StatoRecord.DA_CATTURARE) {
 							// aggiunge a lista bid da catturare
-							listaBid.add(id);
+							listaBid.add(id_input);
 						}
 					} catch (Exception e) {
-						stato = statoId;
-						_log.error("[Errore] Impossibile aggiornare lo stato del documento " + id + ". Errore durante la ricerca in Indice: ", e);
+						stato_new = stato_old;
+						_log.error("[Errore] Impossibile aggiornare lo stato del documento " + id_input + ". Errore durante la ricerca in Indice: ", e);
 					}
 					// aggiorna stato
-					sql = "update import1 SET stato_id_input='"+stato+"' ";
-					sql += "where id_input='" + escapeSql(id) + "' and nr_richiesta="+numRichiesta;
+					sql = "update import1 SET stato_id_input='"+stato_new+"' ";
+					sql += "where id_input='" + escapeSql(id_input) + "' and nr_richiesta="+numRichiesta;
 					executeInsertUpdate(ImportQueryData.asList(sql, null));
-					if (stato == statoId) {
-						_log.debug(id + ": invariato " + StatoRecord.of(statoId));
+					if (stato_new == stato_old) {
+						_log.debug(id_input + ": invariato " + StatoRecord.of(stato_old));
 						nrInv++;
 					} else {
-						_log.debug(id + ": aggiornato da " + StatoRecord.of(statoId) + " a " + StatoRecord.of(stato));
+						_log.debug(id_input + ": aggiornato da " + StatoRecord.of(stato_old) + " a " + StatoRecord.of(stato_new));
 						nrAgg++;
 					}
 				}

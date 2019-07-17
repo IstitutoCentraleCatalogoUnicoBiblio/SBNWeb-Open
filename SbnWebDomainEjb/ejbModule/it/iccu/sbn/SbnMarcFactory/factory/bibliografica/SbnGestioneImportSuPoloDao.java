@@ -104,6 +104,7 @@ import it.iccu.sbn.ejb.model.unimarcmodel.types.DatiElementoTypeCondivisoType;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.Indicatore;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.LegameElementoAutTypeCondivisoType;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnAuthority;
+import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnEdizioneSoggettario;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnFormaNome;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnLegameAut;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnLivello;
@@ -137,7 +138,6 @@ import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.servizi.z3950.Z3950ClientFactory;
 import it.iccu.sbn.util.Constants.Semantica.Soggetti;
 import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
-import it.iccu.sbn.util.semantica.SemanticaUtil;
 import it.iccu.sbn.vo.custom.esporta.QueryData;
 import it.iccu.sbn.web.constant.PeriodiciConstants;
 
@@ -369,7 +369,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 
 				int tagNumeric = Integer.parseInt(tracciatoRecord.getTag());
-				if (!(tracciatoRecord.getDati()!= null && tracciatoRecord.getDati().trim().length() > 0)) {
+				if (!isFilled(tracciatoRecord.getDati()) ) {
 					areaDatiPass.setCodErr("9999");
 					testoLog= setTestoLog(idConvertito + "-" + "ATTENZIONE il valore del campo dati è vuoto o null");
 					areaDatiPass.addListaSegnalazioni(testoLog);
@@ -594,7 +594,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					//almaviva5_20150528
 					c182 = ricostruisciC182(tracciatoRecord.getDati());
 					// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
-					if (!c182[0].getA_182_0().equals("")) {
+					if (isFilled(c182[0].getA_182_0())) {
 						c183 = new C183[1];
 						c183[0] = imposta183Area0Default(c182[0].getA_182_0());
 					}
@@ -801,8 +801,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 
 			// INIZIO INTERVENTO OTTOBRE 2013; (import POLI MAGING PAM) Gestione nuove note con TAG diversi
-	   	    int note =0;
-		    if (ValidazioneDati.notEmpty(areaAppoggioNota300))
+			int note =0;
+			if (ValidazioneDati.notEmpty(areaAppoggioNota300))
 				note++;
 			if (ValidazioneDati.notEmpty(areaAppoggioNota323))
 				note++;
@@ -1074,10 +1074,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			}
 
 			// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-			if (tracciatoRecord.getNatura().equals("M")
-					|| tracciatoRecord.getNatura().equals("W")
-					|| tracciatoRecord.getNatura().equals("S")
-					|| tracciatoRecord.getNatura().equals("N")){
+			if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 				if (c181 == null && c182 == null) {
 					c181 = new C181[1];
 					c181[0] = imposta181Area0Default(tracciatoRecord.getTipoRecord());
@@ -1085,7 +1082,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					c182[0] = imposta182Area0Default(tracciatoRecord.getTipoRecord());
 
 					// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
-					if (!c182[0].getA_182_0().equals("")) {
+					if (isFilled(c182[0].getA_182_0())) {
 						c183 = new C183[1];
 						c183[0] = imposta183Area0Default(c182[0].getA_182_0());
 					}
@@ -1104,10 +1101,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					modernoType.setNaturaDoc(SbnNaturaDocumento.valueOf(tracciatoRecord.getNatura()));
 				}
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N") ){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					modernoType.setT105bis(c105bis);
 					modernoType.setT140bis(c140bis);
 					modernoType.setT181(c181);
@@ -1118,9 +1112,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					modernoType.setT183(c183);
 				}
 
@@ -1174,10 +1166,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					anticoType.setNaturaDoc(SbnNaturaDocumento.valueOf(tracciatoRecord.getNatura()));
 				}
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					anticoType.setT105bis(c105bis);
 					anticoType.setT140bis(c140bis);
 					anticoType.setT181(c181);
@@ -1187,9 +1176,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					anticoType.setT183(c183);
 				}
 
@@ -1246,10 +1233,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					musicaType.setNaturaDoc(SbnNaturaDocumento.valueOf(tracciatoRecord.getNatura()));
 				}
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N") ){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					musicaType.setT105bis(c105bis);
 					musicaType.setT140bis(c140bis);
 					musicaType.setT181(c181);
@@ -1260,9 +1244,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					musicaType.setT183(c183);
 				}
 
@@ -1336,10 +1318,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					cartograficoType.setNaturaDoc(SbnNaturaDocumento.valueOf(tracciatoRecord.getNatura()));
 				}
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					cartograficoType.setT105bis(c105bis);
 					cartograficoType.setT140bis(c140bis);
 					cartograficoType.setT181(c181);
@@ -1350,9 +1329,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					cartograficoType.setT183(c183);
 				}
 
@@ -1413,10 +1390,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					graficoType.setNaturaDoc(SbnNaturaDocumento.valueOf(tracciatoRecord.getNatura()));
 				}
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					graficoType.setT105bis(c105bis);
 					graficoType.setT140bis(c140bis);
 					graficoType.setT181(c181);
@@ -1427,9 +1401,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					graficoType.setT183(c183);
 				}
 
@@ -1486,10 +1458,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					audiovisivoType.setT105bis(c105bis);
 					audiovisivoType.setT140bis(c140bis);
 					audiovisivoType.setT181(c181);
@@ -1500,9 +1469,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					audiovisivoType.setT183(c183);
 				}
 
@@ -1578,10 +1545,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
 
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					datiDocType.setT105bis(c105bis);
 					datiDocType.setT140bis(c140bis);
 					datiDocType.setT181(c181);
@@ -1592,9 +1556,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					datiDocType.setT183(c183);
 				}
 
@@ -2121,14 +2083,14 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					c140bis = ricostruisciC140bis(tracciatoRecord.getDati());
 					break;
 				case 181:
-				    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
+					// almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
 					c181 = ricostruisciC181(areaAppoggio1);
 					break;
 				case 182:
-				    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
+					// almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
 					c182 = ricostruisciC182(areaAppoggio1);
 					// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
-					if (!c182[0].getA_182_0().equals("")) {
+					if (isFilled(c182[0].getA_182_0())) {
 						c183 = new C183[1];
 						c183[0] = imposta183Area0Default(c182[0].getA_182_0());
 					}
@@ -2339,8 +2301,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			}
 
 			// INIZIO INTERVENTO OTTOBRE 2013; (import POLI MAGING PAM) Gestione nuove note con TAG diversi
-	   	    int note =0;
-		    if (ValidazioneDati.notEmpty(areaAppoggioNota300))
+			int note =0;
+			if (ValidazioneDati.notEmpty(areaAppoggioNota300))
 				note++;
 			if (ValidazioneDati.notEmpty(areaAppoggioNota323))
 				note++;
@@ -2502,10 +2464,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			}
 
 			// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-			if (tracciatoRecord.getNatura().equals("M")
-					|| tracciatoRecord.getNatura().equals("W")
-					|| tracciatoRecord.getNatura().equals("S")
-					|| tracciatoRecord.getNatura().equals("N") ){
+			if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 				if (c181 == null && c182 == null) {
 					c181 = new C181[1];
 					c181[0] = imposta181Area0Default(tracciatoRecord.getTipoRecord());
@@ -2513,7 +2472,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					c182[0] = imposta182Area0Default(tracciatoRecord.getTipoRecord());
 
 					// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
-					if (!c182[0].getA_182_0().equals("")) {
+					if (isFilled(c182[0].getA_182_0())) {
 						c183 = new C183[1];
 						c183[0] = imposta183Area0Default(c182[0].getA_182_0());
 					}
@@ -2527,10 +2486,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				modernoType.setNaturaDoc(SbnNaturaDocumento.valueOf("W"));
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N") ){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					modernoType.setT105bis(c105bis);
 					modernoType.setT140bis(c140bis);
 					modernoType.setT181(c181);
@@ -2541,9 +2497,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					modernoType.setT183(c183);
 				}
 
@@ -2590,10 +2544,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				anticoType.setNaturaDoc(SbnNaturaDocumento.valueOf("W"));
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N") ){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					anticoType.setT105bis(c105bis);
 					anticoType.setT140bis(c140bis);
 					anticoType.setT181(c181);
@@ -2604,9 +2555,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					anticoType.setT183(c183);
 				}
 
@@ -2659,10 +2608,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				musicaType.setNaturaDoc(SbnNaturaDocumento.valueOf("W"));
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					musicaType.setT105bis(c105bis);
 					musicaType.setT140bis(c140bis);
 					musicaType.setT181(c181);
@@ -2673,9 +2619,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					musicaType.setT183(c183);
 				}
 
@@ -2749,10 +2693,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				cartograficoType.setNaturaDoc(SbnNaturaDocumento.valueOf("W"));
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					cartograficoType.setT105bis(c105bis);
 					cartograficoType.setT140bis(c140bis);
 					cartograficoType.setT181(c181);
@@ -2763,9 +2704,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					cartograficoType.setT183(c183);
 				}
 
@@ -2821,10 +2760,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				graficoType.setNaturaDoc(SbnNaturaDocumento.valueOf("W"));
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N") ){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					graficoType.setT105bis(c105bis);
 					graficoType.setT140bis(c140bis);
 					graficoType.setT181(c181);
@@ -2835,9 +2771,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					graficoType.setT183(c183);
 				}
 
@@ -2891,10 +2825,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 
 				// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")
-						|| tracciatoRecord.getNatura().equals("N")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 					audiovisivoType.setT105bis(c105bis);
 					audiovisivoType.setT140bis(c140bis);
 					audiovisivoType.setT181(c181);
@@ -2905,9 +2836,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 				// valorizzato solo per le nature M,W,S e non N
-				if (tracciatoRecord.getNatura().equals("M")
-						|| tracciatoRecord.getNatura().equals("W")
-						|| tracciatoRecord.getNatura().equals("S")){
+				if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 					audiovisivoType.setT183(c183);
 				}
 
@@ -4550,7 +4479,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 						    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
 							c182 = ricostruisciC182(areaAppoggio1);
 							// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
-							if (!c182[0].getA_182_0().equals("")) {
+							if (isFilled(c182[0].getA_182_0())) {
 								c183 = new C183[1];
 								c183[0] = imposta183Area0Default(c182[0].getA_182_0());
 							}
@@ -5172,10 +5101,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					}
 
 					// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-					if (tracciatoRecord.getNatura().equals("M")
-							|| tracciatoRecord.getNatura().equals("W")
-							|| tracciatoRecord.getNatura().equals("S")
-							|| tracciatoRecord.getNatura().equals("N") ){
+					if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 						if (c181 == null && c182 == null) {
 							c181 = new C181[1];
 							c181[0] = imposta181Area0Default(tracciatoRecord.getTipoRecord());
@@ -5183,7 +5109,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							c182[0] = imposta182Area0Default(tracciatoRecord.getTipoRecord());
 
 							// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
-							if (!c182[0].getA_182_0().equals("")) {
+							if (isFilled(c182[0].getA_182_0())) {
 								c183 = new C183[1];
 								c183[0] = imposta183Area0Default(c182[0].getA_182_0());
 							}
@@ -5211,10 +5137,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							modernoType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								modernoType.setT105bis(c105bis);
 								modernoType.setT140bis(c140bis);
 								modernoType.setT181(c181);
@@ -5225,9 +5148,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								modernoType.setT183(c183);
 							}
 
@@ -5275,10 +5196,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							anticoType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								anticoType.setT105bis(c105bis);
 								anticoType.setT140bis(c140bis);
 								anticoType.setT181(c181);
@@ -5289,9 +5207,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								anticoType.setT183(c183);
 							}
 
@@ -5338,10 +5254,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							musicaType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								musicaType.setT105bis(c105bis);
 								musicaType.setT140bis(c140bis);
 								musicaType.setT181(c181);
@@ -5352,9 +5265,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								musicaType.setT183(c183);
 							}
 
@@ -5422,10 +5333,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							cartograficoType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								cartograficoType.setT105bis(c105bis);
 								cartograficoType.setT140bis(c140bis);
 								cartograficoType.setT181(c181);
@@ -5436,9 +5344,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								cartograficoType.setT183(c183);
 							}
 
@@ -5493,10 +5399,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							graficoType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								graficoType.setT105bis(c105bis);
 								graficoType.setT140bis(c140bis);
 								graficoType.setT181(c181);
@@ -5507,9 +5410,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								graficoType.setT183(c183);
 							}
 
@@ -5558,10 +5459,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							audiovisivoType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								audiovisivoType.setT105bis(c105bis);
 								audiovisivoType.setT140bis(c140bis);
 								audiovisivoType.setT181(c181);
@@ -5572,9 +5470,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								audiovisivoType.setT183(c183);
 							}
 
@@ -5644,10 +5540,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							datiDocType.setNaturaDoc(SbnNaturaDocumento.valueOf(natura));
 
 							// almaviva2 Evolutiva Ottobre 2014 - EVOLUTIVA SU IMPORT PER SCHEMA 2.0 (AREA0 e NUOVI MATERIALI Audiovisivo/Discosonoro)
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")
-									|| tracciatoRecord.getNatura().equals("N")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S", "N")) {
 								datiDocType.setT105bis(c105bis);
 								datiDocType.setT140bis(c140bis);
 								datiDocType.setT181(c181);
@@ -5658,9 +5551,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 							// Manutenzione interna Luglio 2016 - a correzione del precedente intervento su import : il campo tipo supporto deve essere
 							// valorizzato solo per le nature M,W,S e non N
-							if (tracciatoRecord.getNatura().equals("M")
-									|| tracciatoRecord.getNatura().equals("W")
-									|| tracciatoRecord.getNatura().equals("S")){
+							if (in(tracciatoRecord.getNatura(), "M", "W", "S")) {
 								datiDocType.setT183(c183);
 							}
 
@@ -6438,7 +6329,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 		SbnSoggettiDAO sbnSoggettiDAO = new SbnSoggettiDAO(indice, polo, user);
 		SbnClassiDAO sbnClassiDAO = new SbnClassiDAO(indice, polo, user);
-		String soggettarioDefault = "FIR";
+
 		String soggettarioImportato = "";
 		String soggUnimarc = "FI";
 
@@ -6521,35 +6412,41 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				case 606:
 				case 607:
 				case 610:
-					soggettarioImportato = tagliaEtichetta(tracciatoRecord.getDati(), '2');
+					soggettarioImportato = ValidazioneDati.trimOrEmpty(tagliaEtichetta(tracciatoRecord.getDati(), '2')).toUpperCase();
 					if (isFilled(soggettarioImportato) ) {
-						soggUnimarc = soggettarioImportato.toUpperCase();
-
 						try {
-							soggUnimarc = CodiciProvider.SBNToUnimarc(CodiciType.CODICE_SOGGETTARIO, soggUnimarc);
+							soggUnimarc = CodiciProvider.SBNToUnimarc(CodiciType.CODICE_SOGGETTARIO, soggettarioImportato);
 						} catch (Exception e) {
 							areaDatiPass.setCodErr("9999");
-							testoLog = setTestoLog("ERRORE - decodifica Soggettario: " + soggettarioDefault +  "(" + e.getMessage() +")");
+							testoLog = setTestoLog(idConvertito + "- ERRORE - decodifica Soggettario: " + soggettarioImportato +  "(" + e.getMessage() +")");
 							areaDatiPass.addListaSegnalazioni(testoLog);
 							continue;
 						}
-						if (ValidazioneDati.strIsNull(soggUnimarc)) {
+						//almaviva5_20190618 fix codice soggettario
+						if (!isFilled(soggUnimarc) && !soggettarioImportato.equals(Soggetti.SOGGETTARIO_FIRENZE)) {
 							areaDatiPass.setCodErr("9999");
-							testoLog = setTestoLog("ERRORE - Parametro codice soggettario errato: " + soggettarioDefault );
+							testoLog = setTestoLog(idConvertito + "- ERRORE - Parametro codice soggettario errato: " + soggettarioImportato );
 							areaDatiPass.addListaSegnalazioni(testoLog);
 							continue;
 						}
-					} else {
-						soggUnimarc = Soggetti.SOGGETTARIO_FIRENZE;
 					}
+
+					soggUnimarc = coalesce(soggUnimarc, Soggetti.SOGGETTARIO_FIRENZE);
+
+					SbnEdizioneSoggettario edizione = null;//SbnEdizioneSoggettario.I;
 
 					if (ValidazioneDati.equals(soggUnimarc, Soggetti.SOGGETTARIO_FIRENZE)) {
 						//almaviva5_20181019 trattamento edizione soggettario
-						String edizione = tagliaEtichetta(tracciatoRecord.getDati(), '9');
-						if (isFilled(edizione) ) {
-							String soggettarioIndiceDaEdizione = SemanticaUtil.getSoggettarioIndiceDaEdizione(edizione);
-							if (isFilled(soggettarioIndiceDaEdizione))
-								soggUnimarc = soggettarioIndiceDaEdizione;
+						String edizioneUnimarc = tagliaEtichetta(tracciatoRecord.getDati(), '9');
+						if (isFilled(edizioneUnimarc) ) {
+							try {
+								edizione = SbnEdizioneSoggettario.valueOf(edizioneUnimarc);
+							} catch (Exception e) {
+								areaDatiPass.setCodErr("9999");
+								testoLog = setTestoLog(idConvertito + "- ERRORE - Parametro edizione soggettario errato: " + edizioneUnimarc );
+								areaDatiPass.addListaSegnalazioni(testoLog);
+								continue;
+							}
 						}
 					}
 
@@ -6582,7 +6479,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					newTestoSoggetto = newTestoSoggetto.replace("$f", Soggetti.SEPARATORE_TERMINI_SOGGETTO);
 
 					try {
-						sbnRisposta = sbnSoggettiDAO.creaSoggetto(soggUnimarc, newTestoSoggetto, livelloSogCla, tipoSoggetto, noteSogCla, true, "", false);
+						sbnRisposta = sbnSoggettiDAO.creaSoggetto(soggUnimarc, newTestoSoggetto, livelloSogCla,
+								tipoSoggetto, noteSogCla, true, "", false, edizione);
 					} catch (Exception e) {
 						areaDatiPass.setCodErr("9999");
 						testoLog = setTestoLog("Identificativo Base:" + tracciatoRecord.getIdInput()
@@ -6847,11 +6745,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		areaAppoggio2 = dati;
 		genericSize = dati.length();
 		for (int a = 0; a < genericSize; a++) {
-            if (areaAppoggio2.charAt(a) == '$' && areaAppoggio2.charAt(a+1) == 'a') {
-            	genericInizio = a;
-            	break;
-            }
-        }
+			if (areaAppoggio2.charAt(a) == '$' && areaAppoggio2.charAt(a+1) == 'a') {
+				genericInizio = a;
+				break;
+			}
+		}
 		// il trattamento viene fatto sostituendo i caratteri preceduti da $ con le apposite parole chiave
 		areaAppoggio1 = areaAppoggio2.substring(genericInizio, genericSize); //luogo della pubblicazione
 
@@ -6950,11 +6848,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		areaAppoggio2 = dati;
 		genericSize = dati.length();
 		for (int a = 0; a < genericSize; a++) {
-            if (areaAppoggio2.charAt(a) == '$' && areaAppoggio2.charAt(a+1) == 'a') {
-            	genericInizio = a;
-            	break;
-            }
-        }
+			if (areaAppoggio2.charAt(a) == '$' && areaAppoggio2.charAt(a+1) == 'a') {
+				genericInizio = a;
+				break;
+			}
+		}
 
 		areaAppoggio1 = areaAppoggio2.substring(genericInizio, genericSize); //luogo della pubblicazione
 
@@ -6987,11 +6885,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			String risultato = "";
 
 			for (int a = 0; a < size; a++) {
-	            if (areaAppoggio.charAt(a) == '1' || areaAppoggio.charAt(a) == '2') {
-	            	risultato = risultato + areaAppoggio.substring(a, a+4);
-	            	break;
-	            }
-	        }
+				if (areaAppoggio.charAt(a) == '1' || areaAppoggio.charAt(a) == '2') {
+					risultato = risultato + areaAppoggio.substring(a, a+4);
+					break;
+				}
+			}
 			if (risultato.matches(PeriodiciConstants.REGEX_FORMATO_ANNO)) {
 				return risultato;
 			}
@@ -7533,7 +7431,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 		areaAppoggio1 = tagliaEtichetta(dati, 'a');
 		String codGenere = "";
-		String codGenereDecod = "";
+
 
 		if (areaAppoggio1.length() > 17) {
 			if (ValidazioneDati.notEmpty(areaAppoggio1.substring(9,11))) {
@@ -7543,8 +7441,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				} catch (Exception e) {
 					codGenere = "";
 				}
-				if (codGenere != null) {
-					codGenereDecod = codGenereDecod + codGenere;
+				if (isFilled(codGenere) ) {
+					c140.addA_140_9(codGenere);
 				}
 			}
 			if (ValidazioneDati.notEmpty(areaAppoggio1.substring(11,13))) {
@@ -7554,8 +7452,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				} catch (Exception e) {
 					codGenere = "";
 				}
-				if (codGenere != null) {
-					codGenereDecod = codGenereDecod + codGenere;
+				if (isFilled(codGenere) ) {
+					c140.addA_140_9(codGenere);
 				}
 			}
 			if (ValidazioneDati.notEmpty(areaAppoggio1.substring(13,15))) {
@@ -7565,8 +7463,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				} catch (Exception e) {
 					codGenere = "";
 				}
-				if (codGenere != null) {
-					codGenereDecod = codGenereDecod + codGenere;
+				if (isFilled(codGenere) ) {
+					c140.addA_140_9(codGenere);
 				}
 			}
 			if (ValidazioneDati.notEmpty(areaAppoggio1.substring(15,17))) {
@@ -7576,29 +7474,16 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				} catch (Exception e) {
 					codGenere = "";
 				}
-				if (codGenere != null) {
-					codGenereDecod = codGenereDecod + codGenere;
+				if (isFilled(codGenere) ) {
+					c140.addA_140_9(codGenere);
 				}
-			}
-
-			if (codGenereDecod.length() > 2) {
-				c140.addA_140_9(codGenereDecod.substring(0,2));
-			}
-			if (codGenereDecod.length() > 4) {
-				c140.addA_140_9(codGenereDecod.substring(2,4));
-			}
-			if (codGenereDecod.length() > 6) {
-				c140.addA_140_9(codGenereDecod.substring(4,6));
-			}
-			if (codGenereDecod.length() > 8) {
-				c140.addA_140_9(codGenereDecod.substring(6,8));
 			}
 
 		}
 		return c140;
 	}
 
-    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
+	// almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
 	private C140bis ricostruisciC140bis (String dati) {
 		C140bis c140bis = new C140bis();
 		String testoLetterarioAntico = "";
@@ -7841,9 +7726,9 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		String areaAppoggio="";
 		C181[] c181 = new C181[2]; // Campi Area0
 		c181[0] = new C181();
-        c181[1] = new C181();
+		c181[1] = new C181();
 
-        // prima occorrenza di Area0
+		// prima occorrenza di Area0
 		areaAppoggio = tagliaEtichetta(dati, '?');
 		c181[0].setA_181_0(areaAppoggio); // forma Contenuto
 		areaAppoggio = tagliaEtichetta(dati, '?');
@@ -7859,7 +7744,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		areaAppoggio = tagliaEtichetta(dati, '?');
 		c181[0].setB_181_5(areaAppoggio); // sensorialita3
 
-        // seconda occorrenza di Area0
+		// seconda occorrenza di Area0
 		areaAppoggio = tagliaEtichetta(dati, '?');
 		c181[1].setA_181_0(areaAppoggio); // forma Contenuto
 		areaAppoggio = tagliaEtichetta(dati, '?');
@@ -7881,7 +7766,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 	private C182[] ricostruisciC182 (String dati) {
 		C182[] c182 = new C182[2];
 		c182[0] = new C182();
-        c182[1] = new C182();
+		c182[1] = new C182();
 		String areaAppoggio = "";
 
 		areaAppoggio = tagliaEtichetta(dati, '?');
@@ -7966,13 +7851,13 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			c183.setA_183_0("sz");
 		} else if (in(tipoMediazione, "g")) {
 			c183.setA_183_0("vz");
-		}  else if (in(tipoMediazione, "m", "n")) {
+		} else if (in(tipoMediazione, "m", "n")) {
 			c183.setA_183_0("nz");
 		}
 		return c183;
 	}
 
-    // FINE almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
+	// FINE almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
 
 	// almaviva2 Evolutiva Ottobre 2014 per Gestione nuovi Tipi Materiale Audiovisivo/Discosonoro
 	private C115 ricostruisciC115 (String dati) {
@@ -8471,7 +8356,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 	}
 
 
-    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
+	// almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
 	// Dicembre 2014 per Import di Discoteca di Stato si Importa anche questa nuova etichetta
 	// Manutenzione Novembre 2015, almaviva2 - Si limita la lunghezza dei campi dell'etichetta 922 al
 	// valore del DB
@@ -8737,11 +8622,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		}
 
 		for (int a = 0; a < size; a++) {
-            if (dati.charAt(a) == '$' && dati.charAt(a+1) == carattere) {
-            	inizioRicerca = a+2;
-            	break;
-            }
-        }
+			if (dati.charAt(a) == '$' && dati.charAt(a+1) == carattere) {
+				inizioRicerca = a + 2;
+				break;
+			}
+		}
 		if (inizioRicerca == 0) {
 			return "";
 		}
@@ -8749,10 +8634,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		size--;
 		for (int b = inizioRicerca; b < size; b++) {
 			if (dati.charAt(b) == '$' && dati.charAt(b+1) == carattere) {
-            	fineScorrRicerca = b;
-            	break;
-            }
-        }
+				fineScorrRicerca = b;
+				break;
+			}
+		}
 		if (fineScorrRicerca == 0) {
 			fineScorrRicerca = dati.length();
 		}
@@ -8782,11 +8667,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		}
 
 		for (int a = 0; a < size; a++) {
-            if (dati.charAt(a) == '$' && dati.charAt(a+1) == carattere) {
-            	inizioRicerca = a+2;
-            	break;
-            }
-        }
+			if (dati.charAt(a) == '$' && dati.charAt(a+1) == carattere) {
+				inizioRicerca = a + 2;
+				break;
+			}
+		}
 		if (inizioRicerca == 0) {
 			return "";
 		}
@@ -8796,11 +8681,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			// Evolutiva Ottobre 2018 - almaviva2 - per trattare la etichetta $b negli autori di tipo Ente che è ripetibile
 			// quando si cerca la fine della stringa la ricerca si deve interrompere al carattere $ e non anche al carattere
 			// if (dati.charAt(b) == '$' && dati.charAt(b+1) == carattere) {
-            if (dati.charAt(b) == '$') {
-            	fineScorrRicerca = b;
-            	break;
-            }
-        }
+			if (dati.charAt(b) == '$') {
+				fineScorrRicerca = b;
+				break;
+				}
+			}
 		if (fineScorrRicerca == 0) {
 			fineScorrRicerca = dati.length();
 		}
@@ -8819,10 +8704,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		String risultato="";
 
 		for (int a = 0; a < size; a++) {
-            if (dati.charAt(a) != carattere) {
-            	risultato = risultato + dati.charAt(a);
-            }
-        }
+			if (dati.charAt(a) != carattere) {
+				risultato = risultato + dati.charAt(a);
+			}
+		}
 		return risultato;
 	}
 

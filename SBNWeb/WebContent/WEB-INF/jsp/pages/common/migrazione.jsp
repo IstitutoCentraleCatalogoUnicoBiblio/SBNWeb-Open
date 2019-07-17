@@ -134,6 +134,15 @@
 						</td>
 					</tr>
 					<tr>
+						<td><h3>stop forzato batch</h3></td>
+						<td>
+							<html:text property="idBatchStop" size="5" maxlength="5" />
+							<html:submit property="methodMigrazione">
+								<bean:message key="button.mig.force.batch.stop" bundle="messages" />
+							</html:submit>
+						</td>
+					</tr>
+					<tr>
 						<td><h3>test mail server</h3></td>
 						<td>
 							<html:text property="email" size="25" />

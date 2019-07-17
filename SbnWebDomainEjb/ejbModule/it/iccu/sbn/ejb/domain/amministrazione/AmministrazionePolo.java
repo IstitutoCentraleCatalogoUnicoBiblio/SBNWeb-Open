@@ -159,6 +159,7 @@ public interface AmministrazionePolo
 	public PoloVO getInfoPolo() throws RemoteException, DaoManagerException;
 
 	public void forceBatchStart(String idBatch) throws ValidationException, ApplicationException, RemoteException;
+	public void forceBatchStop(String idBatch) throws ValidationException, ApplicationException, RemoteException;
 
 	public Tbf_batch_servizi selectBatchByCodAttivita(String cod_attivita) throws ValidationException, ApplicationException, RemoteException;
 

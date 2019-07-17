@@ -83,6 +83,7 @@ public final class MigrazioneAction extends LookupDispatchAction {
 		map.put("button.pad.execute", "reload");
 
 		map.put("button.mig.force.batch.start", "forceBatch");
+		map.put("button.mig.force.batch.stop", "forceBatchStop");
 		map.put("button.mig.test.mail", "testMail");
 		map.put("button.mig.test.sms", "testSMS");
 
@@ -367,6 +368,21 @@ public final class MigrazioneAction extends LookupDispatchAction {
 
 		return mapping.getInputForward();
 	}
+
+	public ActionForward forceBatchStop(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		MigrazioneForm currentForm = (MigrazioneForm) form;
+		try {
+			DomainEJBFactory.getInstance().getPolo().forceBatchStop(currentForm.getIdBatchStop());
+			LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico.operazioneCorrettamenteEseguita"));
+		} catch (Exception e) {
+			log.error("", e);
+			LinkableTagUtils.addError(request, new ActionMessage(e.getMessage()));
+		}
+
+		return mapping.getInputForward();
+	}	
 
 	public ActionForward testMail(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)

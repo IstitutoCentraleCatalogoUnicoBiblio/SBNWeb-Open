@@ -396,7 +396,8 @@ public class Marc950 {
 
 	public boolean isCollocato(int idxColl, int idxInv) {
 		// 2: precisato; 5: collocato
-		return ("5".equals(getCodSit(idxColl, idxInv))) ? true : false;
+		String codSit = getCodSit(idxColl, idxInv);
+		return "5".equals(codSit);
 	}
 
 	public String getCodNoDisp(int idxColl, int idxInv) {
