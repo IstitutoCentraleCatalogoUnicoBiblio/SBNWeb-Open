@@ -675,7 +675,8 @@ public abstract class ErogazioneAction extends ServiziBaseAction implements SbnA
 
 		if (utenteVO != null) {
 			dettaglio.setCognomeNome(utenteVO.getCognomeNome());
-			//dettaglio.setEmail(ServiziUtil.getEmailUtente(utenteVO));
+			//almaviva5_20190820 #7054
+			dettaglio.setEmail(ServiziUtil.getEmailUtente(utenteVO));
 		}
 
 		if (infoDocumentoVO != null) {

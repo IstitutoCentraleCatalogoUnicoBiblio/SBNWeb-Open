@@ -1192,9 +1192,9 @@ public final class ConvertToWeb extends DataBindingConverter {
 
 	public final String getEmailUtente(Tbl_utenti u) {
 		//almaviva5_20150428
-		String email1 = ValidazioneDati.trimOrNull(u.getInd_posta_elettr());
-		String email2 = ValidazioneDati.trimOrNull(u.getInd_posta_elettr2());
-		return email1 != null ? email1 : email2;
+		String email1 = u != null ? ValidazioneDati.trimOrNull(u.getInd_posta_elettr()) : null;
+		String email2 = u != null ? ValidazioneDati.trimOrNull(u.getInd_posta_elettr2()) : null;
+		return ValidazioneDati.isFilled(email1) ? email1 : email2;
 	}
 
 	public final UtenteWeb utente(Tbl_utenti hVO) {
