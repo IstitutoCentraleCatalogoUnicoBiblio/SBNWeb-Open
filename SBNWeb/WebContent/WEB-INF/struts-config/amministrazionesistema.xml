@@ -206,7 +206,10 @@
 				<forward name="nuovo" path="/amministrazionesistema/nuovoBibliotecario.do" />
 				<forward name="acquisizioni" path="/acquisizioni/suggerimenti/suggerimentiBiblRicercaParziale.do" />
 				<forward name="stampaEtichette" path="/gestionestampe/etichette/stampaEtichette.do" />
-				<forward name="estrattoreIdDocumenti" path="/common/estrattoreIdDocumenti.do" />
+				  <!-- Manutenzione BUG MANTIS 7080 almaviva2 02.09.2019 - 	modificato percorso per tracciare la navigazione 
+				  			verso RicercaBibliotecario provenendo dalla richiesta "Estrai lista identificativi documento"	
+						<forward name="estrattoreIdDocumenti" path="/common/estrattoreIdDocumenti.do" /> -->
+				<forward name="estrattoreIdDocumenti" path="/elaborazioniDifferite/esporta/estrattoreIdDocumenti.do" />
 				<forward name="blank" path="/blank.do" />
         </action>
 

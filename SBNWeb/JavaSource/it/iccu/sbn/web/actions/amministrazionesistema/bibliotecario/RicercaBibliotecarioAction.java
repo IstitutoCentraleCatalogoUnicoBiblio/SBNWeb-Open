@@ -144,7 +144,11 @@ public final class RicercaBibliotecarioAction extends LookupDispatchAction {
       //Manutenzione almaviva2 21.09.2011 -  inserite le chiamate per la lentina del biblotecario (ute ins e var)
         myForm.setEstrattoreIdDocumenti("FALSE");
         if (navi.getActionCaller() != null &&
-        		navi.getActionCaller().equals("/common/estrattoreIdDocumenti")) {
+        		// Manutenzione BUG MANTIS 7080 almaviva2 02.09.2019
+        		// modificato percorso per tracciare la navigazione verso RicercaBibliotecario provenendo
+        		// dalla richiesta "Estrai lista identificativi documento"
+        		// navi.getActionCaller().equals("/common/estrattoreIdDocumenti")) {
+        		navi.getActionCaller().equals("/elaborazioniDifferite/esporta/estrattoreIdDocumenti")) {
         	myForm.setEstrattoreIdDocumenti("TRUE");
         	myForm.setCheckAbilitato("true");
         	myForm.setAbilitatoNuovo("FALSE");
