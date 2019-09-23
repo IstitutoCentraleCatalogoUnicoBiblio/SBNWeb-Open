@@ -3700,7 +3700,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 				int tagNumeric = Integer.parseInt(tracciatoRecord.getTag());
 
-				if (!(tracciatoRecord.getDati()!= null && tracciatoRecord.getDati().trim().length() > 0)) {
+				if (!isFilled(tracciatoRecord.getDati()) ) {
 					areaDatiPass.setCodErr("9999");
 					testoLog = setTestoLog(idConvertito + "-" + "ATTENZIONE il valore del campo dati è vuoto o null");
 					areaDatiPass.addListaSegnalazioni(testoLog);
@@ -8720,7 +8720,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 	private String notEmptyOrOther(String data1, String data2) {
 
-		if ((data1 != null) && (data1.length() > 0)) {
+		if (isFilled(data1)) {
 			return data1;
 		} else {
 			return data2;

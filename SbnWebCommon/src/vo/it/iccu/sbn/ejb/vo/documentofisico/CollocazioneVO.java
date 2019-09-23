@@ -203,7 +203,7 @@ public class CollocazioneVO extends SerializableVO {
 	}
 
 	public void setConsistenza(String consistenza) {
-		this.consistenza = consistenza;
+		this.consistenza = trimOrEmpty(consistenza);
 	}
 
 	public String getDataAgg() {

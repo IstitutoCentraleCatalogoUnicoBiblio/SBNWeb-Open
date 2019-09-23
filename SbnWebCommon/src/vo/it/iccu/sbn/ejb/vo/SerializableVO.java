@@ -242,6 +242,10 @@ public abstract class SerializableVO implements Serializable, Validable {
 		return ClonePool.copyCommonProperties(dest, source);
 	}
 
+	public static String wrap(String value) {
+		return value != null ? value : "";
+	}
+
 	@Override
 	public String toString() {
 		return dump(this, false);

@@ -54,7 +54,7 @@ public class TracciatoDatiImport1ParzialeVO extends SerializableVO {
 	}
 
 	public void setIdLink(String idLink) {
-		this.idLink = idLink;
+		this.idLink = trimAndSet(idLink);
 	}
 
 	public String getDati() {
@@ -62,7 +62,7 @@ public class TracciatoDatiImport1ParzialeVO extends SerializableVO {
 	}
 
 	public void setDati(String dati) {
-		this.dati = dati;
+		this.dati = wrap(dati);
 	}
 
 	public String getNatura() {

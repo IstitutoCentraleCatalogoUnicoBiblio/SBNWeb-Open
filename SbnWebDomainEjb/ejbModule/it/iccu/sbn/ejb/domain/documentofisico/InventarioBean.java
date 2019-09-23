@@ -2844,6 +2844,8 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 		Tbc_collocazione collocazione = null;
 		int keyLoc = -1;
 		valida.validaInventario(recInvColl);
+		//almaviva5_20190906 #7084
+		valida.validaCollocazione(recColl);
 		try {
 			daoInv = new Tbc_inventarioDao();
 			inventario = daoInv.getInventario(recInvColl.getCodPolo(), recInvColl.getCodBib(),

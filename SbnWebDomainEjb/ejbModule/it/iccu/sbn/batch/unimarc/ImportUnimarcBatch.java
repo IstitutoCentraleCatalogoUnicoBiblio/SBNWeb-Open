@@ -95,6 +95,8 @@ import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 
 public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 
+	private static Logger LOGGER = Logger.getLogger(ImportUnimarcBatch.class);
+
 	enum StatoRecord {
 		DA_INSERIRE('I'),
 		DA_CATTURARE('C'),
@@ -138,7 +140,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 	private String codPolo;
 
 
-	private Logger _log;
+	private Logger _log = LOGGER;
 	private AtomicBoolean status_ok = new AtomicBoolean(false);
 	private TitoloDAO titDAO;
 	private UserTransaction tx;
@@ -2689,7 +2691,9 @@ group by 1, 2, 3
 		startSession();
 		boolean ok = false;
 		try {
-			SQLQuery query = session.createSQLQuery(sqlSelect.toString());
+			final String sql = sqlSelect.toString();
+			LOGGER.debug("SQL: " + sql);
+			SQLQuery query = session.createSQLQuery(sql);
 			List<?> list = query.list();
 			ok = true;
 			return list;

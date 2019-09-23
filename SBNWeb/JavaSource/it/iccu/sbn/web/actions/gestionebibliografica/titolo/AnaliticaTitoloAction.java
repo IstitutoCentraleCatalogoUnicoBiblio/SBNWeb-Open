@@ -102,8 +102,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -113,7 +112,7 @@ import org.apache.struts.actions.LookupDispatchAction;
 
 public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAttivitaChecker {
 
-	private static Log log = LogFactory.getLog(AnaliticaTitoloAction.class);
+	private static Logger log = Logger.getLogger(AnaliticaTitoloAction.class);
 
 	@Override
 	protected Map<String, String> getKeyMethodMap() {
