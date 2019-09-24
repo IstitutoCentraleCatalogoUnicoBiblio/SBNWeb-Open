@@ -368,12 +368,6 @@
    <mbean code="org.jboss.deployment.scanner.URLDeploymentScanner"
       name="jboss.deployment:type=DeploymentScanner,flavor=URL">
 
-      <!-- Uncomment (and comment/remove version below) to enable usage of the
-        DeploymentCache
-      <depends optional-attribute-name="Deployer">jboss.deployment:type=DeploymentCache</depends>
-      -->
-      <depends optional-attribute-name="Deployer">jboss.system:service=MainDeployer</depends>
-
       <!-- The URLComparator can be used to specify a deployment ordering
            for deployments found in a scanned directory.  The class specified
            must be an implementation of java.util.Comparator, it must be able
@@ -454,6 +448,12 @@
       -->
 
       <attribute name="RecursiveSearch">True</attribute>
+
+      <!-- Uncomment (and comment/remove version below) to enable usage of the
+        DeploymentCache
+      <depends optional-attribute-name="Deployer">jboss.deployment:type=DeploymentCache</depends>
+      -->
+      <depends optional-attribute-name="Deployer">jboss.system:service=MainDeployer</depends>
 
    </mbean>
 

@@ -7584,13 +7584,10 @@ public class SbnGestioneAllAuthorityDao {
 
 			// Inizio controlli su presenza di gestionali ancora validi
 			// Area acquisizioni:
-			if (areaDatiPass.getTipoAut() == null
-					|| areaDatiPass.getTipoAut().equals("")) {
-				StrutturaCombo StrutturaCombo;
+			if (ValidazioneDati.strIsEmpty(areaDatiPass.getTipoAut())) {
 				ListaSuppOrdiniVO listaSuppOrdiniVO = new ListaSuppOrdiniVO();
 				GenericJDBCAcquisizioniDAO acquisizioni = new GenericJDBCAcquisizioniDAO();
-				StrutturaCombo = new StrutturaCombo(areaDatiPass.getBid(), "");
-				listaSuppOrdiniVO.setTitolo(StrutturaCombo);
+				listaSuppOrdiniVO.setTitolo(new StrutturaCombo(areaDatiPass.getBid(), ""));
 				List<OrdiniVO> ordini = null;
 				try {
 					ordini = acquisizioni.getRicercaListaOrdini(listaSuppOrdiniVO);
@@ -7616,7 +7613,7 @@ public class SbnGestioneAllAuthorityDao {
 									+ e.getMessage());
 					return areaDatiPass;
 				}
-				if (ordini != null && ordini.size() > 0) {
+				if (ValidazioneDati.isFilled(ordini) ) {
 					ordiniPolo = true;
 					for (int index = 0; index < ordini.size(); index++) {
 						OrdiniVO recResult = ordini.get(index);
@@ -7633,7 +7630,7 @@ public class SbnGestioneAllAuthorityDao {
 				Tbc_inventarioDao inventari = new Tbc_inventarioDao();
 				List tbcInventario = inventari.getListaInventari(areaDatiPass.getBid());
 
-				if (tbcInventario.size() > 0) {
+				if (ValidazioneDati.isFilled(tbcInventario) ) {
 					inventPolo = true;
 
 					// Modifica ALMAVIVA2 2014.07.21 BUG MANTIS esercizio 5602 - se la richiesta di cancellazione
@@ -7676,7 +7673,7 @@ public class SbnGestioneAllAuthorityDao {
 				Tbc_collocazioneDao collocazioni = new Tbc_collocazioneDao();
 				List<Tbc_collocazione> tbcCollocazione = collocazioni.getListaCollocazioni(areaDatiPass.getBid());
 
-				if (tbcCollocazione.size() > 0) {
+				if (ValidazioneDati.isFilled(tbcCollocazione) ) {
 					collocPolo = true;
 					for (int index = 0; index < tbcCollocazione.size(); index++) {
 						Tbc_collocazione recResult = tbcCollocazione.get(index);
@@ -7695,7 +7692,7 @@ public class SbnGestioneAllAuthorityDao {
 				Tbc_esemplare_titoloDao esemplari = new Tbc_esemplare_titoloDao();
 				List tbcEsemplare = esemplari.getListaEsemplari(areaDatiPass.getBid());
 
-				if (tbcEsemplare.size() > 0) {
+				if (ValidazioneDati.isFilled(tbcEsemplare) ) {
 					for (int index = 0; index < tbcEsemplare.size(); index++) {
 						esemplPolo = true;
 						Tbc_esemplare_titolo recResult = (Tbc_esemplare_titolo) tbcEsemplare.get(index);
@@ -8287,11 +8284,9 @@ public class SbnGestioneAllAuthorityDao {
 			if (ValidazioneDati.strIsEmpty(areaDatiPass.getTipoAut()) ) {
 
 				String datiSegnalazione = "";
-				StrutturaCombo StrutturaCombo;
 				ListaSuppOrdiniVO listaSuppOrdiniVO = new ListaSuppOrdiniVO();
 				GenericJDBCAcquisizioniDAO acquisizioni = new GenericJDBCAcquisizioniDAO();
-				StrutturaCombo = new StrutturaCombo(areaDatiPass.getBid(), "");
-				listaSuppOrdiniVO.setTitolo(StrutturaCombo);
+				listaSuppOrdiniVO.setTitolo(new StrutturaCombo(areaDatiPass.getBid(), ""));
 				List<OrdiniVO> ordini = null;
 				try {
 					ordini = acquisizioni.getRicercaListaOrdini(listaSuppOrdiniVO);

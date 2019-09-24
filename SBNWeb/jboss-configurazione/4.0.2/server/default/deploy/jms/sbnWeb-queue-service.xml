@@ -11,19 +11,19 @@
 	<!--  NON MODIFICARE -->
 	<mbean code="org.jboss.mq.server.jmx.Queue"
 		name="jboss.mq.destination:service=Queue,name=sbnMarcBlocchi">
+		<attribute name="RedeliveryLimit">0</attribute>
 		<depends optional-attribute-name="DestinationManager">
 			jboss.mq:service=DestinationManager
 		</depends>
-		<attribute name="RedeliveryLimit">0</attribute>
 	</mbean>
 
 	<!--  NON MODIFICARE -->
 	<mbean code="org.jboss.mq.server.jmx.Queue"
 		name="jboss.mq.destination:service=Queue,name=sbnWebBlocchi">
+		<attribute name="RedeliveryLimit">0</attribute>
 		<depends optional-attribute-name="DestinationManager">
 			jboss.mq:service=DestinationManager
 		</depends>
-		<attribute name="RedeliveryLimit">0</attribute>
 	</mbean>
 
 
@@ -33,28 +33,28 @@
 	<!--  NON MODIFICARE -->
 	<mbean code="org.jboss.mq.server.jmx.Queue"
 		name="jboss.mq.destination:service=Queue,name=sbnBatch_Input">
+		<attribute name="RedeliveryLimit">0</attribute>
 		<depends optional-attribute-name="DestinationManager">
 			jboss.mq:service=DestinationManager
 		</depends>
-		<attribute name="RedeliveryLimit">0</attribute>
 	</mbean>
 
 	<!--  1a coda di output per elaborazioni differite -->
 	<mbean code="org.jboss.mq.server.jmx.Queue"
 		name="jboss.mq.destination:service=Queue,name=sbnBatch_Output1">
+		<attribute name="RedeliveryLimit">0</attribute>
 		<depends optional-attribute-name="DestinationManager">
 			jboss.mq:service=DestinationManager
 		</depends>
-		<attribute name="RedeliveryLimit">0</attribute>
 	</mbean>
 
 	<!--  2a coda di output per elaborazioni differite -->
 	<mbean code="org.jboss.mq.server.jmx.Queue"
 		name="jboss.mq.destination:service=Queue,name=sbnBatch_Output2">
+		<attribute name="RedeliveryLimit">0</attribute>
 		<depends optional-attribute-name="DestinationManager">
 			jboss.mq:service=DestinationManager
 		</depends>
-		<attribute name="RedeliveryLimit">0</attribute>
 	</mbean>
 
 </server>

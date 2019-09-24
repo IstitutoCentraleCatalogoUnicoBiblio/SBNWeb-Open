@@ -526,7 +526,7 @@ public class TitoloValidaLegami extends Titolo {
             tipo_autore_2++;
         }
         if (cd_natura.equals("S") && SbnRespons.valueOf("1").getType() == leg.getTipoRespons().getType()) {
-            if (!aut.getTP_NOME_AUT().equals("E") && !aut.getTP_NOME_AUT().equals("R") && !aut.getTP_NOME_AUT().equals("G"))
+            if (!ValidazioneDati.in(aut.getTP_NOME_AUT(), "E", "R", "G"))
                 throw new EccezioneSbnDiagnostico(3292, "L'autore deve essere di tipo ente");
         }
         timeHash.putTimestamp("Tb_autore", aut.getVID(), new SbnDatavar( aut.getTS_VAR()));

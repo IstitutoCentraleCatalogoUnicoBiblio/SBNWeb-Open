@@ -47,7 +47,6 @@
    -->
   <mbean code="org.jboss.mq.pm.jdbc2.PersistenceManager"
 	 name="jboss.mq:service=PersistenceManager">
-    <depends optional-attribute-name="ConnectionManager">jboss.jca:service=DataSourceBinding,name=jdbc/sbnHibernatePostgresqlDS</depends>
     <attribute name="SqlProperties">
       BLOB_TYPE=BYTES_BLOB
       INSERT_TX = INSERT INTO JMS_TRANSACTIONS (TXID) values(?)
@@ -77,6 +76,7 @@
     <!--attribute name="RecoveryTimeout">0</attribute-->
     <!-- The number of blobs to load at once during message recovery -->
     <!--<attribute name="RecoverMessagesChunk">0</attribute>-->
+    <depends optional-attribute-name="ConnectionManager">jboss.jca:service=DataSourceBinding,name=jdbc/sbnHibernatePostgresqlDS</depends>
   </mbean>
 
 </server>

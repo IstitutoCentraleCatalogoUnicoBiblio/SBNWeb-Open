@@ -20,8 +20,6 @@
   -->
   <mbean code="org.jboss.mq.server.jmx.Topic"
 	 name="jboss.mq.destination:service=Topic,name=testTopic">
-    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
-    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
     <attribute name="SecurityConf">
       <security>
         <role name="guest" read="true" write="true"/>
@@ -29,23 +27,23 @@
         <role name="durpublisher" read="true" write="true" create="true"/>
       </security>
     </attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
   </mbean>
 
   <mbean code="org.jboss.mq.server.jmx.Topic"
 	 name="jboss.mq.destination:service=Topic,name=securedTopic">
-    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
-    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
     <attribute name="SecurityConf">
       <security>
         <role name="publisher" read="true" write="true" create="false"/>
       </security>
     </attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
   </mbean>
 
   <mbean code="org.jboss.mq.server.jmx.Topic"
 	 name="jboss.mq.destination:service=Topic,name=testDurableTopic">
-    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
-    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
     <attribute name="SecurityConf">
        <security>
          <role name="guest" read="true" write="true"/>
@@ -53,12 +51,12 @@
          <role name="durpublisher" read="true" write="true" create="true"/>
       </security>
     </attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
   </mbean>
 
   <mbean code="org.jboss.mq.server.jmx.Queue"
 	 name="jboss.mq.destination:service=Queue,name=testQueue">
-    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
-    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
     <attribute name="MessageCounterHistoryDayLimit">-1</attribute>
     <attribute name="SecurityConf">
       <security>
@@ -67,11 +65,13 @@
         <role name="noacc" read="false" write="false" create="false"/>
       </security>
     </attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+    <depends optional-attribute-name="SecurityManager">jboss.mq:service=SecurityManager</depends>
   </mbean>
   <mbean code="org.jboss.mq.server.jmx.Queue"
 	 name="jboss.mq.destination:service=Queue,name=A">
-    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
 	<attribute name="RedeliveryLimit">0</attribute>
+	<depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
   </mbean>
   <mbean code="org.jboss.mq.server.jmx.Queue"
 	 name="jboss.mq.destination:service=Queue,name=B">
