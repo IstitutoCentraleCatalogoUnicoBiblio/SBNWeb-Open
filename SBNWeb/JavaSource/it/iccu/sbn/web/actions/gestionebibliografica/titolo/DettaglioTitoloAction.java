@@ -3129,6 +3129,20 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 				dettaglioTitoloForm.getDettTitComVO().getDetTitoloPFissaVO().setNatura("N");
 			}
 		}
+		
+		// Inizio Modifica almaviva2 del 20.09.2019 BUG Mantis 7119
+		// quando si proviene da creazione nuovo documento a seguito di un crea legame effettuato su un titolo
+		// di natura A gli oggetti che è possibile creare sono solo D e P e A
+		if (dettaglioTitoloForm.getTipoProspettazione().equals("INS") && 
+				dettaglioTitoloForm.getAreaDatiLegameTitoloVO() != null) {
+			if (dettaglioTitoloForm.getAreaDatiLegameTitoloVO().getNaturaBidPartenza() != null && 
+					dettaglioTitoloForm.getAreaDatiLegameTitoloVO().getNaturaBidPartenza().equals("A")) {
+				tipoFiltro="Legami_su_A";
+			}
+		}
+		// Fine Modifica almaviva2 del 20.09.2019 BUG Mantis 7119	
+		
+		
 		// almaviva2 - agosto 2016 - gestione dei legami fra natura A e sua forma variante natura V con tipo legame 431 (A08V)
 		if (dettaglioTitoloForm.getLegameTitUniRinvio() != null) {
 			if (dettaglioTitoloForm.getLegameTitUniRinvio().equals("SI")) {
@@ -3173,8 +3187,9 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 //				}
 //			}
 		}
-		// Fine Modificata gestione del cambio natura che viene fatta non in variazione ma
-
+		// Fine Modificata gestione del cambio natura che viene fatta non in variazione ma	
+		
+		
 		dettaglioTitoloForm.setListaNatura(carCombo.loadComboCodiciDescNatura(factory
 				.getCodici().getCodiceNaturaBibliografica(), tipoFiltro, naturaOrigine));
 	}

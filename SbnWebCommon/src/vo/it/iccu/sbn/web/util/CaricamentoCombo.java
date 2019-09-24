@@ -238,6 +238,15 @@ public class CaricamentoCombo {
 						|| codDesc.getCodice().equals("C")) {
 					lista.add(codDesc);
 				}
+			} else if (tipoFiltro.equals("Legami_su_A")) {
+				// Inizio Modifica almaviva2 del 20.09.2019 BUG Mantis 7119
+				// quando si proviene da creazione nuodo documento a seguito di un crea legame effettuato su un titolo
+				// di natura A gli oggetti che è possibile creare sono solo D e P e A
+				if (codDesc.getCodice().equals("D")
+						|| codDesc.getCodice().equals("P")
+						|| codDesc.getCodice().equals("A")) {
+					lista.add(codDesc);
+				}
 			}
 		}
 		return lista;
