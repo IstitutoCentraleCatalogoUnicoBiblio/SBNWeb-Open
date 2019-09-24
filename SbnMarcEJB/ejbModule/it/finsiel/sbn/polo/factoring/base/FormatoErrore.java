@@ -154,15 +154,15 @@ public class FormatoErrore {
 		return buildMessaggioErrore(errore, user, null);
 	}
 
-	public static SBNMarc buildMessaggioErrore(int errore, SbnUserType user, String traceId) {
+	public static SBNMarc buildMessaggioErrore(int errore, SbnUserType user, String incidentId) {
 		SBNMarc sbnmarc = new SBNMarc();
 		SbnMessageType message = new SbnMessageType();
 		SbnResponseType response = new SbnResponseType();
 		SbnResultType result = new SbnResultType();
 		String messaggio = Decodificatore.getErrore(errore).getDescrizione();
 		//almaviva5_20131115
-		if (ValidazioneDati.isFilled(traceId))
-			messaggio = String.format("%s [errorId: %s]", messaggio, traceId);
+		if (ValidazioneDati.isFilled(incidentId))
+			messaggio = String.format("%s [incidentId: %s]", messaggio, incidentId);
 
 		result.setTestoEsito(messaggio);
 		SbnResponseTypeChoice responseChoice = new SbnResponseTypeChoice();

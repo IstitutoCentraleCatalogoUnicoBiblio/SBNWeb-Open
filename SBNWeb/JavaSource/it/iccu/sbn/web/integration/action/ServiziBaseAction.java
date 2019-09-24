@@ -730,10 +730,10 @@ public abstract class ServiziBaseAction extends SinteticaLookupDispatchAction {
 			LinkableTagUtils.addError(request, (SbnBaseException)t);
 		else {
 			//almaviva5_20111118
-			String errorId = RandomIdGenerator.getId();
-			log.error("servizi erroreGenerico [errorId: " + errorId + ']');
+			String incidentId = RandomIdGenerator.getId();
+			log.error("servizi erroreGenerico [incidentId: " + incidentId + ']');
 			LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.generico"));
-			LinkableTagUtils.addError(request, new ActionMessage("ERROR_ID_TEMPLATE", errorId ));
+			LinkableTagUtils.addError(request, new ActionMessage("ERROR_ID_TEMPLATE", incidentId ));
 		}
 	}
 

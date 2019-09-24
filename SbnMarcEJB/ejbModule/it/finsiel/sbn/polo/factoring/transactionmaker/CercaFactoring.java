@@ -318,7 +318,7 @@ public abstract class CercaFactoring extends Factoring {
             object_response = FormatoErrore.buildMessaggioErrore(ecc, user_object);
             //Se il processo è stato schedulato non ho bisogno di generare un'eccezione.
             //idem anche se non ci sono risultati
-            if (ecc.getErrorID() != 3251 && ecc.getErrorID()!=3001)
+            if (ecc.getErrorID() != 3251 && ecc.getErrorID() != 3001)
                 throw ecc;
         }
     }

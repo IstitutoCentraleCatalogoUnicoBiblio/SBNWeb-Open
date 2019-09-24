@@ -235,7 +235,7 @@ public class LinkableTagUtils {
 			addError(request, new ActionMessage(sbe.getErrorCode().getErrorMessage(), labels));
 
 			if (sbe.getErrorCode().isIncludeId())
-				addError(request, new ActionMessage("ERROR_ID_TEMPLATE", new String[] {String.valueOf(sbe.getErrorId())} ));
+				addError(request, new ActionMessage("ERROR_ID_TEMPLATE", new String[] {String.valueOf(sbe.getIncidentId())} ));
 
 			Navigation.getInstance(request).setExceptionLog(e);
 		}

@@ -16,7 +16,6 @@
  ******************************************************************************/
 package it.iccu.sbn.web.integration;
 
-import it.iccu.sbn.util.IdGenerator;
 import it.iccu.sbn.web.exception.RandomIdGenerator;
 import it.iccu.sbn.web.exception.SbnBaseException;
 import it.iccu.sbn.web.vo.UserVO;
@@ -64,15 +63,15 @@ public class SbnExceptionHandler extends ExceptionHandler {
 		ex.printStackTrace(writer);
 
 		//almaviva5_20111121
-		String errorId;
+		String incidentId;
 		LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.generico"));
 		if ( (ex instanceof SbnBaseException))
-			errorId = ((SbnBaseException)ex).getErrorId();
+			incidentId = ((SbnBaseException)ex).getIncidentId();
 		else
-			errorId = RandomIdGenerator.getId();
+			incidentId = RandomIdGenerator.getId();
 
-		log.error("erroreGenerico [errorId: " + errorId + ']');
-		LinkableTagUtils.addError(request, new ActionMessage("ERROR_ID_TEMPLATE", errorId ));
+		log.error("erroreGenerico [incidentId: " + incidentId + ']');
+		LinkableTagUtils.addError(request, new ActionMessage("ERROR_ID_TEMPLATE", incidentId ));
 
 		// la form richiesta non è più presente sulla navigazione, sessione corrotta
 		//LinkableTagUtils.addError(request, new ActionMessage("errors.global", output.toString() ));

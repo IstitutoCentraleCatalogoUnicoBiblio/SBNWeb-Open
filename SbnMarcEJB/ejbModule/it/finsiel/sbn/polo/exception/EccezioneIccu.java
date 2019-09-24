@@ -18,6 +18,7 @@ package it.finsiel.sbn.polo.exception;
 
 import it.finsiel.sbn.polo.exception.util.Errore;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
+import it.finsiel.sbn.util.RandomIdGenerator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +51,8 @@ public abstract class EccezioneIccu extends TransactionRolledbackException {
 	private static final long serialVersionUID = -2346113200093551026L;
 
 	private static final Pattern LABEL_GROUP_REGEX = Pattern.compile("(\\{\\d+\\})");
+
+	private final String incidentId = RandomIdGenerator.getId();
 
 	static Logger log = Logger.getLogger("it.finsiel.sbn.polo.exception.EccezioneIccu");
 
@@ -231,6 +234,10 @@ public abstract class EccezioneIccu extends TransactionRolledbackException {
 
 	public String[] getLabels() {
 		return labels;
+	}
+
+	public String getIncidentId() {
+		return incidentId;
 	}
 
 }

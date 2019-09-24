@@ -110,7 +110,7 @@ public class SbnMarcLocalGatewayBean implements SbnMarcLocalGateway {
 				ctx.setRollbackOnly();
 			// Leggo comunque la response
 			log.info("Messaggio informativo: " + main_factoring.getClass() + "; ecc: " + e + "; " + e.getMessaggio());
-			log.error("stacktrace: ", e);
+			log.error(String.format("incidentId: %s; stacktrace: ", e.getIncidentId() ), e);
 			if (main_factoring != null && main_factoring.getSBNMarcResult() != null)
 				result = main_factoring.getSBNMarcResult();
 			else
@@ -129,17 +129,17 @@ public class SbnMarcLocalGatewayBean implements SbnMarcLocalGateway {
 
 		} catch (ValidationException e) {
 			ctx.setRollbackOnly();
-			String errorId = RandomIdGenerator.getId();
-			log.error(String.format("Errore validation [errorId: %s]: ", errorId), e);
-			result = FormatoErrore.buildMessaggioErrore(101, user, errorId);
+			String incidentId = RandomIdGenerator.getId();
+			log.error(String.format("Errore validation [incidentId: %s]: ", incidentId), e);
+			result = FormatoErrore.buildMessaggioErrore(101, user, incidentId);
 
 		} catch (Exception e) {
 			ctx.setRollbackOnly();
 			log.info("Eccezione durante azione di Factoring: " +  main_factoring.getClass());
-			String errorId = RandomIdGenerator.getId();
-			log.error(String.format("Errore transaction [errorId: %s]: ", errorId), e);
+			String incidentId = RandomIdGenerator.getId();
+			log.error(String.format("Errore transaction [incidentId: %s]: ", incidentId), e);
 			// Errore interno durante l'elaborazione del Factoring.
-			result = FormatoErrore.buildMessaggioErrore(56, user, errorId );
+			result = FormatoErrore.buildMessaggioErrore(56, user, incidentId);
 		}
 
 		return result;

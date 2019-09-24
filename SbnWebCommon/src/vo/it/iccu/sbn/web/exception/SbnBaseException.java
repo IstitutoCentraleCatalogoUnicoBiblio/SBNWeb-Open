@@ -28,7 +28,7 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 
 	private static final long serialVersionUID = 6534598661536984760L;
 
-	private final String errorId = RandomIdGenerator.getId();
+	private final String incidentId = RandomIdGenerator.getId();
 	private SbnErrorTypes errorCode;
 
 	protected String[] labels;
@@ -98,7 +98,7 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 			buf.append(getClass().getName());
 			buf.append(String.format("[%04d/%s]", sbe.getErrorCode().getIntCode(), sbe.getErrorCode().name()));
 			if (++idx == 1)
-				buf.append(" (errorId: ").append(errorId).append(" )");
+				buf.append(" (incidentId: ").append(incidentId).append(" )");
 
 			String message = sbe.getLocalizedMessage();
 			if (message != null)
@@ -116,8 +116,8 @@ public abstract class SbnBaseException extends TransactionRolledbackException {
 		return labels;
 	}
 
-	public String getErrorId() {
-		return errorId;
+	public String getIncidentId() {
+		return incidentId;
 	}
 
 	public List<SbnBaseException> getExceptions() {
