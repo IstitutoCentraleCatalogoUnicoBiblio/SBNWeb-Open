@@ -157,6 +157,7 @@ import static it.iccu.sbn.ejb.utils.ValidazioneDati.coalesce;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.in;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.length;
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.size;
 
 /**
  * <p>
@@ -326,7 +327,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		NumStdType[] numISBN = null;
 		C012[] c012 = null;
 		try {
-		if (areaDatiPass.getListaTracciatoRecordArray().size() > 0) {
+		if (isFilled(areaDatiPass.getListaTracciatoRecordArray())) {
 			tracciatoRecord = areaDatiPass.getListaTracciatoRecordArray().get(0);
 
 			idNew = selectImportIdLink(areaDatiPass.getNrRichiesta(), tracciatoRecord.getIdInput());
@@ -354,7 +355,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		}
 
 
-		if (areaDatiPass.getListaTracciatoRecordArray() != null) {
+		if (isFilled(areaDatiPass.getListaTracciatoRecordArray())) {
 			int size = areaDatiPass.getListaTracciatoRecordArray().size();
 			for (int j = 0; j < size; j++) {
 
@@ -395,12 +396,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 
 				if (tagNumeric == 200 && tracciatoRecord.getIndicatore1() == '0') {
-					naturaW=true;
+					naturaW = true;
 					testoLog = setTestoLog("ATTENZIONE rilevata natura W di documento Id Unimarc: " + idConvertito
-							+ ".Trattamento da effettuare contestualmente a inserimento del legame nella fase di Creazione Reticolo");
+							+ ". Trattamento rimandato alla seconda fase dell'elaborazione delle etichette 2xx");
 						areaDatiPass.addListaSegnalazioni(testoLog);
-//						areaDatiPass.setNatureW(naturaW);
-//						areaDatiPass.setCreaTypeW(creaType);
 						return areaDatiPass;
 				}
 
@@ -414,7 +413,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				case 10:
 					// ISBN (es:  $a04-122-0810-5$bScience Paperback edition   ):
 					// ISBN (es:  $a04-122-0810-5$bScience Paperback edition   ):
-					if (datiDocType.getNumSTDCount()< 4) {
+					if (datiDocType.getNumSTDCount() < 4) {
 						numISBN = ricostruisci010(tracciatoRecord.getDati());
 						if (numISBN != null && numISBN.length > 0 && numISBN[0] != null) {
 							datiDocType.addNumSTD(numISBN[0]);
@@ -491,10 +490,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 						try {
 							paesePubb = CodiciProvider.SBNToUnimarc(CodiciType.CODICE_PAESE, paesePubb);
 							} catch (Exception e) {
-								paesePubb="UN";
+								paesePubb = "UN";
 							}
-							if (ValidazioneDati.strIsNull(paesePubb)) {
-								paesePubb="UN";
+							if (!isFilled(paesePubb)) {
+								paesePubb = "UN";
 							}
 							c102.setA_102(paesePubb);
 //						c102.setA_102(tagliaEtichetta(tracciatoRecord.getDati(), 'a').toUpperCase());
@@ -1151,7 +1150,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				if (c215 != null)
 					modernoType.setT215(c215);
 				if (c3xx != null) {
-					for (int i=0; i<c3xx.length; i++) {
+					for (int i = 0; i < c3xx.length; i++) {
 						modernoType.addT3XX(c3xx[i]);
 					}
 				}
@@ -1216,7 +1215,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				if (c215 != null)
 					anticoType.setT215(c215);
 				if (c3xx != null) {
-					for (int i=0; i<c3xx.length; i++) {
+					for (int i = 0; i < c3xx.length; i++) {
 						anticoType.addT3XX(c3xx[i]);
 					}
 				}
@@ -1288,7 +1287,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				if (c215 != null)
 					musicaType.setT215(c215);
 				if (c3xx != null) {
-					for (int i=0; i<c3xx.length; i++) {
+					for (int i = 0; i < c3xx.length; i++) {
 						musicaType.addT3XX(c3xx[i]);
 					}
 				}
@@ -1304,7 +1303,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					musicaType.setT922(c922);
 
 //				Gennaio 2015 almaviva2 - Inserita gestione dei Personaggi/interpreti
-				if (listaPersonaggi.size() > 0) {
+				if (isFilled(listaPersonaggi)) {
 					c927 = ricostruisciC927(listaPersonaggi, areaDatiPass.getNrRichiesta());
 					musicaType.setT927(c927);
 				}
@@ -1367,7 +1366,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				if (c215 != null)
 					cartograficoType.setT215(c215);
 				if (c3xx != null) {
-					for (int i=0; i<c3xx.length; i++) {
+					for (int i = 0; i < c3xx.length; i++) {
 						cartograficoType.addT3XX(c3xx[i]);
 					}
 				}
@@ -1439,7 +1438,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				if (c215 != null)
 					graficoType.setT215(c215);
 				if (c3xx != null) {
-					for (int i=0; i<c3xx.length; i++) {
+					for (int i = 0; i < c3xx.length; i++) {
 						graficoType.addT3XX(c3xx[i]);
 					}
 				}
@@ -1510,7 +1509,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				if (c215 != null)
 					audiovisivoType.setT215(c215);
 				if (c3xx != null) {
-					for (int i=0; i<c3xx.length; i++) {
+					for (int i = 0; i < c3xx.length; i++) {
 						audiovisivoType.addT3XX(c3xx[i]);
 					}
 				}
@@ -1528,7 +1527,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					audiovisivoType.setT922(c922);
 
 //				Gennaio 2015 almaviva2 - Inserita gestione dei Personaggi/interpreti
-				if (listaPersonaggi.size() > 0) {
+				if (isFilled(listaPersonaggi)) {
 					c927 = ricostruisciC927(listaPersonaggi, areaDatiPass.getNrRichiesta());
 					audiovisivoType.setT927(c927);
 				}
@@ -1638,7 +1637,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 			if (naturaW) {
 				testoLog = setTestoLog("ATTENZIONE rilevata natura W di documento Id Unimarc: " + idConvertito
-						+ ".Trattamento da effettuare contestualmente a inserimento del legame nella fase di Creazione Reticolo");
+						+ ". Trattamento rimandato alla seconda fase dell'elaborazione delle etichette 2xx");
 					areaDatiPass.addListaSegnalazioni(testoLog);
 					areaDatiPass.setNatureW(naturaW);
 					areaDatiPass.setCreaTypeW(creaType);
@@ -1652,12 +1651,14 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			try {
 				this.polo.setMessage(sbnmessage, this.user);
 				sbnRisposta = this.polo.eseguiRichiestaServer();
+
 			} catch (SbnMarcException ve) {
 				areaDatiPass.setCodErr("9999");
 				testoLog = setTestoLog("ERRORE validazione - inserimento Documento Id Unimarc: " + idConvertito + " nuovo Id Sbn: " + bidDaAssegnare
 					+ " " + "(" + ve.getMessage() +")");
 				areaDatiPass.addListaSegnalazioni(testoLog);
 				return areaDatiPass;
+
 			} catch (Exception e) {
 				areaDatiPass.setCodErr("9999");
 				testoLog = setTestoLog("ERRORE inserimento Documento Id Unimarc: " + idConvertito + " nuovo Id Sbn: " + bidDaAssegnare
@@ -1665,6 +1666,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				areaDatiPass.addListaSegnalazioni(testoLog);
 				return areaDatiPass;
 			}
+
 			if (sbnRisposta == null) {
 				areaDatiPass.setCodErr("9999");
 				testoLog = setTestoLog("ERRORE inserimento Documento Id Unimarc: " + idConvertito + " nuovo Id Sbn: " + bidDaAssegnare
@@ -1854,7 +1856,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 		String stringaISBD="";
 
-		if (areaDatiPass.getListaTracciatoRecordArray().size() > 0) {
+		if (isFilled(areaDatiPass.getListaTracciatoRecordArray())) {
 			tracciatoRecord = areaDatiPass.getListaTracciatoRecordArray().get(0);
 
 			idNew = selectImportIdLink(areaDatiPass.getNrRichiesta(), tracciatoRecord.getIdInput());
@@ -2677,7 +2679,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					musicaType.setT922(c922);
 
 //	Gennaio 2015 almaviva2 - Inserita gestione dei Personaggi/interpreti
-				if (listaPersonaggi.size() > 0) {
+				if (isFilled(listaPersonaggi)) {
 					c927 = ricostruisciC927(listaPersonaggi, areaDatiPass.getNrRichiesta());
 					musicaType.setT927(c927);
 				}
@@ -2896,7 +2898,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					audiovisivoType.setT922(c922);
 
 //				Gennaio 2015 almaviva2 - Inserita gestione dei Personaggi/interpreti
-				if (listaPersonaggi.size() > 0) {
+				if (isFilled(listaPersonaggi)) {
 					c927 = ricostruisciC927(listaPersonaggi, areaDatiPass.getNrRichiesta());
 					audiovisivoType.setT927(c927);
 				}
@@ -3127,7 +3129,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					continue;
 				}
 
-				if (!(tracciatoRecord.getDati()!= null && tracciatoRecord.getDati().trim().length() > 0)) {
+				if (!isFilled(tracciatoRecord.getDati())) {
 					areaDatiPass.setCodErr("9999");
 					testoLog = setTestoLog(idConvertito + "-" + "ATTENZIONE il valore del campo dati è vuoto o null");
 					areaDatiPass.addListaSegnalazioni(testoLog);
@@ -3150,7 +3152,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					//almaviva5_20150604 controllo presenza etichetta 001 per occorrenze importate da basi dati con
 					//identificativi preceduti da prefisso ISADN.
 					if (areaAppoggioIdentif.length() >= 3) {
-						if (areaAppoggioIdentif.substring(0,3).equals("001")) {
+						if (areaAppoggioIdentif.substring(0, 3).equals("001")) {
+							log.debug("sottocampo $1: " + areaAppoggioIdentif);
 							areaAppoggioIdentif = areaAppoggioIdentif.substring(3, areaAppoggioIdentif.length()).trim();
 
 
@@ -5322,7 +5325,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 								musicaType.setT922(c922);
 
 //							Gennaio 2015 almaviva2 - Inserita gestione dei Personaggi/interpreti
-							if (listaPersonaggi.size() > 0) {
+							if (isFilled(listaPersonaggi)) {
 								c927 = ricostruisciC927(listaPersonaggi, areaDatiPass.getNrRichiesta());
 								musicaType.setT927(c927);
 							}
@@ -5528,7 +5531,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 								audiovisivoType.setT922(c922);
 
 //							Gennaio 2015 almaviva2 - Inserita gestione dei Personaggi/interpreti
-							if (listaPersonaggi.size() > 0) {
+							if (isFilled(listaPersonaggi)) {
 								c927 = ricostruisciC927(listaPersonaggi, areaDatiPass.getNrRichiesta());
 								audiovisivoType.setT927(c927);
 							}
@@ -5850,7 +5853,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			sql.append("select id_inserito, id_input from import_id_link ");
 			sql.append("where id_input=calcola_import_id_link('").append(tag).append("', '").append(DaoManager.escapeSql(dati)).append("')");
 			List list = getRecords(sql);
-			if (list.size() == 0)
+			if (!isFilled(list))
 				return "";
 
 			for (int i = 0; i < list.size(); i++) {
@@ -8415,12 +8418,13 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		String areaAppoggioC = "";
 		String areaAppoggio3 = "";
 		C927[] c927 = null;
-		c927 = new C927[listaPers.size()];
+		int size = size(listaPers);
+		c927 = new C927[size];
 
 		String decodStrumento= "";
 		String idNew= "";
 
-		for (int i = 0; i < listaPers.size(); i++) {
+		for (int i = 0; i < size; i++) {
 			if (listaPers.get(i) != null) {
 				personaggioInf = listaPers.get(i);
 				if (ValidazioneDati.notEmpty(personaggioInf)) {
@@ -9051,7 +9055,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 
 			List list = getRecords(sql);
-			if (list.size()==0) {
+			if (!isFilled(list)) {
 				return "";
 
 			}
