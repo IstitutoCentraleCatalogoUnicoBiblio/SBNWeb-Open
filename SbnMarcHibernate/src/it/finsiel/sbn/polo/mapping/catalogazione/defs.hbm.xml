@@ -3720,7 +3720,13 @@
 		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
 	</filter-def>
 
-	<filter-def name="VL_TITOLO_NUM_STD_countPerLastra">
+<!--     // Inizio manutenzione correttiva 27.09.2019 Bug MANTIS 7124 almaviva2 -->
+<!--     // Vedi anche Protocollo Indice:MANTIS 2108 poich� non fa la count non imposta "numRecord"  -->
+<!--     // Il campo ricercaSenzaCount non deve essere impostato altrimenti vengono portati in sintetica solo le prime 10 (maxrighe)  -->
+<!--     // richieste perdendo la paginazione sulle successive occorrenze.  -->
+
+	<filter-def name="VL_TITOLO_NUM_STD_countPerNumero">
+		<filter-param name="XXXnumero_std" type="java.lang.String" />
 		<filter-param name="XXXtp_numero_std" type="java.lang.String" />
 	</filter-def>
 

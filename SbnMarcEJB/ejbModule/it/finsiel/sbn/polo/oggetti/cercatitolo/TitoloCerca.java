@@ -32,6 +32,7 @@ import it.finsiel.sbn.polo.dao.entity.viste.Vl_titolo_sogResult;
 import it.finsiel.sbn.polo.dao.entity.viste.Vl_titolo_theResult;
 import it.finsiel.sbn.polo.dao.entity.viste.Vl_titolo_tit_bResult;
 import it.finsiel.sbn.polo.dao.entity.viste.Vl_titolo_tit_cResult;
+import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.oggetti.Titolo;
 import it.finsiel.sbn.polo.orm.KeyParameter;
@@ -339,8 +340,8 @@ public class TitoloCerca extends Titolo {
         tn.leggiAllParametro().putAll(this.leggiAllParametro());
         Vl_titolo_num_stdResult tavola = new Vl_titolo_num_stdResult(tn);
 
-
         tavola.executeCustom("selectPerNumero");
+        
         //Deve essere realizzata: campi fissi sono tipo e numero, gli altri sono opzionali.
         return tavola;
     }
@@ -769,7 +770,21 @@ public class TitoloCerca extends Titolo {
         return tavola;
     }
 
+    // Inizio manutenzione correttiva 27.09.2019 Bug MANTIS 7124 almaviva2
+    // Vedi anche Protocollo Indice:MANTIS 2108 poich� non fa la count non imposta "numRecord"
+    // Il campo ricercaSenzaCount non deve essere impostato altrimenti vengono portati in sintetica solo le prime 10 (maxrighe)
+    // richieste perdendo la paginazione sulle successive occorrenze.
+    public int contaTitoloPerNumStd(String num, String tipoStd, String paeseStd, String nota)
+    		throws IllegalArgumentException, InvocationTargetException, Exception   {
+		Vl_titolo_num_std tn = new Vl_titolo_num_std();
+		tn.setTP_NUMERO_STD(Decodificatore.getCd_tabella("Tb_numero_std", "tp_numero_std", tipoStd));
 
+		tn.setNUMERO_STD(num);
+		tn.setCD_PAESE_STD(paeseStd);
+		tn.setNOTA_NUMERO_STD(nota);
+		Vl_titolo_num_stdResult tavola = new Vl_titolo_num_stdResult(tn);
+        return conta(tavola, "countPerNumero");
+	}
 
 
 }

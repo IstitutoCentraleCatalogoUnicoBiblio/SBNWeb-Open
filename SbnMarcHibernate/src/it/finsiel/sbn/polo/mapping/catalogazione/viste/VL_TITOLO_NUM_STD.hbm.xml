@@ -72,5 +72,15 @@ License Type: Purchased
 
         <filter name="VL_TITOLO_NUM_STD_countPerLastra"
         		condition="tp_numero_std = :XXXtp_numero_std"/>
+        		
+<!--     // Inizio manutenzione correttiva 27.09.2019 Bug MANTIS 7124 almaviva2 -->
+<!--     // Vedi anche Protocollo Indice:MANTIS 2108 poich� non fa la count non imposta "numRecord"  -->
+<!--     // Il campo ricercaSenzaCount non deve essere impostato altrimenti vengono portati in sintetica solo le prime 10 (maxrighe)  -->
+<!--     // richieste perdendo la paginazione sulle successive occorrenze.  --> 
+	
+     	<filter name="VL_TITOLO_NUM_STD_countPerNumero"
+     		condition="numero_std = :XXXnumero_std AND tp_numero_std = :XXXtp_numero_std"/>
+     		
+        		
 	</class>
 </hibernate-mapping>

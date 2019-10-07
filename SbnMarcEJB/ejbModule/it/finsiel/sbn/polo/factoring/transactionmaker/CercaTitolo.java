@@ -677,7 +677,15 @@ public class CercaTitolo extends CercaFactoring {
 
         TitoloCerca titolo = new TitoloCerca();
         // titolo.valorizzaFiltri(cercaDatiTit); Non li valorizzo: non c'entrano
-        ricercaSenzaCount = true;
+        
+        // Inizio manutenzione correttiva 27.09.2019 Bug MANTIS 7124 almaviva2
+        // Vedi anche Protocollo Indice:MANTIS 2108 poich� non fa la count non imposta "numRecord"
+        // Il campo ricercaSenzaCount non deve essere impostato altrimenti vengono portati in sintetica solo le prime 10 (maxrighe)
+        // richieste perdendo la paginazione sulle successive occorrenze.
+     		//ricercaSenzaCount = true;
+        controllaNumeroRecord(titolo.contaTitoloPerNumStd(num, tipoStd, paeseStd, nota));
+     // Fine manutenzione correttiva 27.09.2019 Bug MANTIS 7124 
+        
         //almaviva5_20091012
         titolo.setFILTRO_LOC_BIB(locBib);
         tavola_response = titolo.cercaTitoloPerNumStd(num, tipoStd, paeseStd, nota);
@@ -1544,5 +1552,6 @@ public class CercaTitolo extends CercaFactoring {
                         .getTipoOrd(), idLista, rowCounter, maxRighe,
                 numeroRecord, schemaVersion, null, null, esporta);
     }
+ 
 
 }

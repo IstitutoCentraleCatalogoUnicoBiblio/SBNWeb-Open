@@ -74,7 +74,7 @@ public class Vl_titolo_num_stdResult extends it.finsiel.sbn.polo.dao.common.vist
 			throw new InfrastructureException();
 		}
 	}
-
+	
 /*
 <filter name="VL_TITOLO_NUM_STD_selectPerListaNumeri"
 		condition="numero_std in ( :XXXnumero_std  ) AND
@@ -213,6 +213,48 @@ public class Vl_titolo_num_stdResult extends it.finsiel.sbn.polo.dao.common.vist
 		}
 	}
 
+	
+    // Inizio manutenzione correttiva 27.09.2019 Bug MANTIS 7124 
+    // Vedi anche Protocollo Indice:MANTIS 2108 poich� non fa la count non imposta "numRecord"
+    // Il campo ricercaSenzaCount non deve essere impostato altrimenti vengono portati in sintetica solo le prime 10 (maxrighe)
+    // richieste perdendo la paginazione sulle successive occorrenze.
+	public Integer countPerNumero(HashMap opzioni)
+			throws InfrastructureException {
+		try {
+			HashMap myOpzioni = (HashMap) opzioni.clone();
+			Session session = this.getSession();
+			this.beginTransaction();
+			this.basicCriteria = session.createCriteria(getTarget());
+
+			Filter filter = session.enableFilter("VL_TITOLO_NUM_STD_countPerNumero");
+			
+			filter.setParameter(Vl_titolo_num_stdCommonDao.XXXnumero_std, opzioni.get(Vl_titolo_num_stdCommonDao.XXXnumero_std));
+			filter.setParameter(Vl_titolo_num_stdCommonDao.XXXtp_numero_std, opzioni.get(Vl_titolo_num_stdCommonDao.XXXtp_numero_std));
+
+			myOpzioni.remove(Vl_titolo_num_stdCommonDao.XXXnumero_std);
+			myOpzioni.remove(Vl_titolo_num_stdCommonDao.XXXtp_numero_std);
+			
+			
+			this.createCriteria(myOpzioni);
+			Integer result = (Integer) this.basicCriteria.setProjection(
+					Projections.projectionList().add(Projections.rowCount()))
+					.uniqueResult();
+
+			this.commitTransaction();
+			this.closeSession();
+			return result;
+		} catch (InfrastructureException ife) {
+			throw ife;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new InfrastructureException();
+		}
+	}
+
+  // Fine manutenzione correttiva 27.09.2019 Bug MANTIS 7124 
+	
+	
+	
 	@Override
 	public Class<? extends OggettoServerSbnMarc> getTarget() {
 		return Vl_titolo_num_std.class;
