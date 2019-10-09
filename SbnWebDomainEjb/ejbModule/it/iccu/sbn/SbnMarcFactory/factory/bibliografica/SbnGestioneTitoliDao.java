@@ -10268,6 +10268,13 @@ public class SbnGestioneTitoliDao {
 													&& legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut().getTipoRespons().toString().equals(areaDatiPass.getTipoResponsNew())) {
 												legamiTypeDaCopiare = legamiType;
 												arrivoLegameDaCopiare = legamiType.getArrivoLegame(iArrLeg);
+												
+												// Almaviva2 ottobre 2019 BUG MANTIS 7040
+												// nel caso in cui non sia presente il Relator Code il campo deve essere impostato a null e non a vuoto
+												if (arrivoLegameDaCopiare.getLegameElementoAut().getRelatorCode().equals("")) {
+													arrivoLegameDaCopiare.getLegameElementoAut().setRelatorCode(null);
+												}
+												// FINE  Almaviva2 ottobre 2019 BUG MANTIS 7040
 											}
 										}
 									}
@@ -10399,15 +10406,30 @@ public class SbnGestioneTitoliDao {
 
 								for (int iArrLeg = 0; iArrLeg < arrivoLegameCount; iArrLeg++) {
 									if (legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut() != null) {
+										
 										// SIAMO ARRIVATI AI LEGAMI AUTORE DELLA MONOGRAFIA DI PARTENZA
 										// si deve controllare che sia il legame corretto da trascinare sugli Spogli
 										// almaviva2 Febbraio 2016 - Intervento interno - la copia del legame titolo-autore deve essere fatta
 										// considerando sia il vid che il relatorCode che il tiporesponsabilità
+										
+										// Intervento mantis 7040 almaviva2 - Ottobre 2019
+										// nei casi in cui si trascina un legame titolo-autore che ha il relatorCode nullo il trascinamento va in errore
+										// a fronte dei controlli quindi si deve impostare il valore in modo tale che il null sia uguale a campo-vuoto
+										if (legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut().getRelatorCode() == null) {
+											legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut().setRelatorCode("");
+										}
 										if (legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut().getIdArrivo().equals(areaDatiPass.getIdArrivo())
 												&& legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut().getRelatorCode().equals(areaDatiPass.getRelatorCodeNew())
 												&& legamiType.getArrivoLegame(iArrLeg).getLegameElementoAut().getTipoRespons().toString().equals(areaDatiPass.getTipoResponsNew())) {
 											legamiTypeDaCopiare = legamiType;
 											arrivoLegameDaCopiare = legamiType.getArrivoLegame(iArrLeg);
+											
+											// Almaviva2 ottobre 2019 BUG MANTIS 7040
+											// nel caso in cui non sia presente il Relator Code il campo deve essere impostato a null e non a vuoto
+											if (arrivoLegameDaCopiare.getLegameElementoAut().getRelatorCode().equals("")) {
+												arrivoLegameDaCopiare.getLegameElementoAut().setRelatorCode(null);
+											}
+											// FINE  Almaviva2 ottobre 2019 BUG MANTIS 7040
 										}
 									}
 								}
