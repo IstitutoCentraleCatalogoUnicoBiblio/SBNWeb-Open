@@ -1780,6 +1780,12 @@ public class SbnGestioneAllAuthorityDao {
 
 			if (sbnOutPut.getDocumentoCount() > 0) {
 				documentoType = sbnOutPut.getDocumento(0);
+				
+				// MANUTENZIONE migliorativa almaviva2 ottobre 2019
+				// al nuovo spoglio va assegnato il livello autorità del bibliotecario e non quello dello spoglio
+				// da cui e' copiato
+				documentoType.getDocumentoTypeChoice().getDatiDocumento().setLivelloAutDoc(SbnLivello.valueOf(areaDatiPass.getLivAutUtente()));
+
 
 				if (areaDatiPass.isSpoglioCondiviso()) {
 					documentoType.getDocumentoTypeChoice().getDatiDocumento().setCondiviso(DatiDocTypeCondivisoType.S);
@@ -1792,6 +1798,7 @@ public class SbnGestioneAllAuthorityDao {
 						for (int j = 0; j < documentoType.getLegamiDocumento(i).getArrivoLegameCount(); j++) {
 							if (documentoType.getLegamiDocumento(i).getArrivoLegame(j).getLegameDoc() != null) {
 								if (documentoType.getLegamiDocumento(i).getArrivoLegame(j).getLegameDoc().getTipoLegame().toString().equals("461")) {
+									
 									if (areaDatiPass.isSpoglioCondiviso()) {
 										documentoType.getLegamiDocumento(i).getArrivoLegame(j).getLegameDoc().setCondiviso(LegameDocTypeCondivisoType.S);
 									} else {
