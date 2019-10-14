@@ -106,6 +106,7 @@ public class DomainEJBFactory {
 		public T get() { try {
 			return ref != null ? ref : (ref = init());
 		} catch (Exception e) { return null; } }
+		public void invalidate() { this.ref = null; }
 	}
 
 	private static DomainEJBFactory instance;

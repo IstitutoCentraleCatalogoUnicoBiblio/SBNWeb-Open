@@ -67,7 +67,13 @@ public class ReticoloSoggetti {
 
 	public static KeySoggetto getChiaveSoggetto(String codSogg, SbnEdizioneSoggettario edizione, String testoSoggetto)
 			throws SbnMarcDiagnosticoException {
-		return gateway.get().getChiaveSoggetto(codSogg, edizione, testoSoggetto);
+		try {
+			return gateway.get().getChiaveSoggetto(codSogg, edizione, testoSoggetto);
+		} catch (NullPointerException e) {
+			gateway.invalidate();
+			log.error("", e);
+		}
+		return null;
 	}
 
 	public static boolean isSoggettoEquals(String testoSoggetto1, String testoSoggetto2) throws SbnMarcDiagnosticoException {
