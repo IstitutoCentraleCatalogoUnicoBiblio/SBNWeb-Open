@@ -3504,11 +3504,14 @@ String audiovisivi_126_permutations [] = {
 							throw new EccezioneSbnDiagnostico(2900, "Tipo numero standard ISMN non ammesso per questo tipo record");
 						  }
 					  }
-					  if (numStd[i].getTipoSTD().equals("X")) { // controlli 'RISM'
-						  if (tp_record != null	&& (!(tp_record.toString().equals("c") || tp_record.toString().equals("d")))){
-							  throw new EccezioneSbnDiagnostico(2900,	"Tipo numero standard RISM non ammesso per questo tipo record");
-						  }
-					  }
+					  // Inizio Intervento almaviva2 ottobre 2019 Bug MANTIS 7151
+					  // Vengono eliminati i controlli sulla presenza del numero RISM e tipo record "c" e "d"
+//					  if (numStd[i].getTipoSTD().equals("X")) { // controlli 'RISM'
+//						  if (tp_record != null	&& (!(tp_record.toString().equals("c") || tp_record.toString().equals("d")))){
+//							  throw new EccezioneSbnDiagnostico(2900,	"Tipo numero standard RISM non ammesso per questo tipo record");
+//						  }
+//					  }
+					  // Fine Intervento almaviva2 ottobre 2019 Bug MANTIS 7151
 
 					  if (numStd[i].getTipoSTD().equals("Y")) {  //controlli 'SARTORI'
 						  if (tp_record != null &&  tp_record.toString().equals("a")) {
@@ -3752,14 +3755,19 @@ String audiovisivi_126_permutations [] = {
 						}
 					} //controlli 'ISRC' fine
 
-					if (numStd[i].getTipoSTD().equals("X")) {  //controlli 'RISM'
-						if (tp_record != null &&  (!(tp_record.toString().equals("c") || tp_record.toString().equals("d"))))
-							throw new EccezioneSbnDiagnostico(2900, "Tipo numero standard non ammesso per questo tipo record");
-						if( (numStd[i].getNumeroSTD().length() > 0 ) && (numStd[i].getNumeroSTD().length() < 26 ) ){
-						}else{
-							throw new EccezioneSbnDiagnostico(2900, " Lunghezza Numero standard RISM errata. La lunghezza deve essere compresa tra 1 e 25 caratteri");
-						}
-					} //controlli 'RISM' fine
+					
+					// Inizio Intervento almaviva2 ottobre 2019 Bug MANTIS 7151
+					// Vengono eliminati i controlli sulla presenza del numero RISM e tipo record "c" e "d"
+//					if (numStd[i].getTipoSTD().equals("X")) {  //controlli 'RISM'
+//						if (tp_record != null &&  (!(tp_record.toString().equals("c") || tp_record.toString().equals("d"))))
+//							throw new EccezioneSbnDiagnostico(2900, "Tipo numero standard non ammesso per questo tipo record");
+//						if( (numStd[i].getNumeroSTD().length() > 0 ) && (numStd[i].getNumeroSTD().length() < 26 ) ){
+//						}else{
+//							throw new EccezioneSbnDiagnostico(2900, " Lunghezza Numero standard RISM errata. La lunghezza deve essere compresa tra 1 e 25 caratteri");
+//						}
+//					} //controlli 'RISM' fine
+					// Fine Intervento almaviva2 ottobre 2019 Bug MANTIS 7151
+					
 
 					if (numStd[i].getTipoSTD().equals("Y")) {  //controlli 'SARTORI'
 						//solo per libretti a stampa
