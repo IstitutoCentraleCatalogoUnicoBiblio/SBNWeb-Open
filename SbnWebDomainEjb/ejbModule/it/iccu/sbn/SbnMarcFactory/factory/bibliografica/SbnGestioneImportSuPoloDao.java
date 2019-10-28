@@ -16,6 +16,8 @@
  ******************************************************************************/
 package it.iccu.sbn.SbnMarcFactory.factory.bibliografica;
 
+import static it.iccu.sbn.util.sbnmarc.SBNMarcUtil.livelloSoglia;
+
 import it.iccu.sbn.SbnMarcFactory.exception.SbnMarcException;
 import it.iccu.sbn.SbnMarcFactory.factory.FactorySbn;
 import it.iccu.sbn.SbnMarcFactory.factory.semantica.SbnClassiDAO;
@@ -1898,7 +1900,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 
 				int tagNumeric = Integer.parseInt(tracciatoRecord.getTag());
-				if (!(tracciatoRecord.getDati()!= null && tracciatoRecord.getDati().trim().length() > 0)) {
+				if (!isFilled(tracciatoRecord.getDati()) ) {
 					areaDatiPass.setCodErr("9999");
 					testoLog= setTestoLog(idConvertito + "-" + "ATTENZIONE il valore del campo dati è vuoto o null");
 					areaDatiPass.addListaSegnalazioni(testoLog);
@@ -3235,7 +3237,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							datiLegameTitoloSoggettoVO.setBidTipoMateriale(Character.toString(titRadice.getTp_materiale()));
 							datiLegameTitoloSoggettoVO.setBid(idRadice);
 							datiLegameTitoloSoggettoVO.setT005(idRadiceT005);
-							datiLegameTitoloSoggettoVO.setBidLivelloAut(titRadice.getCd_livello());
+							datiLegameTitoloSoggettoVO.setBidLivelloAut(livelloSoglia(titRadice.getCd_livello()));
 							datiLegameTitoloSoggettoVO.setOperazione(TipoOperazioneLegame.CREA);
 							datiLegameTitoloSoggettoVO.getLegami().add(datiLegameTitoloSoggettoVO.new LegameTitoloSoggettoVO(idArrivoLegame, ""));
 
@@ -3260,7 +3262,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 							datiLegameTitoloClasseVO.setBidTipoMateriale(Character.toString(titRadice.getTp_materiale()));
 							datiLegameTitoloClasseVO.setBid(idRadice);
 							datiLegameTitoloClasseVO.setT005(idRadiceT005);
-							datiLegameTitoloClasseVO.setBidLivelloAut(titRadice.getCd_livello());
+							datiLegameTitoloClasseVO.setBidLivelloAut(livelloSoglia(titRadice.getCd_livello()));
 							datiLegameTitoloClasseVO.setOperazione(TipoOperazioneLegame.CREA);
 							datiLegameTitoloClasseVO.getLegami().add(datiLegameTitoloClasseVO.new LegameTitoloClasseVO("", idArrivoLegame, ""));
 
@@ -3341,7 +3343,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 						try {
 							//dati per modifica
 							DocumentoTypeChoice documentoTypeChoice = new DocumentoTypeChoice();
-							SbnLivello livello = SbnLivello.valueOf(titRadice.getCd_livello());
+							SbnLivello livello = SbnLivello.valueOf(livelloSoglia(titRadice.getCd_livello()));
 
 							String natura = Character.toString(titRadice.getCd_natura());
 							if (in(natura, "M", "S", "C", "W", "N", "R") ) {

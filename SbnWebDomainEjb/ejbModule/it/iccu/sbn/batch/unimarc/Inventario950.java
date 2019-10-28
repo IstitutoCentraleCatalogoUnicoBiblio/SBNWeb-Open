@@ -27,16 +27,18 @@ public class Inventario950 extends SerializableVO {
 	private String codInventario;
 	private String codFrui;
 	private Date dataIngresso;
+	private String proven;
 
 	public String getCodInventario() {
 		return codInventario;
 	}
 
-	public Inventario950(String codInventario, String codFrui,	Date dataIngresso) {
+	public Inventario950(String codInventario, String codFrui,	Date dataIngresso, String proven) {
 		super();
 		this.codInventario = codInventario;
 		this.codFrui = codFrui;
 		this.dataIngresso = dataIngresso;
+		this.proven = proven;
 	}
 
 	public void setCodInventario(String codInventario) {
@@ -57,6 +59,14 @@ public class Inventario950 extends SerializableVO {
 
 	public void setDataIngresso(Date dataIngresso) {
 		this.dataIngresso = dataIngresso;
+	}
+
+	public String getProven() {
+		return proven;
+	}
+
+	public void setProven(String proven) {
+		this.proven = proven;
 	}
 
 }

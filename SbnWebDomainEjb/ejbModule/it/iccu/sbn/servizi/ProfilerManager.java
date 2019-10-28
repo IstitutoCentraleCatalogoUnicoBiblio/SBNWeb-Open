@@ -199,7 +199,7 @@ public class ProfilerManager extends ServiceMBeanSupport implements ProfilerMana
 
 		reloadLoggerConf();
 
-		SbnWebProfileCache.getInstance().clear();
+		this.rimuoviProfiliSbnMarc();
 
 		//almaviva5_20150605 pulizia cache script
 		JsScriptExecutor.clear();
@@ -216,8 +216,8 @@ public class ProfilerManager extends ServiceMBeanSupport implements ProfilerMana
 	public void rimuoviProfiliSbnMarc() {
 		log.info("=== ProfilerManager.rimuoviProfiliSbnMarc()");
 		try {
-			getAmministrazionePolo().rimuoviProfiliSbnMarc();
 			SbnWebProfileCache.getInstance().clear();
+			getAmministrazionePolo().rimuoviProfiliSbnMarc();
 
 		} catch (Exception e) {
 			log.error("", e);

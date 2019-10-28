@@ -44,6 +44,7 @@ public class Marc950 {
 	private final String campoInventario = "e";
 	private final String campoCatFruizione = "f";
 	private final String campoDataIngresso = "h";
+	private final String campoProvenienza = "p";
 
 	private String id;											//unimarc 001
 	private String biblioteca;									//unimarc 950$a
@@ -71,6 +72,7 @@ public class Marc950 {
 		campi950.put("l", 4);
 		//almaviva5_20180904 note generiche (?)
 		campi950.put("m", 4);
+		campi950.put("p", 5);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -99,6 +101,7 @@ public class Marc950 {
 				System.out.println(String.format("\tdata ing.: '%s'", inv.getDataIngresso()));
 				System.out.println(String.format("\tseq.coll.: '%s'", _950.getSequenzaCollocazione(i, j)));
 				System.out.println(String.format("\ttipo.mat.: '%s'", _950.getCodMatInv(i, j)));
+				System.out.println(String.format("\tproven   : '%s'", inv.getProven()));
 			}
 
 			System.out.println();
@@ -164,13 +167,15 @@ public class Marc950 {
 					} else if (campoCollocazione.equalsIgnoreCase(currSubf)){
 						collocazione.put(counter, record);
 					} else if (campoInventario.equalsIgnoreCase(currSubf)){
-						currInv = new Inventario950(record, "B", DaoManager.now() );
+						currInv = new Inventario950(record, "B", DaoManager.now(), "" );
 						currInv.setCodInventario(record);
 						tmpInventari.add(currInv);
 					} else if (campoCatFruizione.equalsIgnoreCase(currSubf)){
 						currInv.setCodFrui(record);
 					} else if (campoDataIngresso.equalsIgnoreCase(currSubf)){
 						currInv.setDataIngresso(getDataIngresso(record));
+					} else if (campoProvenienza.equalsIgnoreCase(currSubf)) {
+						currInv.setProven(record);
 					}
 					// normalizza lunghezza arraylist
 					if (consistenzaEsemplare.size()==(counter)) consistenzaEsemplare.put(counter, consEse); //esemplare di riferimento
@@ -196,13 +201,15 @@ public class Marc950 {
 					} else if (campoCollocazione.equalsIgnoreCase(currSubf)){
 						collocazione.put(counter, record);
 					} else if (campoInventario.equalsIgnoreCase(currSubf)){
-						currInv = new Inventario950(record, "B", new Date() );
+						currInv = new Inventario950(record, "B", new Date(), "" );
 						currInv.setCodInventario(record);
 						tmpInventari.add(currInv);
 					} else if (campoCatFruizione.equalsIgnoreCase(currSubf)){
 						currInv.setCodFrui(record);
 					} else if (campoDataIngresso.equalsIgnoreCase(currSubf)){
 						currInv.setDataIngresso(getDataIngresso(record));
+					} else if (campoProvenienza.equalsIgnoreCase(currSubf)) {
+						currInv.setProven(record);
 					}
 				}
 
@@ -475,6 +482,10 @@ public class Marc950 {
 		}
 
 		return null;
+	}
+
+	public String getProvenienza(int idxColl, int idxInv) {
+		return inventario.get(idxColl).get(idxInv).getProven();
 	}
 
 //	h data ingresso

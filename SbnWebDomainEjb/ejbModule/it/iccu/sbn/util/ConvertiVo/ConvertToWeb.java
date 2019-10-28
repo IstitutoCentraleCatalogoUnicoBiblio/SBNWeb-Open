@@ -16,6 +16,8 @@
  ******************************************************************************/
 package it.iccu.sbn.util.ConvertiVo;
 
+import static it.iccu.sbn.util.sbnmarc.SBNMarcUtil.livelloSoglia;
+
 import it.iccu.sbn.ejb.exception.DataException;
 import it.iccu.sbn.ejb.utils.DateUtil;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
@@ -237,7 +239,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 
 		webVO.setId(classe.getCd_sistema() + classe.getCd_edizione() + classe.getClasse());
 		webVO.setTesto(classe.getDs_classe() );
-		webVO.setLivelloAutorita(classe.getCd_livello());
+		webVO.setLivelloAutorita(livelloSoglia(classe.getCd_livello()));
 
 		if (titoliLegati != null && titoliLegati.size() > 0) {
 
@@ -262,7 +264,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 
 		webVO.setId(termine.getCd_the() + " " + termine.getDid());
 		webVO.setTesto(termine.getDs_termine_thesauro());
-		//webVO.setLivelloAutorita(termine.getCd_livello());
+		//webVO.setLivelloAutorita(livelloSoglia(termine.getCd_livello()));
 
 		if (titoliLegati != null && titoliLegati.size() > 0) {
 
@@ -302,7 +304,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 		webVO.setId(descrittore.getDid() );
 		webVO.setTesto(descrittore.getDs_descrittore() );
 		webVO.setCodSoggettario(descrittore.getCd_soggettario());
-		webVO.setLivelloAutorita(descrittore.getCd_livello());
+		webVO.setLivelloAutorita(livelloSoglia(descrittore.getCd_livello()));
 		webVO.setTipoLegame(tipoLegame);
 
 		//almaviva5_20120604 evolutive CFI
@@ -327,7 +329,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 		webVO.setCodSoggettario(soggettario);
 		webVO.setEdizioneSoggettario(edizione != null ? edizione : "\u00A0");
 
-		webVO.setLivelloAutorita(CodiciProvider.cercaDescrizioneCodice(descrittore.getCd_livello(),
+		webVO.setLivelloAutorita(CodiciProvider.cercaDescrizioneCodice(livelloSoglia(descrittore.getCd_livello()),
 				CodiciType.CODICE_LIVELLO_AUTORITA,
 				CodiciRicercaType.RICERCA_CODICE_SBN));
 		webVO.setFormaNome(CodiciProvider.cercaDescrizioneCodice(String.valueOf(descrittore.getTp_forma_des()),
@@ -342,7 +344,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 		webVO.setId(soggetto.getCid() );
 		webVO.setTesto(soggetto.getDs_soggetto() );
 		webVO.setCodSoggettario(soggetto.getCd_soggettario());
-		webVO.setLivelloAutorita(soggetto.getCd_livello());
+		webVO.setLivelloAutorita(livelloSoglia(soggetto.getCd_livello()));
 		webVO.setTipoSoggetto(String.valueOf(soggetto.getCat_sogg()) );
 
 		//almaviva5_20120604 evolutive CFI
@@ -367,7 +369,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 		webVO.setCodSoggettario(soggettario);
 		webVO.setEdizioneSoggettario(edizione != null ? edizione : "");
 
-		webVO.setLivelloAutorita(CodiciProvider.cercaDescrizioneCodice(soggetto.getCd_livello(),
+		webVO.setLivelloAutorita(CodiciProvider.cercaDescrizioneCodice(livelloSoglia(soggetto.getCd_livello()),
 				CodiciType.CODICE_LIVELLO_AUTORITA,
 				CodiciRicercaType.RICERCA_CODICE_SBN));
 		webVO.setTipoSoggetto(CodiciProvider.cercaDescrizioneCodice(String.valueOf(soggetto.getCat_sogg()),
@@ -1346,7 +1348,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 
 		vo.setCodiceSoggettario(s.getCd_soggettario());
 		vo.setCid(s.getCid());
-		vo.setLivello(ValidazioneDati.livelloSoglia(s.getCd_livello()) );
+		vo.setLivello(livelloSoglia(s.getCd_livello()) );
 
 		vo.setTipoSoggetto(String.valueOf(s.getCat_sogg()));
 		vo.setTesto(s.getDs_soggetto());
@@ -2215,7 +2217,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 		webVO.setCid(s.getCid() );
 		webVO.setTesto(s.getDs_soggetto() );
 		webVO.setCodiceSoggettario(s.getCd_soggettario());
-		webVO.setStato(s.getCd_livello());
+		webVO.setStato(livelloSoglia(s.getCd_livello()));
 
 		//almaviva5_20120604 evolutive CFI
 		Character edizione = s.getCd_edizione();
@@ -2227,7 +2229,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 	public SinteticaClasseVO elementoSinteticaClasse(Tb_classe c) throws Exception {
 		SinteticaClasseVO webVO = new SinteticaClasseVO();
 
-		webVO.setLivelloAutorita(c.getCd_livello());
+		webVO.setLivelloAutorita(livelloSoglia(c.getCd_livello()));
 		webVO.setParole(c.getDs_classe());
 
 		StringBuilder id = new StringBuilder(32);

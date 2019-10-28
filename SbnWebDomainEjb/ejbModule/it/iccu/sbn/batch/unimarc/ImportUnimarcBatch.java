@@ -1496,6 +1496,8 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 				// estrapola tutte le 950 del record indicato
 				//almaviva5_20120830 da RG: recuperando da import_id_link il BID assegnato in caso di documento inserito
 				//almaviva5_20130620 da RG: aggiunto check nr_richiesta su import_id_link
+				//a = import1
+				//c = import_id_link
 				sql.append("select CASE when c.id_inserito isnull then a.id_input else c.id_inserito END, ");
 				sql.append("a.leader, a.indicatore1, a.indicatore2, a.dati,  ");
 				sql.append("CASE when c.id_inserito isnull then a.stato_id_input else 'P' END,  ");
@@ -1764,6 +1766,13 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 									inventarioVO.setDataIngresso(DateUtil.formattaData(_950.getDataIngresso(currColl, currInv)));
 									inventarioVO.setUteIns(firmaUtente);
 									inventarioVO.setUteAgg(firmaUtente);
+
+									String provenienza = _950.getProvenienza(currColl, currInv);
+									if (isFilled(provenienza)) {
+										inventarioVO.setCodPoloProven(codPolo);
+										inventarioVO.setCodBibProven(codBib950);
+										inventarioVO.setCodProven(provenienza.trim());
+									}
 
 									try {
 										String nuovoInv = String.format("bid: %-10s; bib: '%-3s'; sez: '%-10s'; coll: '%-24s'; spec: '%-12s'; serie: '%-3s'; num: %09d",

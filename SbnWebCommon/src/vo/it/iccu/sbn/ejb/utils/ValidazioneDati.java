@@ -771,33 +771,6 @@ public class ValidazioneDati {
 		return (int)c.getValue();
 	}
 
-	public static final String livelloSoglia(final String cd_livello) {
-		try {
-			int livello = Integer.parseInt(cd_livello.trim() );
-			if (livello == 1)
-				return "01";
-			if (livello == 2)
-				return "02";
-			if (livello == 3)
-				return "03";
-			if (livello == 4)
-				return "04";
-			else if ((livello == 5) || (livello == 96) || (livello == 97))
-				return cd_livello;
-			else if ((livello > 5) && (livello <= 51))
-				return "51";
-			else if ((livello > 51) && (livello <= 71))
-				return "71";
-			else if ((livello > 71) && (livello <= 90))
-				return "90";
-			else if ((livello > 90) && (livello <= 95))
-				return "95";
-
-		} catch (Exception e) {}
-
-		return "05";
-	}
-
 	public static final <T> T remove(List<T> list, int idx) {
 		if (list != null && list.size() > idx)
 			return list.remove(idx);

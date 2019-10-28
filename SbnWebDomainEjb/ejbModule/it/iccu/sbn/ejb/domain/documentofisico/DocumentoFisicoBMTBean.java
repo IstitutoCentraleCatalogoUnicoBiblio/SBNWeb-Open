@@ -88,7 +88,6 @@ import javax.ejb.CreateException;
 import javax.ejb.EJBException;
 import javax.ejb.SessionContext;
 import javax.naming.NamingException;
-import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 
 import org.apache.log4j.Logger;
@@ -119,7 +118,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 	 */
 	private static final long serialVersionUID = 7915309276263638347L;
 
-	private static Logger log = Logger.getLogger(DocumentoFisicoBMTBean.class);
+	private static Logger log = Logger.getLogger(DocumentoFisicoBMT.class);
 
 	private Tbc_inventarioDao daoInv;
 	private Tbc_collocazioneDao daoColl;
@@ -347,10 +346,10 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 		int numInvMinMax = -1;
 		int numRecTrattati = 0;
 		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 		 Logger logger = blw.getLogger();
 		try{
-			transaction.begin();
+			DaoManager.begin(tx);
 			logger.debug("Inizio transazione scarico");
 			this.scriviLogScarInv(input, output, numRecScaricati);
 			output = this.controllaInputScarInv(input, output);
@@ -373,7 +372,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 				listaInv = daoInv.getListaInventariScrollableDaADaScaricare(input.getCodPolo(), input.getCodBib(),
 						input.getSerie(), input.getStartInventario(), input.getEndInventario());
 				List<CodiceVO> listaInventari = creaFileSequenziale(obj, listaInv);
-				transaction.commit();
+				DaoManager.commit(tx);
 				//trattamento con ciclo
 				numRecScaricati = trattamentoScaricaInv(input, output, listaInventari, numRecScaricati, logger);
 				output.getErrori().add("Numero record scaricati: " + (numRecScaricati));
@@ -425,19 +424,17 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 					output.getErrori().add("ERRORE: tipo operazione '"+input.getTipoOperazione()+"' e lista inventari non presente");
 				}
 			}
-			if (transaction.getStatus() == Status.STATUS_ACTIVE){
-				transaction.commit();
-			}
+			DaoManager.commit(tx);
+
 		} catch (Exception e) {
 			output.getErrori().add("Numero record scaricati: " + (numRecScaricati));
 			output.setStato(ConstantsJMS.STATO_ERROR);
 			output.getErrori().add("ECCEZIONE = " + e);
 			try {
-				transaction.rollback();
+				DaoManager.rollback(tx);
 				logger.error("Rollback transazione");
 				return output;
 			} catch (Exception e1) {
-				e1.printStackTrace();
 				logger.error(e1);
 			}
 			return output;
@@ -463,10 +460,10 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 		ScrollableResults listaInv = null;
 		int numRecSpostati = 0;
 		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 		 Logger logger = blw.getLogger();
 		try{
-			transaction.begin();
+			DaoManager.begin(tx);
 			logger.debug("Inizio transazione spostamento");
 			this.scriviLogSpostColl(input, output, numRecSpostati);
 			output = this.controllaInputSpostColl(input, output);
@@ -478,7 +475,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 					listaInv = daoInv.getListaInventariScrollableDaASpostColl(input.getCodPolo(), input.getCodBib(),
 						input.getSerie(), input.getStartInventario(), input.getEndInventario());
 					List<CodiceVO> listaInventari = creaFileSequenziale(obj, listaInv);
-					transaction.commit();
+					DaoManager.commit(tx);
 					numRecSpostati = this.scorriListaInventariPerSpostamentoCollocazioni(input, output, listaInventari, numRecSpostati, ts, logger);
 				}else{
 					if (input.getAzione() != null){
@@ -499,7 +496,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 										listaInv = daoInv.getListaInventariScrollable(input.getCodPoloSez(),input.getCodBibSez(),
 												input.getSezione().trim(), collSpec.getDaColl(), collSpec.getAColl(), false, collSpec.getDaSpec(), collSpec.getASpec(), false, 0, null, 0);
 										List<CodiceVO> listaInventari = creaFileSequenziale(obj, listaInv);
-										transaction.commit();
+										DaoManager.commit(tx);
 										numRecSpostati = this.scorriListaInventariPerSpostamentoCollocazioni(input, output, listaInventari, numRecSpostati, ts, logger);
 //								}else{//bug 0004699 esercizio rp
 //										output.getErrori().add("ERRORE: tipo operazione S e dalla specificazione > di alla specificazione");
@@ -521,20 +518,19 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 				output.getErrori().add("Numero record spostati: " + (numRecSpostati));
 
 
-				if (transaction.getStatus() == Status.STATUS_ACTIVE){
-					transaction.commit();
-				}
+				DaoManager.commit(tx);
+
 			return output;
 		} catch (Exception e) {
 			output.getErrori().add("Numero record spostati: " + (numRecSpostati));
 			output.setStato(ConstantsJMS.STATO_ERROR);
 			output.getErrori().add("ECCEZIONE = " + e);
 			try {
-				transaction.rollback();
+				DaoManager.rollback(tx);
 				logger.error("Rollback transazione");
 				return output;
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				logger.error("", e1);
 			}
 			return output;
 		}
@@ -1245,10 +1241,10 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 		ScrollableResults listaInv = null;
 		int numRecAggiornati = 0;
 		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 		 Logger logger = blw.getLogger();
 		try{
-			transaction.begin();
+			DaoManager.begin(tx);
 			logger.debug("Inizio transazione aggiornamento");
 			this.scriviLogAggDisp(input, output, numRecAggiornati);
 			output = this.controllaInputAggDisp(input, output);
@@ -1256,10 +1252,6 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 			blw.logWriteCollection(input.getErrori());
 
 
-			String locNormalizzata = null;
-			String aLocNormalizzata = null;
-			String specNormalizzata = null;
-			String aSpecNormalizzata = null;
 			Timestamp dataIngressoDa = null;
 			Timestamp dataIngressoA = null;
 			int numInvMinMax = -1;
@@ -1283,7 +1275,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 //						dataIngressoDa, dataIngressoA, input.getFiltroCodTipoFruizione(), input.getFiltroCodRip(),
 //						input.getFiltroCodNoDisp(), input.getFiltroStatoConservazione());
 //				List<CodiceVO> listaInventari = creaFileSequenziale(obj, listaInv);
-//				transaction.commit();
+//				DaoManager.commit(tx);
 //				numRecAggiornati = trattamentoModificaInventari(input, output, listaInventari, dataIngressoDa, dataIngressoA,
 //						numRecAggiornati, logger);
 //			}else
@@ -1381,19 +1373,17 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 				numRecAggiornati = trattamentoModificaInventari(input, output, listaInventari,
 						numRecAggiornati, logger);
 			}
-			if (transaction.getStatus() == Status.STATUS_ACTIVE){
-				transaction.commit();
-			}
+			DaoManager.commit(tx);
 		} catch (Exception e) {
 			output.getErrori().add("Numero record aggiornati: " + (numRecAggiornati));
 			output.setStato(ConstantsJMS.STATO_ERROR);
 			output.getErrori().add("ECCEZIONE = " + e);
 			try {
-				transaction.rollback();
+				DaoManager.rollback(tx);
 				logger.error("Rollback transazione");
 				return output;
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				logger.error("", e1);
 			}
 			return output;
 		}
@@ -1482,25 +1472,28 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 //			Timestamp dataIngressoDa,
 //			Timestamp dataIngressoA,
 			int numRecAggiornati, Logger logger) throws DaoManagerException {
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 
 
-		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
+		Timestamp ts = DaoManager.now();
 		Logger logg = logger;
 		int loop = 0;
 		CodiceVO ultKeyInv = null;
 		daoInv = new Tbc_inventarioDao();
-		AggDispVO input2 = input.copy();
-		for (int i = 0; i < listaInventari.size(); i++) {
+
+		for (int i = 0; i < ValidazioneDati.size(listaInventari); i++) {
 			CodiceVO stringaInv = listaInventari.get(i);
-			try{
-				BatchManager.getBatchManagerInstance().checkForInterruption(input.getIdBatch());
-				daoInv.begin(transaction);
+			try {
+				if ((i % 100) == 0) {
+					BatchManager.getBatchManagerInstance().checkForInterruption(input.getIdBatch());
+				}	
+				DaoManager.begin(tx);
 
 				Tbc_inventario inventario = daoInv.getInventario(input.getCodPolo(), input.getCodBib(), stringaInv.getCodice(), Integer.valueOf(stringaInv.getDescrizione()));
-				if (inventario != null){
+				if (inventario != null) {
 						//predisposizione per agg inv
-						if (inventario.getB() != null){
+						Tb_titolo tit = inventario.getB();
+						if (tit != null) {
 
 							// almaviva2 Evolutiva marzo 2017 Filtro su data di Pubblicazione su batch di Aggiornamento disponibilità
 //							if ((input.getFiltroCodNatura() != null && !input.getFiltroCodNatura().trim().equals(""))
@@ -1514,18 +1507,18 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 									//se la natura di input è 'w' o 's' il record deve essere aggiornato ugualmente
 									if (input.getFiltroCodNatura().equals("W")){
 										//deve aggiornare anche 'M'
-										if ((inventario.getB().getCd_natura() == input.getFiltroCodNatura().trim().toUpperCase().codePointAt(0)) ||
-												inventario.getB().getCd_natura() == 'M'){
+										if ((tit.getCd_natura() == input.getFiltroCodNatura().trim().toUpperCase().codePointAt(0)) ||
+												tit.getCd_natura() == 'M'){
 											//aggiorna
 										}
 									}else if (input.getFiltroCodNatura().equals("M")){
 										//deve aggiornare anche 'W'
-										if ((inventario.getB().getCd_natura() == input.getFiltroCodNatura().trim().toUpperCase().codePointAt(0)) ||
-												inventario.getB().getCd_natura() == 'W'){
+										if ((tit.getCd_natura() == input.getFiltroCodNatura().trim().toUpperCase().codePointAt(0)) ||
+												tit.getCd_natura() == 'W'){
 											//aggiorna
 										}
 									}else if (input.getFiltroCodNatura().equals("S")){
-										if (inventario.getB().getCd_natura() != input.getFiltroCodNatura().trim().toUpperCase().codePointAt(0)){
+										if (tit.getCd_natura() != input.getFiltroCodNatura().trim().toUpperCase().codePointAt(0)){
 //											output.getErrori().add("------------------------------------------------------------------------------------------------------------------------");
 //											output.getErrori().add("natura del bid dell'inventario " +  inventario.getCd_serie().getCd_serie() +  inventario.getCd_inven() + " diversa da natura di input");
 											continue;
@@ -1537,7 +1530,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 
 								}
 								if (!input.getFiltroLivAut().trim().equals("")){
-									if (!inventario.getB().getCd_livello().equals(input.getFiltroLivAut().toUpperCase().trim())){
+									if (!tit.getCd_livello().equals(input.getFiltroLivAut().toUpperCase().trim())){
 //										output.getErrori().add("------------------------------------------------------------------------------------------------------------------------");
 //										output.getErrori().add("livello autorità del bid dell'inventario " +  inventario.getCd_serie().getCd_serie() +  inventario.getCd_inven() + " e diverso da livello di autorità di input");
 										continue;
@@ -1545,26 +1538,26 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 								}
 
 								if (!input.getTipoDataPubb().trim().equals("")) {
-									if (inventario.getB().getTp_aa_pubb() != input.getTipoDataPubb().toUpperCase().charAt(0)){
+									if (tit.getTp_aa_pubb() != input.getTipoDataPubb().toUpperCase().charAt(0)){
 										continue;
 									}//altrimenti aggiorna
 								}
 
 								if (!input.getAaPubbFrom().trim().equals("")) {
-									if (inventario.getB().getAa_pubb_1() == null) {
+									if (tit.getAa_pubb_1() == null) {
 										continue;
-									} else if (inventario.getB().getAa_pubb_1().endsWith("..")) {
-										if (Integer.valueOf(inventario.getB().getAa_pubb_1().substring(0,2)) < Integer.valueOf(input.getAaPubbFrom().substring(0,2))
-											|| Integer.valueOf(inventario.getB().getAa_pubb_1().substring(0,2)) > Integer.valueOf(input.getAaPubbTo().substring(0,2))) {
+									} else if (tit.getAa_pubb_1().endsWith("..")) {
+										if (Integer.valueOf(tit.getAa_pubb_1().substring(0,2)) < Integer.valueOf(input.getAaPubbFrom().substring(0,2))
+											|| Integer.valueOf(tit.getAa_pubb_1().substring(0,2)) > Integer.valueOf(input.getAaPubbTo().substring(0,2))) {
 											continue;
 										}
-									}  else if (inventario.getB().getAa_pubb_1().endsWith(".")) {
-										if (Integer.valueOf(inventario.getB().getAa_pubb_1().substring(0,3)) < Integer.valueOf(input.getAaPubbFrom().substring(0,3))
-												|| Integer.valueOf(inventario.getB().getAa_pubb_1().substring(0,3)) > Integer.valueOf(input.getAaPubbTo().substring(0,3))) {
+									}  else if (tit.getAa_pubb_1().endsWith(".")) {
+										if (Integer.valueOf(tit.getAa_pubb_1().substring(0,3)) < Integer.valueOf(input.getAaPubbFrom().substring(0,3))
+												|| Integer.valueOf(tit.getAa_pubb_1().substring(0,3)) > Integer.valueOf(input.getAaPubbTo().substring(0,3))) {
 												continue;
 										}
-									}  else if (Integer.valueOf(inventario.getB().getAa_pubb_1()) < Integer.valueOf(input.getAaPubbFrom())
-											|| Integer.valueOf(inventario.getB().getAa_pubb_1()) > Integer.valueOf(input.getAaPubbTo())) {
+									}  else if (Integer.valueOf(tit.getAa_pubb_1()) < Integer.valueOf(input.getAaPubbFrom())
+											|| Integer.valueOf(tit.getAa_pubb_1()) > Integer.valueOf(input.getAaPubbTo())) {
 										continue;
 									} //altrimenti aggiorna
 								}
@@ -1581,7 +1574,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 							}
 							numRecAggiornati = aggiornaDisponibilitaInventario(
 									input, output, numRecAggiornati, inventario);
-							daoInv.commit(transaction);
+							DaoManager.commit(tx);
 							//
 							if ((numRecAggiornati % 500) == 0){
 								logg.debug("Finora " + ts + "sono stati aggiornati "+ numRecAggiornati + " records");
@@ -1590,7 +1583,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 							}
 						}else{
 							output.getErrori().add("------------------------------------------------------------------------------------------------------------------------");
-							output.getErrori().add("inventario " +  inventario.getCd_serie().getCd_serie() +  inventario.getCd_inven() + " con bid " + inventario.getB().getBid() + " non presente sul DB di Polo");
+							output.getErrori().add("inventario " +  inventario.getCd_serie().getCd_serie() +  inventario.getCd_inven() + " con bid " + tit.getBid() + " non presente sul DB di Polo");
 							continue;
 						}
 				}else{
@@ -1668,19 +1661,19 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 	 */
 	private int trattamentoScaricaInv(ScaricoInventarialeVO input,
 			ScaricoInventarialeVO output, List<CodiceVO> listaInventari, int numRecScaricati, Logger logger) throws DaoManagerException {
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 
-		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
+		Timestamp ts = DaoManager.now();
 		Logger logg = logger;
 		int loop = 0;
 		CodiceVO ultKeyInv = null;
 		daoInv = new Tbc_inventarioDao();
-		ScaricoInventarialeVO input2 = input.copy();
+
 		for (int i = 0; i < listaInventari.size(); i++) {
 			CodiceVO stringaInv = listaInventari.get(i);
 			try{
 				BatchManager.getBatchManagerInstance().checkForInterruption(input.getIdBatch());
-				daoInv.begin(transaction);
+				DaoManager.begin(tx);
 
 				Tbc_inventario inventario = daoInv.getInventario(input.getCodPolo(), input.getCodBib(), stringaInv.getCodice(), Integer.valueOf(stringaInv.getDescrizione()));
 				if (inventario != null){
@@ -1968,9 +1961,9 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
 		Logger log1 = Logger.getLogger(input.getFirmaBatch());
 
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 		try{
-			transaction.begin();
+			DaoManager.begin(tx);
 			if (tipoOperazione.equals("R")){
 				outputSt = this.inventario.controllaInputSchede(input, outputSt);
 				if (outputSt != null){
@@ -2053,7 +2046,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 			}else{
 				log1.debug("ERRORE: tipo operazione non valido");
 			}
-			transaction.commit();
+			DaoManager.commit(tx);
 			log.debug("Commit transazione");
 		}catch (ValidationException e) {
 			log.error("", e);
@@ -2102,9 +2095,9 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 		Logger log1 = Logger.getLogger(input.getFirmaBatch());
 		List listaInvDaA = new ArrayList();
 
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 		try{
-			transaction.begin();
+			DaoManager.begin(tx);
 			if (tipoOperazione.equals("R")){
 				outputSt = this.inventario.controllaInputSchede(input, outputSt);
 				if (outputSt != null){
@@ -2177,7 +2170,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 			}else{
 				log1.debug("ERRORE: tipo operazione non valido");
 			}
-			transaction.commit();
+			DaoManager.commit(tx);
 			log.debug("Commit transazione");
 		}catch (ValidationException e) {
 			log.error("", e);
@@ -2247,7 +2240,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 		List listaOutputInvDiColl = null;
 		List listaOutputInvDiEsempl = null;
 		List listaInv = new ArrayList();
-		UserTransaction transaction = context.getUserTransaction();
+		UserTransaction tx = context.getUserTransaction();
 		try {
 			InventarioVO inv = new InventarioVO();
 			inv.setCodPolo(codPolo);
@@ -2256,7 +2249,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 			valida.validaCodPoloCodBibBid(codPolo, codBib, bid);
 			daoInv = new Tbc_inventarioDao();
 
-			transaction.begin();
+			DaoManager.begin(tx);
 			log.debug("Inizio transazione");
 
 			EtichettaDettaglioVO rec = null;
@@ -2321,11 +2314,11 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 			if (!posseduto[0] &&
 					!posseduto[1] &&
 					!posseduto[2] ){
-				transaction.commit();
+				DaoManager.commit(tx);
 				log.debug("Commit transazione");
 				return listaOutput = null;
 			}else{
-				transaction.commit();
+				DaoManager.commit(tx);
 				log.debug("Commit transazione");
 				return listaOutput;
 			}
@@ -2336,7 +2329,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 //			}else{
 //				listaOutput = null;
 //			}
-//			transaction.commit();
+//			DaoManager.commit(tx);
 //			log.debug("Commit transazione");
 		} catch (ValidationException e) {
 			throw e;
@@ -2345,10 +2338,10 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 			throw new DataException(e);
 		} catch (Exception e) {
 			try {
-				transaction.rollback();
+				DaoManager.rollback(tx);
 				log.error("Rollback transazione");
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				log.error("", e1);
 			}
 
 			log.error("", e);
@@ -2430,7 +2423,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 //			valida.validaCodPoloCodBibBid(codPolo, codBib, bid);
 //			daoInv = new Tbc_inventarioDao();
 //
-//			transaction.begin();
+//			DaoManager.begin(tx);
 //			log.debug("Inizio transazione");
 //
 //			EtichettaDettaglioVO rec = null;
@@ -2466,13 +2459,13 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 ////			else{//almaviva2 20091111
 ////				throw new DataException(SbnErrorTypes.GDF_INVENTARIO_NON_TROVATO, "noInv");
 ////			}
-//			transaction.commit();
+//			DaoManager.commit(tx);
 //			log.debug("Commit transazione");
 //		} catch (ValidationException e) {
 //			throw e;
 ////		} catch (DataException e) {
 ////			try {
-////				transaction.rollback();
+////				DaoManager.rollback(tx);
 ////				log.error("Rollback transazione");
 ////			} catch (Exception e1) {
 ////				e1.printStackTrace();
@@ -2483,7 +2476,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 //			throw new DataException(e);
 //		} catch (Exception e) {
 //			try {
-//				transaction.rollback();
+//				DaoManager.rollback();
 //				log.error("Rollback transazione");
 //			} catch (Exception e1) {
 //				e1.printStackTrace();
