@@ -9619,7 +9619,13 @@ public class SbnGestioneTitoliDao {
 					sinteticaTitoliView.setTipoMateriale("");
 					sinteticaTitoliView.setFlagCondiviso(sinteticaAutoriView.isFlagCondiviso());
 					sinteticaTitoliView.setImageUrl(sinteticaAutoriView.getImageUrl());
-					sinteticaTitoliView.setTipoRecDescrizioneLegami(sinteticaAutoriView.getNome());
+					
+					// MANTIS 7172 almaviva2 - ottobre 2019 Nelle sintetiche delle Liste di confronto le parentesi uncinate relative
+					// alle qualificazioni dell’autore non vengono visualizzate correttamente
+					// viene utilizzato il campo getOriginal_nome al posto di getNome
+					// sinteticaTitoliView.setTipoRecDescrizioneLegami(sinteticaAutoriView.getNome());
+					sinteticaTitoliView.setTipoRecDescrizioneLegami(sinteticaAutoriView.getOriginal_nome());
+					// Fine Mantis 7172
 					areaDatiPass.addListaSchedaIdLocale(sinteticaTitoliView);
 					if (areaDatiPass.getStatoLavorRecord().equals("4") && sinteticaTitoliView.isFlagCondiviso()) {
 						areaDatiPass.setMessaggisticaDiLavorazione("Attenzione: Lo stato di lavorazione dell'autore(TRATTATO) è incongruente con lo stato di LOCALE dell'autore stesso");
