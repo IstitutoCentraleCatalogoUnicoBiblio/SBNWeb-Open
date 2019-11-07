@@ -185,7 +185,7 @@ public interface GestioneServizi extends EJBObject, SbnBusinessSessionRemote {
 
 	public UtenteBibliotecaVO getDettaglioUtenteBase(String ticket, RicercaUtenteBibliotecaVO recUte, String numberFormat, Locale locale) throws RemoteException;
 
-	public boolean insertUtente(String ticket, UtenteBibliotecaVO recUte) throws RemoteException;
+	public boolean insertUtente(String ticket, UtenteBibliotecaVO recUte) throws ApplicationException, RemoteException;
 
 	public boolean updateUtente(String ticket, UtenteBibliotecaVO recUte) throws ApplicationException, RemoteException;
 

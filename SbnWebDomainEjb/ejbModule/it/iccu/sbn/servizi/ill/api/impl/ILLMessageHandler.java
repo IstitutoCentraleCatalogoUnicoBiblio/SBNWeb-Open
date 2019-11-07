@@ -289,6 +289,8 @@ public abstract class ILLMessageHandler extends SerializableVO implements
 			ricerca.setCodBib(utenteBase.getCodBib());
 			importa = true;
 			utente = getServizi().getDettaglioUtente(ticket, ricerca, null, Locale.getDefault());
+			if (utente == null)
+				throw new ApplicationException(SbnErrorTypes.SRV_UTENTE_NON_TROVATO);
 
 			// pulizia dei dati appartenenti alle altre biblioteche
 			utente.setImportato(true);

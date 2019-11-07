@@ -169,6 +169,8 @@ public enum SbnErrorTypes {
 	SRV_ERROR_SALE_POSTO_NON_DISPONIBILE														(5111),
 	SRV_ERROR_SALE_UTENTE_GIA_PRENOTATO															(5112),
 
+	SRV_UTENTE_ANAGRAFE_BIB_ESISTENTE															(5150),
+
 	SRV_TIPO_ACCESSO_UTENTE_NON_VALIDO															(5200),
 
 	//Errori servizi ILL (da 5500)

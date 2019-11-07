@@ -795,6 +795,10 @@ public class ValidazioneDati {
 		return str.substring(start, end);
 	}
 
+	public static final String wrap(String value) {
+		return value != null ? value : "";
+	}
+
 	public static final <K, T> Map<K, T> setToMap(Set<T> set, Class<K> keyClass, String keyField) {
 		Map<K, T> out = new HashMap<K, T>(set.size());
 		try {

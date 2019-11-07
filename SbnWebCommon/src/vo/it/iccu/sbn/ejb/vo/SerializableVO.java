@@ -246,6 +246,14 @@ public abstract class SerializableVO implements Serializable, Validable {
 		return value != null ? value : "";
 	}
 
+	public static String upper(String value) {
+		return value != null ? value.toUpperCase() : null;
+	}
+
+	public static String lower(String value) {
+		return value != null ? value.toLowerCase() : null;
+	}
+
 	@Override
 	public String toString() {
 		return dump(this, false);

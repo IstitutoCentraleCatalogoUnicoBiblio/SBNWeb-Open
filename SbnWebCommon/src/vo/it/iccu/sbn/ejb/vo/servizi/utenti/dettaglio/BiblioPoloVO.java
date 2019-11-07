@@ -307,7 +307,7 @@ public class BiblioPoloVO extends SerializableVO {
 	}
 
 	public void setCodiceAnagrafe(String codiceAnagrafe) {
-		this.codiceAnagrafe = trimAndSet(codiceAnagrafe);
+		this.codiceAnagrafe = trimAndSet(upper(codiceAnagrafe));
 	}
 
 	public boolean isUteBibl() {

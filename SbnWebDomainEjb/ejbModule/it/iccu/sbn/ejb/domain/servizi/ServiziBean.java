@@ -249,6 +249,8 @@ import org.hibernate.Session;
 import org.hibernate.exception.DataException;
 import org.marc4j.marc.Record;
 
+import com.annimon.stream.Optional;
+
 /**
  *
  * <!-- begin-user-doc --> A generated session bean <!-- end-user-doc -->
@@ -3533,6 +3535,8 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			UtentiDAO utentiDao = new UtentiDAO();
 			String codBib = utente.getCd_bib().getCd_biblioteca();
 
+			//almaviva5_20191031 #7173 check codice isil
+			checkCodiceAnagrafe(recUte);
 
 			// imposto la password di default
 			// almaviva5_20110228 #4207 per gli enti la password non é significativa
@@ -3595,6 +3599,9 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			recUte.setIdUtenteBiblioteca(String.valueOf(utenteBib.getId_utenti_biblioteca()));
 			this.aggiornaDirittiUtente(utenteBib, recUte);
 			this.aggiornaMaterie_Utente(utenteBib, recUte);
+
+		} catch (ApplicationException e) {
+			throw e;
 
 		} catch (Exception e) {
 			ret = false;
@@ -4133,6 +4140,9 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 				}
 			}
 
+			//almaviva5_20191031 #7173 check codice isil
+			checkCodiceAnagrafe(ub);
+
 			String autOriginal = "";
 			String autDiMappa = "";
 			int numServNew = 0;
@@ -4192,11 +4202,36 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 
 		} catch (ApplicationException e) {
 			throw e;
+
 		} catch (Exception e) {
 			log.error("", e);
 			ret = false;
 		}
 		return ret;
+	}
+
+	private void checkCodiceAnagrafe(UtenteBibliotecaVO ub)
+			throws DaoManagerException, ApplicationException {
+		String isil = ub.getBibliopolo().getCodiceAnagrafe();
+		//controllo codice isil univoco
+		if (ValidazioneDati.isFilled(isil)) {
+			UtentiDAO dao = new UtentiDAO();
+			Optional<Tbl_utenti> utenteByIsil = Optional.ofNullable(dao.getUtenteByIsil(isil));
+			boolean error = false;
+			if (utenteByIsil.isPresent()) {
+				if (ub.isNuovoUte())
+					// nuovo utente = errore
+					error = true;
+				else {
+					// modifica utente, check id
+					int id_utente = Integer.valueOf(ub.getIdUtente());
+					error = (utenteByIsil.get().getId_utenti() != id_utente);
+				}
+
+				if (error)
+					throw new ApplicationException(SbnErrorTypes.SRV_UTENTE_ANAGRAFE_BIB_ESISTENTE, isil);
+			}
+		}
 	}
 
 	/**

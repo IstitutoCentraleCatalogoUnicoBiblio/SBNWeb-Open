@@ -18,7 +18,8 @@
 			--%>
 		</td>
 		<td width="50%" align="left">
-			<html:text styleId="testoNoBold" property="anaMov.codUte"  titleKey="servizi.erogazione.codiceUtente" bundle="serviziLabels" size="30" maxlength="25"></html:text>&nbsp;&nbsp;&nbsp;
+			<html:text styleId="testoNoBold" property="anaMov.codUte"  titleKey="servizi.erogazione.codiceUtente" bundle="serviziLabels" size="30"
+				maxlength="25" onkeydown="submitOnEnter(event, 'btnAvanti')" />&nbsp;&nbsp;&nbsp;
 			<html:submit styleClass="buttonImage" property="methodErogazione" titleKey="servizi.erogazione.ricercaUtente" bundle="serviziLabels">
 				<bean:message key="servizi.bottone.hlputente" bundle="serviziLabels" />
 			</html:submit>
@@ -52,7 +53,7 @@
 				size="8"  maxlength="3"></html:text>
 			&nbsp;&nbsp;&nbsp;
 			<html:text styleId="testoNoBold" property="anaMov.codInvenInv" titleKey="servizi.erogazione.codiceInventario" bundle="serviziLabels"
-				size="14" maxlength="9"></html:text>&nbsp;&nbsp;&nbsp;
+				size="14" maxlength="9" onkeydown="submitOnEnter(event, 'btnAvanti')" />&nbsp;&nbsp;&nbsp;
 			<html:submit styleClass="buttonImage" property="methodErogazione" titleKey="servizi.erogazione.ricercaTitolo" bundle="serviziLabels">
 				<bean:message key="servizi.bottone.hlpinventario"
 					bundle="serviziLabels" />
@@ -84,8 +85,7 @@
 			</html:select>
 			&nbsp;&nbsp;&nbsp;
 
-			<html:text styleId="testoNoBold" property="segnaturaRicerca" size="30"  maxlength="40">
-			</html:text>
+			<html:text styleId="testoNoBold" property="segnaturaRicerca" size="30"  maxlength="40" onkeydown="submitOnEnter(event, 'btnAvanti')" />
 			&nbsp;&nbsp;&nbsp;
 			<html:submit styleClass="buttonImage" property="methodErogazione" titleKey="servizi.erogazione.ricercaDocumentiNonSBN" bundle="serviziLabels">
 				<bean:message key="servizi.bottone.hlpsegnatura"

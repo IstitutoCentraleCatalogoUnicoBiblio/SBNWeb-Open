@@ -53,6 +53,8 @@ import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
 
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.wrap;
 
 public class UtentiDAO extends ServiziBaseDAO {
 
@@ -1375,31 +1377,31 @@ public class UtentiDAO extends ServiziBaseDAO {
 	 * @return
 	 * @throws DaoManagerException
 	 */
-	public List ricercaUtentiPolo(Tbl_utenti utente) throws DaoManagerException {
+	public List<Integer> ricercaUtentiPolo(Tbl_utenti utente) throws DaoManagerException {
 		try {
 			Session session = this.getCurrentSession();
 
 			Criteria c = session.createCriteria(Trl_utenti_biblioteca.class);
 			c.setProjection(Projections.property("id_utenti_biblioteca"));
 
-			if (utente.getId_utenti()>0)
+			if (utente.getId_utenti() > 0)
 			{
 				c.add(Restrictions.ne("fl_canc", 'S'))
 				.createCriteria("id_utenti")
 				.add(Restrictions.eq("id_utenti",  utente.getId_utenti()))
-				.add(Restrictions.eq("cod_utente",  utente.getCod_utente()).ignoreCase())
-				.add(Restrictions.eq("cod_fiscale",  utente.getCod_fiscale()).ignoreCase())
+				.add(Restrictions.eq("cod_utente",  wrap(utente.getCod_utente())).ignoreCase())
+				.add(Restrictions.eq("cod_fiscale",  wrap(utente.getCod_fiscale())).ignoreCase())
 				.add(Restrictions.ne("fl_canc",      'S'));
 			}
-			else if (utente.getCod_utente()!=null && utente.getCod_utente().trim().length()>0 )
+			else if (isFilled(utente.getCod_utente()) )
 			{
 				c.add(Restrictions.ne("fl_canc", 'S'))
 				.createCriteria("id_utenti")
 				.add(Restrictions.eq("cod_utente",  utente.getCod_utente()).ignoreCase())
-				.add(Restrictions.eq("cod_fiscale",  utente.getCod_fiscale()).ignoreCase())
+				.add(Restrictions.eq("cod_fiscale",  wrap(utente.getCod_fiscale())).ignoreCase())
 				.add(Restrictions.ne("fl_canc",      'S'));
 			}
-			else if (utente.getCod_fiscale()!=null && utente.getCod_fiscale().trim().length()>0 )
+			else if (isFilled(utente.getCod_fiscale()) )
 			{
 				c.add(Restrictions.ne("fl_canc", 'S'))
 				.createCriteria("id_utenti")
@@ -1416,7 +1418,7 @@ public class UtentiDAO extends ServiziBaseDAO {
 						Restrictions.eq("ind_posta_elettr2", email).ignoreCase()))
 				.add(Restrictions.ne("fl_canc",      'S'));
 			}
-			else if (utente.getPersona_giuridica()=='S' &&  utente.getCognome()!=null && utente.getCognome().trim().length()>0 )
+			else if (utente.getPersona_giuridica()=='S' &&  isFilled(utente.getCognome()) )
 			{
 				c.add(Restrictions.ne("fl_canc", 'S'))
 				.createCriteria("id_utenti")
@@ -1429,22 +1431,9 @@ public class UtentiDAO extends ServiziBaseDAO {
 				.createCriteria("id_utenti")
 				.add(Restrictions.ne("fl_canc",      'S'));
 			}
-			List utenti = c.list();
+			List<Integer> utenti = c.list();
 
-//			if (utenti!=null && utenti.size()>0) {
-//				List listaUtentiPolo = new ArrayList();
-//				Trl_utenti_biblioteca ute_bib = null;
-//				Iterator iterator = utenti.iterator();
-//				while (iterator.hasNext()) {
-//					ute_bib = (Trl_utenti_biblioteca)iterator.next();
-//					if (ute_bib.getId_utenti().getCod_polo_bib().equals(utente.getCod_polo_bib())) {
-//						listaUtentiPolo.add(ute_bib);
-//					}
-//				}
-//
-//				return listaUtentiPolo;
-//			} else
-				return utenti;
+			return utenti;
 
 		} catch (HibernateException he) {
 			throw new DaoManagerException(he);
@@ -1850,11 +1839,11 @@ public class UtentiDAO extends ServiziBaseDAO {
 			String[] tokens = isil.split("\\u002D");
 			switch (tokens.length) {
 			case 1:	//senza codice
-				c.add(Restrictions.eq("codice_anagrafe", tokens[0]));
+				c.add(Restrictions.eq("codice_anagrafe", tokens[0]).ignoreCase());
 				break;
 			default:
 				c.add(Restrictions.eq("paese_res", tokens[0]));
-				c.add(Restrictions.eq("codice_anagrafe", tokens[1]));
+				c.add(Restrictions.eq("codice_anagrafe", tokens[1]).ignoreCase());
 				break;
 			}
 

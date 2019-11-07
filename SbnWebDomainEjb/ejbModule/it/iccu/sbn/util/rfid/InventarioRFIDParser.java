@@ -57,7 +57,7 @@ public final class InventarioRFIDParser {
 		KeyInventario kinv = null;
 
 		for (InventarioRFIDParsingStrategy p : parsers) {
-			log.debug("parsing strategy: " + p);
+			log.debug(String.format("inv: '%s' --> parsing strategy: %s", rfid, p));
 			kinv = p.parse(rfid);
 			if (kinv != null)
 				return new InventarioVO(kinv);

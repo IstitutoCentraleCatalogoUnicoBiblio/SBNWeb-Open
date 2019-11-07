@@ -29,7 +29,7 @@
 							</html:submit>
 						</c:when>
 						<c:otherwise>
-							<html:submit property="methodListaMovimentiUte" disabled="${navForm.flgErrNuovaRichiesta}">
+							<html:submit property="methodListaMovimentiUte" disabled="${navForm.flgErrNuovaRichiesta}" styleId="btnAvanti">
 								<bean:message key="servizi.bottone.avanti" bundle="serviziLabels" />
 							</html:submit>
 						</c:otherwise>

@@ -108,7 +108,7 @@
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
-				</c:choose> <html:submit property="methodEsameCollRicerca">
+				</c:choose> <html:submit property="methodEsameCollRicerca" styleId="btnCerca">
 					<bean:message key="documentofisico.bottone.cerca" bundle="documentoFisicoLabels" />
 				</html:submit></td>
 			</tr>

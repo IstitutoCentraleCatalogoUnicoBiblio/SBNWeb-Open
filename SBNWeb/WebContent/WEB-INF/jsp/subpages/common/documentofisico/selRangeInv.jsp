@@ -35,7 +35,7 @@
 					&nbsp;(<bean:message key="documentofisico.rfid"
 							bundle="documentoFisicoLabels" />
 						<html:text disabled="false" styleId="testoNormale"
-							property="codRfid" size="18"></html:text>)
+							property="codRfid" size="18" onkeydown="submitOnEnter(event, 'btnCerca')" />)
 					</sbn:checkAttivita>
 				</td>
 			</tr>

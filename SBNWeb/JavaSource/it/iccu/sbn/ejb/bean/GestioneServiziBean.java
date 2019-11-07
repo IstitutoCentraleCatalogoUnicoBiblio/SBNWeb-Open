@@ -868,13 +868,13 @@ public class GestioneServiziBean extends SbnBusinessSessionBean implements Gesti
 	}
 
 
-	public boolean insertUtente(String ticket, UtenteBibliotecaVO recUte) throws EJBException {
+	public boolean insertUtente(String ticket, UtenteBibliotecaVO recUte) throws ApplicationException, RemoteException {
 		boolean ret = false;
 		try {
 			// ServiziDAO dao = DAOFactory.getDAO(ServiziDAO.class);
 			ret = this.getServizi().insertUtente(ticket, recUte);
 		} catch (ApplicationException e) {
-			throw new EJBException(e);
+			throw e;
 		} catch (DataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

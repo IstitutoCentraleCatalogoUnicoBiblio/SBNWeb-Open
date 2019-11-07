@@ -57,7 +57,7 @@
 					</html:submit>
 					<sbn:checkAttivita idControllo="RFID">
 					&nbsp;&nbsp;&nbsp;RFID&nbsp;<html:text styleId="testoNoBold" property="movRicerca.rfidChiaveInventario" size="18"
-						disabled="${navForm.conferma or navForm.confermaNuovaRichiesta}"/>
+						disabled="${navForm.conferma or navForm.confermaNuovaRichiesta}" onkeydown="submitOnEnter(event, 'btnAvanti')" />
 					</sbn:checkAttivita>
 				</td>
 			</tr>
