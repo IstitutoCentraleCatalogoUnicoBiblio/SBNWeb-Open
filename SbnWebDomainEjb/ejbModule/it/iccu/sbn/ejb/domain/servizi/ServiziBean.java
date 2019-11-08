@@ -6246,6 +6246,16 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			if (ValidazioneDati.isFilled(doc.getCd_catfrui()) || ValidazioneDati.isFilled(doc.getCd_no_disp()))
 				return baseDoc;
 
+			//almaviva5_20191108 #7178 solo per richieste ill come fornitore:
+			//se non impostato si carica la categoria di fruizione dalla configurazione
+			if (movimento.isFornitriceRichiestaILL()) {
+				String defaultCodFrui = CommonConfiguration.getProperty(Configuration.ILL_SBN_DEFAULT_COD_FRUIZIONE);
+				if (ValidazioneDati.isFilled(defaultCodFrui)) {
+					baseDoc.setCodFruizione(defaultCodFrui);
+					return baseDoc;	
+				}
+			}
+
 			// cerco la cat. frui mancante
 			return internalGetCategoriaFruizioneSegnatura(baseDoc, codPolo, codBib, doc.getOrd_segnatura());
 
@@ -6253,6 +6263,8 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			throw new ApplicationException(SbnErrorTypes.DB_FALUIRE);
 		} catch (ApplicationException e) {
 			throw e;
+		} catch (Exception e) {
+			throw new ApplicationException(SbnErrorTypes.UNRECOVERABLE, e);
 		}
 	}
 

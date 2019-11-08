@@ -894,7 +894,7 @@ public class ServiziDelegate {
 	public List<ControlloAttivitaServizio> getListaAttivitaSuccessive(
 			String codPolo, String codBib, String codTipoServ, int progrIter, DatiRichiestaILLVO datiILL)
 			throws RemoteException {
-		// La lista tornata Ã¨ di istanze della classe
+		// La lista tornata contiene istanze della classe
 		// it.iccu.sbn.ejb.vo.servizi.Attivita
 		// mentre il metodo deve tornare una lista di istanze di
 		// it.iccu.sbn.web.integration.servizi.erogazione.Attivita
