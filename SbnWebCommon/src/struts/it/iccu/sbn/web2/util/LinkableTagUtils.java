@@ -19,6 +19,7 @@ package it.iccu.sbn.web2.util;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.util.IdGenerator;
 import it.iccu.sbn.web.exception.SbnBaseException;
+import it.iccu.sbn.web.vo.UserMessage;
 import it.iccu.sbn.web2.navigation.Navigation;
 import it.iccu.sbn.web2.navigation.NavigationElement;
 
@@ -219,6 +220,10 @@ public class LinkableTagUtils {
 		addError(request, message, true);
 	}
 
+	public static void addError(HttpServletRequest request, UserMessage msg) {
+		ActionMessage am = new ActionMessage(msg.getKey(), msg.getValues() );
+		addError(request, am);
+	}
 
 	public static final void addError(HttpServletRequest request, SbnBaseException e) {
 		List<SbnBaseException> exceptions = e.getExceptions();

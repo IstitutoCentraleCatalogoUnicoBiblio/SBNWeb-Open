@@ -14,20 +14,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package it.iccu.sbn.ejb.domain.semantica.classi;
+package it.iccu.sbn.web.vo;
 
-import it.iccu.sbn.ejb.dao.DAOException;
-import it.iccu.sbn.ejb.vo.gestionesemantica.classificazione.CreaVariaClasseVO;
-import it.iccu.sbn.web.vo.UserMessage;
+import it.iccu.sbn.web.exception.SbnBaseException;
 
-import java.rmi.RemoteException;
-import java.util.List;
+import java.io.Serializable;
 
-import javax.ejb.EJBObject;
+public interface UserMessage extends Serializable {
 
-public interface Classi extends EJBObject {
+	String getKey();
 
-	public List<UserMessage> consumeMessages(String ticket) throws RemoteException;
+	Object[] getValues();
 
-	public CreaVariaClasseVO importaClasseDaIndice(CreaVariaClasseVO richiesta,	String ticket) throws DAOException, RemoteException;
+	boolean isResource();
+
+	SbnBaseException getException();
+
 }

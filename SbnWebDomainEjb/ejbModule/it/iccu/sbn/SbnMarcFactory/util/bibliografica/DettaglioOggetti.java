@@ -72,13 +72,20 @@ public class DettaglioOggetti {
 
 	private Codici codici;
 
-	private boolean showOCN;
+	private static boolean showOCN;
+
+	static {
+		//almaviva5_20161005 evolutiva oclc
+		try {
+			showOCN = Boolean.parseBoolean(CommonConfiguration.getProperty(Configuration.GB_CARICA_OCLC_CONTROL_NUMBER, "false"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public DettaglioOggetti() {
 		try {
 			this.codici = DomainEJBFactory.getInstance().getCodici();
-			//almaviva5_20161005 evolutiva oclc
-			showOCN = Boolean.parseBoolean(CommonConfiguration.getProperty(Configuration.GB_CARICA_OCLC_CONTROL_NUMBER, "false"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

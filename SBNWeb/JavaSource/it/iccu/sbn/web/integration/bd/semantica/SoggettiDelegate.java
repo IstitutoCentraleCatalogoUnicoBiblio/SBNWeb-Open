@@ -56,11 +56,11 @@ import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ricerca.RicercaSoggettoList
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ricerca.SoggettarioVO;
 import it.iccu.sbn.ejb.vo.semantica.TbCodiciSogg;
 import it.iccu.sbn.exception.UtenteNotAuthorizedException;
-import it.iccu.sbn.vo.custom.semantica.UserMessage;
 import it.iccu.sbn.web.constant.NavigazioneSemantica;
 import it.iccu.sbn.web.exception.SbnBaseException;
 import it.iccu.sbn.web.integration.bd.FactoryEJBDelegate;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
+import it.iccu.sbn.web.vo.UserMessage;
 import it.iccu.sbn.web.vo.UserVO;
 import it.iccu.sbn.web2.navigation.Navigation;
 import it.iccu.sbn.web2.util.Constants;
@@ -1061,8 +1061,7 @@ public class SoggettiDelegate {
 			if (e != null)
 				LinkableTagUtils.addError(request, e);
 			else {
-				ActionMessage am = new ActionMessage(msg.getKey(), msg.getValues() );
-				LinkableTagUtils.addError(request, am);
+				LinkableTagUtils.addError(request, msg);
 			}
 		}
 	}

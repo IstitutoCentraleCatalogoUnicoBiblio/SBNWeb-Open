@@ -14,20 +14,35 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package it.iccu.sbn.ejb.domain.semantica.classi;
+package it.iccu.sbn.web.integration.messages;
 
-import it.iccu.sbn.ejb.dao.DAOException;
-import it.iccu.sbn.ejb.vo.gestionesemantica.classificazione.CreaVariaClasseVO;
 import it.iccu.sbn.web.vo.UserMessage;
 
-import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import javax.ejb.EJBObject;
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 
-public interface Classi extends EJBObject {
+public class UserMessages {
 
-	public List<UserMessage> consumeMessages(String ticket) throws RemoteException;
+	private static Map<String, List<UserMessage>> userMessages = new ConcurrentHashMap<String, List<UserMessage>>();
 
-	public CreaVariaClasseVO importaClasseDaIndice(CreaVariaClasseVO richiesta,	String ticket) throws DAOException, RemoteException;
+	public static List<UserMessage> get(String ticket) {
+		if (!isFilled(ticket))
+			return new ArrayList<UserMessage>();
+
+		List<UserMessage> messages = userMessages.get(ticket);
+		if (messages == null) {
+			messages = new ArrayList<UserMessage>();
+			userMessages.put(ticket, messages);
+		}
+		return messages;
+	}
+
+	public static void remove(String ticket) {
+		if (isFilled(ticket))
+			userMessages.remove(ticket);
+	}
 }

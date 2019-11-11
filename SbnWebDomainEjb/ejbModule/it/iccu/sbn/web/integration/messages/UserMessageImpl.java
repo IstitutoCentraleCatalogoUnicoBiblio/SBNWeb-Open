@@ -14,13 +14,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package it.iccu.sbn.vo.custom.semantica;
+package it.iccu.sbn.web.integration.messages;
 
 import it.iccu.sbn.web.exception.SbnBaseException;
+import it.iccu.sbn.web.vo.UserMessage;
 
-import java.io.Serializable;
-
-public class UserMessage implements Serializable {
+public class UserMessageImpl implements UserMessage {
 
 	private static final long serialVersionUID = -5978144469642784215L;
 
@@ -29,27 +28,27 @@ public class UserMessage implements Serializable {
 	protected boolean resource;
 	protected SbnBaseException exception;
 
-	public UserMessage(String key) {
+	public UserMessageImpl(String key) {
 		this(key, (Object[]) null);
 	}
 
-	public UserMessage(String key, Object value0) {
+	public UserMessageImpl(String key, Object value0) {
 		this(key, new Object[] { value0 });
 	}
 
-	public UserMessage(String key, Object value0, Object value1) {
+	public UserMessageImpl(String key, Object value0, Object value1) {
 		this(key, new Object[] { value0, value1 });
 	}
 
-	public UserMessage(String key, Object value0, Object value1, Object value2) {
+	public UserMessageImpl(String key, Object value0, Object value1, Object value2) {
 		this(key, new Object[] { value0, value1, value2 });
 	}
 
-	public UserMessage(String key, Object value0, Object value1, Object value2, Object value3) {
+	public UserMessageImpl(String key, Object value0, Object value1, Object value2, Object value3) {
 		this(key, new Object[] { value0, value1, value2, value3 });
 	}
 
-	public UserMessage(String key, Object[] values) {
+	public UserMessageImpl(String key, Object[] values) {
 		this.key = null;
 		this.values = null;
 		this.resource = true;
@@ -58,7 +57,7 @@ public class UserMessage implements Serializable {
 		this.resource = true;
 	}
 
-	public UserMessage(String key, boolean resource) {
+	public UserMessageImpl(String key, boolean resource) {
 		this.key = null;
 		this.values = null;
 		this.resource = true;
@@ -66,7 +65,7 @@ public class UserMessage implements Serializable {
 		this.resource = resource;
 	}
 
-	public UserMessage(SbnBaseException e) {
+	public UserMessageImpl(SbnBaseException e) {
 		this.exception = e;
 	}
 

@@ -59,10 +59,12 @@ import it.iccu.sbn.servizi.ticket.TicketChecker;
 import it.iccu.sbn.util.config.CommonConfiguration;
 import it.iccu.sbn.util.config.Configuration;
 import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
-import it.iccu.sbn.vo.custom.semantica.UserMessage;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
 import it.iccu.sbn.web.exception.SbnBaseException;
+import it.iccu.sbn.web.integration.messages.UserMessageImpl;
+import it.iccu.sbn.web.integration.messages.UserMessages;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
+import it.iccu.sbn.web.vo.UserMessage;
 
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
@@ -70,7 +72,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.ejb.EJBException;
 import javax.ejb.SessionContext;
@@ -89,27 +90,6 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 	private static final long serialVersionUID = -1757544682915157733L;
 
 	static Logger log = Logger.getLogger(Soggetti.class);
-	
-	static class UserMessages {
-		private static Map<String, List<UserMessage>> userMessages = new ConcurrentHashMap<String, List<UserMessage>>();
-		
-		static List<UserMessage> get(String ticket) {
-			if (!isFilled(ticket))
-				return new ArrayList<UserMessage>();
-
-			List<UserMessage> messages = userMessages.get(ticket);
-			if (messages == null) {
-				messages = new ArrayList<UserMessage>();
-				userMessages.put(ticket, messages);
-			}
-			return messages;
-		}
-		
-		static void remove(String ticket) {
-			if (isFilled(ticket))
-				userMessages.remove(ticket);
-		}
-	}
 
 	static Reference<Semantica> semantica = new Reference<Semantica>() {
 		@Override
@@ -168,7 +148,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				//il soggetto di indice è stato importato con lo stesso cid
 				AnaliticaSoggettoVO analiticaSoggettoPolo = caricaReticoloSoggetto(ticket, true, soggettoImportato.getCid() );
 				attivaCondivisioneSoggetto(ticket, analiticaSoggettoPolo.getDettaglio(), soggettoIndice.getCid(), OrigineSoggetto.INDICE);
-				messages.add(new UserMessage("errors.gestioneSemantica.operOkIns", soggettoImportato.getCid()));
+				messages.add(new UserMessageImpl("errors.gestioneSemantica.operOkIns", soggettoImportato.getCid()));
 				return analiticaSoggettoPolo;
 			}
 
@@ -181,7 +161,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				ElementoSinteticaSoggettoVO simile =
 					ReticoloSoggetti.trovaSimileConTestoEsatto(soggettoIndice.getTesto(), soggettoImportato.getListaSimili() );
 				if (simile == null) {
-					messages.add(new UserMessage("errors.gestioneSemantica.incongruenzaSogg"));
+					messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruenzaSogg"));
 					return null;
 				}
 				log.debug("importaSoggettoDaIndice(): trovato simile in polo: " + simile);
@@ -246,7 +226,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 					if (soggettoAccorpante.getEsitoType() != SbnMarcEsitoType.OK) {
 						//creazione in polo non riuscita, si elimina il soggetto in indice
 						semantica.get().cancellaSoggettoDescrittore(false, soggettoAccorpante.getCid(), ticket, SbnAuthority.SO);
-						messages.add(new UserMessage("errors.gestioneSemantica.incongruo", soggettoAccorpante.getTestoEsito()));
+						messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", soggettoAccorpante.getTestoEsito()));
 						return null;
 					}
 					//eliminazione link condiviso del vecchio soggetto
@@ -265,7 +245,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				ElementoSinteticaSoggettoVO simile =
 						ReticoloSoggetti.trovaSimileConTestoEsatto(soggettoIndice.getTesto(), soggettoImportato.getListaSimili() );
 				if (simile == null) {
-					messages.add(new UserMessage("errors.gestioneSemantica.incongruenzaSogg"));
+					messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruenzaSogg"));
 					return null;
 				}
 
@@ -285,7 +265,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 					simileInPolo.setEdizioneSoggettario(SbnEdizioneSoggettario.E.toString());
 					CreaVariaSoggettoVO soggPoloModificato = modificaSoggetto(ticket, simileInPolo);
 					if (soggPoloModificato.isEsitoOk()) {
-						messages.add(new UserMessage("errors.gestioneSemantica.soggetto.importa.cambio.edizione.polo", simile.getCid()));
+						messages.add(new UserMessageImpl("errors.gestioneSemantica.soggetto.importa.cambio.edizione.polo", simile.getCid()));
 						// edizione modificata, provo ad attivare la condivisione tra i due soggetti
 						attivaCondivisioneSoggetto(ticket, dettaglioSimile, cidIndice, OrigineSoggetto.INDICE );
 						return caricaReticoloSoggetto(ticket, true, dettaglioSimile.getCid());
@@ -301,31 +281,31 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				}
 			}
 */
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", soggettoImportato.getTestoEsito()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", soggettoImportato.getTestoEsito()));
 			return null;
 
 		} catch (SbnMarcDiagnosticoException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			return null;
 
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 			log.error("", e);
 			return null;
 		}
@@ -365,30 +345,30 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 			if (analitica.isEsitoOk() || analitica.isEsitoNonTrovato() )
 				return analitica;
 
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", analitica.getTestoEsito()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", analitica.getTestoEsito()));
 
 			return null;
 
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 
 			log.error("", e);
 			// nessun codice selezionato
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 
 			log.error("", e);
 			return null;
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 
 			log.error("", e);
 			return null;
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 
 			log.error("", e);
 			return null;
@@ -433,7 +413,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				log.debug(String.format("attivata condivisione tra cid di polo '%s' e quello di indice '%s'", cidPolo, cidIndice));
 				//messaggio all'utente in caso di cid non uguali
 				List<UserMessage> messages = UserMessages.get(ticket);
-				messages.add(new UserMessage("errors.gestioneSemantica.soggetto.condivisione.attiva", cidPolo, cidIndice));
+				messages.add(new UserMessageImpl("errors.gestioneSemantica.soggetto.condivisione.attiva", cidPolo, cidIndice));
 			}
 
 		} catch (DAOException e) {
@@ -471,7 +451,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 			SbnMarcEsitoType esito = soggVariato.getEsitoType();
 			if (esito == SbnMarcEsitoType.OK)
-				messages.add(new UserMessage("errors.gestioneSemantica.polo.operOk"));
+				messages.add(new UserMessageImpl("errors.gestioneSemantica.polo.operOk"));
 
 			String soggSBN = CommonConfiguration.getProperty(Configuration.CODICE_SOGGETTARIO_FIRENZE, "FIR");
 
@@ -507,7 +487,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 				AnaliticaSoggettoVO analitica = caricaReticoloSoggetto(ticket, false, dcs.getCidPolo());
 				if (analitica == null) {
-					messages.add(new UserMessage("errors.gestioneSemantica.incongruo", SbnMarcEsitoType.SERVER_NON_DISPONIBILE.getTestoEsito()));
+					messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", SbnMarcEsitoType.SERVER_NON_DISPONIBILE.getTestoEsito()));
 					if (soggetto.isCondiviso())
 						disattivaCondivisioneSoggetto(ticket, datiCondivisione);
 					return soggVariato;
@@ -539,7 +519,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 					esitoIndice = soggVariatoIndice.getEsitoType();
 					switch (esitoIndice) {
 					case OK:
-						messages.add(new UserMessage("errors.gestioneSemantica.indice.operOk"));
+						messages.add(new UserMessageImpl("errors.gestioneSemantica.indice.operOk"));
 						DettaglioSoggettoVO dettaglioPolo = caricaReticoloSoggetto(ticket, true, soggetto.getCid()).getDettaglio();
 						attivaCondivisioneSoggetto(ticket, dettaglioPolo, soggVariatoIndice.getCid(), OrigineSoggetto.POLO);
 						break;
@@ -570,7 +550,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 							return new CreaVariaSoggettoVO((DettaglioSoggettoVO) dettaglio2);
 						}
 					*/
-						messages.add(new UserMessage("errors.gestioneSemantica.incongruo", soggVariatoIndice.getTestoEsito()));
+						messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", soggVariatoIndice.getTestoEsito()));
 						if (soggetto.isCondiviso())
 							disattivaCondivisioneSoggetto(ticket, datiCondivisione);
 					}
@@ -597,23 +577,23 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
 			log.error("", e);
 			// nessun codice selezionato
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 			log.error("", e);
 			return null;
 		}
@@ -652,7 +632,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 		String cidIndice = first(datiCondivisione).getCidIndice();
 
 		log.warn("disattivazione condivisione soggetto: " + cidPolo + " <--> " + cidIndice);
-		messages.add(new UserMessage("errors.gestioneSemantica.soggetto.condivisione.cancella",	cidPolo, cidIndice));
+		messages.add(new UserMessageImpl("errors.gestioneSemantica.soggetto.condivisione.cancella",	cidPolo, cidIndice));
 	}
 
 	String verificaCidPerCreazioneIndice(String ticket, String cidIndice) {
@@ -668,12 +648,12 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 		} catch (ApplicationException e) {
 			log.error("", e);
-			messages.add(new UserMessage(e));
+			messages.add(new UserMessageImpl(e));
 		} catch (ValidationException e) {
-			messages.add(new UserMessage(e));
+			messages.add(new UserMessageImpl(e));
 		} catch (Exception e) {
 			log.error("", e);
-			messages.add(new UserMessage(SbnErrorTypes.ERROR_GENERIC.getErrorMessage()));
+			messages.add(new UserMessageImpl(SbnErrorTypes.ERROR_GENERIC.getErrorMessage()));
 		}
 
 		return null;
@@ -739,7 +719,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 							}
 
 							//soggetti incompatibili
-							messages.add(new UserMessage("errors.gestioneSemantica.incongruenzaSogg"));
+							messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruenzaSogg"));
 							return null;
 
 						} else {
@@ -757,7 +737,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 						if (!SoggettiUtil.isEdizioneCompatibile(edPol, edIdx) ) {
 							//se l'edizione dei due soggetti non è compatibile è necessario forzare un cambio edizione in indice
 							if (richiesta.isForzaCreazione()) {
-								messages.add(new UserMessage("errors.gestioneSemantica.incongruenzaSogg"));
+								messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruenzaSogg"));
 								return null;
 							} else {
 								//riprovo con forzatura
@@ -792,7 +772,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				//almaviva5_20180621 #6624
 				if (!profiler.get().isOkAttivita(ticket, CodiciAttivita.getIstance().FONDE_SOGGETTO_1272) ) {
 					log.warn("eseguiCreazioneSoggettoIndice(): utente non abilitato alla fusione in polo, impossibile continuare.");
-					messages.add(new UserMessage("errors.gestioneSemantica.soggetto.fondi.polo.non.abilitato"));
+					messages.add(new UserMessageImpl("errors.gestioneSemantica.soggetto.fondi.polo.non.abilitato"));
 					return null;
 				}
 
@@ -822,31 +802,31 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				}
 			}
 
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", soggettoCreato.getTestoEsito()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", soggettoCreato.getTestoEsito()));
 			return null;
 
 		} catch (SbnMarcDiagnosticoException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			return null;
 
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 			log.error("", e);
 			return null;
 		}
@@ -870,10 +850,10 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 		boolean ok = SbnMarcEsitoType.of(fondiSoggetti.getCodiceRitorno()) == SbnMarcEsitoType.OK;
 		if (ok) {
-			messages.add(new UserMessage("errors.gestioneSemantica.soggetto.condiviso.fondi.polo",
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.soggetto.condiviso.fondi.polo",
 					soggettoEliminato.getCid(), soggettoCreato.getCid()));
 		} else {
-			messages.add(new UserMessage("errors.gestioneSemantica.SBNMarc", fondiSoggetti.getIdErrore()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.SBNMarc", fondiSoggetti.getIdErrore()));
 			//cancellazione cid in polo
 			semantica.get().cancellaSoggettoDescrittore(true, soggettoAccorpante.getCid(), ticket, SbnAuthority.SO);
 		}
@@ -889,7 +869,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 			areaDatiPass.setTipoRec(null);
 			AreaDatiPassaggioGetIdSbnVO idSbn =	interrogazione.get().getIdSbn(areaDatiPass, ticket);
 			if (SbnMarcEsitoType.of(idSbn.getCodErr()) != SbnMarcEsitoType.OK) {
-				messages.add(new UserMessage("errors.gestioneSemantica.incongruo", areaDatiPass.getTestoProtocollo()));
+				messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", areaDatiPass.getTestoProtocollo()));
 				return null;
 			}
 
@@ -897,22 +877,22 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 			log.error("", e);
 			return null;
 		}
@@ -981,7 +961,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 					return eseguiCreazioneSoggettoIndice(ticket, soggetto, idSoggetto);
 				}
 
-				messages.add(new UserMessage("errors.gestioneSemantica.incongruo",
+				messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo",
 						reticoloSoggettoIndice.getTestoEsito()));
 				return null;
 			*/
@@ -991,22 +971,22 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 		/*
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 		*/
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 			log.error("", e);
 			return null;
 		}
@@ -1018,7 +998,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 		List<UserMessage> messages = UserMessages.get(ticket);
 		// controllo lunghezza per invio in indice
 		if (!SoggettiUtil.checkSoggettoPerIndice(testoSoggetto)) {
-			messages.add(new UserMessage("errors.gestioneSemantica.soggetto.indiceMaxLen", SoggettiUtil.MAX_LEN_SOGGETTO_INDICE));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.soggetto.indiceMaxLen", SoggettiUtil.MAX_LEN_SOGGETTO_INDICE));
 			return false;
 		}
 
@@ -1034,7 +1014,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 		DatiLegameTitoloSoggettoVO risposta = null;
 
 		if (reticoloIndice == null) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema"));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema"));
 			return null;
 		}
 
@@ -1044,7 +1024,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 		String T005 = detTitoloPFissaVO.getVersione(); // timestamp del titolo
 
 		if (!isFilled(soggettiDaInviare) ) {
-			messages.add(new UserMessage("errors.gestioneSemantica.codiceNessunaSelezione"));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.codiceNessunaSelezione"));
 			return null;
 		}
 
@@ -1066,7 +1046,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 					true, bid, null, SBNMARC_MAX_RIGHE, utenteCollegato.getTicket());
 
 			if (!listaSoggettiPolo.isEsitoOk()) {
-				messages.add(new UserMessage(
+				messages.add(new UserMessageImpl(
 						"errors.gestioneSemantica.incongruo", listaSoggettiPolo.getTestoEsito()));
 
 				return null;
@@ -1078,7 +1058,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 					false, bid, null, SBNMARC_MAX_RIGHE, utenteCollegato.getTicket());
 
 			if (!listaSoggettiIndice.isEsitoOk() && !listaSoggettiIndice.isEsitoNonTrovato() ) {
-				messages.add(new UserMessage(
+				messages.add(new UserMessageImpl(
 						"errors.gestioneSemantica.incongruo", listaSoggettiIndice.getTestoEsito()));
 
 				return null;
@@ -1170,34 +1150,34 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 				risposta = semantica.get().invioInIndiceLegameTitoloSoggetto(legame, ticket);
 
 				if (!risposta.isEsitoOk()) {
-					messages.add(new UserMessage("errors.gestioneSemantica.incongruo", risposta.getTestoEsito()));
+					messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", risposta.getTestoEsito()));
 					return null;
 				}
 
 			} // fase 6
 
-			messages.add(new UserMessage("errors.gestioneSemantica.operOk"));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.operOk"));
 
 			return risposta;
 
 		} catch (ValidationException e) {
 			// errori indice
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreValidazione", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (DataException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (InfrastructureException e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", e.getMessage()));
 			log.error("", e);
 			return null;
 
 		} catch (Exception e) {
-			messages.add(new UserMessage("errors.gestioneSemantica.erroreSistema", e.getMessage()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.erroreSistema", e.getMessage()));
 			log.error("", e);
 			return null;
 		}
@@ -1212,7 +1192,7 @@ public class SoggettiBean extends TicketChecker implements Soggetti {
 
 		AnaliticaSoggettoVO analitica = caricaReticoloSoggetto(ticket, true, cidPolo);
 		if (!analitica.isEsitoOk()) {
-			messages.add(new UserMessage("errors.gestioneSemantica.incongruo", analitica.getTestoEsito()));
+			messages.add(new UserMessageImpl("errors.gestioneSemantica.incongruo", analitica.getTestoEsito()));
 			return false;
 		}
 

@@ -23,8 +23,8 @@ import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.CreaVariaSoggettoVO;
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.DatiCondivisioneSoggettoVO.OrigineSoggetto;
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.DettaglioSoggettoVO;
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.ElementoSinteticaSoggettoVO;
-import it.iccu.sbn.vo.custom.semantica.UserMessage;
 import it.iccu.sbn.web.exception.SbnBaseException;
+import it.iccu.sbn.web.vo.UserMessage;
 
 import java.rmi.RemoteException;
 import java.util.List;
