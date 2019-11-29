@@ -118,7 +118,7 @@
 				key="servizi.documenti.segnatura" bundle="serviziLabels" /></td>
 			<td scope="col" colspan="6" align="left">
 			<sbn:disableAll checkAttivita="SEGNATURA">
-				<html:text styleId="testoNormale" property="documento.segnatura" size="90" />
+				<html:text styleId="testoNormale" property="documento.segnatura" size="90" maxlength="40"/>
 			</sbn:disableAll>
 			</td>
 		</tr>

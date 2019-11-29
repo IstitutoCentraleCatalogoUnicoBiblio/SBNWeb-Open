@@ -39,7 +39,6 @@ import it.iccu.sbn.ejb.vo.servizi.erogazione.SupportiModalitaErogazioneVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.TariffeModalitaErogazioneVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.ill.DatiRichiestaILLVO;
 import it.iccu.sbn.ejb.vo.servizi.utenti.UtenteBaseVO;
-import it.iccu.sbn.util.IdGenerator;
 import it.iccu.sbn.web.constant.NavigazioneServizi;
 import it.iccu.sbn.web.exception.RandomIdGenerator;
 import it.iccu.sbn.web.exception.SbnBaseException;

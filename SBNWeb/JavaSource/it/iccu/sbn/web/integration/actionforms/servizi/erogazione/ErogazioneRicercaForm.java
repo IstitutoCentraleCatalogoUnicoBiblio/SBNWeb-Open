@@ -16,7 +16,6 @@
  ******************************************************************************/
 package it.iccu.sbn.web.integration.actionforms.servizi.erogazione;
 
-import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.ComboCodDescVO;
 import it.iccu.sbn.ejb.vo.servizi.configurazione.TipoServizioVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.InfoDocumentoVO;
@@ -50,16 +49,6 @@ public class ErogazioneRicercaForm extends AbstractBibliotecaForm {
 	private String provengoDa;
 	private RicercaRichiesteType tipoRicerca = RicercaRichiesteType.RICERCA_PER_UTENTE;
 	private RicercaRichiesteType tipoRicerca_old = null;
-
-	private List<ComboVO> elencoBib = new ArrayList<ComboVO>();
-
-	public List<ComboVO> getElencoBib() {
-		return elencoBib;
-	}
-
-	public void setElencoBib(List<ComboVO> elencoBib) {
-		this.elencoBib = elencoBib;
-	}
 
 	// gestisce la pagina di conferma con richiesrta
 	boolean conferma = false;

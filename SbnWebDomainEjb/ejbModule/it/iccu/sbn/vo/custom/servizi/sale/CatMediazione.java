@@ -19,15 +19,17 @@ package it.iccu.sbn.vo.custom.servizi.sale;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 
+import com.annimon.stream.Optional;
+
 public class CatMediazione extends TB_CODICI {
 
 	private static final long serialVersionUID = 5203681504194231194L;
 
-	public static final CatMediazione of(TB_CODICI cod) {
+	public static final Optional<CatMediazione> of(TB_CODICI cod) {
 		if (cod == null)
-			return null;
+			return Optional.empty();
 
-		return new CatMediazione(cod);
+		return Optional.of(new CatMediazione(cod));
 	}
 
 	private CatMediazione(TB_CODICI cod) {

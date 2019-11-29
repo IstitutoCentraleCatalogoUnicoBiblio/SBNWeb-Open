@@ -966,6 +966,8 @@ public class GestioneDocumentoAction extends ServiziBaseAction implements
 			LinkableTagUtils.addError(request, new ValidationException(ERROR_GENERIC_FIELD_TOO_LONG, "servizi.documenti.autore", "160"));
 		if (ValidazioneDati.length(dettaglio.getLuogoEdizione()) > 30)
 			LinkableTagUtils.addError(request, new ValidationException(ERROR_GENERIC_FIELD_TOO_LONG, "servizi.documenti.luogo", "30"));
+		if (ValidazioneDati.length(dettaglio.getSegnatura()) > 40)
+			LinkableTagUtils.addError(request, new ValidationException(ERROR_GENERIC_FIELD_TOO_LONG, "servizi.documenti.segnatura", "40"));
 
 		//almaviva5_20141125 servizi ill
 		boolean tipNumStd = ValidazioneDati.isFilled(dettaglio.getTipoNumStd());

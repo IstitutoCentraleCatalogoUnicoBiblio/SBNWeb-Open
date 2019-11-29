@@ -71,6 +71,7 @@ import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 import com.annimon.stream.function.Predicate;
 
@@ -255,9 +256,9 @@ public class GrigliaCalendario {
 
 			//se la richiesta è inserita dall'utente si verificano i tempi di preparazione del supporto (se previsto)
 			if (utenteRemoto) {
-				CatMediazione catMed = CatMediazione.of(CodiciProvider.cercaCodice(this.cd_cat_mediazione,
+				Optional<CatMediazione> catMed = CatMediazione.of(CodiciProvider.cercaCodice(this.cd_cat_mediazione,
 						CodiciType.CODICE_CATEGORIA_STRUMENTO_MEDIAZIONE, CodiciRicercaType.RICERCA_CODICE_SBN));
-				if (catMed != null && catMed.isRichiedeSupporto()) {
+				if (catMed.isPresent() && catMed.get().isRichiedeSupporto()) {
 					int ggPrepSupp = CalendarioUtil.calcolaGiorniPreparazioneSupporto(calendarioBib, now, servizio);
 					if (inizio.compareTo(now) <= 0)
 						giorniRiservati = ggPrepSupp;

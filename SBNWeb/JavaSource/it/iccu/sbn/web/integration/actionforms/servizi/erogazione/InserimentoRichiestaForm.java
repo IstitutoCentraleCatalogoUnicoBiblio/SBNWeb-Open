@@ -16,7 +16,6 @@
  ******************************************************************************/
 package it.iccu.sbn.web.integration.actionforms.servizi.erogazione;
 
-import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.MovimentoVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.SollecitiVO;
 import it.iccu.sbn.vo.custom.servizi.MovimentoListaVO;
@@ -224,16 +223,6 @@ public class InserimentoRichiestaForm extends ListaMovimentiForm {
 	private String codUtente;
 	private String codBibUtente;
 	private String codServNuovaRich;
-
-	private List<ComboVO> elencoBib = new ArrayList<ComboVO>();
-
-	public List<ComboVO> getElencoBib() {
-		return elencoBib;
-	}
-
-	public void setElencoBib(List<ComboVO> elencoBib) {
-		this.elencoBib = elencoBib;
-	}
 
 	private MovimentoVO anaMov = new MovimentoVO();
 	private String supporto;

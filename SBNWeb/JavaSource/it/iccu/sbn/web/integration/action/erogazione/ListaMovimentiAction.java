@@ -29,7 +29,6 @@ import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.common.DescrittoreBloccoVO;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 import it.iccu.sbn.ejb.vo.documentofisico.InventarioTitoloVO;
-import it.iccu.sbn.ejb.vo.documentofisico.InventarioVO;
 import it.iccu.sbn.ejb.vo.gestionestampe.common.StampaType;
 import it.iccu.sbn.ejb.vo.servizi.ParametriServizi;
 import it.iccu.sbn.ejb.vo.servizi.ParametriServizi.ModalitaGestioneType;
@@ -58,7 +57,6 @@ import it.iccu.sbn.servizi.ill.ILLConfiguration2;
 import it.iccu.sbn.util.cloning.ClonePool;
 import it.iccu.sbn.util.config.CommonConfiguration;
 import it.iccu.sbn.util.config.Configuration;
-import it.iccu.sbn.util.rfid.InventarioRFIDParser;
 import it.iccu.sbn.util.servizi.ServiziUtil;
 import it.iccu.sbn.vo.custom.servizi.CodTipoServizio;
 import it.iccu.sbn.vo.custom.servizi.MovimentoListaVO;
@@ -1957,32 +1955,15 @@ public class ListaMovimentiAction extends ErogazioneAction {
 
 
 		MovimentoRicercaVO movRicerca = (MovimentoRicercaVO) currentForm.getMovRicerca();
-		RicercaRichiesteType tipoRicerca = currentForm.getTipoRicerca();
 
-		//almaviva5_20120221 rfid
-		String rfid = movRicerca.getRfidChiaveInventario();
-		if (ValidazioneDati.isFilled(rfid)) {
-			InventarioVO inv = InventarioRFIDParser.parse(rfid);
-			Navigation navi = Navigation.getInstance(request);
-			movRicerca.setCodPolo(ValidazioneDati.isFilled(inv.getCodPolo()) ? inv.getCodPolo() : navi.getUtente().getCodPolo());
-			//almaviva5_20120221 check biblioteca
-			String codBibInv = inv.getCodBib();
-			boolean found = false;
-			for (ComboVO bib : currentForm.getElencoBib()) {
-				if (ValidazioneDati.equals(bib.getCodice(), codBibInv)) {
-					found = true;
-					break;
-				}
-			}
-			if (!found)
-				throw new ValidationException(SbnErrorTypes.SRV_ERRORE_RFID_BIBLIOTECA);
-			//
-			log.debug("lettura inventario da rfid: " + inv.getChiaveInventario() );
-			movRicerca.setCodBibInv(codBibInv);
-			currentForm.setCodSerieInv(inv.getCodSerie());
-			currentForm.setCodInvenInv(String.valueOf(inv.getCodInvent()));
-			movRicerca.setRfidChiaveInventario(null);
+		if (checkInventarioRfid(request, currentForm, movRicerca) ) {
+			//impostazione chiavi inventario
+			currentForm.setCodBibInv(movRicerca.getCodBibInv());
+			currentForm.setCodSerieInv(movRicerca.getCodSerieInv());
+			currentForm.setCodInvenInv(movRicerca.getCodInvenInv());
 		}
+
+		RicercaRichiesteType tipoRicerca = currentForm.getTipoRicerca();
 
 		switch (tipoRicerca) {
 		case RICERCA_PER_UTENTE:
@@ -2077,7 +2058,7 @@ public class ListaMovimentiAction extends ErogazioneAction {
 		case RICERCA_PER_INVENTARIO:
 		case RICERCA_PER_SEGNATURA:
 
-			if (ValidazioneDati.strIsNull(currentForm.getCodUtente()) ) {
+			if (!ValidazioneDati.isFilled(currentForm.getCodUtente()) ) {
 				checkOK = false;
 				LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.listaMovimenti.indicareTuttiDatiUtente"));
 			}else {
@@ -2416,28 +2397,11 @@ public class ListaMovimentiAction extends ErogazioneAction {
 				return mapping.getInputForward();
 			}
 
-			//almaviva5_20120221 rfid
-			String rfid = movRicerca.getRfidChiaveInventario();
-			if (ValidazioneDati.isFilled(rfid)) {
-				InventarioVO inv = InventarioRFIDParser.parse(rfid);
-				movRicerca.setCodPolo(ValidazioneDati.isFilled(inv.getCodPolo()) ? inv.getCodPolo() : navi.getUtente().getCodPolo());
-				//almaviva5_20120221 check biblioteca
-				String codBibInv = inv.getCodBib();
-				boolean found = false;
-				for (ComboVO bib : currentForm.getElencoBib()) {
-					if (ValidazioneDati.equals(bib.getCodice(), codBibInv)) {
-						found = true;
-						break;
-					}
-				}
-				if (!found)
-					throw new ValidationException(SbnErrorTypes.SRV_ERRORE_RFID_BIBLIOTECA);
-				//
-				log.debug("lettura inventario da rfid: " + inv.getChiaveInventario() );
-				movRicerca.setCodBibInv(codBibInv);
-				currentForm.setCodSerieInv(inv.getCodSerie());
-				currentForm.setCodInvenInv(String.valueOf(inv.getCodInvent()));
-				movRicerca.setRfidChiaveInventario(null);
+			if (checkInventarioRfid(request, currentForm, movRicerca)) {
+				//impostazione chiavi inventario
+				currentForm.setCodBibInv(movRicerca.getCodBibInv());
+				currentForm.setCodSerieInv(movRicerca.getCodSerieInv());
+				currentForm.setCodInvenInv(movRicerca.getCodInvenInv());
 			}
 
 			//controllo dati
@@ -2528,6 +2492,10 @@ public class ListaMovimentiAction extends ErogazioneAction {
 						currentForm.setUtenteVO(utente);
 					}
 				}
+
+			default:
+				checkOK = false;
+				break;
 
 			}
 
@@ -2636,14 +2604,13 @@ public class ListaMovimentiAction extends ErogazioneAction {
 			resetToken(request);
 			log.info(e.getMessage());
 			return mapping.getInputForward();
+
 		} catch (Exception e) {
 			resetToken(request);
 			log.error("", e);
 			this.setErroreGenerico(request, e);
 			return mapping.getInputForward();
-
 		}
-
 	}
 
 	public ActionForward stampa(ActionMapping mapping, ActionForm form,

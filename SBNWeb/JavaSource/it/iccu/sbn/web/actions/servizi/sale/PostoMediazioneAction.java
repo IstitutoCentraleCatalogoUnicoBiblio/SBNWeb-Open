@@ -44,6 +44,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.annimon.stream.Optional;
+
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 
 public class PostoMediazioneAction extends ServiziBaseAction implements SbnAttivitaChecker {
@@ -111,19 +113,19 @@ public class PostoMediazioneAction extends ServiziBaseAction implements SbnAttiv
 		currentForm.setSelected(new Integer[size]);
 
 		for (int idx = 0; idx < size; idx++) {
-			CatMediazione catMed = CatMediazione.of(codici.get(idx));
+			Optional<CatMediazione> catMed = CatMediazione.of(codici.get(idx));
 			Mediazione m = new Mediazione();
-			String cd_cat_mediazione = catMed.getCd_tabellaTrim();
+			String cd_cat_mediazione = catMed.get().getCd_tabellaTrim();
 			if (!isFilled(cd_cat_mediazione) )
 				continue;
 
-			m.setRichiedeSupporto(catMed.isRichiedeSupporto());
+			m.setRichiedeSupporto(catMed.get().isRichiedeSupporto());
 
 			if (categorieMediazione.contains(cd_cat_mediazione))
 				//selezione supporti già presenti
 				currentForm.getSelected()[idx] = m.getUniqueId();
 			m.setCd_cat_mediazione(cd_cat_mediazione);
-			m.setDescr(catMed.getDs_tabella());
+			m.setDescr(catMed.get().getDs_tabella());
 			List<TB_CODICI> tipiMatInv = CodiciProvider.getCodiciCross(CodiciType.CODICE_CAT_STRUMENTO_MEDIAZIONE_TIPO_MAT_INV, cd_cat_mediazione, false);
 			if (isFilled(tipiMatInv)) {
 				List<String> supporti = new ArrayList<String>();

@@ -24,8 +24,10 @@ import it.iccu.sbn.ejb.utils.collocazioni.OrdinamentoCollocazione2;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.BibliotecaVO;
 import it.iccu.sbn.ejb.vo.common.CodiciType;
 import it.iccu.sbn.ejb.vo.common.CodiciType.CodiciRicercaType;
+import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 import it.iccu.sbn.ejb.vo.documentofisico.InventarioTitoloVO;
+import it.iccu.sbn.ejb.vo.documentofisico.InventarioVO;
 import it.iccu.sbn.ejb.vo.gestionestampe.common.ModelloStampaVO;
 import it.iccu.sbn.ejb.vo.gestionestampe.common.TipoStampa;
 import it.iccu.sbn.ejb.vo.servizi.ParametriBibliotecaVO;
@@ -42,6 +44,7 @@ import it.iccu.sbn.ejb.vo.servizi.documenti.sif.SIFListaDocumentiNonSbnVO;
 import it.iccu.sbn.ejb.vo.servizi.documenti.sif.SIFListaDocumentiNonSbnVO.TipoSIF;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.InfoDocumentoVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.IterServizioVO;
+import it.iccu.sbn.ejb.vo.servizi.erogazione.MovimentoRicercaVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.MovimentoVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.RichiestaRecordType;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.ServizioBibliotecaVO;
@@ -57,6 +60,7 @@ import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.servizi.ill.ILLConfiguration2;
 import it.iccu.sbn.servizi.ill.ILLConfiguration2.Action;
 import it.iccu.sbn.util.cloning.ClonePool;
+import it.iccu.sbn.util.rfid.InventarioRFIDParser;
 import it.iccu.sbn.util.servizi.ServiziUtil;
 import it.iccu.sbn.vo.custom.servizi.CodTipoServizio;
 import it.iccu.sbn.vo.custom.servizi.MovimentoListaVO;
@@ -66,6 +70,7 @@ import it.iccu.sbn.web.actions.common.ConfermaDati;
 import it.iccu.sbn.web.constant.NavigazioneServizi;
 import it.iccu.sbn.web.exception.SbnBaseException;
 import it.iccu.sbn.web.integration.action.ServiziBaseAction;
+import it.iccu.sbn.web.integration.actionforms.AbstractBibliotecaForm;
 import it.iccu.sbn.web.integration.actionforms.servizi.erogazione.ListaMovimentiForm;
 import it.iccu.sbn.web.integration.actionforms.servizi.erogazione.ListaMovimentiForm.RichiestaListaMovimentiType;
 import it.iccu.sbn.web.integration.bd.FactoryEJBDelegate;
@@ -1148,6 +1153,41 @@ public abstract class ErogazioneAction extends ServiziBaseAction implements SbnA
 		}
 
 		return null;
+	}
+
+	protected boolean checkInventarioRfid(HttpServletRequest request, AbstractBibliotecaForm currentForm, MovimentoRicercaVO ricerca) throws Exception {
+		//almaviva5_20120220 rfid
+		String rfid = ricerca.getRfidChiaveInventario();
+		if (ValidazioneDati.isFilled(rfid)) {
+			Navigation navi = Navigation.getInstance(request);
+			InventarioVO inv = InventarioRFIDParser.parse(rfid);
+			ricerca.setCodPolo(ValidazioneDati.isFilled(inv.getCodPolo()) ? inv.getCodPolo() : navi.getUtente().getCodPolo());
+			//almaviva5_20120221 check biblioteca
+			//se non valorizzata la bib di inv si controlla prima la biblioteca di ricerca e,
+			//in ultima istanza, la biblioteca corrente
+			String codBibInv = ValidazioneDati.coalesce(inv.getCodBib(),
+					ValidazioneDati.isFilled(ricerca.getCodBibInv()) ? ricerca.getCodBibInv() : currentForm.getBiblioteca() );
+			boolean found = false;
+			for (ComboVO bib : currentForm.getElencoBib()) {
+				if (ValidazioneDati.equals(bib.getCodice(), codBibInv)) {
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+				throw new ValidationException(SbnErrorTypes.SRV_ERRORE_RFID_BIBLIOTECA);
+
+			// cod bib. trovato
+			inv.setCodBib(codBibInv);
+			log.debug("lettura inventario da rfid: " + inv.getChiaveInventario() );
+			ricerca.setCodBibInv(codBibInv);
+			ricerca.setCodSerieInv(inv.getCodSerie());
+			ricerca.setCodInvenInv(String.valueOf(inv.getCodInvent()));
+			ricerca.setRfidChiaveInventario(null);
+			return true;
+		}
+
+		return false;
 	}
 
 }

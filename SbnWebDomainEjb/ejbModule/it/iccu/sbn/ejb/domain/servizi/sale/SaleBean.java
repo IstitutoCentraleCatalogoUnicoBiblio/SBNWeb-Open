@@ -384,14 +384,14 @@ public class SaleBean extends TicketChecker implements Sale {
 			int size = ValidazioneDati.size(codici);
 
 			for (int idx = 0; idx < size; idx++) {
-				CatMediazione catMed = CatMediazione.of(codici.get(idx));
+				Optional<CatMediazione> catMed = CatMediazione.of(codici.get(idx));
 				Mediazione m = new Mediazione();
-				String cd_cat_mediazione = catMed.getCd_tabellaTrim();
+				String cd_cat_mediazione = catMed.get().getCd_tabellaTrim();
 				if (!isFilled(cd_cat_mediazione) )
 					continue;
 
 				//filtra per categorie che richiedono supporto
-				boolean richiedeSupporto = catMed.isRichiedeSupporto();
+				boolean richiedeSupporto = catMed.get().isRichiedeSupporto();
 				if (richiedeSupp == ThreeState.TRUE && !richiedeSupporto)
 					continue;
 				if (richiedeSupp == ThreeState.FALSE && richiedeSupporto)
@@ -403,7 +403,7 @@ public class SaleBean extends TicketChecker implements Sale {
 					continue;
 
 				m.setCd_cat_mediazione(cd_cat_mediazione);
-				m.setDescr(catMed.getDs_tabella());
+				m.setDescr(catMed.get().getDs_tabella());
 				List<TB_CODICI> tipiMatInv = CodiciProvider.getCodiciCross(CodiciType.CODICE_CAT_STRUMENTO_MEDIAZIONE_TIPO_MAT_INV, cd_cat_mediazione, false);
 				if (isFilled(tipiMatInv)) {
 					List<String> supporti = new ArrayList<String>();

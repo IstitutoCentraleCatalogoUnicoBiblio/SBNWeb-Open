@@ -16,7 +16,6 @@
  ******************************************************************************/
 package it.iccu.sbn.web.integration.actionforms.servizi.erogazione;
 
-import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.ComboCodDescVO;
 import it.iccu.sbn.ejb.vo.servizi.configurazione.SupportoBibliotecaVO;
@@ -151,7 +150,6 @@ public class DettaglioMovimentoForm extends AbstractBibliotecaForm {
 	//posizione corrente
 	private int posizioneCorrente;
 
-	private List<ComboVO> elencoBib = new ArrayList<ComboVO>();
 	private String updateCombo;
 
 	public String getSalvaPolo() {
@@ -613,14 +611,6 @@ public class DettaglioMovimentoForm extends AbstractBibliotecaForm {
 
 	public void setPosizioneCorrente(int posizioneCorrente) {
 		this.posizioneCorrente = posizioneCorrente;
-	}
-
-	public List<ComboVO> getElencoBib() {
-		return elencoBib;
-	}
-
-	public void setElencoBib(List<ComboVO> elencoBib) {
-		this.elencoBib = elencoBib;
 	}
 
 	public String getUpdateCombo() {

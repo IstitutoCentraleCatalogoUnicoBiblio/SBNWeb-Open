@@ -18,7 +18,6 @@ package it.iccu.sbn.web.integration.actionforms.servizi.erogazione;
 
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.BibliotecaVO;
-import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 import it.iccu.sbn.ejb.vo.servizi.configurazione.SupportoBibliotecaVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.InfoDocumentoVO;
@@ -115,8 +114,6 @@ public class ListaMovimentiForm extends AbstractBibliotecaForm {
 	private UtenteBaseVO utenteVO = new UtenteBaseVO();
 	private InfoDocumentoVO infoDocumentoVO = new InfoDocumentoVO();
 
-	private List<ComboVO> elencoBib = new ArrayList<ComboVO>();
-
 	private List<SupportoBibliotecaVO> tipiSupporto;
 
 	private boolean rfidEnabled;
@@ -146,14 +143,6 @@ public class ListaMovimentiForm extends AbstractBibliotecaForm {
 	public void setModoErogazione(
 			List<TariffeModalitaErogazioneVO> modoErogazione) {
 		this.modoErogazione = modoErogazione;
-	}
-
-	public List<ComboVO> getElencoBib() {
-		return elencoBib;
-	}
-
-	public void setElencoBib(List<ComboVO> elencoBib) {
-		this.elencoBib = elencoBib;
 	}
 
 	private MovimentoVO anaMov = new MovimentoVO();

@@ -31,7 +31,6 @@ import it.iccu.sbn.ejb.vo.common.DescrittoreBloccoVO;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 import it.iccu.sbn.ejb.vo.documentofisico.FiltroCollocazioneVO;
 import it.iccu.sbn.ejb.vo.documentofisico.InventarioTitoloVO;
-import it.iccu.sbn.ejb.vo.documentofisico.InventarioVO;
 import it.iccu.sbn.ejb.vo.documentofisico.SezioneCollocazioneVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.ComboCodDescVO;
 import it.iccu.sbn.ejb.vo.gestionestampe.common.StampaType;
@@ -50,7 +49,6 @@ import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.util.config.CommonConfiguration;
 import it.iccu.sbn.util.config.Configuration;
-import it.iccu.sbn.util.rfid.InventarioRFIDParser;
 import it.iccu.sbn.util.servizi.ServiziUtil;
 import it.iccu.sbn.vo.custom.servizi.MovimentoListaVO;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
@@ -1143,33 +1141,7 @@ public class ErogazioneRicercaAction extends ErogazioneAction {
 
 			MovimentoRicercaVO ricerca = currentForm.getAnaMov().copy();
 
-			//almaviva5_20120220 rfid
-			String rfid = ricerca.getRfidChiaveInventario();
-			if (ValidazioneDati.isFilled(rfid)) {
-				InventarioVO inv = InventarioRFIDParser.parse(rfid);
-				ricerca.setCodPolo(ValidazioneDati.isFilled(inv.getCodPolo()) ? inv.getCodPolo() : navi.getUtente().getCodPolo());
-				//almaviva5_20120221 check biblioteca
-				//se non valorizzata la bib di inv si controlla prima la biblioteca di ricerca e,
-				//in ultima istanza, la biblioteca corrente
-				String codBibInv = ValidazioneDati.coalesce(inv.getCodBib(),
-						ValidazioneDati.isFilled(ricerca.getCodBibInv()) ? ricerca.getCodBibInv() : currentForm.getBiblioteca() );
-				boolean found = false;
-				for (ComboVO bib : currentForm.getElencoBib()) {
-					if (ValidazioneDati.equals(bib.getCodice(), codBibInv)) {
-						found = true;
-						break;
-					}
-				}
-				if (!found)
-					throw new ValidationException(SbnErrorTypes.SRV_ERRORE_RFID_BIBLIOTECA);
-				//
-				inv.setCodBib(codBibInv);
-				log.debug("lettura inventario da rfid: " + inv.getChiaveInventario() );
-				ricerca.setCodBibInv(codBibInv);
-				ricerca.setCodSerieInv(inv.getCodSerie());
-				ricerca.setCodInvenInv(String.valueOf(inv.getCodInvent()));
-				ricerca.setRfidChiaveInventario(null);
-			}
+			checkInventarioRfid(request, currentForm, ricerca);
 
 			this.validateForm(request, form, ricerca);
 
@@ -1294,6 +1266,9 @@ public class ErogazioneRicercaAction extends ErogazioneAction {
 
 				request.setAttribute(ServiziDelegate.LISTA_TEMATICHE, blocco1);
 				break;
+
+			default:
+				return mapping.getInputForward();
 			}
 
 			request.setAttribute("elencoBiblioteche", currentForm.getElencoBib());

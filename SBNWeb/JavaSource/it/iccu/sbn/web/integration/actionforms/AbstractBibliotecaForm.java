@@ -16,11 +16,14 @@
  ******************************************************************************/
 package it.iccu.sbn.web.integration.actionforms;
 
+import it.iccu.sbn.ejb.vo.common.ComboVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.InfoPasswordVO;
 import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.web.constant.ConstantDefault;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,6 +48,7 @@ public abstract class AbstractBibliotecaForm extends ActionForm {
 	private int numPrimo = 0;
 	private int totBlocchi = 0;
 	private InfoPasswordVO infoPwd = new InfoPasswordVO();
+	private List<ComboVO> elencoBib = new ArrayList<ComboVO>();
 
 	{
 		this.creationTime = DaoManager.now();
@@ -168,6 +172,14 @@ public abstract class AbstractBibliotecaForm extends ActionForm {
 
 	public Timestamp getCreationTime() {
 		return creationTime;
+	}
+
+	public List<ComboVO> getElencoBib() {
+		return elencoBib;
+	}
+
+	public void setElencoBib(List<ComboVO> elencoBib) {
+		this.elencoBib = elencoBib;
 	}
 
 }

@@ -1286,7 +1286,7 @@ public class UtentiDAO extends ServiziBaseDAO {
 				//almaviva5_20111220 segnalazione TO0
 				example.excludeProperty("cd_bib_iscrizione");
 			}
-			if (tipoRic!=null && tipoRic.trim().length()>0)
+			if (ValidazioneDati.isFilled(tipoRic))
 			{
 				if (tipoRic.equals(RicercaUtenteBibliotecaVO.RICERCA_INIZIO))
 				{
@@ -1321,10 +1321,10 @@ public class UtentiDAO extends ServiziBaseDAO {
 			if (idute > 0)
 				c.add(Restrictions.eq("id_utenti", idute));
 
-			if (codUte != null && codUte.trim().length() > 0)
+			if (ValidazioneDati.isFilled(codUte))
 				c.add(Restrictions.eq("cod_utente", codUte).ignoreCase());
 
-			if (codFisc != null && codFisc.trim().length() > 0)
+			if (ValidazioneDati.isFilled(codFisc))
 				c.add(Restrictions.eq("cod_fiscale", codFisc.trim()).ignoreCase());
 			else
 				//almaviva5_20110427 #4398
@@ -1337,10 +1337,10 @@ public class UtentiDAO extends ServiziBaseDAO {
 						Restrictions.eq("ind_posta_elettr2", email).ignoreCase()) );
 			}
 
-			if (ateneo != null && ateneo.trim().length() > 0)
+			if (ValidazioneDati.isFilled(ateneo))
 				c.add(Restrictions.eq("cod_ateneo", ateneo.trim()));
 
-			if (matricola != null && matricola.trim().length() > 0)
+			if (ValidazioneDati.isFilled(matricola))
 				c.add(Restrictions.eq("cod_matricola", matricola.trim()));
 
 			if (ValidazioneDati.isFilled(tipoOrd))
