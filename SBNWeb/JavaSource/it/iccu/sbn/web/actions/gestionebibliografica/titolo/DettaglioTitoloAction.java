@@ -500,6 +500,11 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 						dettaglioTitoloForm.setLegameTitUniRinvio("SI");
 						dettaglioTitoloForm.getAreaDatiLegameTitoloVO().setTipoLegameNew("08");
 						dettaglioTitoloForm.getAreaDatiLegameTitoloVO().setNaturaBidArrivo("V");
+						// INIZIO almaviva2 novembre 2019 BUG 7213 Mantis: Cercando di creare una variante del titolo dell'opera la schermata di dettaglio
+						// che compare presenta i campi specifici del materiale impostato di default per il bibliotecario.
+						// Nel caso di Rinvio Opera i campi tipo materiale e tipo record sono vuoti
+						dettaglioTitoloForm.getDettTitComVO().getDetTitoloPFissaVO().setTipoMat(" ");
+						dettaglioTitoloForm.getDettTitComVO().getDetTitoloPFissaVO().setTipoRec(" ");
 					}
 				}
 			}
