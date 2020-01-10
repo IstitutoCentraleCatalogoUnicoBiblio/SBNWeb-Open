@@ -507,16 +507,17 @@ void Marc4cppCollocazione::costruisciInventarioE(Tb950Inv * tb950InvPtr, Tb950Co
 	// Dobbiamo costruire anche la 956 per il riferimento al digitale?
 
 //tb950InvPtr->dumpRecord();
+/** 18/12/2019 creata apposito metodo indipendente per 956
+~~
 	s = tb950InvPtr->getField(tb950InvPtr->bid);
 	sPtr = tb950InvPtr->getFieldString(tb950InvPtr->tbinv_id_accesso_remoto);
 	if (sPtr->IsEmpty())
 		sPtr = tb950InvPtr->getFieldString(tb950InvPtr->tbinv_rif_teca_digitale);
 	if (!sPtr->IsEmpty())
 	{
-//tb950CollPtr->dumpRecord();
 		addFields956(tb950InvPtr, tb950CollPtr);
 	}
-
+**/
 
 
 
@@ -903,7 +904,8 @@ void Marc4cppCollocazione::crea960CollocazioneNormalizzata(CString &s, Tb950Inv 
  <tr><td valign=top>Sottocampi</td>
     <td>
     <UL>
-        <li>a - Testo della nota. Non ripetibile.
+        <li>a - Precis di inv. Non ripetibile.
+        <li>d - Collocazione. Non ripetibile.
         <li>5 - Istituzione della copia posseduta. Non ripetibile.
     </UL>
     </td></tr>
@@ -987,10 +989,17 @@ bool Marc4cppCollocazione::creaPossessore(Tb950Inv * tb950InvPtr, Tb950Coll *tb9
 	CString cdRelazione;
 
 
-	// Creiamo le etiichette 317 - NOTE DI PROVENIENZA
+	// Creiamo le etichette 317 - NOTE DI PROVENIENZA
 	// -----------------------------------------------
 	while (trcPossProvInventari->loadNextRecord(keyInvetarioPossProv))
 		{
+			if (!tbcPossessoreProvenienza->loadRecord(trcPossProvInventari->getFieldString(trcPossProvInventari->pid)->data()))
+			{
+				continue; // 29/05/2019. Mantis 0006974 Per evitare squadrature della basedati
+			}
+
+
+
 		cd_legame = *trcPossProvInventari->getField(trcPossProvInventari->cd_legame);
 
 		df  = new DataField((char *)"317", INDICATOR_UNDEFINED, INDICATOR_UNDEFINED);
@@ -1020,11 +1029,18 @@ bool Marc4cppCollocazione::creaPossessore(Tb950Inv * tb950InvPtr, Tb950Coll *tb9
 			s.AppendChar(')');
 		}
 		// Prendiamo il PID carichiamo il record da TbcPossessoreProvenienza
-		if (!tbcPossessoreProvenienza->loadRecord(trcPossProvInventari->getFieldString(trcPossProvInventari->pid)->data()))
-		{
-			delete df;
-			return false;
-		}
+
+// 29/05/2019
+//		printf ("\npid=%s", trcPossProvInventari->getFieldString(trcPossProvInventari->pid)->data());
+//
+//		if (!tbcPossessoreProvenienza->loadRecord(trcPossProvInventari->getFieldString(trcPossProvInventari->pid)->data()))
+//		{
+//			delete df;
+//			return false;
+//		}
+
+
+
 		sf = new Subfield('a');
 		CString *ptr = tbcPossessoreProvenienza->getFieldString(tbcPossessoreProvenienza->ds_nome_aut);
 		ptr->Strip(ptr->both, ' ');
@@ -1223,7 +1239,7 @@ bool Marc4cppCollocazione::creaTag950_Gestionale(char *bid) {
 	const char *consese;
 
 	CString biblio;
-	df956 = 0; // Ensure data filed pointer is initialized
+	df956 = 0; // Ensure data field pointer is initialized
 
 	// Cicliamo sulle biblioteche
 	// Una 950 per biblioteca
@@ -1442,15 +1458,16 @@ bool Marc4cppCollocazione::creaTag950_Gestionale(char *bid) {
 		else
 			delete df;	// 22/05/2013
 
+// 18/12/2019 creato apposito metodo
+//		if (df956)
+//		{
+//			Subfield *sf = df956->getSubfield('a'); // descrizione della biblioteca (non ripetibile)
+//			sf->setData(&biblio);
+//
+//			marcRecord->addDataField(df956);
+//			df956 = 0;
+//		}
 
-		if (df956)
-		{
-			Subfield *sf = df956->getSubfield('a'); // descrizione della biblioteca (non ripetibile)
-			sf->setData(&biblio);
-
-			marcRecord->addDataField(df956);
-			df956 = 0;
-		}
 	} // End for bibliotecheKV->Length()
 
 
@@ -1571,8 +1588,6 @@ bool Marc4cppCollocazione::elaboraDatiCollocazione(char *bid, char livelloGerarc
 		} // end while loadNextRecord
 
 	}
-
-
 	curCdBib.Clear();
 
 	// Troviamo tutte le collocazioni per il bid in questione
@@ -1602,6 +1617,7 @@ bool Marc4cppCollocazione::elaboraDatiCollocazione(char *bid, char livelloGerarc
 
 	// Troviamo tutti gli esemplari per il bid dell'inventario
 	//Collocazione950 *collocazione950;
+
 	CKeyValueVector *kvv;
 	CKeyValue *kv;
 	for (int i=0; i < bibliotecheKV->Length(); i++)
@@ -1661,6 +1677,7 @@ bool Marc4cppCollocazione::elaboraDatiCollocazione(char *bid, char livelloGerarc
 		}
 	}
 
+
 // Dump info sulle collocazioni/inventari/esemplari
 #ifdef DUMP
 	for (int i=0; i < bibliotecheKV->Length(); i++)
@@ -1671,12 +1688,26 @@ bool Marc4cppCollocazione::elaboraDatiCollocazione(char *bid, char livelloGerarc
 	}
 #endif
 
+	bool retb=false;
 	// 21/05/2013 per poter generare le 956 indipendentemente dalle 95x		if (IS_TAG_TO_GENERATE(950))
+// 18/12/2019 Mi genera doppioni 316/317
+//			retb = creaTag950_Gestionale(bid);
+//			if (!retb)
+//				return retb;
+
+		if (IS_TAG_TO_GENERATE(950))
+		{
 			bool retb = creaTag950_Gestionale(bid);
 			if (!retb)
 				return retb;
-			if (IS_TAG_TO_GENERATE(960))
-				retb = creaTag960_Gestionale(bid);
+		}
+
+//18/12/2019 Dobbiamo gestire la 956 indipendentemente dalla 950!!
+		if (IS_TAG_TO_GENERATE(956))
+			retb = creaTag956_digitale(bid);
+//-----------
+		if (IS_TAG_TO_GENERATE(960))
+			retb = creaTag960_Gestionale(bid);
 
 	return retb;
 } // End elaboraDatiCollocazione
@@ -2335,3 +2366,96 @@ bool Marc4cppCollocazione::creaTag960_Gestionale(char *bid) {
 
 #endif
 
+
+
+
+
+
+bool Marc4cppCollocazione::creaTag956_digitale(char *bid) {
+
+	//Biblio950 *curBiblio;
+	Tb950Inv * tb950Inv;
+//	Tb950Ese * tb950Ese;
+	DataField *df;
+	Subfield *sf;
+	char * cdBib;
+//	doingTag = DOING_TAG_950;
+
+	CString inventario; // , *sPtr
+//	const char *consese;
+
+	CString biblio;
+	df956 = 0; // Ensure data field pointer is initialized
+
+	// Cicliamo sulle biblioteche
+	// Una 950 per biblioteca
+	for (int i = 0; i < bibliotecheKV->Length(); i++) {
+		cdBib = (char *) bibliotecheKV->GetKey(i);
+
+		// Controlla se biblioteca da escludere da 950
+		if (bibliotecheDaNonMostrareIn950KV->existsKey(cdBib))
+			continue;
+
+		curBiblio950 = (Biblio950 *) bibliotecheKV->GetValue(i);
+//		char indicatore_2 = ; //elaboraLivelloGerarchicoNotizia(bid );
+
+
+		// Gestione collocazioni senza inventario (PRECISATO)
+		// =======================================
+		// Per ogni collocazione
+		CKeyValueVector * kvv = curBiblio950->getCollocazione950VectKV();
+		Collocazione950 * coll;
+		char *keyLoc;
+		CKeyValue *kv;
+
+		// Gestione collocazioni CON inventario
+		// =======================================
+		for (int k = 0; k < kvv->Length(); k++) {
+			kv = kvv->Get(k);
+			coll = (Collocazione950 *)kv->Val.v;
+
+
+			Tb950Coll *tbColl = coll->getTb950Coll();
+			keyLoc = tbColl->getField(tbColl->tbcol_key_loc);
+
+//printf ("\ncollocazioni CON inventario: bid=%s keyLoc=%s", kv->Key.p, keyLoc);
+
+
+			// Controlliamo se collocazione con inventario
+			if (*keyLoc)
+			{
+				// Troviamo la keyloc negli inventari collocati
+				ATTValVector<Tb950Inv *> *tb950InvCollocatiVect = curBiblio950->getTb950InvCollocatiVect();
+				char *invKeyLoc;
+				int j;
+				for (j = 0; j < tb950InvCollocatiVect->Length(); j++) {
+					tb950Inv = tb950InvCollocatiVect->Entry(j);
+					invKeyLoc = tb950Inv->getField(tb950Inv->tbinv_key_loc);
+					if (!strcmp(keyLoc, invKeyLoc))
+					{
+
+//~~~					creaTags950Inventario(tb950Inv, tbColl, df);
+//					s = tb950Inv->getField(tb950Inv->bid);
+					CString *sPtr;
+					sPtr = tb950Inv->getFieldString(tb950Inv->tbinv_id_accesso_remoto);
+					if (sPtr->IsEmpty())
+						sPtr = tb950Inv->getFieldString(tb950Inv->tbinv_rif_teca_digitale);
+					if (!sPtr->IsEmpty())
+						{
+				//tb950CollPtr->dumpRecord();
+						addFields956(tb950Inv, tbColl);
+
+
+						Subfield *sf = df956->getSubfield('a'); // descrizione della biblioteca (non ripetibile)
+						sf->setData(&biblio);
+						marcRecord->addDataField(df956);
+						df956 = 0;
+						}
+					}
+				}
+			}
+		} // End for collocazioni CON inventario
+
+	} // End for bibliotecheKV->Length()
+	return true;
+} // End creaTag956_digitale

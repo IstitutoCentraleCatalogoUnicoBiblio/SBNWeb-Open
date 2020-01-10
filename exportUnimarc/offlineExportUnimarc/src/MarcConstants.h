@@ -248,6 +248,7 @@
 #define POLO_DDS        28 // 12/01/2016
 #define POLO_UPG        29 // 14/11/2016
 #define POLO_BAT        30 // 23/02/2017
+#define POLO_NAP        31 // 29/05/2019
 
 
 // DATABASE DA DOVE SONO STATI ESTRATTI I DATI

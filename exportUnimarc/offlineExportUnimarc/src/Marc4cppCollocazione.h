@@ -99,6 +99,7 @@ class Marc4cppCollocazione {
 
     bool creaTag950_Gestionale(char *bid);
     bool creaTag960_Gestionale(char *bid);
+    bool creaTag956_digitale(char *bid);
 
 public:
 	Marc4cppCollocazione(

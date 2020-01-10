@@ -2673,7 +2673,7 @@ DataField * Marc4cppLegami::creaTag899_Localizzazione(bool has430, bool has440) 
     </td></tr>
  <tr><td valign=top>NOTE</td><td></td></tr>
 </table>
-*/
+*/
 void Marc4cppLegami::creaTag922_Rappresentazione() {
 	DataField *df;
 	Subfield *sf;
@@ -2769,7 +2769,7 @@ void Marc4cppLegami::creaTag922_Rappresentazione() {
     </td></tr>
  <tr><td valign=top>NOTE</td><td></td></tr>
 </table>
-*/
+*/
 
 void Marc4cppLegami::creaTag923_Notazione() {
 	DataField *df;
@@ -4100,8 +4100,8 @@ void Marc4cppLegami::elabora46x(char *bid, bool bidHaPadre) // , char *sequenza
 					{
 						if (isRiferimentoLegame01MW(TokenBid.Data()))
 							{
-							if (IS_TAG_TO_GENERATE(462))
-								df = creaTag462_LegameALivelloIntermedio(&TokenBid, &TokenSequenza); // Legame ad intermedia
+								if (IS_TAG_TO_GENERATE(462))
+									df = creaTag462_LegameALivelloIntermedio(&TokenBid, &TokenSequenza); // Legame ad intermedia
 							}
 						else
 						{
@@ -4118,9 +4118,12 @@ void Marc4cppLegami::elabora46x(char *bid, bool bidHaPadre) // , char *sequenza
 					}
 					else
 					{
-						if (IS_TAG_TO_GENERATE(462))
+						if (DATABASE_ID != DATABASE_INDICE)	// 04/12/2019 richiesta roveri del 08/11/2019
 						{
-							df = creaTag462_LegameALivelloIntermedio(&TokenBid, &TokenSequenza); // Legame ad intermedia
+							if (IS_TAG_TO_GENERATE(462))
+							{
+								df = creaTag462_LegameALivelloIntermedio(&TokenBid, &TokenSequenza); // Legame ad intermedia
+							}
 						}
 					}
 

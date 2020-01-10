@@ -1862,7 +1862,7 @@ void testCFile()
 
 void printHeader()
 {
-	printf ("\nOffline Export UNIMARC - (c)Copyright Iccu 2009-2018 (autore Argentino Trombin) - Open source");
+	printf ("\nOffline Export UNIMARC - (c)Copyright Iccu 2009-2019 (autore Argentino Trombin) - Open source");
 //	printf ("\nVersione 1.0.0 del 17/11/2009");
 //	printf ("\nVersione 1.0.1 del 19/11/2009"); 	// Rifatta la 200
 //	printf ("\nVersione 1.0.2 del 23/11/2009"); 	// Rifatta la 960 in base a doc. di Rossana con aggiunta della $m
@@ -2851,8 +2851,15 @@ void printHeader()
 //					printf ("\n\nVersione 10.3.1 12/03/2019");	// Bug mantis 0006904 problema 462. Fatta batteria di test completa!! Approvato da Rossana e Scognamilio
 																// fix elabora46y // 12/03/2019 messa parentesi (bug insidioso individuato durante preparazione OS per git)
 //					printf ("\n\nVersione 10.3.2 14/03/2019");	// Gestione 462 discendente (SET -> SUBSET) al posto della 463
-					printf ("\n\nVersione 10.3.3 25/03/2019");	// BUG fix if (!entryReticolo || !livelloValido)	// 25/03/2019 BUG RAV0078503 (ambiene di new_sbw)	SEG FAULT
+//					printf ("\n\nVersione 10.3.3 25/03/2019");	// BUG fix if (!entryReticolo || !livelloValido)	// 25/03/2019 BUG RAV0078503 (ambiene di new_sbw)	SEG FAULT
 																// creaTag410_InCascata_Polo e creaTag225_AreaCollezione
+//					printf ("\n\nVersione 10.5.1 29/05/2019");	// creaPossessore. Mantis 0006974 Per evitare squadrature della basedati (317)
+
+//					printf ("\n\nVersione 10.10.1 10/10/2019"); // creaTag850_IstitutoDetentore // 10/10/2019 prendi il polo dalla tr_tit_bib
+//					printf ("\n\nVersione 10.12.1 04/12/2019");	// Fix per non export 462 per indice
+					printf ("\n\nVersione 10.12.2 18/12/2019");	// Mantis CFI 0007267 per 316/317 duplicate // 18/12/2019
+																// creaTag956_digitale scorporato
+//					printf ("\n\nVersione 10.. //2019");
 //					printf ("\n\nVersione 10.. //2019");
 
 
