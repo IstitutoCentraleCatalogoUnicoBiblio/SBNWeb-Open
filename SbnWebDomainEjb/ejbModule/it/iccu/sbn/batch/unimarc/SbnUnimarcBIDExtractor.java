@@ -1601,7 +1601,14 @@ public class SbnUnimarcBIDExtractor extends AbstractJDBCManager {
 			bufTestataPrimaIntest.append(" where (1=1)");
 
 			bufTestataSecondaIntest.append(" SELECT ");
-			bufTestataSecondaIntest.append(" t.bid, t.ky_cles1_t as chiaveOrd, COALESCE(t.ky_cles2_t,'')  as chiaveord2");
+			
+			// INIZIO INTERVENTO: almaviva2 14 Gennaio 2020 Segnalazione Mantis 7287 - errato ordinamento con duplicazione dei titoli sulla stampa;
+			// viene corretto il nome del campo di ordinamento chiaveOrd che dovrebbe essere chiaveOrd1 anche se l'esecuzione della
+			// select è comunque corretto perche viene preso il primo valore, a prescindere dal  nome
+			// bufTestataSecondaIntest.append(" t.bid, t.ky_cles1_t as chiaveOrd, COALESCE(t.ky_cles2_t,'')  as chiaveord2");
+			bufTestataSecondaIntest.append(" t.bid, t.ky_cles1_t as chiaveOrd1, COALESCE(t.ky_cles2_t,'')  as chiaveord2");
+			// FINE INTERVENTO: almaviva2 14 Gennaio 2020 Segnalazione Mantis 7287
+	
 			bufTestataSecondaIntest.append(" from tb_titolo t");
 			bufTestataSecondaIntest.append(" left outer join tr_tit_aut ta on ta.bid = t.bid and ta.tp_responsabilita in ('1', '2') and not ta.fl_canc='S'");
 			bufTestataSecondaIntest.append(" where (1=1)");
@@ -1897,6 +1904,15 @@ public class SbnUnimarcBIDExtractor extends AbstractJDBCManager {
 			buf.append(bufTestataSecondaIntest);
 			buf.append(bufFiltri);
 			buf.append(bufFiltroSecondaIntest);
+			
+			// INIZIO INTERVENTO: almaviva2 14 Gennaio 2020 Segnalazione Mantis 7287 - errato ordinamento con duplicazione dei titoli sulla stampa;
+			// viene aggiunta la parte "and ta is null" nella select altrimenti un titolo viene estratto due volte
+			// (la prima per autore legato e la seconda come titolo secco)
+			if (tipoCatalogo.equals("AUT")) {
+				buf.append(" and ta is null");
+			}
+			// FINE INTERVENTO: almaviva2 14 Gennaio 2020 Segnalazione Mantis 7287
+			
 			buf.append(")");
 			if (tipoCatalogo.equals("AUT")) {
 				buf.append(" order by chiaveOrd1, chiaveord2");
