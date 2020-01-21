@@ -34,6 +34,6 @@
 	<classpathentry kind="lib" path="/sbnmarc/lib/unimarcmodel.jar"/>
 	<classpathentry kind="lib" path="/sbnmarc/lib-compile/javax.ejb-3.0.1.jar"/>
 	<classpathentry kind="lib" path="/sbnmarc/lib-compile/javax.jms-3.0.1.jar"/>
-	stream-1.1.5-jdk5.jar
+	<classpathentry kind="lib" path="/sbnmarc/lib/maven-artifact-3.6.3-jdk5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

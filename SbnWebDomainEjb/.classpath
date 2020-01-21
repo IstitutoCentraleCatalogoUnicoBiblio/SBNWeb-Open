@@ -61,5 +61,6 @@
 	<classpathentry kind="lib" path="/SBNWeb/lib/common/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="/SBNWeb/lib/hibernate/cglib-2.1.3.jar"/>
 	<classpathentry kind="lib" path="/SBNWeb/lib/common/jgroups.jar"/>
+	<classpathentry kind="lib" path="/SBNWeb/lib/common/maven-artifact-3.6.3-jdk5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

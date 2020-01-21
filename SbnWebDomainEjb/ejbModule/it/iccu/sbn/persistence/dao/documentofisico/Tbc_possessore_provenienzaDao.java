@@ -32,6 +32,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -202,7 +203,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									tmp = tmp + " & " + parole[i];
 
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo("8.3") < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('default','" + tmp + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('" + tmp + "')"));
@@ -224,7 +225,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									}
 								}
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo("8.3") < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + parolePoss + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('" + parolePoss + "')"));
@@ -525,7 +526,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									tmp = tmp + " & " + parole[i];
 
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo("8.3") < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('default','" + tmp + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('" + tmp + "')"));
@@ -547,7 +548,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									}
 								}
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo("8.3") < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + parolePoss + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('" + parolePoss + "')"));

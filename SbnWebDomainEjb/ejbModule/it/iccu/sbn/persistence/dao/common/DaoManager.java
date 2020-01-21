@@ -46,6 +46,7 @@ import java.util.Map;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
@@ -63,7 +64,7 @@ import org.jboss.logging.Logger;
 public class DaoManager {
 
 	private ConnectionFactory connectionFactory = null;
-	private static String version;
+	private static ComparableVersion version;
 	private static Logger log = Logger.getLogger(DaoManager.class);
 
 
@@ -206,7 +207,7 @@ public class DaoManager {
     	StringBuilder buf = new StringBuilder();
 		buf.append("({alias}.");
 		buf.append(campoTabella);
-		if ((new DaoManager()).getVersion().compareTo("8.3") < 0)
+		if ((new DaoManager()).getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 			buf.append(" @@ to_tsquery('default', '");
 		else
 			buf.append(" @@ to_tsquery('");
@@ -394,8 +395,8 @@ public class DaoManager {
 
 	public void setSessionCurrentCfg() throws DaoManagerException {
 		try {
-			String version = getVersion();
-			if (version.compareTo(Constants.POSTGRES_VERSION_83) < 0) // config TSearch2 (solo se ver. < 8.3)
+			ComparableVersion version = getVersion();
+			if (version.compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) // config TSearch2 (solo se ver. < 8.3)
 				getCurrentSession().getNamedQuery("set_curcfg").list();
 
 		} catch (Exception ex) {
@@ -405,7 +406,7 @@ public class DaoManager {
 		}
 	}
 
-	public String getVersion() throws DaoManagerException {
+	public ComparableVersion getVersion() throws DaoManagerException {
 		try {
 			if (version != null)
 				return version;
@@ -413,7 +414,7 @@ public class DaoManager {
 			Session session = getCurrentSession();
 			String tmp = (String) session.createSQLQuery("select version()").uniqueResult();
 			String[] tokens = tmp.split("\\s");
-			version = tokens[1];
+			version = ComparableVersion.of(tokens[1]);
 			return version;
 
 		} catch (Exception ex) {
@@ -470,8 +471,8 @@ public class DaoManager {
 	public Connection getConnection() throws SQLException {
 		try {
 			Connection connection = getCurrentSession().connection();
-			String version = getVersion();
-			if (version.compareTo(Constants.POSTGRES_VERSION_83) < 0) {// config TSearch2 (solo se ver. < 8.3)
+			ComparableVersion version = getVersion();
+			if (version.compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) {// config TSearch2 (solo se ver. < 8.3)
 				Statement st = connection.createStatement();
 				st.execute("select set_curcfg('default')");
 				st.close();

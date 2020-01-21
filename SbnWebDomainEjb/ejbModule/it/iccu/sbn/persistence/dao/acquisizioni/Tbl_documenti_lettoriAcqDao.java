@@ -36,6 +36,7 @@ import java.util.List;
 import javax.ejb.CreateException;
 import javax.naming.NamingException;
 
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -222,7 +223,7 @@ public class Tbl_documenti_lettoriAcqDao extends DaoManager {
 
 					}
 					DaoManager hibDao = new DaoManager();
-					 if (hibDao.getVersion().compareTo("8.3") < 0)
+					 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 					 {
 						 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 						cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + paroleTit + "')"));

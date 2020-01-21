@@ -41,6 +41,7 @@ import java.util.Map;
 import javax.ejb.CreateException;
 import javax.naming.NamingException;
 
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
@@ -274,7 +275,7 @@ public class Tba_fornitoriDao extends DaoManager {
 
 							//sql=sql + " forn.chiave_for = '" + ricercaFornitori.getChiaveFor()+"'";
 							DaoManager hibDao = new DaoManager();
-							 if (hibDao.getVersion().compareTo("8.3") < 0)
+							 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 							 {
 								 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + ricercaFornitori.getChiaveFor() +"')";
 								 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + tmp +"')";
@@ -317,7 +318,7 @@ public class Tba_fornitoriDao extends DaoManager {
 
 							}
 							DaoManager hibDao = new DaoManager();
-							 if (hibDao.getVersion().compareTo("8.3") < 0)
+							 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 							 {
 								 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 								cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + paroleForn + "')"));

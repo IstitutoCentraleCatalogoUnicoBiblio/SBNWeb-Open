@@ -126,6 +126,7 @@ import javax.transaction.TransactionRolledbackException;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -5820,7 +5821,7 @@ public class GenericJDBCAcquisizioniDAO extends AcquisizioniBaseDAO {
 
 								//sql +=" forn.chiave_for = '" + ricercaFornitori.getChiaveFor()+"'";
 								DaoManager hibDao = new DaoManager();
-								 if (hibDao.getVersion().compareTo("8.3") < 0)
+								 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 								 {
 									 //sql +=" tidx_vector @@ to_tsquery('default', '" + ricercaFornitori.getChiaveFor() +"')";
 									sql +=" tidx_vector @@ to_tsquery('default', '" + tmp +"')";
@@ -5861,7 +5862,7 @@ public class GenericJDBCAcquisizioniDAO extends AcquisizioniBaseDAO {
 
 								}
 								DaoManager hibDao = new DaoManager();
-								 if (hibDao.getVersion().compareTo("8.3") < 0)
+								 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 								 {
 									 sql +=" tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 								 }
@@ -17179,7 +17180,7 @@ public class GenericJDBCAcquisizioniDAO extends AcquisizioniBaseDAO {
 
 							}
 							DaoManager hibDao = new DaoManager();
-							 if (hibDao.getVersion().compareTo("8.3") < 0)
+							 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
 							 {
 								 sql +=" docLet.tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 							 }

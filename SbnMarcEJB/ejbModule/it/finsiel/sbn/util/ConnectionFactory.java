@@ -24,6 +24,7 @@ import javax.naming.InitialContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.hibernate.HibernateException;
 import org.hibernate.Interceptor;
 import org.hibernate.MappingException;
@@ -261,7 +262,7 @@ public class ConnectionFactory {
 		if (version != null)
 			return version;
 
-		String dbVersion = null;
+		ComparableVersion dbVersion = null;
 		try {
 			Session session = this.getCurrentSession();
 			beginTransaction();
@@ -273,10 +274,10 @@ public class ConnectionFactory {
     		StringTokenizer versionParts = new StringTokenizer(result);
 
     		versionParts.nextToken(); /* "PostgreSQL" */
-    		dbVersion = versionParts.nextToken(); /* "X.Y.Z" */
+    		dbVersion = new ComparableVersion(versionParts.nextToken()); /* "X.Y.Z" */
     		//dbVersion = "8.3.1";
 	        commitTransaction();
-	        version = dbVersion.compareTo("8.3.0");
+	        version = dbVersion.compareTo(new ComparableVersion("8.3.0"));
     		return version;
 
 		} catch (HibernateException e) {
