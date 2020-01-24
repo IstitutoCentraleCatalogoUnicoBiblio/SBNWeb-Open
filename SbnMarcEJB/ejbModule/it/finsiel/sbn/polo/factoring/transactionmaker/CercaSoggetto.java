@@ -672,8 +672,8 @@ public class CercaSoggetto extends CercaElementoAutFactoring {
 			// almaviva5_20120827 #5065
 //			if (ricercaSoggettoPerDescrittorePerPosizione)
 //				output.setTotRighe(totRighe);
-			if (ricercaDidMultipli)
-				output.setTotRighe(totRighe);
+//			if (ricercaDidMultipli)
+//				output.setTotRighe(totRighe);
 
 			output.setNumPrimo(rowCounter + 1);
 			output.setTipoOrd(sbnOrd);

@@ -30,11 +30,12 @@ import it.finsiel.sbn.polo.factoring.base.NormalizzaNomi;
 import it.finsiel.sbn.polo.factoring.util.Elenco;
 import it.finsiel.sbn.polo.factoring.util.ElencoArticoli;
 import it.finsiel.sbn.polo.factoring.util.IndiceJMSObjectLocator;
-import it.finsiel.sbn.polo.factoring.util.Progressivi;
+
 import it.finsiel.sbn.polo.factoring.util.ResourceLoader;
 import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.orm.Tb_titolo;
 import it.finsiel.sbn.util.MarshallingUtil;
+import it.finsiel.sbn.util.RandomIdGenerator;
 import it.iccu.sbn.ejb.model.unimarcmodel.CercaDatiTitType;
 import it.iccu.sbn.ejb.model.unimarcmodel.CercaType;
 import it.iccu.sbn.ejb.model.unimarcmodel.DocumentoType;
@@ -300,9 +301,10 @@ public abstract class CercaFactoring extends Factoring {
                 if (scheduled)
                     idLista = idScript;
                 else if (numeroRecord > maxRighe) {
-                    Progressivi progr = new Progressivi();
-                    idLista = progr.getIdLista();
+                    //Progressivi progr = new Progressivi();
+                    //idLista = progr.getIdLista();
                 }
+                idLista = RandomIdGenerator.getId();
                 object_response = preparaOutput();
             }
         } catch (EccezioneIccu ecc) {

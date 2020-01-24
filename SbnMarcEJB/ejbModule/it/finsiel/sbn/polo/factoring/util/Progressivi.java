@@ -518,7 +518,8 @@ public class Progressivi {
 			dao.commitTransaction();
 			dao.closeSession();
 
-			check6(id);
+			//almaviva5_20200124 #7326 segnalazione TO0: eliminato controllo valore max.
+			//check6(id);
 		} catch (InfrastructureException e) {
 
 			log.error("", e);
