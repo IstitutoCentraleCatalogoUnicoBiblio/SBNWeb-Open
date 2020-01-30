@@ -50,6 +50,8 @@ import it.iccu.sbn.servizi.codici.CodiciProvider;
 
 import java.util.List;
 
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.trimOrEmpty;
+
 /**
  * @author Maurizio Alvino
  *
@@ -1856,7 +1858,8 @@ public class UtilityCampiTitolo {
 								} catch (NullPointerException npe) {
 									//non fare nulla, oggetto a null
 								}
-								datazione = musicaType.getT923().getE_923();
+								//almaviva5_20200128 #7335
+								datazione = trimOrEmpty(musicaType.getT923().getE_923());
 								materia = musicaType.getT923().getG_923();
 								illustrazioni = musicaType.getT923().getH_923();
 								notazioneMusicale = musicaType.getT923().getI_923();

@@ -317,7 +317,8 @@ public class DettaglioTitoloMusicaVO extends BaseVO {
 	}
 
 	public void setDatazione(String datazione) {
-		this.datazione = datazione;
+		//almaviva5_20200128 #7335
+		this.datazione = trimOrEmpty(datazione);
 	}
 
 	public String getSezioni() {

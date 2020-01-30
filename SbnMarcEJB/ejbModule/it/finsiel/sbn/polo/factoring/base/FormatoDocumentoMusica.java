@@ -16,6 +16,9 @@
  ******************************************************************************/
 package it.finsiel.sbn.polo.factoring.base;
 
+import static it.finsiel.sbn.polo.factoring.util.ValidazioneDati.isFilled;
+import static it.finsiel.sbn.polo.factoring.util.ValidazioneDati.trimOrEmpty;
+
 import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.factoring.util.AnnoDate;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
@@ -180,7 +183,8 @@ public class FormatoDocumentoMusica extends FormatoDocumento {
 	        }
 	        if (musica.getDATAZIONE()!=null) {
 	            C923 c923 = new C923();
-	            c923.setE_923(musica.getDATAZIONE());
+				//almaviva5_20200128 #7335
+	            c923.setE_923(trimOrEmpty(musica.getDATAZIONE()));
 	            datiDoc.setT923(c923);
 	        }
         }
@@ -290,7 +294,8 @@ public class FormatoDocumentoMusica extends FormatoDocumento {
 		        }
 		        datiDoc.setT125(c125);
 		        C128 c128 = new C128();
-		        if (musica.getTP_ELABORAZIONE() != null && !musica.getTP_ELABORAZIONE().trim().equals(""))
+				//almaviva5_20200128 #7335
+		        if (isFilled(musica.getTP_ELABORAZIONE()))
 		            c128.setD_128(
 		                Decodificatore.getCd_unimarc("Tb_musica", "tp_elaborazione", musica.getTP_ELABORAZIONE()));
 		        //tipo elaborazione
@@ -305,7 +310,8 @@ public class FormatoDocumentoMusica extends FormatoDocumento {
 		            c923.setC_923(SbnIndicatore.valueOf(musica.getFL_COMPOSITO()));
 		        if (!musica.getFL_PALINSESTO().equals(" "))
 		            c923.setD_923(SbnIndicatore.valueOf(musica.getFL_PALINSESTO()));
-		        c923.setE_923(musica.getDATAZIONE());
+				//almaviva5_20200128 #7335
+		        c923.setE_923(trimOrEmpty(musica.getDATAZIONE()));
 		        if (musica.getCD_MATERIA() != null)
 		            c923.setG_923(Decodificatore.getCd_unimarc("Tb_musica", "cd_materia", musica.getCD_MATERIA()));
 		        c923.setH_923(musica.getDS_ILLUSTRAZIONI());

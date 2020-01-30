@@ -16,6 +16,9 @@
  ******************************************************************************/
 package it.finsiel.sbn.polo.factoring.base;
 
+import static it.finsiel.sbn.polo.factoring.util.ValidazioneDati.isFilled;
+import static it.finsiel.sbn.polo.factoring.util.ValidazioneDati.trimOrEmpty;
+
 import it.finsiel.sbn.exception.InfrastructureException;
 import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
@@ -209,8 +212,9 @@ public class FormatoTitoloUniformeMusica extends FormatoElementAut {
             a929.setA_929(comp.getNUMERO_ORDINE()); //num. ordine
             a929.setB_929(comp.getNUMERO_OPERA()); //num. opera
             a929.setC_929(comp.getNUMERO_CAT_TEM()); //num. catalogo tematico
-            a929.setD_929(comp.getDATAZIONE()); // Datazione
-            if (comp.getCD_TONALITA() != null && comp.getCD_TONALITA().trim().length()>0)
+            //almaviva5_20200128 #7335
+            a929.setD_929(trimOrEmpty(comp.getDATAZIONE())); // Datazione
+            if (isFilled(comp.getCD_TONALITA()))
                 a929.setE_929(
                     Decodificatore.getCd_unimarc("Tb_composizione", "cd_tonalita", comp.getCD_TONALITA()));
             a929.setF_929(comp.getDS_SEZIONI()); //sezioni
