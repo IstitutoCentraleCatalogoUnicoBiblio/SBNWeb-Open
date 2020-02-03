@@ -727,16 +727,16 @@ public class ValidazioneDati {
 		return c[0];
 	}
 
-	public static final String formatValueList(List<String> values, String separator) {
+	public static final <T> String formatValueList(List<T> values, String separator) {
 		return formatValueList(values, null, separator);
 	}
 
-	public static final String formatValueList(List<String> values, Character quote, String separator) {
+	public static final <T> String formatValueList(List<T> values, Character quote, String separator) {
 		if (!isFilled(values))
 			return null;
 
 		StringBuilder buf = new StringBuilder();
-		Iterator<String> i = values.iterator();
+		Iterator<T> i = values.iterator();
 		for (;;) {
 			if (quote != null)
 				buf.append(quote).append(i.next()).append(quote);
@@ -793,6 +793,23 @@ public class ValidazioneDati {
 			end = len;
 
 		return str.substring(start, end);
+	}
+
+	public static final String substring(String str, int start) {
+		int len = length(str);
+		if (len < 1)
+			return "";
+
+		if (start < 0)
+			start = len + start;
+
+		if (start < 0)
+			start = 0;
+
+		if (start > len)
+			return "";
+
+		return str.substring(start);
 	}
 
 	public static final String wrap(String value) {

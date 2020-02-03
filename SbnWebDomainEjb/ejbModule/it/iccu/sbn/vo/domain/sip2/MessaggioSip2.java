@@ -19,9 +19,9 @@ package it.iccu.sbn.vo.domain.sip2;
 import gnu.trove.THashMap;
 
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
+import it.iccu.sbn.ejb.vo.SerializableVO;
 import it.iccu.sbn.exception.Sip2ValidationException;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
  * dati .
  * @author Finsiel
  */
-public abstract class MessaggioSip2 implements Serializable  {
+public abstract class MessaggioSip2 extends SerializableVO {
 
 	private static final long serialVersionUID = 6794516959844090546L;
 
@@ -603,6 +603,13 @@ public abstract class MessaggioSip2 implements Serializable  {
     	min = min.length()==1 ? "0" + min : min;
     	sec = sec.length()==1 ? "0" + sec : sec;
     	return year + month + day + "    " + hour + min + sec;
+    }
+    
+    protected String getElement(String[] array, int idx) {
+    	if (idx < 0 || idx >= size(array)) {
+    	    return "";
+    	}
+    	return array[idx];
     }
 
 }

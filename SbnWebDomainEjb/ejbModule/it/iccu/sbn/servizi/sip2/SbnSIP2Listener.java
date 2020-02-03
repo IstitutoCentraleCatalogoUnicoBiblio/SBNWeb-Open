@@ -36,10 +36,7 @@ import it.iccu.sbn.ejb.vo.servizi.erogazione.SollecitiVO;
 import it.iccu.sbn.ejb.vo.servizi.erogazione.TariffeModalitaErogazioneVO;
 import it.iccu.sbn.ejb.vo.servizi.utenti.dettaglio.RicercaUtenteBibliotecaVO;
 import it.iccu.sbn.ejb.vo.servizi.utenti.dettaglio.UtenteBibliotecaVO;
-import it.iccu.sbn.exception.UtenteNotFoundException;
-import it.iccu.sbn.exception.UtenteNotProfiledException;
 import it.iccu.sbn.persistence.dao.common.DaoManager;
-import it.iccu.sbn.persistence.dao.exception.DaoManagerException;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.util.AtomicCyclicCounter;
 import it.iccu.sbn.util.MiscString;
@@ -86,6 +83,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -93,8 +91,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 import org.jboss.system.ServiceMBeanSupport;
 
 /**
@@ -104,6 +104,10 @@ import org.jboss.system.ServiceMBeanSupport;
 public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2ListenerMBean, ConfigChangeInterceptor {
 
 	private static Logger log = Logger.getLogger(SbnSIP2Listener.class);
+
+	static final Pattern institutionId_regex = Pattern.compile(".{3}#\\s.{2}#.+");
+
+	static final ComparableVersion SIP2_PROTOCOL_VERSION_2 = ComparableVersion.of("2.00");
 
 	private static final AtomicCyclicCounter clientId = new AtomicCyclicCounter();
 	private Servizi servizi;
@@ -223,15 +227,15 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 		}
 
 		/**
-		 * @param institutionId COD_POLO|COD_BIB|COD_TOTEM
+		 * @param institutionId COD_POLO#COD_BIB#COD_TOTEM
 		 * @throws ApplicationException
 		 */
 		private void refreshTotemInfo(String institutionId) throws ApplicationException {
 
 			clog.debug("----> institutionId: " + institutionId);
 
-			String totemId[] = MiscString.estraiCampi(institutionId, "#");
-			if (totemId.length >= 3) {
+			if (institutionId_regex.matcher(ValidazioneDati.wrap(institutionId)).matches() ) {
+				String totemId[] = MiscString.estraiCampi(institutionId, "#");
 				this.codPolo = totemId[0];
 				this.codBiblio = totemId[1];
 				try {
@@ -267,10 +271,6 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				String line = null;
 				MessaggioSip2 response = null;
 
-				// Location code  [required - login]
-				// Institution id [required]
-				String ticket = null;
-
 				do {
 					line = in.readLine();
 					if (line != null) {
@@ -285,6 +285,8 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 						clog.debug("message handler: " + msgSip2.getClass().getCanonicalName());
 
 						try {
+							String ticket = SbnSIP2Ticket.getUtenteSIP2Ticket(codPolo, codBiblio, clientSocket.getInetAddress());
+
 							switch (msgSip2.getCodiceMessaggio()) {
 							case SIP2_SC_PATRON_STATUS_REQUEST: {
 								// 23<language><transaction date><institution id><patron identifier><terminal password><patron password>
@@ -335,7 +337,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 //									usrEstesa = servizi.espandiCodUtente(usr);
 //									RicercaUtenteBibliotecaVO ricercaUtenteBibliotecaVO = preparaRicercaUtente(usrEstesa);
 //									utenteBibliotecaVO = servizi.getDettaglioUtente(ticket, ricercaUtenteBibliotecaVO, null, Locale.getDefault());
-									ticket = getUser(null, usr, ticket);
+									getUser(usr, ticket);
 //									codBiblio = ((MessaggioSip2PatronStatusRequest)msgSip2).getInstitutionId();
 									resp.setPersonalName(utenteBibliotecaVO.getCognomeNome());
 
@@ -415,113 +417,12 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 							}
 
 							case SIP2_SC_LOGIN: {
-								// 93<UID algorithm><PWD algorithm><login user id><login password><location code>
-
-								// Login utente (bibliotecario)
-								// Startup
-
-								MessaggioSip2LoginResponse resp;
-								try {
-									MessaggioSip2LoginRequest msg = (MessaggioSip2LoginRequest) msgSip2;
-									resp = new MessaggioSip2LoginResponse(true, msg.getSequenceNumber());
-
-//									refreshTotemInfo(((MessaggioSip2LoginRequest)msgSip2).get);
-
-									// ok = 0 (login failed - default)
-									response = resp;
-									char loginOk = '0';
-
-//									// Codici polo e biblioteca estrapolati dal LocationCode della richiesta
-//									// LocationCode [campo da opzionale a richiesto]
-//									codPolo = ((MessaggioSip2LoginRequest)msgSip2).getCodicePolo();
-//									codBiblio = ((MessaggioSip2LoginRequest)msgSip2).getCodiceBiblioteca();
-//									codServizio = ((MessaggioSip2LoginRequest)msgSip2).getCodiceServizio();
-//									ticket = SbnSIP2Ticket.getUtenteSIP2Ticket(codPolo, codBiblio, clientSocket.getInetAddress());
-
-									clog.debug("[Login request] user: "+msg.getLoginUserID()+" / polo: "+codPolo+" / biblio: "+codBiblio);
-
-									// Nome utente
-//									usr = ((MessaggioSip2LoginRequest)msgSip2).getLoginUserID();
-
-//									usrEstesa = servizi.espandiCodUtente(usr);
-//									RicercaUtenteBibliotecaVO ricercaUtenteBibliotecaVO = preparaRicercaUtente(usrEstesa);
-//									utenteBibliotecaVO = servizi.getDettaglioUtente(ticket, ricercaUtenteBibliotecaVO, null, Locale.getDefault());
-									ticket = getUser(msg, null, ticket);
-
-//									clog.debug("[Credentials from DB] id: "+utenteBibliotecaVO.getIdUtente()+" / bibUtente: "+utenteBibliotecaVO.getCodiceBiblioteca()+" / nome: "+utenteBibliotecaVO.getNome()+" / password: "+utenteBibliotecaVO.getPassword());
-
-									// Password utente
-									pwd = msg.getLoginPassword();
-									// pwd criptata
-/*									if (!pwd.equals(utenteBibliotecaVO.getPassword())){
-										response = resp;
-										throw new Exception("Errore Login: password errata");
-									}*/
-
-									try {
-										checkUser();
-										loginOk = '1';
-									} catch (Exception e) {
-										loginOk = '0';
-										clog.error(e.getMessage(), e);
-									}
-
-									clog.debug("[Login ok] chksum: "+resp.getChecksum()+" / seqNr: "+resp.getSequenceNumber());
-
-									resp.setOk(loginOk); //login ok
-									response = resp;
-
-									clog.debug("[Output String] " + resp.toString());
-
-								} catch (DaoManagerException e) {
-									clog.error(e.getMessage());
-								} catch (UtenteNotFoundException e) {
-									clog.error(e.getMessage());
-								} catch (UtenteNotProfiledException e) {
-									clog.error(e.getMessage());
-								} catch (Exception e) {
-									clog.error(e.getMessage());
-								}
+								response = doTotemLogin(ticket, msgSip2);
 								break;
 							}
 
 							case SIP2_SC_STATUS_MESSAGE: {
-								// 99<status code><max print width><protocol version>
-
-								// SC Status
-								// Dopo il Login in caso di connessione tramite Socket
-
-//								if (codBiblio==null)
-									// login non effettuato
-
-								//default status ok
-								MessaggioSip2ScStatusRequest msg = (MessaggioSip2ScStatusRequest) msgSip2;
-								MessaggioSip2ScStatusResponse resp = new MessaggioSip2ScStatusResponse(true, codBiblio, msg);
-
-//								refreshTotemInfo(((MessaggioSip2ScStatusRequest)msgSip2).getI);
-
-								// status-code: char(1), required
-//								0 SC unit is OK
-//								1 SC printer is out of paper
-//								2 SC is about to shut down
-								scStatus = msg.getStatusCode();
-
-								try {
-									// nome della biblioteca
-//									resp.setLibraryName("");
-									//resp.setLibraryName(amministrazioneBiblioteca.getBiblioteca("SBW", " IC").getNom_biblioteca());
-									BibliotecaVO bib = getAmministrazioneBib().getBiblioteca(codPolo, codBiblio);
-									resp.setLibraryName(bib != null ? bib.getNom_biblioteca() : "");
-
-								} catch (Exception e) {
-									// Messaggio di errore
-									resp.setCheckinOk('N');
-									resp.setCheckoutOk('N');
-									resp.addScreenMessage(e.getMessage());
-									clog.error(e.getMessage(), e);
-								}
-
-								response = resp;
+								response = doScStatusMessage(ticket, msgSip2);
 								break;
 							}
 
@@ -541,25 +442,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 							}
 
 							case SIP2_SC_END_PATRON_SESSION: {
-								//35<transaction date><institution id><patron identifier><terminal password><patron password>
-
-								// Fine della sessione
-
-								MessaggioSip2EndPatronSessionRequest msg = (MessaggioSip2EndPatronSessionRequest)msgSip2;
-								MessaggioSip2EndPatronSessionResponse resp = new MessaggioSip2EndPatronSessionResponse(true, msg);
-
-								refreshTotemInfo(msg.getInstitutionId());
-
-								response = resp;
-
-								// end session
-								codPolo = null;
-								codBiblio = null;
-								utenteBibliotecaVO = new UtenteBibliotecaVO();
-								ticket = null;
-								usr = null;
-								pwd = null;
-
+								response = doPatronEndSession(ticket, msgSip2);
 								break;
 							}
 
@@ -619,6 +502,86 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 			}
 		}
 
+		private MessaggioSip2 doScStatusMessage(String ticket, MessaggioSip2 msgSip2) throws Exception {
+			// 99<status code><max print width><protocol version>
+
+			// SC Status
+			// Dopo il Login in caso di connessione tramite Socket
+
+			//default status ok
+			MessaggioSip2ScStatusRequest msg = (MessaggioSip2ScStatusRequest) msgSip2;
+			MessaggioSip2ScStatusResponse resp = new MessaggioSip2ScStatusResponse(true, codBiblio, msg);
+
+			// status-code: char(1), required
+//			0 SC unit is OK
+//			1 SC printer is out of paper
+//			2 SC is about to shut down
+			scStatus = msg.getStatusCode();
+
+			try {
+				// nome della biblioteca
+				BibliotecaVO bib = getAmministrazioneBib().getBiblioteca(codPolo, codBiblio);
+				resp.setLibraryName(bib != null ? bib.getNom_biblioteca() : "");
+
+			} catch (Exception e) {
+				// Messaggio di errore
+				resp.setCheckinOk('N');
+				resp.setCheckoutOk('N');
+				resp.addScreenMessage(e.getMessage());
+				clog.error(e.getMessage(), e);
+			}
+
+			char renewalPolicy = CommonConfiguration.getProperty(Configuration.SIP2_RENEWAL_POLICY, "N").charAt(0);
+			resp.setAcsRenewalPolicy(renewalPolicy);
+			boolean v2 = ComparableVersion.of(resp.getProtocolVersion()).compareTo(SIP2_PROTOCOL_VERSION_2) >= 0;
+			if (v2) {
+				//Position Message Command/Response pair
+				Character[] BX_SUPPORTED_MESSAGES = new Character[16];
+				int idx = -1;
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//0 Patron Status Request
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//1 Checkout
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//2 Checkin
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//3 Block Patron
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//4 SC/ACS Status
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//5 Request SC/ACS Resend
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//6 Login
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//7 Patron Information
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//8 End Patron Session
+				BX_SUPPORTED_MESSAGES[++idx] = 'N';	//9 Fee Paid
+				BX_SUPPORTED_MESSAGES[++idx] = 'Y';	//10 Item Information
+				BX_SUPPORTED_MESSAGES[++idx] = 'N';	//11 Item Status Update
+				BX_SUPPORTED_MESSAGES[++idx] = 'N';	//12 Patron Enable
+				BX_SUPPORTED_MESSAGES[++idx] = 'N';	//13 Hold
+				BX_SUPPORTED_MESSAGES[++idx] = renewalPolicy;	//14 Renew
+				BX_SUPPORTED_MESSAGES[++idx] = 'N';	//15 Renew All
+	
+				resp.setSupportedMessages(ValidazioneDati.formatValueList(Arrays.asList(BX_SUPPORTED_MESSAGES), ""));
+			}
+
+			return resp;
+		}
+
+		private MessaggioSip2 doPatronEndSession(String ticket, MessaggioSip2 msgSip2) throws Exception {
+			//35<transaction date><institution id><patron identifier><terminal password><patron password>
+
+			// Fine della sessione
+
+			MessaggioSip2EndPatronSessionRequest msg = (MessaggioSip2EndPatronSessionRequest)msgSip2;
+			MessaggioSip2EndPatronSessionResponse resp = new MessaggioSip2EndPatronSessionResponse(true, msg);
+
+			refreshTotemInfo(msg.getInstitutionId());
+
+			// end session
+/*			
+			codPolo = null;
+			codBiblio = null;
+*/			
+			utenteBibliotecaVO = new UtenteBibliotecaVO();
+			usr = null;
+			pwd = null;
+
+			return resp;
+		}
 
 		private MessaggioSip2 doItemInfo(String ticket, MessaggioSip2 msgSip2) throws Exception {
 			// 17<transaction date><institution id>< item identifier ><terminal password>
@@ -663,11 +626,10 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 //					clog.debug("- cod stato mov: " + datiControllo.getMovimento().getCodStatoMov());
 //					clog.debug("- cod stato ric: " + datiControllo.getMovimento().getCodStatoRic());
 
-					if ( "03".equals(datiControllo.getMovimento().getCodAttivita().trim()) &&
-							(datiControllo.getMovimento().getDataFineEffString()==null) ){
+					if (StatoIterRichiesta.of(datiControllo.getMovimento().getCodAttivita()) == StatoIterRichiesta.CONSEGNA_DOCUMENTO_AL_LETTORE
+							&& !ValidazioneDati.isFilled(datiControllo.getMovimento().getDataFineEffString()) ) {
 						// data prevista di fine prestito (se presente)
-						if ( datiControllo.getMovimento().getDataFinePrev()!=null ){
-							//resp.setDueDate(msgSip2.getSIP2Date(datiControllo.getMovimento().getDataFinePrev()));
+						if ( datiControllo.getMovimento().getDataFinePrev() != null ) {
 							resp.setDueDate(datiControllo.getMovimento().getDataFinePrevString());
 						}
 						resp.setCirculationStatus("04");	// charged
@@ -688,6 +650,11 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				// Utente non obbligatorio
 				resp.setSecurityMarker("02");		// 3M tattle-tape security strip
 				resp.setFeeType("01");				// other/unknown
+
+				resp.setCurrentLocation(codBiblio);
+				String segnatura = ServiziUtil.formattaSegnaturaCollocazione(dati.getCollCodSez(),
+						dati.getCollCodLoc(), dati.getCollSpecLoc(), dati.getSeqColl(), 'M', null);
+				resp.setPermanentLocation(segnatura);
 
 			} catch (Exception ve) {
 				// Messaggio di errore
@@ -721,7 +688,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 			resp.setPatronStatus("              "); //default (patron status OK)
 
 			try {
-				ticket = getUser(null, usr, ticket);
+				getUser(usr, ticket);
 				checkUser(); // nessuna eccezione: utenza valida (non scaduta)
 
 				DatiControlloVO datiControllo = preparaDatiControllo(ticket, null, true);
@@ -867,6 +834,39 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				resp.setValidPatron("N");
 				resp.setValidPatronPassword("N");
 				clog.error(e.getMessage(), e);
+			}
+
+			return resp;
+		}
+		
+		private MessaggioSip2 doTotemLogin(String ticket, MessaggioSip2 msgSip2) throws Exception {
+
+			// 93<UID algorithm><PWD algorithm><login user id><login password><location code>
+
+			// Login utente (bibliotecario)
+			// Startup
+
+			MessaggioSip2LoginRequest msg = (MessaggioSip2LoginRequest) msgSip2;
+			MessaggioSip2LoginResponse resp = new MessaggioSip2LoginResponse(true, msg.getSequenceNumber());
+
+			refreshTotemInfo(msg.getLocationCode());
+
+			try {
+				// ok = 0 (login failed - default)
+				char loginOk = '0';
+
+				clog.debug("[Login request] user: "+msg.getLoginUserID()+" / polo: "+codPolo+" / biblio: "+codBiblio);
+				//UserProfile userProfile = DomainEJBFactory.getInstance().getBibliotecario().login(msg.getLoginUserID(), msg.getLoginPassword(), clientSocket.getInetAddress() );
+
+				loginOk = '1';
+				clog.debug("[Login ok] chksum: "+resp.getChecksum()+" / seqNr: "+resp.getSequenceNumber());
+
+				resp.setOk(loginOk); //login ok
+				
+				clog.debug("[Output String] " + resp.toString());
+
+			} catch (Exception e) {
+				clog.error(e.getMessage());
 			}
 
 			return resp;
@@ -1090,15 +1090,11 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 		 * @return ticket utente
 		 * @throws Exception
 		 */
-		private String getUser(MessaggioSip2LoginRequest request, String user, String ticket) throws Exception {
-			String newTicket;
-			if (request != null) {
-				usr = request.getLoginUserID();
-				newTicket = SbnSIP2Ticket.getUtenteSIP2Ticket(codPolo, codBiblio, clientSocket.getInetAddress());
-			} else {
-				usr = (user == null) ? usr : user;
-				newTicket = (ticket == null) ? SbnSIP2Ticket.getUtenteSIP2Ticket(codPolo, codBiblio, clientSocket.getInetAddress())	: ticket;
-			}
+		private void getUser(String user, String ticket) throws Exception {
+
+			usr = (user == null) ? usr : user;
+			//String newTicket = (ticket == null) ? SbnSIP2Ticket.getUtenteSIP2Ticket(codPolo, codBiblio, clientSocket.getInetAddress())	: ticket;
+
 			usrEstesa = ServiziUtil.espandiCodUtente(usr);
 			RicercaUtenteBibliotecaVO ricercaUtenteBibliotecaVO = preparaRicercaUtente(usrEstesa);
 			utenteBibliotecaVO = getServizi().getDettaglioUtente(ticket, ricercaUtenteBibliotecaVO, null, Locale.getDefault());
@@ -1115,7 +1111,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 
 			usrEstesa = utenteBibliotecaVO.getCodiceUtente();	//potrebbe contenere il cod.fiscale.
 
-			return newTicket;
+			//return newTicket;
 		}
 
 		/**
@@ -1199,6 +1195,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				resp.setResensitize('Y');
 				//almaviva5_20190620 #6999
 				resp.setAlert('N');
+				resp.addScreenMessage("Restituzione avvenuta con successo");
 
 			} catch (Exception ve) {
 				// Messaggio di errore
@@ -1235,7 +1232,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				String patronId = msg.getPatronIdentifier();
 				clog.debug("----> patronId: " + patronId);
 
-				ticket = getUser(null, patronId, ticket);
+				getUser(patronId, ticket);
 				checkUser(); // nessuna eccezione: utenza valida (non scaduta)
 
 				ServizioBibliotecaVO servizioVO = recuperaServizioUtente(ticket);
@@ -1299,6 +1296,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 				resp.setDesensitize('Y');		//
 				resp.setSecurityInhibit("Y");	//
 				resp.setRenewalOk('N');			// primo prestito
+				resp.addScreenMessage("Richiesta inserita con successo");
 
 			} catch (Exception ve) {
 				resp.setSecurityInhibit("N");	//
@@ -1391,10 +1389,6 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 			server.stopAll();
 	}
 
-	public static void main(String[] args) {
-		return;
-	}
-
 	public Servizi getServizi() throws Exception {
 		if (servizi != null)
 			return servizi;
@@ -1430,5 +1424,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 		return amministrazioneBib;
 	}
 
-
+	public static void main(String[] args) {
+		return;
+	}
 }

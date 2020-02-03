@@ -139,7 +139,7 @@
 					<table border="0" cellpadding="0" cellspacing="0"  >
 					<tr>
 					<td valign="top" align="left">
-					  <html:text styleId="testoNormale"   property="titolo.codice" size="10" readonly="${noinput}" onkeypress="if (event.keyCode==13) return false;"></html:text>
+					  <html:text styleId="testoNormale"   property="titolo.codice" size="10" readonly="${noinput}" onkeypress="if (event.keyCode==13) return false;" maxlength="10"></html:text>
 					</td>
 					<td bgcolor="#EBEBE4" valign="top" align="left" >
 						<bean-struts:write  name="ordineRicercaParzialeForm" property="titolo.descrizione" />

@@ -56,6 +56,7 @@ public class Configuration {
 	public static final String SIP2_CURR_COD_SERVIZIO = "SIP2_CURR_COD_SERVIZIO";
 	public static final String SIP2_TOTEM_ = "SIP2_TOTEM_";
 	public static final String SIP2_BASE_URL = "SIP2_BASE_URL";
+	public static final String SIP2_RENEWAL_POLICY = "SIP2_RENEWAL_POLICY";
 
 	public static final String DEBUG_SBNMARC_URL = "DEBUG_SBNMARC_URL";
 	public static final String SBNMARC_LOCAL_DEBUG = "SBNMARC_LOCAL_DEBUG";

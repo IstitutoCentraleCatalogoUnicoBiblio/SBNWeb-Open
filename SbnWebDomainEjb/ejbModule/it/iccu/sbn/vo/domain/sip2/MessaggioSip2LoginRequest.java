@@ -63,7 +63,8 @@ public class MessaggioSip2LoginRequest  extends MessaggioSip2 //extends DesignMo
 //        	setChecksum(ar[i].substring(5));
 //        	setErrorDetection(true);
 //        }
-        if (ar[i]!= null && ar[i].length() > 0) // Error detection
+        String error = getElement(ar, i);
+        if (isFilled(error)) // Error detection
         {
         	setSequenceNumber(ar[i].charAt(2));
         	setChecksum(ar[i].substring(5));
@@ -139,6 +140,12 @@ public class MessaggioSip2LoginRequest  extends MessaggioSip2 //extends DesignMo
 
 	public void setUserPwdAlgorithm(char userPwdAlgorithm) {
 		this.userPwdAlgorithm = userPwdAlgorithm;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		String test = "9300CNUtente test|COpassword|CPBA1# 37#01|";
+		MessaggioSip2LoginRequest msg = new MessaggioSip2LoginRequest(test);
+		System.out.println(msg);
 	}
 
 }

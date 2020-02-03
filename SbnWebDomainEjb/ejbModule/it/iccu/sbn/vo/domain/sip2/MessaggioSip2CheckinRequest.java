@@ -15,6 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 package it.iccu.sbn.vo.domain.sip2;
+import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.util.MiscString;
 
 /**
@@ -53,7 +54,8 @@ public class MessaggioSip2CheckinRequest  extends MessaggioSip2 //extends Design
         this.noBlock = ar[i].substring(2, 3);			// 1-char, fixed-length required field:  Y or N.
         this.transactionDate = ar[i].substring(3,21); 	// 18-char, fixed-length required field:  YYYYMMDDZZZZHHMMSS
         this.returnDate = ar[i].substring(21,39);		// 18-char, fixed-length required field:  YYYYMMDDZZZZHHMMSS
-        this.currentLocation = ar[i++].substring(39+2);	// AP variable-length required field
+//        this.currentLocation = ar[i++].substring(39+2);	// AP variable-length required field
+        this.currentLocation = ValidazioneDati.substring(ar[i++], 39+2);	// AP variable-length required field
         this.institutionId = ar[i++].substring(2);		// AO variable-length required field
         this.itemIdentifier=ar[i++].substring(2);		// AB variable-length required field
         this.terminalPassword=ar[i++].substring(2);		// AC variable-length required field
@@ -194,5 +196,11 @@ public class MessaggioSip2CheckinRequest  extends MessaggioSip2 //extends Design
 	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
 	}
+	
+	public static void main(String[] args) throws Exception {
+		String test= "09N20180214    10213320180214    102133AP 07|AO 37|ABGES    21196|AC|AY3AZEFD9";
+		MessaggioSip2CheckinRequest msg = new MessaggioSip2CheckinRequest(test);
+		System.out.println(msg);
+	}
 
-    }
+}

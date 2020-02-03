@@ -71,7 +71,8 @@ public class MessaggioSip2ScStatusResponse  extends MessaggioSip2 //extends Desi
     	setOnLineStatus('Y');
     	setCheckinOk('Y');
     	setCheckoutOk('Y');
-    	setAcsRenewalPolicy('Y');
+    	// rinnovo non implementato
+    	setAcsRenewalPolicy('N');
     	setStatusUpdateOk('Y');
     	setOfflineOk('Y');
     	setTimeoutPeriod("999"); //Unknown (Server : default 1000)
@@ -222,30 +223,8 @@ public class MessaggioSip2ScStatusResponse  extends MessaggioSip2 //extends Desi
 		if (this.institutionId == null)
 			throw new Sip2ValidationException("Sip2 protocol: Sc Status response - campi obbligatori non validi [Institution id]");
 		if (this.protocolVersion.equals("2.00")){
-			/*
-			Position Message Command/Response pair
-			0 Patron Status Request
-			1 Checkout
-			2 Checkin
-			3 Block Patron
-			4 SC/ACS Status
-			5 Request SC/ACS Resend
-			6 Login
-			7 Patron Information
-			8 End Patron Session
-			9 Fee Paid
-			10 Item Information
-			11 Item Status Update
-			12 Patron Enable
-			13 Hold
-			14 Renew
-			15 Renew All
-			*/
-			this.setSupportedMessages("YYYYYYYYYYYYYYYY"); //cambia
-//			this.setSupportedMessages("YYYNYNYYNNNNYNNN");
-
-//			if (this.supportedMessages == null)
-//				throw new Sip2ValidationException("Sip2 protocol: Sc Status response - campi obbligatori non validi [Supported messages]");
+			if (this.supportedMessages == null)
+				throw new Sip2ValidationException("Sip2 protocol: Sc Status response - campi obbligatori non validi [Supported messages]");
 		}
     	return true;
 	}

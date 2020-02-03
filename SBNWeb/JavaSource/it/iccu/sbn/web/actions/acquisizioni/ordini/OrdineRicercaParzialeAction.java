@@ -736,7 +736,7 @@ public class OrdineRicercaParzialeAction extends AcquisizioniBaseAction implemen
 			StrutturaCombo tit=new StrutturaCombo ("","");
 			if (currentForm.getTitolo()!=null && currentForm.getTitolo().getCodice()!=null && currentForm.getTitolo().getCodice().trim().length()>0)
 			{
-				tit.setCodice(currentForm.getTitolo().getCodice().trim());
+				tit.setCodice(currentForm.getTitolo().getCodice().toUpperCase().trim());
 			}
 			if (currentForm.getTitolo()!=null && currentForm.getTitolo().getDescrizione()!=null && currentForm.getTitolo().getDescrizione().trim().length()>0)
 			{
