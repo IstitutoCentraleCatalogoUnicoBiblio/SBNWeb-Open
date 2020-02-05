@@ -155,10 +155,8 @@ public class EsameCollocEsaminaInventarioAction extends SinteticaLookupDispatchA
 							currentForm.setIsbdDiCollocazione(titolo.getIsbd());
 						}
 					}
-					if (currentForm.getRecInvDett().getKeyLocOld() != null){
-					}
 				}
-				if (currentForm.getRecInvDett().getKeyLocOld() != null && (Integer.parseInt(currentForm.getRecInvDett().getKeyLocOld()) > 0)){
+				if (ValidazioneDati.isFilled(currentForm.getRecInvDett().getKeyLocOld())) {
 //					invEsam.setCollCodSez(invEsam.getSezOld());
 //					invEsam.setCollCodLoc(invEsam.getLocOld());
 //					invEsam.setCollSpecLoc(invEsam.getSpecOld());

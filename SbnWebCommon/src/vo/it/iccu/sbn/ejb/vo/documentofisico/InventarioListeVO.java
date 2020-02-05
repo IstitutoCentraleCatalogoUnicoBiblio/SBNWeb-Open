@@ -119,7 +119,7 @@ public class InventarioListeVO extends InventarioVO implements
 	// Lista Inventari di Collocazione
 	public InventarioListeVO(int prg, String codBib, String codSerie,
 			int codInvent, String codSit, String seqColl, String prec,
-			String bid, int keyLoc, String keyLocOld, String sezOld,
+			String bid, int keyLoc, Integer keyLocOld, String sezOld,
 			String locOld, String specOld, String descr) throws Exception {
 		super(codBib, codSerie, codInvent, codSit, seqColl, prec, bid, keyLoc,
 				keyLocOld, sezOld, locOld, specOld);

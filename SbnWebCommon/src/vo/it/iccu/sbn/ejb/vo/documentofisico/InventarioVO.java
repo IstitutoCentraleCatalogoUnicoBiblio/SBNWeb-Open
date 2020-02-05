@@ -80,7 +80,7 @@ public class InventarioVO extends SerializableVO implements KeyInventario {
 	private String sezOld;
 	private String locOld;
 	private String specOld;
-	private String keyLocOld;
+	private Integer keyLocOld;
 	private String cancDB2i;
 	private String codSupporto;
 	private String dataInsPrimaColl;
@@ -262,7 +262,7 @@ public class InventarioVO extends SerializableVO implements KeyInventario {
 	// usata per lista inventari di Collocazione
 	public InventarioVO(String codBib, String codSerie, int codInvent,
 			String codSit, String seqColl, String prec, String bid, int keyLoc,
-			String keyLocOld, String sezOld, String locOld, String specOld)
+			Integer keyLocOld, String sezOld, String locOld, String specOld)
 			throws Exception {
 
 		this.codBib = codBib;
@@ -613,11 +613,11 @@ public class InventarioVO extends SerializableVO implements KeyInventario {
 		this.keyLoc = keyLoc;
 	}
 
-	public String getKeyLocOld() {
+	public Integer getKeyLocOld() {
 		return keyLocOld;
 	}
 
-	public void setKeyLocOld(String keyLocOld) {
+	public void setKeyLocOld(Integer keyLocOld) {
 		this.keyLocOld = keyLocOld;
 	}
 

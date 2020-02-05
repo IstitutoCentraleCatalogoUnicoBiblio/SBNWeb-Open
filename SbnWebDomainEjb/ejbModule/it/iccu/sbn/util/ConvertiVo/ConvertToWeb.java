@@ -1163,7 +1163,7 @@ public final class ConvertToWeb extends DataBindingConverter {
 		}
 		Tbc_collocazione key_loc = inv.getKey_loc();
 		webVO.setKeyLoc(key_loc != null ? key_loc.getKey_loc() : 0);
-		webVO.setKeyLocOld(String.valueOf(inv.getKey_loc_old()));
+		webVO.setKeyLocOld(inv.getKey_loc_old());
 		webVO.setSezOld(inv.getSez_old());
 		webVO.setLocOld(inv.getLoc_old());
 		webVO.setSpecOld(inv.getSpec_old());
@@ -1751,9 +1751,9 @@ public final class ConvertToWeb extends DataBindingConverter {
 				webVO.setSpecOld("");
 			}
 			if (i.getKey_loc_old() != null) {
-				webVO.setKeyLocOld(i.getKey_loc_old().toString());
+				webVO.setKeyLocOld(i.getKey_loc_old());
 			} else {
-				webVO.setKeyLocOld("");
+				webVO.setKeyLocOld(0);
 			}
 			webVO.setCancDB2i(String.valueOf(i.getFl_canc()));
 			if (i.getCd_supporto() != null) {

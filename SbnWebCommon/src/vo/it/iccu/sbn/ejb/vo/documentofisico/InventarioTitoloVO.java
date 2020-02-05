@@ -42,7 +42,7 @@ public class InventarioTitoloVO extends InventarioVO implements
 
 	public InventarioTitoloVO(String codBib, String codSerie, int codInvent,
 			String codSit, String seqColl, String prec1, String bid,
-			int keyLoc, String keyLocOld, String sezOld, String locOld,
+			int keyLoc, Integer keyLocOld, String sezOld, String locOld,
 			String specOld, String codSez, String codLoc, String specLoc,
 			String consistenza, int prg, String flEsempl, String fruizione,
 			String disponibilita) throws Exception {

@@ -23,6 +23,7 @@ import it.iccu.sbn.ejb.vo.common.DescrittoreBloccoInterceptor;
 import it.iccu.sbn.ejb.vo.common.DescrittoreBloccoVO;
 import it.iccu.sbn.ejb.vo.common.IdListaMetaInfoVO;
 import it.iccu.sbn.util.IdGenerator;
+import it.iccu.sbn.web.exception.RandomIdGenerator;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.ejb.EJBException;
 
@@ -56,15 +58,15 @@ public final class DescrittoreBlocchiUtil {
 	}
 
 	private static Logger log = Logger.getLogger(DescrittoreBlocchiUtil.class);
-	private static long  idListaCount = 0;
+	private static AtomicInteger idListaCount = new AtomicInteger(0);
 
 	private static final ReferenceQueue<DescrittoreBloccoInterceptor> garbaged = new ReferenceQueue<DescrittoreBloccoInterceptor>();
 
 	private static final Map<String, InterceptorReference> interceptors = new ConcurrentHashMap<String, InterceptorReference>();
 
-	private static final synchronized String creaIdLista() {
-		long id  = IdGenerator.getId() + idListaCount++;
-		return Long.toHexString(id).toUpperCase();
+	private static final String creaIdLista() {
+		long id  = IdGenerator.getId() + idListaCount.incrementAndGet();
+		return RandomIdGenerator.getId() + Long.toHexString(id);
 	}
 
 	private static final void addInterceptor(String idLista, DescrittoreBloccoInterceptor interceptor) {
@@ -145,7 +147,7 @@ public final class DescrittoreBlocchiUtil {
 		}
 		if (idLista != null)
 			log.info("Creato nuovo descrittore per ricerca id " + idLista + " ("
-				+ numBlocchi + " blocchi / sintetica n. " + idListaCount + ")");
+				+ numBlocchi + " blocchi / sintetica n. " + idListaCount.get() + ")");
 
 		return blocchi;
 	}

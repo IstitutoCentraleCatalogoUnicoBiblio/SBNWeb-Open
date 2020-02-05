@@ -1956,10 +1956,7 @@ String audiovisivi_126_permutations [] = {
         Double sv = Double.parseDouble(datiDoc.getVersioneSchema());
         if (sv.compareTo(2.00) > -1 )
         {
-    		if (cd_natura.equals("M")
-    			|| cd_natura.equals("S")
-    			|| cd_natura.equals("W")
-    			|| cd_natura.equals("N"))
+    		if (ValidazioneDati.in(cd_natura, "M", "S", "W", "N"))
     		{
 	        	if (datiDoc.getT181Count() >0) {
 			        C181[] c181 = datiDoc.getT181();
@@ -3590,12 +3587,12 @@ String audiovisivi_126_permutations [] = {
 						if( (rimuoviTrattini(numStd[i].getNumeroSTD()).length() == 10 ) ||
 							(rimuoviTrattini(numStd[i].getNumeroSTD()).length() == 13 ) ){
 						}else{
-							// UN ISBN puï¿½ essere solo 10 o 13 chr
+							// UN ISBN puo' essere solo 10 o 13 chr
 							throw new EccezioneSbnDiagnostico(2900, "Lunghezza Numero ISBN errata. La lunghezza deve essere di 10 caratteri o 13 caratteri");
 						} //controllo lunghezza '010' fine
 						if ( rimuoviTrattini(numStd[i].getNumeroSTD()).length() == 13 ){
 							if( (!numStd[i].getNumeroSTD().startsWith("978")) && (!numStd[i].getNumeroSTD().startsWith("979")) ){
-								// un  ISBN di 13 chr puï¿½ iniziare solo con 978 o 979
+								// un  ISBN di 13 chr puo' iniziare solo con 978 o 979
 								throw new EccezioneSbnDiagnostico(2900, "Numero ISBN errato. Prefisso 979 / 978 non presente");
 							}
 						}
@@ -3638,7 +3635,7 @@ String audiovisivi_126_permutations [] = {
 //						  }
 						if(rimuoviTrattini(numStd[i].getNumeroSTD()).length() == 8 ) {
 						}else{
-							// UN ISSN puï¿½ essere solo 8 chr
+							// UN ISSN puo' essere solo 8 chr
 							throw new EccezioneSbnDiagnostico(2900, "Lunghezza Numero ISSN errata. La lunghezza deve essere di 8 caratteri");
 						}
 					} //controlli '011' fine
@@ -3664,7 +3661,7 @@ String audiovisivi_126_permutations [] = {
 						if( (rimuoviTrattini(numStd[i].getNumeroSTD()).length() == 10 ) ||
 								(rimuoviTrattini(numStd[i].getNumeroSTD()).length() == 13 ) ){
 						}else{
-							// UN ISMN puï¿½ essere solo 10 o 13 chr
+							// UN ISMN puo' essere solo 10 o 13 chr
 							throw new EccezioneSbnDiagnostico(2900, "Lunghezza Numero ISMN errata. La lunghezza deve essere di 10 caratteri o 13 caratteri");
 						}
 

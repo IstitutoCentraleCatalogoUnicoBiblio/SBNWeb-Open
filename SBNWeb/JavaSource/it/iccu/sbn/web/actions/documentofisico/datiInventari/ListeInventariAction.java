@@ -716,7 +716,7 @@ public class ListeInventariAction extends SinteticaLookupDispatchAction implemen
 				request.setAttribute("codInvent",scelInv.getCodInvent());
 				request.setAttribute("descrBib",myForm.getDescrBib());
 
-				if (!scelInv.getKeyLocOld().equals("0")){
+				if (ValidazioneDati.isFilled(scelInv.getKeyLocOld())) {
 					request.setAttribute("prov", "collDef");
 					return mapping.findForward("collocazioneDefinitiva");
 				}else{

@@ -2245,9 +2245,9 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 				inv.setSpecOld("");
 			}
 			if (inventario.getKey_loc_old() != null){
-				inv.setKeyLocOld(inventario.getKey_loc_old().toString());
+				inv.setKeyLocOld(inventario.getKey_loc_old());
 			}else{
-				inv.setKeyLocOld("");
+				inv.setKeyLocOld(0);
 			}
 			inv.setCancDB2i(String.valueOf(inventario.getFl_canc()));
 			if (inventario.getCd_supporto() != null){
@@ -2327,7 +2327,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 				inventario.setRiga_fattura(null);
 				inventario.setCd_bib_fatt("");
 			}
-			inventario.setKey_loc_old(Integer.parseInt(recInvColl.getKeyLocOld()));
+			inventario.setKey_loc_old(recInvColl.getKeyLocOld());
 			inventario.setNum_carico(Integer.parseInt(recInvColl.getNumCarico()));
 			inventario.setNum_scarico(Integer.parseInt(recInvColl.getNumScarico()));
 			if (recInvColl.getDataCarico().equals("00/00/0000")) {
@@ -4153,7 +4153,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 							rec.setPrecInv(recResult.getPrecis_inv());
 						}
 						rec.setKeyLoc(recResult.getKey_loc().getKey_loc());
-						rec.setKeyLocOld(String.valueOf(recResult.getKey_loc_old()));
+						rec.setKeyLocOld(recResult.getKey_loc_old());
 						rec.setSezOld(recResult.getSez_old());
 						rec.setLocOld(recResult.getLoc_old());
 						rec.setSpecOld(recResult.getSpec_old());
@@ -5170,9 +5170,9 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 				inv.setSpecOld("");
 			}
 			if (recInv.getKey_loc_old() != null){
-				inv.setKeyLocOld(recInv.getKey_loc_old().toString());
+				inv.setKeyLocOld(recInv.getKey_loc_old());
 			}else{
-				inv.setKeyLocOld("");
+				inv.setKeyLocOld(0);
 			}
 			inv.setCancDB2i(String.valueOf(recInv.getFl_canc()));
 			if (recInv.getCd_supporto() != null){

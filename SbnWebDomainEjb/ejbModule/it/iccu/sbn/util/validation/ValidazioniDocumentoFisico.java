@@ -1213,11 +1213,6 @@ public class ValidazioniDocumentoFisico {
 					throw new ValidationException("validaInvBidEccedente", ValidationException.errore);
 				}
 			}
-			if (!this.strIsNull(String.valueOf(rec.getKeyLocOld()))) {
-				if (String.valueOf(rec.getKeyLocOld()).length()>9) {
-					throw new ValidationException("validaInvKeyLocOldEccedente", ValidationException.errore);
-				}
-			}
 //			if (rec.getSeqColl()!=null && rec.getSeqColl().trim().length()==0){
 //			throw new ValidationException("validaInvSeqCollObbligatorio", ValidationException.errore);
 //			}
@@ -1885,11 +1880,6 @@ public class ValidazioniDocumentoFisico {
 			if (rec.getBid() !=null &&  rec.getBid().length()!=0)	{
 				if (rec.getBid().length()>10)	{
 					throw new ValidationException("validaInvBidEccedente", ValidationException.errore);
-				}
-			}
-			if (!this.strIsNull((rec.getKeyLocOld()))) {
-				if ((rec.getKeyLocOld()).length()>9 || !this.strIsNumeric(rec.getKeyLocOld())) {
-					throw new ValidationException("validaInvKeyLocOldEccedente", ValidationException.errore);
 				}
 			}
 //			if (rec.getSeqColl()!=null && rec.getSeqColl().trim().length()==0){
