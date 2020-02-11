@@ -2276,7 +2276,16 @@ public class VariazioneBodyTitoli {
 		// 750 - Tipografo
         if (responsabilita.equals("4")) {
         	if (!relatorCode.equals("")) {
-	            if ((!relatorCode.equals("650")) &&	(!relatorCode.equals("340")) && (!relatorCode.equals("700")) && (!relatorCode.equals("750"))) {
+        		// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+        	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+        	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'  
+	            // if ((!relatorCode.equals("650")) &&	(!relatorCode.equals("340")) && (!relatorCode.equals("700")) && (!relatorCode.equals("750"))) {
+	            if ((!relatorCode.equals("160")) &&	
+	            		(!relatorCode.equals("310")) && 
+	            		(!relatorCode.equals("610")) && 
+	            		(!relatorCode.equals("620")) && 
+	            		(!relatorCode.equals("650")) && 
+	            		(!relatorCode.equals("700"))) {
 	                esito = false;
 	            }
         	}

@@ -532,6 +532,22 @@ public class TitoloValidaLegami extends Titolo {
         timeHash.putTimestamp("Tb_autore", aut.getVID(), new SbnDatavar( aut.getTS_VAR()));
         TitoloAutore titAut = new TitoloAutore();
         String tp_resp = titAut.calcolaTp_responsabilita(leg);
+        
+		// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'
+        // Inizio Intervento interno per Raccolte Fattizie 20.09.2011 almaviva2
+        if (cd_relazione.equals("160")
+                || cd_relazione.equals("310")
+                || cd_relazione.equals("610")
+                || cd_relazione.equals("620")
+                || cd_relazione.equals("650")
+                || cd_relazione.equals("700") )
+           {if (!tp_resp.equals("4"))
+        	   throw new EccezioneSbnDiagnostico(2900, "Ammessa solo responsabilità '4'");
+           }
+        // Fine Intervento interno per Raccolte Fattizie 20.09.2011 almaviva2
+        
         if (!legamiCancellati.contains(leg.getIdArrivo())
             && titAut.estraiTitoloAutore(bid, leg.getIdArrivo(), cd_relazione, tp_resp) != null)
             throw new EccezioneSbnDiagnostico(3030, "Legame del titolo esistente");
@@ -612,7 +628,24 @@ public class TitoloValidaLegami extends Titolo {
 		timeHash.putTimestamp("Tb_autore", aut.getVID(), new SbnDatavar( aut.getTS_VAR()));
 		TitoloAutore titAut = new TitoloAutore();
 		String tp_resp = titAut.calcolaTp_responsabilita(leg);
-		if (!legamiCancellati.contains(leg.getIdArrivo())
+		
+		// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'		
+        if (cd_relazione.equals("160")
+                || cd_relazione.equals("310")
+                || cd_relazione.equals("610")
+                || cd_relazione.equals("620")
+                || cd_relazione.equals("650")
+                || cd_relazione.equals("700") )
+           {if (!tp_resp.equals("4"))
+        	   throw new EccezioneSbnDiagnostico(2900, "Ammessa solo responsabilità '4'");
+           }
+     // Fine almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+	
+        
+        
+        if (!legamiCancellati.contains(leg.getIdArrivo())
 			&& titAut.estraiTitoloAutore(
 				bid,
 				leg.getIdArrivo(),

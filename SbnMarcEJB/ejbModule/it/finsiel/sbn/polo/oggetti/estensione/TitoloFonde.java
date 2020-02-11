@@ -979,11 +979,20 @@ public class TitoloFonde extends Titolo {
                 tb.setUTE_VAR(ute_var);
                	Tr_tit_bib titBibArrivo = titBib.cercaPerChiave(tb);
                	if (titBibArrivo != null) {
-               		titBib.aggiornaTr_tit_bib_Consis(titBibArrivo, ute_var, tb.getDS_SEGN());
+               		// INIZIO almaviva2 - intervento Mantis bug 7324
+               		// in presenza dell'URI sul bid fuso querste inormazioni vanno aggiornate anche sul bid arrivi di fusione
+               		// (tb.getFL_DISP_ELETTR,tb.getTP_DIGITALIZZ, tb.getURI_COPIA)
+               		if (tb.getURI_COPIA() != null && tb.getURI_COPIA().length() > 0) {
+               			titBib.aggiornaTr_tit_bib_Consis_URI(titBibArrivo, ute_var, tb.getDS_SEGN(),
+                   				tb.getFL_DISP_ELETTR(),tb.getTP_DIGITALIZZ(), tb.getURI_COPIA());
+               		} else {
+               			titBib.aggiornaTr_tit_bib_Consis(titBibArrivo, ute_var, tb.getDS_SEGN());
+               		}
+               	// FINE almaviva2 - intervento Mantis bug 7324
                	} else {
                		if ((polo && tb.getCD_POLO().equals(ute_var.substring(0, 3)))
                     || (tb.getFL_POSSESSO().equals("S") && !tb.getFL_GESTIONE().equals("S"))) {
-                    // se esiste giï¿½ la localizzazione sul titolo di arrivo per la biblioteca,
+                    // se esiste gia' la localizzazione sul titolo di arrivo per la biblioteca,
                 	// devo aggiornare la consistenza
                         titBib.inserisciTr_tit_bib(tb);
                		}

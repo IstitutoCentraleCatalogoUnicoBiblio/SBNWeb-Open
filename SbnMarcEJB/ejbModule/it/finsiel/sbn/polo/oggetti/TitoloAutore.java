@@ -197,13 +197,23 @@ public class TitoloAutore extends Tr_tit_aut {
             leg.getTipoLegame().getType() == SbnLegameAut.valueOf("701").getType()
                 || leg.getTipoLegame().getType() == SbnLegameAut.valueOf("711").getType())
             return "2";
+        
+     // almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+     // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+     // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'        
         if (leg.getRelatorCode() != null) {
-            if (leg.getRelatorCode().equals("650")
-                || leg.getRelatorCode().equals("610")
-                || leg.getRelatorCode().equals("160")
-                || leg.getRelatorCode().equals("310")
-                || leg.getRelatorCode().equals("700")
-                || leg.getRelatorCode().equals("750"))
+//            if (leg.getRelatorCode().equals("650")
+//                || leg.getRelatorCode().equals("610")
+//                || leg.getRelatorCode().equals("160")
+//                || leg.getRelatorCode().equals("310")
+//                || leg.getRelatorCode().equals("700")
+//                || leg.getRelatorCode().equals("750"))
+        	if (leg.getRelatorCode().equals("160")
+                    || leg.getRelatorCode().equals("310")
+                    || leg.getRelatorCode().equals("610")
+                    || leg.getRelatorCode().equals("620")
+                    || leg.getRelatorCode().equals("650")
+                    || leg.getRelatorCode().equals("700"))
                 return "4"; //Editore
             else if (
                 leg.getRelatorCode().equals("200")
@@ -220,11 +230,11 @@ public class TitoloAutore extends Tr_tit_aut {
                     || leg.getRelatorCode().equals("190")
                     || leg.getRelatorCode().equals("300")
                     || leg.getRelatorCode().equals("250")
-                    || leg.getRelatorCode().equals("310")
+//                    || leg.getRelatorCode().equals("310")
                     || leg.getRelatorCode().equals("320")
                     || leg.getRelatorCode().equals("400")
                     || leg.getRelatorCode().equals("110")
-                    || leg.getRelatorCode().equals("160")
+//                    || leg.getRelatorCode().equals("160")
                     || leg.getRelatorCode().equals("500")
                     || leg.getRelatorCode().equals("490")
                     || leg.getRelatorCode().equals("420"))

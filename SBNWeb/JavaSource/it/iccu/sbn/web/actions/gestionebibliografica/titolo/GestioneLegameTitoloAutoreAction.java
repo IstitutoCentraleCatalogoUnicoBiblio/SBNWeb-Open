@@ -155,14 +155,25 @@ public class GestioneLegameTitoloAutoreAction extends LookupDispatchAction {
 		// 650 - Editore
 		// 700 - Scrittore
 		// 750 - Tipografo
+		
+		// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'        
         if (gestLegTAForm.getAreaDatiLegameTitoloVO().getTipoResponsNew().equals("4")) {
         	// L.almaviva2 30/10/2009 inserito controllo su presenza del valore altrimenti nullPointerException
         	if (gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew() != null
         			&& !gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("")) {
-        		if ((!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("650")) &&
-        					(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("340")) &&
-        	                (!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("700")) &&
-        	                (!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("750"))) {
+//        		if ((!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("650")) &&
+//        					(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("340")) &&
+//        	                (!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("700")) &&
+//        	                (!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("750"))) {
+        		if ((!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("160")) &&
+        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("310")) &&
+        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("610")) &&
+        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("620")) &&
+        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("650")) &&
+        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("700"))) {       		
+        		
         	    			ActionMessages errors = new ActionMessages();
         	    			errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.RelatorCodeNonValido"));
         	    			this.saveErrors(request, errors);
