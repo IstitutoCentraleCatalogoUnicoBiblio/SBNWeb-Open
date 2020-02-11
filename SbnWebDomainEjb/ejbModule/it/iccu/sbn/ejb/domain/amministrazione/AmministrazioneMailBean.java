@@ -10,31 +10,37 @@ import it.iccu.sbn.persistence.dao.amministrazione.Tbf_poloDao;
 import it.iccu.sbn.persistence.dao.exception.DaoManagerException;
 import it.iccu.sbn.polo.orm.amministrazione.Tbf_mail;
 import it.iccu.sbn.servizi.ticket.TicketChecker;
+import it.iccu.sbn.util.config.CommonConfiguration;
+import it.iccu.sbn.util.config.Configuration;
 import it.iccu.sbn.util.mail.MailUtil;
 import it.iccu.sbn.util.mail.servizi.ServiziMail;
 import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 import it.iccu.sbn.vo.domain.mail.MailVO;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
 
+import java.io.FileInputStream;
 import java.rmi.RemoteException;
+import java.util.Properties;
 
 import javax.ejb.EJBException;
-import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.log4j.Logger;
+
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
 
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.coalesce;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.trimOrEmpty;
 
 
-public abstract class AmministrazioneMailBean extends TicketChecker implements SessionBean {
+public abstract class AmministrazioneMailBean extends TicketChecker implements AmministrazioneMail {
 
 	private static final long serialVersionUID = 8540398692909652725L;
 
-	private static final Logger log = Logger.getLogger(AmministrazioneMailBean.class);
+	private static final Logger log = Logger.getLogger(AmministrazioneMail.class);
 
 	// PROPRIETA' DEL MAIL SERVER PREDEFINITO:
 	private MailProperties mailProperties;
@@ -56,7 +62,7 @@ public abstract class AmministrazioneMailBean extends TicketChecker implements S
 		if (m == null)
 			return null;
 
-		MailPropertiesImpl mp = new MailPropertiesImpl();
+		final MailPropertiesImpl mp = new MailPropertiesImpl();
 		mp.smtp = trimOrEmpty(m.getSmtp());
 		mp.pop = trimOrEmpty(m.getPop3());
 		mp.mailUser = trimOrEmpty(m.getUser_name());
@@ -71,6 +77,25 @@ public abstract class AmministrazioneMailBean extends TicketChecker implements S
 			log.warn("indirizzo mittente default non impostato, si ricava dalla tabella di polo");
 			Tbf_poloDao pdao = new Tbf_poloDao();
 			mp.indirizzo = ValidazioneDati.trimOrEmpty(pdao.getPolo().getEmail());
+		}
+
+		//almaviva5_20191126 altre impostazioni
+		try {
+			String otherParamsPath = CommonConfiguration.getProperty(Configuration.EMAIL_OTHER_PROPERTIES_FILE);
+			if (isFilled(otherParamsPath)) {
+				final Properties others = new Properties();
+				others.load(new FileInputStream(otherParamsPath));
+				Stream.of(others.keySet()).forEach(new Consumer<Object>() {
+					public void accept(Object o) {
+						String k = (String) o;
+						mp.params.put(k, others.getProperty(k) );
+					}
+				});
+				log.info("caricamento altre impostazioni da: " + otherParamsPath);
+			}
+		} catch (Exception e) {
+			log.error("", e);
+			throw new EJBException(e);
 		}
 
 		log.info("Caricate le property del mail server:");

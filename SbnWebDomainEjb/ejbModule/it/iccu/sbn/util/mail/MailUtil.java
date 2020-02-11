@@ -34,6 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -170,7 +171,9 @@ public class MailUtil {
 		MailProperties mp = DomainEJBFactory.getInstance().getAmministrazioneMail().getPoloMailProperties();
 		if (mp == null)
 			throw new ValidationException(SbnErrorTypes.MAIL_INVALID_PARAMS);
-		Properties props = System.getProperties();
+
+		Properties props = new Properties();
+		props.putAll(System.getProperties());
 
 		props.put("mail.transport.protocol", "smtp");
 
@@ -191,6 +194,12 @@ public class MailUtil {
 			}
 		} else
 			throw new ValidationException(SbnErrorTypes.MAIL_INVALID_PARAMS);
+
+		Map<String, String> otherParams = mp.getOtherParams();
+		if (ValidazioneDati.isFilled(otherParams)) {
+			//load properties addizionali
+			props.putAll(otherParams);
+		}
 
 		String user = mp.getMailUser();
 		String pswd = mp.getMailPassword();

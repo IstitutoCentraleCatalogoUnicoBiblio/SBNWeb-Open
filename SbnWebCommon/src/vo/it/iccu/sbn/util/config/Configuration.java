@@ -157,5 +157,7 @@ public class Configuration {
 	//codice biblioteca per web-service sync con ESSE3
 	public static final String ESSE3_COD_BIB = "ESSE3_COD_BIB";
 
+	public static final String EMAIL_OTHER_PROPERTIES_FILE = "EMAIL_OTHER_PROPERTIES_FILE";
+
 	public static final String ILL_SBN_DEFAULT_COD_FRUIZIONE = "ILL_SBN_DEFAULT_CODFRUI";
 }

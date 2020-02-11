@@ -19,6 +19,9 @@ package it.iccu.sbn.ejb.domain.amministrazione;
 import it.iccu.sbn.ejb.vo.SerializableVO;
 import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class MailPropertiesImpl extends SerializableVO implements MailProperties {
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +33,7 @@ class MailPropertiesImpl extends SerializableVO implements MailProperties {
 	String indirizzo;
 	String descrizione;
 	boolean forzaMittentePolo;
+	Map<String, String> params = new HashMap<String, String>();
 
 	public String getSmtp() {
 		return smtp;
@@ -57,5 +61,9 @@ class MailPropertiesImpl extends SerializableVO implements MailProperties {
 
 	public boolean isForzaMittentePolo() {
 		return forzaMittentePolo;
+	}
+
+	public Map<String, String> getOtherParams() {
+		return params;
 	}
 }

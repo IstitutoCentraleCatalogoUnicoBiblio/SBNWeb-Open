@@ -16,6 +16,8 @@
  ******************************************************************************/
 package it.iccu.sbn.vo.custom.amministrazione;
 
+import java.util.Map;
+
 public interface MailProperties {
 
 	String getSmtp();
@@ -25,5 +27,6 @@ public interface MailProperties {
 	String getIndirizzo();
 	String getDescrizione();
 	boolean isForzaMittentePolo();
+	Map<String, String> getOtherParams();
 
 }
