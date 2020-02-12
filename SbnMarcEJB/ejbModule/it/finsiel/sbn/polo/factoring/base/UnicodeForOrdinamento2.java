@@ -412,7 +412,14 @@ public class UnicodeForOrdinamento2 {
         case 0x032E: return -1;      // breve below
         case 0x0332: return -1;      // low line (= line below?)
         case 0x0333: return -1;      // double low line
-//--------------------------------------------------------------------------------------
+
+        // INIZIO Almaviva2 - febbraio 2020 - inserita manutenzione già effettuata in Indice nel 2018 per gestione caratteri speciale
+        case 0x0331: return -1;      // ARGE 25/06/2018	'̱' underscore
+        case 0x0627: return 0x02BE;      // ARGE 02/07/2018	'ا' // ARABIC LETTER ALEF, 'ʾ'
+        // FINE Almaviva2 - febbraio 2020
+        
+      //--------------------------------------------------------------------------------------
+        
         case 0x1E00: return 0x41;    // capital a with ring below
         case 0x1E01: return 0x41;    // small a with ring below
         case 0x1E02: return 0x42;    // capital b with dot above
