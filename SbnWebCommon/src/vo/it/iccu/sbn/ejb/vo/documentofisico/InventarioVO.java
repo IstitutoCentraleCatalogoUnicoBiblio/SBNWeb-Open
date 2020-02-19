@@ -597,9 +597,10 @@ public class InventarioVO extends SerializableVO implements KeyInventario {
 		return importo;
 	}
 
-	public void setImporto(String importo) {
+	public void setImporto(final String importo) {
 		if (isNull(importo)) {
-			importo = "0";
+			//almaviva5_20200219 #7358
+			this.importo = "0";
 		} else {
 			this.importo = importo;
 		}
