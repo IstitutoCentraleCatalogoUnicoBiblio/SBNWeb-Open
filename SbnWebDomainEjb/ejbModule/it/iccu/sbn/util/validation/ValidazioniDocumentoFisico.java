@@ -1612,6 +1612,9 @@ public class ValidazioniDocumentoFisico {
 	public	void validaCollocazione (CollocazioneVO rec)
 	throws ValidationException {
 		try {
+			//almaviva5_20200220 #7357 #7359
+			if (rec == null)
+				return;
 
 			if (rec.getCodPolo() == null || (rec.getCodPolo()!=null && rec.getCodPolo().trim().length()==0)){
 				throw new ValidationException("validaCollCodPoloObbligatorio", ValidationException.errore);
