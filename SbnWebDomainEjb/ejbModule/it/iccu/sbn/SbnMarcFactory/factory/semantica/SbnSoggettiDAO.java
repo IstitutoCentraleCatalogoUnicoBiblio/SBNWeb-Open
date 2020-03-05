@@ -2643,14 +2643,14 @@ public class SbnSoggettiDAO {
 		DatiElementoType datiElemento = elementoAut.getDatiElementoAut();
 
 		SbnAuthority tipoAuthority = datiElemento.getTipoAuthority();
-		if (ValidazioneDati.eqAuthority(tipoAuthority, SbnAuthority.SO) ) {
+		if (SBNMarcUtil.eqAuthority(tipoAuthority, SbnAuthority.SO) ) {
 			listaSintentica = new ArrayList();
 			for (int i = 0; i < numeroElementi; i++) {
 				ElementoSinteticaSoggettoVO sogg = creaElementoListaSoggetti(sbnOutPut, i, ++progressivo,	livelloPolo);
 				listaSintentica.add(sogg);
 			}
 		}
-		if (ValidazioneDati.eqAuthority(tipoAuthority, SbnAuthority.DE) ) {
+		if (SBNMarcUtil.eqAuthority(tipoAuthority, SbnAuthority.DE) ) {
 			listaSintentica = new ArrayList();
 			for (int i = 0; i < numeroElementi; i++) {
 				ElementoSinteticaDescrittoreVO desc = creaElementoListaDescrittori(sbnOutPut, i, ++progressivo, livelloPolo, codPolo, codBib);

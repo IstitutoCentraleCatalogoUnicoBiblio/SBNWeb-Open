@@ -1366,10 +1366,10 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 			int numPrgInv = 0;
 			int prgInv = 0;
 			InventarioVO inv = null;
-			Tbc_serie_inventariale recSerie = null;
+
 			boolean ret = false;
 			valida.validaInventario(inventario, tipoOperazione, nInv);
-			recSerie = daoSerie.getSerie(inventario.getCodPolo(), inventario
+			Tbc_serie_inventariale recSerie = daoSerie.getSerieForUpdate(inventario.getCodPolo(), inventario
 					.getCodBib(), inventario.getCodSerie());
 			if (recSerie != null) {
 				if (tipoOperazione.equals("C")

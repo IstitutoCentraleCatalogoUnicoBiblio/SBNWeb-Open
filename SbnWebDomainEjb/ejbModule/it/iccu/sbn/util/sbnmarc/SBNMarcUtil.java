@@ -25,6 +25,7 @@ import it.iccu.sbn.ejb.model.unimarcmodel.SbnResponseType;
 import it.iccu.sbn.ejb.model.unimarcmodel.SbnResponseTypeChoice;
 import it.iccu.sbn.ejb.model.unimarcmodel.SbnResultType;
 import it.iccu.sbn.ejb.model.unimarcmodel.SbnUserType;
+import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnAuthority;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.common.CodiciType;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
@@ -448,6 +449,16 @@ public final class SBNMarcUtil {
 		} catch (Exception e) {}
 
 		return "05";
+	}
+	
+	public static final boolean eqAuthority(SbnAuthority authority, SbnAuthority... authorities) {
+		if (authority == null || !isFilled(authorities))
+			return false;
+		for (SbnAuthority auth : authorities)
+			if (authority.getType() == auth.getType())
+				return true;
+
+		return false;
 	}
 
 	public static void main(String... args) {

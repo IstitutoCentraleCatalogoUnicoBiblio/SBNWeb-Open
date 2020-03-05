@@ -1224,23 +1224,13 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 		boolean ret = false;
 		try {
 			valida.validaSerie(serie);
-			Tbc_serie_inventariale recSerie = daoSerie.getSerie(serie
+			Tbc_serie_inventariale recSerie = daoSerie.getSerieForUpdate(serie
 					.getCodPolo(), serie.getCodBib(), serie.getCodSerie());
 			if (recSerie != null) {
 				if (!serie.getDataAgg().equals(DateUtil.formattaDataCompletaTimestamp(recSerie.getTs_var()))){
 					throw new ValidationException("erroreSerieModDaAltroUtente",
 							ValidationException.errore);
 				}else{
-					if (serie.getDescrSerie().trim().equals("")) {
-						recSerie.setDescr("$");
-					} else {
-						recSerie.setDescr(serie.getDescrSerie());
-					}
-					//					if (Integer.parseInt(serie.getProgAssInv()) < recSerie.getPrg_inv_corrente()
-					//							|| Integer.parseInt(serie.getPregrAssInv()) < recSerie.getPrg_inv_pregresso()) {
-					//						throw new ValidationException("progrPregrNonPuoEssereMinoreDellUltimoAssegnato",
-					//								ValidationException.errore);
-					//					} else {
 					if(Integer.parseInt(serie.getProgAssInv()) < recSerie.getPrg_inv_corrente()){
 						throw new ValidationException("progrAutNonPuoEssereMinoreDellUltimoAssegnato");
 					}
@@ -1250,29 +1240,10 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 							throw new DataException("progrPregrNonPuoEssereMinoreDellUltimoAssegnato");
 						}
 					}
-					recSerie.setPrg_inv_corrente(Integer.parseInt(serie.getProgAssInv()));
-					recSerie.setPrg_inv_pregresso(Integer.parseInt(serie.getPregrAssInv()));
-					recSerie.setDt_ingr_inv_preg(DateUtil.toDate(serie.getDataIngrPregr()));
-					recSerie.setNum_man(Integer.parseInt(serie.getNumMan()));
-					recSerie.setDt_ingr_inv_man(DateUtil.toDate(serie.getDataIngrMan()));
-					recSerie.setFlg_chiusa((serie.getFlChiusa().charAt(0)));
-					recSerie.setFl_default((serie.getFlDefault().charAt(0)));
-					//
-					recSerie.setInizio_man(Integer.parseInt(serie.getInizioMan1()));
-					recSerie.setFine_man(Integer.parseInt(serie.getFineMan1()));
-					recSerie.setDt_ingr_inv_ris1(DateUtil.toDate(serie.getDataIngrRis1()));
-					recSerie.setInizio_man2(Integer.parseInt(serie.getInizioMan2()));
-					recSerie.setFine_man2(Integer.parseInt(serie.getFineMan2()));
-					recSerie.setDt_ingr_inv_ris2(DateUtil.toDate(serie.getDataIngrRis2()));
-					recSerie.setInizio_man3(Integer.parseInt(serie.getInizioMan3()));
-					recSerie.setFine_man3(Integer.parseInt(serie.getFineMan3()));
-					recSerie.setDt_ingr_inv_ris3(DateUtil.toDate(serie.getDataIngrRis3()));
-					recSerie.setInizio_man4(Integer.parseInt(serie.getInizioMan4()));
-					recSerie.setFine_man4(Integer.parseInt(serie.getFineMan4()));
-					recSerie.setDt_ingr_inv_ris4(DateUtil.toDate(serie.getDataIngrRis4()));
-					recSerie.setUte_var(serie.getUteAgg());
+					
+					recSerie = ConversioneHibernateVO.toHibernate().serieInventariale(recSerie, serie);
 					return ret = daoSerie.modificaSerie(recSerie);
-					//					}
+
 				}
 			} else {
 				throw new DataException("recInesistente");
@@ -1366,10 +1337,10 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 			int numPrgInv = 0;
 			int prgInv = 0;
 			InventarioVO inv = null;
-			Tbc_serie_inventariale recSerie = null;
+
 			boolean ret = false;
 			valida.validaInventario(inventario, tipoOperazione, nInv);
-			recSerie = daoSerie.getSerie(inventario.getCodPolo(), inventario
+			Tbc_serie_inventariale recSerie = daoSerie.getSerieForUpdate(inventario.getCodPolo(), inventario
 					.getCodBib(), inventario.getCodSerie());
 			if (recSerie != null) {
 				if (tipoOperazione.equals(DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE)

@@ -137,7 +137,7 @@ public class SbnAbstractDAO {
 		ElementAutType elementoAut = sbnOutPut.getElementoAut(0);
 		DatiElementoType datiElemento = elementoAut.getDatiElementoAut();
 
-		if (ValidazioneDati.eqAuthority(datiElemento.getTipoAuthority(), SbnAuthority.AB) ) {
+		if (SBNMarcUtil.eqAuthority(datiElemento.getTipoAuthority(), SbnAuthority.AB) ) {
 			listaSintentica = new ArrayList<SinteticaAbstractPerLegameTitVO>();
 			for (int i = 0; i < numeroElementi; i++) {
 				abstracto = creaElementoListaAbstract(sbnOutPut, i, ++progressivo);

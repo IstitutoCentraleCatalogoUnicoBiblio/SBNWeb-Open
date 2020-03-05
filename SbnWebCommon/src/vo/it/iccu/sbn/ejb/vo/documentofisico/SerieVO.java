@@ -76,7 +76,7 @@ public class SerieVO extends SerializableVO implements Comparable<SerieVO> {
 	}
 
 	public void setDescrSerie(String descrSerie) {
-		this.descrSerie = descrSerie;
+		this.descrSerie = trimOrEmpty(descrSerie);
 	}
 
 	public String getFlChiusa() {

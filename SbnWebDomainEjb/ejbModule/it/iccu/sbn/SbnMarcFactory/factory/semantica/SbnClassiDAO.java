@@ -340,7 +340,7 @@ public class SbnClassiDAO {
 		ElementAutType elementoAut = sbnOutPut.getElementoAut(0);
 		DatiElementoType datiElemento = elementoAut.getDatiElementoAut();
 
-		if (ValidazioneDati.eqAuthority(datiElemento.getTipoAuthority(), SbnAuthority.CL) ) {
+		if (SBNMarcUtil.eqAuthority(datiElemento.getTipoAuthority(), SbnAuthority.CL) ) {
 
 			//almaviva5_20090915 #2940
 			String codPolo = user.getBiblioteca().substring(0, 3);

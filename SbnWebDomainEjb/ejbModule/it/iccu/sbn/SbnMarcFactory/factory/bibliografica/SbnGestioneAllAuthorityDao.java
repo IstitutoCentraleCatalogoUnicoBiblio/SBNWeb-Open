@@ -7308,7 +7308,7 @@ public class SbnGestioneAllAuthorityDao {
 
 				//almaviva5_20180321 attiva link condivisione titolo-soggetto
 				LegameElementoAutType legameAut = areaDatiCatturaReticoloVO.getLegameElementoAutType();
-				if (legameAut != null && ValidazioneDati.eqAuthority(legameAut.getTipoAuthority(), SbnAuthority.SO)) {
+				if (legameAut != null && SBNMarcUtil.eqAuthority(legameAut.getTipoAuthority(), SbnAuthority.SO)) {
 					getSoggetti().attivaCondivisioneTitoloSoggetto(ticket,
 							legameAut.getIdArrivo(),
 							areaDatiCatturaReticoloVO.getIdOggetto());

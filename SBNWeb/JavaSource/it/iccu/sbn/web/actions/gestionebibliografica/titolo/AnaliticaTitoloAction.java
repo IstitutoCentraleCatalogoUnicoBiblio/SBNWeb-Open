@@ -74,6 +74,7 @@ import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.DettaglioTitoloParteFissa
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.TabellaNumSTDImpronteVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.TreeElementViewTitoli;
 import it.iccu.sbn.exception.UtenteNotAuthorizedException;
+import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
 import it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.AnaliticaTitoloForm;
 import it.iccu.sbn.web.actions.gestionebibliografica.utility.GestioneVaiA;
@@ -590,16 +591,16 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			}
 		} else {
 			analiticaTitoloForm.setGestioneInferiori("NO");
-			if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.PP)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.PP)) {
 				caricaComboPossessoreVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU)
-					|| ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.UM)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU)
+					|| SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.UM)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
 			}
 		}
@@ -977,17 +978,17 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			caricaComboTitoloVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
 
 		} else {
-			if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.PP)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.PP)) {
 				caricaComboPossessoreVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth,
+			} else if (SBNMarcUtil.eqAuthority(elemAuth,
 					SbnAuthority.AB,
 					SbnAuthority.CL,
 					SbnAuthority.DE,
@@ -1062,7 +1063,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 		// Richiesta dettaglio
 		SbnAuthority elemAuth = elementoTree.getTipoAuthority();
 		if (elemAuth == null
-				|| ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+				|| SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 			DettaglioTitoloCompletoVO dettTitComVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioTitoloCompletoVO();
 			request.setAttribute("dettaglioTit", dettTitComVO);
 			resetToken(request);
@@ -1080,7 +1081,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 //		 	Fine Modifica almaviva2 del 13.01.2009 BUG Mantis 2525
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 			DettaglioAutoreGeneraleVO dettAutGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioAutoreGeneraleVO();
 			request.setAttribute("dettaglioAut", dettAutGenVO);
 			resetToken(request);
@@ -1088,7 +1089,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 		}
 
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.PP)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.PP)) {
 				PossessoriDettaglioVO possDettVO = elementoTree.getAreaDatiDettaglioOggettiVO().getPossessoreDettaglioVO() ;
 				request.setAttribute("dettaglioPossDaAnalitica", possDettVO);
 				request.setAttribute("dettaglioPossDaAnaliticaTipoForma", elementoTree.isPossessoreFormaRinvio()?"FORMA_R":"FORMA_A");
@@ -1096,42 +1097,42 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				return mapping.findForward("dettaglioPossessore");
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 			DettaglioMarcaGeneraleVO dettMarGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioMarcaGeneraleVO();
 			request.setAttribute("dettaglioMar", dettMarGenVO);
 			resetToken(request);
 			return Navigation.getInstance(request).goForward(mapping.findForward("dettaglioMarca"));
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.SO)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.SO)) {
 			DettaglioSoggettoGeneraleVO dettSogGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioSoggettoGeneraleVO();
 			request.setAttribute("dettaglioSog", dettSogGenVO);
 			resetToken(request);
 			return mapping.findForward("dettaglioSemantici");
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.CL)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.CL)) {
 			DettaglioClasseGeneraleVO dettClaGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioClasseGeneraleVO();
 			request.setAttribute("dettaglioCla", dettClaGenVO);
 			resetToken(request);
 			return mapping.findForward("dettaglioSemantici");
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.DE)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.DE)) {
 			DettaglioDescrittoreGeneraleVO dettDesGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioDescrittoreGeneraleVO();
 			request.setAttribute("dettaglioDes", dettDesGenVO);
 			resetToken(request);
 			return mapping.findForward("dettaglioSemantici");
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TH)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TH)) {
 			DettaglioTermineThesauroGeneraleVO dettTerThesGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioTermineThesauroGeneraleVO();
 			request.setAttribute("dettaglioTerThes", dettTerThesGenVO);
 			resetToken(request);
 			return mapping.findForward("dettaglioSemantici");
 		}
 
-		if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+		if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 			DettaglioLuogoGeneraleVO dettLuoGenVO = elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioLuogoGeneraleVO();
 			request.setAttribute("dettaglioLuo", dettLuoGenVO);
 			resetToken(request);
@@ -1191,7 +1192,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 //			if (myForwardPath.equals("")) {
 			SbnAuthority elemAuth = elementoTree.getTipoAuthority();
 			if (myForwardPath.equals("") || myForwardPath.equals("FALLITO")) {
-				if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.PP)) {
+				if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.PP)) {
 					// Inizio gestione fuori standard per i Possessori che si agganciano all0'area del Documento Fisico;
 					request.setAttribute("prov", "listaSuppInvPoss");
 					request.setAttribute("codPolo", Navigation.getInstance(request).getUtente().getCodPolo());
@@ -1225,11 +1226,11 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			int appoggio = 0;
 			if (elemAuth == null) {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_TITOLO;
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.DE, SbnAuthority.RE)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.DE, SbnAuthority.RE)) {
 				// Non sono gestiti gli esamina di titoli legati a descrittore/repertorio
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_AUTORE;
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.PP)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.PP)) {
 				// Inizio gestione fuori standard per i Possessori che si agganciano all0'area del Documento Fisico;
 				request.setAttribute("prov", "listaSuppInvPoss");
 				request.setAttribute("codPolo", Navigation.getInstance(request).getUtente().getCodPolo());
@@ -1239,13 +1240,13 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				resetToken(request);
 				return Navigation.getInstance(request).goForward(mapping.findForward("inventariPossessori"));
 				// Fine gestione fuori standard per i Possessori che si agganciano all0'area del Documento Fisico;
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_MARCA;
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_LUOGO;
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.SO)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.SO)) {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_SOGGETTO;
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.CL)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.CL)) {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_CLASSE;
 			} else {
 				appoggio = TitoliCollegatiInvoke.TITOLI_COLLEGATI_A_TITOLO;
@@ -3709,7 +3710,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			}
 
 			if (elemAuth == null
-					|| ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+					|| SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO TITOLO
 				ActionForward actionForward = impostaAreaPerVariaLegameTitolo(mapping, request, elementoTree, analiticaTitoloForm.getBidRoot(), areaDatiLegameTitoloVO);
@@ -3717,7 +3718,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					return actionForward;
 				}
 
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO AUTORE
 				// E' NECASSARIO INSERIRE LA PARTE DEI DATI OLD PERCHE' LA MODIFICA DI QUESTO
 				// TIPO DI LEGAME CONSISTE IN CANCELLA-INSERISCI
@@ -3726,7 +3727,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					return actionForward;
 				}
 
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO MARCA
 				areaDatiLegameTitoloVO.setIdArrivo(elementoTree.getKey());
 				areaDatiLegameTitoloVO.setDescArrivo(elementoTree.getDescription());
@@ -3735,7 +3736,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				areaDatiLegameTitoloVO.setNoteLegameNew(elementoTree.getDatiLegame().getNotaLegame());
 				areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 				if (parentAuth == null
-						|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+						|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 					// OGGETTO PADRE E' UN TITOLO - variazione legame titolo-marca
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
 					if (analiticaTitoloForm.getBidRoot() != null) {
@@ -3755,7 +3756,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					areaDatiLegameTitoloVO.setTipoOperazione("Modifica");
 					request.setAttribute("AreaDatiLegameTitoloVO",	areaDatiLegameTitoloVO);
 					return mapping.findForward("variazionePerLegamiTitoloMarca");
-				} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.AU)) {
+				} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.AU)) {
 					// OGGETTO PADRE E' UN AUTORE - variazione legame editore-marca
 					areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("AU");
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -3775,7 +3776,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					request.setAttribute("AreaDatiLegameTitoloVO",	areaDatiLegameTitoloVO);
 					return mapping.findForward("variazionePerLegamiFraAutority");
 				}
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 
 				//================================================================
 
@@ -3794,7 +3795,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				areaDatiLegameTitoloVO.setNoteLegameNew(elementoTree.getDatiLegame().getNotaLegame());
 				areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 				if (parentAuth == null
-						|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+						|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 					// OGGETTO PADRE E' UN TITOLO - variazione legame titolo-luogo
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
 					if (analiticaTitoloForm.getBidRoot() != null) {
@@ -3814,7 +3815,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					areaDatiLegameTitoloVO.setTipoOperazione("Modifica");
 					request.setAttribute("AreaDatiLegameTitoloVO", areaDatiLegameTitoloVO);
 					return mapping.findForward("variazionePerLegamiTitoloLuogo");
-				} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.LU)) {
+				} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.LU)) {
 					// OGGETTO PADRE E' UNA LUOGO - variazione legameluogo-luogo
 					areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("LU");
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -4372,7 +4373,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 
 
 			if (elemAuth == null
-					|| ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+					|| SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO TITOLO
 				areaDatiLegameTitoloVO.setIdArrivo(elementoTree.getKey());
 				areaDatiLegameTitoloVO.setDescArrivo(elementoTree
@@ -4394,7 +4395,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 						.getDatiLegame().getSottoTipoLegame());
 				areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 				if (parentAuth == null
-						|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+						|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 					// OGGETTO PADRE E' UN TITOLO - variazione legame
 					// titolo-titolo
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -4433,7 +4434,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					return mapping
 							.findForward("variazionePerLegamiTitoloTitolo");
 				}
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO AUTORE
 				areaDatiLegameTitoloVO.setIdArrivo(elementoTree.getKey());
 				areaDatiLegameTitoloVO.setDescArrivo(elementoTree
@@ -4456,7 +4457,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 						.getDatiLegame().getNotaLegame());
 				areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 				if (parentAuth == null
-						|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+						|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 					// OGGETTO PADRE E' UN TITOLO - variazione legame
 					// titolo-autore
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -4498,7 +4499,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 
 					request.setAttribute("AreaDatiLegameTitoloVO", areaDatiLegameTitoloVO);
 					return mapping.findForward("variazionePerLegamiTitoloAutore");
-				} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.AU)) {
+				} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.AU)) {
 					// OGGETTO PADRE E' UN AUTORE - variazione legame fra
 					// editori
 					areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("AU");
@@ -4526,7 +4527,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					request.setAttribute("AreaDatiLegameTitoloVO",
 							areaDatiLegameTitoloVO);
 					return mapping.findForward("variazionePerLegamiFraAutority");
-				} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.MA)) {
+				} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.MA)) {
 					// OGGETTO PADRE E' UNA MARCA - variazione legame
 					// marca-autore
 					areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("MA");
@@ -4556,7 +4557,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					return mapping
 							.findForward("variazionePerLegamiFraAutority");
 				}
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO MARCA
 				areaDatiLegameTitoloVO.setIdArrivo(elementoTree.getKey());
 				areaDatiLegameTitoloVO.setDescArrivo(elementoTree
@@ -4567,7 +4568,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 						.getDatiLegame().getNotaLegame());
 				areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 				if (parentAuth == null
-						|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+						|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 					// OGGETTO PADRE E' UN TITOLO - variazione legame
 					// titolo-marca
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -4605,7 +4606,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 							areaDatiLegameTitoloVO);
 					return mapping
 							.findForward("variazionePerLegamiTitoloMarca");
-				} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.AU)) {
+				} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.AU)) {
 					// OGGETTO PADRE E' UN AUTORE - variazione legame
 					// editore-marca
 					areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("AU");
@@ -4635,7 +4636,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					return mapping
 							.findForward("variazionePerLegamiFraAutority");
 				}
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 				// POSIZIONAMENTO SU UN OGGETTO DI TIPO LUOGO
 				areaDatiLegameTitoloVO.setIdArrivo(elementoTree.getKey());
 				areaDatiLegameTitoloVO.setDescArrivo(elementoTree.getDescription());
@@ -4651,7 +4652,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 
 
 				if (parentAuth == null
-						|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+						|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 					// OGGETTO PADRE E' UN TITOLO - variazione legame titolo-marca
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
 					if (analiticaTitoloForm.getBidRoot() != null) {
@@ -4674,7 +4675,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 					areaDatiLegameTitoloVO.setTipoOperazione("Cancella");
 					request.setAttribute("AreaDatiLegameTitoloVO", areaDatiLegameTitoloVO);
 					return mapping.findForward("variazionePerLegamiTitoloLuogo");
-				} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.LU)) {
+				} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.LU)) {
 					// OGGETTO PADRE E' UN LUOGO - variazione legame luogo-luogo
 					areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("LU");
 					areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -4931,15 +4932,15 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			}
 			caricaComboTitoloVaiA(request,analiticaTitoloForm, elementoTree,	bidRoot);
 		} else {
-			if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.PP)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.PP)) {
 				caricaComboPossessoreVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.MA)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.MA)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.LU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.LU)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 				caricaComboOggettiBibliogVaiA(request,analiticaTitoloForm, elementoTree, bidRoot);
 			}
 		}
@@ -5868,7 +5869,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
 
 		if (elemAuth == null
-				|| ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+				|| SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 
 			AreaDatiVariazioneTitoloVO areaDatiPass = new AreaDatiVariazioneTitoloVO();
 			areaDatiPass.setDetTitoloPFissaVO(elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioTitoloCompletoVO().getDetTitoloPFissaVO());
@@ -5983,7 +5984,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 
 				SbnAuthority figlioAuth = treeElementViewFiglio.getTipoAuthority();
 				if (figlioAuth != null) {
-					if (!(ValidazioneDati.eqAuthority(figlioAuth,
+					if (!(SBNMarcUtil.eqAuthority(figlioAuth,
 							SbnAuthority.AB,
 							SbnAuthority.CL,
 							SbnAuthority.PP,
@@ -6068,7 +6069,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				this.saveErrors(request, errors);
 				return mapping.findForward("annulla");
 			}
-		} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+		} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 
 			AreaDatiVariazioneAutoreVO areaDatiPass = new AreaDatiVariazioneAutoreVO();
 			areaDatiPass.setDettAutoreVO(elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioAutoreGeneraleVO());
@@ -6102,7 +6103,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 
 				SbnAuthority figlioAuth = treeElementViewFiglio.getTipoAuthority();
 				if (figlioAuth != null
-						&& ValidazioneDati.eqAuthority(figlioAuth, SbnAuthority.AU)
+						&& SBNMarcUtil.eqAuthority(figlioAuth, SbnAuthority.AU)
 						&& treeElementViewFiglio.isAutoreFormaRinvio()) {
 
 					areaDatiLegameTitoloVO = new AreaDatiLegameTitoloVO();
@@ -6231,13 +6232,13 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				request.setAttribute("areaDatiPassPerConfVariazione", areaDatiVariazioneTitoloVO);
 				resetToken(request);
 				return Navigation.getInstance(request).goForward(mapping.findForward("sinteticaTitoliPerCondividi"));
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.AU)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.AU)) {
 				AreaDatiVariazioneAutoreVO areaDatiVariazioneAutoreVO = new AreaDatiVariazioneAutoreVO();
 				areaDatiVariazioneAutoreVO.setDettAutoreVO(elementoTree.getAreaDatiDettaglioOggettiVO().getDettaglioAutoreGeneraleVO());
 				request.setAttribute("areaDatiPassPerConfVariazione", areaDatiVariazioneAutoreVO);
 				resetToken(request);
 				return Navigation.getInstance(request).goForward(mapping.findForward("sinteticaAutoriPerCondividi"));
-			} else if (ValidazioneDati.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+			} else if (SBNMarcUtil.eqAuthority(elemAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 				return Navigation.getInstance(request).goForward(mapping.findForward("sinteticaTitoliPerCondividi"));
 			}
 		}
@@ -6437,7 +6438,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 		areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 		SbnAuthority parentAuth = elementoTree.getParent() != null ? elementoTree.getParent().getTipoAuthority() : null;
 		if (parentAuth == null
-				|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+				|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 			// OGGETTO PADRE E' UN TITOLO - variazione legame titolo-titolo
 			areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
 			if (bidRoot != null) {
@@ -6503,7 +6504,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 		areaDatiLegameTitoloVO.setFlagCondivisoLegame(elementoTree.getDatiLegame().isFlagCondiviso());
 		SbnAuthority parentAuth = elementoTree.getParent() != null ? elementoTree.getParent().getTipoAuthority() : null;
 		if (parentAuth == null
-				|| ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
+				|| SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.TU, SbnAuthority.UM)) {
 			// OGGETTO PADRE E' UN TITOLO - variazione legame titolo-autore
 			areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
 			if (bidRoot != null) {
@@ -6529,7 +6530,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 
 			request.setAttribute("AreaDatiLegameTitoloVO",areaDatiLegameTitoloVO);
 			return mapping.findForward("variazionePerLegamiTitoloAutore");
-		} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.AU)) {
+		} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.AU)) {
 			// OGGETTO PADRE E' UN AUTORE - variazione legame fra editori
 			areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("AU");
 			areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());
@@ -6548,7 +6549,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			areaDatiLegameTitoloVO.setTipoOperazione("Modifica");
 			request.setAttribute("AreaDatiLegameTitoloVO", areaDatiLegameTitoloVO);
 			return mapping.findForward("variazionePerLegamiFraAutority");
-		} else if (ValidazioneDati.eqAuthority(parentAuth, SbnAuthority.MA)) {
+		} else if (SBNMarcUtil.eqAuthority(parentAuth, SbnAuthority.MA)) {
 			// OGGETTO PADRE E' UNA MARCA - variazione legame marca-autore
 			areaDatiLegameTitoloVO.setAuthorityOggettoPartenza("MA");
 			areaDatiLegameTitoloVO.setBidPartenza(elementoTree.getParent().getKey());

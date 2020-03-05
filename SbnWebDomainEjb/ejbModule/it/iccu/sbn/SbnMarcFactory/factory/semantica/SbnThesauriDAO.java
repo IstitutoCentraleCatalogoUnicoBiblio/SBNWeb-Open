@@ -697,7 +697,7 @@ public class SbnThesauriDAO {
 		ElementAutType elementoAut = sbnOutPut.getElementoAut(0);
 		DatiElementoType datiElemento = elementoAut.getDatiElementoAut();
 
-		if (ValidazioneDati.eqAuthority(datiElemento.getTipoAuthority(), SbnAuthority.TH) ) {
+		if (SBNMarcUtil.eqAuthority(datiElemento.getTipoAuthority(), SbnAuthority.TH) ) {
 			listaSintentica = new ArrayList<ElementoSinteticaThesauroVO>();
 			for (int i = 0; i < numeroElementi; i++) {
 				++progressivo;

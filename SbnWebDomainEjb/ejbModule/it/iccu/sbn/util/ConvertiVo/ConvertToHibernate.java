@@ -22,6 +22,7 @@ import it.iccu.sbn.ejb.vo.acquisizioni.ordini.OrdineCarrelloSpedizioneVO;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.BibliotecaVO;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.codici.CodiceVO;
 import it.iccu.sbn.ejb.vo.documentofisico.InventarioVO;
+import it.iccu.sbn.ejb.vo.documentofisico.SerieVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.AreaDatiLocalizzazioniAuthorityVO;
 import it.iccu.sbn.ejb.vo.gestionesemantica.soggetto.DatiCondivisioneSoggettoVO;
 import it.iccu.sbn.ejb.vo.periodici.fascicolo.EsemplareFascicoloVO;
@@ -56,6 +57,7 @@ import it.iccu.sbn.polo.orm.amministrazione.Tb_codici;
 import it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca;
 import it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo;
 import it.iccu.sbn.polo.orm.bibliografica.Tb_loc_indice;
+import it.iccu.sbn.polo.orm.documentofisico.Tbc_serie_inventariale;
 import it.iccu.sbn.polo.orm.gestionesemantica.Tb_soggetto;
 import it.iccu.sbn.polo.orm.gestionesemantica.Tr_sogp_sogi;
 import it.iccu.sbn.polo.orm.periodici.Tbp_esemplare_fascicolo;
@@ -897,6 +899,41 @@ public final class ConvertToHibernate extends DataBindingConverter {
 		hVO.setRequesterId(webVO.getRequesterId());
 		hVO.setResponderId(webVO.getResponderId());
 		hVO.setFl_ruolo(webVO.getRuolo().getFl_ruolo() );
+
+		return hVO;
+	}
+
+	public final Tbc_serie_inventariale serieInventariale(Tbc_serie_inventariale hVO, SerieVO webVO) {
+		if (hVO == null)
+			hVO = new Tbc_serie_inventariale();
+
+		hVO.setPrg_inv_corrente(Integer.parseInt(webVO.getProgAssInv()));
+		hVO.setPrg_inv_pregresso(Integer.parseInt(webVO.getPregrAssInv()));
+		hVO.setDt_ingr_inv_preg(DateUtil.toDate(webVO.getDataIngrPregr()));
+		hVO.setNum_man(Integer.parseInt(webVO.getNumMan()));
+		hVO.setDt_ingr_inv_man(DateUtil.toDate(webVO.getDataIngrMan()));
+		hVO.setFlg_chiusa((webVO.getFlChiusa().charAt(0)));
+		hVO.setFl_default((webVO.getFlDefault().charAt(0)));
+
+		hVO.setInizio_man(Integer.parseInt(webVO.getInizioMan1()));
+		hVO.setFine_man(Integer.parseInt(webVO.getFineMan1()));
+		hVO.setDt_ingr_inv_ris1(DateUtil.toDate(webVO.getDataIngrRis1()));
+		hVO.setInizio_man2(Integer.parseInt(webVO.getInizioMan2()));
+		hVO.setFine_man2(Integer.parseInt(webVO.getFineMan2()));
+		hVO.setDt_ingr_inv_ris2(DateUtil.toDate(webVO.getDataIngrRis2()));
+		hVO.setInizio_man3(Integer.parseInt(webVO.getInizioMan3()));
+		hVO.setFine_man3(Integer.parseInt(webVO.getFineMan3()));
+		hVO.setDt_ingr_inv_ris3(DateUtil.toDate(webVO.getDataIngrRis3()));
+		hVO.setInizio_man4(Integer.parseInt(webVO.getInizioMan4()));
+		hVO.setFine_man4(Integer.parseInt(webVO.getFineMan4()));
+		hVO.setDt_ingr_inv_ris4(DateUtil.toDate(webVO.getDataIngrRis4()));
+		hVO.setUte_var(webVO.getUteAgg());
+
+		if (!isFilled(webVO.getDescrSerie())) {
+			hVO.setDescr("$");
+		} else {
+			hVO.setDescr(webVO.getDescrSerie());
+		}
 
 		return hVO;
 	}

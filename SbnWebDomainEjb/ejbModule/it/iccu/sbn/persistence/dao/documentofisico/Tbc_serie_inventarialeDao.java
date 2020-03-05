@@ -18,8 +18,6 @@ package it.iccu.sbn.persistence.dao.documentofisico;
 
 import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.persistence.dao.exception.DaoManagerException;
-import it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo;
-import it.iccu.sbn.polo.orm.amministrazione.Tbf_polo;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_serie_inventariale;
 
 import java.sql.Connection;
@@ -28,6 +26,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -38,7 +37,6 @@ public class Tbc_serie_inventarialeDao extends DaoManager {
 
 	public Tbc_serie_inventarialeDao() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<Tbc_serie_inventariale> getListaSerie(String codPolo, String codBib)
@@ -47,14 +45,8 @@ public class Tbc_serie_inventarialeDao extends DaoManager {
 			Session session = this.getCurrentSession();
 			Criteria cr = session.createCriteria(Tbc_serie_inventariale.class);
 
-			Tbf_polo polo = new Tbf_polo();
-			polo.setCd_polo(codPolo);
-			Tbf_biblioteca_in_polo bib = new Tbf_biblioteca_in_polo();
-			bib.setCd_biblioteca(codBib);
-			bib.setCd_polo(polo);
-
-			cr.add(Restrictions.eq("cd_polo", bib));
-			cr.add(Restrictions.eq("fl_canc", 'N'));
+			cr.add(Restrictions.eq("cd_polo", creaIdBib(codPolo, codBib)));
+			cr.add(Restrictions.ne("fl_canc", 'S'));
 			cr.addOrder(Order.asc("cd_serie"));
 			List<Tbc_serie_inventariale> results = cr.list();
 			return results;
@@ -64,26 +56,23 @@ public class Tbc_serie_inventarialeDao extends DaoManager {
 		}
 	}
 
-	public List<Tbc_serie_inventariale> getListaSerie(String codPolo, String codBib, String codSerie)
-	throws DaoManagerException	{
+	public Tbc_serie_inventariale getSerieForUpdate(String codPolo, String codBib, String codSerie)
+	throws DaoManagerException {
+
 		try{
+			Tbc_serie_inventariale rec = null;
+
 			Session session = this.getCurrentSession();
-			Criteria cr = session.createCriteria(Tbc_serie_inventariale.class);
+			rec = new Tbc_serie_inventariale();
 
-			Tbf_polo polo = new Tbf_polo();
-			polo.setCd_polo(codPolo);
-			Tbf_biblioteca_in_polo bib = new Tbf_biblioteca_in_polo();
-			bib.setCd_biblioteca(codBib);
-			bib.setCd_polo(polo);
-
-			cr.add(Restrictions.eq("cd_polo", bib));
-			cr.add(Restrictions.eq("fl_canc", 'N'));
-			cr.addOrder(Order.asc("cd_serie"));
-			List<Tbc_serie_inventariale> results = cr.list();
-			return results;
+			rec.setCd_polo(creaIdBib(codPolo, codBib));
+			rec.setCd_serie(codSerie);
+			rec = (Tbc_serie_inventariale) session.get(Tbc_serie_inventariale.class, rec, LockMode.UPGRADE);
+			return rec;
+		}catch (org.hibernate.ObjectNotFoundException e){
+			return null;
 		}catch (HibernateException e){
 			throw new DaoManagerException(e);
-//			return null;
 		}
 	}
 
@@ -96,12 +85,7 @@ public class Tbc_serie_inventarialeDao extends DaoManager {
 			Session session = this.getCurrentSession();
 			rec = new Tbc_serie_inventariale();
 
-			Tbf_polo polo = new Tbf_polo();
-			polo.setCd_polo(codPolo);
-			Tbf_biblioteca_in_polo bib = new Tbf_biblioteca_in_polo();
-			bib.setCd_biblioteca(codBib);
-			bib.setCd_polo(polo);
-			rec.setCd_polo(bib);
+			rec.setCd_polo(creaIdBib(codPolo, codBib));
 			rec.setCd_serie(codSerie);
 			rec = (Tbc_serie_inventariale) loadNoLazy(session, Tbc_serie_inventariale.class, rec);
 			return rec;
@@ -119,8 +103,6 @@ public class Tbc_serie_inventarialeDao extends DaoManager {
 		boolean ret = false;
 		try{
 			Session session = this.getCurrentSession();
-			Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
-			Criteria cr = session.createCriteria(Tbc_serie_inventariale.class);
 			session.saveOrUpdate(serie);
 			return ret = true;
 		}catch (HibernateException e){
@@ -132,7 +114,7 @@ public class Tbc_serie_inventarialeDao extends DaoManager {
 	throws DaoManagerException {
 		try{
 			Session session = this.getCurrentSession();
-			Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
+			Timestamp ts = DaoManager.now();
 			serie.setTs_var(ts);
 			session.saveOrUpdate(serie);
 		}catch (HibernateException e){
