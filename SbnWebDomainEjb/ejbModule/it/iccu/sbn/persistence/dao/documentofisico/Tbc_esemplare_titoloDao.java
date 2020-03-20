@@ -84,23 +84,18 @@ public class Tbc_esemplare_titoloDao extends DaoManager {
 		return rec1;
 	}
 
-	public Integer getEsemplare(String codPolo, String codBib, String bid)
+	public Integer getMaxEsemplare(String codPolo, String codBib, String bid)
 	throws DaoManagerException {
 
 		Integer rec = null;
 		try{
 			Session session = this.getCurrentSession();
 
-			Tbf_polo polo = new Tbf_polo();
-			polo.setCd_polo(codPolo);
-			Tbf_biblioteca_in_polo bib = new Tbf_biblioteca_in_polo();
-			bib.setCd_biblioteca(codBib);
-			bib.setCd_polo(polo);
 			Tb_titolo titolo = new Tb_titolo();
 			titolo.setBid(bid);
 			rec = (Integer) session.createCriteria(Tbc_esemplare_titolo.class)
 			.setProjection(Projections.max("cd_doc"))
-			.add(Restrictions.eq("cd_polo", bib))
+			.add(Restrictions.eq("cd_polo", creaIdBib(codPolo, codBib)))
 			.add(Restrictions.eq("b", titolo)).uniqueResult();
 
 		}catch (HibernateException e){

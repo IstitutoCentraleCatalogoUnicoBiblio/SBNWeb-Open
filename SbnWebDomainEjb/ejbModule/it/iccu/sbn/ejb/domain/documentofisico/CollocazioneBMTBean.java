@@ -268,7 +268,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try{
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("insertSezione(): Inizio transazione");
 
 			valida.validaSezione(sezione);
 			Tbc_sezione_collocazione recSez = daoSez.getSezione(sezione.getCodPolo(), sezione.getCodBib(),
@@ -403,7 +403,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("insertSezione(): Commit transazione");
 
 			return ret;
 
@@ -419,7 +419,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("insertSezione(): Rollback transazione");
 		}
 
 	}
@@ -448,7 +448,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try{
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("getSezioneDettaglio(): Inizio transazione");
 
 			SezioneCollocazioneVO recVal = new SezioneCollocazioneVO();
 			recVal.setCodPolo(codPolo);
@@ -495,7 +495,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 				tx.commit();
 				ok = true;
-				log.debug("Commit transazione");
+				log.debug("getSezioneDettaglio(): Commit transazione");
 
 			}else{
 				throw new DataException("recSezioneInesistente");
@@ -515,7 +515,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("getSezioneDettaglio(): Rollback transazione");
 		}
 		return dettaglio;
 	}
@@ -1154,7 +1154,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try{
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("getCollocazione(): Inizio transazione");
 
 			if (keyLoc == 0)
 				throw new ValidationException("validaCollKeyCollocObbligatorio", ValidationException.errore);
@@ -1167,7 +1167,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("getCollocazione(): Commit transazione");
 
 		} catch (ValidationException e) {
 			throw e;
@@ -1180,7 +1180,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("getCollocazione(): Rollback transazione");
 		}
 		return coll;
 	}
@@ -1210,7 +1210,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try{
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("getCollocazione(): Inizio transazione");
 
 			valida.validaCollocazione(recColl);
 			daoColl = new Tbc_collocazioneDao();
@@ -1224,7 +1224,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("getCollocazione(): Commit transazione");
 
 		} catch (ValidationException e) {
 			throw e;
@@ -1237,7 +1237,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("getCollocazione(): Rollback transazione");
 
 		}
 		return coll;
@@ -2399,7 +2399,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try {
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("getEsemplareDettaglio(): Inizio transazione");
 
 			EsemplareVO esempl = new EsemplareVO();
 			esempl.setCodPolo(codPolo);
@@ -2453,7 +2453,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 					tx.commit();
 					ok = true;
-					log.debug("Commit transazione");
+					log.debug("getEsemplareDettaglio(): Commit transazione");
 
 			}else{
 				throw new DataException("NonEsistente");
@@ -2471,7 +2471,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("getEsemplareDettaglio(): Rollback transazione");
 		}
 		return rec;
 	}
@@ -2691,11 +2691,11 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try{
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("insertEsemplare(): Inizio transazione");
 
 			valida.validaEsemplare(recEsempl);
 			daoEsempl = new Tbc_esemplare_titoloDao();
-			Integer esemplareCodDocMax = daoEsempl.getEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(),
+			Integer esemplareCodDocMax = daoEsempl.getMaxEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(),
 					recEsempl.getBid());
 			Tbc_esemplare_titolo esemplare = new Tbc_esemplare_titolo();
 			if (esemplareCodDocMax == null){
@@ -2738,7 +2738,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("insertEsemplare(): Commit transazione");
 
 		}catch (ValidationException e) {
 			throw e;
@@ -2753,7 +2753,7 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("insertEsemplare(): Rollback transazione");
 		}
 		return ret;
 	}
@@ -2770,11 +2770,11 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 	 *
 	 * //TODO: Must provide implementation for bean create stub
 	 */
-	public boolean insertEsemplare(EsemplareVO recEsempl, List<Integer> keyLoc, String ticket)
+	public boolean insertEsemplare(EsemplareVO recEsempl, List<Integer> collocazioni, String ticket)
 	throws DataException, ApplicationException, ValidationException {
 		checkTicket(ticket);
 
-		boolean ret = false;
+
 		boolean inserisci = true;
 //		int codDoc = 0;
 		int codDoc = recEsempl.getCodDoc();
@@ -2785,20 +2785,17 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 
 		try{
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("insertEsemplare(): Inizio transazione");
 
 			valida.validaEsemplare(recEsempl);
 			daoEsempl = new Tbc_esemplare_titoloDao();
 
-			Tbc_esemplare_titolo esemplare = new Tbc_esemplare_titolo();
-			if (codDoc==0){
-				Integer esemplareCodDocMax = daoEsempl.getEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(),
-						recEsempl.getBid());
-				if (esemplareCodDocMax == null){
-					codDoc++;
+			if (codDoc == 0) {
+				Integer max = daoEsempl.getMaxEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(), recEsempl.getBid());
+				if (!ValidazioneDati.isFilled(max) ) {
+					codDoc = 1;
 				}else{
-					codDoc = esemplareCodDocMax;
-					codDoc++;
+					codDoc = max + 1;
 				}
 				recEsempl.setCodDoc(codDoc);
 			} else {
@@ -2806,33 +2803,42 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 				inserisci = false;
 			}
 
-			Tbf_polo polo = new Tbf_polo();
-			polo.setCd_polo(recEsempl.getCodPolo());
-			Tbf_biblioteca_in_polo bib = new Tbf_biblioteca_in_polo();
-			bib.setCd_biblioteca(recEsempl.getCodBib());
-			bib.setCd_polo(polo);
-			esemplare.setCd_polo(bib);
-			Tb_titolo titolo = new Tb_titolo();
-			titolo.setBid(recEsempl.getBid());
-			esemplare.setB(titolo);
-			esemplare.setCd_doc(codDoc);
-			if (recEsempl.getConsDoc().trim().equals("")){
-				esemplare.setCons_doc("$");
-			}else{
-				esemplare.setCons_doc(recEsempl.getConsDoc().trim());
+			Tbc_esemplare_titolo esemplare = new Tbc_esemplare_titolo();
+			if (inserisci) {
+				Tbf_polo polo = new Tbf_polo();
+				polo.setCd_polo(recEsempl.getCodPolo());
+				Tbf_biblioteca_in_polo bib = new Tbf_biblioteca_in_polo();
+				bib.setCd_biblioteca(recEsempl.getCodBib());
+				bib.setCd_polo(polo);
+				esemplare.setCd_polo(bib);
+				Tb_titolo titolo = new Tb_titolo();
+				titolo.setBid(recEsempl.getBid());
+				esemplare.setB(titolo);
+				esemplare.setCd_doc(codDoc);
+				if (recEsempl.getConsDoc().trim().equals("")){
+					esemplare.setCons_doc("$");
+				}else{
+					esemplare.setCons_doc(recEsempl.getConsDoc().trim());
+				}
+			} else {
+				esemplare = daoEsempl.getEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(), recEsempl.getBid(), codDoc);
 			}
+			
 			esemplare.setTs_ins(ts);
 			esemplare.setTs_var(ts);
 			esemplare.setUte_ins(recEsempl.getUteAgg());
 			esemplare.setUte_var(recEsempl.getUteAgg());
 			esemplare.setFl_canc('N');
 
+			if (inserisci)
+				daoEsempl.inserimentoEsemplare(esemplare);
+
 			// aggiornamento di più collocazioni per esemplare
-			if( (keyLoc!=null)&&(keyLoc.size()>0) ){
-				Tbc_collocazione collocazione = null;
-				for (int i=0; i<keyLoc.size(); i++){
-					if (keyLoc.get(i) > 0){
-						collocazione = this.aggiornaColloc(keyLoc.get(i), esemplare, null);
+			if( ValidazioneDati.isFilled(collocazioni) ) {
+
+				for (Integer keyLoc : collocazioni) {
+					if (keyLoc > 0){
+						Tbc_collocazione collocazione = this.aggiornaColloc(keyLoc, esemplare, null);
 						if (collocazione != null){
 							esemplare.getTbc_collocazione().add(collocazione);
 						}
@@ -2840,14 +2846,9 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 				}
 			}
 
-			daoEsempl = new Tbc_esemplare_titoloDao();
-
-			if (inserisci) ret = daoEsempl.inserimentoEsemplare(esemplare);
-			else ret = true; // nessuna eccezione: aggiornamento collocazioni superato
-
-			tx.commit();
+			DaoManager.commit(tx);
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("insertEsemplare(): Commit transazione");
 
 		}catch (ValidationException e) {
 			throw e;
@@ -2862,9 +2863,9 @@ public abstract class CollocazioneBMTBean extends TicketChecker implements Collo
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("insertEsemplare(): Rollback transazione");
 		}
-		return ret;
+		return ok;
 	}
 
 //	private List getTitolo(String bid, String ticket)

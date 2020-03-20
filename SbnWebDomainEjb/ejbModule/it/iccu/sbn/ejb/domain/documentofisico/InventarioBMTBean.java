@@ -978,7 +978,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 		try {
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("getSerieDettaglio(): Inizio transazione");
 
 			valida.validaCodPoloCodBibSerie(codPolo, codBib, codSerie);
 			rec = daoSerie.getSerie(codPolo, codBib, codSerie.toUpperCase());
@@ -1078,7 +1078,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 				tx.commit();
 				ok = true;
-				log.debug("Commit transazione");
+				log.debug("getSerieDettaglio(): Commit transazione");
 
 			} else {
 				throw new ValidationException("recInesistente");
@@ -1095,7 +1095,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("getSerieDettaglio(): Rollback transazione");
 		}
 
 		return dettaglio;
@@ -1125,7 +1125,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 		try {
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("insertSerie(): Inizio transazione");
 
 			valida.validaSerie(serie);
 			recSerie = daoSerie.getSerie(serie.getCodPolo(),
@@ -1179,7 +1179,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 				tx.commit();
 				ok = true;
-				log.debug("Commit transazione");
+				log.debug("insertSerie(): Commit transazione");
 
 				return ret;
 			}
@@ -1194,7 +1194,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("insertSerie(): Rollback transazione");
 		}
 	}
 
@@ -1309,7 +1309,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 			boolean tipoOperazionePrevista = false;
 
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("insertInventario(): Inizio transazione");
 
 			// int numInvAss = 0;
 			if (tipoOperazione.equals("O")) {
@@ -1338,7 +1338,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("insertInventario(): Commit transazione");
 
 			return listaInvAss;
 
@@ -1352,7 +1352,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("insertInventario(): Rollback transazione");
 		}
 	}
 
@@ -1635,7 +1635,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 		InventarioVO inv = null;
 		try {
 			// valida.validaInventario(inventario, tipoOperazione, nInv);
-			recSerie = daoSerie.getSerie(inventario.getCodPolo(), inventario.getCodBib(), inventario.getCodSerie());
+			recSerie = daoSerie.getSerieForUpdate(inventario.getCodPolo(), inventario.getCodBib(), inventario.getCodSerie());
 			if (recSerie != null) {
 				if (tipoOperazione.equals("S")) {
 					inv = controllaEsistenza(inventario, tipoOperazione, recSerie, nInv, locale, ticket);
@@ -1873,7 +1873,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 		try {
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("getInventario(): Inizio transazione");
 
 			inv = new InventarioVO();
 			inv.setCodPolo(codPolo);
@@ -1906,7 +1906,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("getInventario(): Commit transazione");
 
 		} catch (ValidationException e) {
 			throw e;
@@ -1921,7 +1921,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("getInventario(): Rollback transazione");
 		}
 		return inv;
 	}
@@ -2713,7 +2713,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 		try {
 			DaoManager.begin(tx);
-			log.debug("Inizio transazione");
+			log.debug("updateInvColl(): Inizio transazione");
 
 			if (tipoOperazione.equals("M_INV")) {
 				keyLoc = modificaInvColl(recInvColl, recColl, tipoOperazione);
@@ -2728,7 +2728,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 			tx.commit();
 			ok = true;
-			log.debug("Commit transazione");
+			log.debug("updateInvColl(): Commit transazione");
 
 		} catch (ValidationException e) {
 			throw e;
@@ -2740,7 +2740,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 		} finally {
 			DaoManager.endTransaction(tx, ok);
 			if (!ok)
-				log.error("Rollback transazione");
+				log.error("updateInvColl(): Rollback transazione");
 		}
 		return keyLoc;
 	}

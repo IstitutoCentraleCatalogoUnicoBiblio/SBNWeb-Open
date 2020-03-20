@@ -121,6 +121,7 @@ import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnTipoOperazione;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.TipoRecord;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.TipoSeriale;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.TitAccessoTypeCondivisoType;
+import it.iccu.sbn.ejb.utils.DateUtil;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.common.CodiciType;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.AreaDatiImportSuPoloVO;
@@ -145,7 +146,6 @@ import it.iccu.sbn.vo.custom.esporta.QueryData;
 import it.iccu.sbn.web.constant.PeriodiciConstants;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -197,6 +197,8 @@ import static it.iccu.sbn.ejb.utils.ValidazioneDati.trunc;
  */
 public class SbnGestioneImportSuPoloDao extends DaoManager {
 
+	static Logger _log = Logger.getLogger(SbnGestioneImportSuPoloDao.class);
+
 	private FactorySbn indice;
 	private FactorySbn polo;
 	private SbnUserType user;
@@ -216,13 +218,17 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		this.polo = polo;
 
 		//almaviva5_20120614
-		this.log = blw.getLogger();
+		this.log = blw != null ? blw.getLogger() : _log;
 
 		//almaviva5_20150211
-		currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		currentYear = DateUtil.getYear(now());
 
 		titDao = new TitoloDAO();
 		autDao = new AutoreDAO();
+	}
+
+	SbnGestioneImportSuPoloDao() {
+		return;
 	}
 
 	public static final String IID_STRINGAVUOTA = "";
@@ -1761,6 +1767,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		}
 		} catch (Exception e) {
 			this.log.error(String.format("trattamentoDocumento(): id_input = %s: ", idConvertito), e);
+			areaDatiPass.addListaSegnalazioni(setTestoLog(String.format("ERRORE inserimento Documento Id Unimarc: %s: %s", idConvertito, e.getMessage())));
 		}
 
 		return areaDatiPass;
@@ -1868,6 +1875,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 		String stringaISBD="";
 
+		try {
 		if (isFilled(areaDatiPass.getListaTracciatoRecordArray())) {
 			tracciatoRecord = areaDatiPass.getListaTracciatoRecordArray().get(0);
 
@@ -2100,11 +2108,11 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					break;
 				case 181:
 					// almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
-					c181.add(ricostruisciC181(areaAppoggio1));
+					c181.add(ricostruisciC181(tracciatoRecord.getDati()));
 					break;
 				case 182:
 					// almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
-					C182 tag182 = ricostruisciC182(areaAppoggio1);
+					C182 tag182 = ricostruisciC182(tracciatoRecord.getDati());
 					c182.add(tag182);
 					// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
 					if (isFilled(tag182.getA_182_0())) {
@@ -2940,6 +2948,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			sbnrequest.setCrea(creaType);
 			areaDatiPass.setNatureW(naturaW);
 			areaDatiPass.setCreaTypeW(creaType);
+		}
+		} catch (Exception e) {
+			this.log.error(String.format("trattamentoDocumentoInferiore(): id_input = %s: ", idConvertito), e);
+			areaDatiPass.addListaSegnalazioni(setTestoLog(String.format("ERRORE inserimento Documento Id Unimarc: %s: %s", idConvertito, e.getMessage())));
 		}
 
 		return areaDatiPass;
@@ -4076,7 +4088,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 		String stringaISBD="";
 		String areaAppoggioTitolo = "";
-
+		try {
 		if (areaDatiPass.getListaTracciatoRecordArray() != null) {
 			int size = areaDatiPass.getListaTracciatoRecordArray().size();
 			for (int j = 0; j < size; j++) {
@@ -4491,12 +4503,12 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 						case 181:
 						    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
-							c181.add(ricostruisciC181(areaAppoggio1));
+							c181.add(ricostruisciC181(tracciatoRecord.getDati()));
 							break;
 
 						case 182:
 						    // almaviva2 Evolutiva Settembre 2014 per Gestione Area0 - solo Nature M,W e S - Inizio definizione/Gestione Nuovi campi
-							C182 tag182 = ricostruisciC182(areaAppoggio1);
+							C182 tag182 = ricostruisciC182(tracciatoRecord.getDati());
 							c182.add(tag182);
 							// evolutive Schema 2.01-ottobre 2015 almaviva2 - Inserimento gestione nuovo campo TipoSupporto (etichetta 183)
 							if (isFilled(tag182.getA_182_0())) {
@@ -5853,6 +5865,10 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 			}
 		}
+		} catch (Exception e) {
+			this.log.error(String.format("trattamentoTitCollegati4xx(): id_input = %s: ", idConvertito), e);
+			areaDatiPass.addListaSegnalazioni(setTestoLog(String.format("ERRORE inserimento Documento Id Unimarc: %s: %s", idConvertito, e.getMessage())));
+		}
 		return areaDatiPass;
 	}
 
@@ -5957,7 +5973,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 				tagNumeric = Integer.parseInt(tracciatoRecord.getTag());
 
-				if (!(tracciatoRecord.getDati()!= null && tracciatoRecord.getDati().trim().length() > 0)) {
+				if (!isFilled(tracciatoRecord.getDati())) {
 					areaDatiPass.setCodErr("9999");
 					testoLog = setTestoLog(idConvertito + "-" + "ATTENZIONE valore del campo dati vuoto o null");
 					areaDatiPass.addListaSegnalazioni(testoLog);
@@ -6946,16 +6962,16 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 			// inizio almaviva2 - Gennaio 2015: Modifica per correggere il tipo data h da noi non considerato
 			// verrà trattato come fosse un tipo data
-			if (tipoData.equals("h") || tipoData.equals("H")) {
+			if (in(tipoData, "h", "H")) {
 				tipoData = "d";
 			}
 			// fine almaviva2 - Gennaio 2015
-			if (tipoData.toUpperCase().equals("U")) {
+			if (in(tipoData, "u", "U")) {
 				tipoData = "f";
 			}
 
 			//almaviva5_20180705 tipo data 'c' non gestito da Sbn
-			if (tipoData.equals("c")) {
+			if (in(tipoData, "c")) {
 				tipoData = "b";	//seriale cessato
 			}
 
@@ -7142,24 +7158,29 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		C120 c120 = new C120();
 		String areaAppoggio1 = "";
 		DataField tag = MarcUtil.string2field("120", dati);
-		areaAppoggio1 = tag.getSubfield('a').getData();
+		Subfield $a = tag.getSubfield('a');
+		try {
+			areaAppoggio1 = $a.getData();
 
-		// Indicatore di colore
-		if (isFilled(areaAppoggio1.substring(0, 1))) {
-			c120.setA_120_0(areaAppoggio1.substring(0, 1));
-		} else {
-			c120.setA_120_0(IID_SPAZIO);
-		}
+			// Indicatore di colore
+			if (isFilled(areaAppoggio1.substring(0, 1))) {
+				c120.setA_120_0(areaAppoggio1.substring(0, 1));
+			} else {
+				c120.setA_120_0(IID_SPAZIO);
+			}
 
-		// Meridiano d'origine
-		if (isFilled(areaAppoggio1.substring(9, 13))) {
-			// Ottobre 2018: i caratteri validi, accettati da SbnMarc, sono solo i primi due
-			//c120.setA_120_9(areaAppoggio1.substring(9, 13));
-			c120.setA_120_9(areaAppoggio1.substring(9, 11));
-		} else {
-			c120.setA_120_9(IID_SPAZIO);
+			// Meridiano d'origine
+			if (isFilled(areaAppoggio1.substring(9, 13))) {
+				// Ottobre 2018: i caratteri validi, accettati da SbnMarc, sono solo i primi due
+				//c120.setA_120_9(areaAppoggio1.substring(9, 13));
+				c120.setA_120_9(areaAppoggio1.substring(9, 11));
+			} else {
+				c120.setA_120_9(IID_SPAZIO);
+			}
+			return c120;
+		} catch (Exception e) {
+			throw erroreEtichetta("120", 'a', e);
 		}
-		return c120;
 	}
 
 
@@ -7174,34 +7195,39 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		}
 		DataField tag = MarcUtil.string2field("121", dati.replace('|', ' '));
 
-		areaAppoggio1 = tag.getSubfield('a').getData();
+		Subfield $a = tag.getSubfield('a');
+		try {
+			areaAppoggio1 = $a.getData();
 
-		// Supporto fisico
-		if (isFilled(areaAppoggio1.substring(3,5))) {
-			c121.setA_121_3(areaAppoggio1.substring(3,5));
+			// Supporto fisico
+			if (isFilled(areaAppoggio1.substring(3,5))) {
+				c121.setA_121_3(areaAppoggio1.substring(3,5));
+			}
+
+			// Tecnica creazione
+			if (isFilled(areaAppoggio1.substring(5,6))) {
+				c121.setA_121_5(areaAppoggio1.substring(5,6));
+			}
+
+			// Forma riproduzione
+			if (isFilled(areaAppoggio1.substring(6,7))) {
+				c121.setA_121_6(areaAppoggio1.substring(6,7));
+			}
+
+			// Forma pubblicazione
+			if (isFilled(areaAppoggio1.substring(8,9))) {
+				c121.setA_121_8(areaAppoggio1.substring(8,9));
+			}
+		} catch (Exception e) {
+			throw erroreEtichetta("121", 'a', e);
 		}
-
-		// Tecnica creazione
-		if (isFilled(areaAppoggio1.substring(5,6))) {
-			c121.setA_121_5(areaAppoggio1.substring(5,6));
-		}
-
-		// Forma riproduzione
-		if (isFilled(areaAppoggio1.substring(6,7))) {
-			c121.setA_121_6(areaAppoggio1.substring(6,7));
-		}
-
-		// Forma pubblicazione
-		if (isFilled(areaAppoggio1.substring(8,9))) {
-			c121.setA_121_8(areaAppoggio1.substring(8,9));
-		}
-
-		areaAppoggio1 = tag.getSubfield('b').getData();
-		// Altitudine
-		// almaviva2 Ottobre 2018 - inserito controllo su presenza della $b perchè se è assente
-		// si incorre nell'errore java.lang.StringIndexOutOfBoundsException: String index out of range: 1
-		if (isFilled(areaAppoggio1)) {
-			c121.setB_121_0(areaAppoggio1.substring(0,1));
+		Subfield $b = tag.getSubfield('b');
+		if ($b != null) {
+			areaAppoggio1 = $b.getData();
+			// Altitudine
+			if (isFilled(areaAppoggio1)) {
+				c121.setB_121_0(areaAppoggio1.substring(0, 1));
+			}
 		}
 
 		return c121;
@@ -7747,23 +7773,33 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 	}
 
 	private C181 ricostruisciC181 (String dati) {
-		String areaAppoggio="";
+
 		C181 c181 = new C181();
 		
 		// ISBD Content form Code
 		DataField tag = MarcUtil.string2field("181", dati);
-		areaAppoggio = tag.getSubfield('a').getData();
-		//areaAppoggio = tagliaEtichetta(dati, 'a');
-		c181.setA_181_0(checkFiller(String.valueOf(areaAppoggio.charAt(0)), null)); // forma Contenuto
+		Subfield $a = tag.getSubfield('a');
+		try {
+			String areaAppoggio = $a.getData();
+			//areaAppoggio = tagliaEtichetta(dati, 'a');
+			c181.setA_181_0(checkFiller(String.valueOf(areaAppoggio.charAt(0)), null)); // forma Contenuto
+		} catch (Exception e) {
+			throw erroreEtichetta("181", 'a', e);
+		}
 
 		//ISBD Content Qualification Code
-		areaAppoggio = tag.getSubfield('b').getData();
-		c181.setB_181_0(checkFiller(String.valueOf(areaAppoggio.charAt(0)), null)); // tipo Contenuto
-		c181.setB_181_1(checkFiller(String.valueOf(areaAppoggio.charAt(1)), null)); // movimento
-		c181.setB_181_2(checkFiller(String.valueOf(areaAppoggio.charAt(2)), null)); // dimensione
-		c181.setB_181_3(checkFiller(String.valueOf(areaAppoggio.charAt(3)), null)); // sensorialita1
-		c181.setB_181_4(checkFiller(String.valueOf(areaAppoggio.charAt(4)), null)); // sensorialita2
-		c181.setB_181_5(checkFiller(String.valueOf(areaAppoggio.charAt(5)), null)); // sensorialita3
+		Subfield $b = tag.getSubfield('b');
+		try {
+			String areaAppoggio = $b.getData();
+			c181.setB_181_0(checkFiller(String.valueOf(areaAppoggio.charAt(0)), null)); // tipo Contenuto
+			c181.setB_181_1(checkFiller(String.valueOf(areaAppoggio.charAt(1)), null)); // movimento
+			c181.setB_181_2(checkFiller(String.valueOf(areaAppoggio.charAt(2)), null)); // dimensione
+			c181.setB_181_3(checkFiller(String.valueOf(areaAppoggio.charAt(3)), null)); // sensorialita1
+			c181.setB_181_4(checkFiller(String.valueOf(areaAppoggio.charAt(4)), null)); // sensorialita2
+			c181.setB_181_5(checkFiller(String.valueOf(areaAppoggio.charAt(5)), null)); // sensorialita3
+		} catch (Exception e) {
+			throw erroreEtichetta("181", 'b', e);
+		}
 
 		return c181;
 	}
@@ -8089,7 +8125,9 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 			} else {
 				return null;
 			}
-		}
+		} else
+			return null;
+
 		if (isFilled(areaAppoggio2)) {
 			numISSN[0].setNotaSTD(areaAppoggio2);
 			if (isFilled(areaAppoggio3)) {
@@ -9244,4 +9282,14 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 		return documentoFisico;
 	}
 
+	private RuntimeException erroreEtichetta(String tag, char sf, Throwable t) {
+		return new RuntimeException(String.format("Errore etichetta %s, sottocampo $%s: %s", tag, sf, t.getMessage()));
+	}
+
+	public static void main(String[] args) {
+		String tag = "$ai$b   e   ";
+		SbnGestioneImportSuPoloDao dao = new SbnGestioneImportSuPoloDao();
+		C181 c181 = dao.ricostruisciC181(tag);
+		System.out.println(c181);
+	}
 }

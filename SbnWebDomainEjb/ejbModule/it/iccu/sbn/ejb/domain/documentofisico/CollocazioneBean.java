@@ -2689,7 +2689,7 @@ public abstract class CollocazioneBean extends TicketChecker implements Collocaz
 		try {
 			valida.validaEsemplare(recEsempl);
 			daoEsempl = new Tbc_esemplare_titoloDao();
-			Integer esemplareCodDocMax = daoEsempl.getEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(),
+			Integer esemplareCodDocMax = daoEsempl.getMaxEsemplare(recEsempl.getCodPolo(), recEsempl.getCodBib(),
 					recEsempl.getBid());
 			Tbc_esemplare_titolo esemplare = new Tbc_esemplare_titolo();
 			if (esemplareCodDocMax == null){

@@ -257,7 +257,7 @@ public abstract class DocumentoFisicoBMTBean extends TicketChecker implements Do
 							bib.getCd_biblioteca(), bidNew,
 							esemplare.getCd_doc());
 					if (esemplDoc != null) {
-						Integer esemplareCodDocMax = daoEsempl.getEsemplare(bib.getCd_polo().getCd_polo(),
+						Integer esemplareCodDocMax = daoEsempl.getMaxEsemplare(bib.getCd_polo().getCd_polo(),
 								bib.getCd_biblioteca(),
 								bidNew);
 						//progressivo da max (se esistente), oppure 0

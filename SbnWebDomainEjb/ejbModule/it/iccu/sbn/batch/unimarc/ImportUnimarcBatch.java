@@ -1661,7 +1661,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 							String codSerie950 = _950.getCodSerie(currColl, currInv);
 							//_log.debug(String.format("  serie_inv: '%s'", codSerie950));
 							if (error == Stato950.OK) {
-								if (serieInventariali.contains(codSerie950)) {
+								if (serieInventariali.contains(codBib950 + codSerie950)) {
 									serieEsistente = true;
 									numSerieInvDupl++;
 								} else try {
@@ -1672,8 +1672,8 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 											ticket);
 
 									serieEsistente = true;
-									serieInventariali.add(codSerie950);
-									_log.debug("Serie inventariale (" + serieVO.getCodSerie() + ") già presente");
+									serieInventariali.add(codBib950 + codSerie950);
+									_log.debug(String.format("Serie inventariale (%s %s) già presente", serieVO.getCodBib(), serieVO.getCodSerie()));
 									numSerieInvDupl++;
 
 								} catch (Exception e) {
@@ -1714,8 +1714,8 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 										if (!getInventario().insertSerie(serieVO, ticket))
 											throw new Exception();
 
-										_log.debug("Serie inventariale (" + serieVO.getCodSerie() + ") inserita");
-										serieInventariali.add(codSerie950);
+										_log.debug(String.format("Serie inventariale (%s %s) inserita", serieVO.getCodBib(), serieVO.getCodSerie()));
+										serieInventariali.add(codBib950 + codSerie950);
 										numSerieInvInsOK++;
 									} catch (Exception e2) {
 										error = Stato950.ERRORE;
@@ -1746,7 +1746,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 //										sezEsistente = true;
 //										collEsistente = true;
 //									}
-									_log.debug(String.format("inventario: %-3s%09d già presente", inventarioVO.getCodSerie(), inventarioVO.getCodInvent()));
+									_log.debug(String.format("inventario: %s %-3s%09d già presente", codBib950, inventarioVO.getCodSerie(), inventarioVO.getCodInvent()));
 									numInvDupl++;
 
 								} catch (Exception e) {
@@ -1813,7 +1813,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 
 											if (error == Stato950.OK) {
 												// collocato
-												if (sezioni.contains(codSez950)) {
+												if (sezioni.contains(codBib950 + codSez950)) {
 													sezEsistente = true;
 													numSezCollDupl++;
 												} else try {
@@ -1825,7 +1825,7 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 
 														sezEsistente = true;
 														//_log.debug("Sezione di collocazione (" + sezioneVO.getCodSezione() + ") già presente");
-														sezioni.add(codSez950);
+														sezioni.add(codBib950 + codSez950);
 														numSezCollDupl++;
 
 													} catch (Exception e1) {
@@ -1851,8 +1851,8 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 															if (!getCollocazione().insertSezione(sezioneVO, ticket)) {
 																throw new Exception();
 															}
-															_log.debug("Sezione di collocazione (" + sezioneVO.getCodSezione() + ") inserita");
-															sezioni.add(codSez950);
+															_log.debug(String.format("Sezione di collocazione (%s %s) inserita", sezioneVO.getCodBib(), sezioneVO.getCodSezione()));
+															sezioni.add(codBib950 + codSez950);
 															numSezCollInsOK++;
 														} catch (Exception e2) {
 															error = Stato950.ERRORE;
@@ -2004,18 +2004,19 @@ public class ImportUnimarcBatch extends DaoManager implements BatchExecutor {
 						if (isFilled(listaKeyLoc) ) {
 							// inserimento
 
-							if (esemplareVO != null && isFilled(_950.getConsistenzaDocumento(currColl))) {
+							String consDoc950 = _950.getConsistenzaDocumento(currColl);
+							if (isFilled(consDoc950)) {
 
 								// campi obbligatori
 								esemplareVO = new EsemplareDettaglioVO();
 								esemplareVO.setCodPolo(codPolo);
-								esemplareVO.setCodBib(_950.getCodBibColl(currColl));
+								esemplareVO.setCodBib(codBib950);
 								esemplareVO.setBid(bid);
-								esemplareVO.setConsDoc(_950.getConsistenzaDocumento(currColl));
+								esemplareVO.setConsDoc(consDoc950);
 								esemplareVO.setUteAgg(firmaUtente);
 
 								// codDoc
-								codDocEse = (esemplareVO.getConsDoc().equals(consEsePrec))
+								codDocEse = ValidazioneDati.equals(esemplareVO.getConsDoc(), consEsePrec)
 									? codDocEse	// stesso esemplare: conserva il codDoc precedente
 									: 0;		// nuovo esemplare: codDoc di default (per superare la validazione)
 								esemplareVO.setCodDoc(codDocEse);
