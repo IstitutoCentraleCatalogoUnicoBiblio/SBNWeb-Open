@@ -16,6 +16,8 @@
  ******************************************************************************/
 package it.finsiel.sbn.polo.oggetti.estensione;
 
+import static it.finsiel.sbn.polo.factoring.util.ValidazioneDati.isFilled;
+
 import it.finsiel.sbn.exception.InfrastructureException;
 import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
@@ -24,7 +26,6 @@ import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
 import it.finsiel.sbn.polo.factoring.util.Progressivi;
 import it.finsiel.sbn.polo.factoring.util.ResourceLoader;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
-import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.oggetti.AllineamentoTitolo;
 import it.finsiel.sbn.polo.oggetti.Cartografia;
 import it.finsiel.sbn.polo.oggetti.Composizione;
@@ -763,7 +764,7 @@ public class TitoloFonde extends Titolo {
         // e si asterisca la chiamata secca alla cancellazione; Intervento interno
         // Inizio modifica almaviva2 22.06.2012 viene ripristinato il metodo per lo spostamento delle classi
         List<Tr_tit_cla> classi = titoloClasse.estraiTitoliClasse(bid1);
-        if (!ValidazioneDati.isFilled(classi))
+        if (!isFilled(classi))
         	return;
 
 		// almaviva2 15.10.2012 Bug Mantis esercizio 5140/5144:Errrore nello spostamento legami classi se partenza e arrivo fusione sono
@@ -796,7 +797,7 @@ public class TitoloFonde extends Titolo {
         // 14.7.2005 i legami a soggetto si cancellano
         // Inizio modifica almaviva2 22.06.2012 i soggetti vengono spostati dal bid di partenza a quello di arrivo
         List<Tr_tit_sog_bib> soggetti = ts.estraiTitoliSoggetto(bid1);
-        if (!ValidazioneDati.isFilled(soggetti) )
+        if (!isFilled(soggetti) )
         	return;
 
     	Map<String, Integer> livelli = new HashMap<String, Integer>();
@@ -968,21 +969,21 @@ public class TitoloFonde extends Titolo {
         }
     }
 
-    public void elaboraTitBib(String bid, String bid2, String ute_var) throws IllegalArgumentException, InvocationTargetException, Exception {
+    public void elaboraTitBib(String bidPartenza, String bidArrivo, String ute_var) throws IllegalArgumentException, InvocationTargetException, Exception {
         TitoloBiblioteca titBib = new TitoloBiblioteca();
-        List v = titBib.cercaLocalizzazioni(bid);
+        List localizzazioni = titBib.cercaLocalizzazioni(bidPartenza);
         boolean polo = ValidatorProfiler.getInstance().isPolo(ute_var);
-        if (v.size() > 0) {
-            for (int i = 0; i < v.size(); i++) {
-                Tr_tit_bib tb = (Tr_tit_bib) v.get(i);
-                tb.setBID(bid2);
+        if (isFilled(localizzazioni) ) {
+            for (int i = 0; i < localizzazioni.size(); i++) {
+                Tr_tit_bib tb = (Tr_tit_bib) localizzazioni.get(i);
+                tb.setBID(bidArrivo);
                 tb.setUTE_VAR(ute_var);
                	Tr_tit_bib titBibArrivo = titBib.cercaPerChiave(tb);
                	if (titBibArrivo != null) {
                		// INIZIO almaviva2 - intervento Mantis bug 7324
                		// in presenza dell'URI sul bid fuso querste inormazioni vanno aggiornate anche sul bid arrivi di fusione
                		// (tb.getFL_DISP_ELETTR,tb.getTP_DIGITALIZZ, tb.getURI_COPIA)
-               		if (tb.getURI_COPIA() != null && tb.getURI_COPIA().length() > 0) {
+               		if (isFilled(tb.getURI_COPIA()) ) {
                			titBib.aggiornaTr_tit_bib_Consis_URI(titBibArrivo, ute_var, tb.getDS_SEGN(),
                    				tb.getFL_DISP_ELETTR(),tb.getTP_DIGITALIZZ(), tb.getURI_COPIA());
                		} else {
@@ -990,20 +991,26 @@ public class TitoloFonde extends Titolo {
                		}
                	// FINE almaviva2 - intervento Mantis bug 7324
                	} else {
-               		if ((polo && tb.getCD_POLO().equals(ute_var.substring(0, 3)))
-                    || (tb.getFL_POSSESSO().equals("S") && !tb.getFL_GESTIONE().equals("S"))) {
+               		// INIZIO Bug esercizio 7434 - Almaviva2 - maggio 2020
+               		// in caso di assenza localizzazione l'inserimento deve sempre essere fatto senza ulteriori controlli
+               		// e deve essere impostato anche tb.setUTE_INS aggiornato (viene asteriscato tutto il controllo)
+               		// if ((polo && tb.getCD_POLO().equals(ute_var.substring(0, 3)))
+                    // || (tb.getFL_POSSESSO().equals("S") && !tb.getFL_GESTIONE().equals("S"))) {
                     // se esiste gia' la localizzazione sul titolo di arrivo per la biblioteca,
                 	// devo aggiornare la consistenza
-                        titBib.inserisciTr_tit_bib(tb);
-               		}
+                    //    titBib.inserisciTr_tit_bib(tb);
+               		//}
+               		tb.setUTE_INS(ute_var);
+               		titBib.inserisciTr_tit_bib(tb);
+               	// FINE Bug esercizio 7434 - Almaviva2 - maggio 2020
                	}
             }
             if (!polo) {
-                titBib.aggiornaCancellaFlAllinea(ute_var, bid, null, null);
+                titBib.aggiornaCancellaFlAllinea(ute_var, bidPartenza, null, null);
             } else {
                 titBib.aggiornaCancellaFlAllinea(
                     ute_var,
-                    bid,
+                    bidPartenza,
                     ute_var.substring(0, 3),
                     ute_var.substring(3, 6));
             }
@@ -1015,10 +1022,10 @@ public class TitoloFonde extends Titolo {
         //    il fl_allinea sarï¿½ impostato a 'S' quando ï¿½ spazio AND il fl_canc != 'S' (diverso da 'S') AND il fl_gestione != 'N' (diverso da 'N') AND il bid=bid-accorpante
         //    il fl_allinea sarï¿½ impostato a 'Z' quando ï¿½ 'C' AND il fl_canc != 'S' (diverso da 'S') AND il fl_gestione != 'N' (diverso da 'N') AND il bid=bid-accorpante
 
-        v = titBib.cercaLocalizzazioni(bid2);
-        if (v.size() > 0) {
-            for (int i = 0; i < v.size(); i++) {
-                Tr_tit_bib tb = (Tr_tit_bib) v.get(i);
+        localizzazioni = titBib.cercaLocalizzazioni(bidArrivo);
+        if (isFilled(localizzazioni) ) {
+            for (int i = 0; i < localizzazioni.size(); i++) {
+                Tr_tit_bib tb = (Tr_tit_bib) localizzazioni.get(i);
 
                 // MARCO RANIERI MODIFICA:
                 // PROSEGUO SOLO SE FLAG GESTIONE DIVERSO DA N

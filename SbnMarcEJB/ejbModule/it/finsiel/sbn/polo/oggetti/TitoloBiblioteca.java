@@ -334,6 +334,8 @@ public class TitoloBiblioteca extends Tr_tit_bib {
 	// almaviva2 - intervento Mantis bug 7324
 	// in presenza dell'URI sul bid fuso querste inormazioni vanno aggiornate anche sul bid arrivi di fusione
 	// (tb.getFL_DISP_ELETTR,tb.getTP_DIGITALIZZ, tb.getURI_COPIA)
+    //  Bug esercizio 7434 - Almaviva2 - maggio 2020
+	//	L'aggiornamento dell'URI deve essere effettuato anche in assenza di consistenza e quindi viene tirato fuori dall'IF sulla stessa
     public void aggiornaTr_tit_bib_Consis_URI(Tr_tit_bib tr_tit_bib, String user, String segnatura, String dispElettr, String tpDiglit, String uriCopia)
             throws EccezioneDB, InfrastructureException {
             if (segnatura != null) {
@@ -343,6 +345,7 @@ public class TitoloBiblioteca extends Tr_tit_bib {
                     tr_tit_bib.setDS_CONSISTENZA(tr_tit_bib.getDS_CONSISTENZA().trim() + ";" + segnatura.trim());
                 }
                 
+            }
                 tr_tit_bib.setFL_DISP_ELETTR(dispElettr);
                 tr_tit_bib.setTP_DIGITALIZZ(tpDiglit);
                 tr_tit_bib.setURI_COPIA(uriCopia);
@@ -355,7 +358,7 @@ public class TitoloBiblioteca extends Tr_tit_bib {
 
     	        tr_tit_bibResult.update(tr_tit_bib);
 
-    	    }
+    	    //}
         }
     
 
