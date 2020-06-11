@@ -619,7 +619,7 @@ public class DatiRichiestaILLAction extends ErogazioneAction implements SbnAttiv
 
 			//diritti dell'utente in biblioteca
 			List<ServizioBibliotecaVO> dirittiUtente = delegate.getServiziAttivi(bib.getCod_polo(), utenteVO.getCodBib(), utenteVO.getCodUtente(),
-					bib.getCod_bib(), null);//DaoManager.now());
+					bib.getCod_bib(), DaoManager.now());
 
 			if (currentForm.getServizioLocale().isNuovo()) {	//servizio locale non impostato
 

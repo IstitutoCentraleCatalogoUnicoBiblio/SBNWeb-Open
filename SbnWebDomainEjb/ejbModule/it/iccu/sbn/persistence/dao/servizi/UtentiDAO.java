@@ -487,23 +487,23 @@ public class UtentiDAO extends ServiziBaseDAO {
 			throws DaoManagerException {
 		Tbl_utenti utente = getUtente(codPolo, codBibUte, codUtente, codBib);
 		if (utente == null)
-			return null;
+			return ValidazioneDati.emptyList();
 
 		Set<Trl_diritti_utente> diritti = utente.getTrl_diritti_utente();
 
 		Session session = this.getCurrentSession();
 		//Definizione filtro
-		StringBuilder filtro = new StringBuilder("where fl_canc!='S'");
+		StringBuilder filtro = new StringBuilder("where fl_canc<>'S' and id_servizio.id_tipo_servizio.cd_bib = :bib");
 		if (data != null) {
 			filtro.append(" and (data_inizio_serv is null or :data>=data_inizio_serv)")
-				  .append(" and (data_fine_serv is null   or :data<=data_fine_serv)")
-				  .append(" and id_servizio.id_tipo_servizio.cd_bib = :bib")
-				  .append(" and ((data_inizio_sosp is null and data_fine_sosp is null) or (data_inizio_sosp is not null and data_fine_sosp is not null and not :data between data_inizio_sosp and data_fine_sosp))");
+				.append(" and (data_fine_serv is null   or :data<=data_fine_serv)")
+				.append(" and ( (data_inizio_sosp is null and data_fine_sosp is null)")
+				.append(" or (data_inizio_sosp is not null and data_fine_sosp is not null and not :data between data_inizio_sosp and data_fine_sosp) )");
 		}
 		Query query = session.createFilter(diritti, filtro.toString());
+		query.setEntity("bib", creaIdBib(codPolo, codBib) );
 		if (data != null) {
 			query.setTimestamp("data", data);
-			query.setEntity("bib", creaIdBib(codPolo, codBib) );
 		}
 
 		return query.list();
