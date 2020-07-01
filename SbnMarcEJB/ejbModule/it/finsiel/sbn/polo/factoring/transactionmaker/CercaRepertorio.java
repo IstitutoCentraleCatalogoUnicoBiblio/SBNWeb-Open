@@ -46,6 +46,7 @@ import it.iccu.sbn.ejb.model.unimarcmodel.StringaCercaType;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnAuthority;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnTipoOrd;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnTipoOutput;
+import it.iccu.sbn.ejb.model.unimarcmodel.types.TipoRepertorio;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -103,6 +104,7 @@ public class CercaRepertorio extends CercaElementoAutFactoring {
     private LegameElementoAutType _legameElementoAut;
 
     private SbnAuthority _tipoAuthority;
+	private TipoRepertorio tipoRep;
 
     public CercaRepertorio(SBNMarc input_root_object) {
         super(input_root_object);
@@ -129,8 +131,10 @@ public class CercaRepertorio extends CercaElementoAutFactoring {
             if (_datiElementoAut.getLivelloAut_Da() != null)
                 _livelloAutDA = _datiElementoAut.getLivelloAut_Da().toString();
         }
-        if (_cercaRepertorio != null)
-            paroleAut = _cercaRepertorio.getParoleAut();
+        if (_cercaRepertorio != null) {
+			paroleAut = _cercaRepertorio.getParoleAut();
+			tipoRep = _cercaRepertorio.getB_930();
+		}
         if (_elementoAut.getArrivoLegame() != null) {
             _legameElementoAut = _elementoAut.getArrivoLegame().getLegameElementoAut();
             _tipoAuthority = _legameElementoAut.getTipoAuthority();
@@ -152,6 +156,8 @@ public class CercaRepertorio extends CercaElementoAutFactoring {
             counter++;
         if (paroleAut != null && paroleAut.length > 0)
             counter++;
+        if (counter == 0 && tipoRep != null)
+        	counter++;
         if (counter != 1)
             throw new EccezioneSbnDiagnostico(3039, "comunicare uno e un solo canale di ricerca");
         if (_T001 != null)

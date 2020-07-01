@@ -23,6 +23,7 @@ import it.finsiel.sbn.polo.exception.EccezioneDB;
 import it.finsiel.sbn.polo.orm.Tb_repertorio;
 import it.iccu.sbn.ejb.model.unimarcmodel.CercaDatiAutType;
 import it.iccu.sbn.ejb.model.unimarcmodel.CercaSoggettoDescrittoreClassiReperType;
+import it.iccu.sbn.ejb.model.unimarcmodel.types.TipoRepertorio;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -71,11 +72,13 @@ public class Repertorio extends Tb_repertorio {
 	            repertorio.settaParametro(TableDao.XXXdata_ins_A,cerca.getT005_Range().getDataA().toString());
         	}
         }
-   		if (cerca instanceof CercaSoggettoDescrittoreClassiReperType)
-			cerca = cerca;
-		if (cerca != null)
-			if (cerca.getFormaNome() != null)
-				setTP_REPERTORIO(cerca.getFormaNome().toString());
+   		if (cerca instanceof CercaSoggettoDescrittoreClassiReperType) {
+   			CercaSoggettoDescrittoreClassiReperType cercaRep = (CercaSoggettoDescrittoreClassiReperType) cerca;
+   			TipoRepertorio tipoRepertorio = cercaRep.getB_930();
+   			if (tipoRepertorio != null)
+   				setTP_REPERTORIO(tipoRepertorio.toString());
+		}
+
         return repertorio;
     }
 

@@ -27,10 +27,12 @@ import it.finsiel.sbn.util.BuilderUpdate;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * TODO Da Testare
@@ -529,6 +531,12 @@ public class Tb_repertorioResult extends Tb_repertorioCommonDao {
         session.saveOrUpdate(this.tb_repertorio);
         this.commitTransaction();
         this.closeSession();
+	}
+
+	public void setTipoRepertorio(Map<String, Object> opzioni) {
+		if (opzioni.containsKey(KeyParameter.XXXtp_repertorio)) {
+			this.basicCriteria.add(Restrictions.eq("TP_REPERTORIO", opzioni.get(KeyParameter.XXXtp_repertorio) ));
+		}
 	}
 
 	@Override

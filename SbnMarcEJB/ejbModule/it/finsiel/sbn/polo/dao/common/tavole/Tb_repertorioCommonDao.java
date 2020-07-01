@@ -134,7 +134,7 @@ import org.hibernate.criterion.Restrictions;
     public void createCriteria(HashMap opzioni) throws InfrastructureException
     {
         try {
-            Class cl = Tb_repertorioCommonDao.class;//this.getClass();
+            Class cl = this.getClass();
             Method[] metodi = cl.getDeclaredMethods();
             for(int index =0; index<metodi.length; index++){
                 if(metodi[index].getName().startsWith("set")){
