@@ -287,9 +287,17 @@ public final class ConvertToXML extends ConvertFromXML {
 		ct.setSez(ip.getCd_sez());
 		ct.setLoc(ip.getCd_loc());
 		ct.setSpec(ip.getSpec_loc());
-		String consis = trimOrEmpty(ip.getConsis());
-		if (!in(consis, "", "$"))
-			ct.setConsis(consis);
+
+		// gestione consistenza:
+		// se è valorizzata la consistenza di collocazione (950$c) ha la precedenza,
+		// in alternativa si utilizza la consistenza di esemplare (950$b)
+		String consisCol = trimOrEmpty(ip.getConsis());
+		boolean hasConsisCol = isFilled(consisCol) && !consisCol.equals("$");
+
+		String consisEse = trimOrEmpty(ip.getCons_doc());
+		boolean hasConsisEse = isFilled(consisEse) && !consisEse.equals("$");
+		
+		ct.setConsis(hasConsisCol ? consisCol : hasConsisEse ? consisEse : null);
 
 		return ct;
 	}

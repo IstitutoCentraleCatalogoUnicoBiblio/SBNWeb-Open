@@ -312,6 +312,7 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 		<return-scalar column="isbd_inv" type="string" />
 		<return-scalar column="cd_natura_inv" type="character" />
 		<return-scalar column="anno_abb" type="integer" />
+		<return-scalar column="cons_doc" type="string" />
 
 		<![CDATA[
 			select distinct i.cd_serie, i.cd_inven, i.seq_coll, c.cd_sez, c.cd_loc,
@@ -330,10 +331,15 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 				i.cd_frui, i.cd_no_disp,
 				null as isbd_inv,
 				null as cd_natura_inv,
-				coalesce(i.anno_abb, 9999) as anno_abb
+				coalesce(i.anno_abb, 9999) as anno_abb, et.cons_doc
 			from tbc_collocazione c
 			inner join tbc_inventario i on i.key_loc=c.key_loc
 			inner join tb_titolo ti on ti.bid=i.bid
+			left join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc 
+				and et.cd_biblioteca=c.cd_biblioteca_doc
+				and et.bid=c.bid_doc
+				and et.cd_doc=c.cd_doc
+				and et.fl_canc<>'S'
 			where true
 				and i.fl_canc<>'S'
 				and i.cd_polo=:polo
@@ -357,10 +363,15 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 				i.cd_frui, i.cd_no_disp,
 				estrai_area_da_isbd(ti.isbd, ti.indice_isbd, '200') as isbd_inv,
 				ti.cd_natura as cd_natura_inv,
-				coalesce(i.anno_abb, 9999) as anno_abb
+				coalesce(i.anno_abb, 9999) as anno_abb, et.cons_doc
 			from tbc_collocazione c
 			inner join tbc_inventario i on i.key_loc=c.key_loc
 			inner join tb_titolo ti on ti.bid=i.bid
+			left join tbc_esemplare_titolo et on et.cd_polo=c.cd_polo_doc 
+				and et.cd_biblioteca=c.cd_biblioteca_doc
+				and et.bid=c.bid_doc
+				and et.cd_doc=c.cd_doc
+				and et.fl_canc<>'S'
 			where true
 				and i.fl_canc<>'S'
 				and c.cd_polo_sezione=:polo
@@ -385,7 +396,7 @@ inner join tb_titolo tit on colloc.bid=tit.bid
 				i.cd_frui, i.cd_no_disp,
 				estrai_area_da_isbd(ti.isbd, ti.indice_isbd, '200') as isbd_inv,
 				ti.cd_natura as cd_natura_inv,
-				coalesce(i.anno_abb, 9999) as anno_abb
+				coalesce(i.anno_abb, 9999) as anno_abb, null
 			from tbc_inventario i
 			inner join tb_titolo ti on ti.bid=i.bid
 			where true
