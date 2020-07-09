@@ -82,4 +82,25 @@ public class Constants {
 			
 		}
 	}
+
+	public static class Bibliografica {
+
+		public static final int MAX_LUNGHEZZA_NOTA_LEGAME_SBNMARC = 80;
+
+		public static class Autori {
+
+			// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+			// Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+			public static final String[] TITAUT_CD_RELAZIONE_RESP_4 = new String[] {
+				"160",	// '160 Libraio'
+				"310",	// '310 Distributore'
+				"610",	// '610 Stampatore'
+				"620",	// '620 Stampatore delle tavole'
+				"650",	// '650 Editore'
+				"700"	// '700 Copista'
+			};
+		}
+
+	}
+
 }

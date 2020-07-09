@@ -83,10 +83,28 @@ import java.util.List;
  * @version 21-mar-2003
  */
 public class TitoloValidaLegami extends Titolo {
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4442646412602008276L;
+
+	// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+	// Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+	public static final String[] TITAUT_CD_RELAZIONE_RESP_4 = new String[] {
+		"160",	// '160 Libraio'
+		"310",	// '310 Distributore'
+		"610",	// '610 Stampatore'
+		"620",	// '620 Stampatore delle tavole'
+		"650",	// '650 Editore'
+		"700"	// '700 Copista'
+	};
+
+	public static final String[] TITAUT_CD_RELAZIONE_RESP_0 = new String[] {
+			"200", "820", "790", "280", "290", "390", "590",
+			"040", "005", "275", "580", "190", "300", "250",
+//			"310",
+			"320", "400", "110",
+//			"160",
+			"500", "490", "420" };
+
 	LegamiType[] legami = null;
     int tipo_autore_1 = 0;
     int tipo_autore_2 = 0;
@@ -537,12 +555,7 @@ public class TitoloValidaLegami extends Titolo {
 	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
 	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'
         // Inizio Intervento interno per Raccolte Fattizie 20.09.2011 almaviva2
-        if (cd_relazione.equals("160")
-                || cd_relazione.equals("310")
-                || cd_relazione.equals("610")
-                || cd_relazione.equals("620")
-                || cd_relazione.equals("650")
-                || cd_relazione.equals("700") )
+        if (ValidazioneDati.in(cd_relazione, TITAUT_CD_RELAZIONE_RESP_4) )
            {if (!tp_resp.equals("4"))
         	   throw new EccezioneSbnDiagnostico(2900, "Ammessa solo responsabilità '4'");
            }

@@ -139,6 +139,7 @@ import it.iccu.sbn.polo.orm.bibliografica.Tb_titolo;
 import it.iccu.sbn.servizi.batch.BatchLogWriter;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.servizi.z3950.Z3950ClientFactory;
+import it.iccu.sbn.util.Constants;
 import it.iccu.sbn.util.Constants.Semantica.Soggetti;
 import it.iccu.sbn.util.marc.MarcUtil;
 import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
@@ -1276,7 +1277,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 //					if (numISBN != null) {
 //						musicaType.setNumSTD(numISBN);
 //					}
-					if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+					if (isFilled(datiDocType.getNumSTD()) )
 						musicaType.setNumSTD(datiDocType.getNumSTD());
 
 					if (c012 != null)
@@ -1358,7 +1359,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				cartograficoType.setGuida(guidaDoc);
 //				if (numISBN != null)
 //					cartograficoType.setNumSTD(numISBN);
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					cartograficoType.setNumSTD(datiDocType.getNumSTD());
 
 				if (c856 != null)
@@ -1430,7 +1431,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				graficoType.setGuida(guidaDoc);
 //				if (numISBN != null)
 //					graficoType.setNumSTD(numISBN);
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					graficoType.setNumSTD(datiDocType.getNumSTD());
 
 				if (c856 != null)
@@ -1501,7 +1502,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				audiovisivoType.setLivelloAut(SbnLivello.valueOf("05"));
 				audiovisivoType.setLivelloAutDoc(SbnLivello.valueOf("05"));
 				audiovisivoType.setGuida(guidaDoc);
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					audiovisivoType.setNumSTD(datiDocType.getNumSTD());
 
 				if (c856 != null)
@@ -1942,7 +1943,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					// ISBN (es:  $a04-122-0810-5$bScience Paperback edition   ):
 					if (datiDocType.getNumSTDCount()< 4) {
 						numISBN = ricostruisci010(tracciatoRecord.getDati());
-						if (numISBN != null && numISBN.length > 0 && numISBN[0] != null) {
+						if (isFilled(numISBN) && numISBN[0] != null) {
 							datiDocType.addNumSTD(numISBN[0]);
 						}
 					}
@@ -1972,7 +1973,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				case 20:
 					// Numero di bibliografia nazionale  (es:.......):
 					numISBN = ricostruisci020(tracciatoRecord.getDati());
-					if (numISBN != null && numISBN.length > 0 && numISBN[0] != null) {
+					if (isFilled(numISBN) && numISBN[0] != null) {
 						datiDocType.addNumSTD(numISBN[0]);
 					}
 					break;
@@ -2532,7 +2533,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				modernoType.setGuida(guidaDoc);
 //				if (numISBN != null)
 //					modernoType.setNumSTD(datiDocType.getNumSTD());
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					modernoType.setNumSTD(datiDocType.getNumSTD());
 
 				if (c856 != null)
@@ -2658,7 +2659,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 //					if (numISBN != null) {
 //						musicaType.setNumSTD(numISBN);
 //					}
-					if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+					if (isFilled(datiDocType.getNumSTD()) )
 						musicaType.setNumSTD(datiDocType.getNumSTD());
 
 
@@ -2740,7 +2741,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				cartograficoType.setGuida(guidaDoc);
 //				if (numISBN != null)
 //					cartograficoType.setNumSTD(numISBN);
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					cartograficoType.setNumSTD(datiDocType.getNumSTD());
 
 
@@ -2807,7 +2808,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				graficoType.setGuida(guidaDoc);
 //				if (numISBN != null)
 //					graficoType.setNumSTD(numISBN);
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					graficoType.setNumSTD(datiDocType.getNumSTD());
 
 
@@ -2875,7 +2876,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				audiovisivoType.setLivelloAut(SbnLivello.valueOf("05"));
 				audiovisivoType.setLivelloAutDoc(SbnLivello.valueOf("05"));
 				audiovisivoType.setGuida(guidaDoc);
-				if (datiDocType.getNumSTD() != null && datiDocType.getNumSTD().length > 0)
+				if (isFilled(datiDocType.getNumSTD()) )
 					audiovisivoType.setNumSTD(datiDocType.getNumSTD());
 
 				if (c856 != null)
@@ -3459,7 +3460,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 						// 04.12.2012 Inserita decodifica di controllo del relator code per evitare inserimento relator code inesistenti
 						if (isFilled(relatorCode)) {
-							String relatorCodeCorretto="";
+							String relatorCodeCorretto = "";
 							try {
 								relatorCodeCorretto = CodiciProvider.unimarcToSBN(CodiciType.CODICE_LEGAME_TITOLO_AUTORE, relatorCode);
 							} catch (Exception e) {
@@ -3469,9 +3470,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 								areaDatiPass.addListaSegnalazioni(testoLog);
 								continue;
 							}
-							if (relatorCodeCorretto != null && relatorCodeCorretto.length() > 0) {
+							if (isFilled(relatorCodeCorretto) ) {
 								areaDatiLegameTitoloVO.setRelatorCodeNew(relatorCode);
-
 								// Inizio modifica Dicembre 2014 - nel caso in cui si sia in presenza di legame 712 (legame con Ente)
 								// si imposta sempre il TipoResponsNew al valore 3 TRANNE nel caso di relator-code=650 che
 								// identifica il legame di Tipo Editore: a questo punto si imposta il TipoResponsNew al valore 4
@@ -3479,6 +3479,12 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 									areaDatiLegameTitoloVO.setTipoResponsNew("4");
 								}
 								// Fine modifica Dicembre 2014
+
+								// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
+								// Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
+								if (in(relatorCodeCorretto, Constants.Bibliografica.Autori.TITAUT_CD_RELAZIONE_RESP_4) ) {
+									areaDatiLegameTitoloVO.setTipoResponsNew("4");
+								}
 							} else {
 								// Dicembre 2015 - si ripulisce il campo in presenza di CODICE_LEGAME_TITOLO_AUTORE non valido
 								// altrimenti si salverebbe il legame con il vecchio valore
@@ -3498,6 +3504,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 //							areaDatiLegameTitoloVO.setTipoNomeArrivo(enteType.getTipoNome().toString());
 //						}
 					} else {
+						//LEGAME TITOLO-TITOLO
 						//String naturaBidArrivo = utilityCastor.getNaturaTitolo(idArrivoLegame, analiticaReturnIdLegDocVO.getSbnMarcType());
 						String naturaBidArrivo = Character.toString(titArrivo.getCd_natura());
 						areaDatiLegameTitoloVO.setNaturaBidArrivo(naturaBidArrivo);
@@ -3551,16 +3558,18 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 						// Inserimento sequenza di legame nel caso delle 410 (legame a collana)
 						// Modifica dicembre 2014 - Inserimento nota al legame nel caso di etchetta 463/464 (legame a spogli)
-						if (tracciatoRecord.getTag().equals("410") && tracciatoRecord.getDati().contains("$v")) {
-							areaDatiLegameTitoloVO.setSequenzaNew(tagliaEtichetta(tracciatoRecord.getDati(), 'v')); // sequenza del legame
-						} else if ((tracciatoRecord.getTag().equals("463") || tracciatoRecord.getTag().equals("464"))
-								&& tracciatoRecord.getDati().contains("$v")){
-							areaDatiLegameTitoloVO.setSequenzaNew("");
-							areaDatiLegameTitoloVO.setNoteLegameNew(tagliaEtichetta(tracciatoRecord.getDati(), 'v')); // nota al legame
-						} else {
-							 // Modifica 13.07.2012 L.almaviva2 Posizione nella sequenza in legami 46x viene valorizzata con la $v della 410
-							areaDatiLegameTitoloVO.setSequenzaNew("");
-						}
+						String $v = tagliaEtichetta(tracciatoRecord.getDati(), 'v');
+						// 20200709_almaviva5 fix: per 461$v presente la sequenza non viene valorizzata
+						if (in(tracciatoRecord.getTag(), "410", "461") && isFilled($v)) {
+							areaDatiLegameTitoloVO.setSequenzaNew($v); // sequenza del legame
+						} else
+							if (in(tracciatoRecord.getTag(), "463", "464") && isFilled($v)) {
+								areaDatiLegameTitoloVO.setSequenzaNew("");
+								areaDatiLegameTitoloVO.setNoteLegameNew($v); // nota al legame
+							} else {
+								// Modifica 13.07.2012 L.almaviva2 Posizione nella sequenza in legami 46x viene valorizzata con la $v della 410
+								areaDatiLegameTitoloVO.setSequenzaNew("");
+							}
 					}
 
 
@@ -4107,7 +4116,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 				}
 				tagNumeric = Integer.parseInt(tracciatoRecord.getTag());
 
-				if (!(tracciatoRecord.getDati()!= null && tracciatoRecord.getDati().trim().length() > 0)) {
+				if (!isFilled(tracciatoRecord.getDati()) ) {
 					areaDatiPass.setCodErr("9999");
 					testoLog = setTestoLog(idConvertito + "-" + "ATTENZIONE il valore del campo dati è vuoto o null");
 					areaDatiPass.addListaSegnalazioni(testoLog);
@@ -4193,7 +4202,7 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 
 				int inizioDati = 0;
 				int fineStringa = 0;
-				int fineDati = tracciatoRecord.getDati().length();
+				int fineDati = length(tracciatoRecord.getDati());
 				tipoMateriale = "M";
 				tipoRecord = "a";
 

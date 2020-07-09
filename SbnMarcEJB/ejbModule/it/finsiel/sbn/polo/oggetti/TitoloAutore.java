@@ -28,7 +28,9 @@ import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.TimestampHash;
 import it.finsiel.sbn.polo.factoring.util.ConverterDate;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
+import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.oggetti.estensione.TitoloGestisceAllineamento;
+import it.finsiel.sbn.polo.oggetti.estensione.TitoloValidaLegami;
 import it.finsiel.sbn.polo.orm.Tb_autore;
 import it.finsiel.sbn.polo.orm.Tb_titolo;
 import it.finsiel.sbn.polo.orm.Tr_tit_aut;
@@ -208,36 +210,10 @@ public class TitoloAutore extends Tr_tit_aut {
 //                || leg.getRelatorCode().equals("310")
 //                || leg.getRelatorCode().equals("700")
 //                || leg.getRelatorCode().equals("750"))
-        	if (leg.getRelatorCode().equals("160")
-                    || leg.getRelatorCode().equals("310")
-                    || leg.getRelatorCode().equals("610")
-                    || leg.getRelatorCode().equals("620")
-                    || leg.getRelatorCode().equals("650")
-                    || leg.getRelatorCode().equals("700"))
+        	if (ValidazioneDati.in(leg.getRelatorCode(), TitoloValidaLegami.TITAUT_CD_RELAZIONE_RESP_4) )
                 return "4"; //Editore
             else if (
-                leg.getRelatorCode().equals("200")
-                    || leg.getRelatorCode().equals("820")
-                    || leg.getRelatorCode().equals("790")
-                    || leg.getRelatorCode().equals("280")
-                    || leg.getRelatorCode().equals("290")
-                    || leg.getRelatorCode().equals("390")
-                    || leg.getRelatorCode().equals("590")
-                    || leg.getRelatorCode().equals("040")
-                    || leg.getRelatorCode().equals("005")
-                    || leg.getRelatorCode().equals("275")
-                    || leg.getRelatorCode().equals("580")
-                    || leg.getRelatorCode().equals("190")
-                    || leg.getRelatorCode().equals("300")
-                    || leg.getRelatorCode().equals("250")
-//                    || leg.getRelatorCode().equals("310")
-                    || leg.getRelatorCode().equals("320")
-                    || leg.getRelatorCode().equals("400")
-                    || leg.getRelatorCode().equals("110")
-//                    || leg.getRelatorCode().equals("160")
-                    || leg.getRelatorCode().equals("500")
-                    || leg.getRelatorCode().equals("490")
-                    || leg.getRelatorCode().equals("420"))
+                ValidazioneDati.in(leg.getRelatorCode(), TitoloValidaLegami.TITAUT_CD_RELAZIONE_RESP_0) )
                 return "0";
         }
         return "3";
