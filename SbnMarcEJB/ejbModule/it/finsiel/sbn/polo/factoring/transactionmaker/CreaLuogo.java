@@ -175,7 +175,7 @@ public class CreaLuogo extends CreaElementoAutFactoring {
 		ds_luogo = null;
 		if (luogoType.getT260() != null){
 			ds_luogo = luogoType.getT260().getD_260();
-			// MODIFICA RICHIESTA DA ROSSANA IN CASO DI IMPORT DA INDICE E IN CASO IL CODICE PAESE NON VALORIZZATO
+			// IMPORT DA INDICE E IN CASO IL CODICE PAESE NON VALORIZZATO
 			// IL CLIENT INVIA SPAZIO. TESTO LA CONDIZIONE E INSERISCO CODICE UN (PAESE INDETERMINATO)
             if (luogoType.getT260().getA_260() != null){
             		cd_paese = Decodificatore.getCd_tabella("Tb_luogo","cd_paese",luogoType.getT260().getA_260().toUpperCase());
@@ -212,8 +212,8 @@ public class CreaLuogo extends CreaElementoAutFactoring {
 			_TableDao_response = validaLuogo.validaPerCrea(getCdUtente(),ignoraID,_cattura);
 		}
 		//controllo che non ci siano luoghi simili (se tipocontrollo<>conferma) e che non esiste ID
-    	if ((_TableDao_response.size() == 0) &&
-	    	(_tipoControllo.getType() != SbnSimile.SIMILEIMPORT_TYPE)){
+		if ((_TableDao_response.size() == 0) &&
+		(_tipoControllo.getType() != SbnSimile.SIMILEIMPORT_TYPE)){
 			if (ignoraID) {
 				Progressivi progress = new Progressivi();
 				_t001 = progress.getNextIdLuogo();

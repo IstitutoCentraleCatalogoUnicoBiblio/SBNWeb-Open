@@ -75,9 +75,9 @@ License Type: Evaluation
 
 
 		<filter name="TB_LUOGO_selectSimili"
-				condition="UPPER(TRIM(Tb_luogo.ky_norm_luogo))=UPPER(TRIM(:XXXky_norm_luogo ))
-				 		   AND UPPER(TRIM(Tb_luogo.ds_luogo))=UPPER(TRIM(:XXXds_luogo))
-				 		   AND fl_canc != 'S' "/>
+				condition="UPPER(TRIM(this_.ky_norm_luogo))=UPPER(TRIM(:XXXky_norm_luogo ))
+				 		   AND UPPER(TRIM(this_.ds_luogo))=UPPER(TRIM(:XXXds_luogo))
+				 		   AND this_.fl_canc != 'S' "/>
 
 
 	</class>
