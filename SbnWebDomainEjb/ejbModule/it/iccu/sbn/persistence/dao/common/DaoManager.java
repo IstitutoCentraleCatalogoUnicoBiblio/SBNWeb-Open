@@ -207,7 +207,7 @@ public class DaoManager {
     	StringBuilder buf = new StringBuilder();
 		buf.append("({alias}.");
 		buf.append(campoTabella);
-		if ((new DaoManager()).getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+		if ((new DaoManager()).getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 			buf.append(" @@ to_tsquery('default', '");
 		else
 			buf.append(" @@ to_tsquery('");

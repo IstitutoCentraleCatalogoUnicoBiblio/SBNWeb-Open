@@ -26,6 +26,7 @@ import it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo;
 import it.iccu.sbn.polo.orm.amministrazione.Tbf_polo;
 import it.iccu.sbn.polo.orm.servizi.Tbl_documenti_lettori;
 import it.iccu.sbn.polo.orm.servizi.Tbl_utenti;
+import it.iccu.sbn.web2.util.Constants;
 
 import java.rmi.RemoteException;
 import java.text.ParseException;
@@ -223,7 +224,7 @@ public class Tbl_documenti_lettoriAcqDao extends DaoManager {
 
 					}
 					DaoManager hibDao = new DaoManager();
-					 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+					 if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 					 {
 						 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 						cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + paroleTit + "')"));

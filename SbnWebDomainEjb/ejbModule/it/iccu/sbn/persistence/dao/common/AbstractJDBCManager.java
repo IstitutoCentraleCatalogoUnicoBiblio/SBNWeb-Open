@@ -37,6 +37,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.apache.maven.artifact.versioning.ComparableVersion;
 
 
 public abstract class AbstractJDBCManager {
@@ -44,6 +45,8 @@ public abstract class AbstractJDBCManager {
 	private static Logger log = Logger.getLogger(AbstractJDBCManager.class);
 
 	private static String DATA_SOURCE;
+
+	private static ComparableVersion version;
 
 	private DataSource ds = null;
 
@@ -112,17 +115,11 @@ public abstract class AbstractJDBCManager {
 				ds = (DataSource) ctx.lookup(DATA_SOURCE);
 			}
 			conn = ds.getConnection();
-			Statement st = conn.createStatement();
-			if (st.execute("select version()") )  {
-				ResultSet rs = st.getResultSet();
-				rs.next();
-				String version = rs.getString(1);
-				rs.close();
-				if (version.substring(11).compareTo(Constants.POSTGRES_VERSION_83) < 0) // config TSearch2 (solo se ver. < 8.3)
-					st.execute("select set_curcfg('default')");
+			if (getVersion(conn).compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) {// config TSearch2 (solo se ver. < 8.3)
+				Statement st = conn.createStatement();
+				st.execute("select set_curcfg('default')");
+				st.close();
 			}
-
-			st.close();
 
 		} catch (NamingException e) {
 			log.error("", e);
@@ -130,6 +127,22 @@ public abstract class AbstractJDBCManager {
 		}
 
 		return conn;
+	}
+
+	private static ComparableVersion getVersion(Connection conn) throws SQLException {
+		if (version != null)
+			return version;
+
+		Statement st = conn.createStatement();
+		st.execute("select version()");
+		ResultSet rs = st.getResultSet();
+		rs.next();
+		String result = rs.getString(1);
+		String[] tokens = result.split("\\s");
+		version = ComparableVersion.of(tokens[1]);
+		rs.close();
+
+		return version;
 	}
 
 	public void close(Connection c) {

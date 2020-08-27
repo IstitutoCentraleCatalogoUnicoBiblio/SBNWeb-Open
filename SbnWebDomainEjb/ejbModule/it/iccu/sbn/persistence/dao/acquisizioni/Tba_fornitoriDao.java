@@ -31,6 +31,7 @@ import it.iccu.sbn.polo.orm.acquisizioni.Tra_sez_acquisizione_fornitori;
 import it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca_in_polo;
 import it.iccu.sbn.polo.orm.amministrazione.Tbf_polo;
 import it.iccu.sbn.polo.orm.bibliografica.viste.V_catalogo_editoria;
+import it.iccu.sbn.web2.util.Constants;
 
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
@@ -275,7 +276,7 @@ public class Tba_fornitoriDao extends DaoManager {
 
 							//sql=sql + " forn.chiave_for = '" + ricercaFornitori.getChiaveFor()+"'";
 							DaoManager hibDao = new DaoManager();
-							 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+							 if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 							 {
 								 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + ricercaFornitori.getChiaveFor() +"')";
 								 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + tmp +"')";
@@ -318,7 +319,7 @@ public class Tba_fornitoriDao extends DaoManager {
 
 							}
 							DaoManager hibDao = new DaoManager();
-							 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+							 if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 							 {
 								 //sql=sql + " tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 								cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + paroleForn + "')"));

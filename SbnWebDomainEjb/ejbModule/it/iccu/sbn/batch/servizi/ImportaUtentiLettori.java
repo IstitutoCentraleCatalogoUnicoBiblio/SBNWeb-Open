@@ -30,7 +30,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.iccu.sbn.web2.util.Constants;
 
 
 
@@ -1615,9 +1614,9 @@ private void trattaUtenteBiblioteca(String id, String[] ar2, String dt) {
 				if (st.execute("select version()") )  {
 					ResultSet resultSet = st.getResultSet();
 					resultSet.next();
-					String version = resultSet.getString(1);
+					double version = Double.valueOf(resultSet.getString(1).trim());
 					st.close();
-					if (version.substring(11).compareTo(Constants.POSTGRES_VERSION_83) < 0) {// config TSearch2 (solo se ver. < 8.3)
+					if (version < Double.valueOf("8.3") ) {// config TSearch2 (solo se ver. < 8.3)
 						Statement st2 = con.createStatement();
 						st2.execute("select set_curcfg('default')");
 						st2.close();

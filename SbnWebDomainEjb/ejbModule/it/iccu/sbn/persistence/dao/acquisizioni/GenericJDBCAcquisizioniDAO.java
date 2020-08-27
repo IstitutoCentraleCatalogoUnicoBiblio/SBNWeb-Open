@@ -99,6 +99,7 @@ import it.iccu.sbn.vo.custom.acquisizioni.ordini.OrdineCarrelloSpedizioneDecorat
 import it.iccu.sbn.vo.custom.bibliografica.AreaDatiServizioInterrTitoloCusVO;
 import it.iccu.sbn.vo.validators.acquisizioni.Validazione;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
+import it.iccu.sbn.web2.util.Constants;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -5821,7 +5822,7 @@ public class GenericJDBCAcquisizioniDAO extends AcquisizioniBaseDAO {
 
 								//sql +=" forn.chiave_for = '" + ricercaFornitori.getChiaveFor()+"'";
 								DaoManager hibDao = new DaoManager();
-								 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+								 if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 								 {
 									 //sql +=" tidx_vector @@ to_tsquery('default', '" + ricercaFornitori.getChiaveFor() +"')";
 									sql +=" tidx_vector @@ to_tsquery('default', '" + tmp +"')";
@@ -5862,7 +5863,7 @@ public class GenericJDBCAcquisizioniDAO extends AcquisizioniBaseDAO {
 
 								}
 								DaoManager hibDao = new DaoManager();
-								 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+								 if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 								 {
 									 sql +=" tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 								 }
@@ -17180,7 +17181,7 @@ public class GenericJDBCAcquisizioniDAO extends AcquisizioniBaseDAO {
 
 							}
 							DaoManager hibDao = new DaoManager();
-							 if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0)
+							 if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0)
 							 {
 								 sql +=" docLet.tidx_vector @@ to_tsquery('default', '" + paroleForn +"')";
 							 }

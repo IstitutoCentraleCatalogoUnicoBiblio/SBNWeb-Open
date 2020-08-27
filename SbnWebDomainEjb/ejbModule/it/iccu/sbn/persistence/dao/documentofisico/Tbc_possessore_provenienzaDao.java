@@ -23,6 +23,7 @@ import it.iccu.sbn.persistence.dao.exception.DaoManagerException;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_possessore_provenienza;
 import it.iccu.sbn.polo.orm.documentofisico.Trc_poss_prov_inventari;
 import it.iccu.sbn.web.keygenerator.GeneraChiave;
+import it.iccu.sbn.web2.util.Constants;
 
 import java.sql.Connection;
 import java.sql.Timestamp;
@@ -203,7 +204,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									tmp = tmp + " & " + parole[i];
 
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('default','" + tmp + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('" + tmp + "')"));
@@ -225,7 +226,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									}
 								}
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + parolePoss + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('" + parolePoss + "')"));
@@ -526,7 +527,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									tmp = tmp + " & " + parole[i];
 
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('default','" + tmp + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector_ds_nome_aut @@ to_tsquery('" + tmp + "')"));
@@ -548,7 +549,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 									}
 								}
 								DaoManager hibDao = new DaoManager();
-								if (hibDao.getVersion().compareTo(ComparableVersion.of("8.3")) < 0) {
+								if (hibDao.getVersion().compareTo(ComparableVersion.of(Constants.POSTGRES_VERSION_83)) < 0) {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('default','" + parolePoss + "')"));
 								} else {
 									cr.add(Restrictions.sqlRestriction("{alias}.tidx_vector @@ to_tsquery('" + parolePoss + "')"));
