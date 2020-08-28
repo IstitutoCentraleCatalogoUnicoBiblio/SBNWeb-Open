@@ -66,7 +66,7 @@
 					<html:submit styleClass="submit;margin-top:0;background-color=beige;border-color=green" property="methodLogin">
 						<bean:message key="button.login" bundle="messages" />
 					</html:submit>
-					<html:reset styleClass="submit;margin-top:0;background-color=beige;border-color=green" />
+					<!-- <html:reset styleClass="submit;margin-top:0;background-color=beige;border-color=green" /> -->
 				</td>
 			</tr>
 		</table>
