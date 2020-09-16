@@ -477,7 +477,7 @@ public class ImportaUtentiAction extends NavigationBaseAction implements SbnAtti
 	public boolean checkAttivita(HttpServletRequest request, ActionForm form, String idCheck) {
 		if (ValidazioneDati.equals(idCheck, "ESSE3")) {
 			try {
-				String esse3Bib = CommonConfiguration.getProperty(Configuration.ESSE3_COD_BIB);
+				String esse3Bib = CommonConfiguration.getProperty(Configuration.ESSE3_BIB_APIKEY_FILE);
 				return ValidazioneDati.isFilled(esse3Bib);
 			} catch (Exception e) {
 				log.error("", e);

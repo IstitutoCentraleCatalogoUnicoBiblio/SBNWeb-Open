@@ -18,6 +18,7 @@ package it.iccu.sbn.ejb.domain.servizi.esse3.csv;
 
 import it.iccu.sbn.ejb.DomainEJBFactory;
 import it.iccu.sbn.ejb.domain.servizi.Servizi;
+import it.iccu.sbn.ejb.exception.ApplicationException;
 import it.iccu.sbn.ejb.exception.ResourceNotFoundException;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.servizi.autorizzazioni.AutorizzazioneVO;
@@ -206,9 +207,10 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 			String chiaveUte = generaChiaveRicerca(cognomeNome_key);
 			utente.setChiaveUte(chiaveUte);
 			if(!cd_biblioteca.equals(utente.getCodBibSer())) {
-				//ConstraintViolationException:
-				utente.setCodBibSer(cd_biblioteca);
-				servizi.importaUtente(ticket, utente);
+				// fix iscrizione multipla esse3
+				throw new ApplicationException("Utente iscritto ad altra biblioteca ESSE3");
+				//utente.setCodBibSer(cd_biblioteca);
+				//servizi.importaUtente(ticket, utente);
 			} else {
 				servizi.updateUtente(ticket, utente);
 
@@ -227,7 +229,7 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 			errorMessage += ("Utente: " + utenteToUpdate.toString() + "\n");
 			errorMessage += (e.getMessage() + "\n -----------------");
 			errors.add(errorMessage);
-			utentiScartati.add("Aggiornamennto id: " + utenteToUpdate.getCodiceUtente() + " cod_fiscale: " + utenteToUpdate.getAnagrafe().getCodFiscale());
+			utentiScartati.add("Aggiornamento id: " + utenteToUpdate.getCodiceUtente() + " cod_fiscale: " + utenteToUpdate.getAnagrafe().getCodFiscale());
 			DaoManager.rollback(tx);
 			return false;
 		}

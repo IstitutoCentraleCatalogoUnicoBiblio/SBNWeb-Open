@@ -4655,6 +4655,7 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			mov.validate(new MovimentoValidator());
 
 			boolean nuovaRichiesta = mov.isNuovo();
+			mov.setUteVar(DaoManager.getFirmaUtente(ticket));
 
 			// almaviva5_20170403 prenotazioni posto
 			PrenotazionePostoVO pp = mov.getPrenotazionePosto();

@@ -156,7 +156,7 @@ public class Configuration {
 	public static final String SBNWEB_BATCH_ALLINEAMENTO_DA_LOCALE = "SBNWEB_BATCH_ALLINEAMENTO_DA_LOCALE";
 
 	//codice biblioteca per web-service sync con ESSE3
-	public static final String ESSE3_COD_BIB = "ESSE3_COD_BIB";
+	public static final String ESSE3_BIB_APIKEY_FILE = "ESSE3_BIB_APIKEY_FILE";
 
 	public static final String EMAIL_OTHER_PROPERTIES_FILE = "EMAIL_OTHER_PROPERTIES_FILE";
 

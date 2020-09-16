@@ -14,29 +14,54 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package it.iccu.sbn.servizi.utenti.auth.impl.esse3;
+package it.iccu.sbn.ejb.domain.servizi.esse3.conf;
 
-import it.iccu.sbn.ejb.domain.servizi.esse3.conf.Esse3BibConfigEntry;
 import it.iccu.sbn.ejb.vo.SerializableVO;
-import it.iccu.sbn.extension.auth.utente.UserSessionInfo;
 
-public class Esse3SessionInfo extends SerializableVO implements UserSessionInfo {
+import java.net.URL;
 
-	private static final long serialVersionUID = 2874512631741125052L;
-	private final String sessionId;
-	private final Esse3BibConfigEntry config;
+public class Esse3BibConfigEntry extends SerializableVO {
 
-	public Esse3SessionInfo(String sessionId, Esse3BibConfigEntry config) {
-		this.sessionId = sessionId;
-		this.config = config;
+	private static final long serialVersionUID = -8909022942135831339L;
+
+	private String id;
+	private String apikey;
+	private URL login_ws_url;
+	private String cd_bib;
+
+	// Getter Methods
+
+	public String getId() {
+		return id;
 	}
 
-	public String getSessionId() {
-		return sessionId;
+	public String getApikey() {
+		return apikey;
 	}
 
-	public Esse3BibConfigEntry getConfig() {
-		return config;
+	public URL getLogin_ws_url() {
+		return login_ws_url;
 	}
 
+	public String getCd_bib() {
+		return cd_bib;
+	}
+
+	// Setter Methods
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setApikey(String apikey) {
+		this.apikey = apikey;
+	}
+
+	public void setLogin_ws_url(URL login_url) {
+		this.login_ws_url = login_url;
+	}
+
+	public void setCd_bib(String cd_bib) {
+		this.cd_bib = cd_bib;
+	}
 }
