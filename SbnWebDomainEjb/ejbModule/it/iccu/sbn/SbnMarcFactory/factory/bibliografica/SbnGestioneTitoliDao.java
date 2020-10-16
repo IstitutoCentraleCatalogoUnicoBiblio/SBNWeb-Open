@@ -4674,7 +4674,7 @@ public class SbnGestioneTitoliDao {
 					sbnBody.vectorSetLinkEsternoId(i, tabImpST.getCampoDue());
 
 					// Evolutiva Maggio 2016 - gestione del campo nota che deve essere valorizzato automaticamente
-					String url321 = SBNMarcUtil.generatoreURL321(tabImpST.getCampoUno(), tabImpST.getCampoDue());
+					String url321 = tabImpST.getNota(); //SBNMarcUtil.generatoreURL321(tabImpST.getCampoUno(), tabImpST.getCampoDue());
 					sbnBody.vectorSetLinkEsternoURL(i, url321);
 					// sbnBody.vectorSetLinkEsternoURL(i, tabImpST.getNota());
 					String appo = codici.SBNToUnimarc(CodiciType.CODICE_LINK_ALTRA_BASE_DATI, tabImpST.getCampoUno());

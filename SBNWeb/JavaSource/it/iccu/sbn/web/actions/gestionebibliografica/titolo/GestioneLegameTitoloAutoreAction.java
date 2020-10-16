@@ -20,8 +20,10 @@
 
 package it.iccu.sbn.web.actions.gestionebibliografica.titolo;
 
+import it.iccu.sbn.ejb.vo.common.CodiciType;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.AreaDatiVariazioneReturnVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.AreaDatiLegameTitoloVO;
+import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTitoloAutoreForm;
 import it.iccu.sbn.web.integration.bd.FactoryEJBDelegate;
 import it.iccu.sbn.web.util.CaricamentoCombo;
@@ -34,8 +36,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -45,7 +46,7 @@ import org.apache.struts.actions.LookupDispatchAction;
 
 public class GestioneLegameTitoloAutoreAction extends LookupDispatchAction {
 
-	private static Log log = LogFactory.getLog(DettaglioTitoloAction.class);
+	private static Logger log = Logger.getLogger(DettaglioTitoloAction.class);
 
 	@Override
 	protected Map<String, String> getKeyMethodMap() {
@@ -72,9 +73,8 @@ public class GestioneLegameTitoloAutoreAction extends LookupDispatchAction {
 		}
 
 		CaricamentoCombo carCombo = new CaricamentoCombo();
-		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
-		gestLegTAForm.setListaRelatorCode(carCombo.loadComboCodiciDesc(factory.getCodici().getCodiceLegameTitoloAutore()));
-		gestLegTAForm.setListaTipoRespons(carCombo.loadComboCodiciDesc(factory.getCodici().getCodiceResponsabilita()));
+		gestLegTAForm.setListaRelatorCode(carCombo.loadComboCodiciDesc(CodiciProvider.getCodici(CodiciType.CODICE_LEGAME_TITOLO_AUTORE, true)));
+		gestLegTAForm.setListaTipoRespons(carCombo.loadComboCodiciDesc(CodiciProvider.getCodici(CodiciType.CODICE_RESPONSABILITA, true)));
 
 		// Inizio Modifica gennaio 2015 - Vedi Doc test SbnWEB audiovisivi di Carla Scognamiglio
 		// 4) Occorre aggiungere la specificazione dei relator code 590 (interprete) e 906 (strumentista).
@@ -85,7 +85,7 @@ public class GestioneLegameTitoloAutoreAction extends LookupDispatchAction {
 		} else if (gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("590")
 				|| gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("906")) {
 			gestLegTAForm.setPresenzaSpecStrumVoci("SI");
-			gestLegTAForm.setListaSpecStrumVoci(carCombo.loadComboCodiciDesc(factory.getCodici().getCodiceStrumentiVociOrganico()));
+			gestLegTAForm.setListaSpecStrumVoci(carCombo.loadComboCodiciDesc(CodiciProvider.getCodici(CodiciType.CODICE_STRUMENTI_VOCI_ORGANICO, true)));
 		} else  {
 			gestLegTAForm.setPresenzaSpecStrumVoci("NO");
 		}
@@ -172,8 +172,8 @@ public class GestioneLegameTitoloAutoreAction extends LookupDispatchAction {
         				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("610")) &&
         				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("620")) &&
         				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("650")) &&
-        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("700"))) {       		
-        		
+        				(!gestLegTAForm.getAreaDatiLegameTitoloVO().getRelatorCodeNew().equals("700"))) {
+
         	    			ActionMessages errors = new ActionMessages();
         	    			errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.RelatorCodeNonValido"));
         	    			this.saveErrors(request, errors);
