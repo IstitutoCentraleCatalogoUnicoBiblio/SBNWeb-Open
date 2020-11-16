@@ -719,7 +719,7 @@ public class SbnGestioneAllAuthorityDao {
 		areaDatiPassReturn.setCodErr("0000");
 
 		// SbnIDLoc: è quello del titolo per cui si vuole inserire una nuova localizzazione.
-		String sbnIdLoc = "";;
+		String sbnIdLoc = "";
 		AreaDatiLocalizzazioniAuthorityVO areaDatiPass = new AreaDatiLocalizzazioniAuthorityVO();;
 		SbnMessageType sbnmessage = new SbnMessageType();
 		SbnRequestType sbnrequest = new SbnRequestType();

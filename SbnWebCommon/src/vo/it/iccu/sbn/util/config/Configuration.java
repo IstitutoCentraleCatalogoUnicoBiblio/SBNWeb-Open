@@ -79,6 +79,11 @@ public class Configuration {
 	public static final String SBNMARC_INDICE_PROXY_USERNAME = "SBNMARC_INDICE_PROXY_USERNAME";
 	public static final String SBNMARC_INDICE_PROXY_PASSWORD = "SBNMARC_INDICE_PROXY_PASSWORD";
 
+	// almaviva5_20201021 timeout connessione
+	public static final String HTTP_CONNECTION_TIMEOUT = "HTTP_CONNECTION_TIMEOUT";
+	public static final String HTTP_REQUEST_TIMEOUT = "HTTP_REQUEST_TIMEOUT";
+	public static final String HTTP_NUMERO_TENTATIVI = "HTTP_NUMERO_TENTATIVI";
+
 	//almaviva5_20111222 timeout indice per allineamento
 	public static final String SBNMARC_INDICE_ALLINEA_REQUEST_TIMEOUT = "SBNMARC_INDICE_ALLINEA_REQUEST_TIMEOUT";
 

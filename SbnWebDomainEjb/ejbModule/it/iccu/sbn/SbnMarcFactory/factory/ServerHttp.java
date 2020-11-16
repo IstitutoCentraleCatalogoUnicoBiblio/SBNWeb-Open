@@ -81,8 +81,13 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 	private static Logger log = Logger.getLogger("sbnmarc");
 
 	// property per config interceptor
-	private static final String[] OBSERVED_PROPS =
-		new String[] {FactorySbn.URL_INDICE, FactorySbn.URL_POLO };
+	private static final String[] OBSERVED_PROPS = new String[] {
+		FactorySbn.URL_INDICE,
+		FactorySbn.URL_POLO,
+		Configuration.HTTP_CONNECTION_TIMEOUT,
+		Configuration.HTTP_REQUEST_TIMEOUT,
+		Configuration.HTTP_NUMERO_TENTATIVI
+	};
 
 	private static final String FORCE_RETRY = "::FORCE_RETRY::";
 
@@ -97,7 +102,16 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 		}
 
 		public boolean retryMethod(final HttpMethod method, final IOException e, int executionCount) {
-			log.warn(String.format("errore connessione (%s), tentativo %d di %d", e.getLocalizedMessage(), executionCount, retries));
+			log.warn(String.format("errore connessione (%s: %s), tentativo %d di %d", e.getClass().getSimpleName(), 
+					e.getLocalizedMessage(), executionCount, retries));
+			boolean check = checkError(method, e, executionCount);
+			if (!check) {
+				log.error("exception class: " + e.getClass().getCanonicalName() );
+			}
+			return check;
+		}
+
+		private boolean checkError(final HttpMethod method, final IOException e, int executionCount) {
 			if (debug)
 				return true;
 
@@ -110,7 +124,7 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 			if (!method.isRequestSent())
 				return true;
 
-			return false;
+			return true;
 		}
 	};
 
@@ -200,7 +214,7 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 
 		if (httpClient == null) {
 
-			httpClient = new HttpClient();
+			this.httpClient = new HttpClient();
 			HttpClientParams params = httpClient.getParams();
 
 			params.setParameter(HttpClientParams.USER_AGENT, Constants.APP_NAME);
@@ -486,6 +500,9 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 				httpClient.getHttpConnectionManager().getConnection(conf).close();
 		} catch (Exception e) {
 			log.error("", e);
+		} finally {
+			this.httpClient = null;
+			this.conf = null;
 		}
 	}
 
@@ -522,6 +539,10 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 						param.setURL_SERVLET(CommonConfiguration.getProperty(FactorySbn.URL_INDICE));
 					if (type.equals("POLO"))
 						param.setURL_SERVLET(CommonConfiguration.getProperty(FactorySbn.URL_POLO));
+					// almaviva5_20201021 timeout connessione
+					param.setHTTP_CONNECTION_TIMEOUT(CommonConfiguration.getPropertyAsInteger(Configuration.HTTP_CONNECTION_TIMEOUT, 30 * 1000));
+					param.setHTTP_REQUEST_TIMEOUT(CommonConfiguration.getPropertyAsInteger(Configuration.HTTP_REQUEST_TIMEOUT, 15 * 60 * 1000));
+					param.setHTTP_NUMERO_TENTATIVI(CommonConfiguration.getPropertyAsInteger(Configuration.HTTP_NUMERO_TENTATIVI, 2));
 
 					//almaviva5_20150707
 					Credentials credentials = new Credentials();

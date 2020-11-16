@@ -427,6 +427,12 @@ public abstract class AmministrazionePoloBean extends AmministrazioneBaseBean im
 			parametri.setPROXY_USER(CommonConfiguration.getProperty(Configuration.SBNMARC_INDICE_PROXY_USERNAME));
 			parametri.setPROXY_PWD(CommonConfiguration.getProperty(Configuration.SBNMARC_INDICE_PROXY_PASSWORD));
 			//
+			// almaviva5_20201021 timeout connessione
+			parametri.setHTTP_CONNECTION_TIMEOUT(CommonConfiguration.getPropertyAsInteger(Configuration.HTTP_CONNECTION_TIMEOUT, 30 * 1000));
+			parametri.setHTTP_REQUEST_TIMEOUT(CommonConfiguration.getPropertyAsInteger(Configuration.HTTP_REQUEST_TIMEOUT, 15 * 60 * 1000));
+			parametri.setHTTP_NUMERO_TENTATIVI(CommonConfiguration.getPropertyAsInteger(Configuration.HTTP_NUMERO_TENTATIVI, 2));
+
+			log.debug("parametri HTTP: " + parametri);
 
 			return parametri;
 		} catch (Exception e) {
