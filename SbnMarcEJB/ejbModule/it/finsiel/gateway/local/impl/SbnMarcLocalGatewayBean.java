@@ -333,7 +333,7 @@ public class SbnMarcLocalGatewayBean implements SbnMarcLocalGateway {
 					b_928, c_928);
 		} catch (EccezioneSbnDiagnostico e) {
 			throw new SbnMarcDiagnosticoException(e.getErrorID(), e.getMessaggio());
-}
+		}
 
 		return isbd.getIsbd();
 	}
