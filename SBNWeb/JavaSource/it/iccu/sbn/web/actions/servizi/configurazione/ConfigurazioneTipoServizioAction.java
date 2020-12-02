@@ -1002,7 +1002,7 @@ public class ConfigurazioneTipoServizioAction extends ConfigurazioneBaseAction {
 		//codControlloScelto in realtà contiene il progressivo fase
 		if ( (new Integer(currentForm.getProgrIter())==1 && tipoOp.equals(TipoAggiornamentoIter.SU))
 				||
-				(new Integer(currentForm.getProgrIter())==currentForm.getIterMap().size() && tipoOp.equals(TipoAggiornamentoIter.GIU))) {
+				(new Integer(currentForm.getProgrIter()) == ValidazioneDati.size(currentForm.getIterMap()) && tipoOp.equals(TipoAggiornamentoIter.GIU))) {
 			LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.configurazioneControllo.parametriScambioErrati"));
 
 			checkOK=false;

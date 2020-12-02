@@ -1,0 +1,56 @@
+#========================================================================================
+#
+# Elenco dei file da usare per esportare DB per creare unimarc offline
+#
+#========================================================================================
+
+jdbcDriver=org.postgresql.Driver
+connectionUrl=jdbc:postgresql://localhost:5432/sbnwebDbCSWese
+userName=sbnweb
+userPassword=sbnweb
+
+fieldSeparator=|
+rimuoviNewline=true
+
+logFileOut=downloadFileAccessoriXXX.log
+downloadDir=../unimarc/
+
+# Progress counter in HEX Format
+progress=1FFF
+
+# Per l'export la query prende come TABLENAME il nome della tabella dall'elelnco
+# semicolon ok per postgres
+#query="select * from " $tableName " where fl_canc != 'S'";
+
+
+
+
+# semicolon KO per oracle (invalid character)
+query="select * from " $tableName " where fl_canc != 'S'" 
+
+# Per la selezione dei bid su cui agire per la creazione del file unimarc la query puo' essere specifica e 
+# le tabelle dell'elenco (se presenti) vengono ignorate
+#queryUtente="select bid from tb_titolo where fl_canc != 'S' and to_date ....";
+
+endConfig
+
+# Elenco delle tabelle da scaricare
+#
+# usa il comando sql "Select ...  limit 10" per sviluppp
+#=======================================================
+
+# nome Tabella          FILE, QUERY OVERRIDE, lunghezze dei campi, separatore finale? 
+tbf_biblioteca_in_polo fileOut=biblioteche.txt query="select cd_biblioteca from tbf_biblioteca_in_polo where fl_canc != 'S'"
+tb_codici              fileOut=CategorieDiFruizione_XXX.txt query="select cd_tabella, ds_tabella from tb_codici where tp_tabella = 'LCFR' order by cd_tabella" lunghezze=2,160 chiudiConSeparatore=true
+tb_codici              fileOut=CodiciDiNonDisponibilita_XXX.txt query="select cd_tabella, ds_tabella from tb_codici where tp_tabella = 'CCND' order by cd_tabella" lunghezze=2,160 chiudiConSeparatore=true
+tb_codici              fileOut=MaterialeInventariale_XXX.txt query="select cd_tabella, ds_tabella from tb_codici where tp_tabella = 'CTMI' and dt_fine_validita > now() order by cd_tabella" lunghezze=2,160 chiudiConSeparatore=true
+tr_tit_cla             fileOut=BID-Classificazioni_XXX.txt query="select bid, cd_edizione, classe from tr_tit_cla WHERE  substr(cd_SISTEMA,1,1)  = 'D' and CLASSE > ' ' and fl_canc <> 'S' ORDER by bid,CD_EDIZIONE,CLASSE" lunghezze=10,2,31 chiudiConSeparatore=true
+tb_classe              fileOut=DescClassificazioni_XXX.txt query="select classe, cd_edizione, ds_classe from tb_classe where fl_canc != 'S' ORDER by classe" trim=1,0,0 chiudiConSeparatore=true
+tbc_inventario          fileOut=FruizioneInventari_XXX.txt query="SELECT ts_ins, ts_var, cd_bib, cd_serie, cd_inven, cd_frui, cd_no_disp from tbc_inventario WHERE cd_sit = '2' and FL_CANC  <> 'S' ORDER by cd_bib,cd_serie,cd_inven" lunghezze=19,19,0,0,9,0,0 leftPad=\0,\0,\0,\0,0,\0,\0 rightPad=\0,\0,\0,\0,\0,\0,\0 chiudiConSeparatore=true
+#
+#
+
+
+
+
+

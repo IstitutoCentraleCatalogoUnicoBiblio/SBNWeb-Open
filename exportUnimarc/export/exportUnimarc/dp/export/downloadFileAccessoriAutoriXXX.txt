@@ -1,0 +1,49 @@
+#========================================================================================
+#
+# Elenco dei file da usare per esportare DB per creare unimarc offline
+#
+#========================================================================================
+
+jdbcDriver=org.postgresql.Driver
+connectionUrl=jdbc:postgresql://localhost:5432/sbnwebDb
+userName=sbnweb
+userPassword=sbnweb
+
+fieldSeparator=|
+rimuoviNewline=true
+
+logFileOut=downloadFileAccessoriAutoriXXX.log
+downloadDir=../unimarc/
+
+# Progress counter in HEX Format
+progress=1FFF
+
+# Per l'export la query prende come TABLENAME il nome della tabella dall'elelnco
+# semicolon ok per postgres
+#query="select * from " $tableName " where fl_canc != 'S'";
+
+
+
+
+# semicolon KO per oracle (invalid character)
+query="select * from " $tableName " where fl_canc != 'S'" 
+
+# Per la selezione dei bid su cui agire per la creazione del file unimarc la query puo' essere specifica e 
+# le tabelle dell'elenco (se presenti) vengono ignorate
+#queryUtente="select bid from tb_titolo where fl_canc != 'S' and to_date ....";
+
+endConfig
+
+# Elenco delle tabelle da scaricare
+#
+# usa il comando sql "Select ...  limit 10" per sviluppp
+#=======================================================
+
+# nome Tabella          FILE, QUERY OVERRIDE, lunghezze dei campi, separatore finale? 
+#
+tb_autore               fileOut=VID-Datazioni.notNull_XXX.txt query="select a.vid, COALESCE(a.aa_nascita,'    '), COALESCE(a.aa_morte,'    ') from tb_autore a where a.fl_canc<>'S' and (a.aa_nascita ~ '[0-9]{4}' or a.aa_morte ~ '[0-9]{4}') order by a.vid" lunghezze=10,4,4 chiudiConSeparatore=true
+
+
+
+
+
