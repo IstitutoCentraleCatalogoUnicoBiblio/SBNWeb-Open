@@ -930,10 +930,13 @@ public class ConfigurazioneTipoServizioAction extends ConfigurazioneBaseAction {
 		currentForm.setLstIter(listaIterServizio);
 
 		TreeMap<String, IterServizioVO> iterServizioMap = new TreeMap<String, IterServizioVO>();
+		currentForm.setIterMap(iterServizioMap);
 		List<String> lstCodiciAttivita = new ArrayList<String>();
+		currentForm.setLstCodiciAttivita(lstCodiciAttivita);
 		IterServizioVO iterServizioVO;
 		String cod_stato_richiesta_appo = "";
 		String cod_stato_movimento_appo = "";
+		boolean checkPosition = true;
 		for (int i = 0; i < ValidazioneDati.size(listaIterServizio); i++) {
 			iterServizioVO = listaIterServizio.get(i);
 			iterServizioMap.put(iterServizioVO.getProgrIter().toString(), iterServizioVO);
@@ -950,9 +953,12 @@ public class ConfigurazioneTipoServizioAction extends ConfigurazioneBaseAction {
 						Locale.getDefault(), "errors.servizi.configurazione.tipoServizio.iter.posizione.errata",
 						CodiciProvider.getDescrizioneCodiceSBN(CodiciType.CODICE_ATTIVITA_ITER, codAttivita), position));
 				currentForm.setStringaMessaggioIterOK("");
-				return;
+				checkPosition = false;
 			}
 		}
+		if (!checkPosition)
+			return;
+
 		if (cod_stato_richiesta_appo.equals("H") && cod_stato_movimento_appo.equals("C")){
 			// se per l'ultima attività lo stato richiesta è "concluso"
 			// e lo stato movimento è "chiuso"
@@ -970,8 +976,6 @@ public class ConfigurazioneTipoServizioAction extends ConfigurazioneBaseAction {
 				Locale.getDefault(), "errors.servizi.configurazione.tipoServizio.iter.non.completo"));
 			currentForm.setStringaMessaggioIterOK("");
 		}
-		currentForm.setIterMap(iterServizioMap);
-		currentForm.setLstCodiciAttivita(lstCodiciAttivita);
 
 		if (lstCodiciAttivita.size() == 1)
 			currentForm.setProgrIter("1");

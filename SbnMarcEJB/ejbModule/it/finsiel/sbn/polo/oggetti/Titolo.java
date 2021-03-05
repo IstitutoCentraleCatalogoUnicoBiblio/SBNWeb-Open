@@ -28,6 +28,8 @@ import it.finsiel.sbn.polo.exception.EccezioneSbnDiagnostico;
 import it.finsiel.sbn.polo.factoring.base.ChiaviTitolo;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.Formattazione;
+import it.finsiel.sbn.polo.factoring.util.NormalizzaSequenza;
+import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.orm.Tb_titolo;
 import it.finsiel.sbn.polo.orm.Tr_tit_bib;
 import it.finsiel.sbn.polo.orm.Tr_tit_tit;
@@ -48,6 +50,8 @@ import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnNaturaDocumento;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -63,6 +67,20 @@ public class Titolo extends Tb_titolo {
     boolean filtriValorizzati = false;
     boolean esporta = false;
     private static Logger log = Logger.getLogger("iccu.serversbnmarc.Titolo");
+
+	private static final Comparator<Vl_titolo_tit_c> ORDINAMENTO_SEQUENZA = new Comparator<Vl_titolo_tit_c>() {
+		public int compare(Vl_titolo_tit_c n1, Vl_titolo_tit_c n2) {
+			//ORDER BY this_.TP_LEGAME, this_.CD_NATURA_BASE DESC, this_.SEQUENZA 
+			int cmp	= n1.getTP_LEGAME().compareTo(n2.getTP_LEGAME());
+			cmp = cmp != 0 ? cmp : -(n1.getCD_NATURA_BASE().compareTo(n2.getCD_NATURA_BASE())); // desc
+			if (cmp == 0) {
+				final String s1 = NormalizzaSequenza.normalizza(n1.getSEQUENZA());
+				final String s2 = NormalizzaSequenza.normalizza(n2.getSEQUENZA());
+				cmp = s1.compareTo(s2);	
+			}
+			return cmp;
+		}
+	};
 
     /** Costruttore, la connessione al db serve per tutti gli accessi al DB */
     public Titolo() {
@@ -559,8 +577,10 @@ public class Titolo extends Tb_titolo {
         // le nature M che per le W (esempio per gli spogli)
         //bug mantis 3101 di Indice RIPORTATO su Protocollo di Polo
 		//if (versoBasso && titolo.getCD_NATURA().equals("M")) {
-        if (versoBasso && titolo.getCD_NATURA().equals("M") || versoBasso && titolo.getCD_NATURA().equals("W")) {
+        if (versoBasso && ValidazioneDati.in(titolo.getCD_NATURA(), "M", "W")) {
             List v2 = cercaLegamiDocumentoVersoBasso(titolo.getBID());
+            // almaviva5_20210305 ordinamento per sequenza
+            Collections.sort(v2, ORDINAMENTO_SEQUENZA);
             v.addAll(v2);
         }
         return v;

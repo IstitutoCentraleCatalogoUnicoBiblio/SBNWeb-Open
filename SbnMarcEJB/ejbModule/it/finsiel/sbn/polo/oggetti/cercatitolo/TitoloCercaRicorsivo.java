@@ -374,11 +374,11 @@ public class TitoloCercaRicorsivo extends Titolo {
         Vl_titolo_tit_b titolo = new Vl_titolo_tit_b();
         titolo.setBID(tit_partenza.getBID());
         titolo.setCD_NATURA(tit_partenza.getCD_NATURA());
-        List elenco = new ArrayList<Tb_titolo>();
+        List<Tb_titolo> elenco = new ArrayList<Tb_titolo>();
         // cercaLegamiDocumento(titolo, ordinamento);
         elenco.add(titolo);
         // hashtable bid-nodo
-        Map nodi = new HashMap();
+        Map<String, Nodo> nodi = new HashMap<String, Nodo>();
         Nodo nodo, nodo2;
         // inizializzo i nodi
         int counter;
@@ -427,7 +427,7 @@ public class TitoloCercaRicorsivo extends Titolo {
      * Verifica se il titolo è contenuto nel vettore di titoli, confrontando il
      * bid
      */
-    protected boolean contenuto(List v, Tb_titolo tit) {
+    protected boolean contenuto(List<Tb_titolo> v, Tb_titolo tit) {
         for (int i = 0; i < v.size(); i++)
             if (((Tb_titolo) v.get(i)).getBID().equals(tit.getBID()))
                 return true;
@@ -435,14 +435,14 @@ public class TitoloCercaRicorsivo extends Titolo {
     }
 
     /** Classe di utilizzo personale */
-    class Nodo {
+    static class Nodo {
         private Vl_titolo_tit_b titolo_b = null;
 
         private Vl_titolo_tit_c titolo_c = null;
 
         public final boolean tit_b;
 
-        public List legamiTitoli = new ArrayList();
+        public List<Nodo> legamiTitoli = new ArrayList<Nodo>();
 
         public Nodo(Tb_titolo titolo) {
             if (titolo instanceof Vl_titolo_tit_b) {
@@ -517,7 +517,7 @@ public class TitoloCercaRicorsivo extends Titolo {
         }
     }
 
-    class Legame {
+    static class Legame {
         String id1 = null;
 
         String id2 = null;
