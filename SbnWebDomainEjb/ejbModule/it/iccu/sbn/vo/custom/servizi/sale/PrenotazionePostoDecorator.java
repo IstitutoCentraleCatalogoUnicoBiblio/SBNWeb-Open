@@ -80,7 +80,7 @@ public class PrenotazionePostoDecorator extends PrenotazionePostoVO {
 	public void setStato(StatoPrenotazionePosto stato) {
 		super.setStato(stato);
 		try {
-			statoDinamico = SaleUtil.getStatoDinamico(this, creationTime);
+			statoDinamico = SaleUtil.getStatoDinamico(this.getStato(), this.getTs_fine(), creationTime);
 			this.descrizioneStato = CodiciProvider.cercaDescrizioneCodice(statoDinamico.getStato(),
 					CodiciType.CODICE_STATO_PRENOTAZIONE_POSTO, CodiciRicercaType.RICERCA_CODICE_SBN);
 		} catch (Exception e) {

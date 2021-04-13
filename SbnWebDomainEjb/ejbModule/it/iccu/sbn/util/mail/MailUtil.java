@@ -36,6 +36,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.activation.DataHandler;
 import javax.mail.Authenticator;
@@ -60,6 +62,8 @@ public class MailUtil {
 	public static final String MIME_TYPE_HTML = "text/html; charset=UTF-8";
 
 	private static Logger log = Logger.getLogger(MailUtil.class);
+
+	static final Queue<MailVO> sendQueue = new ConcurrentLinkedQueue<MailVO>();
 
 	private static class SMTPAuth extends Authenticator {
 
@@ -132,6 +136,12 @@ public class MailUtil {
 		} catch (Exception e) {
 			log.error("", e);
 			throw new ApplicationException(SbnErrorTypes.MAIL_DELIVERY_ERROR, e);
+		}
+	}
+
+	public static final void sendMailAsync(MailVO mail) {
+		if (MailUtil.sendQueue.add(mail)) {
+			log.debug("inserita mail in coda per invio asincrono");
 		}
 	}
 

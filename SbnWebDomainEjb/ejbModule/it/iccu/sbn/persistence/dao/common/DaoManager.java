@@ -488,6 +488,10 @@ public class DaoManager {
 		getCurrentSession().flush();
 	}
 
+	public void clear() throws HibernateException, DaoManagerException {
+		getCurrentSession().clear();
+	}
+
 	public static final Timestamp now() {
 		return new Timestamp(System.currentTimeMillis());
 	}

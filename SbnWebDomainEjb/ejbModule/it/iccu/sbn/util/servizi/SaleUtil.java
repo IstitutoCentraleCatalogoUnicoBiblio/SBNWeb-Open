@@ -21,7 +21,7 @@ import it.iccu.sbn.ejb.vo.common.TB_CODICI;
 import it.iccu.sbn.ejb.vo.servizi.calendario.SlotVO;
 import it.iccu.sbn.ejb.vo.servizi.sale.GruppoPostiVO;
 import it.iccu.sbn.ejb.vo.servizi.sale.PostoSalaVO;
-import it.iccu.sbn.ejb.vo.servizi.sale.PrenotazionePostoVO;
+import it.iccu.sbn.ejb.vo.servizi.sale.StatoPrenotazionePosto;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.util.matchers.Sale;
 import it.iccu.sbn.vo.custom.servizi.sale.StatoPrenotazionePosto2;
@@ -90,9 +90,8 @@ public class SaleUtil {
 		return merged;
 	}
 
-	public static StatoPrenotazionePosto2 getStatoDinamico(PrenotazionePostoVO pp, Timestamp now) {
-		Timestamp ts_fine = pp.getTs_fine();
-		switch (pp.getStato()) {
+	public static StatoPrenotazionePosto2 getStatoDinamico(final StatoPrenotazionePosto stato, final Timestamp ts_fine, final Timestamp now) {
+		switch (stato) {
 		case IMMESSA:
 			if (ts_fine.after(now) ) return StatoPrenotazionePosto2.IMMESSA;
 			if (ts_fine.before(now) ) return StatoPrenotazionePosto2.NON_FRUITA;

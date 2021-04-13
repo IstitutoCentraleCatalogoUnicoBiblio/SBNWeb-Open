@@ -39,7 +39,7 @@ public class ChiusuraPrenotazioniPostoJob extends SerializableVO implements Stat
 
 	private static final long serialVersionUID = -7768361190480551025L;
 
-	static Logger log = Logger.getLogger(ChiusuraPrenotazioniPostoJob.class);
+	private static Logger log = Logger.getLogger(ChiusuraPrenotazioniPostoJob.class);
 
 	static Reference<ServiziBMT> servizi = new Reference<ServiziBMT>() {
 		@Override
@@ -63,6 +63,8 @@ public class ChiusuraPrenotazioniPostoJob extends SerializableVO implements Stat
 
 			params.setDataFinePrevista(LocalDate.now().minusDays(1).toDate());
 			params.setLivelloPolo(true);
+			// flag per invocazione automatica da scheduler
+			params.setAutomatico(true);
 
 			servizi.get().rifiutaPrenotazioniScadute(params, null);
 

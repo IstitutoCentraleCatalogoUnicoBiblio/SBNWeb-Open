@@ -67,9 +67,9 @@ public class RifiutaPrenotazioniScadute {
 			return DomainEJBFactory.getInstance().getSale();
 		}};
 
-	private UserTransaction tx;
-	private RifiutaPrenotazioniScaduteVO richiesta;
-	private Logger _log;
+	private final UserTransaction tx;
+	private final RifiutaPrenotazioniScaduteVO richiesta;
+	private final Logger _log;
 
 	private PrenotazionePostoVO prenotazione = new PrenotazionePostoVO();
 
@@ -115,12 +115,16 @@ public class RifiutaPrenotazioniScadute {
 						dao.getListaIdPrenotazioniPostoScadute(null, null, dataFinePrev) :
 						dao.getListaIdPrenotazioniPostoScadute(richiesta.getCodPolo(), richiesta.getCodBib(), dataFinePrev);
 
+				log.debug("prenotazioni caricate: " + prenotazioni.size());
 				for (Integer id : prenotazioni) {
 					try {
 						read++;
-						if ((read % 100) == 0) {
-							_log.debug("prenotazioni elaborate: " + read);
-							BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
+						if (!richiesta.isAutomatico() ) {
+							// check interruzione manuale
+							if ((read % 100) == 0) {
+								_log.debug("prenotazioni elaborate: " + read);
+								BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
+							} 
 						}
 
 						DaoManager.begin(tx);
@@ -155,7 +159,7 @@ public class RifiutaPrenotazioniScadute {
 						errors++;
 						DaoManager.rollback(tx);
 						prenotazione.setId_prenotazione(id);
-						_log.error("errore lettura identificativo: " + prenotazione);
+						_log.error("errore lettura identificativo: " + prenotazione.getId_prenotazione());
 						writeReportRow(w, prenotazione, read, false, "errore lettura identificativo");
 						continue;
 					}

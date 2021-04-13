@@ -59,4 +59,24 @@
 		</trigger>
 	</job>
 
+	<!--  mail async -->
+	<job>
+		<job-detail>
+			<name>MailAsync</name>
+			<group>Mail</group>
+			<description>invio asincrono mail</description>
+			<job-class>it.iccu.sbn.util.mail.MailSenderJob</job-class>
+		</job-detail>
+
+		<trigger>
+			<cron>
+				<name>MailAsync_Trigger</name>
+				<job-name>MailAsync</job-name>
+				<job-group>Mail</job-group>
+				<!-- ogni 30 secondi -->
+				<cron-expression>0/30 * * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</job>
+
 </quartz>

@@ -17,6 +17,7 @@
 package it.iccu.sbn.vo.domain.mail;
 
 import it.iccu.sbn.ejb.exception.ValidationException;
+import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.SerializableVO;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
 
@@ -119,6 +120,15 @@ public class MailVO extends SerializableVO {
 
 		if (from == null || !isFilled(to))
 			throw new ValidationException(SbnErrorTypes.MAIL_INVALID_PARAMS);
+	}
+
+	public String summary() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("[from=").append(from.getAddress())
+			.append(", to=").append(ValidazioneDati.formatValueList(this.to, ","))
+			.append(", subject=").append(subject)
+			.append("]");
+		return buf.toString();
 	}
 
 }

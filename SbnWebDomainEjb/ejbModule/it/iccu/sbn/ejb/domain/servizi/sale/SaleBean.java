@@ -80,6 +80,7 @@ import it.iccu.sbn.web.vo.SbnErrorTypes;
 import it.iccu.sbn.web2.util.Constants;
 
 import java.rmi.RemoteException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -464,11 +465,10 @@ public class SaleBean extends TicketChecker implements Sale {
 					stati, ricerca.getListaCatMediazione(), ricerca.getMaxRichiesteAssociate(),
 					ricerca.isEscludiPrenotSenzaSupporto(),
 					ricerca.getPrenotazioniEscluse() );
+			final Timestamp now = DaoManager.now();
 
 			for (Tbl_prenotazione_posto pp : prenotazioni) {
-				PrenotazionePostoVO prenotazioneVO = ConvertToWeb.Sale.prenotazione(pp, null);
-				PrenotazionePostoDecorator decorated = new PrenotazionePostoDecorator(prenotazioneVO);
-				StatoPrenotazionePosto2 statoDinamico = decorated.getStatoDinamico();
+				StatoPrenotazionePosto2 statoDinamico = SaleUtil.getStatoDinamico(StatoPrenotazionePosto.of(pp.getCd_stato()), pp.getTs_fine(), now);
 				if (!scadute) {
 					if (statoDinamico == StatoPrenotazionePosto2.NON_FRUITA)
 						continue;
@@ -478,6 +478,8 @@ public class SaleBean extends TicketChecker implements Sale {
 						continue;
 				}
 
+				PrenotazionePostoVO prenotazioneVO = ConvertToWeb.Sale.prenotazione(pp, null);
+				PrenotazionePostoDecorator decorated = new PrenotazionePostoDecorator(prenotazioneVO);
 				if (ricerca.isEscludiPrenotConSupporto()) {
 					if (isFilled(prenotazioneVO.getMovimenti()))
 						continue;
@@ -509,10 +511,13 @@ public class SaleBean extends TicketChecker implements Sale {
 	public PrenotazionePostoVO aggiornaPrenotazionePosto(String ticket, PrenotazionePostoVO prenotazione, boolean aggiornaRichieste)
 			throws SbnBaseException {
 
+		Tbl_prenotazione_posto old_prenotazione_posto = null;
 		StatoPrenotazionePosto old_stato;
 
 		try {
 			checkTicket(ticket);
+			log.debug(String.format("aggiornaPrenotazionePosto(): id=%d, stato=%s, nuova=%b, utente=%s",
+					prenotazione.getId_prenotazione(), prenotazione.getStato(), prenotazione.isNuovo(), prenotazione.getUtente().getCodUtente()));
 			prenotazione.validate(new PrenotazionePostoValidator());
 			boolean nuovaPrenotazione = prenotazione.isNuovo();
 			if (nuovaPrenotazione) {
@@ -520,8 +525,8 @@ public class SaleBean extends TicketChecker implements Sale {
 				old_stato = prenotazione.getStato();
 			} else {
 				//verifica cambio di stato
-				Tbl_prenotazione_posto prenotazione_posto = dao.getPrenotazionePostoById(prenotazione.getId_prenotazione());
-				old_stato = StatoPrenotazionePosto.of(prenotazione_posto.getCd_stato());
+				old_prenotazione_posto = dao.getPrenotazionePostoById(prenotazione.getId_prenotazione());
+				old_stato = StatoPrenotazionePosto.of(old_prenotazione_posto.getCd_stato());
 			}
 
 			if (ValidazioneDati.in(prenotazione.getStato(),
@@ -530,10 +535,8 @@ public class SaleBean extends TicketChecker implements Sale {
 				this.verificaDisponibilitaPosto(prenotazione);
 			}
 
-			if (aggiornaRichieste)
-				checkCambiamentoStatoPrenotazione(ticket, prenotazione, old_stato);
-
-			Tbl_prenotazione_posto tbl_pren_posto = ConvertToHibernate.Sale.prenotazione(prenotazione);
+			prenotazione.setUteVar(DaoManager.getFirmaUtente(ticket));
+			Tbl_prenotazione_posto tbl_pren_posto = ConvertToHibernate.Sale.prenotazione(old_prenotazione_posto, prenotazione);
 			tbl_pren_posto = dao.aggiornaPrenotazionePosto(tbl_pren_posto);
 			PrenotazionePostoVO prenotazioneAggiornata = ConvertToWeb.Sale.prenotazione(tbl_pren_posto, null);
 
@@ -541,6 +544,10 @@ public class SaleBean extends TicketChecker implements Sale {
 			//senza movimenti associati (in questo caso sarà inviata mail per la richiesta)
 			if (nuovaPrenotazione)
 				invioMailNotificaNuovaPrenotazionePosto(ticket, prenotazioneAggiornata);
+
+			if (aggiornaRichieste) {
+				checkCambiamentoStatoPrenotazione(ticket, prenotazione, old_stato);
+			}
 
 			return prenotazioneAggiornata;
 
@@ -656,7 +663,7 @@ public class SaleBean extends TicketChecker implements Sale {
 				mail.setSubject("Inserimento nuova prenotazione posto");
 				mail.setBody(MailBodyBuilder.Servizi.nuovaPrenotazionePosto(prenotazione));
 
-				MailUtil.sendMail(mail);
+				MailUtil.sendMailAsync(mail);
 
 			} catch (Exception e) {
 				log.error("", e);
@@ -694,7 +701,7 @@ public class SaleBean extends TicketChecker implements Sale {
 			mail.setSubject("Rifiuto prenotazione posto");
 			mail.setBody(MailBodyBuilder.Servizi.rifiutoPrenotazionePosto(prenotazione));
 
-			MailUtil.sendMail(mail);
+			MailUtil.sendMailAsync(mail);
 
 		} catch (Exception e) {
 			log.error("", e);

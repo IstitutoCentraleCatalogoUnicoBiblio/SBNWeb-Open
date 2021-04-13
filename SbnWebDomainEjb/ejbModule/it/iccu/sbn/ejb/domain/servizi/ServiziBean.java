@@ -4491,7 +4491,7 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			// m.setStato_richiesta(CodiciProvider.getDescrizioneCodiceSBN(CodiciType.CODICE_STATO_RICHIESTA,
 			// "A")); //immessa
 			m.setStato_richiesta(CodiciProvider.getDescrizioneCodiceSBN(CodiciType.CODICE_STATO_PRENOTAZIONE_POSTO,
-					SaleUtil.getStatoDinamico(pp, now).getStato()));
+					SaleUtil.getStatoDinamico(pp.getStato(), pp.getTs_fine(), now).getStato()));
 			m.setStato_movimento(CodiciProvider.getDescrizioneCodiceSBN(CodiciType.CODICE_STATO_MOVIMENTO, "P")); // prenotazione
 			m.setPrenotazionePosto(pp);
 			return m;
@@ -5137,7 +5137,9 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			if (tipoServizio != null) {
 				Tbl_iter_servizio iter_servizio = dao.getIterServizio(tipoServizio.getId_tipo_servizio(),
 						stato.getISOCode());
-				return ConversioneHibernateVO.toWeb().iterServizio(iter_servizio);
+				if (iter_servizio != null) {
+					return ConversioneHibernateVO.toWeb().iterServizio(iter_servizio);
+				}
 			}
 
 		} catch (DaoManagerException e) {

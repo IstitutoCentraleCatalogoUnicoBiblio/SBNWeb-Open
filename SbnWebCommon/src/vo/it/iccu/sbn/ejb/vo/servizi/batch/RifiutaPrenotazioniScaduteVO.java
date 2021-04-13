@@ -28,6 +28,7 @@ public class RifiutaPrenotazioniScaduteVO extends ParametriRichiestaElaborazione
 
 	private Date dataFinePrevista;
 	private boolean livelloPolo;
+	private boolean automatico;
 
 	@Override
 	public void validate() throws ValidationException {
@@ -50,6 +51,14 @@ public class RifiutaPrenotazioniScaduteVO extends ParametriRichiestaElaborazione
 
 	public void setLivelloPolo(boolean livelloPolo) {
 		this.livelloPolo = livelloPolo;
+	}
+
+	public boolean isAutomatico() {
+		return automatico;
+	}
+
+	public void setAutomatico(boolean automatico) {
+		this.automatico = automatico;
 	}
 
 }

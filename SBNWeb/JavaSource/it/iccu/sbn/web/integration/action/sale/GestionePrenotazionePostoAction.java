@@ -444,6 +444,9 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 			}
 			setIntestazione(currentForm);
 			return no(mapping, currentForm, request, response);
+
+		default:
+			break;
 		}
 
 		return mapping.getInputForward();
@@ -515,6 +518,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 							_formatter.format(currentForm.getGiorno().getDate())));
 
 			currentForm.setConferma(true);
+			this.saveToken(request);
 			currentForm.setPulsanti(BOTTONIERA_CONFERMA);
 		}
 
@@ -530,8 +534,12 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 	public ActionForward si(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
 		GestionePrenotazionePostoForm currentForm = (GestionePrenotazionePostoForm) form;
+		if (!this.isTokenValid(request)) {
+			LinkableTagUtils.addError(request, new ActionMessage("errors.navigation.locked") );
+			return no(mapping, currentForm, request, response);
+		}
+		this.resetToken(request);
 		TipoOperazionePrenotazione op = currentForm.getTipoOperazione();
 		switch (op) {
 		case SPOSTA:
@@ -691,6 +699,9 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 		case PRENOTAZIONI_UTENTE:
 			currentForm.setPulsanti(BOTTONIERA_PRENOTAZIONI_UTENTE);
 			break;
+
+		default:
+			break;
 		}
 
 
@@ -721,6 +732,9 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 
 			//preparaGiorno(request, currentForm, String.valueOf(idx - 1) );
 			return mapping.getInputForward();
+
+		default:
+			break;
 		}
 
 		return mapping.getInputForward();
@@ -748,6 +762,9 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 			//GiornoVO giorno = currentForm.getGiorno();
 			//preparaGiorno(request, currentForm, String.valueOf(currentForm.getGiorni().indexOf(giorno) + 1) );
 			return mapping.getInputForward();
+
+		default:
+			break;
 		}
 
 		return mapping.getInputForward();
@@ -763,13 +780,15 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 				pp.getId_prenotazione(), pp.getPosto().getSala().getDescrizione()));
 
 		currentForm.setConferma(true);
+		this.saveToken(request);
 		currentForm.setPulsanti(BOTTONIERA_CONFERMA);
 		currentForm.setTipoOperazione(TipoOperazionePrenotazione.RIFIUTA);
 
-		// se il rifiuto proviene dal modulo utente è una disdetta, altrimenti è un'annullamento
+		// se il rifiuto proviene dal modulo utente è una disdetta, altrimenti è un annullamento
 		StatoPrenotazionePosto nuovoStato = StatoPrenotazionePosto.DISDETTA;
-		if (getOperatore(request) == OperatoreType.BIBLIOTECARIO)
+		if (getOperatore(request) == OperatoreType.BIBLIOTECARIO) {
 			nuovoStato = StatoPrenotazionePosto.ANNULLATA;
+		}
 
 		pp.setStato(nuovoStato);
 
@@ -784,6 +803,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 		LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.confermaOperazione"));
 
 		currentForm.setConferma(true);
+		this.saveToken(request);
 		currentForm.setPulsanti(BOTTONIERA_CONFERMA);
 		currentForm.setTipoOperazione(TipoOperazionePrenotazione.SALVA);
 
@@ -801,6 +821,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 		LinkableTagUtils.addError(request, new ActionMessage("errors.servizi.confermaOperazione"));
 
 		currentForm.setConferma(true);
+		this.saveToken(request);
 		currentForm.setPulsanti(BOTTONIERA_CONFERMA);
 		currentForm.setTipoOperazione(TipoOperazionePrenotazione.SALVA);
 
@@ -968,6 +989,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 				return LocalDate.fromDateFields(ricerca.getInizio()).isAfter(LocalDate.now());
 			case SALA:
 			case GIORNO:
+			default:
 				return false;//LocalDate.fromDateFields(currentForm.getGiorno().getDate()).isAfter(LocalDate.now());
 			}
 		}
@@ -978,6 +1000,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 				return true;//LocalDate.fromDateFields(currentForm.getDataInizioGriglia()).isAfter(LocalDate.now());
 			case SALA:
 			case GIORNO:
+			default:
 				return false;//!LocalDate.fromDateFields(currentForm.getGiorno().getDate()).isEqual(LocalDate.fromDateFields(ricerca.getFine()));
 			}
 		}
@@ -991,18 +1014,20 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 			return mov != null && mov.isRichiestaSuInventario();
 		}
 
- 		Timestamp now = DaoManager.now();
+ 		final Timestamp now = DaoManager.now();
+		final StatoPrenotazionePosto2 stato = currentForm.getPrenotazione() != null ? SaleUtil.getStatoDinamico(currentForm.getPrenotazione().getStato(), 
+				currentForm.getPrenotazione().getTs_fine(), now) : StatoPrenotazionePosto2.IMMESSA;
 		if (ValidazioneDati.equals(idCheck, "servizi.bottone.respingi")) {
 			return dettaglio
 					&& getOperatore(request) == OperatoreType.BIBLIOTECARIO
-					&& ValidazioneDati.in(SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now),
+					&& ValidazioneDati.in(stato,
 							StatoPrenotazionePosto2.IMMESSA);
 		}
 
 		if (ValidazioneDati.equals(idCheck, "servizi.bottone.prenotazionePosto.disdici")) {
 			return dettaglio
 					&& getOperatore(request) == OperatoreType.UTENTE
-					&& ValidazioneDati.in(SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now),
+					&& ValidazioneDati.in(stato,
 							StatoPrenotazionePosto2.IMMESSA);
 		}
 
@@ -1011,14 +1036,14 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 			return dettaglio
 					&& getOperatore(request) == OperatoreType.BIBLIOTECARIO
 					&& DateUtil.isSameDay(currentForm.getPrenotazione().getTs_inizio(), now)
-					&& ValidazioneDati.in(SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now),
+					&& ValidazioneDati.in(stato,
 							StatoPrenotazionePosto2.IMMESSA);
 		}
 		if (ValidazioneDati.equals(idCheck, "servizi.bottone.conclusa")) {
 			return dettaglio
 					&& getOperatore(request) == OperatoreType.BIBLIOTECARIO
 					//&& DateUtil.isSameDay(currentForm.getPrenotazione().getTs_inizio(), now)
-					&& ValidazioneDati.in(SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now),
+					&& ValidazioneDati.in(stato,
 							StatoPrenotazionePosto2.NON_FRUITA,
 							StatoPrenotazionePosto2.IN_CORSO);
 		}
@@ -1036,7 +1061,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 		}
 
 		if (ValidazioneDati.equals(idCheck, "AGGIUNGI_UTENTE")) {
-			if (!ValidazioneDati.in(SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now),
+			if (!ValidazioneDati.in(stato,
 					StatoPrenotazionePosto2.IMMESSA,
 					StatoPrenotazionePosto2.IN_CORSO))
 				return false;
@@ -1046,7 +1071,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 		}
 
 		if (ValidazioneDati.equals(idCheck, "RIMUOVI_UTENTE")) {
-			if (!ValidazioneDati.in(SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now),
+			if (!ValidazioneDati.in(stato,
 					StatoPrenotazionePosto2.IMMESSA,
 					StatoPrenotazionePosto2.IN_CORSO))
 				return false;
@@ -1066,7 +1091,7 @@ public class GestionePrenotazionePostoAction extends ServiziBaseAction implement
 		if (ValidazioneDati.equals(idCheck,  "servizi.bottone.prenotazionePosto.sposta")) {
 			return dettaglio
 					&& getOperatore(request) == OperatoreType.BIBLIOTECARIO
-					&& SaleUtil.getStatoDinamico(currentForm.getPrenotazione(), now) == StatoPrenotazionePosto2.IMMESSA;
+					&& stato == StatoPrenotazionePosto2.IMMESSA;
 		}
 
 		if (ValidazioneDati.equals(idCheck,  "SPOSTA")) {

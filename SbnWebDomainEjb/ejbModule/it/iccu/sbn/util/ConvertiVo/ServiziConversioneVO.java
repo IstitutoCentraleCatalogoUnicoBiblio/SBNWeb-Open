@@ -62,6 +62,7 @@ import it.iccu.sbn.persistence.dao.servizi.MaterieDAO;
 import it.iccu.sbn.persistence.dao.servizi.ModalitaErogazioneDAO;
 import it.iccu.sbn.persistence.dao.servizi.OccupazioniDAO;
 import it.iccu.sbn.persistence.dao.servizi.RichiesteServizioDAO;
+import it.iccu.sbn.persistence.dao.servizi.SaleDAO;
 import it.iccu.sbn.persistence.dao.servizi.SegnatureDAO;
 import it.iccu.sbn.persistence.dao.servizi.ServiziDAO;
 import it.iccu.sbn.persistence.dao.servizi.SupportiBibliotecaDAO;
@@ -147,22 +148,23 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 
 	private static final ServiziConversioneVO instance = new ServiziConversioneVO();
 
-	private RichiesteServizioDAO richiesteDAO = new RichiesteServizioDAO();
-	private AutorizzazioniDAO autDAO = new AutorizzazioniDAO();
-	private MaterieDAO matDAO = new MaterieDAO();
-	private UtilitaDAO utilDAO = new UtilitaDAO();
-	private IterServizioDAO iterDAO = new IterServizioDAO();
-	private UtentiDAO utentiDAO = new UtentiDAO();
-	private Tbc_inventarioDao invDAO = new Tbc_inventarioDao();
-	private ServiziDAO srvDAO = new ServiziDAO();
-	private SupportiBibliotecaDAO suppDAO = new SupportiBibliotecaDAO();
-	private Tbl_documenti_lettoriDAO docDAO = new Tbl_documenti_lettoriDAO();
-	private OccupazioniDAO occDAO = new OccupazioniDAO();
-	private SegnatureDAO segnDAO = new SegnatureDAO();
-	private TipoServizioDAO tipoSrvDAO = new TipoServizioDAO();
-	private TitoliDiStudioDAO titStudioDAO = new TitoliDiStudioDAO();
-	private TabelleRelazioneDAO relDAO = new TabelleRelazioneDAO();
-	private ModalitaErogazioneDAO modErogDAO = new ModalitaErogazioneDAO();
+	private final RichiesteServizioDAO richiesteDAO = new RichiesteServizioDAO();
+	private final AutorizzazioniDAO autDAO = new AutorizzazioniDAO();
+	private final MaterieDAO matDAO = new MaterieDAO();
+	private final UtilitaDAO utilDAO = new UtilitaDAO();
+	private final IterServizioDAO iterDAO = new IterServizioDAO();
+	private final UtentiDAO utentiDAO = new UtentiDAO();
+	private final Tbc_inventarioDao invDAO = new Tbc_inventarioDao();
+	private final ServiziDAO srvDAO = new ServiziDAO();
+	private final SupportiBibliotecaDAO suppDAO = new SupportiBibliotecaDAO();
+	private final Tbl_documenti_lettoriDAO docDAO = new Tbl_documenti_lettoriDAO();
+	private final OccupazioniDAO occDAO = new OccupazioniDAO();
+	private final SegnatureDAO segnDAO = new SegnatureDAO();
+	private final TipoServizioDAO tipoSrvDAO = new TipoServizioDAO();
+	private final TitoliDiStudioDAO titStudioDAO = new TitoliDiStudioDAO();
+	private final TabelleRelazioneDAO relDAO = new TabelleRelazioneDAO();
+	private final ModalitaErogazioneDAO modErogDAO = new ModalitaErogazioneDAO();
+	private final SaleDAO saleDAO = new SaleDAO();
 
 
 	private static DocumentoFisicoCommon getDfCommon() {
@@ -2148,8 +2150,10 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 			hVO.setUte_var(webVO.getUteVar());
 
 			PrenotazionePostoVO pp = webVO.getPrenotazionePosto();
-			if (pp != null)
-				hVO.getPrenotazioni_posti().add(ConvertToHibernate.Sale.prenotazione(pp));
+			if (pp != null) {
+				final Tbl_prenotazione_posto tbl_prenotazione_posto = pp.isNuovo() ? null : instance.saleDAO.getPrenotazionePostoById(pp.getId_prenotazione());
+				hVO.getPrenotazioni_posti().add(ConvertToHibernate.Sale.prenotazione(tbl_prenotazione_posto, pp));
+			}
 
 			if (webVO.isRichiestaSuInventario() ) {
 				Tbc_inventario inventario = instance.invDAO.getInventario(codPolo, webVO.getCodBibInv(), webVO.getCodSerieInv(), new Integer(webVO.getCodInvenInv()));
