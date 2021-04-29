@@ -55,6 +55,7 @@ import it.iccu.sbn.util.ConvertiVo.ConversioneHibernateVO;
 import it.iccu.sbn.util.ConvertiVo.ServiziConversioneVO;
 import it.iccu.sbn.util.jms.ConstantsJMS;
 import it.iccu.sbn.util.mail.MailUtil;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.util.mail.servizi.ServiziMail;
 import it.iccu.sbn.util.servizi.SollecitiUtil;
 import it.iccu.sbn.util.sms.SMSUtil;
@@ -474,7 +475,7 @@ public class BatchSolleciti {
 
 	private boolean inviaSollecitoMail(Tbl_richiesta_servizio req, Tbl_solleciti prossimo) {
 		try {
-			InternetAddress bibMail = util.getMailBiblioteca(richiesta.getCodPolo(), richiesta.getCodBib());
+			AddressPair pair = util.getMailBiblioteca(richiesta.getCodPolo(), richiesta.getCodBib());
 			InternetAddress uteMail = util.getMailUtenteMovimento(req);
 			if (uteMail ==  null) {
 				log.error("Indirizzo mail non impostato per utente " + req.getId_utenti_biblioteca().getId_utenti().getCod_utente());
@@ -482,7 +483,8 @@ public class BatchSolleciti {
 			}
 
 			MailVO mail = new MailVO();
-			mail.setFrom(bibMail);
+			mail.setFrom(pair.getFrom());
+			mail.getReplyTo().add(pair.getReplyTo());
 			mail.getTo().add(uteMail);
 
 			//almaviva5_20111122 nome bib su oggetto mail

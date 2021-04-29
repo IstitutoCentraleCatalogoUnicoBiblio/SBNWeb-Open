@@ -160,7 +160,7 @@ import it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice;
 import it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice_id_arrivo;
 import it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice_id_locali;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
-import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
+
 import it.iccu.sbn.util.semantica.SemanticaUtil;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
 import it.iccu.sbn.vo.domain.bibliografica.AreaDatiServizioInterrTitoloDomVO;

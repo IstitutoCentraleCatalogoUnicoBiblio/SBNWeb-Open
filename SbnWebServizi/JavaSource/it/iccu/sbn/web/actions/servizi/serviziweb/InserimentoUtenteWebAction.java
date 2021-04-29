@@ -29,6 +29,7 @@ import it.iccu.sbn.ejb.vo.servizi.utenti.dettaglio.UtenteBibliotecaVO;
 import it.iccu.sbn.util.config.CommonConfiguration;
 import it.iccu.sbn.util.config.Configuration;
 import it.iccu.sbn.util.mail.MailBodyBuilder;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.util.servizi.ServiziUtil;
 import it.iccu.sbn.vo.custom.UtenteWebLock;
 import it.iccu.sbn.web.actionforms.servizi.serviziweb.InserimentoUtenteWebForm;
@@ -409,10 +410,10 @@ public final class InserimentoUtenteWebAction extends LookupDispatchAction {
 				AmministrazioneMail mailBean = factory.getGestioneAcquisizioni().getAmministrazioneMailBean();
 
 				InternetAddress to = new InternetAddress(mail, utente.getCognomeNome());
-				InternetAddress from = mailBean.getMailBiblioteca(polo, currentForm.getCod_biblio() );
+				AddressPair pair = mailBean.getMailBiblioteca(polo, currentForm.getCod_biblio() );
 
 				String subject = "Autoregistrazione " + utente.getCodPolo() + utente.getCodBibSer();
-				ritEmail = mailBean.inviaMail(from, to, subject, body.toString());
+				ritEmail = mailBean.inviaMail(pair.getFrom(), to, subject, body.toString());
 				if (ritEmail > 0)
 					LinkableTagUtils.addError(request, new ActionMessage("error.email.autoreg.failed", utente.getCodiceUtente() ));
 

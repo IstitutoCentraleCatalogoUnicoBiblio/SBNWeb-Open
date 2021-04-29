@@ -184,6 +184,7 @@ import it.iccu.sbn.util.jasper.BatchCollectionSerializer;
 import it.iccu.sbn.util.mail.EmailValidator;
 import it.iccu.sbn.util.mail.MailBodyBuilder;
 import it.iccu.sbn.util.mail.MailUtil;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.util.mail.servizi.ServiziMail;
 import it.iccu.sbn.util.servizi.SaleUtil;
 import it.iccu.sbn.util.servizi.ServiziUtil;
@@ -7591,7 +7592,7 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			}
 
 			ServiziMail util = new ServiziMail();
-			InternetAddress from = util.getMailBiblioteca(p.getCodPolo(), p.getCodBibDest());
+			AddressPair pair = util.getMailBiblioteca(p.getCodPolo(), p.getCodBibDest());
 			InternetAddress uteMail = util.getMailUtenteMovimento(req);
 			if (uteMail == null) {
 				log.error("Indirizzo mail non impostato per utente "
@@ -7600,7 +7601,8 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			}
 
 			MailVO mail = new MailVO();
-			mail.setFrom(from);
+			mail.setFrom(pair.getFrom());
+			mail.getReplyTo().add(pair.getReplyTo());
 			mail.getTo().add(uteMail);
 
 			StringBuilder subject = new StringBuilder();
@@ -7614,7 +7616,7 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			mail.setSubject(subject.toString());
 
 			mail.setBody(MailBodyBuilder.Servizi.prenotazioneDocRestituito(p));
-			return MailUtil.sendMail(mail);
+			return MailUtil.sendMailAsync(mail);
 
 		} catch (ApplicationException e) {
 			log.error("", e);
@@ -7771,7 +7773,7 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			decodificaCodiciMovimento(mov, codPolo, codBib, Locale.getDefault(), req);
 
 			ServiziMail util = new ServiziMail();
-			InternetAddress from = util.getMailBiblioteca(codPolo, codBib);
+			AddressPair pair = util.getMailBiblioteca(codPolo, codBib);
 			InternetAddress uteMail = util.getMailUtenteMovimento(req);
 			if (uteMail == null) {
 				log.error("Indirizzo mail non impostato per utente "
@@ -7780,7 +7782,8 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			}
 
 			MailVO mail = new MailVO();
-			mail.setFrom(from);
+			mail.setFrom(pair.getFrom());
+			mail.getReplyTo().add(pair.getReplyTo());
 			mail.getTo().add(uteMail);
 
 			StringBuilder subject = new StringBuilder();
@@ -7793,7 +7796,7 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 			mail.setSubject(subject.toString());
 
 			mail.setBody(MailBodyBuilder.Servizi.rifiutoRichiesta(mov));
-			return MailUtil.sendMail(mail);
+			return MailUtil.sendMailAsync(mail);
 
 		} catch (Exception e) {
 			log.error(e);
@@ -8307,16 +8310,17 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 		InternetAddress to = new InternetAddress(mailNotifica);
 
 		ServiziMail util = new ServiziMail();
-		InternetAddress from = util.getMailBiblioteca(mov.getCodPolo(), mov.getCodBibDest());
+		AddressPair pair = util.getMailBiblioteca(mov.getCodPolo(), mov.getCodBibDest());
 
 		MailVO mail = new MailVO();
-		mail.setFrom(from);
+		mail.setFrom(pair.getFrom());
+		mail.getReplyTo().add(pair.getReplyTo());
 		mail.getTo().add(to);
 
 		mail.setSubject("Inserimento nuova richiesta");
 		mail.setBody(MailBodyBuilder.Servizi.nuovaRichiesta(dettaglio));
 		try {
-			MailUtil.sendMail(mail);
+			MailUtil.sendMailAsync(mail);
 		} catch (Exception e) {
 			log.error("", e);
 		}

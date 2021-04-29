@@ -18,6 +18,7 @@ package it.iccu.sbn.ejb.domain.amministrazione;
 
 import it.iccu.sbn.ejb.exception.ApplicationException;
 import it.iccu.sbn.persistence.dao.exception.DaoManagerException;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 
 import java.rmi.RemoteException;
@@ -38,5 +39,5 @@ public interface AmministrazioneMail extends EJBObject {
 
 	public void reload() throws DaoManagerException, RemoteException;
 
-	public InternetAddress getMailBiblioteca(String cdPolo, String cdBib) throws ApplicationException, RemoteException;
+	public AddressPair getMailBiblioteca(String cdPolo, String cdBib) throws ApplicationException, RemoteException;
 }

@@ -175,6 +175,7 @@ import it.iccu.sbn.util.Constants.DocFisico;
 import it.iccu.sbn.util.ConvertiVo.ConversioneHibernateVO;
 import it.iccu.sbn.util.mail.MailBodyBuilder;
 import it.iccu.sbn.util.mail.MailUtil;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.util.mail.servizi.ServiziMail;
 import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
 import it.iccu.sbn.util.semantica.SemanticaUtil;
@@ -9449,12 +9450,12 @@ public class SbnGestioneAllAuthorityDao {
 	private boolean inviaPresenzaGestionaliMail(String codPolo, String codBibl,	String bid, String segnalazione) {
 		try {
 
-			InternetAddress from = util.getMailBiblioteca(codPolo, codBibl, true);	//indirizzo bib o polo se forzato
-			InternetAddress to   = util.getMailBiblioteca(codPolo, codBibl, false);	//sempre indirizzo bib
+			AddressPair pair = util.getMailBiblioteca(codPolo, codBibl, true);	//indirizzo bib o polo se forzato
 
 			MailVO mail = new MailVO();
-			mail.setFrom(from);
-			mail.getTo().add(to);
+			mail.setFrom(pair.getFrom());
+			mail.getTo().add(pair.getReplyTo());
+			mail.getReplyTo().add(pair.getReplyTo());
 			// Inizio indirizzo di prova per effettuare i test dall'Ufficio Almaviva
 //			mail.getTo().add(new InternetAddress("indirizzoUtente@almavivaitalia.it"));
 			// Fine indirizzo di prova per effettuare i test

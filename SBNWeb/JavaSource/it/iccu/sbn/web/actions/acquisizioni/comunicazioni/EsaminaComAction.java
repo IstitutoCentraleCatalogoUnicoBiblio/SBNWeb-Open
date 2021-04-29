@@ -38,6 +38,7 @@ import it.iccu.sbn.ejb.vo.stampe.StampaOnLineVO;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
 import it.iccu.sbn.util.jms.ConstantsJMS;
 import it.iccu.sbn.util.mail.MailUtil;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
 import it.iccu.sbn.vo.domain.mail.MailVO;
 import it.iccu.sbn.web.actionforms.acquisizioni.comunicazioni.EsaminaComForm;
@@ -839,7 +840,7 @@ public class EsaminaComAction extends ComunicazioneBaseAction implements SbnAtti
 					if (isFilled(indirizzoEMail) && isFilled(oggetto) ) { //&& testo!=null && testo.trim().length()>0)
 
 						AmministrazioneMail ejb = factory.getGestioneAcquisizioni().getAmministrazioneMailBean();
-						InternetAddress from = ejb.getMailBiblioteca(com.getCodPolo(), com.getCodBibl() );
+						AddressPair pair = ejb.getMailBiblioteca(com.getCodPolo(), com.getCodBibl() );
 						InternetAddress to = new InternetAddress(indirizzoEMail, fornitore.getNomeFornitore() );
 
 						//almaviva5_20130702 #4765
@@ -852,10 +853,11 @@ public class EsaminaComAction extends ComunicazioneBaseAction implements SbnAtti
 						MailVO mail = new MailVO();
 						mail.setBody(html);
 						mail.setSubject(oggetto);
-						mail.setFrom(from);
+						mail.setFrom(pair.getFrom());
+						mail.getReplyTo().add(pair.getReplyTo());
 						mail.getTo().add(to);
 						mail.setType(MailUtil.MIME_TYPE_HTML);
-						MailUtil.sendMail(mail);
+						MailUtil.sendMailAsync(mail);
 					}
 					else
 						LinkableTagUtils.addError(request,  new ActionMessage("errors.acquisizioni.erroreServerPosta"));

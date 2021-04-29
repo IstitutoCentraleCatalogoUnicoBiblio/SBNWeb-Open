@@ -33,6 +33,7 @@ public class MailVO extends SerializableVO {
 	private List<InternetAddress> to = new ArrayList<InternetAddress>();
 	private List<InternetAddress> cc = new ArrayList<InternetAddress>();
 	private List<InternetAddress> ccn = new ArrayList<InternetAddress>();
+	private List<InternetAddress> replyTo = new ArrayList<InternetAddress>();
 	private List<MailAttachmentVO> attachment = new ArrayList<MailAttachmentVO>();
 
 	private String subject;
@@ -63,24 +64,16 @@ public class MailVO extends SerializableVO {
 		return to;
 	}
 
-	public void setTo(List<InternetAddress> to) {
-		this.to = to;
-	}
-
 	public List<InternetAddress> getCc() {
 		return cc;
-	}
-
-	public void setCc(List<InternetAddress> cc) {
-		this.cc = cc;
 	}
 
 	public List<InternetAddress> getCcn() {
 		return ccn;
 	}
 
-	public void setCcn(List<InternetAddress> ccn) {
-		this.ccn = ccn;
+	public List<InternetAddress> getReplyTo() {
+		return replyTo;
 	}
 
 	public String getSubject() {
@@ -125,8 +118,11 @@ public class MailVO extends SerializableVO {
 	public String summary() {
 		StringBuilder buf = new StringBuilder();
 		buf.append("[from=").append(from.getAddress())
-			.append(", to=").append(ValidazioneDati.formatValueList(this.to, ","))
-			.append(", subject=").append(subject)
+			.append(", to=").append(ValidazioneDati.formatValueList(this.to, ","));
+		if (ValidazioneDati.isFilled(this.replyTo)) {
+			buf.append(", replyTo=").append(ValidazioneDati.formatValueList(this.replyTo, ","));
+		}
+		buf.append(", subject=").append(subject)
 			.append("]");
 		return buf.toString();
 	}

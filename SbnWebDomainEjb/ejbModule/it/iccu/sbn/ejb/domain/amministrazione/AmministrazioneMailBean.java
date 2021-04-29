@@ -13,6 +13,7 @@ import it.iccu.sbn.servizi.ticket.TicketChecker;
 import it.iccu.sbn.util.config.CommonConfiguration;
 import it.iccu.sbn.util.config.Configuration;
 import it.iccu.sbn.util.mail.MailUtil;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.util.mail.servizi.ServiziMail;
 import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 import it.iccu.sbn.vo.domain.mail.MailVO;
@@ -130,7 +131,7 @@ public abstract class AmministrazioneMailBean extends TicketChecker implements A
 			}
 
 			MailVO mail = new MailVO(from, to, oggetto, testo);
-			boolean inviaMail = MailUtil.sendMail(mail);
+			boolean inviaMail = MailUtil.sendMailAsync(mail);
 
 			return inviaMail ? 0 : 1;
 
@@ -141,7 +142,7 @@ public abstract class AmministrazioneMailBean extends TicketChecker implements A
 
 	}
 
-	public InternetAddress getMailBiblioteca(String cdPolo, String cdBib) throws ApplicationException, EJBException {
+	public AddressPair getMailBiblioteca(String cdPolo, String cdBib) throws ApplicationException, EJBException {
 		try {
 			MailProperties mp;
 			if ( (mp = getPoloMailProperties()) == null)

@@ -24,6 +24,7 @@ import it.iccu.sbn.polo.orm.amministrazione.Tbf_biblioteca;
 import it.iccu.sbn.polo.orm.servizi.Tbl_richiesta_servizio;
 import it.iccu.sbn.polo.orm.servizi.Tbl_utenti;
 import it.iccu.sbn.util.ConvertiVo.ConversioneHibernateVO;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.vo.custom.amministrazione.MailProperties;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
 
@@ -34,37 +35,42 @@ import javax.mail.internet.InternetAddress;
 
 public final class ServiziMail {
 
-	private Map<String, InternetAddress> addresses = new HashMap<String, InternetAddress>();
+	private Map<String, AddressPair> addresses = new HashMap<String, AddressPair>();
 
+	public AddressPair getMailBiblioteca(String codPolo, String codBib, boolean checkForzatura) throws Exception {
 
-	public InternetAddress getMailBiblioteca(String codPolo, String codBib, boolean checkForzatura) throws Exception {
 		// almaviva5_20150119 #5701
-		InternetAddress addr = addresses.get(codBib);
+		final AddressPair addr = addresses.get(codBib);
 		if (addr != null)
 			return addr;
-
-		if (checkForzatura) {
-			//almaviva5_20161026 check forzatura polo
-			MailProperties mp = DomainEJBFactory.getInstance().getAmministrazioneMail().getPoloMailProperties();
-			if (mp.isForzaMittentePolo())
-				return new InternetAddress(mp.getIndirizzo(), mp.getDescrizione(), "UTF-8");
-		}
 
 		Tbf_bibliotecaDao dao = new Tbf_bibliotecaDao();
 		Tbf_biblioteca bib = dao.getBiblioteca(codPolo, codBib);
 		if (bib == null || ValidazioneDati.strIsNull(bib.getE_mail()))
 			throw new ApplicationException(SbnErrorTypes.MAIL_INVALID_PARAMS);
 
-		addr = new InternetAddress(ValidazioneDati.trimOrEmpty(bib.getE_mail()),
+		final InternetAddress bibAddr = new InternetAddress(ValidazioneDati.trimOrEmpty(bib.getE_mail()),
 				ValidazioneDati.trimOrEmpty(bib.getNom_biblioteca()), "UTF-8");
 
-		addresses.put(codBib, addr);
+		final AddressPair pair = new AddressPair();
+		pair.setFrom(bibAddr);
+		// reply sempre alla biblioteca
+		pair.setReplyTo(bibAddr); 
 
-		return addr;
+		if (checkForzatura) {
+			//almaviva5_20161026 check forzatura polo
+			MailProperties mp = DomainEJBFactory.getInstance().getAmministrazioneMail().getPoloMailProperties();
+			if (mp.isForzaMittentePolo()) {
+				pair.setFrom(new InternetAddress(mp.getIndirizzo(), mp.getDescrizione(), "UTF-8"));
+			}
+		}
 
+		addresses.put(codBib, pair);
+
+		return pair;
 	}
 
-	public InternetAddress getMailBiblioteca(String codPolo, String codBib) throws Exception {
+	public AddressPair getMailBiblioteca(String codPolo, String codBib) throws Exception {
 		return getMailBiblioteca(codPolo, codBib, true);
 	}
 

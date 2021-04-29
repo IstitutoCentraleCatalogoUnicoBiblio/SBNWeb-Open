@@ -60,6 +60,7 @@ import it.iccu.sbn.util.ConvertiVo.ConvertToHibernate;
 import it.iccu.sbn.util.ConvertiVo.ConvertToWeb;
 import it.iccu.sbn.util.mail.MailBodyBuilder;
 import it.iccu.sbn.util.mail.MailUtil;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.util.mail.servizi.ServiziMail;
 import it.iccu.sbn.util.servizi.SaleUtil;
 import it.iccu.sbn.util.servizi.ServiziUtil;
@@ -654,10 +655,11 @@ public class SaleBean extends TicketChecker implements Sale {
 				InternetAddress to = new InternetAddress(mailNotifica);
 
 				ServiziMail util = new ServiziMail();
-				InternetAddress from = util.getMailBiblioteca(prenotazione.getCodPolo(), prenotazione.getCodBib() );
+				AddressPair pair = util.getMailBiblioteca(prenotazione.getCodPolo(), prenotazione.getCodBib() );
 
 				MailVO mail = new MailVO();
-				mail.setFrom(from);
+				mail.setFrom(pair.getFrom());
+				mail.getReplyTo().add(pair.getReplyTo());
 				mail.getTo().add(to);
 
 				mail.setSubject("Inserimento nuova prenotazione posto");
@@ -679,10 +681,11 @@ public class SaleBean extends TicketChecker implements Sale {
 				return;
 
 			ServiziMail util = new ServiziMail();
-			InternetAddress from = util.getMailBiblioteca(prenotazione.getCodPolo(), prenotazione.getCodBib() );
+			AddressPair pair = util.getMailBiblioteca(prenotazione.getCodPolo(), prenotazione.getCodBib() );
 
 			MailVO mail = new MailVO();
-			mail.setFrom(from);
+			mail.setFrom(pair.getFrom());
+			mail.getReplyTo().add(pair.getReplyTo());
 
 			for (UtenteBaseVO u : prenotazione.getAltriUtenti() ) {
 				String mailUtente = ServiziUtil.getEmailUtente(u);

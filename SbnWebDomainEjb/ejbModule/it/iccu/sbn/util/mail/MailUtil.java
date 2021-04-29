@@ -34,6 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Queue;
@@ -52,6 +53,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+import javax.net.ssl.SSLContext;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
@@ -64,6 +66,27 @@ public class MailUtil {
 	private static Logger log = Logger.getLogger(MailUtil.class);
 
 	static final Queue<MailVO> sendQueue = new ConcurrentLinkedQueue<MailVO>();
+
+	public static class AddressPair {
+		private InternetAddress from;
+		private InternetAddress replyTo;
+
+		public InternetAddress getFrom() {
+			return from;
+		}
+
+		public void setFrom(InternetAddress from) {
+			this.from = from;
+		}
+
+		public InternetAddress getReplyTo() {
+			return replyTo;
+		}
+
+		public void setReplyTo(InternetAddress replyTo) {
+			this.replyTo = replyTo;
+		}
+	}
 
 	private static class SMTPAuth extends Authenticator {
 
@@ -100,29 +123,7 @@ public class MailUtil {
 
 			Session session = getSession();
 			Transport transport = session.getTransport("smtp");
-			MimeMessage msg = new MimeMessage(session);
-
-			InternetAddress from = mail.getFrom();
-			msg.setFrom(from);
-
-			msg.setSubject(mail.getSubject() );
-
-			if (ValidazioneDati.isFilled(mail.getTo())) {
-				for (InternetAddress to : mail.getTo() )
-					msg.addRecipient(RecipientType.TO, to);
-			}
-
-			if (ValidazioneDati.isFilled(mail.getCc())) {
-				for (InternetAddress cc : mail.getCc() )
-					msg.addRecipient(RecipientType.CC, cc);
-			}
-
-			if (ValidazioneDati.isFilled(mail.getCcn())) {
-				for (InternetAddress ccn : mail.getCcn() )
-					msg.addRecipient(RecipientType.BCC, ccn);
-			}
-
-			prepareBody(mail, msg);
+			MimeMessage msg = preparaMessage(mail, session);
 
 			log.debug("invio mail: " + mail);
 
@@ -139,10 +140,42 @@ public class MailUtil {
 		}
 	}
 
-	public static final void sendMailAsync(MailVO mail) {
-		if (MailUtil.sendQueue.add(mail)) {
+	static MimeMessage preparaMessage(MailVO mail, Session session) throws MessagingException {
+		final MimeMessage msg = new MimeMessage(session);
+
+		msg.setFrom(mail.getFrom());
+
+		msg.setSubject(mail.getSubject() );
+
+		if (ValidazioneDati.isFilled(mail.getTo())) {
+			for (InternetAddress to : mail.getTo() )
+				msg.addRecipient(RecipientType.TO, to);
+		}
+
+		if (ValidazioneDati.isFilled(mail.getCc())) {
+			for (InternetAddress cc : mail.getCc() )
+				msg.addRecipient(RecipientType.CC, cc);
+		}
+
+		if (ValidazioneDati.isFilled(mail.getCcn())) {
+			for (InternetAddress ccn : mail.getCcn() )
+				msg.addRecipient(RecipientType.BCC, ccn);
+		}
+
+		if (ValidazioneDati.isFilled(mail.getReplyTo())) {
+			msg.setReplyTo(mail.getReplyTo().toArray(new InternetAddress[0]));
+		}
+
+		prepareBody(mail, msg);
+		return msg;
+	}
+
+	public static final boolean sendMailAsync(MailVO mail) {
+		final boolean ok = MailUtil.sendQueue.add(mail);
+		if (ok) {
 			log.debug("inserita mail in coda per invio asincrono");
 		}
+		return ok;
 	}
 
 	private static void prepareBody(MailVO mail, MimeMessage message)
@@ -174,7 +207,7 @@ public class MailUtil {
 		message.setContent(mp);
 	}
 
-	private static Session getSession() throws Exception {
+	static Session getSession() throws Exception {
 
 		Session session = null;
 
@@ -186,6 +219,15 @@ public class MailUtil {
 		props.putAll(System.getProperties());
 
 		props.put("mail.transport.protocol", "smtp");
+		
+		try {
+			final String[] supportedProtocols = SSLContext.getDefault().getSupportedSSLParameters().getProtocols();
+			if (ValidazioneDati.isFilled(supportedProtocols)) {
+				final String protocols = ValidazioneDati.formatValueList(Arrays.asList(supportedProtocols), " ");
+				log.debug("ssl protocols: " + protocols);
+				props.put("mail.smtp.ssl.protocols", protocols);
+			}
+		} catch (Exception e) { }
 
 		//livello logging
 		String level = CommonConfiguration.getProperty(Configuration.LOG_LEVEL_SBNWEB).toUpperCase();
@@ -229,7 +271,6 @@ public class MailUtil {
 		}
 
 		return session;
-
 	}
 
 	public static final byte[] fileToByteArray(String path) throws Exception {

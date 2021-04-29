@@ -34,6 +34,7 @@ import it.iccu.sbn.ejb.vo.servizi.utenti.dettaglio.RicercaUtenteBibliotecaVO;
 import it.iccu.sbn.ejb.vo.servizi.utenti.dettaglio.UtenteBibliotecaVO;
 import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
+import it.iccu.sbn.util.mail.MailUtil.AddressPair;
 import it.iccu.sbn.vo.custom.servizi.CodTipoServizio;
 import it.iccu.sbn.web.constant.ServiziConstant;
 import it.iccu.sbn.web.integration.bd.ServiziFactoryEJBDelegate;
@@ -183,7 +184,7 @@ public class ServiziWebDelegate {
 
 	}
 
-	public InternetAddress getMailBiblioteca(String codPolo, String cod_bib) throws Exception {
+	public AddressPair getMailBiblioteca(String codPolo, String cod_bib) throws Exception {
 		//almaviva5_20120920 #5117
 		return getAmministrazioneMail().getMailBiblioteca(codPolo, cod_bib);
 	}
