@@ -83,11 +83,12 @@ public class LocalizzazioneMassiva {
 
 	private static final String HTML_NBSP = "&nbsp;";
 	private static final int RICHIESTA_INDICE_WAIT = 30 * 1000;	//30 sec.
+	private static final Logger log = Logger.getLogger(LocalizzazioneMassiva.class);
 
 	private final UserTransaction tx;
 	private final LocalizzazioneMassivaVO richiesta;
 	private final String firmaUtente;
-	private final Logger log;
+	private Logger _log = log;
 
 	private int wait_threshold;
 
@@ -105,10 +106,10 @@ public class LocalizzazioneMassiva {
 			return DomainEJBFactory.getInstance().getPolo();
 
 		} catch (CreateException e) {
-			log.error("", e);
+			_log.error("", e);
 			throw new EJBException(e);
 		} catch (NamingException e) {
-			log.error("", e);
+			_log.error("", e);
 			throw new EJBException(e);
 		} catch (RemoteException e) {
 			throw new EJBException((Exception) e.detail);
@@ -128,7 +129,7 @@ public class LocalizzazioneMassiva {
 	public LocalizzazioneMassiva(UserTransaction tx, LocalizzazioneMassivaVO richiesta, BatchLogWriter blw) {
 		this.tx = tx;
 		this.richiesta = richiesta;
-		this.log = blw.getLogger();
+		this._log = blw.getLogger();
 		this.firmaUtente = DaoManager.getFirmaUtente(richiesta.getTicket());
 	}
 
@@ -144,12 +145,12 @@ public class LocalizzazioneMassiva {
 			try {
 				this.wait_threshold = CommonConfiguration.getPropertyAsInteger(Configuration.LOC_MASSIVA_INDICE_WAIT_TIMEOUT,
 						RICHIESTA_INDICE_WAIT);
-				log.debug(String.format("Tempo di attesa per richiesta indice: %dms", wait_threshold));
+				_log.debug(String.format("Tempo di attesa per richiesta indice: %dms", wait_threshold));
 
 				output.setStato(ConstantsJMS.STATO_ERROR);
 
 				String tipoInput = richiesta.getTipoInput();
-				log.debug("Tipo input: " + tipoInput);
+				_log.debug("Tipo input: " + tipoInput);
 				TipoInput type = TipoInput.valueOf(tipoInput);
 
 				//setup report file
@@ -189,23 +190,23 @@ public class LocalizzazioneMassiva {
 				success = true;
 
 			} catch (ApplicationException e) {
-				log.error("", e);
+				_log.error("", e);
 				throw e;
 
 			} catch (FileNotFoundException e) {
-				log.error("", e);
+				_log.error("", e);
 				throw new ApplicationException(SbnErrorTypes.ERROR_IO_READ_FILE);
 
 			} catch (IOException e) {
-				log.error("", e);
+				_log.error("", e);
 				throw new ApplicationException(SbnErrorTypes.ERROR_IO_READ_FILE);
 
 			} catch (DaoManagerException e) {
-				log.error("", e);
+				_log.error("", e);
 
 				throw new ApplicationException(SbnErrorTypes.DB_FALUIRE);
 			} catch (Exception e) {
-				log.error("", e);
+				_log.error("", e);
 			}
 
 		} finally {
@@ -262,7 +263,7 @@ public class LocalizzazioneMassiva {
 				//almaviva5_20140826 #5629
 				if (!tdao.esisteTitolo(bid) )  {
 					++errors;
-					log.error(String.format("Titolo non trovato in polo per BID %s.", bid));
+					_log.error(String.format("Titolo non trovato in polo per BID %s.", bid));
 					writeReportRow(w, sbnUser, bid, tp_loc, read, false, "Titolo non trovato in polo");
 					continue;
 				}
@@ -278,7 +279,7 @@ public class LocalizzazioneMassiva {
 				indice.setMessage(request.getSbnMessage(), sbnUser);
 				SBNMarc sbnMarcResult = indice.eseguiRichiestaServer();
 				if (sbnMarcResult == null) {
-					log.error(String.format("Errore richiesta per BID %s: nessuna risposta.", bid));
+					_log.error(String.format("Errore richiesta per BID %s: nessuna risposta.", bid));
 					writeReportRow(w, sbnUser, bid, tp_loc, read, false, "nessuna risposta");
 					continue;
 				}
@@ -296,7 +297,7 @@ public class LocalizzazioneMassiva {
 					writeReportRow(w, sbnUser, bid, tp_loc, read, true, "localizzazione aggiornata");
 					break;
 				default:
-					log.error(String.format("Errore richiesta per BID %s: esito: %s: %s.",
+					_log.error(String.format("Errore richiesta per BID %s: esito: %s: %s.",
 									bid, result.getEsito(),
 									result.getTestoEsito()));
 					++errors;
@@ -377,18 +378,18 @@ public class LocalizzazioneMassiva {
 		DaoManager.begin(tx);
 
 		List<Number> locPendenti = dao.getLocalizzazioniPendentiIDs();
-		log.debug("localizzazioni pendenti trovate: " + ValidazioneDati.size(locPendenti));
+		_log.debug("localizzazioni pendenti trovate: " + ValidazioneDati.size(locPendenti));
 		for (Number locId : locPendenti)
 			try {
 				if ( (++read % 100) == 0) {
 					BatchManager.getBatchManagerInstance().checkForInterruption(idBatch);
-					log.debug("localizzazioni trattate: " + read);
+					_log.debug("localizzazioni trattate: " + read);
 				}
 
 				DaoManager.begin(tx);
 				Tb_loc_indice loc = dao.getLocalizzazionePendenteById(locId.intValue());
 				if (loc == null) {
-					log.error(String.format("localizzazione non trovata."));
+					_log.error(String.format("localizzazione non trovata."));
 					writeReportRow(w, null, null, -1, read, false, "localizzazione non trovata");
 					continue;
 				}
@@ -403,7 +404,7 @@ public class LocalizzazioneMassiva {
 				indice.setMessage(request.getSbnMessage(), request.getSbnUser());
 				SBNMarc sbnMarcResult = indice.eseguiRichiestaServer();
 				if (sbnMarcResult == null) {
-					log.error(String.format("Errore richiesta per BID %s: nessuna risposta.", bid));
+					_log.error(String.format("Errore richiesta per BID %s: nessuna risposta.", bid));
 					writeReportRow(w, sbnUser, bid, tp_loc, read, false, "nessuna risposta");
 					continue;
 				}
@@ -421,7 +422,7 @@ public class LocalizzazioneMassiva {
 					writeReportRow(w, sbnUser, bid, tp_loc, read, true, "localizzazione aggiornata");
 					break;
 				default:
-					log.error(String.format("Errore richiesta per BID %s: esito: %s: %s.",
+					_log.error(String.format("Errore richiesta per BID %s: esito: %s: %s.",
 									bid, result.getEsito(),
 									result.getTestoEsito()));
 					++errors;
@@ -538,6 +539,11 @@ public class LocalizzazioneMassiva {
 			LocalizzaType localizza = ClonePool.deepCopy(sbnmarc.getSbnMessage().getSbnRequest().getLocalizza());
 			for (LocalizzaInfoType lit : localizza.getLocalizzaInfo() )	{
 				String bid = lit.getSbnIDLoc();
+				log.debug(String.format("salvaLocalizzazione(): %s %s %s", codPolo, codBib, bid));
+				if (!checkTitolo(bid)) {
+					// check titolo cancellato/non condiviso
+					continue;
+				}
 				SbnTipoLocalizza sbnTipoLoc = lit.getTipoInfo();
 				//l'xml con localizzazioni multiple viene spezzato in xml singoli
 				localizza_copy.setLocalizzaInfo(new LocalizzaInfoType[] { lit });
@@ -575,6 +581,22 @@ public class LocalizzazioneMassiva {
 		return true;
 	}
 
+	private static boolean checkTitolo(final String bid) throws DaoManagerException {
+		TitoloDAO dao = new TitoloDAO();
+		Tb_titolo titolo = dao.getTitolo(bid);
+		if ('S' == titolo.getFl_canc()) {
+			// cancellato
+			log.warn(String.format("checkTitolo(): %s cancellato", bid));
+			return false;
+		}
+		if ('s' != titolo.getFl_condiviso()) {
+			// non condiviso
+			log.warn(String.format("checkTitolo(): %s non condiviso", bid));
+			return false;
+		}
+		return true;
+	}
+
 	public static void rimuoviLocalizzazione(String codPolo,
 			String codBib, SbnMessageType sbnmessage, SbnUserType user) {
 		LocalizzaDAO dao = new LocalizzaDAO();
@@ -584,6 +606,7 @@ public class LocalizzazioneMassiva {
 			LocalizzaType localizza = sbnmessage.getSbnRequest().getLocalizza();
 			for (LocalizzaInfoType lit : localizza.getLocalizzaInfo() )	{
 				String bid = lit.getSbnIDLoc();
+				log.debug(String.format("rimuoviLocalizzazione(): %s %s %s", codPolo, codBib, bid));
 				SbnTipoLocalizza sbnTipoLoc = lit.getTipoInfo();
 				Tb_loc_indice loc = dao.getLocalizzazione(codPolo, codBib, bid, (short) sbnTipoLoc.getType());
 				if (loc != null) {

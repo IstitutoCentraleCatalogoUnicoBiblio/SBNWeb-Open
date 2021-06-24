@@ -2916,7 +2916,7 @@ public class ModificaInvCollAction extends SinteticaLookupDispatchAction {
 		ModificaInvCollForm currentForm = (ModificaInvCollForm) form;
 		DatiBibliograficiCollocazioneVO reticolo = currentForm.getReticolo();
 		AreaDatiLocalizzazioniAuthorityMultiplaVO adlam = new AreaDatiLocalizzazioniAuthorityMultiplaVO();
-		TreeElementViewTitoli titoloNotiziaCorrente = (TreeElementViewTitoli)reticolo.getAnalitica().findElement(currentForm.getBid());
+
 
 		AreaDatiVariazioneReturnVO advr = null;
 
@@ -2926,7 +2926,7 @@ public class ModificaInvCollAction extends SinteticaLookupDispatchAction {
 			TreeElementViewTitoli tit = (TreeElementViewTitoli)reticolo.getAnalitica().findElement(titoloCollocabile.getBid());
 
 			AreaDatiLocalizzazioniAuthorityVO al = new AreaDatiLocalizzazioniAuthorityVO();
-			al.setIndice(titoloNotiziaCorrente.isFlagCondiviso());
+			al.setIndice(tit.isFlagCondiviso());
 			al.setPolo(true);
 
 			if (!ValidazioneDati.in(tit.getLocalizzazione(),
