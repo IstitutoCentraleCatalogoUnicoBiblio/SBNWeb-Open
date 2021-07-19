@@ -5990,7 +5990,8 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 							SbnAuthority.PP,
 							SbnAuthority.DE,
 							SbnAuthority.RE,
-							SbnAuthority.SO))) {
+							SbnAuthority.SO,
+							SbnAuthority.TH))) {
 
 						LegameElementoAutType legameElementoAutType = new LegameElementoAutType();
 						legameElementoAutType.setIdArrivo(keyFiglio);

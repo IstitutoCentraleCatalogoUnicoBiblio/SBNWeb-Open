@@ -1425,8 +1425,7 @@ public class MovimentoVO extends BaseVO {
 
 	private Date fromStringToDate(String data) {
 		java.util.Date newDate = DateUtil.toDate(data);
-		return (newDate==null || newDate.equals("") ? null : new java.sql.Date(newDate.getTime()));
-
+		return (newDate == null) ? null : new java.sql.Date(newDate.getTime());
 	}
 
 	public boolean isAttivitaAttuale() {

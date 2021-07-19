@@ -258,23 +258,22 @@ public class EsameRichiesteAction extends ServiziBaseAction {
 						RicercaRichiesteType.RICERCA_PER_UTENTE, this.getLocale(request, Constants.SBN_LOCALE))
 				.get(ServiziConstant.BLOCCO_RICHIESTE);
 
-		List<MovimentoVO> listaRichieste = currentForm.getListaRichieste();
-		listaRichieste.clear();
+		currentForm.getListaRichieste().clear();
 
 		if (!DescrittoreBloccoVO.isFilled(blocco1) ) {
 			LinkableTagUtils.addError(request, new ActionMessage("message.servizi.utenti.richieste.non.presenti"));
 			return false;
-
-		} else
-			listaRichieste.addAll(blocco1.getLista());
+		}
 
 		//Effettuo un ciclo su listaServiziRichiesti, per ogni richiesta
 		//mi chiedo se esistono i presupposti per una
 		//proroga, qualora ci fossero procedo al caricamento
 		//del link "proroga" sulla jsp.
 		List<MovimentoVO> out = new ArrayList<MovimentoVO>();
-		for (MovimentoVO m : listaRichieste) {
+		for (Object o : blocco1.getLista()) {
+			MovimentoVO m = (MovimentoVO) o;
 			MovimentoProrogaVO p = impostaFlagProroga(request, (MovimentoListaVO) m);
+			log.debug(String.format("impostaFlagProroga(): mov=%s prorogabile=%b", p.getCodRichServ(), p.isProrogabile()));
 			if (p.isWithPrenotazionePosto()) {
 				PrenotazionePostoVO pp = p.getPrenotazionePosto();
 				p.setPrenotazionePosto(new PrenotazionePostoDecorator(pp));
