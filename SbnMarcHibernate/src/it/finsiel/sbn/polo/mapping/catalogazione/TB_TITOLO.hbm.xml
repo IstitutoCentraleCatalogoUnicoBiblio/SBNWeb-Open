@@ -60,7 +60,7 @@ License Type: Evaluation
 		<property name="TS_CONDIVISO" column="TS_CONDIVISO" type="timestamp" not-null="true"/>
 		<property name="CD_PERIODICITA" column="CD_PERIODICITA" type="it.finsiel.sbn.util.DataTypeCHAR" length="1" not-null="false"/>
 
-		<set name="TR_TIT_BIB" lazy="false" inverse="true">
+		<set name="TR_TIT_BIB" lazy="true" inverse="true">
 			<key column="BID" not-null="true"/>
 			<one-to-many class="it.finsiel.sbn.polo.orm.Tr_tit_bib" />
 			<filter name="TB_TITOLO_LOCALIZZAZIONI" condition="fl_canc !='S' AND cd_biblioteca = :XXXcd_biblioteca AND cd_polo = :XXXcd_polo"/>

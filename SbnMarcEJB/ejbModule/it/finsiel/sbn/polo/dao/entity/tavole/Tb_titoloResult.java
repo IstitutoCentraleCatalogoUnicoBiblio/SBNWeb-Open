@@ -96,13 +96,14 @@ public class Tb_titoloResult extends Tb_titoloCommonDao{
 		}
 	}
     public Session abilitaRicercaLocalizzazioni(Session session){
+/*    	
         Filter filter = session.enableFilter("TB_TITOLO_LOCALIZZAZIONI");
         //chiaamo il profiler per leggere il polo
         //TODO: INSERIRE LA CHIAMATA AL PROFILER sigla = validator.getCodicePolo();
         String PoloBib = ResourceLoader.getPropertyString("SIGLA_INDICE");
         filter.setParameter("XXXcd_polo",PoloBib);
         filter.setParameter("XXXcd_biblioteca"," FI");
-
+*/
         return session;
     }
 	/**

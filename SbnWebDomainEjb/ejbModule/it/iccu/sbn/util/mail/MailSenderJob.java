@@ -16,31 +16,36 @@ import org.quartz.StatefulJob;
 
 public class MailSenderJob implements StatefulJob {
 
+	private static final long SEND_LOOP_WAIT = 250;
 	private static Logger log = Logger.getLogger(MailSenderJob.class);
 
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
 		try {
 			final Queue<MailVO> queue = MailUtil.sendQueue;
 			int send = 0;
-			if (queue.isEmpty()) {
+			final int pending = queue.size();
+			if (pending < 1) {
 				// non ci sono mail in coda
 				return;
 			}
 			final Session session = MailUtil.getSession();
 			final Transport transport = session.getTransport("smtp");
 			transport.connect();
-			MailVO mail;
-			while ((mail = queue.poll()) != null) {
-				log.debug("inizio invio mail: " + mail.summary());
-				try {
-					final MimeMessage msg = MailUtil.preparaMessage(mail, session);
-					msg.saveChanges();
-					transport.sendMessage(msg, msg.getAllRecipients() );
-					send++;
-				} catch (MessagingException e) {
-					log.error("errore invio mail: " + e.getMessage());
+			for (int cnt = 0; cnt < pending; cnt++) {
+				final MailVO mail = queue.poll();
+				if (mail != null) {
+					log.debug("inizio invio mail: " + mail.summary());
+					try {
+						final MimeMessage msg = MailUtil.preparaMessage(mail, session);
+						msg.saveChanges();
+						transport.sendMessage(msg, msg.getAllRecipients() );
+						send++;
+					} catch (MessagingException e) {
+						log.error("errore invio mail: " + e.getMessage());
+					}
+					log.debug("fine invio mail...");
+					Thread.sleep(SEND_LOOP_WAIT);
 				}
-				log.debug("fine invio mail...");
 			}
 			if (send > 0) 
 				log.debug("mail inviate: " + send);

@@ -530,7 +530,11 @@ public class TitoloFonde extends Titolo {
 
             ttDB.updateCancella(user, tt.getBID_BASE(), fonde.getIdPartenza());
             //Devo settare i flag di allineamento del titolo con bid tt.getBid_base()
-            AllineamentoTitolo allineamentoTitolo = new AllineamentoTitolo(new Titolo().estraiTitoloPerID(tt.getBID_BASE()));
+            final Tb_titolo titoloBase = new Titolo().estraiTitoloPerID(tt.getBID_BASE());
+            if (titoloBase == null) {
+            	throw new EccezioneSbnDiagnostico(3233, "Esiste un legame attivo al titolo cancellato (" + tt.getBID_BASE() + ")");
+            }
+			AllineamentoTitolo allineamentoTitolo = new AllineamentoTitolo(titoloBase);
             allineamentoTitolo.setTr_tit_tit(true);
             TitoloGestisceAllineamento titoloG = new TitoloGestisceAllineamento();
             titoloG.aggiornaFlagAllineamento(allineamentoTitolo, user);
