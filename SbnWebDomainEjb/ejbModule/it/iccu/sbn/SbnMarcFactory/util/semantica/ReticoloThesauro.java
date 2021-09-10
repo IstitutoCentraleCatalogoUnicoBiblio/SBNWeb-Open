@@ -208,8 +208,9 @@ public class ReticoloThesauro {
 						// ULTERIORI LEGAMI, RICHIAMA SE STESSO
 						if (elementAutType.getLegamiElementoAutCount() > 0) {
 							setLegamiReticolo(elementAutType, nodoAppoggio);
-							nodoAppoggio.setPlusVisible(true);
 						}
+						// reticolo esplorabile se in forma accettata
+						nodoAppoggio.setPlusVisible("A".equals(nodoAppoggio.getFormaNome()));
 
 					}
 				}// end if

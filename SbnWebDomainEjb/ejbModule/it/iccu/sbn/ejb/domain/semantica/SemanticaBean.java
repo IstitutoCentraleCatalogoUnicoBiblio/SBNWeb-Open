@@ -4175,7 +4175,8 @@ public abstract class SemanticaBean extends TicketChecker implements Semantica {
 
 			// almaviva5_20080212
 			if (root.hasChildren())
-				caricaSottoReticoliThesauro(server, dati, reticolo, root);
+				root.setPlusVisible(true);
+				//caricaSottoReticoliThesauro(server, dati, reticolo, root);
 			else
 				root.setPlusVisible(false);
 
@@ -4195,7 +4196,7 @@ public abstract class SemanticaBean extends TicketChecker implements Semantica {
 		}
 	}
 
-	private void caricaSottoReticoliThesauro(SbnThesauriDAO server,
+	protected void caricaSottoReticoliThesauro(SbnThesauriDAO server,
 			AnaliticaThesauroVO dati, ReticoloThesauro reticolo,
 			TreeElementViewSoggetti root) throws DAOException {
 
