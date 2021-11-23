@@ -47,7 +47,7 @@
 					<bean:message key="servizi.utenti.codUtente" bundle="serviziLabels" />
 				</td>
 				<td>
-					<html:text styleId="testoNoBold" property="ricerca.codUte" size="25" maxlength="25" readonly="${RicercaUtentiForm.conferma}"></html:text>
+					<html:text styleId="testoNoBold" property="ricerca.codUte" size="25" maxlength="128" readonly="${RicercaUtentiForm.conferma}"></html:text>
 				</td>
 			</tr>
 			<tr>

@@ -15,7 +15,7 @@
 					<bean:message key="servizi.utenti.codUtente" bundle="serviziLabels" />
 					</strong></td>
 					<td width="150px" align="left"><html:text
-						styleId="testoNoBold" property="uteAna.codiceUtente" size="16"
+						styleId="testoNoBold" property="uteAna.codiceUtente" size="40"
 						readonly="true"></html:text></td>
 					<td width="100px" align="right" class="etichetta">&nbsp;</td>
 					<td width="150px" align="left">&nbsp;</td>
@@ -68,7 +68,7 @@
 					<bean:message key="servizi.utenti.codUtente" bundle="serviziLabels" />
 					</strong></td>
 					<td width="150px" align="left"><html:text
-						styleId="testoNoBold" property="uteAna.codiceUtente" size="16"
+						styleId="testoNoBold" property="uteAna.codiceUtente" size="40"
 						readonly="true"></html:text></td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>

@@ -34,7 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
+
 import java.util.Map;
 import java.util.Properties;
 import java.util.Queue;
@@ -53,7 +53,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
-import javax.net.ssl.SSLContext;
+
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
@@ -219,7 +219,7 @@ public class MailUtil {
 		props.putAll(System.getProperties());
 
 		props.put("mail.transport.protocol", "smtp");
-		
+/*
 		try {
 			final String[] supportedProtocols = SSLContext.getDefault().getSupportedSSLParameters().getProtocols();
 			if (ValidazioneDati.isFilled(supportedProtocols)) {
@@ -228,7 +228,7 @@ public class MailUtil {
 				props.put("mail.smtp.ssl.protocols", protocols);
 			}
 		} catch (Exception e) { }
-
+*/
 		//livello logging
 		String level = CommonConfiguration.getProperty(Configuration.LOG_LEVEL_SBNWEB).toUpperCase();
 		Boolean debug = ValidazioneDati.in(level, "ALL", "TRACE", "DEBUG");

@@ -17,7 +17,7 @@ import org.quartz.StatefulJob;
 public class MailSenderJob implements StatefulJob {
 
 	private static final long SEND_LOOP_WAIT = 250;
-	private static Logger log = Logger.getLogger(MailSenderJob.class);
+	private static final Logger log = Logger.getLogger(MailSenderJob.class);
 
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
 		try {
@@ -28,13 +28,14 @@ public class MailSenderJob implements StatefulJob {
 				// non ci sono mail in coda
 				return;
 			}
+			log.debug("mail in coda per l'invio: " + pending);
 			final Session session = MailUtil.getSession();
 			final Transport transport = session.getTransport("smtp");
 			transport.connect();
 			for (int cnt = 0; cnt < pending; cnt++) {
 				final MailVO mail = queue.poll();
 				if (mail != null) {
-					log.debug("inizio invio mail: " + mail.summary());
+					log.debug(String.format("inizio invio mail %d di %d: %s", (cnt + 1), pending, mail.summary()));
 					try {
 						final MimeMessage msg = MailUtil.preparaMessage(mail, session);
 						msg.saveChanges();

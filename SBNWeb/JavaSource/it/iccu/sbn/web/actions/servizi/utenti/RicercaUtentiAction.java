@@ -133,7 +133,7 @@ public class RicercaUtentiAction extends UtenteBaseAction {
 
 			ricerca.setCodUte(ServiziUtil.espandiCodUtente(codiceUtente));
 			//LFV 08/10/2018 Adeguato a utenze Esse3
-			if (ricerca.getCodUte().length() > 25) {
+			if (ricerca.getCodUte().length() > 128) {
 				errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.servizi.codiceUtenteErrore"));
 				this.saveErrors(request, errors);
 				throw new ValidationException("");

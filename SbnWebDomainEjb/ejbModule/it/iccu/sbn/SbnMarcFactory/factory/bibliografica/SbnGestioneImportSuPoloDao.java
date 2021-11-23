@@ -3231,7 +3231,8 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 					testoLog = setTestoLog("ERRORE in ricerca su import_id_link"
 						+ " oggetto arrivo non trovato per chiave: n.richiesta=" + areaDatiPass.getNrRichiesta()
 						+ " per tag=" + tracciatoRecord.getTag()
-						+ " id unimarc=" + notEmptyOrOther(tracciatoRecord.getIdLink(), tracciatoRecord.getDati()));
+						+ " per id_input=" + tracciatoRecord.getIdInput()
+						+ " e id unimarc=" + notEmptyOrOther(tracciatoRecord.getIdLink(), tracciatoRecord.getDati()));
 					areaDatiPass.addListaSegnalazioni(testoLog);
 					areaDatiPass.setCodErr("9999");
 					return areaDatiPass;
