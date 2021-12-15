@@ -393,7 +393,8 @@ public class ModificaTitolo extends ModificaFactoring {
 						String URL_Composta = "";
 						// ESTC e ISTC controllo sul campo identificativo:
 						// Si controlla che il campo non contiene spazi in caso affermativo viene emesso un messaggio di ERRORE.
-						if ((DB.equalsIgnoreCase("c"))	|| (DB.equalsIgnoreCase("d"))) {
+						// almaviva5_20211214 aggiunto db corago (g)
+						if ((DB.equalsIgnoreCase("c")) || (DB.equalsIgnoreCase("d")) || (DB.equalsIgnoreCase("g"))) {
 							String tag = "_ID_";
 							int countSpace_C_D = StringUtils.countMatches(ID_record, " ");
 							if (countSpace_C_D > 0) {

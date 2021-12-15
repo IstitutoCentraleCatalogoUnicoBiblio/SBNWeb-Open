@@ -1292,7 +1292,8 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 									this.saveErrors(request, errors);
 									return mapping.getInputForward();
 								}
-							} else if (siglaLinkEsterno.equals("c") || siglaLinkEsterno.equals("d")) {		// ESTC o ISTC
+							// almaviva5_20211214 aggiunto db corago (g)
+							} else if (siglaLinkEsterno.equals("c") || siglaLinkEsterno.equals("d") || siglaLinkEsterno.equals("g")) {		// ESTC o ISTC
 								if (idLinkEsterno.contains(" ")) {
 									ActionMessages errors = new ActionMessages();
 									errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.idRecordErrato", idLinkEsterno));
@@ -5495,7 +5496,8 @@ public class DettaglioTitoloAction extends LookupDispatchAction {
 								this.saveErrors(request, errors);
 								return mapping.getInputForward();
 							}
-						} else if (siglaLinkEsterno.equals("c") || siglaLinkEsterno.equals("d")) {		// ESTC o ISTC
+						// almaviva5_20211214 aggiunto db corago (g)
+						} else if (siglaLinkEsterno.equals("c") || siglaLinkEsterno.equals("d") || siglaLinkEsterno.equals("g")) {		// ESTC o ISTC
 							if (idLinkEsterno.contains(" ")) {
 								ActionMessages errors = new ActionMessages();
 								errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.idRecordErrato", idLinkEsterno));
