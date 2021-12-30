@@ -17321,6 +17321,17 @@ VALUES (E'ORGA', E'sax-b', NULL, E'Sassofono basso',E'sax-b',E'sax-b', E'U', E'9
  
 INSERT INTO sbnweb.tb_codici ("tp_tabella", "cd_tabella", "cd_valore", "ds_tabella", "cd_unimarc", "cd_marc_21", "tp_materiale", "dt_fine_validita", "ds_cdsbn_ulteriore", "cd_flg1", "cd_flg2", "cd_flg3", "cd_flg4", "cd_flg5", "cd_flg6", "cd_flg7", "cd_flg8", "cd_flg9", "cd_flg10", "cd_flg11")
 VALUES (E'ORGA', E'sax-bt', NULL, E'Sassofono baritono',E'sax-bt',E'sax-bt', E'U', E'9999-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+/* tabella LINK */
+INSERT INTO tb_codici (tp_tabella,cd_tabella,cd_valore,ds_tabella,cd_unimarc,cd_marc_21,tp_materiale,dt_fine_validita,ds_cdsbn_ulteriore,cd_flg1,cd_flg2,cd_flg3,cd_flg4,cd_flg5,cd_flg6,cd_flg7,cd_flg8,cd_flg9,cd_flg10,cd_flg11) VALUES
+	 ('0000','LINK','SBN','Link ad altra base dati',NULL,NULL,NULL,NULL,NULL,'tab=DICT|1|ALPHA|READ;uni=1|ALPHA|NOBLANK;marc21=1|ALPHA|NOBLANK',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','a',NULL,'British Museum','a','a',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','b',NULL,'EDIT 16','b','b',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','c',NULL,'ESTC','c','c',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','d',NULL,'ISTC','d','d',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','e',NULL,'VD 16','e','e',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','f',NULL,'VD 17','f','f',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	 ('LINK','g',NULL,'CORAGO','g','g',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
  
 /* Variazioni decodifiche "tipo record" */
 update "sbnweb"."tb_codici" set ds_tabella = 'Testo' where tp_tabella = 'GEUN' and cd_tabella = 'a' ;
