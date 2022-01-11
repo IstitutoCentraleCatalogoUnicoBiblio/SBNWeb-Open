@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.iccu.sbn</groupId>
 	<artifactId>sbnmarc</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.6-dev</version>
 	<packaging>pom</packaging>
 	<name>sbnmarc</name>
 	<description>sbnweb LMS</description>
@@ -27,6 +27,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
@@ -34,7 +35,7 @@
 			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>4.0.5</version>
 				<executions>
 					<execution>
 						<id>git-info</id>
