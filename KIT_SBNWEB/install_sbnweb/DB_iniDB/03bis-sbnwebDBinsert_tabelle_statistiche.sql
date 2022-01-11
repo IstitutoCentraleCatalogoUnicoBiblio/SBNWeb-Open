@@ -1712,7 +1712,7 @@ INSERT INTO sbnweb.tbf_config_statistiche
 VALUES(134, '00_CatPolo22', '00_CatPolo', 22, 'IC000', NULL, NULL, 'Lista_identificativi_forme_di_rinvio_prive_di_legami', '0', 'select  CAST(au.VID as text) from  tb_autore au where au.fl_canc <> ''S''  and   au.tp_forma_aut = ''R'' and not exists ( select taa.vid_coll from tr_aut_aut taa  where taa.fl_canc <> ''S'' and au.vid = taa.vid_coll) order by vid', 'VID', 'P', 'S');
 INSERT INTO sbnweb.tbf_config_statistiche
 (id_stat, id_area_sezione, parent, seq_ordinamento, codice_attivita, parametro_attivita, codice_modulo, nome_statistica, tipo_query, query, colonne_output, fl_polo_biblio, fl_txt)
-VALUES(87, '00_GestBib2', '00_GestBib', 2, 'IC000', NULL, NULL, 'Totale_autori_inseriti_in_un_dato_periodo_suddivisi_per_forma_e_tipo_nome', '1', 'select
+VALUES(87, '00_GestBib2', '00_GestBib', 2, 'IC000', NULL, NULL, 'Totale_autori_inseriti_in_un_dato_periodo_suddivisi_per_forma_e_tipo_nome', '1', '(select
 CAST(au.tp_nome_aut as text)||  '' ('' ||
 lower((select ds_tabella from tb_codici where tp_tabella=''AUTO'' and cd_tabella=au.tp_nome_aut)) 
 || '')'' as tipo_nome
