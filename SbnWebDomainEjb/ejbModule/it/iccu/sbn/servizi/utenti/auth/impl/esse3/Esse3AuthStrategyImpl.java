@@ -38,6 +38,7 @@ import it.iccu.sbn.servizi.utenti.auth.impl.PlainPasswordAuthData;
 
 import it.iccu.sbn.web.vo.SbnErrorTypes;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
@@ -111,9 +112,12 @@ public class Esse3AuthStrategyImpl implements UtenteAuthenticationStrategy {
 			Esse3BibConfigEntry bibConfig = Esse3ConfigProvider.fromCdBib(utente.getCd_bib().getCd_biblioteca());
 			if (bibConfig == Esse3ConfigProvider.EMPTY)
 				return new LoginResponseImpl(LoginResult.NOT_FOUND, null, null);
+			if (!bibConfig.canLogin())
+				return new LoginResponseImpl(LoginResult.NOT_FOUND, null, null);
+
 			log.debug("configurazione esse3 caricata: " + bibConfig);
 			//creare Esse3ServicesImpl con url letto da file json
-			Esse3ServicesImpl esse3 = createEndpointClient(bibConfig.getLogin_ws_url());
+			Esse3ServicesImpl esse3 = createEndpointClient(new URL(bibConfig.getLogin_ws_url()));
 
 			login = esse3.login(loginRequest.getUserId(), authenticationData.getPassword());
 
@@ -128,9 +132,14 @@ public class Esse3AuthStrategyImpl implements UtenteAuthenticationStrategy {
 
 	public void logout(String ticket, LogoutRequest logoutRequest) throws UtenteAuthException {
 		Esse3SessionInfo userSessionInfo = (Esse3SessionInfo) logoutRequest.getUserSessionInfo();
-		Esse3ServicesImpl esse3 = createEndpointClient(userSessionInfo.getConfig().getLogin_ws_url());
-		//TODO: Sid?
-		esse3.logout(userSessionInfo.getSessionId());
+		try {
+			Esse3ServicesImpl esse3 = createEndpointClient(new URL(userSessionInfo.getConfig().getLogin_ws_url()));
+			//TODO: Sid?
+			esse3.logout(userSessionInfo.getSessionId());
+		} catch (MalformedURLException e) {
+			log.error("", e);
+			throw new UtenteAuthException(e);
+		}
 	}
 
 	public int priority() {

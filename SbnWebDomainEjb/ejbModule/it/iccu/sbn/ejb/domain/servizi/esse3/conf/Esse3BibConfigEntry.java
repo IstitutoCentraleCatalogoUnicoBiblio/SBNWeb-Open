@@ -18,15 +18,13 @@ package it.iccu.sbn.ejb.domain.servizi.esse3.conf;
 
 import it.iccu.sbn.ejb.vo.SerializableVO;
 
-import java.net.URL;
-
 public class Esse3BibConfigEntry extends SerializableVO {
 
 	private static final long serialVersionUID = -8909022942135831339L;
 
 	private String id;
 	private String apikey;
-	private URL login_ws_url;
+	private String login_ws_url;
 	private String cd_bib;
 
 	// Getter Methods
@@ -39,7 +37,7 @@ public class Esse3BibConfigEntry extends SerializableVO {
 		return apikey;
 	}
 
-	public URL getLogin_ws_url() {
+	public String getLogin_ws_url() {
 		return login_ws_url;
 	}
 
@@ -57,11 +55,15 @@ public class Esse3BibConfigEntry extends SerializableVO {
 		this.apikey = apikey;
 	}
 
-	public void setLogin_ws_url(URL login_url) {
+	public void setLogin_ws_url(String login_url) {
 		this.login_ws_url = login_url;
 	}
 
 	public void setCd_bib(String cd_bib) {
 		this.cd_bib = cd_bib;
+	}
+
+	public boolean canLogin() {
+		return isFilled(login_ws_url);
 	}
 }

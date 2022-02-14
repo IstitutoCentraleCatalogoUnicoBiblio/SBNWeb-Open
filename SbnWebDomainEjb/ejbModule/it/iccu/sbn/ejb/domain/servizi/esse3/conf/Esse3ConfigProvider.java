@@ -54,6 +54,7 @@ public class Esse3ConfigProvider {
 		} catch (Exception e) {
 			log.error("", e);
 		}
+		log.debug("configurazioni ESSE3 caricate: " + configs.size());
 	}
 
 	/**
@@ -75,6 +76,7 @@ public class Esse3ConfigProvider {
 	 * @return
 	 */
 	public static Esse3BibConfigEntry fromApikey(String pass) {
+		log.debug("Esse3ConfigProvider.fromApikey(): pass=" + pass);
 		for (Esse3BibConfigEntry conf : INSTANCE.configs) {
 			if (ValidazioneDati.equals(conf.getApikey(), pass))
 				return conf;
@@ -88,6 +90,7 @@ public class Esse3ConfigProvider {
 	 * @return
 	 */
 	public static Esse3BibConfigEntry fromCdBib(String cdBib) {
+		log.debug("Esse3ConfigProvider.fromCdBib(): bib=" + cdBib);
 		for (Esse3BibConfigEntry conf : INSTANCE.configs) {
 			if (ValidazioneDati.equals(conf.getCd_bib(), cdBib))
 				return conf;
