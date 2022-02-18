@@ -17050,7 +17050,7 @@ INSERT INTO sbnweb.tb_codici ("tp_tabella", "cd_tabella", "cd_valore", "ds_tabel
 VALUES (E'PROE', E'xx', NULL, E'Non applicabile', E'xx', E'xx', E'', E'9999-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO sbnweb.tb_codici ("tp_tabella", "cd_tabella", "cd_valore", "ds_tabella", "cd_unimarc", "cd_marc_21", "tp_materiale", "dt_fine_validita", "ds_cdsbn_ulteriore", "cd_flg1", "cd_flg2", "cd_flg3", "cd_flg4", "cd_flg5", "cd_flg6", "cd_flg7", "cd_flg8", "cd_flg9", "cd_flg10", "cd_flg11")
-VALUES (E'PROE', E'z', NULL, E'Altre', E'z', E'z', E'', E'9999-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+VALUES (E'PROE', E'zz', NULL, E'Altre', E'zz', E'zz', E'', E'9999-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 INSERT INTO sbnweb.tb_codici ("tp_tabella", "cd_tabella", "cd_valore", "ds_tabella", "cd_unimarc", "cd_marc_21", "tp_materiale", "dt_fine_validita", "ds_cdsbn_ulteriore", "cd_flg1", "cd_flg2", "cd_flg3", "cd_flg4", "cd_flg5", "cd_flg6", "cd_flg7", "cd_flg8", "cd_flg9", "cd_flg10", "cd_flg11")
 VALUES (E'FOOP', E'a', NULL, E'forma A', E'a', E'a', E'', E'9999-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
