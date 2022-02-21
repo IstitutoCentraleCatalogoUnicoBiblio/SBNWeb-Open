@@ -1094,7 +1094,8 @@ public class MenuBean extends AbstractStatelessSessionBean implements Menu {
 		funz.setActionPath("");
 		lista.add(funz);
 
-		funz = new DescrizioneFunzioneVO(TipoOggetto.QUALSIASI, LivelloRicerca.INDICE, Localizzazione.SI, Condiviso.SI, RootReticolo.QUALSIASI);
+		//almaviva5_20220221 #7837 eliminata voce per oggetti diversi da TITOLO
+		funz = new DescrizioneFunzioneVO(TipoOggetto.TITOLO, LivelloRicerca.INDICE, Localizzazione.SI, Condiviso.SI, RootReticolo.QUALSIASI);
 		funz.addDescrizione("it","Aggiorna dati di possesso");
 		funz.addDescrizione("en","Aggiorna dati di possesso en");
 		funz.setCodice(MenuHome.FUNZ_BIBLIOGRAFICA_GESTIONE_LOCALIZZAZIONI_POSSESSO);
