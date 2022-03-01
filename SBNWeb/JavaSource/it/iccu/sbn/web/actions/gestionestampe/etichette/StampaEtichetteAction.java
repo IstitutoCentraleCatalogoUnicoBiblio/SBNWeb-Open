@@ -158,7 +158,7 @@ public class StampaEtichetteAction  extends RicercaInventariCollocazioniAction {
 			if (!currentForm.isSessione()) {
 				currentForm.setSessione(true);
 			}else{
-				String nomeSalva="cache_modello";
+
 				if (request.getAttribute("codBibDaLista") != null) {
 					BibliotecaVO bib = (BibliotecaVO)request.getAttribute("codBibDaLista");
 					request.setAttribute("codBib", bib.getCod_bib());
@@ -251,7 +251,7 @@ public class StampaEtichetteAction  extends RicercaInventariCollocazioniAction {
 	public ActionForward listaSupportoModelli(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		HttpSession httpSession = request.getSession();
+
 
 
 		StampaEtichetteForm ricEtichette = (StampaEtichetteForm) form;
@@ -291,8 +291,8 @@ public class StampaEtichetteAction  extends RicercaInventariCollocazioniAction {
 
 	StampaEtichetteForm myForm = (StampaEtichetteForm)form;
 
-	List listaSerie = null;
-	String appS = "";//" ";
+
+
 	try {
 		//creo il VO da inserire nel messaggio di richiesta per la stampa batch
 		StampaEtichetteVO stampaEtichetteVO = new StampaEtichetteVO(FakeParamRichiestaElaborazioneDifferitaVO.FAKE_INSTANCE);
@@ -328,7 +328,7 @@ public class StampaEtichetteAction  extends RicercaInventariCollocazioniAction {
 		//Ricerca per inventari
 		if (myForm.getFolder().equals("Inventari")){
 			super.validaInputInventari(mapping, request, myForm);
-			List<CodiceVO> listaConInvMoltiplicati = new ArrayList<CodiceVO>();
+
 			if (myForm.getTipoOperazione() != null && myForm.getTipoOperazione().equals("A")){
 				List<CodiceVO> listaInv = this.getListaInventariCollocati(Navigation.getInstance(request).getUtente().getCodPolo(),
 						Navigation.getInstance(request).getUtente().getCodBib(),
@@ -472,7 +472,7 @@ public class StampaEtichetteAction  extends RicercaInventariCollocazioniAction {
 			return mapping.getInputForward();
 		}
 
-		myForm.setDisable(true);
+		//myForm.setDisable(true);
 	} catch (ValidationException ve) {
 		ActionMessages errors = new ActionMessages();
 		errors.add("generico", new ActionMessage("error.documentofisico."+ ve.getMessage()));
