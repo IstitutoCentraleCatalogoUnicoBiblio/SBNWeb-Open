@@ -164,6 +164,9 @@ public class Configuration {
 	public static final String ESSE3_BIB_APIKEY_FILE = "ESSE3_BIB_APIKEY_FILE";
 
 	public static final String EMAIL_OTHER_PROPERTIES_FILE = "EMAIL_OTHER_PROPERTIES_FILE";
+	public static final String MAIL_SEND_MAX_RETRIES = "MAIL_SEND_MAX_RETRIES";
+	public static final String MAIL_MAX_SEND_PER_SESSION = "MAIL_MAX_SEND_PER_SESSION";
+	public static final String MAIL_SENDER_JOB_INTERVAL = "MAIL_SENDER_JOB_INTERVAL";
 
 	public static final String ILL_SBN_DEFAULT_COD_FRUIZIONE = "ILL_SBN_DEFAULT_CODFRUI";
 }

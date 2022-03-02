@@ -40,6 +40,8 @@ public class MailVO extends SerializableVO {
 	private String body;
 	private String type;
 
+	private int retries;
+
 	public MailVO() {
 		super();
 	}
@@ -125,6 +127,14 @@ public class MailVO extends SerializableVO {
 		buf.append(", subject=").append(subject)
 			.append("]");
 		return buf.toString();
+	}
+
+	public int getRetries() {
+		return retries;
+	}
+
+	public void incrementRetries() {
+		this.retries++;
 	}
 
 }

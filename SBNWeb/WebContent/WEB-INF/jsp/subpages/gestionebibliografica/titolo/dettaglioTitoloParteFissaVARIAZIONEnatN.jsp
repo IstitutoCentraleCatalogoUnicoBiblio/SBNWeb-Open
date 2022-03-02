@@ -354,7 +354,7 @@
 									<html:text name="itemLinkEsterni"
 											property="nota" indexed="true" size="30" maxlength="30" readonly="true"
 											style="color:blue; text-decoration:underline; cursor:pointer"
-											onclick="window.open(this.value)" />
+											onclick="if ($.trim(this.value).length > 0) { window.open(this.value) }" />
 								</td>
 
 

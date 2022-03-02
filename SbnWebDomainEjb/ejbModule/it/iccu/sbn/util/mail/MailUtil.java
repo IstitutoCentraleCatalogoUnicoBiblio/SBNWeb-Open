@@ -58,6 +58,8 @@ import javax.mail.util.ByteArrayDataSource;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 
+import com.sun.mail.smtp.SMTPSendFailedException;
+
 public class MailUtil {
 
 	public static final String MIME_TYPE_TEXT_PLAIN = "text/plain; charset=UTF-8";
@@ -133,6 +135,16 @@ public class MailUtil {
 			transport.close();
 
 			return true;
+
+		} catch (SMTPSendFailedException e) {
+			log.error("errore invio mail: " + e.getMessage());
+			// se l'errore è transitorio e non è stato superato il numero di tentativi la mail viene rimessa in coda
+			if (isSMTPTransientError(e.getReturnCode()) ) {
+				mail.incrementRetries();
+				MailUtil.sendMailAsync(mail);
+				return true;
+			} else
+				throw new ApplicationException(SbnErrorTypes.MAIL_DELIVERY_ERROR, e);
 
 		} catch (Exception e) {
 			log.error("", e);
@@ -302,6 +314,10 @@ public class MailUtil {
 		} finally {
 			FileUtil.close(in);
 		}
+	}
+
+	static boolean isSMTPTransientError(final int returnCode) {
+		return ValidazioneDati.between(returnCode, 400, 499);
 	}
 
 	public static void testMailServer(String email) throws Exception {
