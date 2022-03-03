@@ -17,9 +17,11 @@
 package it.iccu.sbn.util.bibliografica.impl;
 
 import it.iccu.sbn.ejb.DomainEJBFactory;
+import it.iccu.sbn.ejb.DomainEJBFactory.Reference;
 import it.iccu.sbn.ejb.domain.acquisizioni.AcquisizioniBMT;
 import it.iccu.sbn.ejb.domain.documentofisico.DocumentoFisicoBMT;
 import it.iccu.sbn.ejb.domain.periodici.PeriodiciSBN;
+import it.iccu.sbn.ejb.services.bibliografica.ServiziBibliografici;
 import it.iccu.sbn.extension.bibliografica.FusioneDatiGestionaliDelegate;
 
 public class SbnWebFusioneBaseDelegateImpl implements
@@ -68,6 +70,12 @@ public class SbnWebFusioneBaseDelegateImpl implements
 		}
 	}
 
+	static Reference<ServiziBibliografici> bibliografica = new Reference<ServiziBibliografici>() {
+		@Override
+		protected ServiziBibliografici init() throws Exception {
+			return DomainEJBFactory.getInstance().getSrvBibliografica();
+		}};
+
 	public boolean richiestaCancellazione(String idElementoEliminato,
 			String uteVar) throws Exception {
 		return false;
@@ -83,6 +91,9 @@ public class SbnWebFusioneBaseDelegateImpl implements
 
 		// almaviva5_20111111 #4735 spostamento legami fascicoli
 		getPeriodiciBean().spostaFascicoliPerFusione(idElementoEliminato, idElementoAccorpante, uteVar);
+
+		// almaviva5_20211103 fusione numeri oclc
+		bibliografica.get().spostaAltroIdPerFusione(idElementoEliminato, idElementoAccorpante, uteVar);
 
 		return true;
 

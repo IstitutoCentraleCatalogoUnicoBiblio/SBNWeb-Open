@@ -72,4 +72,8 @@ public abstract class Tb_base implements Serializable {
 		this.fl_canc = fl_canc;
 	}
 
+	public boolean cancellato() {
+		return this.fl_canc == 'S' || this.fl_canc == 's';
+	}
+
 }

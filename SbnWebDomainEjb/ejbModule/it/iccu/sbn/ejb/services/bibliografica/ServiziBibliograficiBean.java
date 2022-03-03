@@ -345,4 +345,13 @@ public abstract class ServiziBibliograficiBean extends TicketChecker implements 
 
 	}
 
+	public void spostaAltroIdPerFusione(String idElementoEliminato, String idElementoAccorpante, String uteVar) throws DAOException, RemoteException {
+		try {
+			final ImportazioneLegamiBidAltroId importa = new ImportazioneLegamiBidAltroId(ctx.getUserTransaction());
+			importa.spostaAltroIdPerFusione(idElementoEliminato, idElementoAccorpante, uteVar);
+		} catch (DaoManagerException e) {
+			throw new DAOException(e);
+		}
+	}
+
 }

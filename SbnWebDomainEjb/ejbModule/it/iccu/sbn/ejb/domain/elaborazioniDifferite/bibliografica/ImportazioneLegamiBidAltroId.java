@@ -44,11 +44,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.transaction.UserTransaction;
 
 import org.apache.log4j.Logger;
+
+import com.annimon.stream.Optional;
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.coalesce;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.leggiXID;
@@ -57,9 +62,11 @@ import static it.iccu.sbn.ejb.utils.ValidazioneDati.trimOrNull;
 
 public class ImportazioneLegamiBidAltroId {
 
+	private static final Logger log = Logger.getLogger(ImportazioneLegamiBidAltroId.class);
+
 	private UserTransaction tx;
 	private ImportaLegamiBidAltroIdVO richiesta;
-	private Logger log;
+	private Logger _log = log;
 
 	private static final String SEPARATOR = "\\s";
 
@@ -77,7 +84,11 @@ public class ImportazioneLegamiBidAltroId {
 			BatchLogWriter blw) {
 		this.tx = tx;
 		this.richiesta = richiesta;
-		log = blw.getLogger();
+		_log = blw != null ? blw.getLogger() : log;
+	}
+
+	public ImportazioneLegamiBidAltroId(UserTransaction tx) {
+		this(tx, null, null);
 	}
 
 	public ElaborazioniDifferiteOutputVo execute() throws ApplicationException {
@@ -119,7 +130,7 @@ public class ImportazioneLegamiBidAltroId {
 				String codIstituzione = richiesta.getCodIstituzione().getCd_istituzione();
 				String firmaUtente = DaoManager.getFirmaUtente(richiesta.getTicket());
 
-				log.debug("File di ingresso per i legami: " + richiesta.getNomeInputFile());
+				_log.debug("File di ingresso per i legami: " + richiesta.getNomeInputFile());
 
 				writeReportHeader(w, "Importazione relazioni Titolo - Altro Id");
 
@@ -130,7 +141,7 @@ public class ImportazioneLegamiBidAltroId {
 					try {
 						read++;
 						if ((read % 100) == 0) {
-							log.debug("Legami elaborati: " + read);
+							_log.debug("Legami elaborati: " + read);
 							BatchManager.getBatchManagerInstance().checkForInterruption(richiesta.getIdBatch());
 						}
 
@@ -139,7 +150,7 @@ public class ImportazioneLegamiBidAltroId {
 						String[] tokens = line.split(SEPARATOR);
 						if (tokens.length != 2) {
 							errors++;
-							log.error(String.format("riga %d, formato errato.", read));
+							_log.error(String.format("riga %d, formato errato.", read));
 							writeReportRow(w, null, null, read, false, "formato riga errato");
 							continue;
 						}
@@ -162,8 +173,22 @@ public class ImportazioneLegamiBidAltroId {
 						Tb_titolo t = dao.getTitoloLazy(bid);
 						if (t == null) {
 							errors++;
-							log.error("titolo non trovato: " + bid);
+							_log.error("titolo non trovato: " + bid);
 							writeReportRow(w, bid, altroId, read, false, "titolo non trovato");
+							continue;
+						}
+						if (t.getFl_canc() == 'S') {	// cancellato/fuso
+							errors++;
+							String msg;
+							final boolean isFuso = t.getTp_link() == 'F';
+							if (isFuso) {
+								 msg = "titolo fuso su " + t.getBid_link();
+								_log.error("titolo fuso: " + bid + " --> " + t.getBid_link());
+							} else {
+								msg = "titolo cancellato";
+								_log.error("titolo cancellato: " + bid);
+							}
+							writeReportRow(w, bid, altroId, read, false, msg);
 							continue;
 						}
 
@@ -173,13 +198,7 @@ public class ImportazioneLegamiBidAltroId {
 							Tr_bid_altroid tr_bid_altroid = dao.getInstitutionId(codIstituzione, bid);
 							if (tr_bid_altroid == null) {
 								//inserimento
-								tr_bid_altroid = new Tr_bid_altroid();
-								tr_bid_altroid.setTitolo(t);
-
-								tr_bid_altroid.setCd_istituzione(codIstituzione);
-								tr_bid_altroid.setUte_ins(firmaUtente);
-								tr_bid_altroid.setTs_ins(DaoManager.now());
-
+								tr_bid_altroid = preparaRecord(t, codIstituzione, firmaUtente);
 								msg = "legame inserito";
 								_new = true;
 							} else {
@@ -210,7 +229,7 @@ public class ImportazioneLegamiBidAltroId {
 						} catch (DaoManagerException e) {
 							errors++;
 							DaoManager.rollback(tx);
-							log.error("errore aggiornamento titolo: " + bid, e);
+							_log.error("errore aggiornamento titolo: " + bid, e);
 							writeReportRow(w, bid, altroId, read, false, "errore aggiornamento");
 							continue;
 						}
@@ -227,17 +246,17 @@ public class ImportazioneLegamiBidAltroId {
 					} catch (Exception e) {
 						errors++;
 						DaoManager.rollback(tx);
-						log.error("errore lettura identificativo: " + line);
+						_log.error("errore lettura identificativo: " + line);
 						writeReportRow(w, null, null, read, false, "errore lettura identificativo");
 						continue;
 					}
 				}
 
-				log.debug("righe lette:          " + read);
-				log.debug("righe inserite:       " + inserted);
-				log.debug("righe aggiornate:     " + updated);
-				log.debug("righe non aggiornate: " + not_updated);
-				log.debug("righe con errori:     " + errors);
+				_log.debug("righe lette:          " + read);
+				_log.debug("righe inserite:       " + inserted);
+				_log.debug("righe aggiornate:     " + updated);
+				_log.debug("righe non aggiornate: " + not_updated);
+				_log.debug("righe con errori:     " + errors);
 
 				writeReportFooter(w, read, inserted, updated, not_updated, errors);
 
@@ -265,12 +284,76 @@ public class ImportazioneLegamiBidAltroId {
 		}
 
 		return output;
+	}
 
+	private Tr_bid_altroid preparaRecord(Tb_titolo t, String codIstituzione, String firmaUtente) {
+		final Tr_bid_altroid tr_bid_altroid = new Tr_bid_altroid();
+		tr_bid_altroid.setTitolo(t);
+		tr_bid_altroid.setCd_istituzione(codIstituzione);
+		tr_bid_altroid.setUte_ins(firmaUtente);
+		tr_bid_altroid.setTs_ins(DaoManager.now());
+		tr_bid_altroid.setUte_var(firmaUtente);
+		tr_bid_altroid.setFl_canc('N');
+		return tr_bid_altroid;
+	}
+
+	private static Predicate<Tr_bid_altroid> altroIdEq(final Tr_bid_altroid id) {
+		return new Predicate<Tr_bid_altroid>() {
+			public boolean test(Tr_bid_altroid altroid) {
+				final boolean eq = ValidazioneDati.equals(altroid.getCd_istituzione(), id.getCd_istituzione()) && ValidazioneDati.equals(altroid.getIst_id(), id.getIst_id());
+				return eq;
+			}
+		};
+	}
+
+	public void spostaAltroIdPerFusione(String idElementoEliminato, String idElementoAccorpante, String uteVar) throws DaoManagerException {
+		log.debug(String.format("spostaAltroIdPerFusione(): spostamento legami '%s' --> '%s'", idElementoEliminato, idElementoAccorpante));
+		final TitoloDAO dao = new TitoloDAO();
+		try {
+			DaoManager.begin(tx);
+			final Tb_titolo titArrivo = dao.getTitoloLazy(idElementoAccorpante);
+			if (titArrivo == null) {
+				log.error("titolo non trovato: " + idElementoAccorpante);
+				return;
+			}
+			// 1. lettura id legati
+			final List<Tr_bid_altroid> idsEliminato = dao.getListaInstitutionId(idElementoEliminato);
+			final List<Tr_bid_altroid> idsAccorpante = dao.getListaInstitutionId(idElementoAccorpante);
+
+			for (final Tr_bid_altroid oldId : idsEliminato) {
+				// 2. per ogni id trovato per il bid eliminato verificare esistenza su id accorpante
+				final Optional<Tr_bid_altroid> found = Stream.of(idsAccorpante).filter(altroIdEq(oldId)).findSingle();
+				if (found.isPresent()) {
+					// legame presente su id accorpante, viene riattivato
+					final Tr_bid_altroid newId = found.get();
+					newId.setUte_var(uteVar);
+					newId.setFl_canc('N');
+					dao.aggiornaInstitutionId(newId);
+					log.debug(String.format("spostamento legame: bid=%s numero=%d", newId.getTitolo().getBid(), newId.getIst_id()));
+				} else {
+					// il legame non esiste, si sposta su id accorpante
+					final Tr_bid_altroid newId = preparaRecord(titArrivo, oldId.getCd_istituzione(), uteVar);
+					newId.setIst_id(oldId.getIst_id());
+					dao.aggiornaInstitutionId(newId);
+					log.debug(String.format("creazione legame: bid=%s numero=%d", newId.getTitolo().getBid(), newId.getIst_id()));
+				}
+				// cancellazione vecchio legame
+				oldId.setUte_var(uteVar);
+				oldId.setFl_canc('S');
+				dao.aggiornaInstitutionId(oldId);
+				log.debug(String.format("cancellazione legame: bid=%s numero=%d", oldId.getTitolo().getBid(), oldId.getIst_id()));
+			}
+			dao.flush();
+			DaoManager.commit(tx);
+
+		} catch (Exception e) {
+			_log.error("", e);
+			DaoManager.rollback(tx);
+		}
 	}
 
 	private boolean checkInstitutionId(String id) {
 		return INSTITUTION_ID_FORMAT.matcher(id).matches();
-
 	}
 
 	protected void writeReportHeader(Writer w, String title) throws IOException {

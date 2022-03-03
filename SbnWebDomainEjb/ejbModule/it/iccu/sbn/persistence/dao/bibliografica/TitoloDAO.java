@@ -27,6 +27,7 @@ import it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_serie_inventariale;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -204,6 +205,18 @@ public class TitoloDAO extends DaoManager {
 		try {
 			Session session = this.getCurrentSession();
 			session.saveOrUpdate(t);
+
+		} catch (HibernateException e) {
+			throw new DaoManagerException(e);
+		}
+	}
+
+	public List<Tr_bid_altroid> getListaInstitutionId(final String bid) throws DaoManagerException {
+		try {
+			Session session = this.getCurrentSession();
+			Criteria c = session.createCriteria(Tr_bid_altroid.class);
+			c.add(Restrictions.eq("titolo.id", bid));
+			return c.list();
 
 		} catch (HibernateException e) {
 			throw new DaoManagerException(e);

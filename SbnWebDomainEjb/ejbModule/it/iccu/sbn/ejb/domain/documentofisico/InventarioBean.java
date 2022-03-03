@@ -1144,7 +1144,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 				bib.setCd_polo(polo);
 
 				recSerie.setCd_polo(bib);
-				recSerie.setCd_serie(serie.getCodSerie().toUpperCase());
+				recSerie.setCd_serie(ValidazioneDati.trimOrEmpty(serie.getCodSerie()).toUpperCase());
 				if (serie.getDescrSerie().trim().equals("")){
 					recSerie.setDescr("$");
 				}else{

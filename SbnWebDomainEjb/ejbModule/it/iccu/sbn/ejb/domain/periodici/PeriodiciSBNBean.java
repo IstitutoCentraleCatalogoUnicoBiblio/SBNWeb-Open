@@ -138,7 +138,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJBException;
-import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import javax.transaction.UserTransaction;
 
@@ -148,7 +147,7 @@ import org.hibernate.Session;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.in;
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.trimOrEmpty;
 
-public class PeriodiciSBNBean extends TicketChecker implements SessionBean {
+public class PeriodiciSBNBean extends TicketChecker implements PeriodiciSBN {
 
 	private static final long serialVersionUID = 7976077788913934319L;
 	private static final Class<PeriodiciSBNBean> clazz = PeriodiciSBNBean.class;

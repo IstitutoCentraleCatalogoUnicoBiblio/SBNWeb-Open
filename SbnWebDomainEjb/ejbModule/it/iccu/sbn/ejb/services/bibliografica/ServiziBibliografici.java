@@ -56,4 +56,6 @@ public interface ServiziBibliografici
 
 	public AllineaVO scaricaFileAllineamentoBaseLocale(AllineaVO areaDatiPass,
 			java.lang.String ticket) throws it.iccu.sbn.ejb.dao.DAOException, java.rmi.RemoteException;
+
+	public void spostaAltroIdPerFusione(String idElementoEliminato, String idElementoAccorpante, String uteVar) throws it.iccu.sbn.ejb.dao.DAOException, java.rmi.RemoteException;
 }
