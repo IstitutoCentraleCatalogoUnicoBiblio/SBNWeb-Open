@@ -65,6 +65,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import static it.iccu.sbn.ejb.utils.ValidazioneDati.coalesce;
 
 public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction implements SbnAttivitaChecker {
 
@@ -192,8 +193,8 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 			if (!currentForm.isSessione()) {
 				currentForm.setTicket(navi.getUserTicket());
 				currentForm.setCodPolo(navi.getUtente().getCodPolo());
-				currentForm.setCodBib(navi.getUtente().getCodBib());
-				currentForm.setDescrBib(navi.getUtente().getBiblioteca());
+				currentForm.setCodBib(coalesce((String)request.getAttribute("codBib"), navi.getUtente().getCodBib()));
+				currentForm.setDescrBib(coalesce((String)request.getAttribute("descrBib"), navi.getUtente().getBiblioteca()));
 				if (!this.checkAttivita(request, currentForm, "df")){
 
 					LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico.utenteNonAbilitato"));
@@ -370,7 +371,8 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 				}
 				*/
 				currentForm.getRecInv().setCodInvent(0);
-				if (currentForm.getTipoOperazione() != null && currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE)){//almaviva2 bug 0004950 collaudo
+				if (currentForm.getTipoOperazione() != null && currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE)){
+					//almaviva2 bug 0004950 collaudo
 					currentForm.getRecInv().setDataIngresso(DateUtil.formattaDataOra(DaoManager.now()).toString().substring(0, 11));
 					currentForm.setDisable(true);
 				}
@@ -728,7 +730,7 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 				CollocazioneTitoloVO[] listaTitoliReticolo = currentForm.getReticolo().getListaTitoliCollocazione();
 				CollocazioneTitoloVO titoloReticolo = null;
 				String collTit = null;
-				List listaBidReticolo = new ArrayList();
+				List<String> listaBidReticolo = new ArrayList<String>();
 				for (int i = 0; i < listaTitoliReticolo.length; i++) {
 //				for (int i = 0; i < currentForm.getReticolo().getListaTitoliCollocazione().length; i++) {
 					titoloReticolo = listaTitoliReticolo[i];
@@ -785,7 +787,7 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 		try {
 			//inserisce inventario
 			currentForm.setNInv(1);
-			boolean conferma = false;
+
 			try{
 				ActionForward forward = controlloTipoInventario(mapping, request, currentForm);
 				// se forward é valorizzato c'é stato un errore nei controlli
@@ -902,24 +904,27 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 	}
 
 	private void controllaTipoOperazione(HttpServletRequest request, ActionForm form) throws Exception {
-//
+
 		VaiAInserimentoInvForm currentForm = (VaiAInserimentoInvForm)form;
-		if (currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.N_INVENTARIO_NON_PRESENTE) ||
-				currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.S_INVENTARIO_PRESENTE)){
-//			currentForm.getRecInv().setCodSerie(((CodiceVO)currentForm.getListaComboSerie().get(0)).getCodice());
+		final String tipoOperazione = coalesce(currentForm.getTipoOperazione(), DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE);
+		if (ValidazioneDati.in(tipoOperazione, 
+				DocumentoFisicoCostant.N_INVENTARIO_NON_PRESENTE,
+				DocumentoFisicoCostant.S_INVENTARIO_PRESENTE)) {
+
 			currentForm.getRecInv().setCodInvent(0);
-			currentForm.setTipoOperazione(currentForm.getTipoOperazione());
+			currentForm.setTipoOperazione(tipoOperazione);
 			currentForm.setDisable(false);
 			currentForm.setDisableDataIngresso(true);
 			currentForm.getRecInv().setDataIngresso("");
-		}else if (currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE) ||
-				currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.P_PROGRESSIVO_PREGRESSO)){
-//			currentForm.getRecInv().setCodSerie(((CodiceVO)currentForm.getListaComboSerie().get(0)).getCodice());
+		} else if (ValidazioneDati.in(tipoOperazione,
+						DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE,
+						DocumentoFisicoCostant.P_PROGRESSIVO_PREGRESSO)) {
+
 			currentForm.getRecInv().setCodInvent(0);
-			currentForm.setTipoOperazione(currentForm.getTipoOperazione());
+			currentForm.setTipoOperazione(tipoOperazione);
 			currentForm.setDisable(true);
 			currentForm.setDisableDataIngresso(true);
-			if ((currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.P_PROGRESSIVO_PREGRESSO))){
+			if ((tipoOperazione.equals(DocumentoFisicoCostant.P_PROGRESSIVO_PREGRESSO))) {
 				currentForm.setDisableDataIngresso(false);
 			}else{
 				currentForm.getRecInv().setDataIngresso(DateUtil.formattaDataOra(DaoManager.now()).toString().substring(0, 11));
@@ -931,7 +936,7 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 	private void assegnaDateIngresso(VaiAInserimentoInvForm currentForm, HttpServletRequest request) {
 		//per la serie selezionata prendo in considerazione i dati per i controlli
 		for (int i = 0; i < currentForm.getListaSerie().size(); i++) {
-			SerieVO rec = (SerieVO) currentForm.getListaSerie().get(i);
+			final SerieVO rec = (SerieVO) currentForm.getListaSerie().get(i);
 			if ((currentForm.getRecInv().getCodSerie().trim()).equals(rec.getCodSerie().trim())){
 				if (currentForm.getTipoOperazione().equals(DocumentoFisicoCostant.C_PROGRESSIVO_CORRENTE)){
 					currentForm.getRecInv().setDataIngresso(DateUtil.formattaDataOra(DaoManager.now()).toString().substring(0, 11));
@@ -1187,9 +1192,9 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 
 	private List getListaSerie(String codPolo, String codBib, String ticket, ActionForm form) throws Exception {
 		VaiAInserimentoInvForm currentForm = (VaiAInserimentoInvForm)form;
-		List serie;
+
 		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
-		serie = factory.getGestioneDocumentoFisico().getListaSerie(codPolo, codBib, ticket);
+		final List serie = factory.getGestioneDocumentoFisico().getListaSerie(codPolo, codBib, ticket);
 		if (serie == null ||  serie.size() <= 0)  {
 			currentForm.setNoSerie(true);
 		}
@@ -1197,28 +1202,25 @@ public class VaiAInserimentoInvAction extends SinteticaLookupDispatchAction impl
 	}
 	private List getListaSerieDate(String codPolo, String codBib, String ticket, ActionForm form) throws Exception {
 		VaiAInserimentoInvForm currentForm = (VaiAInserimentoInvForm)form;
-		List serie;
 		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
-		serie = factory.getGestioneDocumentoFisico().getListaSerieDate(codPolo, codBib, ticket);
-		if (serie == null ||  serie.size() <= 0)  {
+		final List serie = factory.getGestioneDocumentoFisico().getListaSerieDate(codPolo, codBib, ticket);
+		if (!ValidazioneDati.isFilled(serie)) {
 			currentForm.setNoSerie(true);
 		}
 		return serie;
 	}
 	private List insertInventario(InventarioVO inventario, String tipoOperazione, int nInv, Locale locale, String ticket, ActionForm form) throws Exception {
 		VaiAInserimentoInvForm currentForm = (VaiAInserimentoInvForm)form;
-		List inv;
 		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
-		inv = factory.getGestioneDocumentoFisico().insertInventario(inventario, tipoOperazione, nInv, locale, ticket);
-		if (inv == null ||  inv.size() <= 0)  {
+		final List inv = factory.getGestioneDocumentoFisico().insertInventario(inventario, tipoOperazione, nInv, locale, ticket);
+		if (!ValidazioneDati.isFilled(inv))  {
 			currentForm.setNoSerie(true);
 		}
 		return inv;
 	}
-	private List getTitolo(String bid, String ticket) throws Exception {
-		List titolo = null;
+	private List<TitoloVO> getTitolo(String bid, String ticket) throws Exception {
 		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
-		titolo = factory.getGestioneDocumentoFisico().getTitolo(bid, ticket);
+		List<TitoloVO> titolo = factory.getGestioneDocumentoFisico().getTitolo(bid, ticket);
 		return titolo;
 	}
 	private DatiBibliograficiCollocazioneVO getAnaliticaPerCollocazione(String bid, String ticket, ActionForm form) throws Exception {
