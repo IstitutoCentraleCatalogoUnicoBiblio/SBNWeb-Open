@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
@@ -27,6 +27,7 @@ import java.util.List;
 import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * TODO Da Testare
@@ -640,6 +641,29 @@ public class Vl_titolo_tit_bResult extends it.finsiel.sbn.polo.dao.common.viste.
 		}
 	}
 
+	private static final String[] NATURE_SUP = new String[] {"M", "C", "S"};
+	public List<Vl_titolo_tit_b> cercaTitoloSuperiore(String bid)
+		throws InfrastructureException {
+		try {
+			Session session = this.getSession();
+			this.beginTransaction();
+			this.basicCriteria = session.createCriteria(getTarget());
+			this.basicCriteria.add(Restrictions.ne("FL_CANC", "S"));
+			this.basicCriteria.add(Restrictions.eq("BID_BASE", bid));
+			this.basicCriteria.add(Restrictions.eq("TP_LEGAME", "01"));
+			this.basicCriteria.add(Restrictions.in("CD_NATURA_COLL", NATURE_SUP));
+
+			List<Vl_titolo_tit_b> result = this.basicCriteria.list();
+			this.commitTransaction();
+			this.closeSession();
+			return result;
+		} catch (InfrastructureException ife) {
+			throw ife;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new InfrastructureException();
+		}
+	}
 
     /*
     <statement nome="selectCollane" tipo="select" id="13_marco">

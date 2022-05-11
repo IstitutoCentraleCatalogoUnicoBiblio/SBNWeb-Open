@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
@@ -29,7 +29,6 @@ import it.finsiel.sbn.polo.factoring.base.ChiaviTitolo;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.Formattazione;
 import it.finsiel.sbn.polo.factoring.util.NormalizzaSequenza;
-import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.orm.Tb_titolo;
 import it.finsiel.sbn.polo.orm.Tr_tit_bib;
 import it.finsiel.sbn.polo.orm.Tr_tit_tit;
@@ -47,6 +46,7 @@ import it.iccu.sbn.ejb.model.unimarcmodel.StringaCercaTypeChoice;
 import it.iccu.sbn.ejb.model.unimarcmodel.TitoloCercaType;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnMateriale;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnNaturaDocumento;
+import it.iccu.sbn.ejb.utils.ValidazioneDati;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -69,14 +69,15 @@ public class Titolo extends Tb_titolo {
     private static Logger log = Logger.getLogger("iccu.serversbnmarc.Titolo");
 
 	private static final Comparator<Vl_titolo_tit_c> ORDINAMENTO_SEQUENZA = new Comparator<Vl_titolo_tit_c>() {
+		@Override
 		public int compare(Vl_titolo_tit_c n1, Vl_titolo_tit_c n2) {
-			//ORDER BY this_.TP_LEGAME, this_.CD_NATURA_BASE DESC, this_.SEQUENZA 
+			//ORDER BY this_.TP_LEGAME, this_.CD_NATURA_BASE DESC, this_.SEQUENZA
 			int cmp	= n1.getTP_LEGAME().compareTo(n2.getTP_LEGAME());
 			cmp = cmp != 0 ? cmp : -(n1.getCD_NATURA_BASE().compareTo(n2.getCD_NATURA_BASE())); // desc
 			if (cmp == 0) {
 				final String s1 = NormalizzaSequenza.normalizza(n1.getSEQUENZA());
 				final String s2 = NormalizzaSequenza.normalizza(n2.getSEQUENZA());
-				cmp = s1.compareTo(s2);	
+				cmp = s1.compareTo(s2);
 			}
 			return cmp;
 		}
@@ -771,6 +772,14 @@ public class Titolo extends Tb_titolo {
             return null;
 
     }
+
+	public List<Vl_titolo_tit_b> cercaTitoloSuperiore(String bid) throws IllegalArgumentException, InvocationTargetException, Exception {
+		Vl_titolo_tit_b tit_tit = new Vl_titolo_tit_b();
+		tit_tit.setBID_BASE(bid);
+		Vl_titolo_tit_bResult tavola = new Vl_titolo_tit_bResult(tit_tit);
+
+		return tavola.cercaTitoloSuperiore(bid);
+	}
     /**
      * Method eseguiUpdate.
      * @param autore

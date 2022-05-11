@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
@@ -550,7 +550,7 @@ public class TitoloValidaLegami extends Titolo {
         timeHash.putTimestamp("Tb_autore", aut.getVID(), new SbnDatavar( aut.getTS_VAR()));
         TitoloAutore titAut = new TitoloAutore();
         String tp_resp = titAut.calcolaTp_responsabilita(leg);
-        
+
 		// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
 	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
 	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'
@@ -560,7 +560,7 @@ public class TitoloValidaLegami extends Titolo {
         	   throw new EccezioneSbnDiagnostico(2900, "Ammessa solo responsabilità '4'");
            }
         // Fine Intervento interno per Raccolte Fattizie 20.09.2011 almaviva2
-        
+
         if (!legamiCancellati.contains(leg.getIdArrivo())
             && titAut.estraiTitoloAutore(bid, leg.getIdArrivo(), cd_relazione, tp_resp) != null)
             throw new EccezioneSbnDiagnostico(3030, "Legame del titolo esistente");
@@ -641,10 +641,10 @@ public class TitoloValidaLegami extends Titolo {
 		timeHash.putTimestamp("Tb_autore", aut.getVID(), new SbnDatavar( aut.getTS_VAR()));
 		TitoloAutore titAut = new TitoloAutore();
 		String tp_resp = titAut.calcolaTp_responsabilita(leg);
-		
+
 		// almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
 	    // Per i seguenti codici di relazione deve essere consentito solo il legame di responsabilità '4':
-	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'		
+	    // '160 Libraio' - '310 Distributore' - '610 Stampatore' - '620 Stampatore delle tavole' - '650 Editore' - '700 Copista'
         if (cd_relazione.equals("160")
                 || cd_relazione.equals("310")
                 || cd_relazione.equals("610")
@@ -655,9 +655,9 @@ public class TitoloValidaLegami extends Titolo {
         	   throw new EccezioneSbnDiagnostico(2900, "Ammessa solo responsabilità '4'");
            }
      // Fine almaviva2 Febbraio 2020 - Nuove regole nella gestione del legame titolo-autore
-	
-        
-        
+
+
+
         if (!legamiCancellati.contains(leg.getIdArrivo())
 			&& titAut.estraiTitoloAutore(
 				bid,
@@ -794,6 +794,8 @@ public class TitoloValidaLegami extends Titolo {
         Tb_luogo tb_luogo = luogo.cercaLuogoPerID(leg.getIdArrivo());
         if (tb_luogo == null)
             throw new EccezioneSbnDiagnostico(3025, "Luogo non esistente");
+	    if (!"A".equals(luogo.getTP_FORMA()))
+		    throw new EccezioneSbnDiagnostico(3031, "Forma del luogo non corretta");
         if (leg.getTipoLegame().getType() != SbnLegameAut.valueOf("620").getType())
             throw new EccezioneSbnDiagnostico(3031, "tipo legame errato");
         timeHash.putTimestamp("Tb_luogo", tb_luogo.getLID(), new SbnDatavar( tb_luogo.getTS_VAR()));

@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Copyright (C) 2019 ICCU - Istituto Centrale per il Catalogo Unico
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published
  * by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
@@ -72,6 +72,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
+
 
 
 /**
@@ -86,7 +89,7 @@ import java.util.List;
  */
 public class TitoloValidaLegamiModifica extends TitoloValidaLegami {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 3232046651260390278L;
 	boolean modificaLegamiAutore = false;
@@ -102,7 +105,7 @@ public class TitoloValidaLegamiModifica extends TitoloValidaLegami {
         throws IllegalArgumentException, InvocationTargetException, Exception {
         String cd_natura = titolo.getCD_NATURA();
         String tp_materiale = titolo.getTP_MATERIALE();
-        List legamiAutoreCancellati = new ArrayList();
+        List<String> legamiAutoreCancellati = new ArrayList<String>();
 
 
         // Inizio manutenzione riportata da Indice Su SbnWEB BUG 2982
@@ -305,8 +308,8 @@ public class TitoloValidaLegamiModifica extends TitoloValidaLegami {
                 }
             }
         }
-        if (cd_natura.equals("M") || cd_natura.equals("S") || cd_natura.equals("W")) {
-            int num_leg_461 = 0;
+        if (ValidazioneDati.in(cd_natura, "M", "S", "W")) {
+	        int num_leg_461 = 0;
             for (int i = 0; i < legami.length; i++) {
                 for (int c = 0; c < legami[i].getArrivoLegameCount(); c++) {
                     //Sbntipooperazione serve, è da ignorare o non c'è?
@@ -320,14 +323,20 @@ public class TitoloValidaLegamiModifica extends TitoloValidaLegami {
                         }
                 }
             }
-            if (cercaMonografiaSuperiore(titolo.getBID()) != null)
+			final List<Vl_titolo_tit_b> titoliSup = this.cercaTitoloSuperiore(titolo.getBID());
+	        long naturaLegS = Stream.of(titoliSup).filter(filtraNaturaColl("S")).count();
+	        long naturaLegM = Stream.of(titoliSup).filter(filtraNaturaColl("M")).count();
+            if (naturaLegM > 0) {
                 num_leg_461++;
+			}
             if (cd_natura.equals("W")) {
-                if (num_leg_461 != 1)
+	            if (naturaLegM < 1)
                     throw new EccezioneSbnDiagnostico(3081, "Legame al titolo superiore obbligatorio");
             } else {
-                if (num_leg_461 > 1)
-                    throw new EccezioneSbnDiagnostico(3082, "Legame al titolo superiore esistente");
+                if (num_leg_461 > 1) {
+	                if (naturaLegS > 1 || naturaLegM > 1)
+		                throw new EccezioneSbnDiagnostico(3082, "Legame al titolo superiore esistente");
+                }
             }
 
         }
@@ -335,7 +344,15 @@ public class TitoloValidaLegamiModifica extends TitoloValidaLegami {
             controlloNumeroAutoriLegati();
     }
 
-    /** Valida per creazione, cancellazione o modifica di legami di un titolo di accesso
+    private Predicate<? super Vl_titolo_tit_b> filtraNaturaColl(final String natura) {
+		return new Predicate<Vl_titolo_tit_b>() {
+			public boolean test(Vl_titolo_tit_b tt) {
+				return natura.equals(tt.getCD_NATURA_COLL());
+			}
+		};
+	}
+
+	/** Valida per creazione, cancellazione o modifica di legami di un titolo di accesso
      * @throws Exception
      * @throws InvocationTargetException
      * @throws IllegalArgumentException */
