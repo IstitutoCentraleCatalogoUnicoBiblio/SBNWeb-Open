@@ -29,6 +29,7 @@ import it.finsiel.sbn.polo.factoring.base.ChiaviTitolo;
 import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.Formattazione;
 import it.finsiel.sbn.polo.factoring.util.NormalizzaSequenza;
+import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.orm.Tb_titolo;
 import it.finsiel.sbn.polo.orm.Tr_tit_bib;
 import it.finsiel.sbn.polo.orm.Tr_tit_tit;
@@ -46,7 +47,6 @@ import it.iccu.sbn.ejb.model.unimarcmodel.StringaCercaTypeChoice;
 import it.iccu.sbn.ejb.model.unimarcmodel.TitoloCercaType;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnMateriale;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnNaturaDocumento;
-import it.iccu.sbn.ejb.utils.ValidazioneDati;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -69,7 +69,6 @@ public class Titolo extends Tb_titolo {
     private static Logger log = Logger.getLogger("iccu.serversbnmarc.Titolo");
 
 	private static final Comparator<Vl_titolo_tit_c> ORDINAMENTO_SEQUENZA = new Comparator<Vl_titolo_tit_c>() {
-		@Override
 		public int compare(Vl_titolo_tit_c n1, Vl_titolo_tit_c n2) {
 			//ORDER BY this_.TP_LEGAME, this_.CD_NATURA_BASE DESC, this_.SEQUENZA
 			int cmp	= n1.getTP_LEGAME().compareTo(n2.getTP_LEGAME());

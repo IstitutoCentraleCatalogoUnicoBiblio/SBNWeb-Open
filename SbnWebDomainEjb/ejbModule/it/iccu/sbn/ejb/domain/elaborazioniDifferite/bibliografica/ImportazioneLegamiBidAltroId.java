@@ -125,8 +125,6 @@ public class ImportazioneLegamiBidAltroId {
 				w = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
 				output.addDownload(fileName, fileName);
 
-				//String codPolo = richiesta.getCodPolo();
-				//String codBib = richiesta.getCodBib();
 				String codIstituzione = richiesta.getCodIstituzione().getCd_istituzione();
 				String firmaUtente = DaoManager.getFirmaUtente(richiesta.getTicket());
 
@@ -155,8 +153,8 @@ public class ImportazioneLegamiBidAltroId {
 							continue;
 						}
 
-						String altroId = tokens[0];
-						String bid = tokens[1];
+						final String bid = tokens[0];
+						final String altroId = tokens[1];
 
 						if (!leggiXID(bid)) {
 							errors++;

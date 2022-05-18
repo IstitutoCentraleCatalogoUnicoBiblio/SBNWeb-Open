@@ -794,7 +794,7 @@ public class TitoloValidaLegami extends Titolo {
         Tb_luogo tb_luogo = luogo.cercaLuogoPerID(leg.getIdArrivo());
         if (tb_luogo == null)
             throw new EccezioneSbnDiagnostico(3025, "Luogo non esistente");
-	    if (!"A".equals(luogo.getTP_FORMA()))
+	    if (!"A".equals(tb_luogo.getTP_FORMA()))
 		    throw new EccezioneSbnDiagnostico(3031, "Forma del luogo non corretta");
         if (leg.getTipoLegame().getType() != SbnLegameAut.valueOf("620").getType())
             throw new EccezioneSbnDiagnostico(3031, "tipo legame errato");

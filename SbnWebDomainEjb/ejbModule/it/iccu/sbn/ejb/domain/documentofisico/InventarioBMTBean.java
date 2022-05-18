@@ -1129,7 +1129,7 @@ public abstract class InventarioBMTBean extends TicketChecker implements Inventa
 
 			valida.validaSerie(serie);
 			recSerie = daoSerie.getSerie(serie.getCodPolo(),
-					serie.getCodBib(), serie.getCodSerie().toUpperCase());
+					serie.getCodBib(), ValidazioneDati.trimOrEmpty(serie.getCodSerie()).toUpperCase());
 			if (recSerie != null) {
 				throw new ValidationException("recEsistente");
 			} else {
