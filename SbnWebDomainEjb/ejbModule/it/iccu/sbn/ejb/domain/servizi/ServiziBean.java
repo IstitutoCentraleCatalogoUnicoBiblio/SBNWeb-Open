@@ -4174,22 +4174,10 @@ public abstract class ServiziBean extends TicketChecker implements Servizi {
 				oldUte.setId_specificita_titoli_studio(
 						tsDao.getTitoloStudioById(id_specificita_titoli_studio.getId_specificita_titoli_studio()));
 
-			// test
-			Timestamp ts = DaoManager.now();
-			utente.setLast_access(ts);
 			dao.aggiornaUtente(utente);
-			/*
-			 * if(!oldUte.getData_fine_aut().equals(recUte.getBibliopolo().getFineAuto())) {
-			 * Trl_utenti_biblioteca newUteBib=
-			 * ServiziConversioneVO.daWebAHibernateUteBibRicerca(recUte);
-			 * newUteBib.setUte_var(utente.getUte_var());
-			 * utentiDao.updateUtentiBib(newUteBib); }
-			 */
-			// || (autOriginal.equals(autDiMappa) && numServNew!=servOld.size())
+
 			if (!autOriginal.equals(autDiMappa)) {
 				List servOld = dao.getListaDirittiUtente(oldUte.getId_utenti_biblioteca());
-				// hibernateDAO.getListaDirittiUtente(oldUte.getId_utenti().
-				// getId_utenti());
 				int riga = 0;
 				for (riga = 0; riga < servOld.size(); riga++) {
 					Trl_diritti_utente singSerOld = (Trl_diritti_utente) servOld.get(riga);

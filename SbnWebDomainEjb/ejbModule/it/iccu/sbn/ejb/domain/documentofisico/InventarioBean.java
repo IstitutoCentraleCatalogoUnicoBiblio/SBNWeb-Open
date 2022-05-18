@@ -1616,10 +1616,16 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 					}
 				}
 				// tipo operazione = N (non presente, crea inventario manuale)
-				if ((recSerie.getFine_man() == 0	&& recSerie.getInizio_man() == 0)
-						&& (recSerie.getFine_man2() == 0	&& recSerie.getInizio_man2() == 0)
-						&& (recSerie.getFine_man3() == 0	&& recSerie.getInizio_man3() == 0)
-						&& (recSerie.getFine_man4() == 0	&& recSerie.getInizio_man4() == 0)) {
+				int inizio_man2 = ValidazioneDati.coalesce(recSerie.getInizio_man2(), 0);
+				int fine_man2 = ValidazioneDati.coalesce(recSerie.getFine_man2(), 0);
+				int inizio_man3 = ValidazioneDati.coalesce(recSerie.getInizio_man3(), 0);
+				int fine_man3 = ValidazioneDati.coalesce(recSerie.getFine_man3(), 0);
+				int inizio_man4 = ValidazioneDati.coalesce(recSerie.getInizio_man4(), 0);
+				int fine_man4 = ValidazioneDati.coalesce(recSerie.getFine_man4(), 0);
+				if ((recSerie.getFine_man() == 0 && recSerie.getInizio_man() == 0)
+						&& (fine_man2 == 0 && inizio_man2 == 0)
+						&& (fine_man3 == 0 && inizio_man3 == 0)
+						&& (fine_man4 == 0 && inizio_man4 == 0)) {
 					// vado a fare solo il controllo esistenza
 					if (inventario.getCodInvent() > recSerie.getPrg_inv_corrente()) {
 						throw new ValidationException("invNumSuperioreProgressivoAutomatico", ValidationException.errore);
