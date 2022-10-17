@@ -17323,7 +17323,7 @@ INSERT INTO sbnweb.tb_codici ("tp_tabella", "cd_tabella", "cd_valore", "ds_tabel
 VALUES (E'ORGA', E'sax-bt', NULL, E'Sassofono baritono',E'sax-bt',E'sax-bt', E'U', E'9999-12-31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 /* tabella LINK */
-INSERT INTO tb_codici (tp_tabella,cd_tabella,cd_valore,ds_tabella,cd_unimarc,cd_marc_21,tp_materiale,dt_fine_validita,ds_cdsbn_ulteriore,cd_flg1,cd_flg2,cd_flg3,cd_flg4,cd_flg5,cd_flg6,cd_flg7,cd_flg8,cd_flg9,cd_flg10,cd_flg11) VALUES
+INSERT INTO sbnweb.tb_codici (tp_tabella,cd_tabella,cd_valore,ds_tabella,cd_unimarc,cd_marc_21,tp_materiale,dt_fine_validita,ds_cdsbn_ulteriore,cd_flg1,cd_flg2,cd_flg3,cd_flg4,cd_flg5,cd_flg6,cd_flg7,cd_flg8,cd_flg9,cd_flg10,cd_flg11) VALUES
 	 ('0000','LINK','SBN','Link ad altra base dati',NULL,NULL,NULL,NULL,NULL,'tab=DICT|1|ALPHA|READ;uni=1|ALPHA|NOBLANK;marc21=1|ALPHA|NOBLANK',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 	 ('LINK','a',NULL,'British Museum','a','a',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 	 ('LINK','b',NULL,'EDIT 16','b','b',NULL,'9999-12-31',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
