@@ -89,8 +89,8 @@ public final class IsbdTokenizer {
 				lastAreaStart = start;
 				continue;
 			} catch (StringIndexOutOfBoundsException siob) {
-				log.warn("bid: " + indice_isbd);
-				throw new StringIndexOutOfBoundsException();
+				log.error(String.format("errore split aree: indice_isbd: '%s', isbd: '%s'", indice_isbd, isbd));
+				return new IsbdVO(isbd);
 			}
 
 		}

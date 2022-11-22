@@ -6198,7 +6198,10 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 				Navigation.getInstance(request).removeBookmark(keyElemento);
 
 				request.setAttribute("esitoAnalitica", "CATALOGATO");
-				return Navigation.getInstance(request).goToBookmark(TitoliCollegatiInvoke.GESTIONE_DA_SINT_SCHEDE, false);
+				// 2022-11-22 bug #7960 segnalazione BUN: in caso di catalogazione di un bid locale provenendo da liste di confronto
+				// si deve tornare con il flag fromBar=true per visualizzare l'oggetto successivo e proseguire con le operazioni
+				// altrimenti compare il diagnostico: ERROR >>Area sinteticaSchedeTitoliForm.getAreaDatiPassCiclicaVO() invalida.
+				return Navigation.getInstance(request).goToBookmark(TitoliCollegatiInvoke.GESTIONE_DA_SINT_SCHEDE, true);
 			}
 
 		}
@@ -6261,7 +6264,10 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 			Navigation.getInstance(request).removeBookmark(keyElemento);
 
 			request.setAttribute("esitoAnalitica", "CATALOGATO");
-			return Navigation.getInstance(request).goToBookmark(TitoliCollegatiInvoke.GESTIONE_DA_SINT_SCHEDE, false);
+			// 2022-11-22 bug #7960 segnalazione BUN: in caso di catalogazione di un bid locale provenendo da liste di confronto
+			// si deve tornare con il flag fromBar=true per visualizzare l'oggetto successivo e proseguire con le operazioni
+			// altrimenti compare il diagnostico: ERROR >>Area sinteticaSchedeTitoliForm.getAreaDatiPassCiclicaVO() invalida.
+			return Navigation.getInstance(request).goToBookmark(TitoliCollegatiInvoke.GESTIONE_DA_SINT_SCHEDE, true);
 
 		}
 
