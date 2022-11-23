@@ -31,6 +31,7 @@ import it.iccu.sbn.polo.orm.documentofisico.Tbc_sezione_collocazione;
 import it.iccu.sbn.polo.orm.documentofisico.viste.Vc_inventario_coll;
 import it.iccu.sbn.polo.orm.gestionesemantica.Tb_classe;
 import it.iccu.sbn.vo.custom.documentofisico.InventarioPossedutoVO;
+import it.iccu.sbn.vo.custom.documentofisico.TbcInventarioKey;
 import it.iccu.sbn.web.constant.DocumentoFisicoCostant;
 
 import java.sql.Connection;
@@ -40,6 +41,7 @@ import java.util.Map;
 
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
@@ -1626,7 +1628,7 @@ public List getListaCollocazioni(String codPolo, String codBib, String bid)
 		return listaColl;
 	}
 
-	public List<Vc_inventario_coll> getCollocStrumentiPatrimonio_vista(
+	public List<TbcInventarioKey> getCollocStrumentiPatrimonio_vista(
 			String codPolo, String codBib, String codSez, String loc,
 			String aLoc, String spec, String aSpec, String tipoMat,
 			String statoCon, String digit, String noDispo, String ord, boolean escludiDigit, String tipoDigit)
@@ -1642,7 +1644,7 @@ public List getListaCollocazioni(String codPolo, String codBib, String bid)
 			params.put("coll_da", loc + spec);
 			params.put("coll_a", aLoc + aSpec);
 
-			sql.append("select inv.* from vc_inventario_coll inv");
+			sql.append("select inv.cd_polo, inv.cd_bib, inv.cd_serie, inv.cd_inven from vc_inventario_coll inv");
 
 			//almaviva5_20131003 evolutive google2
 			if (ValidazioneDati.equals(digit, "N"))
@@ -1697,7 +1699,13 @@ public List getListaCollocazioni(String codPolo, String codBib, String bid)
 			}
 
 			SQLQuery query = session.createSQLQuery(sql.toString());
-			query.addEntity("inv", Vc_inventario_coll.class);
+			//query.addEntity("inv", Vc_inventario_coll.class);
+			query
+				.addScalar("cd_polo", Hibernate.STRING)
+				.addScalar("cd_bib", Hibernate.STRING)
+				.addScalar("cd_serie", Hibernate.STRING)
+				.addScalar("cd_inven", Hibernate.INTEGER)
+				.setResultTransformer(new TbcInventarioKey.Transformer());
 			query.setProperties(params);
 
 			return query.list();

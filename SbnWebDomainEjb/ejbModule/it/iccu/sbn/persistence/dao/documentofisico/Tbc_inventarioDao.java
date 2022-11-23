@@ -31,6 +31,7 @@ import it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_inventario;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_serie_inventariale;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_sezione_collocazione;
+import it.iccu.sbn.vo.custom.documentofisico.TbcInventarioKey;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -46,6 +47,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.ObjectNotFoundException;
@@ -1863,7 +1865,7 @@ public class Tbc_inventarioDao extends DFCommonDAO {
 		}
 	}
 
-	public List<Tbc_inventario> getListaInventariXls(String codPolo, String codBib,
+	public List<TbcInventarioKey> getListaInventariXls(String codPolo, String codBib,
 			Timestamp dataDa, Timestamp dataA, String codSerie, String daInv, String aInv, List listaInv,
 			String tipoMat, String statoCon, String digit, String noDispo, String ord, String tipoOperazione, String tipoLista,
 			TipoData tipo, boolean escludiDigit, String tipoDigit) throws DaoManagerException	{
@@ -1872,10 +1874,10 @@ public class Tbc_inventarioDao extends DFCommonDAO {
 			params.put("codPolo", codPolo);
 			params.put("codBib", codBib);
 			//
-			List<Tbc_inventario> results = null;
+			List<TbcInventarioKey> results = null;
 			Session session = this.getCurrentSession();
 			StringBuilder query = new StringBuilder(1024);
-			query.append("select inv.* from tbc_inventario inv ");
+			query.append("select inv.cd_polo, inv.cd_bib, inv.cd_serie, inv.cd_inven from tbc_inventario inv ");
 
 			//almaviva5_20131003 evolutive google2
 			if (ValidazioneDati.equals(digit, "N"))
@@ -1998,7 +2000,13 @@ public class Tbc_inventarioDao extends DFCommonDAO {
 			}
 			SQLQuery queryI = session.createSQLQuery(query.toString());
 			queryI.setProperties(params);
-			queryI.addEntity(Tbc_inventario.class);
+//			queryI.addEntity(Tbc_inventario.class);
+			queryI
+				.addScalar("cd_polo", Hibernate.STRING)
+				.addScalar("cd_bib", Hibernate.STRING)
+				.addScalar("cd_serie", Hibernate.STRING)
+				.addScalar("cd_inven", Hibernate.INTEGER)
+				.setResultTransformer(new TbcInventarioKey.Transformer());
 			results = queryI.list();
 			return results;
 

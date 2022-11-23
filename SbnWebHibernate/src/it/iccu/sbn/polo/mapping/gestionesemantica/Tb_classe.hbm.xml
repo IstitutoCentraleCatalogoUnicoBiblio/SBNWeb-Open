@@ -82,7 +82,7 @@ License Type: Purchased
 				Flag di cancellazione logica
 			</meta>
 		</property>
-		<one-to-one name="Tbc_collocazione" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione" cascade="save-update,lock" property-ref="cd_sistema"/>
+		<!-- <one-to-one name="Tbc_collocazione" class="it.iccu.sbn.polo.orm.documentofisico.Tbc_collocazione" cascade="save-update,lock" property-ref="cd_sistema"/> -->
 		<set name="Tr_sistemi_classi_biblioteche" lazy="true" cascade="save-update,lock" inverse="true">
 			<key not-null="true">
 				<column name="cd_sistema"/>

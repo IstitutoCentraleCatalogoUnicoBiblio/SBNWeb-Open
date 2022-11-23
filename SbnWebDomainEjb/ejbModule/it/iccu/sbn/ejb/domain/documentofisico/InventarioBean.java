@@ -148,6 +148,7 @@ import it.iccu.sbn.util.TitoloHibernate;
 import it.iccu.sbn.util.ConvertiVo.ConversioneHibernateVO;
 import it.iccu.sbn.util.jasper.BatchCollectionSerializer;
 import it.iccu.sbn.util.validation.ValidazioniDocumentoFisico;
+import it.iccu.sbn.vo.custom.documentofisico.TbcInventarioKey;
 import it.iccu.sbn.web.constant.ConstantDefault;
 import it.iccu.sbn.web.constant.DocumentoFisicoCostant;
 import it.iccu.sbn.web.vo.SbnErrorTypes;
@@ -7245,7 +7246,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 		TitoloVO rec = null;
 		Timestamp now = DaoManager.now();
 		StampaStrumentiPossedutoDettaglioVO rpDettaglio = null;
-		List listaInv = new ArrayList();
+		List<TbcInventarioKey> listaInv = new ArrayList();
 		Logger _log = blw != null ? blw.getLogger() : log;
 		try{
 			output = this.controllaInputStPossedutoXls(input, output);
@@ -7299,7 +7300,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 
 				if (input.getTipoOperazione().equals("N")) {	//lista inventari
 					List listaInventariInput = input.getListaInventari();
-					List listaInv1 = new ArrayList();
+
 
 					if (ValidazioneDati.size(listaInventariInput) > 0) {
 						daoInv = new Tbc_inventarioDao();
@@ -7360,7 +7361,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 						CodiciNormalizzatiVO collSpecA = NormalizzaRangeCollocazioni.normalizzaCollSpecRange(Character.toString(sezione.getCd_colloc()), input.getDallaCollocazione(), input.getAllaCollocazione(),
 								input.getDallaSpecificazione(), input.getAllaSpecificazione(), "");
 						daoColl = new Tbc_collocazioneDao();
-						List<Vc_inventario_coll> listaCollocazioni = daoColl.getCollocStrumentiPatrimonio_vista(input.getCodPolo(),input.getCodBib(), sezione.getCd_sez(),
+						List<TbcInventarioKey> listaCollocazioni = daoColl.getCollocStrumentiPatrimonio_vista(input.getCodPolo(),input.getCodBib(), sezione.getCd_sez(),
 								collSpecA.getDaColl(), collSpecA.getAColl(), collSpecA.getDaSpec(), collSpecA.getASpec(),
 								input.getTipoMateriale(), input.getStatoConservazione(), input.getDigitalizzazione(),
 								input.getNoDispo(),	input.getTipoOrdinamento(), input.isEscludiDigit(), input.getTipoDigit() );
@@ -7810,7 +7811,7 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 
 	private void trattamentoDatiInventarioPossedutoXls(StampaStrumentiPatrimonioVO input,
 			StampaStrumentiPatrimonioVO output, Tbc_collocazione collocazione,
-			List listaInvColl, String tipoRegistro, String ticket, Logger _log) throws Exception {
+			List<TbcInventarioKey> listaInvColl, String tipoRegistro, String ticket, Logger _log) throws Exception {
 		BigDecimal valore = null;
 		StampaStrumentiPatrimonioDettaglioVO rpDettaglio = null;
 
@@ -7818,14 +7819,15 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 		Tbc_inventario inventario = new Tbc_inventario();
 		int size = ValidazioneDati.size(listaInvColl);
 		try {
-			for (int index = 0; index < size; index++) {
+			for (TbcInventarioKey key : listaInvColl) {
 				if ( (++cnt % 100) == 0) {
 					_log.debug(cnt + " inventari trattati.");
 					BatchManager.getBatchManagerInstance().checkForInterruption(input.getIdBatch());
 					checkTicket(ticket);
+					daoInv.getCurrentSession().clear();
 				}
 				rpDettaglio = new StampaStrumentiPatrimonioDettaglioVO(FakeParamRichiestaElaborazioneDifferitaVO.FAKE_INSTANCE);
-				inventario = (Tbc_inventario) listaInvColl.get(index);
+				inventario = daoInv.getInventario(key.getCd_polo(), key.getCd_bib(), key.getCd_serie(), key.getCd_inven());
 				if (inventario != null){
 					rpDettaglio = this.elementoStrumentiPatrimonioDettaglio(ticket, inventario, tipoRegistro);
 				}else{
@@ -8153,20 +8155,21 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 	}
 
 	private void trattamentoDatiInventarioPossedutoXls_vista(StampaStrumentiPatrimonioVO input,
-			StampaStrumentiPatrimonioVO output, List list, String tipoRegistro, String ticket, Logger _log)
+			StampaStrumentiPatrimonioVO output, List<TbcInventarioKey> list, String tipoRegistro, String ticket, Logger _log)
 	throws RemoteException, DaoManagerException, ParseException, Exception {
 		BigDecimal valore = null;
 		StampaStrumentiPatrimonioDettaglioVO rpDettaglio = null;
 		int cnt = 0;
 		int size = ValidazioneDati.size(list);
-		for (int index = 0; index < size; index++) {
+		for (TbcInventarioKey key : list) {
 			if ( (++cnt % 100) == 0) {
 				_log.debug(cnt + " inventari trattati");
 				BatchManager.getBatchManagerInstance().checkForInterruption(input.getIdBatch());
 				checkTicket(ticket);
+				daoInv.getCurrentSession().clear();
 			}
 			rpDettaglio = new StampaStrumentiPatrimonioDettaglioVO(FakeParamRichiestaElaborazioneDifferitaVO.FAKE_INSTANCE);
-			Vc_inventario_coll inventario = (Vc_inventario_coll) list.get(index);
+			Tbc_inventario inventario = daoInv.getInventario(key.getCd_polo(), key.getCd_bib(), key.getCd_serie(), key.getCd_inven());
 			if (inventario != null){
 				rpDettaglio = this.elementoStrumentiPatrimonioDettaglio(ticket, inventario, tipoRegistro);
 			}else{
@@ -8563,8 +8566,10 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 
 			classificazione = new CatSemClassificazioneVO();
 			List<SinteticaClasseVO> listaClassi = new ArrayList<SinteticaClasseVO>(numLegami.getCountLegamiClasse());
-			for (Tb_classe c : classi)
+			for (Tb_classe c : classi) {
 				listaClassi.add(ConversioneHibernateVO.toWeb().elementoSinteticaClasse(c) );
+				daoInv.getCurrentSession().evict(c);
+			}
 
 			classificazione.setListaClassi(listaClassi);
 			classificazione.setEsito(ValidazioneDati.isFilled(listaClassi) ?
@@ -8642,8 +8647,10 @@ public abstract class InventarioBean extends TicketChecker implements Inventario
 
 			soggettario = new CatSemSoggettoVO();
 			List<ElementoSinteticaSoggettoVO> listaSoggetti = new ArrayList<ElementoSinteticaSoggettoVO>(numLegami.getCountLegamiSoggetto());
-			for (Tb_soggetto s : soggetti)
+			for (Tb_soggetto s : soggetti) {
 				listaSoggetti.add(ConversioneHibernateVO.toWeb().elementoSinteticaSoggetto(s) );
+				daoInv.getCurrentSession().evict(s);
+			}
 
 			soggettario.setListaSoggetti(listaSoggetti);
 			soggettario.setEsito(ValidazioneDati.isFilled(listaSoggetti) ?
