@@ -272,9 +272,18 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 				output.addDownload(zipFile, mrcPath + File.separator + zipFile);
 		}
 
+		if (status_ok.get()) {
+			status_ok.set(this.scriviFileUtimoExport(richiesta));
+		}
+
 		output.setStato(status_ok.get() ? ConstantsJMS.STATO_OK : ConstantsJMS.STATO_ERROR);
 
 		return output;
+	}
+
+	private boolean scriviFileUtimoExport(EsportaVO richiesta) throws Exception {
+		final String fileName = getDataPrepHome() + File.separator + "unimarc" + File.separator + "ultimo_exp.txt";
+		return FileUtil.writeStringToFile(fileName, richiesta.getIdBatch());
 	}
 
 	private String cercaNomeFileExport(EsportaVO richiesta) throws Exception {

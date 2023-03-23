@@ -41,7 +41,6 @@ public class FileUtil {
 	private static final int BUFFER_SIZE = 8 * 1024;
 
 	private static final boolean transfer(InputStream input, OutputStream output) throws Exception {
-
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
 		try {
@@ -59,7 +58,6 @@ public class FileUtil {
 			close(bos);
 		}
 		return true;
-
 	}
 
 	public static final String getTemporaryFileName() {
