@@ -27,6 +27,7 @@ import it.finsiel.sbn.polo.factoring.util.Decodificatore;
 import it.finsiel.sbn.polo.factoring.util.Progressivi;
 import it.finsiel.sbn.polo.factoring.util.ResourceLoader;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
+import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.oggetti.Nota;
 import it.finsiel.sbn.polo.oggetti.Repertorio;
 import it.finsiel.sbn.polo.oggetti.Titolo;
@@ -488,8 +489,9 @@ public class CreaDocumento extends CreaFactoring {
 		        } //end if datadase_type
            	else
            	{ //if repertorio_type
+           		// bug #8199: la data è opzionale per i repertori cartacei
            		if( ( c321 != null
-               			&& ( (c321[i].getB_321() != null) && (c321[i].getB_321() != ""))
+               			//&& ( (c321[i].getB_321() != null) && (c321[i].getB_321() != ""))
                			&& ( (c321[i].getC_321() != null) && (c321[i].getC_321() != ""))
                			&& ( (c321[i].getA_321() != null) && (c321[i].getA_321() != "")
                		))){
@@ -498,7 +500,7 @@ public class CreaDocumento extends CreaFactoring {
                      	          "321",
                      	          "I##" +
                      	          "REP##" + datiDoc.getT321(i).getA_321() +
-                                "##" + datiDoc.getT321(i).getB_321() +
+                                "##" + ValidazioneDati.trimOrEmpty(datiDoc.getT321(i).getB_321()) +
                                 "##" + datiDoc.getT321(i).getC_321() +
                      	          "##", //$u vuota non presente
                      	          getCdUtente());
