@@ -256,7 +256,8 @@ public class SBNStampeRichiestaBean extends SBNStampeBase implements MessageDriv
 				sr.setCodStatoRic(req.getStato_richiesta());
 				sr.setTipoServizio(req.getTipoServizio());
 				sr.setCodBibUte("");
-				sr.setCodUte(req.getCodUte().trim());
+				// bug #7936 controllo codice utente vuoto
+				sr.setCodUte(ValidazioneDati.trimOrEmpty(req.getCodUte()));
 				sr.setCognomeNome("   " + req.getCognomeNome().trim());
 
 				//almaviva5_20110127 #4179
