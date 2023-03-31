@@ -165,7 +165,10 @@ public class CaricamentoCombo {
 
 			if (tipoFiltro == null || tipoFiltro.equals("")) {
 //				if (tipoFiltro == null || tipoFiltro.equals("") || tipoFiltro.equals("Titolo_infe")) {
-				lista.add(codDesc);
+				// bug #8122: esclusa natura V se non provengo da creazione rinvio opera
+				if (!codDesc.getCodice().equals("V")) {
+					lista.add(codDesc);
+				}
 			} else if (tipoFiltro.equals("Titolo_base")) {
 				if (codDesc.getCodice().equals("M")
 						|| codDesc.getCodice().equals("S")
