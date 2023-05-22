@@ -925,8 +925,10 @@ public class TitoloValidaModifica extends TitoloValida {
                 tp_materiale = tb_titolo.getTP_MATERIALE();
             }
 
-            Tbf_par_mat parModerno =
-            	ValidatorProfiler.getInstance().getParametriUtentePerMateriale(utente, "M");
+			// il livello autorità del titolo base può essere moderno o antico
+            final Tbf_par_mat parTitBase = (datiDoc instanceof AnticoType) ?
+            	ValidatorProfiler.getInstance().getParametriUtentePerMateriale(utente, "E") :
+				ValidatorProfiler.getInstance().getParametriUtentePerMateriale(utente, "M");
 
             // Modifica almaviva2 Giugno 2015 per consentire controlli e modifiche sui nuovi materiali
             // (ElettronicoType e AudiovisivoType) presa da Indice
@@ -990,7 +992,7 @@ public class TitoloValidaModifica extends TitoloValida {
                 // fine specificità
             } else {
                 if (tipoControllo != null && tipoControllo.getType() == SbnSimile.CONFERMA_TYPE) {
-                    if (parModerno.getFl_abil_forzat()!='S') {
+                    if (parTitBase.getFl_abil_forzat()!='S') {
 
     					if (modificaBaseSpecificita == MODIFICA_NESSUNA) {
     						throw new EccezioneSbnDiagnostico(3008, "Utente non abilitato per la forzatura");
@@ -1004,7 +1006,7 @@ public class TitoloValidaModifica extends TitoloValida {
                     }
                 }
             }
-            String livelloUtente = parModerno.getCd_livello();
+            String livelloUtente = parTitBase.getCd_livello();
 
 //            if (livelloUtente == null || Integer.parseInt(livelloAut.toString()) > Integer.parseInt(livelloUtente))
 //                throw new EccezioneSbnDiagnostico(3007, "Livello di autorità utente non consente l'operazione");
