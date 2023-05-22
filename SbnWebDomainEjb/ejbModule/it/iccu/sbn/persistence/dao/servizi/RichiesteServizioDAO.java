@@ -74,6 +74,11 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
 
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Function;
+
+import ch.lambdaj.Lambda;
+
 public class RichiesteServizioDAO extends ServiziBaseDAO {
 
 	private UtilitaDAO serviziDAO = new UtilitaDAO();
@@ -630,6 +635,17 @@ public class RichiesteServizioDAO extends ServiziBaseDAO {
 			params.put("codSez", filtroColl.getCodSezione().toUpperCase() );
 		}
 
+		// #7945 esclusione giacenze
+		final List<Vl_richiesta_servizio> giacenze = this.getListaMovimentiAttiviPerGiacenze(codBib);
+		if (ValidazioneDati.isFilled(giacenze)) {
+			final String filter = ValidazioneDati.formatValueList(Stream.of(giacenze).map(new Function<Vl_richiesta_servizio, Long> () {
+				public Long apply(Vl_richiesta_servizio rs) {
+					return rs.getCod_rich_serv();
+				}
+			}).toList(), ",");
+			hql.append("and req.cod_rich_serv not in (").append(filter).append(")");
+		}
+
 		if (ValidazioneDati.isFilled(ordinamento)) {
 			String ord = createHQLOrder(ordinamento, "req");
 			if (ord != null)
@@ -641,7 +657,6 @@ public class RichiesteServizioDAO extends ServiziBaseDAO {
 		query.setProperties(params);
 
 		return query;
-
 	}
 
 	public List<Tbl_richiesta_servizio> getListaRichiesteFiltriTematici(String codPolo, String codBib, String svolgimento,
@@ -675,7 +690,7 @@ public class RichiesteServizioDAO extends ServiziBaseDAO {
 			FiltroCollocazioneVO filtroColl) throws DaoManagerException {
 
 		try {
-			Query q = prepareQueryFiltriTematici(codPolo, codBib, svolgimento,
+			Query q = this.prepareQueryFiltriTematici(codPolo, codBib, svolgimento,
 					codTipoServizio, statoMov, statoRich, codErog, codAttivita,
 					dataFinePrevDa, dataFinePrevA, attuale, ordinamento,
 					codBibInv, codSerie, codInv, segnatura, codBibDocLett,
