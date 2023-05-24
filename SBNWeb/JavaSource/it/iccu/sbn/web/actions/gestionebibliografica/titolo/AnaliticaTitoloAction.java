@@ -6046,7 +6046,7 @@ public class AnaliticaTitoloAction extends LookupDispatchAction implements SbnAt
 						legameDocType.setIdArrivo(keyFiglio);
 						legameDocType.setCondiviso(LegameDocTypeCondivisoType.S);
 						legameDocType.setNoteLegame(treeElementViewFiglio.getDatiLegame().getNotaLegame());
-						legameDocType.setSequenza(treeElementViewFiglio.getDatiLegame().getSequenza());
+						legameDocType.setSequenza(SBNMarcUtil.formattaSequenza(treeElementViewFiglio.getDatiLegame().getSequenza()));
 						legameDocType.setSici(treeElementViewFiglio.getDatiLegame().getSici());
 						legameDocType.setTipoLegame(SbnLegameDoc.valueOf(treeElementViewFiglio.getDatiLegame().getTipoLegame()));
 						arrivoLegame.setLegameDoc(legameDocType);

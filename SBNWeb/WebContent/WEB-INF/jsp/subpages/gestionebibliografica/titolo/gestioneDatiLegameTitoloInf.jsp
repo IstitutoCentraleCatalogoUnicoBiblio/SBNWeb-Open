@@ -27,7 +27,7 @@
 		<td width="60" class="etichetta"><bean:message
 			key="dettaglio.sequenzaLegame" bundle="gestioneBibliograficaLabels" /></td>
 		<td width="100" class="testoNormale"><html:text
-			property="areaDatiVarTitoloVO.sequenza" size="10"></html:text></td>
+			property="areaDatiVarTitoloVO.sequenza" size="10" maxlength="10"></html:text></td>
 	</tr>
 </table>
 

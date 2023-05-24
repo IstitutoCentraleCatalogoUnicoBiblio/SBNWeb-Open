@@ -1925,8 +1925,7 @@ public class UtilityCastor {
 
 											// prendo la sequenza
 											datiLegame
-													.setSequenza(legameDocumento
-															.getSequenza());
+													.setSequenza(ValidazioneDati.trimOrNull(legameDocumento.getSequenza()));
 
 											// prendo il sici
 											datiLegame.setSici(legameDocumento
@@ -2222,7 +2221,7 @@ public class UtilityCastor {
 							.toString());
 
 					// prendo la sequenza
-					datiLegame.setSequenza(legameDocType.getSequenza());
+					datiLegame.setSequenza(ValidazioneDati.trimOrNull(legameDocType.getSequenza()));
 
 					// prendo il sici
 					datiLegame.setSici(legameDocType.getSici());
@@ -3874,7 +3873,7 @@ public class UtilityCastor {
 			// LEGAME A DOCUMENTO
 			datiLegame = new DatiLegame();
 			datiLegame.setNotaLegame(legameDoc.getNoteLegame());
-			datiLegame.setSequenza(legameDoc.getSequenza());
+			datiLegame.setSequenza(ValidazioneDati.trimOrNull(legameDoc.getSequenza()));
 			datiLegame.setSici(legameDoc.getSici());
 			if (legameDoc.getTipoLegame() != null) {
 				datiLegame.setTipoLegame(legameDoc.getTipoLegame().toString());

@@ -20,6 +20,7 @@
 
 package it.iccu.sbn.web.actions.gestionebibliografica.titolo;
 
+import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.common.CodiciType;
 import it.iccu.sbn.ejb.vo.common.CodiciType.CodiciRicercaType;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.AreaDatiVariazioneReturnVO;
@@ -30,6 +31,7 @@ import it.iccu.sbn.web.actionforms.gestionebibliografica.titolo.GestioneLegameTi
 import it.iccu.sbn.web.integration.bd.FactoryEJBDelegate;
 import it.iccu.sbn.web.util.CaricamentoCombo;
 import it.iccu.sbn.web2.navigation.Navigation;
+import it.iccu.sbn.web2.util.LinkableTagUtils;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -117,11 +119,9 @@ public class GestioneLegameTitoloTitoloAction extends LookupDispatchAction {
 				if (gestLegTTForm.getAreaDatiLegameTitoloVO().getTipoOperazione().equals("Crea")) {
 					if (gestLegTTForm.getAreaDatiLegameTitoloVO().getNaturaBidPartenza().equals("M")
 							&& gestLegTTForm.getAreaDatiLegameTitoloVO().getNaturaBidArrivo().equals("M")) {
-						List listaTipoLegame = gestLegTTForm.getListaTipoLegame();
-						List listaTipoLegameDepurato = new ArrayList();
-						ComboCodDescVO codDesc;
-						for (int i = 0; i < listaTipoLegame.size(); i++) {
-							codDesc = (ComboCodDescVO) listaTipoLegame.get(i);
+						List<ComboCodDescVO> listaTipoLegame = gestLegTTForm.getListaTipoLegame();
+						List<ComboCodDescVO> listaTipoLegameDepurato = new ArrayList<ComboCodDescVO>();
+						for (ComboCodDescVO codDesc : listaTipoLegame) {
 							if (!codDesc.getCodice().equals(
 									gestLegTTForm.getAreaDatiLegameTitoloVO().getNaturaBidPartenza()
 									+ "51"
@@ -376,16 +376,17 @@ public class GestioneLegameTitoloTitoloAction extends LookupDispatchAction {
 
 		// Inizio Modifica almaviva2 01.12.2010 BUG MANTIS 4023 verifica che la nota al legame non superi gli 80 caratteri
 		// (GestioneLegameTitoloTitoloAction - confermaOper)
-		if (gestLegTTForm.getAreaDatiLegameTitoloVO().getNoteLegameNew() != null) {
-			if (gestLegTTForm.getAreaDatiLegameTitoloVO().getNoteLegameNew().length() > 80) {
-    			ActionMessages errors = new ActionMessages();
-    			errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.notaLegameSup80Char"));
-    			this.saveErrors(request, errors);
-    			return mapping.getInputForward();
-			}
+		if (ValidazioneDati.length(gestLegTTForm.getAreaDatiLegameTitoloVO().getNoteLegameNew()) > 80) {
+			ActionMessages errors = new ActionMessages();
+			errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.notaLegameSup80Char"));
+			this.saveErrors(request, errors);
+			return mapping.getInputForward();
 		}
 		// Fine Modifica almaviva2 01.12.2010 BUG MANTIS 4023
-
+		if (ValidazioneDati.length(gestLegTTForm.getAreaDatiLegameTitoloVO().getSequenzaNew()) > 10) {
+			LinkableTagUtils.addError(request, new ActionMessage("errors.gestioneBibliografica.sequenza10Chr"));
+			return mapping.getInputForward();
+		}
 
 		AreaDatiVariazioneReturnVO areaDatiPassReturn = null;
 		if (gestLegTTForm.getCreaLegameInferiore().equals("SI")) {

@@ -2206,7 +2206,7 @@ public class SbnGestioneAllAuthorityDao {
 								legameDocType.setNoteLegame(documentoType.getLegamiDocumento(i).getArrivoLegame(j).getLegameDoc().getNoteLegame());
 
 								// Mail scognamiglio 26.01.2017 - non viene copiato il numero di sequenza
-								legameDocType.setSequenza(documentoType.getLegamiDocumento(i).getArrivoLegame(j).getLegameDoc().getSequenza());
+								legameDocType.setSequenza(SBNMarcUtil.formattaSequenza(documentoType.getLegamiDocumento(i).getArrivoLegame(j).getLegameDoc().getSequenza()));
 
 								legameDocType.setIdArrivo(monogNuova);
 
@@ -4188,7 +4188,7 @@ public class SbnGestioneAllAuthorityDao {
 
 				LegameDocType legameDocType = new LegameDocType();
 				legameDocType.setNoteLegame(areaDatiCatturaReticoloVO.getLegameDocType().getNoteLegame());
-				legameDocType.setSequenza(areaDatiCatturaReticoloVO.getLegameDocType().getSequenza());
+				legameDocType.setSequenza(SBNMarcUtil.formattaSequenza(areaDatiCatturaReticoloVO.getLegameDocType().getSequenza()));
 
 				// Inizio Modifica ALMAVIVA2 29.09.2009
 				// Per copia reticolo si deve inserire il legame 51 (e ovviamente la W) come locale

@@ -104,6 +104,7 @@ public class Configuration {
 	public static final String WS_MAX_CONCURRENT_CLIENTS = "WS_MAX_CONCURRENT_CLIENTS";
 
 	public static final String EXPORT_UNIMARC_AUTORI_FILE_ACCESSORI = "EXPORT_UNIMARC_AUTORI_FILE_ACCESSORI";
+	public static final String EXPORT_UNIMARC_FILE_ULTIMO_ID = "EXPORT_UNIMARC_FILE_ULTIMO_ID";
 
 	public static final String CSV_FIELD_SEPARATOR = "CSV_FIELD_SEPARATOR";
 

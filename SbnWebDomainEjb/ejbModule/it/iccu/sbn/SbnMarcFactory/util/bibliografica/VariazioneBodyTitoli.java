@@ -2057,8 +2057,8 @@ public class VariazioneBodyTitoli {
 				if ((areaDatiPass.getSiciNew() != null)	&& (ValidazioneDati.notEmpty(areaDatiPass.getSiciNew())))
 					legameDocType.setSici(areaDatiPass.getSiciNew());
 
-				if ((areaDatiPass.getSequenzaNew() != null)	&& (ValidazioneDati.notEmpty(areaDatiPass.getSequenzaNew())))
-					legameDocType.setSequenza(areaDatiPass.getSequenzaNew());
+				if (ValidazioneDati.isFilled(areaDatiPass.getSequenzaNew()))
+					legameDocType.setSequenza(SBNMarcUtil.formattaSequenza(areaDatiPass.getSequenzaNew()));
 
 				arrivoLegame.setLegameDoc(legameDocType);
 
@@ -2098,8 +2098,8 @@ public class VariazioneBodyTitoli {
 					if ((areaDatiPass.getSiciNew() != null)	&& (ValidazioneDati.notEmpty(areaDatiPass.getSiciNew())))
 						legameDocType.setSici(areaDatiPass.getSiciNew());
 
-					if ((areaDatiPass.getSequenzaNew() != null)	&& (ValidazioneDati.notEmpty(areaDatiPass.getSequenzaNew())))
-						legameDocType.setSequenza(areaDatiPass.getSequenzaNew());
+					if (ValidazioneDati.isFilled(areaDatiPass.getSequenzaNew()))
+						legameDocType.setSequenza(SBNMarcUtil.formattaSequenza(areaDatiPass.getSequenzaNew()));
 
 					arrivoLegame = new ArrivoLegame();
 					arrivoLegame.setLegameDoc(legameDocType);

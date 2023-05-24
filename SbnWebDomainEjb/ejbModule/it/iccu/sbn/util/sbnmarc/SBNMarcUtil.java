@@ -461,6 +461,14 @@ public final class SBNMarcUtil {
 		return false;
 	}
 
+	public static String formattaSequenza(final String seq) {
+		if (ValidazioneDati.isFilled(seq)) {
+			return ValidazioneDati.trunc(ValidazioneDati.fillLeft(seq.trim(), ' ', 10), 10);
+		} else {
+			return null;
+		}
+	}
+
 	public static void main(String... args) {
 		System.out.println(timestampToT005(DaoManager.now()));
 		System.out.println(formattaSbnId("XXX1234567"));

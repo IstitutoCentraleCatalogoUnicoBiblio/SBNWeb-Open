@@ -282,7 +282,8 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 	}
 
 	private boolean scriviFileUtimoExport(EsportaVO richiesta) throws Exception {
-		final String fileName = getDataPrepHome() + File.separator + "unimarc" + File.separator + "ultimo_exp.txt";
+		final String ultimoExport = CommonConfiguration.getProperty(Configuration.EXPORT_UNIMARC_FILE_ULTIMO_ID);
+		final String fileName = getDataPrepHome() + File.separator + "unimarc" + File.separator + ultimoExport;
 		return FileUtil.writeStringToFile(fileName, richiesta.getIdBatch());
 	}
 

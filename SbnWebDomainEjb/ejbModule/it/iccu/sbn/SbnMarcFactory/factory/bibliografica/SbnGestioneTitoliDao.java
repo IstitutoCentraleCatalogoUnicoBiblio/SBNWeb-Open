@@ -160,7 +160,7 @@ import it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice;
 import it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice_id_arrivo;
 import it.iccu.sbn.polo.orm.bibliografica.Tb_report_indice_id_locali;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
-
+import it.iccu.sbn.util.sbnmarc.SBNMarcUtil;
 import it.iccu.sbn.util.semantica.SemanticaUtil;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
 import it.iccu.sbn.vo.domain.bibliografica.AreaDatiServizioInterrTitoloDomVO;
@@ -3192,7 +3192,7 @@ public class SbnGestioneTitoliDao {
 				} else  {
 					LegameDocType legameDocType = new LegameDocType();
 					legameDocType.setNoteLegame(areaDatiPass.getNoteLegame());
-					legameDocType.setSequenza(areaDatiPass.getSequenza());
+					legameDocType.setSequenza(SBNMarcUtil.formattaSequenza(areaDatiPass.getSequenza()));
 					// Inizio intervento almaviva2 BUG 3288 - 28 ottobre 2009  -->
 					// Inizio modifica almaviva2 BUG MANTIS 4131 (Collaudo): inserito controllo su contenuto SICI
 					// che deve essere impostato solo se valorizzato
@@ -7386,7 +7386,7 @@ public class SbnGestioneTitoliDao {
 			// value = Natura + livelloAutorita + " " + codiceLegameCompleto + " " + myData1 + " " + TitoloProprio;
 			// value = livelloAutoritaDesc + " " + Natura + " " + codiceLegameCompleto + " " + myData1 + " " + TitoloProprio;
 			if (visualizzaSequenza) {
-				if (numeroSequenza == null || numeroSequenza.equals("")) {
+				if (!ValidazioneDati.isFilled(numeroSequenza)) {
 					value = livelloAutoritaDesc + " " + Natura + " " + codiceLegameCompleto + " " + myData1 + " " + TitoloProprio;
 				} else {
 					value = livelloAutoritaDesc + " " + Natura + " " + codiceLegameCompleto + " " + myData1 + " (" +

@@ -887,7 +887,7 @@ public class SinteticaTitoli {
                                 if (visualNumSequenza.equals("SI")
                                 		&& (tipoLegameNumerico == 410 || tipoLegameNumerico == 461)
                                 		&& legameDocType.getSequenza() != null) {
-                                	stringArrivoLegame = stringArrivoLegame + " [sequenza:" + legameDocType.getSequenza() + "]";
+                                	stringArrivoLegame = stringArrivoLegame + " [sequenza:" + legameDocType.getSequenza().trim() + "]";
 
                                 }
 
