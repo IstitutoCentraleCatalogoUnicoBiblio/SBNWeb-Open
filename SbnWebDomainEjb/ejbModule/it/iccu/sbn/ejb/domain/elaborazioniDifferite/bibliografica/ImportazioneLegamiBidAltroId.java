@@ -220,8 +220,18 @@ public class ImportazioneLegamiBidAltroId {
 									updated++;
 
 							} else {
-								not_updated++;
-								msg = "legame già presente";
+								// legame presente ma cancellato
+								if (tr_bid_altroid.cancellato()) {
+									tr_bid_altroid.setUte_var(firmaUtente);
+									tr_bid_altroid.setFl_canc('N');
+									msg = "legame riattivato";
+
+									dao.aggiornaInstitutionId(tr_bid_altroid);
+									updated++;
+								} else {
+									not_updated++;
+									msg = "legame già presente";
+								}
 							}
 
 						} catch (DaoManagerException e) {

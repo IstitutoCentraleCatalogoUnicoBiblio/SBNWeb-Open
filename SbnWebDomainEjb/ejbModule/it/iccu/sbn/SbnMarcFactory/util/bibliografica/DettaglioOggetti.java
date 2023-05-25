@@ -170,10 +170,10 @@ public class DettaglioOggetti {
 		if (showOCN)
 			try {
 				//numero ocn associato al bid
-				Tr_bid_altroid ocn = dao.getInstitutionId(Institution.OCLC.getCd_istituzione(), BID);
-				if (ocn != null)
+				final Tr_bid_altroid ocn = dao.getInstitutionId(Institution.OCLC.getCd_istituzione(), BID);
+				if (ocn != null && !ocn.cancellato()) {
 					dettTitolo.getDetTitoloPFissaVO().setOcn(ocn.getIst_id().toString());
-
+				}
 			} catch (DaoManagerException e) {
 				e.printStackTrace();
 			}

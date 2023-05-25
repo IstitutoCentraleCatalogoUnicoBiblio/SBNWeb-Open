@@ -181,7 +181,7 @@ public class TitoloDAO extends DaoManager {
 			Criteria c = session.createCriteria(Tr_bid_altroid.class);
 			c.add(Restrictions.eq("cd_istituzione", cd_istituzione));
 			c.add(Restrictions.eq("titolo.id", bid));
-			c.add(Restrictions.ne("fl_canc", 'S'));
+			//c.add(Restrictions.ne("fl_canc", 'S'));
 			//c.createCriteria("titolo").add(Restrictions.idEq(bid));
 
 			return (Tr_bid_altroid) c.uniqueResult();
