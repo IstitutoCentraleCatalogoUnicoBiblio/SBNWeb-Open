@@ -177,4 +177,14 @@ public class FileUtil {
 		return transfer(new ByteArrayInputStream(content.getBytes(encoding)), new FileOutputStream(fileName));
 	}
 
+	public static void delete(String fileName) {
+		try {
+			File f = new File(fileName);
+			if (f.exists())
+				f.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

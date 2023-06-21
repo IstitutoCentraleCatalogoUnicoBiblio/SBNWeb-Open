@@ -80,6 +80,7 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 	private static final String TAGS_FILE = "tagsToExport.txt";
 
 	protected static final String PROPS_FILE = "db_extract.properties";
+	protected static final String LATEST_EXPORT_ID_FILE = "export.latest";
 
 	private AmministrazioneBiblioteca amministrazioneBiblioteca;
 
@@ -108,7 +109,7 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 
 	protected AtomicBoolean status_ok = new AtomicBoolean(false);
 	protected Logger _log;
-	private Timestamp tsLastDBExtraction;
+	private Timestamp tsExportStart;
 	private UserTransaction tx;
 
 	public static final long getDbLastExtractionTime() {
@@ -150,6 +151,9 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 		//almaviva5_20100210 filtro ateneo
 		if (ValidazioneDati.isFilled(richiesta.getAteneo()))
 			status_ok.set( impostaFiltroAteneo(richiesta) );
+
+		//almaviva5_20130326 evolutive LO1
+		this.tsExportStart = DaoManager.now();
 
 		// estrazione totale del DB
 		//almaviva5_20111027 estrazione db solo per unimarc
@@ -270,6 +274,7 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 
 			if (status_ok.get())
 				output.addDownload(zipFile, mrcPath + File.separator + zipFile);
+
 		}
 
 		if (status_ok.get()) {
@@ -469,11 +474,8 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 
 		try {
 			_log.debug("execFase1_estrazioneDB()");
-			long startTime = 0;//System.currentTimeMillis();
+			long startTime = 0;
 			status_ok.set(false);
-
-			//almaviva5_20130326 evolutive LO1
-			tsLastDBExtraction = DaoManager.now();
 
 			String exportHome = getExportHome();
 			int exit = exec(log, exportHome, exportHome + File.separator + "export.sh");
@@ -553,12 +555,20 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 	}
 
 	public ParametriRichiestaElaborazioneDifferitaVO buildActivationParameters(
-			SchedulableBatchVO params, Serializable... otherParams)
+			SchedulableBatchVO sb, Serializable... otherParams)
 			throws Exception {
 
 		_log = Logger.getLogger(ExportUnimarcBatch.class);
 
-		EsportaVO esporta = new EsportaVO();
+		ExportSchedulableBatchVO params = new ExportSchedulableBatchVO(sb);
+
+		EsportaVO template = params.getTemplate();
+		boolean withTemplate = (template != null);
+		if (withTemplate) {
+			_log.debug("export json template: " + sb.getConfig().getCd_flg11());
+		}
+
+		EsportaVO esporta = withTemplate ? template : new EsportaVO();
 		esporta.setPayload(params);
 
 		String userId = params.getUser();
@@ -570,42 +580,42 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 		esporta.setCodPolo(codPolo);
 		esporta.setCodBib(codBib);
 		esporta.setUser(user);
-		String ticket = SbnSIP2Ticket.getUtenteTicket(codPolo, codBib, user, InetAddress.getLocalHost());
-		esporta.setTicket(ticket);
+		esporta.setTicket(SbnSIP2Ticket.getUtenteTicket(codPolo, codBib, user, InetAddress.getLocalHost()));
+
+		esporta.setDownloadPath(StampeUtil.getBatchFilesPath());
+		esporta.setDownloadLinkPath("/"); // eliminato
 
 		esporta.setCodAttivita(CodiciAttivita.getIstance().ESPORTA_DOCUMENTI_1040);
 
-		esporta.setExportDB(true);
-		//almaviva5_20131106 segnalazione RML: eliminato filtro su tipo materiale
-		//esporta.setMateriali(EsportaVO.MATERIALI);
-		esporta.setMateriali(null);
-		esporta.setNature(EsportaVO.NATURE);
-		esporta.setTipoEstrazione(TipoEstrazioneUnimarc.ARCHIVIO);
+		if (!withTemplate) {
+			//template mancante: impostazione filtri di default
+			esporta.setExportDB(true);
+			//almaviva5_20131106 segnalazione RML: eliminato filtro su tipo materiale
+			//esporta.setMateriali(EsportaVO.MATERIALI);
+			esporta.setMateriali(null);
+			esporta.setNature(EsportaVO.NATURE);
+			esporta.setTipoEstrazione(TipoEstrazioneUnimarc.ARCHIVIO);
 
-		//almaviva5_20160322 tipo scarico da tabella
-		String tipoScarico = ValidazioneDati.coalesce(params.getTipoScarico(), "ALL");
-		_log.debug("tipo scarico unimarc: " + tipoScarico);
-		esporta.setCodScaricoSelez(tipoScarico);
-		impostaEtichetteDaEsportare(esporta);
+			//almaviva5_20160322 tipo scarico da tabella
+			String tipoScarico = ValidazioneDati.coalesce(params.getTipoScarico(), "ALL");
+			_log.debug("tipo scarico unimarc: " + tipoScarico);
+			esporta.setCodScaricoSelez(tipoScarico);
+			impostaEtichetteDaEsportare(esporta);
 
-		String downloadPath = StampeUtil.getBatchFilesPath();
-		esporta.setDownloadPath(downloadPath);
-		esporta.setDownloadLinkPath("/"); // eliminato
-
-		//almaviva5_20160308 prepara filtro biblioteche
-		List<String> biblioteche = params.getBiblioteche();
-		if (ValidazioneDati.isFilled(biblioteche)) {
-			_log.debug("preparazione filtro per biblioteca: " + biblioteche);
-			List<BibliotecaVO> listaBib = new ArrayList<BibliotecaVO>();
-			for (String cdBib : biblioteche) {
-				BibliotecaVO bib = DomainEJBFactory.getInstance().getBiblioteca().getBiblioteca(codPolo, cdBib);
-				if (bib != null)
-					listaBib.add(bib);
+			//almaviva5_20160308 prepara filtro biblioteche
+			List<String> biblioteche = params.getBiblioteche();
+			if (ValidazioneDati.isFilled(biblioteche)) {
+				_log.debug("preparazione filtro per biblioteca: " + biblioteche);
+				List<BibliotecaVO> listaBib = new ArrayList<BibliotecaVO>();
+				for (String cdBib : biblioteche) {
+					BibliotecaVO bib = DomainEJBFactory.getInstance().getBiblioteca().getBiblioteca(codPolo, cdBib);
+					if (bib != null)
+						listaBib.add(bib);
+				}
+				esporta.setListaBib(listaBib);
+				//preparaFileFiltroBiblioteca(esporta);
 			}
-			esporta.setListaBib(listaBib);
-			//preparaFileFiltroBiblioteca(esporta);
 		}
-
 		return esporta;
 	}
 
@@ -641,7 +651,7 @@ public class ExportUnimarcBatch extends ExternalBatchExecutor implements Schedul
 		if (!ValidazioneDati.equals(stato, ConstantsJMS.STATO_OK))
 			return;
 
-		sb.setLatestSuccessfulEnd(tsLastDBExtraction);
+		sb.setLatestSuccessfulEnd(tsExportStart);
 
 		getCodici().salvaTabellaCodici(sb.getConfig(), false);
 	}

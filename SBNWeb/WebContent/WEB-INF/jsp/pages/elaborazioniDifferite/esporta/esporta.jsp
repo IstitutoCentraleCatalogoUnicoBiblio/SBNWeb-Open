@@ -717,6 +717,11 @@
 				<td align="center"><html:submit property="methodMap_esporta">
 					<bean:message key="button.prenota" bundle="esportaLabels" />
 				</html:submit></td>
+				<sbn:checkAttivita idControllo="TEMPLATE">
+					<td align="center"><html:submit property="methodMap_esporta">
+						<bean:message key="button.scarica.template.conf" bundle="esportaLabels" />
+					</html:submit></td>
+				</sbn:checkAttivita>
 			</tr>
 
 		</table>

@@ -20,20 +20,11 @@ import it.iccu.sbn.ejb.utils.DateUtil;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.UniqueIdentifiableVO;
 import it.iccu.sbn.ejb.vo.common.CodiciType;
-import it.iccu.sbn.ejb.vo.common.CodiciType.CodiciRicercaType;
 import it.iccu.sbn.ejb.vo.common.TB_CODICI;
-import it.iccu.sbn.servizi.codici.CodiciProvider;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
 
 /*
  * cd_tabella	job_name.
@@ -56,7 +47,7 @@ import org.apache.commons.lang.StringUtils;
 public class SchedulableBatchVO extends UniqueIdentifiableVO {
 
 	private static final long serialVersionUID = -7803792221970476948L;
-	private final TB_CODICI config;
+	protected final TB_CODICI config;
 
 	public enum ScheduleType {
 		TIME,
@@ -146,48 +137,6 @@ public class SchedulableBatchVO extends UniqueIdentifiableVO {
 
 	public void setParams(String params) {
 		config.setCd_flg10(params);
-	}
-
-	public String getTipoScarico() throws Exception {
-		String cd_flg11 = trimOrEmpty(config.getCd_flg11());
-		String[] tokens = cd_flg11.split("\\|");
-		//il flag11 contiene sia il cod.scarico che l'elenco delle biblioteche, viene gestito il codice solo in prima
-		//posizione
-		if (tokens.length > 2)
-			return null;
-
-		String tipoScarico = tokens[0].trim().toUpperCase();
-		TB_CODICI cod = CodiciProvider.cercaCodice(tipoScarico, CodiciType.CODICE_TIPO_ESTRAZIONE_UNIMARC,
-			CodiciRicercaType.RICERCA_CODICE_SBN, true);
-
-		return (cod != null) ? tipoScarico : null;
-	}
-
-	public List<String> getBiblioteche() throws Exception {
-		Set<String> biblioteche = new HashSet<String>();
-		String cd_flg11 = trimOrEmpty(config.getCd_flg11());
-
-		//il flag11 contiene sia il cod.scarico che l'elenco delle biblioteche,
-		//le biblioteche sono gestite solo in seconda posizione
-		if (isFilled(getTipoScarico()) ) {
-			String[] tokens = cd_flg11.split("\\|");
-			if (tokens.length != 2)	//non ci sono biblioteche
-				return Collections.emptyList();
-
-			cd_flg11 = tokens[1]; //biblioteche nel secondo blocco
-		} else
-			//almaviva5_20170712 #6439 eliminazione delimitatore
-			cd_flg11 = StringUtils.stripStart(cd_flg11, "|");
-
-		for (String token : cd_flg11.split(",|;")) {
-			token = token.trim();
-			if (token.length() != 2)	//cod.bib senza spazio
-				continue;
-
-			biblioteche.add(ValidazioneDati.fillLeft(token.toUpperCase(), ' ', 3));
-		}
-
-		return new ArrayList<String>(biblioteche);
 	}
 
 	public boolean isActive() {

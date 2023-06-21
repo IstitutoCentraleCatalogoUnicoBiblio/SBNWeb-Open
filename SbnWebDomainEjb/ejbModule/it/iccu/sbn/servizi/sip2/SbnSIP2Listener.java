@@ -130,6 +130,7 @@ public class SbnSIP2Listener extends ServiceMBeanSupport implements SbnSIP2Liste
 			super("SbnSIP2Listener@Server");
 			socket = new ServerSocket(listenPort);
 			socket.setSoTimeout(1000);
+			socket.setReuseAddress(true);
 		}
 
 		public Server(int listenPort, String codPolo, String codBiblio) throws IOException {

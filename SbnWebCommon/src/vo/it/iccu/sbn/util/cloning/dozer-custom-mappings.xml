@@ -55,6 +55,12 @@
 		<class-b>java.io.Serializable</class-b>
 	</mapping>
 
+	<!-- ExportSchedulableBatchVO  -->
+	<mapping bean-factory="it.iccu.sbn.util.cloning.DozerCloneFactory" >
+		<class-a>it.iccu.sbn.batch.unimarc.ExportSchedulableBatchVO</class-a>
+		<class-b>java.io.Serializable</class-b>
+	</mapping>
+
 	<!-- StatoPrenotazionePosto  -->
 	<mapping bean-factory="it.iccu.sbn.util.cloning.DozerIdentityFactory" >
 		<class-a>it.iccu.sbn.ejb.vo.servizi.sale.StatoPrenotazionePosto</class-a>

@@ -21,6 +21,7 @@ import it.iccu.sbn.batch.unimarc.ExportUnimarcBatch;
 import it.iccu.sbn.ejb.exception.ValidationException;
 import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.utils.stampe.StampeUtil;
+import it.iccu.sbn.ejb.vo.UniqueIdentifiableVO;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.BibliotecaVO;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.sif.SIFListaBibliotecheAffiliatePerAttivitaVO;
 import it.iccu.sbn.ejb.vo.amministrazionesistema.sif.SIFListaBibliotechePoloVO;
@@ -34,13 +35,17 @@ import it.iccu.sbn.ejb.vo.gestionebibliografica.AreaParametriStampaSchedeVo;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.ComboCodDescVO;
 import it.iccu.sbn.ejb.vo.gestionestampe.common.TipoStampa;
 import it.iccu.sbn.ejb.vo.stampe.StampaDiffVO;
+import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.servizi.codici.CodiciProvider;
+import it.iccu.sbn.util.config.CommonConfiguration;
+import it.iccu.sbn.util.config.Configuration;
 import it.iccu.sbn.util.rfid.InventarioRFIDParser;
 import it.iccu.sbn.vo.domain.CodiciAttivita;
 import it.iccu.sbn.web.actionforms.common.documentofisico.RicercaInventariCollocazioniForm;
 import it.iccu.sbn.web.actionforms.elaborazioniDifferite.esporta.EsportaForm;
 import it.iccu.sbn.web.actionforms.elaborazioniDifferite.esporta.EsportaForm.TipoProspettazioneExport;
 import it.iccu.sbn.web.actions.common.ConfermaDati;
+import it.iccu.sbn.web.actions.common.SbnDownloadAction;
 import it.iccu.sbn.web.actions.common.documentofisico.RicercaInventariCollocazioniAction;
 import it.iccu.sbn.web.actions.gestionebibliografica.isbd.akros.EccezioneSbnDiagnostico;
 import it.iccu.sbn.web.actions.gestionesemantica.utility.CaricamentoComboSemantica;
@@ -60,6 +65,7 @@ import it.iccu.sbn.web2.util.SbnAttivitaChecker;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -72,19 +78,27 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.apache.struts.upload.FormFile;
+
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import static it.iccu.sbn.ejb.utils.ValidazioneDati.isFilled;
 
 public class EsportaAction extends RicercaInventariCollocazioniAction implements SbnAttivitaChecker {
 
 	private static final String LISTA_BIBLIOTECHE = "sif.bib.export.unimarc";
+	private static final EsportaVO ESPORTA_ERROR = new EsportaVO();
 
 	private static Logger log = Logger.getLogger(EsportaAction.class);
 
@@ -101,6 +115,8 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 		map.put("button.tutteLeBiblio", "tutteLeBiblio");
 
 		map.put("gestionestampe.lsBib", "cartiglioListaBib");
+
+		map.put("button.scarica.template.conf", "downloadConfigTemplate");
 
 		return map;
 	}
@@ -268,14 +284,14 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 			this.saveToken(request);
 
 		} catch (ValidationException ve) {
-			ActionMessages errors = new ActionMessages();
-			errors.add("generico", new ActionMessage("error.documentofisico."+ ve.getMessage()));
-			this.saveErrors(request, errors);
+
+			LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico."+ ve.getMessage()));
+
 			return mapping.getInputForward();
 		} catch (Exception e) { // altri tipi di errore
-			ActionMessages errors = new ActionMessages();
-			errors.add("generico", new ActionMessage("error.documentofisico."+ e.getMessage())); if (!ValidazioneDati.isFilled(e.getMessage())) log.error("", e);
-			this.saveErrors(request, errors);
+
+			LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico."+ e.getMessage())); if (!ValidazioneDati.isFilled(e.getMessage())) log.error("", e);
+
 			return mapping.getInputForward();
 		}
 		return mapping.getInputForward();
@@ -310,9 +326,9 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 
 		if (ValidazioneDati.equals(currentForm.getCodAttivita(), CodiciAttivita.getIstance().ESPORTA_DOCUMENTI_1040)
 			&& ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1) {
-			ActionMessages errors = new ActionMessages();
-			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.esporta.selezionare.bib"));
-			this.saveErrors(request, errors);
+
+			LinkableTagUtils.addError(request, new ActionMessage("errors.esporta.selezionare.bib"));
+
 		}
 		currentForm.getEsporta().setTipoEstrazione(TipoEstrazioneUnimarc.COLLOCAZIONI);
 		super.unspecified(mapping, currentForm, request, response);
@@ -374,7 +390,6 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 
 		EsportaForm currentForm = (EsportaForm) form;
 		String idBatch = null;
-		ActionMessages errors = new ActionMessages();
 
 		try {
 			resetToken(request);
@@ -384,44 +399,12 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 
 			// Setting biblioteca corrente (6 caratteri)
 			// codice polo + codice biblioteca
+			EsportaVO esportaVO = this.preparaParametriExport(mapping, form, request, response);
+			if (esportaVO == ESPORTA_ERROR)
+				return mapping.getInputForward();
+
 			Navigation navi = Navigation.getInstance(request);
 			UserVO utente = navi.getUtente();
-			EsportaVO esportaVO = currentForm.getEsporta().copy();
-			esportaVO.setCodPolo(utente.getCodPolo());
-			esportaVO.setCodBib(utente.getCodBib());
-			esportaVO.setUser(utente.getUserId());
-
-			esportaVO.setCodAttivita(CodiciAttivita.getIstance().ESPORTA_DOCUMENTI_1040);
-
-			if (currentForm.isUnimarc() ) {
-				esportaVO.validate();
-				//almaviva5_20130226 imposta etichette da esportate
-				ExportUnimarcBatch.impostaEtichetteDaEsportare(esportaVO);
-			}
-
-			// se ho selezionato tutti i materiali é più efficente
-			// eliminare il filtro
-			String[] materiali = esportaVO.getMateriali();
-			if (ValidazioneDati.size(materiali) == EsportaVO.MATERIALI.length)
-				esportaVO.setMateriali(null);
-			else
-				// le collane hanno il tipo materiale a spazio, devo includerlo nel
-				// filtro
-				if (ValidazioneDati.isFilled(materiali)) {
-					if (Arrays.asList(esportaVO.getNature()).contains("C")) {
-						List<String> tmp = new ArrayList<String>(Arrays.asList(materiali));
-						tmp.add(" "); // aggiungo mat. fittizio
-						esportaVO.setMateriali(tmp.toArray(materiali));
-					}
-				}
-
-			String basePath = this.servlet.getServletContext().getRealPath(File.separator);
-			esportaVO.setBasePath(basePath);
-			String downloadPath = StampeUtil.getBatchFilesPath();
-			esportaVO.setDownloadPath(downloadPath);
-			esportaVO.setDownloadLinkPath("/"); // eliminato
-
-			esportaVO.setTicket(utente.getTicket());
 
 			// Inizio Modifica almaviva2 febbraio 2010 per utilizzare oggetto anche per stampa cataloghi e classi.
 			if (currentForm.getCodAttivita().equals(CodiciAttivita.getIstance().GDF_STAMPA_CATALOGHI)) {
@@ -429,10 +412,10 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 				// Intervento del 25.02.2013 su Richiesta ICCU in fase di Elaborazione Manuale Utente;
 				// Modifiche/controlli per attivazione stampa catalogo per Soggetti e Classi
 				if (esportaVO.getTipoCatalogo().equals("SOG") && esportaVO.getCodSoggettario().equals("")) {
-					errors = new ActionMessages();
-					errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.testoProtocollo" ,
+
+					LinkableTagUtils.addError(request, new ActionMessage("errors.gestioneBibliografica.testoProtocollo" ,
 							"La stampa catalogo per Soggetto può essere richiesta per un solo Soggettario - impostarlo con l'apposita selezione"));
-					this.saveErrors(request, errors);
+
 					return mapping.getInputForward();
 				}
 				if (esportaVO.getCodSoggettario().length() > 0 && !esportaVO.getTipoCatalogo().equals("SOG")) {
@@ -440,10 +423,10 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 				}
 
 				if (esportaVO.getTipoCatalogo().equals("CLA") && esportaVO.getCodSistemaClassificazione().equals("")) {
-					errors = new ActionMessages();
-					errors.add("Attenzione", new ActionMessage("errors.gestioneBibliografica.testoProtocollo" ,
+
+					LinkableTagUtils.addError(request, new ActionMessage("errors.gestioneBibliografica.testoProtocollo" ,
 							"La stampa catalogo per Classe può essere richiesta per un solo sistema di Classificazione - impostarlo con l'apposita selezione"));
-					this.saveErrors(request, errors);
+
 					return mapping.getInputForward();
 				}
 				if (esportaVO.getCodSistemaClassificazione().length() > 0 && !esportaVO.getTipoCatalogo().equals("CLA")) {
@@ -498,8 +481,8 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 							try {
 								nome = FormattazioneModificata.formatta(stringaLike);
 							} catch (EccezioneSbnDiagnostico e) {
-								errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(e.getMessage()));
-								this.saveErrors(request, errors);
+								LinkableTagUtils.addError(request, new ActionMessage(e.getMessage()));
+
 								return mapping.getInputForward();
 							}
 							// Manutenzione BUG Mantis (Collaudo) 5167 - 05-11-2012
@@ -507,8 +490,8 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 							// perchè tale limite è valido solo nel caso che la ricerca venga effettuata con il Protocollo
 							// mentre qui si usano le select su tabelle DB
 //								if (nome.length() < 3) {
-//									errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.prenotazione.failed"));
-//									this.saveErrors(request, errors);
+//									LinkableTagUtils.addError(request, new ActionMessage("errors.prenotazione.failed"));
+//
 //									return mapping.getInputForward();
 //								}
 							if (nome.length() > 50) {
@@ -522,8 +505,8 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 							try {
 								nome = FormattazioneModificata.formatta(stringaLike);
 							} catch (EccezioneSbnDiagnostico e) {
-								errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(e.getMessage()));
-								this.saveErrors(request, errors);
+								LinkableTagUtils.addError(request, new ActionMessage(e.getMessage()));
+
 								return mapping.getInputForward();
 							}
 							if (nome.length() > 50) {
@@ -539,8 +522,8 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 					//esporta per collocazioni
 					if (esportaVO.getTipoEstrazione() == TipoEstrazioneUnimarc.COLLOCAZIONI) {
 						if (currentForm.getCodPoloSez() == null && currentForm.getCodBibSez() == null){
-							errors.add("generico", new ActionMessage("error.documentofisico.premereTastoSezione"));
-							this.saveErrors(request, errors);
+							LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico.premereTastoSezione"));
+
 							request.setAttribute("currentForm", currentForm);
 							super.unspecified(mapping, currentForm, request, response);
 							this.saveMessages(request, ConfermaDati.bottoneGenerico(this, mapping, request));
@@ -577,21 +560,21 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 						areaParametriStampaSchedeVo.setEndInventario(currentForm.getEndInventario());
 						areaParametriStampaSchedeVo.setStartInventario(currentForm.getStartInventario());
 					} else {
-						errors = new ActionMessages();
-						errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+
+						LinkableTagUtils.addError(request, new ActionMessage(
 								"errors.gestioneBibliografica.testoProtocollo",
 						"Selezionare il tipo di filtri da utilizzare (Collocazione o Serie inventariale)"));
-						this.saveErrors(request, errors);
+
 						return mapping.getInputForward();
 
 					}
 
 				} else if (currentForm.getTipoProspettazione().toString().equals("CLASSIFICAZIONI")) {
-					errors = new ActionMessages();
-					errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+
+					LinkableTagUtils.addError(request, new ActionMessage(
 							"errors.gestioneBibliografica.testoProtocollo",
 					"La funzione richiesta attualmente non è disponibile; utilizzare i filtri per DATI CATALOGRAFICI"));
-					this.saveErrors(request, errors);
+
 					return mapping.getInputForward();
 				}
 
@@ -649,16 +632,15 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 				}
 
 				// user
-				UserVO user = utente;
-				areaParametriStampaSchedeVo.setUser(user.getUserId());
+				areaParametriStampaSchedeVo.setUser(utente.getUserId());
 
 				// percorso dei file template: webroot/jrxml/\tab\tab\tab\par
-				basePath = this.servlet.getServletContext().getRealPath(File.separator);
+				String basePath = this.servlet.getServletContext().getRealPath(File.separator);
 				String pathJrxml = basePath + File.separator + "jrxml" + File.separator + "default_catalografico.jrxml";
 
 				// ho finito di preparare il VO, ora lo metto nell'arraylist che
 				// passerò alla coda.
-				List parametri = new ArrayList();
+				List<AreaParametriStampaSchedeVo> parametri = new ArrayList<AreaParametriStampaSchedeVo>();
 				parametri.add(areaParametriStampaSchedeVo);
 				request.setAttribute("DatiVo", parametri);
 
@@ -668,10 +650,10 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 				// differita
 				StampaDiffVO stam = new StampaDiffVO();
 
-				UserVO ute = utente;
-				stam.setCodPolo(ute.getCodPolo());
-				stam.setCodBib(ute.getCodBib());
-				stam.setUser(ute.getUserId());
+
+				stam.setCodPolo(utente.getCodPolo());
+				stam.setCodBib(utente.getCodBib());
+				stam.setUser(utente.getUserId());
 				stam.setCodAttivita(CodiciAttivita.getIstance().GDF_STAMPA_CATALOGHI);
 
 				stam.setTipoStampa(currentForm.getTipoFormato());
@@ -686,61 +668,9 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 				String dataCorr = util.getCurrentDate();
 				stam.setData(dataCorr);
 
-				idBatch = factory.getElaborazioniDifferite().prenotaElaborazioneDifferita(ute.getTicket(), stam, null);
+				idBatch = factory.getElaborazioniDifferite().prenotaElaborazioneDifferita(utente.getTicket(), stam, null);
 			} else {
 				//esporta
-				TipoEstrazioneUnimarc type = getTipoEstrazione(mapping, form, request, response);
-				if (type == null)
-					return mapping.getInputForward();
-				esportaVO.setTipoEstrazione(type);
-				if (!ValidazioneDati.in(type,
-								TipoEstrazioneUnimarc.ARCHIVIO,
-								TipoEstrazioneUnimarc.FILE)) {
-					if (ValidazioneDati.equals(currentForm.getCodAttivita(), CodiciAttivita.getIstance().ESPORTA_DOCUMENTI_1040)
-							&& ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1) {
-						errors = new ActionMessages();
-						errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.esporta.selezionare.bib"));
-						this.saveErrors(request, errors);
-						request.setAttribute("currentForm", currentForm);
-						return mapping.getInputForward();
-					}
-					//esporta per collocazioni
-					if (type == TipoEstrazioneUnimarc.COLLOCAZIONI) {
-						if (currentForm.getCodPoloSez() == null && currentForm.getCodBibSez() == null){
-							errors.add("generico", new ActionMessage("error.documentofisico.premereTastoSezione"));
-							this.saveErrors(request, errors);
-							request.setAttribute("currentForm", currentForm);
-							return mapping.getInputForward();
-						}
-						currentForm.setFolder("Collocazione");
-
-						super.validaInputCollocazioni(mapping, request, currentForm);
-						currentForm.setTipoOperazione("S");
-						esportaVO.setCodPoloSez(utente.getCodPolo());
-						esportaVO.setCodBibSez(utente.getCodBib());
-						esportaVO.setPossCodSez(currentForm.getSezione());
-						esportaVO.setPossDallaCollocazione(currentForm.getDallaCollocazione());
-						esportaVO.setPossAllaCollocazione(currentForm.getAllaCollocazione());
-						esportaVO.setPossSpecificazioneCollDa(currentForm.getDallaSpecificazione());
-						esportaVO.setPossSpecificazioneCollA(currentForm.getAllaSpecificazione());
-						esportaVO.setTipoCollocazione(currentForm.getTipoColloc());
-						if (ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1){
-							throw new ValidationException(SbnErrorTypes.UNI_TROPPE_BIBLIOTECHE_PER_RANGE);
-						}
-						currentForm.setFolder(null);
-					}else{
-						super.validaInputRangeInventari(mapping, request, currentForm);
-						currentForm.setTipoOperazione("R");
-						esportaVO.setPossSerie(currentForm.getSerie());
-						esportaVO.setPossDalNumero(currentForm.getStartInventario());
-						esportaVO.setPossAlNumero(currentForm.getEndInventario());
-						currentForm.setFolder(null);
-						if (ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1){
-							throw new ValidationException(SbnErrorTypes.UNI_TROPPE_BIBLIOTECHE_PER_RANGE);
-						}
-					}
-
-				}
 				idBatch = factory.getElaborazioniDifferite().prenotaElaborazioneDifferita(utente.getTicket(), esportaVO, null);
 			}
 
@@ -752,9 +682,9 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 			}
 
 			if (currentForm.getTipoProspettazione() == TipoProspettazioneExport.POSSEDUTO){
-				errors = new ActionMessages();
-				errors.add("generico", new ActionMessage("error.documentofisico."+ e.getMessage())); if (!ValidazioneDati.isFilled(e.getMessage())) log.error("", e);
-				this.saveErrors(request, errors);
+
+				LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico."+ e.getMessage())); if (!ValidazioneDati.isFilled(e.getMessage())) log.error("", e);
+
 				request.setAttribute("currentForm", currentForm);
 				return mapping.getInputForward();
 			}
@@ -765,19 +695,118 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 		}
 
 		if (idBatch != null) {
-			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+			LinkableTagUtils.addError(request, new ActionMessage(
 					"errors.prenotazione.ok", idBatch));
-			this.saveErrors(request, errors);
+
 			return mapping.getInputForward();
 		} else {
-			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+			LinkableTagUtils.addError(request, new ActionMessage(
 					"errors.prenotazione.failed"));
-			this.saveErrors(request, errors);
+
 			return mapping.getInputForward();
 		}
 
 	}
 
+
+	private EsportaVO preparaParametriExport(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Navigation navi = Navigation.getInstance(request);
+		UserVO utente = navi.getUtente();
+		EsportaForm currentForm = (EsportaForm) form;
+		EsportaVO esportaVO = currentForm.getEsporta().copy();
+		esportaVO.setCodPolo(utente.getCodPolo());
+		esportaVO.setCodBib(utente.getCodBib());
+		esportaVO.setUser(utente.getUserId());
+
+		esportaVO.setCodAttivita(CodiciAttivita.getIstance().ESPORTA_DOCUMENTI_1040);
+
+		if (currentForm.isUnimarc() ) {
+			esportaVO.validate();
+			//almaviva5_20130226 imposta etichette da esportate
+			ExportUnimarcBatch.impostaEtichetteDaEsportare(esportaVO);
+		}
+
+		// se ho selezionato tutti i materiali é più efficente
+		// eliminare il filtro
+		String[] materiali = esportaVO.getMateriali();
+		if (ValidazioneDati.size(materiali) == EsportaVO.MATERIALI.length)
+			esportaVO.setMateriali(null);
+		else
+			// le collane hanno il tipo materiale a spazio, devo includerlo nel
+			// filtro
+			if (ValidazioneDati.isFilled(materiali)) {
+				if (Arrays.asList(esportaVO.getNature()).contains("C")) {
+					List<String> tmp = new ArrayList<String>(Arrays.asList(materiali));
+					tmp.add(" "); // aggiungo mat. fittizio
+					esportaVO.setMateriali(tmp.toArray(materiali));
+				}
+			}
+
+		String basePath = this.servlet.getServletContext().getRealPath(File.separator);
+		esportaVO.setBasePath(basePath);
+		String downloadPath = StampeUtil.getBatchFilesPath();
+		esportaVO.setDownloadPath(downloadPath);
+		esportaVO.setDownloadLinkPath("/"); // eliminato
+
+		esportaVO.setTicket(utente.getTicket());
+
+		if (currentForm.isUnimarc() ) {
+			TipoEstrazioneUnimarc type = getTipoEstrazione(mapping, form, request, response);
+			if (type == null)
+				return ESPORTA_ERROR;
+			esportaVO.setTipoEstrazione(type);
+			if (!ValidazioneDati.in(type,
+							TipoEstrazioneUnimarc.ARCHIVIO,
+							TipoEstrazioneUnimarc.FILE)) {
+				if (ValidazioneDati.equals(currentForm.getCodAttivita(), CodiciAttivita.getIstance().ESPORTA_DOCUMENTI_1040)
+						&& ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1) {
+
+					LinkableTagUtils.addError(request, new ActionMessage("errors.esporta.selezionare.bib"));
+
+					request.setAttribute("currentForm", currentForm);
+					return ESPORTA_ERROR;
+				}
+				//esporta per collocazioni
+				if (type == TipoEstrazioneUnimarc.COLLOCAZIONI) {
+					if (currentForm.getCodPoloSez() == null && currentForm.getCodBibSez() == null){
+						LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico.premereTastoSezione"));
+
+						request.setAttribute("currentForm", currentForm);
+						return ESPORTA_ERROR;
+					}
+					currentForm.setFolder("Collocazione");
+
+					super.validaInputCollocazioni(mapping, request, currentForm);
+					currentForm.setTipoOperazione("S");
+					esportaVO.setCodPoloSez(utente.getCodPolo());
+					esportaVO.setCodBibSez(utente.getCodBib());
+					esportaVO.setPossCodSez(currentForm.getSezione());
+					esportaVO.setPossDallaCollocazione(currentForm.getDallaCollocazione());
+					esportaVO.setPossAllaCollocazione(currentForm.getAllaCollocazione());
+					esportaVO.setPossSpecificazioneCollDa(currentForm.getDallaSpecificazione());
+					esportaVO.setPossSpecificazioneCollA(currentForm.getAllaSpecificazione());
+					esportaVO.setTipoCollocazione(currentForm.getTipoColloc());
+					if (ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1){
+						throw new ValidationException(SbnErrorTypes.UNI_TROPPE_BIBLIOTECHE_PER_RANGE);
+					}
+					currentForm.setFolder(null);
+				}else{
+					super.validaInputRangeInventari(mapping, request, currentForm);
+					currentForm.setTipoOperazione("R");
+					esportaVO.setPossSerie(currentForm.getSerie());
+					esportaVO.setPossDalNumero(currentForm.getStartInventario());
+					esportaVO.setPossAlNumero(currentForm.getEndInventario());
+					currentForm.setFolder(null);
+					if (ValidazioneDati.size(currentForm.getEsporta().getListaBib()) != 1){
+						throw new ValidationException(SbnErrorTypes.UNI_TROPPE_BIBLIOTECHE_PER_RANGE);
+					}
+				}
+			}
+		}
+
+		return esportaVO;
+	}
 
 	private TipoEstrazioneUnimarc getTipoEstrazione(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -929,6 +958,9 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 				return caricaFileBid(mapping, form, request);
 			case INV:
 				return caricaFileInventari(mapping, form, request);
+			default:
+				LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico.contenutoFileNonValido"));
+				break;
 			}
 
 			return mapping.getInputForward();
@@ -1060,9 +1092,9 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 
 			return biblio.getSIFListaBibliotechePolo(richiesta);
 		} catch (Exception e) { // altri tipi di errore
-			ActionMessages errors = new ActionMessages();
-			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.errore." + e.getMessage()));
-			this.saveErrors(request, errors);
+
+			LinkableTagUtils.addError(request, new ActionMessage("errors.errore." + e.getMessage()));
+
 			return mapping.getInputForward();
 		}
 	}
@@ -1157,10 +1189,10 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 //		return mapping.getInputForward();
 //	}
 
-	private List getListaSerie(String codPolo, String codBib, String ticket)
+	private List<SerieVO> getListaSerie(String codPolo, String codBib, String ticket)
 			throws Exception {
 		FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
-		List serie = factory.getGestioneDocumentoFisico().getListaSerie(codPolo, codBib, ticket);
+		List<SerieVO> serie = factory.getGestioneDocumentoFisico().getListaSerie(codPolo, codBib, ticket);
 		if (!ValidazioneDati.isFilled(serie))
 			return null;
 
@@ -1169,14 +1201,16 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 
 	public boolean checkAttivita(HttpServletRequest request, ActionForm form,
 			String idCheck) {
-
 		EsportaForm currentForm = (EsportaForm) form;
 		if (currentForm.isUnimarc()) {
 			// filtri su possesso solo se seleziono una singola bib.
 			if (ValidazioneDati.equals(idCheck, "COUNT_BIBLIOTECHE"))
 				return (ValidazioneDati.size(currentForm.getEsporta().getListaBib()) == 1);
+			if (ValidazioneDati.equals(idCheck, "TEMPLATE"))
+				try {
+					return Boolean.parseBoolean(CommonConfiguration.getProperty(Configuration.EXPORT_UNIMARC_SAVE_TEMPLATE, "false"));
+				} catch (Exception e) { return false; }
 		}
-
 		return true;
 	}
 
@@ -1246,15 +1280,11 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 		currentForm.getEsporta().setCodSistemaClassificazione("");
 	}
 
-
-
-
 	public ActionForward cartiglioListaBib(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 	throws Exception {
 		EsportaForm currentForm = (EsportaForm) form;
 		try {
-
 				FactoryEJBDelegate factory = FactoryEJBDelegate.getInstance();
 				BibliotecaDelegate biblio = new BibliotecaDelegate(factory, request);
 				SIFListaBibliotecheAffiliatePerAttivitaVO richiesta = new SIFListaBibliotecheAffiliatePerAttivitaVO(
@@ -1270,6 +1300,53 @@ public class EsportaAction extends RicercaInventariCollocazioniAction implements
 			}
 		}
 
+	public ActionForward downloadConfigTemplate(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+	throws Exception {
 
+		try {
+			EsportaVO esportaVO = this.preparaParametriExport(mapping, form, request, response);
+			if (esportaVO == ESPORTA_ERROR)
+				return mapping.getInputForward();
+
+			String json = this.toJson(esportaVO);
+			String fileName = "esporta-conf-" + (new SimpleDateFormat("yyyyMMdd-HHmmss")).format(DaoManager.now()) + ".json";
+			return SbnDownloadAction.downloadFile(request, fileName, json.getBytes("UTF-8"));
+
+			} catch (Exception e) {
+				return mapping.getInputForward();
+			}
+		}
+
+	private String toJson(EsportaVO esportaVO) {
+		final GsonBuilder gsonBuilder = new GsonBuilder().addSerializationExclusionStrategy(new ExclusionStrategy() {
+			public boolean shouldSkipField(FieldAttributes f) {
+				Class<?> clazz = f.getDeclaringClass();
+				return clazz == UniqueIdentifiableVO.class
+						&& ValidazioneDati.in(f.getName(), "uniqueId", "creationTime");
+			}
+
+			public boolean shouldSkipClass(Class<?> c) {
+				return false;
+			}
+		}).registerTypeAdapter(BibliotecaVO.class, new TypeAdapter<BibliotecaVO>() {
+			@Override
+			public BibliotecaVO read(JsonReader reader) throws IOException {
+				throw new NotImplementedException("non implementato");
+			}
+
+			@Override
+			public void write(JsonWriter writer, BibliotecaVO bib) throws IOException {
+				writer.beginObject();
+				writer.name("cod_polo");
+				writer.value(bib.getCod_polo());
+				writer.name("cod_bib");
+				writer.value(bib.getCod_bib());
+				writer.endObject();
+			}
+		});
+
+		return gsonBuilder.create().toJson(esportaVO);
+	}
 
 }

@@ -50,5 +50,6 @@
 	<classpathentry kind="lib" path="lib/common/commons-discovery-0.2.jar"/>
 	<classpathentry kind="lib" path="lib/common/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/common/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="lib/common/gson-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

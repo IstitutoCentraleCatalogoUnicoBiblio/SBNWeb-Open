@@ -100,6 +100,7 @@ public class Configuration {
 	public static final String SBNWEB_EXPORT_CONFIG_FILE = "SBNWEB_EXPORT_CONFIG_FILE";
 	public static final String SBNWEB_EXPORT_IGNORE_FILE = "SBNWEB_EXPORT_IGNORE_FILE";
 	public static final String EXPORT_UNIMARC_FILE_ACCESSORI = "EXPORT_UNIMARC_FILE_ACCESSORI";
+	public static final String EXPORT_UNIMARC_SAVE_TEMPLATE = "EXPORT_UNIMARC_SAVE_TEMPLATE";
 
 	public static final String WS_MAX_CONCURRENT_CLIENTS = "WS_MAX_CONCURRENT_CLIENTS";
 
