@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.iccu.sbn</groupId>
 	<artifactId>sbnweb</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.7-dev</version>
 	<packaging>pom</packaging>
 	<name>sbnweb</name>
 	<description>sbnweb LMS</description>
