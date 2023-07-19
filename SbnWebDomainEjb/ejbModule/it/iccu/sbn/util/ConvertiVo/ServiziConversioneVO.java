@@ -2913,11 +2913,6 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 		hVO.setCod_bib(bp.getCodBibXUteBib());
 		hVO.setCod_polo_bib(bp.getCodPoloXUteBib());
 
-//		if (webVO.getPassword()!= null && !webVO.getPassword().trim().equals("")) {
-//			PasswordEncrypter encrypter = new PasswordEncrypter(webVO.getPassword().trim());
-//			String encryptedPassword = encrypter.encrypt(webVO.getPassword().trim());
-//			hibernateVO.setPassword(encryptedPassword);
-//		}
 		if (ValidazioneDati.isFilled(webVO.getPassword())) {
 			hVO.setPassword(webVO.getPassword());
 			hVO.setLast_access(webVO.getLastAccess());
@@ -2992,41 +2987,35 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 		hVO.setPersona_giuridica(webVO.getProfessione().getPersonaGiuridica());
 
 		// esame esistenza della sola professione 18.01.10
-		if (webVO.getProfessione().getProfessione()!=null && webVO.getProfessione().getProfessione().trim().length()>0 ) {
+		if (ValidazioneDati.isFilled(webVO.getProfessione().getProfessione()) ) {
 			hVO.setProfessione(webVO.getProfessione().getProfessione().trim().charAt(0));
 		}
 
 		// esame esistenza solo titolo di studio 18.01.10
-		if (webVO.getProfessione().getTitoloStudio()!=null && webVO.getProfessione().getTitoloStudio().trim().length()>0 ) {
+		if (ValidazioneDati.isFilled(webVO.getProfessione().getTitoloStudio()) ) {
 			hVO.setTit_studio(webVO.getProfessione().getTitoloStudio().trim().charAt(0));
 		}
 
-		if (webVO.getProfessione().getTipoPersona() != null
-				&& webVO.getProfessione().getTipoPersona().length() != 0)
-			hVO.setTipo_pers_giur(webVO.getProfessione()
-					.getTipoPersona().charAt(0));
-		if (bp.getPoloCredito() != null
-				&& bp.getPoloCredito().length() != 0) {
+		if (ValidazioneDati.isFilled(webVO.getProfessione().getTipoPersona()) )
+			hVO.setTipo_pers_giur(webVO.getProfessione().getTipoPersona().charAt(0));
+		if (ValidazioneDati.isFilled(bp.getPoloCredito().length()) ) {
 			//hibernateVO.setCredito_polo(new BigDecimal(webVO.getBibliopolo().getPoloCredito()));
 			hVO.setCredito_polo(new BigDecimal(bp.getPoloCreditoDouble()));
 		}
 		if (bp.getPoloNote() != null)
-			hVO
-					.setNote_polo(bp.getPoloNote().trim());
+			hVO.setNote_polo(bp.getPoloNote().trim());
 		if (bp.getPoloDataRegistrazione() != null
 				&& bp.getPoloDataRegistrazione().length() != 0)
-			hVO.setData_reg(ddMMyyyparser
-					.parse(bp.getPoloDataRegistrazione()));
+			hVO.setData_reg(ddMMyyyparser.parse(bp.getPoloDataRegistrazione()));
 		if (bp.getPoloInfrazioni() != null)
-			hVO.setNote(bp.getPoloInfrazioni()
-					.trim());
+			hVO.setNote(bp.getPoloInfrazioni().trim());
 
 		//almaviva5_20110428 #4401
 		hVO.setCodice_anagrafe(bp.getCodiceAnagrafe());
 
 		hVO.setUte_ins(webVO.getUteIns());
 		hVO.setUte_var(webVO.getUteVar());
-		Timestamp ts = DaoManager.now();
+		final Timestamp ts = DaoManager.now();
 		if (webVO.getTsIns() == null)
 			hVO.setTs_ins(ts);
 		else
@@ -3040,6 +3029,9 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 
 		String tipoUtente = webVO.getTipoUtente();
 		hVO.setCd_tipo_ute(isFilled(tipoUtente) ? tipoUtente.charAt(0) : Servizi.Utenti.UTENTE_TIPO_SBNWEB_CHR);
+
+		// segnalazione CSA: mancato aggiornamento diritti
+		hVO.setLast_access(ValidazioneDati.coalesce(webVO.getLastAccess(), ts));
 
 		return hVO;
 	}
