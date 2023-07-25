@@ -26,9 +26,12 @@ import it.finsiel.sbn.polo.factoring.profile.ValidatorProfiler;
 import it.finsiel.sbn.polo.factoring.util.Progressivi;
 import it.finsiel.sbn.polo.factoring.util.ResourceLoader;
 import it.finsiel.sbn.polo.factoring.util.SbnDatavar;
+import it.finsiel.sbn.polo.factoring.util.ValidazioneDati;
 import it.finsiel.sbn.polo.oggetti.AllineamentoTitolo;
+import it.finsiel.sbn.polo.oggetti.Audiovisivo;
 import it.finsiel.sbn.polo.oggetti.Cartografia;
 import it.finsiel.sbn.polo.oggetti.Composizione;
+import it.finsiel.sbn.polo.oggetti.Discosonoro;
 import it.finsiel.sbn.polo.oggetti.Grafica;
 import it.finsiel.sbn.polo.oggetti.Impronta;
 import it.finsiel.sbn.polo.oggetti.Incipit;
@@ -44,8 +47,10 @@ import it.finsiel.sbn.polo.oggetti.TitoloBiblioteca;
 import it.finsiel.sbn.polo.oggetti.TitoloLuogo;
 import it.finsiel.sbn.polo.oggetti.TitoloMarca;
 import it.finsiel.sbn.polo.oggetti.TitoloTitolo;
+import it.finsiel.sbn.polo.orm.Tb_audiovideo;
 import it.finsiel.sbn.polo.orm.Tb_cartografia;
 import it.finsiel.sbn.polo.orm.Tb_composizione;
+import it.finsiel.sbn.polo.orm.Tb_disco_sonoro;
 import it.finsiel.sbn.polo.orm.Tb_grafica;
 import it.finsiel.sbn.polo.orm.Tb_incipit;
 import it.finsiel.sbn.polo.orm.Tb_musica;
@@ -300,7 +305,7 @@ public class TitoloFonde extends Titolo {
       	  	 && !cd_natura.equals(cd_natura2)
       	  	) {
       		Tr_tit_tit tt2;
-      		TitoloTitolo tt1 = new TitoloTitolo();
+
       		String padreTitPartenza = null;
       		String padreTitArrivo = null;
       		tt2 = null;
@@ -934,44 +939,71 @@ public class TitoloFonde extends Titolo {
 
     }
 
-    public void aggiornaEstensioni(Tb_titolo titolo, String bid2) throws IllegalArgumentException, InvocationTargetException, Exception {
-        String mat2 = estraiTitoloPerID(bid2).getTP_MATERIALE();
-        String mat1 = titolo.getTP_MATERIALE();
-        if (!mat2.equals("M") && mat2.equals("A"))
-            return;
-        if (!mat1.equals("G") && !mat1.equals("C"))
-            return;
-        String bid = titolo.getBID();
-        String ute_var = titolo.getUTE_VAR();
-        if (mat1.equals("C")) {
-            //Cartografia
-            Cartografia cart = new Cartografia();
-            Tb_cartografia tbc = cart.cercaPerId(bid);
-            cart.cancellaPerBid(bid, ute_var, new SbnDatavar(tbc.getTS_VAR()));
-            tbc.setUTE_INS(ute_var);
-            tbc.setUTE_VAR(ute_var);
-            tbc.setBID(bid2);
-            cart.inserisci(tbc);
-        } else {
-            //Grafica
-            Grafica gra = new Grafica();
-            Tb_grafica tbg = gra.cercaPerId(bid);
-
-
-            // Inizio BUG MANTIS 3648  almaviva2 adeguato comportamento a quello di Cartografia
-//            gra.cancellaPerBid(bid, ute_var);
-            gra.cancellaPerBid(bid, ute_var, new SbnDatavar(tbg.getTS_VAR()));
-            // Fine BUG MANTIS 3648  almaviva2 adeguato comportamento a quello di Cartografia
-
-
-
-            tbg.setUTE_INS(ute_var);
-            tbg.setUTE_VAR(ute_var);
-            tbg.setBID(bid2);
-            gra.inserisci(tbg);
-
-        }
-    }
+	public void aggiornaEstensioni(Tb_titolo titolo, String bid2) throws IllegalArgumentException, InvocationTargetException, Exception {
+		String mat2 = estraiTitoloPerID(bid2).getTP_MATERIALE();
+		String mat1 = titolo.getTP_MATERIALE();
+		if (!mat2.equals("M") && mat2.equals("A"))
+			return;
+		if (!ValidazioneDati.in(mat1, "G", "C", "H"))
+			return;
+		String bid = titolo.getBID();
+		String ute_var = titolo.getUTE_VAR();
+		if (mat1.equals("C")) {
+			// Cartografia
+			Cartografia cart = new Cartografia();
+			Tb_cartografia tbc = cart.cercaPerId(bid);
+			if (tbc != null) {
+				cart.cancellaPerBid(bid, ute_var, new SbnDatavar(tbc.getTS_VAR()));
+				tbc.setUTE_INS(ute_var);
+				tbc.setUTE_VAR(ute_var);
+				tbc.setBID(bid2);
+				cart.inserisci(tbc);
+			}
+		} else if (mat1.equals("G")) {
+			// Grafica
+			Grafica gra = new Grafica();
+			Tb_grafica tbg = gra.cercaPerId(bid);
+			if (tbg != null) {
+				// Inizio BUG MANTIS 3648 almaviva2 adeguato comportamento a quello di
+				// Cartografia
+				// gra.cancellaPerBid(bid, ute_var);
+				gra.cancellaPerBid(bid, ute_var, new SbnDatavar(tbg.getTS_VAR()));
+				// Fine BUG MANTIS 3648 almaviva2 adeguato comportamento a quello di Cartografia
+				tbg.setUTE_INS(ute_var);
+				tbg.setUTE_VAR(ute_var);
+				tbg.setBID(bid2);
+				gra.inserisci(tbg);
+			}
+		} else if (mat1.equals("H")) {
+			// Audiovisivo
+			Audiovisivo vis = new Audiovisivo();
+			Tb_audiovideo aud = vis.cercaPerId(bid);
+			if (aud != null) {
+				vis.cancellaPerBid(bid, ute_var, new SbnDatavar(aud.getTS_VAR()));
+				aud.setUTE_INS(ute_var);
+				aud.setUTE_VAR(ute_var);
+				aud.setBID(bid2);
+				if (vis.cercaPerId(bid2) == null) {
+					vis.inserisci(aud);
+				} else {
+					vis.update(aud);
+				}
+			} // end if tb_audiovideo
+			Discosonoro dis = new Discosonoro();
+			Tb_disco_sonoro son = dis.cercaPerId(bid);
+			if (son != null) {
+				dis.cancellaPerBid(bid, ute_var, new SbnDatavar(son.getTS_VAR()));
+				son.setUTE_INS(ute_var);
+				son.setUTE_VAR(ute_var);
+				son.setBID(bid2);
+				if (dis.cercaPerId(bid2) == null) {
+					dis.inserisci(son);
+				} else {
+					dis.update(son);
+				}
+			} // end if tb_disco_sonoro
+		}
+	}
 
     public void elaboraTitBib(String bidPartenza, String bidArrivo, String ute_var) throws IllegalArgumentException, InvocationTargetException, Exception {
         TitoloBiblioteca titBib = new TitoloBiblioteca();
