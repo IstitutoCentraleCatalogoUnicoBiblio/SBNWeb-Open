@@ -3082,8 +3082,12 @@ public class VariazioneBodyTitoli {
 		// Campi CARTOGRAFIA
 		if (getTipoMateriale().equals("C")) {
 			// Pubblicazione governativa
-			if (ValidazioneDati.notEmpty(getPubblicazioneGovernativa()))
-				c100.setA_100_20(getPubblicazioneGovernativa());
+			if (ValidazioneDati.notEmpty(getPubblicazioneGovernativa())) {
+				if (c100 != null) {
+					// fix per spoglio cartografico senza data
+					c100.setA_100_20(getPubblicazioneGovernativa());
+				}
+			}
 
 			// Indicatore di colore
 			if (ValidazioneDati.notEmpty(getIndicatoreColoreCartografia())) {

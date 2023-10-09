@@ -968,7 +968,7 @@ public abstract class FormatoDocumento extends FormatoTitolo {
             //if (c3.getTipoNota().getType() == SbnTipoNota.VALUE_1_TYPE) {
 
             	c321 = new C321();
-                String [] nota321 = nota.getDS_NOTA().split("##");
+            	String [] nota321 = nota.getDS_NOTA().split("##", -1);	// #8199 lettura note con elementi vuoti
 //                if (nota321[0].equals("I")) { //nota inserita
 	                if (nota321[1].equals("DB")) {
 		                String link = Decodificatore.getCd_tabellaDaDescrizione("LINK", nota321[2]);
