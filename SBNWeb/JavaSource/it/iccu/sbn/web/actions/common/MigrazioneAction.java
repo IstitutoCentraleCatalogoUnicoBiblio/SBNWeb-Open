@@ -92,6 +92,7 @@ public final class MigrazioneAction extends LookupDispatchAction {
 		map.put("button.mig.allinea.ill", "allineaILL");
 
 		map.put("button.mig.invia.ill.xml", "invioXmlILL");
+		map.put("button.mig.chiavi.possessore", "chiaviPossessore");
 
 		return map;
 	}
@@ -491,6 +492,21 @@ public final class MigrazioneAction extends LookupDispatchAction {
 			log.error("", e);
 			LinkableTagUtils.addError(request, new ActionMessage(e.getLinkedException().getMessage()));
 
+		} catch (Exception e) {
+			log.error("", e);
+			LinkableTagUtils.addError(request, new ActionMessage(e.getMessage()));
+		}
+
+		return mapping.getInputForward();
+	}
+
+	public ActionForward chiaviPossessore(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		try {
+			DomainEJBFactory.getInstance().getPossessoriBMT().ricalcolaChiavi();
+			LinkableTagUtils.addError(request, new ActionMessage("error.documentofisico.operazioneCorrettamenteEseguita"));
 		} catch (Exception e) {
 			log.error("", e);
 			LinkableTagUtils.addError(request, new ActionMessage(e.getMessage()));

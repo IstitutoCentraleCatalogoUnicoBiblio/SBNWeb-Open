@@ -41,6 +41,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
@@ -608,17 +609,16 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 
 		}
 	}
-	public List<Tbc_possessore_provenienza> getPossessoreByPid (String codePID) throws DaoManagerException	{
+
+	public Tbc_possessore_provenienza getPossessoreByPid (String codePID) throws DaoManagerException	{
 		try {
 			Session session = this.getCurrentSession();
 			Criteria cr = session.createCriteria(Tbc_possessore_provenienza.class);
 			cr.add(Restrictions.eq("pid", codePID));
 			cr.add(Restrictions.ne("fl_canc", 'S'));
-			List<Tbc_possessore_provenienza> ret =  (cr.list());
-			return ret;
+			return (Tbc_possessore_provenienza) cr.uniqueResult();
 		} catch (HibernateException he) {
 			throw new DaoManagerException(he);
-
 		}
 	}
 
@@ -628,7 +628,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 		try{
 			Session session = this.getCurrentSession();
 			setSessionCurrentCfg();
-			Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
+			Timestamp ts = DaoManager.now();
 			Tbc_possessore_provenienza possProv = new Tbc_possessore_provenienza();
 
 			possProv.setPid(possDett.getPid());
@@ -650,8 +650,8 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 //			//chiavi calcolate
 			possProv.setKy_cautun(key.getKy_cautun());
 			possProv.setKy_auteur(key.getKy_auteur());
-			possProv.setKy_el1(key.getKy_el1a());
-			possProv.setKy_el2(key.getKy_el2a());
+			possProv.setKy_el1(key.getKy_el1());
+			possProv.setKy_el2(key.getKy_el2());
 			possProv.setKy_el3(key.getKy_el3());
 			possProv.setKy_el4(key.getKy_el4());
 			possProv.setKy_el5(key.getKy_el5());
@@ -670,7 +670,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 		try{
 			Session session = this.getCurrentSession();
 			setSessionCurrentCfg();
-			Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
+			Timestamp ts = DaoManager.now();
 			possProv.setTp_nome_pp(possDett.getTipoTitolo().charAt(0));
 			possProv.setCd_livello(possDett.getLivello());
 			possProv.setTp_forma_pp(possDett.getForma().charAt(0));
@@ -764,7 +764,7 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 		String ret = null;
 		try{
 			Session session = this.getCurrentSession();
-			Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
+			Timestamp ts = DaoManager.now();
 			// imposto la data di variazione
 			setSessionCurrentCfg();
 			possProv.setTs_var(ts);
@@ -792,4 +792,19 @@ public class Tbc_possessore_provenienzaDao extends DaoManager {
 
         return Restrictions.sqlRestriction(sql.toString());
   }
+
+	public List<String> getPossessori() throws DaoManagerException	{
+		try {
+			final Session session = this.getCurrentSession();
+			final Criteria c = session.createCriteria(Tbc_possessore_provenienza.class);
+			c.setProjection(Projections.property("pid"));
+			c.add(Restrictions.ne("fl_canc", 'S'));
+			c.addOrder(Order.asc("pid"));
+			List<String> ret = c.list();
+			return ret;
+		} catch (HibernateException he) {
+			throw new DaoManagerException(he);
+		}
+	}
+
 }

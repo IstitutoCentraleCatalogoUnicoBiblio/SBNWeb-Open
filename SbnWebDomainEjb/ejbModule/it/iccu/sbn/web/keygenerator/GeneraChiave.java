@@ -223,12 +223,20 @@ public class GeneraChiave extends SbnMarcGateway implements KeyAutore {
 		return key != null ? key.getKy_cles2_A() : null;
 	}
 
+	public String getKy_el1() {
+		return key != null ? key.getKy_el1() : null;
+	}
+
 	public String getKy_el1a() {
 		return key != null ? key.getKy_el1a() : null;
 	}
 
 	public String getKy_el1b() {
 		return key != null ? key.getKy_el1b() : null;
+	}
+
+	public String getKy_el2() {
+		return key != null ? key.getKy_el2() : null;
 	}
 
 	public String getKy_el2a() {

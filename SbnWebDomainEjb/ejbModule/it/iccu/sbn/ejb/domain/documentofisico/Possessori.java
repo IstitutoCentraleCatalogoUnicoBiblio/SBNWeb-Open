@@ -65,6 +65,6 @@ public interface Possessori extends javax.ejb.EJBObject {
    public String modificaLegamePossessoreInventario (PossessoriDiInventarioVO possInv)
 	throws it.iccu.sbn.ejb.exception.ApplicationException, it.iccu.sbn.ejb.exception.DataException, it.iccu.sbn.ejb.exception.ValidationException, java.rmi.RemoteException;
 
-
+	public void ricalcolaChiavi() throws ApplicationException, RemoteException;
 
 }

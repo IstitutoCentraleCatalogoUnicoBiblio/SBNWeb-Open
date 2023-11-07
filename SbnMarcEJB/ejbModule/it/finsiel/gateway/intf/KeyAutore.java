@@ -25,66 +25,70 @@ public interface KeyAutore extends Serializable {
 	 * Returns the ky_auteur.
 	 * @return String
 	 */
-	public abstract String getKy_auteur();
+	String getKy_auteur();
 
 	/**
 	 * Returns the ky_cautun.
 	 * @return String
 	 */
-	public abstract String getKy_cautun();
+	String getKy_cautun();
 
 	/**
 	 * Returns the ky_el1a.
 	 * @return String
 	 */
-	public abstract String getKy_el1a();
+	String getKy_el1a();
 
 	/**
 	 * Returns the ky_el1b.
 	 * @return String
 	 */
-	public abstract String getKy_el1b();
+	String getKy_el1b();
 
 	/**
 	 * Returns the ky_el2a.
 	 * @return String
 	 */
-	public abstract String getKy_el2a();
+	String getKy_el2a();
 
 	/**
 	 * Returns the ky_el2b.
 	 * @return String
 	 */
-	public abstract String getKy_el2b();
+	String getKy_el2b();
 
 	/**
 	 * Returns the ky_el3.
 	 * @return String
 	 */
-	public abstract String getKy_el3();
+	String getKy_el3();
 
 	/**
 	 * Returns the ky_el4.
 	 * @return String
 	 */
-	public abstract String getKy_el4();
+	String getKy_el4();
 
 	/**
 	 * Returns the ky_el5.
 	 * @return String
 	 */
-	public abstract String getKy_el5();
+	String getKy_el5();
 
 	/**
 	 * Returns the ky_cles1_A.
 	 * @return String
 	 */
-	public abstract String getKy_cles1_A();
+	String getKy_cles1_A();
 
 	/**
 	 * Returns the ky_cles2_A, null se ky_cles2_A è lunga zero
 	 * @return String
 	 */
-	public abstract String getKy_cles2_A();
+	String getKy_cles2_A();
+
+	String getKy_el1();
+
+	String getKy_el2();
 
 }

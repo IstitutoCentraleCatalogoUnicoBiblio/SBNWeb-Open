@@ -229,6 +229,12 @@
 			<method-attributes></method-attributes>
 		</session>
 		<session>
+			<ejb-name>PossessoriBMT</ejb-name>
+			<jndi-name>sbnWeb/PossessoriBMT</jndi-name>
+
+			<method-attributes></method-attributes>
+		</session>
+		<session>
 			<ejb-name>Semantica</ejb-name>
 			<jndi-name>sbnWeb/Semantica</jndi-name>
 

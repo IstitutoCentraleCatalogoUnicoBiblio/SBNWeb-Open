@@ -181,6 +181,14 @@
 							</html:submit>
 						</td>
 					</tr>
+					<tr>
+						<td><h3>Ricalcolo chiavi possessori</h3></td>
+						<td>
+							<html:submit property="methodMigrazione">
+								<bean:message key="button.mig.chiavi.possessore" bundle="messages" />
+							</html:submit>
+						</td>
+					</tr>
 				</table>
 
 

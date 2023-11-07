@@ -1287,6 +1287,17 @@ public class ChiaviAutore implements KeyAutore {
             ky_cles2_A += " ";
         return ky_cles2_A;
     }
+
+	@Override
+	public String getKy_el1() {
+		return this.ky_el1 != null ? ValidazioneDati.fillRight(this.ky_el1, ' ', 6) : null;
+	}
+
+	@Override
+	public String getKy_el2() {
+		return this.ky_el2 != null ? ValidazioneDati.fillRight(this.ky_el2, ' ', 6) : null;
+	}
+
     /**
      * Il metodo si applica soo se non ci sono già asterischi nel nome.
      *
@@ -1383,4 +1394,5 @@ public class ChiaviAutore implements KeyAutore {
 		System.out.println(idTitAut("CSWE123456", "CSWV123456", null, null));
 		return;
 	}
+
 }

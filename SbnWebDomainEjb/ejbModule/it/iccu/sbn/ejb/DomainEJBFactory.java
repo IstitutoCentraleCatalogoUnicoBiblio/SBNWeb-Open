@@ -52,6 +52,7 @@ import it.iccu.sbn.ejb.domain.documentofisico.InventarioBMT;
 import it.iccu.sbn.ejb.domain.documentofisico.InventarioBMTHome;
 import it.iccu.sbn.ejb.domain.documentofisico.InventarioHome;
 import it.iccu.sbn.ejb.domain.documentofisico.Possessori;
+import it.iccu.sbn.ejb.domain.documentofisico.PossessoriBMTHome;
 import it.iccu.sbn.ejb.domain.documentofisico.PossessoriHome;
 import it.iccu.sbn.ejb.domain.periodici.PeriodiciBMTHome;
 import it.iccu.sbn.ejb.domain.periodici.PeriodiciSBN;
@@ -128,6 +129,7 @@ public class DomainEJBFactory {
 	private Collocazione collocazione;
 	private DocumentoFisicoCommon documentoFisicoCommon;
 	private Possessori possessori;
+	private Possessori possessoriBMT;
 	private Repertorio repertorio;
 	private Semantica semantica;
 	private Servizi servizi;
@@ -318,6 +320,16 @@ public class DomainEJBFactory {
 		this.possessori = possessoriHome.create();
 
 		return possessori;
+	}
+
+	public synchronized Possessori getPossessoriBMT() throws NamingException, RemoteException, CreateException {
+		if (possessoriBMT != null)
+			return possessoriBMT;
+
+		PossessoriBMTHome possessoriHome = (PossessoriBMTHome) ctx.lookup(PossessoriBMTHome.JNDI_NAME);
+		this.possessoriBMT = possessoriHome.create();
+
+		return possessoriBMT;
 	}
 
 	public synchronized Repertorio getRepertorio() throws NamingException, RemoteException,

@@ -747,6 +747,17 @@
          <transaction-type>Container</transaction-type>
       </session>
 
+      <session>
+         <description>PossessoriBMT</description>
+         <display-name>PossessoriBMT</display-name>
+         <ejb-name>PossessoriBMT</ejb-name>
+         <home>it.iccu.sbn.ejb.domain.documentofisico.PossessoriBMTHome</home>
+         <remote>it.iccu.sbn.ejb.domain.documentofisico.Possessori</remote>
+         <ejb-class>it.iccu.sbn.ejb.domain.documentofisico.PossessoriSession</ejb-class>
+         <session-type>Stateless</session-type>
+         <transaction-type>Bean</transaction-type>
+      </session>
+
       <session id="Session_ServiziErogazioneServizi">
          <description><![CDATA[A session bean named ServiziErogazioneServizi]]></description>
          <display-name>ServiziErogazioneServizi</display-name>

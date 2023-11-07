@@ -21,6 +21,7 @@ import it.iccu.sbn.ejb.exception.DataException;
 import it.iccu.sbn.ejb.exception.ValidationException;
 import it.iccu.sbn.ejb.model.unimarcmodel.types.SbnAuthority;
 import it.iccu.sbn.ejb.utils.DateUtil;
+import it.iccu.sbn.ejb.utils.ValidazioneDati;
 import it.iccu.sbn.ejb.vo.documentofisico.CodiceVO;
 import it.iccu.sbn.ejb.vo.documentofisico.PossessoreListeVO;
 import it.iccu.sbn.ejb.vo.documentofisico.PossessoriDettaglioVO;
@@ -30,6 +31,7 @@ import it.iccu.sbn.ejb.vo.documentofisico.PossessoriRicercaVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.AreaDatiPassaggioInterrogazioneTitoloAnaliticaVO;
 import it.iccu.sbn.ejb.vo.gestionebibliografica.titolo.TreeElementViewTitoli;
+import it.iccu.sbn.persistence.dao.common.DaoManager;
 import it.iccu.sbn.persistence.dao.documentofisico.Tbc_possessore_provenienzaDao;
 import it.iccu.sbn.persistence.dao.documentofisico.Trc_poss_prov_inventariDao;
 import it.iccu.sbn.persistence.dao.documentofisico.Trc_possessori_possessoriDao;
@@ -37,9 +39,11 @@ import it.iccu.sbn.persistence.dao.exception.DaoManagerException;
 import it.iccu.sbn.polo.orm.documentofisico.Tbc_possessore_provenienza;
 import it.iccu.sbn.polo.orm.documentofisico.Trc_poss_prov_inventari;
 import it.iccu.sbn.polo.orm.documentofisico.Trc_possessori_possessori;
+import it.iccu.sbn.servizi.ticket.TicketChecker;
 import it.iccu.sbn.util.validation.ValidazioniDocumentoFisico;
 import it.iccu.sbn.web.constant.TitoliCollegatiInvoke;
 import it.iccu.sbn.web.keygenerator.GeneraChiave;
+import it.iccu.sbn.web.vo.SbnErrorTypes;
 import it.iccu.sbn.web.vo.TreeElementView.KeyDisplayMode;
 
 import java.rmi.RemoteException;
@@ -47,8 +51,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJBException;
-import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
+import javax.transaction.UserTransaction;
+
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -65,9 +71,11 @@ import javax.ejb.SessionContext;
  * <!-- end-xdoclet-definition -->
  * @generated
  */
-public abstract class PossessoriBean implements SessionBean {
+public abstract class PossessoriBean extends TicketChecker implements Possessori {
 
 	private static final long serialVersionUID = 8724788180488377473L;
+
+	private static Logger log = Logger.getLogger(Possessori.class);
 
 	private Trc_poss_prov_inventariDao daoPossessori;
 	private Tbc_possessore_provenienzaDao daoPossessoriProv;
@@ -75,6 +83,7 @@ public abstract class PossessoriBean implements SessionBean {
 
 	private ValidazioniDocumentoFisico valida;
 
+	private SessionContext ctx;
 
 	public PossessoriBean() {
 		valida = new ValidazioniDocumentoFisico();
@@ -85,6 +94,7 @@ public abstract class PossessoriBean implements SessionBean {
 	}
 
 	public void setSessionContext(SessionContext ctx) throws EJBException, RemoteException {
+		this.ctx = ctx;
 		daoPossessori = new Trc_poss_prov_inventariDao();
 		daoPossessoriProv = new Tbc_possessore_provenienzaDao() ;
 		daoPossPoss = new Trc_possessori_possessoriDao();
@@ -272,8 +282,8 @@ public abstract class PossessoriBean implements SessionBean {
 		try {
 			//estraggo la lista dei possessori per il singolo pid selezionato dalla sintetica di partenza
 			listaPossPerPID = daoPossessoriProv.getListaPossessori(polo, bib ,possRic,null);
-			if (listaPossPerPID.size() > 0) {
-				Tbc_possessore_provenienza recResult = (Tbc_possessore_provenienza)listaPossPerPID.get(0);
+			if (ValidazioneDati.isFilled(listaPossPerPID) ) {
+				Tbc_possessore_provenienza recResult = (Tbc_possessore_provenienza)ValidazioneDati.first(listaPossPerPID);
 				if (recResult.getTp_forma_pp() == 'A'){
 					// il pid da sintetica era una forma A - Accettata e quindi è la radice e posso crearla da subito
 					int invCount = (daoPossessori.countInventariPerPossessore(pid_da_sintetica)).intValue() ;
@@ -515,8 +525,7 @@ public abstract class PossessoriBean implements SessionBean {
 		String ret="";
 		AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO result = new AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO();
 		try {
-			List<Tbc_possessore_provenienza> possposs = daoPossessoriProv.getPossessoreByPid(pid_padre);
-			Tbc_possessore_provenienza possessore_A = possposs.get(0);
+			Tbc_possessore_provenienza possessore_A = daoPossessoriProv.getPossessoreByPid(pid_padre);
 			Tbc_possessore_provenienza possessore_Appoggio = new Tbc_possessore_provenienza();
 
 			possessore_Appoggio.setTp_forma_pp(possessore_A.getTp_forma_pp());
@@ -537,11 +546,7 @@ public abstract class PossessoriBean implements SessionBean {
 			possessore_Appoggio.setDs_nome_aut(possessore_A.getDs_nome_aut());
 			possessore_Appoggio.setFl_canc(possessore_A.getFl_canc());
 
-			possposs.clear();
-			possposs = daoPossessoriProv.getPossessoreByPid(pid_figlio);
-			Tbc_possessore_provenienza possessore_B = possposs.get(0);
-			String codice_Pid_Poss_A = possessore_A.getPid();
-			String codice_Pid_Poss_B = possessore_B.getPid();
+			Tbc_possessore_provenienza possessore_B = daoPossessoriProv.getPossessoreByPid(pid_figlio);
 
 			//imposto in modo invertito i pid sui possessori determinati
 			//possessore_A.setTp_forma_pp(possessore_B.getTp_forma_pp());
@@ -615,7 +620,7 @@ public abstract class PossessoriBean implements SessionBean {
 		try {
 			possTrovato = ((daoPossessoriProv.getCountPossessoreByPid(possDett.getPid())) > 0) ?true:false;
 			if (possTrovato) {
-				Tbc_possessore_provenienza possProv = (daoPossessoriProv.getPossessoreByPid(possDett.getPid()).get(0));
+				Tbc_possessore_provenienza possProv = daoPossessoriProv.getPossessoreByPid(possDett.getPid());
 				risultatoIns = daoPossessoriProv.modificaPossessore(possDett, uteFirma,key,possProv);
 			}
 		} catch (DaoManagerException e) {
@@ -680,7 +685,7 @@ public abstract class PossessoriBean implements SessionBean {
 		possTrovato = (daoPossessoriProv.getCountPossessoreByPid(possDett.getPid()) > 0) ?true:false;
 		if (possTrovato) {
 
-			Tbc_possessore_provenienza possProv = (daoPossessoriProv.getPossessoreByPid(possDett.getPid())).get(0) ;
+			Tbc_possessore_provenienza possProv = daoPossessoriProv.getPossessoreByPid(possDett.getPid());
 			Trc_possessori_possessori possPoss =  (Trc_possessori_possessori)(daoPossPoss.getPossessorePossessore(possDett.getPid(), pidOrigine)).get(0);
 
 			//posso fare update di questa riga
@@ -891,7 +896,7 @@ public AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO cancellaLegamePoss
 		// Se pid_figlio esiste cancelliamo il pid_figlio e la sua relazione con il pid_padre
 		// in quanto non ci sono vincoli
 		if (pid_figlio.length() > 0){
-			if (daoPossessoriProv.getPossessoreByPid(pid_figlio).size() == 0) {
+			if (daoPossessoriProv.getPossessoreByPid(pid_figlio) == null) {
 				result.setTestoProtocollo("Impossibile eliminare il possessore selezionato. Non presente in base dati.");
 				result.setCodErr("0101");
 				return result ;
@@ -911,7 +916,7 @@ public AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO cancellaLegamePoss
 			if (numInvPoss==0){
 				if (pid_figlio.trim().equals("")){
 					//la cancellazione avviene partendo dalla radice libera da inventari e quindi elimino lei e le sue forme di rinvio se esistono
-					if (daoPossessoriProv.getPossessoreByPid(pid_padre).size() == 0) {
+					if (daoPossessoriProv.getPossessoreByPid(pid_padre) == null) {
 						result.setCodErr("0101");
 						result.setTestoProtocollo("Impossibile eliminare il possessore selezionato.Disallineamento sulla base dati.");
 						return result ;
@@ -956,22 +961,60 @@ public AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO cancellaLegamePoss
 	return result;
 }
 
-// almaviva7 03/07/2008 12.46
-public AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO cancellaLegameInventario(String pid, String codiceInventario, String polo ,String bib , String uteFirma)	throws RemoteException {
-	AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO result = new AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO();
-	try {
-		daoPossessori.cancellaLegamePossessoreInventario(bib, pid, codiceInventario, uteFirma);
-		result.setCodErr("0000");
-	} catch (Exception e) {
-		throw new DataException(e);
+	// almaviva7 03/07/2008 12.46
+	public AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO cancellaLegameInventario(String pid,
+			String codiceInventario, String polo, String bib, String uteFirma) throws RemoteException {
+		AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO result = new AreaDatiPassaggioInterrogazioneTitoloAnaliticaReturnVO();
+		try {
+			daoPossessori.cancellaLegamePossessoreInventario(bib, pid, codiceInventario, uteFirma);
+			result.setCodErr("0000");
+		} catch (Exception e) {
+			throw new DataException(e);
+		}
+		return result;
 	}
-	return result;
-}
 
+	public void ricalcolaChiavi() throws ApplicationException {
+		final UserTransaction tx = this.ctx.getUserTransaction();
+		try {
+			log.debug(" --- INIZIO AGGIORNAMENTO CHIAVI POSSESSORE --- ");
+			DaoManager.begin(tx);
+			final List<String> possessori = this.daoPossessoriProv.getPossessori();
+			for (String pid : possessori) {
+				try {
+					DaoManager.begin(tx);
+					final Tbc_possessore_provenienza p = this.daoPossessoriProv.getPossessoreByPid(pid);
+					if (p != null) {
+						final GeneraChiave key = new GeneraChiave();
+						key.estraiChiavi(String.valueOf(p.getTp_nome_pp()), ValidazioneDati.trimOrEmpty(p.getDs_nome_aut()));
+						p.setKy_cautun(key.getKy_cautun());
+						p.setKy_auteur(key.getKy_auteur());
+						p.setKy_el1(key.getKy_el1());
+						p.setKy_el2(key.getKy_el2());
+						p.setKy_el3(key.getKy_el3());
+						p.setKy_el4(key.getKy_el4());
+						p.setKy_el5(key.getKy_el5());
+						p.setKy_cles1_a(key.getKy_cles1_A());
+						p.setKy_cles2_a(key.getKy_cles2_A());
+						p.setTs_var(DaoManager.now());
+						//
+						this.daoPossessoriProv.getCurrentSession().update(p);
+						this.daoPossessoriProv.flush();
+						this.daoPossessoriProv.evict(p);
+						DaoManager.commit(tx);
+						log.debug(String.format("Aggiornamento chiavi possessore pid=%s",  p.getPid()));
+					}
+				} catch (Exception e) {
+					DaoManager.rollback(tx);
+					log.error(String.format("Errore aggiornamento chiavi possessore pid=%s: ",  pid), e);
+				}
+			}
+			log.debug(" --- FINE AGGIORNAMENTO CHIAVI POSSESSORE --- ");
 
-
+		} catch (Exception e) {
+			DaoManager.rollback(tx);
+			throw new ApplicationException(SbnErrorTypes.DB_FALUIRE);
+		}
+	}
 
 } // End PossessoriBean
-
-
-
