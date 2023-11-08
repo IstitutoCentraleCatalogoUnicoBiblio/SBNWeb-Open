@@ -32,8 +32,8 @@ import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
-	private List<PERSONA> persone_data_ws;
 
+	private List<PERSONA> persone_data_ws;
 
 	private Trl_utenti_biblioteca preparaUtenteModel (PERSONA p) {
 		Tbl_utenti utente = new Tbl_utenti();
@@ -58,7 +58,6 @@ public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 		
 		if(ValidazioneDati.isFilled(p.getSESSO()))
 			utente.setSesso(p.getSESSO().charAt(0));
-
 
 		//residenza
 		if(ValidazioneDati.isFilled(p.getCAPRES()))
@@ -128,6 +127,8 @@ public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 		//Tipo record
 		utente_bib.setCod_tipo_aut(p.getTIPORECORD());
 
+		utente.setPersona_giuridica('N');
+
 		utente.setCd_tipo_ute(Servizi.Utenti.UTENTE_TIPO_ESTERNO_CHR);
 		//Utenza disabilitata
 		if(ValidazioneDati.isFilled(p.getDISABLEFLG()) && "1".equals(p.getDISABLEFLG().toString()))
@@ -142,6 +143,7 @@ public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 		initPoloBibCodici(cd_polo, cd_biblioteca);
 		this.persone_data_ws = persone;
 	}
+
 	public boolean read() {
 		try {
 			for (PERSONA p: persone_data_ws) {
@@ -156,6 +158,7 @@ public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 		}
 		return true;
 	}
+
 	public List<UtenteBibliotecaVO> getUtentiBibliotecaVO() {
 		List<UtenteBibliotecaVO> users = new ArrayList<UtenteBibliotecaVO>();
 		if (users.size() == 0)
@@ -165,6 +168,7 @@ public class Esse3DataPersonaReader extends Esse3DataCsvReaderImpl {
 		}
 		return users;
 	}
+
 	public List<Trl_utenti_biblioteca> getUtenti() {
 		if (users.size() == 0)
 			read();

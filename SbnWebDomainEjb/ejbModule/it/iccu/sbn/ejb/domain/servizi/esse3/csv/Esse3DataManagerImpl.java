@@ -306,13 +306,11 @@ public class Esse3DataManagerImpl implements Esse3DataManager {
 		return (utentiAggiornati.size() > 0 || utentiInseriti.size() > 0);
 	}
 	public boolean updatePersone(String cd_polo, String cd_biblioteca, List<PERSONA> persone) {
-
-		Servizi servizi = getServizi();
-		Esse3DataPersonaReader bcl = new Esse3DataPersonaReader(cd_polo, cd_biblioteca, persone);
-		List<UtenteBibliotecaVO> utentiBibliotecaVO = bcl.getUtentiBibliotecaVO();
+		final Servizi servizi = getServizi();
+		final Esse3DataPersonaReader bcl = new Esse3DataPersonaReader(cd_polo, cd_biblioteca, persone);
+		final List<UtenteBibliotecaVO> utentiBibliotecaVO = bcl.getUtentiBibliotecaVO();
 		errors = bcl.getErrors();
-		for(UtenteBibliotecaVO utente: utentiBibliotecaVO) {
-
+		for (UtenteBibliotecaVO utente : utentiBibliotecaVO) {
 			boolean isUpdated = updateDB(servizi, utente, cd_polo, cd_biblioteca);
 			if(isUpdated) {
 				utentiAggiornati.add(utente.getCodiceUtente());

@@ -1623,7 +1623,7 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 		webVO.setTsVarAna(utenteAna.getTs_var());
 		webVO.setFlCancAna(String.valueOf(utenteAna.getFl_canc()));
 
-		if (diritti != null && diritti.size() > 0) {
+		if (ValidazioneDati.isFilled(diritti)) {
 			int p = 0;
 			for (Trl_diritti_utente d : diritti) {
 				ServizioVO servizio = daHibernateAWebDirittoUtente(d);
@@ -1632,7 +1632,7 @@ public final class ServiziConversioneVO extends DataBindingConverter {
 			}
 		}
 
-		if (materie != null && materie.size() > 0) {
+		if (ValidazioneDati.isFilled(materie)) {
 			int p = 0;
 			for (Trl_materie_utenti m : materie) {
 				MateriaVO materia = daHibernateAWebMateriaUtente(m);
