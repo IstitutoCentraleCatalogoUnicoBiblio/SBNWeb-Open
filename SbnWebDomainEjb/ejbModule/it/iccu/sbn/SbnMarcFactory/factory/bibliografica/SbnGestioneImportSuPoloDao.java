@@ -77,6 +77,7 @@ import it.iccu.sbn.ejb.model.unimarcmodel.C922;
 import it.iccu.sbn.ejb.model.unimarcmodel.C923;
 import it.iccu.sbn.ejb.model.unimarcmodel.C927;
 import it.iccu.sbn.ejb.model.unimarcmodel.CartograficoType;
+import it.iccu.sbn.ejb.model.unimarcmodel.Cf_200Type;
 import it.iccu.sbn.ejb.model.unimarcmodel.CreaType;
 import it.iccu.sbn.ejb.model.unimarcmodel.CreaTypeChoice;
 import it.iccu.sbn.ejb.model.unimarcmodel.DatiDocType;
@@ -6696,10 +6697,13 @@ public class SbnGestioneImportSuPoloDao extends DaoManager {
 //			c200.addB_200(areaAppoggio1);
 //		}
 
-//		areaAppoggio1 = tagliaEtichetta(tracciatoRecord.getDati(), 'c'); //titolo proprio di un altro autore (dove va messo ??)
-//		if (isFilled(areaAppoggio1)) {
-//			c200.addC_200(areaAppoggio1);
-//		}
+		// almaviva5 2023-11-07 riattivato trattamento parziale $c
+		areaAppoggio1 = tagliaEtichetta(dati, 'c'); //titolo proprio di un altro autore (dove va messo ??)
+		if (isFilled(areaAppoggio1)) {
+			Cf_200Type cf200 = new Cf_200Type();
+			cf200.setC_200(areaAppoggio1);
+			c200.addCf_200(cf200);
+		}
 
 		areaAppoggio1 = tagliaEtichetta(dati, 'd'); //titolo parallelo
 		if (isFilled(areaAppoggio1)) {
