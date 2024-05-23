@@ -36,6 +36,8 @@ import java.util.List;
 
 public class ImportaUtentiLettori
 {
+	private static final int VERSION_8_3 = 80003;
+
 	private static final String ERROR_COD_AUT_DIVERSO = "error.cod.aut.diverso";
 
 	private static String DATAAUT = null;
@@ -1611,12 +1613,12 @@ private void trattaUtenteBiblioteca(String id, String[] ar2, String dt) {
 
 				con = DriverManager.getConnection(connectionUrl,userName, userPassword);
 				Statement st = con.createStatement();
-				if (st.execute("select version()") )  {
+				if (st.execute("SELECT current_setting('server_version_num')") )  {
 					ResultSet resultSet = st.getResultSet();
 					resultSet.next();
-					double version = Double.valueOf(resultSet.getString(1).trim());
+					int version = resultSet.getInt(1);
 					st.close();
-					if (version < Double.valueOf("8.3") ) {// config TSearch2 (solo se ver. < 8.3)
+					if (version < VERSION_8_3 ) {// config TSearch2 (solo se ver. < 8.3)
 						Statement st2 = con.createStatement();
 						st2.execute("select set_curcfg('default')");
 						st2.close();
