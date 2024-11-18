@@ -290,7 +290,8 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 			try {
 				// Se la risposta HTTP è positiva allora si prende l'XML ritornato dal
 				// server(caratteri codificati UTF-8)
-				if (method.getStatusCode() == HttpStatus.SC_OK) {
+				switch (method.getStatusCode()) {
+				case HttpStatus.SC_OK: {
 					log.debug("httpId: " + httpId + " - HTTP 200 OK ricevuto - Ricezione response body");
 					// Decoding risposta: UTF-8
 					xmlReturned = null;
@@ -305,11 +306,26 @@ public class ServerHttp implements Runnable, ConfigChangeInterceptor {
 					}
 
 					xmlReturned = xml_text_buffer.toString();
+					break;
+				}
 
-				} else
+				case HttpStatus.SC_MOVED_TEMPORARILY:
+				case HttpStatus.SC_MOVED_PERMANENTLY: {
+					// follow redirect
+					final String newLocation = method.getResponseHeader("Location").getValue();
+					log.warn("httpId: " + httpId + " - HTTP 3xx redirect ricevuto. Nuova location: " + newLocation);
+					URI uri = new URI(newLocation, false);
+					method.releaseConnection();
+					method.setURI(uri);
+					xmlReturned = this.executeHTTPRequest(method);
+					break;
+				}
+
+				default:
 					log.error("httpId: " + httpId + " - HTTP "
 							+ method.getStatusCode() + " Unexpected failure: "
 							+ method.getStatusLine().toString());
+				}
 
 			} catch (Exception e) {
 				if (xml_text_buffer.length() > 0)
